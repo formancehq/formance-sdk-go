@@ -1341,6 +1341,261 @@ paths:
       summary: Get the aggregated balances from selected accounts
       tags:
       - Balances
+  /api/payments/payments:
+    get:
+      operationId: listPayments
+      parameters:
+      - description: "Limit the number of payments to return, pagination can be achieved\
+          \ in conjunction with 'skip' parameter."
+        example: 10
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: "How many payments to skip, pagination can be achieved in conjunction\
+          \ with 'limit' parameter."
+        example: 100
+        explode: true
+        in: query
+        name: skip
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Field used to sort payments (Default is by date).
+        example: status
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPaymentsResponse'
+          description: A JSON array of payments
+      summary: Returns a list of payments.
+      tags:
+      - Payments
+  /api/payments/payments/{paymentId}:
+    get:
+      operationId: getPayment
+      parameters:
+      - description: The payment id
+        example: XXX
+        explode: false
+        in: path
+        name: paymentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: A payment
+      summary: Returns a payment.
+      tags:
+      - Payments
+  /api/payments/connectors:
+    get:
+      description: Get all installed connectors
+      operationId: getAllConnectors
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConnectorsResponse'
+          description: List of installed connectors
+      summary: Get all installed connectors
+      tags:
+      - Payments
+  /api/payments/connectors/configs:
+    get:
+      description: Get all available connectors configs
+      operationId: getAllConnectorsConfigs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConnectorsConfigsResponse'
+          description: List of available connectors configs
+      summary: Get all available connectors configs
+      tags:
+      - Payments
+  /api/payments/connectors/{connector}:
+    delete:
+      description: Uninstall  connector
+      operationId: uninstallConnector
+      parameters:
+      - description: The connector code
+        explode: false
+        in: path
+        name: connector
+        required: true
+        schema:
+          enum:
+          - stripe
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Connector has been uninstalled
+      summary: Uninstall connector
+      tags:
+      - Payments
+    post:
+      description: Install connector
+      operationId: installConnector
+      parameters:
+      - description: The connector code
+        explode: false
+        in: path
+        name: connector
+        required: true
+        schema:
+          enum:
+          - stripe
+          - dummypay
+          - wise
+          - modulr
+          - currencycloud
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectorConfig'
+        required: true
+      responses:
+        "204":
+          description: Connector has been installed
+      summary: Install connector
+      tags:
+      - Payments
+  /api/payments/connectors/{connector}/config:
+    get:
+      description: Read connector config
+      operationId: readConnectorConfig
+      parameters:
+      - description: The connector code
+        explode: false
+        in: path
+        name: connector
+        required: true
+        schema:
+          enum:
+          - stripe
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorConfig'
+          description: Connector config
+      summary: Read connector config
+      tags:
+      - Payments
+  /api/payments/connectors/{connector}/reset:
+    post:
+      description: Reset connector. Will remove the connector and ALL PAYMENTS generated
+        with it.
+      operationId: resetConnector
+      parameters:
+      - description: The connector code
+        explode: false
+        in: path
+        name: connector
+        required: true
+        schema:
+          enum:
+          - stripe
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Connector has been reset
+      summary: Reset connector
+      tags:
+      - Payments
+  /api/payments/connectors/{connector}/tasks:
+    get:
+      description: List all tasks associated with this connector.
+      operationId: listConnectorTasks
+      parameters:
+      - description: The connector code
+        explode: false
+        in: path
+        name: connector
+        required: true
+        schema:
+          enum:
+          - stripe
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectorTask'
+                type: array
+          description: Task list
+      summary: List connector tasks
+      tags:
+      - Payments
+  /api/payments/connectors/{connector}/tasks/{taskId}:
+    get:
+      description: Get a specific task associated to the connector
+      operationId: getConnectorTask
+      parameters:
+      - description: The connector code
+        explode: false
+        in: path
+        name: connector
+        required: true
+        schema:
+          enum:
+          - stripe
+          type: string
+        style: simple
+      - description: The task id
+        example: task1
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorTask'
+          description: The specified task
+      summary: Read a specific task of the connector
+      tags:
+      - Payments
   /api/search/:
     post:
       description: Search with Query
@@ -2534,6 +2789,283 @@ components:
       required:
       - error_code
       type: object
+    ConnectorConfig:
+      oneOf:
+      - $ref: '#/components/schemas/StripeConfig'
+      - $ref: '#/components/schemas/DummyPayConfig'
+      - $ref: '#/components/schemas/WiseConfig'
+      - $ref: '#/components/schemas/ModulrConfig'
+      - $ref: '#/components/schemas/CurrencyCloudConfig'
+      - $ref: '#/components/schemas/BankingCircleConfig'
+    ConnectorTask:
+      oneOf:
+      - $ref: '#/components/schemas/StripeTask'
+    StripeConfig:
+      properties:
+        pollingPeriod:
+          default: 120s
+          description: The frequency at which the connector will try to fetch new
+            BalanceTransaction objects from Stripe api
+          example: 60s
+          type: string
+        apiKey:
+          example: XXX
+          type: string
+        pageSize:
+          default: 10
+          description: |
+            Number of BalanceTransaction to fetch at each polling interval.
+          example: 50
+          type: number
+      required:
+      - apiKey
+      type: object
+    StripeTask:
+      properties:
+        oldestId:
+          description: The id of the oldest BalanceTransaction fetched from stripe
+            for this account
+          type: string
+        oldestDate:
+          description: The creation date of the oldest BalanceTransaction fetched
+            from stripe for this account
+          format: date-time
+          type: string
+        moreRecentId:
+          description: The id of the more recent BalanceTransaction fetched from stripe
+            for this account
+          type: string
+        moreRecentDate:
+          description: The creation date of the more recent BalanceTransaction fetched
+            from stripe for this account
+          format: date-time
+          type: string
+        noMoreHistory:
+          type: boolean
+      type: object
+    DummyPayConfig:
+      properties:
+        filePollingPeriod:
+          default: 10s
+          description: The frequency at which the connector will try to fetch new
+            payment objects from the directory
+          example: 60s
+          type: string
+        fileGenerationPeriod:
+          default: 10s
+          description: The frequency at which the connector will create new payment
+            objects in the directory
+          example: 60s
+          type: string
+        directory:
+          example: /tmp/dummypay
+          type: string
+      required:
+      - directory
+      type: object
+    WiseConfig:
+      properties:
+        apiKey:
+          example: XXX
+          type: string
+      required:
+      - apiKey
+      type: object
+    ModulrConfig:
+      properties:
+        apiKey:
+          example: XXX
+          type: string
+        apiSecret:
+          example: XXX
+          type: string
+        endpoint:
+          example: XXX
+          type: string
+      required:
+      - apiKey
+      - apiSecret
+      type: object
+    BankingCircleConfig:
+      properties:
+        username:
+          example: XXX
+          type: string
+        password:
+          example: XXX
+          type: string
+        endpoint:
+          example: XXX
+          type: string
+        authorizationEndpoint:
+          example: XXX
+          type: string
+      required:
+      - authorizationEndpoint
+      - endpoint
+      - password
+      - username
+      type: object
+    CurrencyCloudConfig:
+      properties:
+        apiKey:
+          example: XXX
+          type: string
+        loginID:
+          description: Username of the API Key holder
+          example: XXX
+          type: string
+        pollingPeriod:
+          description: The frequency at which the connector will fetch transactions
+          example: 60s
+          type: string
+        endpoint:
+          description: The endpoint to use for the API. Defaults to https://devapi.currencycloud.com
+          example: XXX
+          type: string
+      required:
+      - apiKey
+      - loginID
+      type: object
+    ListPaymentsResponse:
+      example:
+        data:
+        - reference: reference
+          date: 2000-01-23T04:56:07.000+00:00
+          amount: 100
+          scheme: visa
+          provider: provider
+          raw: ""
+          id: XXX
+          type: pay-in
+          asset: USD
+          status: status
+        - reference: reference
+          date: 2000-01-23T04:56:07.000+00:00
+          amount: 100
+          scheme: visa
+          provider: provider
+          raw: ""
+          id: XXX
+          type: pay-in
+          asset: USD
+          status: status
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Payment'
+          type: array
+      required:
+      - data
+      type: object
+    GetPaymentResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - data
+      type: object
+    Payment:
+      example:
+        reference: reference
+        date: 2000-01-23T04:56:07.000+00:00
+        amount: 100
+        scheme: visa
+        provider: provider
+        raw: ""
+        id: XXX
+        type: pay-in
+        asset: USD
+        status: status
+      properties:
+        provider:
+          type: string
+        reference:
+          type: string
+        scheme:
+          enum:
+          - visa
+          - mastercard
+          - apple pay
+          - google pay
+          - sepa debit
+          - sepa credit
+          - sepa
+          - a2a
+          - ach debit
+          - ach
+          - rtp
+          - other
+          type: string
+        status:
+          type: string
+        type:
+          enum:
+          - pay-in
+          - payout
+          - other
+          type: string
+        id:
+          example: XXX
+          type: string
+        amount:
+          example: 100
+          type: integer
+        asset:
+          example: USD
+          type: string
+        date:
+          format: date-time
+          type: string
+        raw:
+          nullable: true
+      required:
+      - amount
+      - asset
+      - date
+      - id
+      - provider
+      - scheme
+      - status
+      - type
+      type: object
+    ListConnectorsResponse:
+      example:
+        data:
+        - provider: stripe
+          disabled: false
+        - provider: stripe
+          disabled: false
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ConnectorBaseInfo'
+          type: array
+      required:
+      - data
+      type: object
+    ListConnectorsConfigsResponse:
+      example:
+        connector:
+          key:
+            datatype: datatype
+            required: true
+      properties:
+        connector:
+          $ref: '#/components/schemas/ListConnectorsConfigsResponse_connector'
+      type: object
+    ConnectorBaseInfo:
+      example:
+        provider: stripe
+        disabled: false
+      properties:
+        provider:
+          example: stripe
+          type: string
+        disabled:
+          example: false
+          type: boolean
+      type: object
     Query:
       example:
         size: 0
@@ -2913,6 +3445,25 @@ components:
           type: object
       required:
       - plain
+      type: object
+    ListConnectorsConfigsResponse_connector_key:
+      example:
+        datatype: datatype
+        required: true
+      properties:
+        datatype:
+          type: string
+        required:
+          type: boolean
+      type: object
+    ListConnectorsConfigsResponse_connector:
+      example:
+        key:
+          datatype: datatype
+          required: true
+      properties:
+        key:
+          $ref: '#/components/schemas/ListConnectorsConfigsResponse_connector_key'
       type: object
     Response_cursor_total:
       properties:
