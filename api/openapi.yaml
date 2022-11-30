@@ -17,7 +17,7 @@ info:
     and standard method from web, mobile and desktop applications.
     <SecurityDefinitions />
   title: Formance Stack API
-  version: v0.2.2
+  version: v0.2.3
   x-logo:
     url: https://avatars.githubusercontent.com/u/84325077?s=200&v=4
     altText: Formance
@@ -1608,6 +1608,10 @@ paths:
         required: true
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
           description: Success
       summary: Search
       tags:
@@ -3094,6 +3098,21 @@ components:
           type: string
       type: object
     Response:
+      example:
+        cursor:
+          next: next
+          total:
+            value: 6.027456183070403
+            relation: relation
+          previous: previous
+          data:
+          - ""
+          - ""
+          hasMore: true
+          pageSize: 0.8008281904610115
+        ledger: ledger
+        data: "{}"
+        kind: kind
       properties:
         data:
           description: The payload
@@ -3466,6 +3485,9 @@ components:
           $ref: '#/components/schemas/ListConnectorsConfigsResponse_connector_key'
       type: object
     Response_cursor_total:
+      example:
+        value: 6.027456183070403
+        relation: relation
       properties:
         value:
           type: number
@@ -3473,6 +3495,17 @@ components:
           type: string
       type: object
     Response_cursor:
+      example:
+        next: next
+        total:
+          value: 6.027456183070403
+          relation: relation
+        previous: previous
+        data:
+        - ""
+        - ""
+        hasMore: true
+        pageSize: 0.8008281904610115
       properties:
         pageSize:
           type: number
