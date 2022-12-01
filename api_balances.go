@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.3
+API version: v0.2.4
 Contact: support@formance.com
 */
 
@@ -74,7 +74,7 @@ func (r ApiGetBalancesRequest) After(after string) ApiGetBalancesRequest {
 	return r
 }
 
-// Parameter used in pagination requests.  Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results.
+// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results.
 func (r ApiGetBalancesRequest) PaginationToken(paginationToken string) ApiGetBalancesRequest {
 	r.paginationToken = &paginationToken
 	return r

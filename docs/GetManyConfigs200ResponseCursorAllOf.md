@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**[]WebhooksConfig**](WebhooksConfig.md) |  | 
+**Data** | [**[]ConfigActivated**](ConfigActivated.md) |  | 
 
 ## Methods
 
 ### NewGetManyConfigs200ResponseCursorAllOf
 
-`func NewGetManyConfigs200ResponseCursorAllOf(data []WebhooksConfig, ) *GetManyConfigs200ResponseCursorAllOf`
+`func NewGetManyConfigs200ResponseCursorAllOf(data []ConfigActivated, ) *GetManyConfigs200ResponseCursorAllOf`
 
 NewGetManyConfigs200ResponseCursorAllOf instantiates a new GetManyConfigs200ResponseCursorAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *GetManyConfigs200ResponseCursorAllOf) GetData() []WebhooksConfig`
+`func (o *GetManyConfigs200ResponseCursorAllOf) GetData() []ConfigActivated`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *GetManyConfigs200ResponseCursorAllOf) GetDataOk() (*[]WebhooksConfig, bool)`
+`func (o *GetManyConfigs200ResponseCursorAllOf) GetDataOk() (*[]ConfigActivated, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *GetManyConfigs200ResponseCursorAllOf) SetData(v []WebhooksConfig)`
+`func (o *GetManyConfigs200ResponseCursorAllOf) SetData(v []ConfigActivated)`
 
 SetData sets Data field to given value.
 

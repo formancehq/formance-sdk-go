@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.3
+API version: v0.2.4
 Contact: support@formance.com
 */
 
@@ -33,15 +33,15 @@ type WebhooksApi interface {
 	ActivateOneConfig(ctx context.Context, id string) ApiActivateOneConfigRequest
 
 	// ActivateOneConfigExecute executes the request
-	//  @return GetManyConfigs200Response
-	ActivateOneConfigExecute(r ApiActivateOneConfigRequest) (*GetManyConfigs200Response, *http.Response, error)
+	//  @return ConfigActivatedResponse
+	ActivateOneConfigExecute(r ApiActivateOneConfigRequest) (*ConfigActivatedResponse, *http.Response, error)
 
 	/*
 	ChangeOneConfigSecret Change the signing secret of a config
 
 	Change the signing secret of the endpoint of a config.
 
-If not passed or empty, a secret is automatically generated. 
+If not passed or empty, a secret is automatically generated.
 The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 
 
@@ -52,8 +52,8 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 	ChangeOneConfigSecret(ctx context.Context, id string) ApiChangeOneConfigSecretRequest
 
 	// ChangeOneConfigSecretExecute executes the request
-	//  @return GetManyConfigs200Response
-	ChangeOneConfigSecretExecute(r ApiChangeOneConfigSecretRequest) (*GetManyConfigs200Response, *http.Response, error)
+	//  @return ConfigActivatedResponse
+	ChangeOneConfigSecretExecute(r ApiChangeOneConfigSecretRequest) (*ConfigActivatedResponse, *http.Response, error)
 
 	/*
 	DeactivateOneConfig Deactivate one config
@@ -65,8 +65,8 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 	DeactivateOneConfig(ctx context.Context, id string) ApiDeactivateOneConfigRequest
 
 	// DeactivateOneConfigExecute executes the request
-	//  @return GetManyConfigs200Response
-	DeactivateOneConfigExecute(r ApiDeactivateOneConfigRequest) (*GetManyConfigs200Response, *http.Response, error)
+	//  @return ConfigDeactivatedResponse
+	DeactivateOneConfigExecute(r ApiDeactivateOneConfigRequest) (*ConfigDeactivatedResponse, *http.Response, error)
 
 	/*
 	DeleteOneConfig Delete one config
@@ -101,8 +101,8 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 
 The endpoint should be a valid https URL and be unique.
 
-The secret is the endpoint's verification secret. 
-If not passed or empty, a secret is automatically generated. 
+The secret is the endpoint's verification secret.
+If not passed or empty, a secret is automatically generated.
 The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 
 All eventTypes are converted to lower-case when inserted.
@@ -114,8 +114,24 @@ All eventTypes are converted to lower-case when inserted.
 	InsertOneConfig(ctx context.Context) ApiInsertOneConfigRequest
 
 	// InsertOneConfigExecute executes the request
-	//  @return string
-	InsertOneConfigExecute(r ApiInsertOneConfigRequest) (string, *http.Response, error)
+	//  @return ConfigActivatedResponse
+	InsertOneConfigExecute(r ApiInsertOneConfigRequest) (*ConfigActivatedResponse, *http.Response, error)
+
+	/*
+	TestOneConfig Test one config
+
+	Test one config by sending a webhook to its endpoint.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Config ID
+	@return ApiTestOneConfigRequest
+	*/
+	TestOneConfig(ctx context.Context, id string) ApiTestOneConfigRequest
+
+	// TestOneConfigExecute executes the request
+	//  @return AttemptResponse
+	TestOneConfigExecute(r ApiTestOneConfigRequest) (*AttemptResponse, *http.Response, error)
 }
 
 // WebhooksApiService WebhooksApi service
@@ -127,7 +143,7 @@ type ApiActivateOneConfigRequest struct {
 	id string
 }
 
-func (r ApiActivateOneConfigRequest) Execute() (*GetManyConfigs200Response, *http.Response, error) {
+func (r ApiActivateOneConfigRequest) Execute() (*ConfigActivatedResponse, *http.Response, error) {
 	return r.ApiService.ActivateOneConfigExecute(r)
 }
 
@@ -147,13 +163,13 @@ func (a *WebhooksApiService) ActivateOneConfig(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return GetManyConfigs200Response
-func (a *WebhooksApiService) ActivateOneConfigExecute(r ApiActivateOneConfigRequest) (*GetManyConfigs200Response, *http.Response, error) {
+//  @return ConfigActivatedResponse
+func (a *WebhooksApiService) ActivateOneConfigExecute(r ApiActivateOneConfigRequest) (*ConfigActivatedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetManyConfigs200Response
+		localVarReturnValue  *ConfigActivatedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ActivateOneConfig")
@@ -234,7 +250,7 @@ func (r ApiChangeOneConfigSecretRequest) ChangeOneConfigSecretRequest(changeOneC
 	return r
 }
 
-func (r ApiChangeOneConfigSecretRequest) Execute() (*GetManyConfigs200Response, *http.Response, error) {
+func (r ApiChangeOneConfigSecretRequest) Execute() (*ConfigActivatedResponse, *http.Response, error) {
 	return r.ApiService.ChangeOneConfigSecretExecute(r)
 }
 
@@ -243,7 +259,7 @@ ChangeOneConfigSecret Change the signing secret of a config
 
 Change the signing secret of the endpoint of a config.
 
-If not passed or empty, a secret is automatically generated. 
+If not passed or empty, a secret is automatically generated.
 The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 
 
@@ -260,13 +276,13 @@ func (a *WebhooksApiService) ChangeOneConfigSecret(ctx context.Context, id strin
 }
 
 // Execute executes the request
-//  @return GetManyConfigs200Response
-func (a *WebhooksApiService) ChangeOneConfigSecretExecute(r ApiChangeOneConfigSecretRequest) (*GetManyConfigs200Response, *http.Response, error) {
+//  @return ConfigActivatedResponse
+func (a *WebhooksApiService) ChangeOneConfigSecretExecute(r ApiChangeOneConfigSecretRequest) (*ConfigActivatedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetManyConfigs200Response
+		localVarReturnValue  *ConfigActivatedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ChangeOneConfigSecret")
@@ -343,7 +359,7 @@ type ApiDeactivateOneConfigRequest struct {
 	id string
 }
 
-func (r ApiDeactivateOneConfigRequest) Execute() (*GetManyConfigs200Response, *http.Response, error) {
+func (r ApiDeactivateOneConfigRequest) Execute() (*ConfigDeactivatedResponse, *http.Response, error) {
 	return r.ApiService.DeactivateOneConfigExecute(r)
 }
 
@@ -363,13 +379,13 @@ func (a *WebhooksApiService) DeactivateOneConfig(ctx context.Context, id string)
 }
 
 // Execute executes the request
-//  @return GetManyConfigs200Response
-func (a *WebhooksApiService) DeactivateOneConfigExecute(r ApiDeactivateOneConfigRequest) (*GetManyConfigs200Response, *http.Response, error) {
+//  @return ConfigDeactivatedResponse
+func (a *WebhooksApiService) DeactivateOneConfigExecute(r ApiDeactivateOneConfigRequest) (*ConfigDeactivatedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetManyConfigs200Response
+		localVarReturnValue  *ConfigDeactivatedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.DeactivateOneConfig")
@@ -658,7 +674,7 @@ func (r ApiInsertOneConfigRequest) ConfigUser(configUser ConfigUser) ApiInsertOn
 	return r
 }
 
-func (r ApiInsertOneConfigRequest) Execute() (string, *http.Response, error) {
+func (r ApiInsertOneConfigRequest) Execute() (*ConfigActivatedResponse, *http.Response, error) {
 	return r.ApiService.InsertOneConfigExecute(r)
 }
 
@@ -669,8 +685,8 @@ Insert a new config.
 
 The endpoint should be a valid https URL and be unique.
 
-The secret is the endpoint's verification secret. 
-If not passed or empty, a secret is automatically generated. 
+The secret is the endpoint's verification secret.
+If not passed or empty, a secret is automatically generated.
 The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 
 All eventTypes are converted to lower-case when inserted.
@@ -687,13 +703,13 @@ func (a *WebhooksApiService) InsertOneConfig(ctx context.Context) ApiInsertOneCo
 }
 
 // Execute executes the request
-//  @return string
-func (a *WebhooksApiService) InsertOneConfigExecute(r ApiInsertOneConfigRequest) (string, *http.Response, error) {
+//  @return ConfigActivatedResponse
+func (a *WebhooksApiService) InsertOneConfigExecute(r ApiInsertOneConfigRequest) (*ConfigActivatedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  string
+		localVarReturnValue  *ConfigActivatedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.InsertOneConfig")
@@ -720,7 +736,7 @@ func (a *WebhooksApiService) InsertOneConfigExecute(r ApiInsertOneConfigRequest)
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/plain"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -760,6 +776,110 @@ func (a *WebhooksApiService) InsertOneConfigExecute(r ApiInsertOneConfigRequest)
 			}
             		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             		newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTestOneConfigRequest struct {
+	ctx context.Context
+	ApiService WebhooksApi
+	id string
+}
+
+func (r ApiTestOneConfigRequest) Execute() (*AttemptResponse, *http.Response, error) {
+	return r.ApiService.TestOneConfigExecute(r)
+}
+
+/*
+TestOneConfig Test one config
+
+Test one config by sending a webhook to its endpoint.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Config ID
+ @return ApiTestOneConfigRequest
+*/
+func (a *WebhooksApiService) TestOneConfig(ctx context.Context, id string) ApiTestOneConfigRequest {
+	return ApiTestOneConfigRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return AttemptResponse
+func (a *WebhooksApiService) TestOneConfigExecute(r ApiTestOneConfigRequest) (*AttemptResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AttemptResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.TestOneConfig")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/webhooks/configs/{id}/test"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

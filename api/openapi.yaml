@@ -17,7 +17,7 @@ info:
     and standard method from web, mobile and desktop applications.
     <SecurityDefinitions />
   title: Formance Stack API
-  version: v0.2.3
+  version: v0.2.4
   x-logo:
     url: https://avatars.githubusercontent.com/u/84325077?s=200&v=4
     altText: Formance
@@ -518,10 +518,11 @@ paths:
           example: gte
           type: string
         style: form
-      - description: "Parameter used in pagination requests. Maximum page size is\
-          \ set to 15.\nSet to the value of next for the next page of results. \n\
-          Set to the value of previous for the previous page of results.\nNo other\
-          \ parameters can be set when the pagination token is set.\n"
+      - description: |
+          Parameter used in pagination requests. Maximum page size is set to 15.
+          Set to the value of next for the next page of results.
+          Set to the value of previous for the previous page of results.
+          No other parameters can be set when the pagination token is set.
         explode: true
         in: query
         name: pagination_token
@@ -899,10 +900,11 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Parameter used in pagination requests. Maximum page size is\
-          \ set to 15.\nSet to the value of next for the next page of results. \n\
-          Set to the value of previous for the previous page of results.\nNo other\
-          \ parameters can be set when the pagination token is set.\n"
+      - description: |
+          Parameter used in pagination requests. Maximum page size is set to 15.
+          Set to the value of next for the next page of results.
+          Set to the value of previous for the previous page of results.
+          No other parameters can be set when the pagination token is set.
         explode: true
         in: query
         name: pagination_token
@@ -987,6 +989,27 @@ paths:
         required: false
         schema:
           example: users:001
+          type: string
+        style: form
+      - description: |
+          Filter transactions that occurred after this timestamp.
+          The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute).
+        explode: true
+        in: query
+        name: start_time
+        required: false
+        schema:
+          type: string
+          example: null
+        style: form
+      - description: |
+          Filter transactions that occurred before this timestamp.
+          The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute).
+        explode: true
+        in: query
+        name: end_time
+        required: false
+        schema:
           type: string
         style: form
       - description: Filter transactions by metadata key value pairs. Nested objects
@@ -1275,9 +1298,10 @@ paths:
           example: users:003
           type: string
         style: form
-      - description: "Parameter used in pagination requests. \nSet to the value of\
-          \ next for the next page of results. \nSet to the value of previous for\
-          \ the previous page of results."
+      - description: |-
+          Parameter used in pagination requests.
+          Set to the value of next for the next page of results.
+          Set to the value of previous for the previous page of results.
         explode: true
         in: query
         name: pagination_token
@@ -1650,11 +1674,16 @@ paths:
       tags:
       - Webhooks
     post:
-      description: "Insert a new config.\n\nThe endpoint should be a valid https URL\
-        \ and be unique.\n\nThe secret is the endpoint's verification secret. \nIf\
-        \ not passed or empty, a secret is automatically generated. \nThe format is\
-        \ a random string of bytes of size 24, base64 encoded. (larger size after\
-        \ encoding)\n\nAll eventTypes are converted to lower-case when inserted.\n"
+      description: |
+        Insert a new config.
+
+        The endpoint should be a valid https URL and be unique.
+
+        The secret is the endpoint's verification secret.
+        If not passed or empty, a secret is automatically generated.
+        The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
+
+        All eventTypes are converted to lower-case when inserted.
       operationId: insertOneConfig
       requestBody:
         content:
@@ -1665,12 +1694,10 @@ paths:
       responses:
         "200":
           content:
-            text/plain:
+            application/json:
               schema:
-                description: Config ID
-                example: 4997257d-dfb6-445b-929c-cbe2ab182818
-                type: string
-          description: "Config created successfully, returns its ID."
+                $ref: '#/components/schemas/ConfigActivatedResponse'
+          description: Config created successfully.
         "400":
           content:
             text/plain:
@@ -1698,8 +1725,33 @@ paths:
       responses:
         "200":
           content: {}
-          description: OK
+          description: Config successfully deleted.
       summary: Delete one config
+      tags:
+      - Webhooks
+  /api/webhooks/configs/{id}/test:
+    get:
+      description: |
+        Test one config by sending a webhook to its endpoint.
+      operationId: testOneConfig
+      parameters:
+      - description: Config ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 4997257d-dfb6-445b-929c-cbe2ab182818
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttemptResponse'
+          description: OK
+      summary: Test one config
       tags:
       - Webhooks
   /api/webhooks/configs/{id}/activate:
@@ -1720,7 +1772,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getManyConfigs_200_response'
+                $ref: '#/components/schemas/ConfigActivatedResponse'
           description: Config successfully activated.
         "304":
           content: {}
@@ -1746,7 +1798,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getManyConfigs_200_response'
+                $ref: '#/components/schemas/ConfigDeactivatedResponse'
           description: Config successfully deactivated.
         "304":
           content: {}
@@ -1756,9 +1808,11 @@ paths:
       - Webhooks
   /api/webhooks/configs/{id}/secret/change:
     put:
-      description: "Change the signing secret of the endpoint of a config.\n\nIf not\
-        \ passed or empty, a secret is automatically generated. \nThe format is a\
-        \ random string of bytes of size 24, base64 encoded. (larger size after encoding)\n"
+      description: |
+        Change the signing secret of the endpoint of a config.
+
+        If not passed or empty, a secret is automatically generated.
+        The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
       operationId: changeOneConfigSecret
       parameters:
       - description: Config ID
@@ -1780,8 +1834,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getManyConfigs_200_response'
-          description: OK
+                $ref: '#/components/schemas/ConfigActivatedResponse'
+          description: Secret successfully changed.
       summary: Change the signing secret of a config
       tags:
       - Webhooks
@@ -3148,7 +3202,46 @@ components:
             example: TYPE1
             type: string
           type: array
-    webhooksConfig:
+    ConfigActivatedResponse:
+      example:
+        data:
+          createdAt: 2022-07-20T07:31:40Z
+          endpoint: https://example.com
+          modifiedAt: 2022-07-20T08:32:59Z
+          active: true
+          secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          eventTypes:
+          - TYPE1
+          - TYPE2
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfigActivated'
+      type: object
+    ConfigDeactivatedResponse:
+      example:
+        data:
+          createdAt: 2022-07-20T07:31:40Z
+          endpoint: https://example.com
+          modifiedAt: 2022-07-20T08:32:59Z
+          active: false
+          secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          eventTypes:
+          - TYPE1
+          - TYPE2
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfigDeactivated'
+      type: object
+    ConfigActivated:
+      example:
+        createdAt: 2022-07-20T07:31:40Z
+        endpoint: https://example.com
+        modifiedAt: 2022-07-20T08:32:59Z
+        active: true
+        secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+        eventTypes:
+        - TYPE1
+        - TYPE2
       properties:
         endpoint:
           example: https://example.com
@@ -3173,6 +3266,107 @@ components:
           type: string
         modifiedAt:
           example: 2022-07-20T08:32:59Z
+          format: date-time
+          type: string
+    ConfigDeactivated:
+      example:
+        createdAt: 2022-07-20T07:31:40Z
+        endpoint: https://example.com
+        modifiedAt: 2022-07-20T08:32:59Z
+        active: false
+        secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+        eventTypes:
+        - TYPE1
+        - TYPE2
+      properties:
+        endpoint:
+          example: https://example.com
+          type: string
+        secret:
+          example: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          type: string
+        eventTypes:
+          example:
+          - TYPE1
+          - TYPE2
+          items:
+            example: TYPE1
+            type: string
+          type: array
+        active:
+          example: false
+          type: boolean
+        createdAt:
+          example: 2022-07-20T07:31:40Z
+          format: date-time
+          type: string
+        modifiedAt:
+          example: 2022-07-20T08:32:59Z
+          format: date-time
+          type: string
+    AttemptResponse:
+      example:
+        data:
+          date: 2000-01-23T04:56:07.000+00:00
+          nextRetryAfter: 2000-01-23T04:56:07.000+00:00
+          webhookID: 4997257d-dfb6-445b-929c-cbe2ab182818
+          payload: "{\"data\":\"test\"}"
+          retryAttempt: 1
+          config:
+            createdAt: 2022-07-20T07:31:40Z
+            endpoint: https://example.com
+            modifiedAt: 2022-07-20T08:32:59Z
+            active: true
+            secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+            eventTypes:
+            - TYPE1
+            - TYPE2
+          statusCode: 200
+          status: success
+      properties:
+        data:
+          $ref: '#/components/schemas/Attempt'
+      type: object
+    Attempt:
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        nextRetryAfter: 2000-01-23T04:56:07.000+00:00
+        webhookID: 4997257d-dfb6-445b-929c-cbe2ab182818
+        payload: "{\"data\":\"test\"}"
+        retryAttempt: 1
+        config:
+          createdAt: 2022-07-20T07:31:40Z
+          endpoint: https://example.com
+          modifiedAt: 2022-07-20T08:32:59Z
+          active: true
+          secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          eventTypes:
+          - TYPE1
+          - TYPE2
+        statusCode: 200
+        status: success
+      properties:
+        webhookID:
+          example: 4997257d-dfb6-445b-929c-cbe2ab182818
+          type: string
+        date:
+          format: date-time
+          type: string
+        config:
+          $ref: '#/components/schemas/ConfigActivated'
+        payload:
+          example: "{\"data\":\"test\"}"
+          type: string
+        statusCode:
+          example: 200
+          type: integer
+        retryAttempt:
+          example: 1
+          type: integer
+        status:
+          example: success
+          type: string
+        nextRetryAfter:
           format: date-time
           type: string
     webhooksCursor:
@@ -3376,7 +3570,7 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/webhooksConfig'
+            $ref: '#/components/schemas/ConfigActivated'
           type: array
       required:
       - data
