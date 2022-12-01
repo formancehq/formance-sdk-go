@@ -10,12 +10,13 @@ Method | HTTP request | Description
 [**DeleteOneConfig**](WebhooksApi.md#DeleteOneConfig) | **Delete** /api/webhooks/configs/{id} | Delete one config
 [**GetManyConfigs**](WebhooksApi.md#GetManyConfigs) | **Get** /api/webhooks/configs | Get many configs
 [**InsertOneConfig**](WebhooksApi.md#InsertOneConfig) | **Post** /api/webhooks/configs | Insert a new config 
+[**TestOneConfig**](WebhooksApi.md#TestOneConfig) | **Get** /api/webhooks/configs/{id}/test | Test one config
 
 
 
 ## ActivateOneConfig
 
-> GetManyConfigs200Response ActivateOneConfig(ctx, id).Execute()
+> ConfigActivatedResponse ActivateOneConfig(ctx, id).Execute()
 
 Activate one config
 
@@ -41,7 +42,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ActivateOneConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ActivateOneConfig`: GetManyConfigs200Response
+    // response from `ActivateOneConfig`: ConfigActivatedResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ActivateOneConfig`: %v\n", resp)
 }
 ```
@@ -65,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetManyConfigs200Response**](GetManyConfigs200Response.md)
+[**ConfigActivatedResponse**](ConfigActivatedResponse.md)
 
 ### Authorization
 
@@ -83,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## ChangeOneConfigSecret
 
-> GetManyConfigs200Response ChangeOneConfigSecret(ctx, id).ChangeOneConfigSecretRequest(changeOneConfigSecretRequest).Execute()
+> ConfigActivatedResponse ChangeOneConfigSecret(ctx, id).ChangeOneConfigSecretRequest(changeOneConfigSecretRequest).Execute()
 
 Change the signing secret of a config
 
@@ -112,7 +113,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ChangeOneConfigSecret``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ChangeOneConfigSecret`: GetManyConfigs200Response
+    // response from `ChangeOneConfigSecret`: ConfigActivatedResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ChangeOneConfigSecret`: %v\n", resp)
 }
 ```
@@ -137,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetManyConfigs200Response**](GetManyConfigs200Response.md)
+[**ConfigActivatedResponse**](ConfigActivatedResponse.md)
 
 ### Authorization
 
@@ -155,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## DeactivateOneConfig
 
-> GetManyConfigs200Response DeactivateOneConfig(ctx, id).Execute()
+> ConfigDeactivatedResponse DeactivateOneConfig(ctx, id).Execute()
 
 Deactivate one config
 
@@ -181,7 +182,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeactivateOneConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeactivateOneConfig`: GetManyConfigs200Response
+    // response from `DeactivateOneConfig`: ConfigDeactivatedResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.DeactivateOneConfig`: %v\n", resp)
 }
 ```
@@ -205,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetManyConfigs200Response**](GetManyConfigs200Response.md)
+[**ConfigDeactivatedResponse**](ConfigDeactivatedResponse.md)
 
 ### Authorization
 
@@ -357,7 +358,7 @@ Name | Type | Description  | Notes
 
 ## InsertOneConfig
 
-> string InsertOneConfig(ctx).ConfigUser(configUser).Execute()
+> ConfigActivatedResponse InsertOneConfig(ctx).ConfigUser(configUser).Execute()
 
 Insert a new config 
 
@@ -385,7 +386,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.InsertOneConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `InsertOneConfig`: string
+    // response from `InsertOneConfig`: ConfigActivatedResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.InsertOneConfig`: %v\n", resp)
 }
 ```
@@ -405,7 +406,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**ConfigActivatedResponse**](ConfigActivatedResponse.md)
 
 ### Authorization
 
@@ -414,7 +415,77 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: text/plain
+- **Accept**: application/json, text/plain
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TestOneConfig
+
+> AttemptResponse TestOneConfig(ctx, id).Execute()
+
+Test one config
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    client "./openapi"
+)
+
+func main() {
+    id := "4997257d-dfb6-445b-929c-cbe2ab182818" // string | Config ID
+
+    configuration := client.NewConfiguration()
+    apiClient := client.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.TestOneConfig(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.TestOneConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `TestOneConfig`: AttemptResponse
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.TestOneConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Config ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTestOneConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AttemptResponse**](AttemptResponse.md)
+
+### Authorization
+
+[Authorization](../README.md#Authorization)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

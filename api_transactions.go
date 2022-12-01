@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.3
+API version: v0.2.4
 Contact: support@formance.com
 */
 
@@ -253,6 +253,8 @@ type ApiCountTransactionsRequest struct {
 	account *string
 	source *string
 	destination *string
+	startTime *string
+	endTime *string
 	metadata *map[string]interface{}
 }
 
@@ -277,6 +279,18 @@ func (r ApiCountTransactionsRequest) Source(source string) ApiCountTransactionsR
 // Filter transactions with postings involving given account at destination (regular expression placed between ^ and $).
 func (r ApiCountTransactionsRequest) Destination(destination string) ApiCountTransactionsRequest {
 	r.destination = &destination
+	return r
+}
+
+// Filter transactions that occurred after this timestamp. The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute). 
+func (r ApiCountTransactionsRequest) StartTime(startTime string) ApiCountTransactionsRequest {
+	r.startTime = &startTime
+	return r
+}
+
+// Filter transactions that occurred before this timestamp. The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute). 
+func (r ApiCountTransactionsRequest) EndTime(endTime string) ApiCountTransactionsRequest {
+	r.endTime = &endTime
 	return r
 }
 
@@ -336,6 +350,12 @@ func (a *TransactionsApiService) CountTransactionsExecute(r ApiCountTransactions
 	}
 	if r.destination != nil {
 	    parameterAddToQuery(localVarQueryParams, "destination", r.destination, "")
+	}
+	if r.startTime != nil {
+	    parameterAddToQuery(localVarQueryParams, "start_time", r.startTime, "")
+	}
+	if r.endTime != nil {
+	    parameterAddToQuery(localVarQueryParams, "end_time", r.endTime, "")
 	}
 	if r.metadata != nil {
 	    parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
@@ -852,7 +872,7 @@ func (r ApiListTransactionsRequest) EndTime(endTime string) ApiListTransactionsR
 	return r
 }
 
-// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set. 
+// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set. 
 func (r ApiListTransactionsRequest) PaginationToken(paginationToken string) ApiListTransactionsRequest {
 	r.paginationToken = &paginationToken
 	return r
