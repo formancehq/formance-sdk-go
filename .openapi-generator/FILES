@@ -31,12 +31,9 @@ docs/ClientOptions.md
 docs/ClientSecret.md
 docs/ClientsApi.md
 docs/Config.md
-docs/ConfigActivated.md
-docs/ConfigActivatedResponse.md
-docs/ConfigDeactivated.md
-docs/ConfigDeactivatedResponse.md
 docs/ConfigInfo.md
 docs/ConfigInfoResponse.md
+docs/ConfigResponse.md
 docs/ConfigUser.md
 docs/ConnectorBaseInfo.md
 docs/ConnectorConfig.md
@@ -124,6 +121,7 @@ docs/User.md
 docs/UsersApi.md
 docs/Volume.md
 docs/WebhooksApi.md
+docs/WebhooksConfig.md
 docs/WebhooksCursor.md
 docs/WiseConfig.md
 git_push.sh
@@ -140,12 +138,9 @@ model_client_all_of.go
 model_client_options.go
 model_client_secret.go
 model_config.go
-model_config_activated.go
-model_config_activated_response.go
-model_config_deactivated.go
-model_config_deactivated_response.go
 model_config_info.go
 model_config_info_response.go
+model_config_response.go
 model_config_user.go
 model_connector_base_info.go
 model_connector_config.go
@@ -223,6 +218,7 @@ model_transactions.go
 model_transactions_response.go
 model_user.go
 model_volume.go
+model_webhooks_config.go
 model_webhooks_cursor.go
 model_wise_config.go
 response.go

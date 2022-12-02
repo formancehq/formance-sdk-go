@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.4
+API version: v0.2.5
 Contact: support@formance.com
 */
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &Attempt{}
 type Attempt struct {
 	WebhookID *string `json:"webhookID,omitempty"`
 	Date *time.Time `json:"date,omitempty"`
-	Config *ConfigActivated `json:"config,omitempty"`
+	Config *WebhooksConfig `json:"config,omitempty"`
 	Payload *string `json:"payload,omitempty"`
 	StatusCode *int32 `json:"statusCode,omitempty"`
 	RetryAttempt *int32 `json:"retryAttempt,omitempty"`
@@ -113,9 +113,9 @@ func (o *Attempt) SetDate(v time.Time) {
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
-func (o *Attempt) GetConfig() ConfigActivated {
+func (o *Attempt) GetConfig() WebhooksConfig {
 	if o == nil || isNil(o.Config) {
-		var ret ConfigActivated
+		var ret WebhooksConfig
 		return ret
 	}
 	return *o.Config
@@ -123,7 +123,7 @@ func (o *Attempt) GetConfig() ConfigActivated {
 
 // GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Attempt) GetConfigOk() (*ConfigActivated, bool) {
+func (o *Attempt) GetConfigOk() (*WebhooksConfig, bool) {
 	if o == nil || isNil(o.Config) {
 		return nil, false
 	}
@@ -139,8 +139,8 @@ func (o *Attempt) HasConfig() bool {
 	return false
 }
 
-// SetConfig gets a reference to the given ConfigActivated and assigns it to the Config field.
-func (o *Attempt) SetConfig(v ConfigActivated) {
+// SetConfig gets a reference to the given WebhooksConfig and assigns it to the Config field.
+func (o *Attempt) SetConfig(v WebhooksConfig) {
 	o.Config = &v
 }
 

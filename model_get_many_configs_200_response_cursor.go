@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.4
+API version: v0.2.5
 Contact: support@formance.com
 */
 
@@ -21,14 +21,14 @@ var _ MappedNullable = &GetManyConfigs200ResponseCursor{}
 // GetManyConfigs200ResponseCursor struct for GetManyConfigs200ResponseCursor
 type GetManyConfigs200ResponseCursor struct {
 	HasMore *bool `json:"has_more,omitempty"`
-	Data []ConfigActivated `json:"data"`
+	Data []WebhooksConfig `json:"data"`
 }
 
 // NewGetManyConfigs200ResponseCursor instantiates a new GetManyConfigs200ResponseCursor object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetManyConfigs200ResponseCursor(data []ConfigActivated) *GetManyConfigs200ResponseCursor {
+func NewGetManyConfigs200ResponseCursor(data []WebhooksConfig) *GetManyConfigs200ResponseCursor {
 	this := GetManyConfigs200ResponseCursor{}
 	this.Data = data
 	return &this
@@ -75,9 +75,9 @@ func (o *GetManyConfigs200ResponseCursor) SetHasMore(v bool) {
 }
 
 // GetData returns the Data field value
-func (o *GetManyConfigs200ResponseCursor) GetData() []ConfigActivated {
+func (o *GetManyConfigs200ResponseCursor) GetData() []WebhooksConfig {
 	if o == nil {
-		var ret []ConfigActivated
+		var ret []WebhooksConfig
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *GetManyConfigs200ResponseCursor) GetData() []ConfigActivated {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *GetManyConfigs200ResponseCursor) GetDataOk() ([]ConfigActivated, bool) {
+func (o *GetManyConfigs200ResponseCursor) GetDataOk() ([]WebhooksConfig, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *GetManyConfigs200ResponseCursor) GetDataOk() ([]ConfigActivated, bool) 
 }
 
 // SetData sets field value
-func (o *GetManyConfigs200ResponseCursor) SetData(v []ConfigActivated) {
+func (o *GetManyConfigs200ResponseCursor) SetData(v []WebhooksConfig) {
 	o.Data = v
 }
 
