@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.5
+API version: v0.2.8
 Contact: support@formance.com
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &WebhooksConfig{}
 
 // WebhooksConfig struct for WebhooksConfig
 type WebhooksConfig struct {
+	Id *string `json:"id,omitempty"`
 	Endpoint *string `json:"endpoint,omitempty"`
 	Secret *string `json:"secret,omitempty"`
 	EventTypes []string `json:"eventTypes,omitempty"`
@@ -44,6 +45,38 @@ func NewWebhooksConfig() *WebhooksConfig {
 func NewWebhooksConfigWithDefaults() *WebhooksConfig {
 	this := WebhooksConfig{}
 	return &this
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *WebhooksConfig) GetId() string {
+	if o == nil || isNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WebhooksConfig) GetIdOk() (*string, bool) {
+	if o == nil || isNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *WebhooksConfig) HasId() bool {
+	if o != nil && !isNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *WebhooksConfig) SetId(v string) {
+	o.Id = &v
 }
 
 // GetEndpoint returns the Endpoint field value if set, zero value otherwise.
@@ -248,6 +281,9 @@ func (o WebhooksConfig) MarshalJSON() ([]byte, error) {
 
 func (o WebhooksConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !isNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	if !isNil(o.Endpoint) {
 		toSerialize["endpoint"] = o.Endpoint
 	}
