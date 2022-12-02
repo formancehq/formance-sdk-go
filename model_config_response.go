@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateScopeResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateScopeResponse{}
+// checks if the ConfigResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConfigResponse{}
 
-// CreateScopeResponse struct for CreateScopeResponse
-type CreateScopeResponse struct {
-	Data *Scope `json:"data,omitempty"`
+// ConfigResponse struct for ConfigResponse
+type ConfigResponse struct {
+	Data *WebhooksConfig `json:"data,omitempty"`
 }
 
-// NewCreateScopeResponse instantiates a new CreateScopeResponse object
+// NewConfigResponse instantiates a new ConfigResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateScopeResponse() *CreateScopeResponse {
-	this := CreateScopeResponse{}
+func NewConfigResponse() *ConfigResponse {
+	this := ConfigResponse{}
 	return &this
 }
 
-// NewCreateScopeResponseWithDefaults instantiates a new CreateScopeResponse object
+// NewConfigResponseWithDefaults instantiates a new ConfigResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateScopeResponseWithDefaults() *CreateScopeResponse {
-	this := CreateScopeResponse{}
+func NewConfigResponseWithDefaults() *ConfigResponse {
+	this := ConfigResponse{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateScopeResponse) GetData() Scope {
+func (o *ConfigResponse) GetData() WebhooksConfig {
 	if o == nil || isNil(o.Data) {
-		var ret Scope
+		var ret WebhooksConfig
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *CreateScopeResponse) GetData() Scope {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateScopeResponse) GetDataOk() (*Scope, bool) {
+func (o *ConfigResponse) GetDataOk() (*WebhooksConfig, bool) {
 	if o == nil || isNil(o.Data) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *CreateScopeResponse) GetDataOk() (*Scope, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *CreateScopeResponse) HasData() bool {
+func (o *ConfigResponse) HasData() bool {
 	if o != nil && !isNil(o.Data) {
 		return true
 	}
@@ -67,12 +67,12 @@ func (o *CreateScopeResponse) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given Scope and assigns it to the Data field.
-func (o *CreateScopeResponse) SetData(v Scope) {
+// SetData gets a reference to the given WebhooksConfig and assigns it to the Data field.
+func (o *ConfigResponse) SetData(v WebhooksConfig) {
 	o.Data = &v
 }
 
-func (o CreateScopeResponse) MarshalJSON() ([]byte, error) {
+func (o ConfigResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,7 +80,7 @@ func (o CreateScopeResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateScopeResponse) ToMap() (map[string]interface{}, error) {
+func (o ConfigResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -88,38 +88,38 @@ func (o CreateScopeResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateScopeResponse struct {
-	value *CreateScopeResponse
+type NullableConfigResponse struct {
+	value *ConfigResponse
 	isSet bool
 }
 
-func (v NullableCreateScopeResponse) Get() *CreateScopeResponse {
+func (v NullableConfigResponse) Get() *ConfigResponse {
 	return v.value
 }
 
-func (v *NullableCreateScopeResponse) Set(val *CreateScopeResponse) {
+func (v *NullableConfigResponse) Set(val *ConfigResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateScopeResponse) IsSet() bool {
+func (v NullableConfigResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateScopeResponse) Unset() {
+func (v *NullableConfigResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateScopeResponse(val *CreateScopeResponse) *NullableCreateScopeResponse {
-	return &NullableCreateScopeResponse{value: val, isSet: true}
+func NewNullableConfigResponse(val *ConfigResponse) *NullableConfigResponse {
+	return &NullableConfigResponse{value: val, isSet: true}
 }
 
-func (v NullableCreateScopeResponse) MarshalJSON() ([]byte, error) {
+func (v NullableConfigResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateScopeResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableConfigResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
