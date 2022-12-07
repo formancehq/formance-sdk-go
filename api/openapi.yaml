@@ -17,7 +17,7 @@ info:
     and standard method from web, mobile and desktop applications.
     <SecurityDefinitions />
   title: Formance Stack API
-  version: v0.2.8
+  version: develop
   x-logo:
     url: https://avatars.githubusercontent.com/u/84325077?s=200&v=4
     altText: Formance
@@ -434,7 +434,7 @@ paths:
           description: OK
       summary: Show server information.
       tags:
-      - Server
+      - server
   /api/ledger/{ledger}/accounts:
     get:
       description: "List accounts from a ledger, sorted by address in descending order."
@@ -518,11 +518,10 @@ paths:
           example: gte
           type: string
         style: form
-      - description: |
-          Parameter used in pagination requests. Maximum page size is set to 15.
-          Set to the value of next for the next page of results.
-          Set to the value of previous for the previous page of results.
-          No other parameters can be set when the pagination token is set.
+      - description: "Parameter used in pagination requests. Maximum page size is\
+          \ set to 15.\nSet to the value of next for the next page of results. \n\
+          Set to the value of previous for the previous page of results.\nNo other\
+          \ parameters can be set when the pagination token is set.\n"
         explode: true
         in: query
         name: pagination_token
@@ -546,7 +545,7 @@ paths:
           description: Bad Request
       summary: List accounts from a ledger.
       tags:
-      - Accounts
+      - accounts
     head:
       operationId: countAccounts
       parameters:
@@ -591,7 +590,7 @@ paths:
               style: simple
       summary: Count the accounts from a ledger.
       tags:
-      - Accounts
+      - accounts
   /api/ledger/{ledger}/accounts/{address}:
     get:
       operationId: getAccount
@@ -633,7 +632,7 @@ paths:
           description: Bad Request
       summary: Get account by its address.
       tags:
-      - Accounts
+      - accounts
   /api/ledger/{ledger}/accounts/{address}/metadata:
     post:
       operationId: addMetadataToAccount
@@ -677,9 +676,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/getAccount_400_response'
           description: Bad Request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addMetadataToAccount_409_response'
+          description: Conflict
       summary: Add metadata to an account.
       tags:
-      - Accounts
+      - accounts
   /api/ledger/{ledger}/mapping:
     get:
       operationId: getMapping
@@ -702,7 +707,7 @@ paths:
           description: OK
       summary: Get the mapping of a ledger.
       tags:
-      - Mapping
+      - mapping
     put:
       operationId: updateMapping
       parameters:
@@ -730,10 +735,9 @@ paths:
           description: OK
       summary: Update the mapping of a ledger.
       tags:
-      - Mapping
+      - mapping
   /api/ledger/{ledger}/script:
     post:
-      deprecated: true
       operationId: runScript
       parameters:
       - description: Name of the ledger.
@@ -767,16 +771,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScriptResult'
-          description: |
-            On success, it will return a 200 status code, and the resulting transaction under the `transaction` field.
-
-            On failure, it will also return a 200 status code, and the following fields:
-              - `details`: contains a URL. When there is an error parsing Numscript, the result can be difficult to read—the provided URL will render the error in an easy-to-read format.
-              - `error_code`: contains the string code of the error
-              - `error_message`: contains a human-readable indication of what went wrong, for example that an account had insufficient funds, or that there was an error in the provided Numscript.
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runScript_400_response'
+          description: Bad Request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addMetadataToAccount_409_response'
+          description: Conflict
       summary: Execute a Numscript.
       tags:
-      - Script
+      - script
   /api/ledger/{ledger}/stats:
     get:
       description: |
@@ -802,7 +812,7 @@ paths:
           description: OK
       summary: Get Stats
       tags:
-      - Stats
+      - stats
   /api/ledger/{ledger}/transactions:
     get:
       description: "List transactions from a ledger, sorted by txid in descending\
@@ -849,8 +859,8 @@ paths:
           example: ref:001
           type: string
         style: form
-      - description: "Filter transactions with postings involving given account, either\
-          \ as source or destination (regular expression placed between ^ and $)."
+      - description: "Find transactions with postings involving given account, either\
+          \ as source or destination."
         explode: true
         in: query
         name: account
@@ -859,8 +869,7 @@ paths:
           example: users:001
           type: string
         style: form
-      - description: Filter transactions with postings involving given account at
-          source (regular expression placed between ^ and $).
+      - description: Find transactions with postings involving given account at source.
         explode: true
         in: query
         name: source
@@ -869,8 +878,7 @@ paths:
           example: users:001
           type: string
         style: form
-      - description: Filter transactions with postings involving given account at
-          destination (regular expression placed between ^ and $).
+      - description: Find transactions with postings involving given account at destination.
         explode: true
         in: query
         name: destination
@@ -900,11 +908,10 @@ paths:
         schema:
           type: string
         style: form
-      - description: |
-          Parameter used in pagination requests. Maximum page size is set to 15.
-          Set to the value of next for the next page of results.
-          Set to the value of previous for the previous page of results.
-          No other parameters can be set when the pagination token is set.
+      - description: "Parameter used in pagination requests. Maximum page size is\
+          \ set to 15.\nSet to the value of next for the next page of results. \n\
+          Set to the value of previous for the previous page of results.\nNo other\
+          \ parameters can be set when the pagination token is set.\n"
         explode: true
         in: query
         name: pagination_token
@@ -939,7 +946,7 @@ paths:
           description: Bad Request
       summary: List transactions from a ledger.
       tags:
-      - Transactions
+      - transactions
     head:
       operationId: countTransactions
       parameters:
@@ -991,27 +998,6 @@ paths:
           example: users:001
           type: string
         style: form
-      - description: |
-          Filter transactions that occurred after this timestamp.
-          The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute).
-        explode: true
-        in: query
-        name: start_time
-        required: false
-        schema:
-          type: string
-          example: null
-        style: form
-      - description: |
-          Filter transactions that occurred before this timestamp.
-          The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute).
-        explode: true
-        in: query
-        name: end_time
-        required: false
-        schema:
-          type: string
-        style: form
       - description: Filter transactions by metadata key value pairs. Nested objects
           can be used as seen in the example below.
         example: "metadata[key]=value1&metadata[a.nested.key]=value2"
@@ -1034,7 +1020,7 @@ paths:
               style: simple
       summary: Count the transactions from a ledger.
       tags:
-      - Transactions
+      - transactions
     post:
       operationId: createTransaction
       parameters:
@@ -1061,11 +1047,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PostTransaction'
-        description: |
-          The request body must contain one of the following objects:
-            - `postings`: suitable for simple transactions
-            - `script`: enabling more complex transactions with Numscript
+              $ref: '#/components/schemas/TransactionData'
         required: true
       responses:
         "200":
@@ -1074,6 +1056,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/TransactionsResponse'
           description: OK
+        "304":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+          description: Not modified (when preview is enabled)
         "400":
           content:
             application/json:
@@ -1088,7 +1076,7 @@ paths:
           description: Conflict
       summary: Create a new transaction to a ledger.
       tags:
-      - Transactions
+      - transactions
   /api/ledger/{ledger}/transactions/{txid}:
     get:
       operationId: getTransaction
@@ -1132,7 +1120,7 @@ paths:
           description: Not Found
       summary: Get transaction from a ledger by its ID.
       tags:
-      - Transactions
+      - transactions
   /api/ledger/{ledger}/transactions/{txid}/metadata:
     post:
       operationId: addMetadataOnTransaction
@@ -1177,9 +1165,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/getTransaction_404_response'
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addMetadataToAccount_409_response'
+          description: Conflict
       summary: Set the metadata of a transaction by its ID.
       tags:
-      - Transactions
+      - transactions
   /api/ledger/{ledger}/transactions/{txid}/revert:
     post:
       operationId: revertTransaction
@@ -1221,9 +1215,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/getTransaction_404_response'
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addMetadataToAccount_409_response'
+          description: Conflict
       summary: Revert a ledger transaction by its ID.
       tags:
-      - Transactions
+      - transactions
   /api/ledger/{ledger}/transactions/batch:
     post:
       operationId: CreateTransactions
@@ -1264,7 +1264,7 @@ paths:
           description: Conflict
       summary: Create a new batch of transactions to a ledger.
       tags:
-      - Transactions
+      - transactions
   /api/ledger/{ledger}/balances:
     get:
       operationId: getBalances
@@ -1298,10 +1298,9 @@ paths:
           example: users:003
           type: string
         style: form
-      - description: |-
-          Parameter used in pagination requests.
-          Set to the value of next for the next page of results.
-          Set to the value of previous for the previous page of results.
+      - description: "Parameter used in pagination requests. \nSet to the value of\
+          \ next for the next page of results. \nSet to the value of previous for\
+          \ the previous page of results."
         explode: true
         in: query
         name: pagination_token
@@ -1325,7 +1324,7 @@ paths:
           description: Bad Request
       summary: Get the balances from a ledger's account
       tags:
-      - Balances
+      - balances
   /api/ledger/{ledger}/aggregate/balances:
     get:
       operationId: getBalancesAggregated
@@ -1364,7 +1363,7 @@ paths:
           description: Bad Request
       summary: Get the aggregated balances from selected accounts
       tags:
-      - Balances
+      - balances
   /api/payments/payments:
     get:
       operationId: listPayments
@@ -1620,6 +1619,22 @@ paths:
       summary: Read a specific task of the connector
       tags:
       - Payments
+  /api/payments/connectors/stripe/transfer:
+    post:
+      description: Execute a transfer between two Stripe accounts
+      operationId: connectorsStripeTransfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeTransferRequest'
+        required: true
+      responses:
+        "200":
+          description: Transfer has been executed
+      summary: Transfer funds between Stripe accounts
+      tags:
+      - Payments
   /api/search/:
     post:
       description: Search with Query
@@ -1632,10 +1647,6 @@ paths:
         required: true
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
           description: Success
       summary: Search
       tags:
@@ -2107,9 +2118,9 @@ components:
       type: object
     ScriptResult:
       example:
-        error_message: account had insufficient funds
-        details: https://play.numscript.org/?payload=eyJlcnJvciI6ImFjY291bnQgaGFkIGluc3VmZmljaWVudCBmdW5kcyJ9
-        error_code: INSUFFICIENT_FUND
+        error_message: error_message
+        details: details
+        error_code: INTERNAL
         transaction:
           reference: ref:001
           metadata:
@@ -2152,7 +2163,6 @@ components:
           timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         details:
-          example: https://play.numscript.org/?payload=eyJlcnJvciI6ImFjY291bnQgaGFkIGluc3VmZmljaWVudCBmdW5kcyJ9
           type: string
         error_code:
           enum:
@@ -2160,11 +2170,8 @@ components:
           - INSUFFICIENT_FUND
           - COMPILATION_FAILED
           - NO_SCRIPT
-          - METADATA_OVERRIDE
-          example: INSUFFICIENT_FUND
           type: string
         error_message:
-          example: account had insufficient funds
           type: string
         transaction:
           $ref: '#/components/schemas/Transaction'
@@ -2324,16 +2331,6 @@ components:
           vars:
             user: users:042
       properties:
-        plain:
-          example: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\
-            \tdestination = $user\n)\n"
-          type: string
-        vars:
-          example:
-            vars:
-              user: users:042
-          properties: {}
-          type: object
         reference:
           description: Reference to attach to the generated transaction
           example: order_1234
@@ -2346,6 +2343,16 @@ components:
               nested:
                 key: value
           nullable: true
+          type: object
+        plain:
+          example: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\
+            \tdestination = $user\n)\n"
+          type: string
+        vars:
+          example:
+            vars:
+              user: users:042
+          properties: {}
           type: object
       required:
       - plain
@@ -2532,53 +2539,6 @@ components:
       required:
       - transactions
       type: object
-    PostTransaction:
-      example:
-        reference: ref:001
-        metadata:
-          admin: true
-          a:
-            nested:
-              key: value
-        postings:
-        - amount: 100
-          destination: users:002
-          source: users:001
-          asset: COIN
-        - amount: 100
-          destination: users:002
-          source: users:001
-          asset: COIN
-        script:
-          plain: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\t\
-            destination = $user\n)\n"
-          vars:
-            vars:
-              user: users:042
-        timestamp: 2000-01-23T04:56:07.000+00:00
-      properties:
-        timestamp:
-          format: date-time
-          type: string
-        postings:
-          items:
-            $ref: '#/components/schemas/Posting'
-          type: array
-        script:
-          $ref: '#/components/schemas/PostTransaction_script'
-        reference:
-          example: ref:001
-          type: string
-        metadata:
-          additionalProperties: {}
-          example:
-            admin: true
-            a:
-              nested:
-                key: value
-          nullable: true
-          type: object
-      type: object
     Stats:
       example:
         accounts: 0
@@ -2595,7 +2555,7 @@ components:
     Cursor:
       properties:
         page_size:
-          example: 15
+          example: 1
           type: integer
         has_more:
           example: false
@@ -2604,7 +2564,7 @@ components:
           example: YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol=
           type: string
         next:
-          example: ""
+          example: aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ==
           type: string
       required:
       - page_size
@@ -3124,6 +3084,31 @@ components:
           example: false
           type: boolean
       type: object
+    StripeTransferRequest:
+      example:
+        amount: 100
+        metadata:
+          order_id: "6735"
+        destination: acct_1Gqj58KZcSIg2N2q
+        asset: USD
+      properties:
+        amount:
+          example: 100
+          type: integer
+        asset:
+          example: USD
+          type: string
+        destination:
+          example: acct_1Gqj58KZcSIg2N2q
+          type: string
+        metadata:
+          description: |
+            A set of key/value pairs that you can attach to a transfer object.
+            It can be useful for storing additional information about the transfer in a structured format.
+          example:
+            order_id: "6735"
+          type: object
+      type: object
     Query:
       example:
         size: 0
@@ -3152,21 +3137,6 @@ components:
           type: string
       type: object
     Response:
-      example:
-        cursor:
-          next: next
-          total:
-            value: 6.027456183070403
-            relation: relation
-          previous: previous
-          data:
-          - ""
-          - ""
-          hasMore: true
-          pageSize: 0.8008281904610115
-        ledger: ledger
-        data: "{}"
-        kind: kind
       properties:
         data:
           description: The payload
@@ -3396,6 +3366,27 @@ components:
       required:
       - error_code
       type: object
+    addMetadataToAccount_409_response:
+      properties:
+        error_code:
+          example: CONFLICT
+          type: string
+        error_message:
+          type: string
+      required:
+      - error_code
+      type: object
+    runScript_400_response:
+      properties:
+        error_code:
+          example: VALIDATION
+          type: string
+        error_message:
+          example: invalid payload
+          type: string
+      required:
+      - error_code
+      type: object
     listTransactions_200_response_cursor_allOf:
       properties:
         data:
@@ -3594,27 +3585,6 @@ components:
       - lastDigits
       type: object
       example: null
-    PostTransaction_script:
-      example:
-        plain: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\t\
-          destination = $user\n)\n"
-        vars:
-          vars:
-            user: users:042
-      properties:
-        plain:
-          example: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\
-            \tdestination = $user\n)\n"
-          type: string
-        vars:
-          example:
-            vars:
-              user: users:042
-          properties: {}
-          type: object
-      required:
-      - plain
-      type: object
     ListConnectorsConfigsResponse_connector_key:
       example:
         datatype: datatype
@@ -3635,9 +3605,6 @@ components:
           $ref: '#/components/schemas/ListConnectorsConfigsResponse_connector_key'
       type: object
     Response_cursor_total:
-      example:
-        value: 6.027456183070403
-        relation: relation
       properties:
         value:
           type: number
@@ -3645,17 +3612,6 @@ components:
           type: string
       type: object
     Response_cursor:
-      example:
-        next: next
-        total:
-          value: 6.027456183070403
-          relation: relation
-        previous: previous
-        data:
-        - ""
-        - ""
-        hasMore: true
-        pageSize: 0.8008281904610115
       properties:
         pageSize:
           type: number
@@ -3696,6 +3652,13 @@ x-tagGroups:
   - Stats
   - Transactions
   - Balances
+  - server
+  - accounts
+  - mapping
+  - script
+  - stats
+  - transactions
+  - balances
 - name: Payments
   tags:
   - Payments

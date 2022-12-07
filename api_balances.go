@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.8
+API version: develop
 Contact: support@formance.com
 */
 
@@ -74,7 +74,7 @@ func (r ApiGetBalancesRequest) After(after string) ApiGetBalancesRequest {
 	return r
 }
 
-// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results.
+// Parameter used in pagination requests.  Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results.
 func (r ApiGetBalancesRequest) PaginationToken(paginationToken string) ApiGetBalancesRequest {
 	r.paginationToken = &paginationToken
 	return r
@@ -122,13 +122,13 @@ func (a *BalancesApiService) GetBalancesExecute(r ApiGetBalancesRequest) (*GetBa
 	localVarFormParams := url.Values{}
 
 	if r.address != nil {
-	    parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
 	}
 	if r.after != nil {
-	    parameterAddToQuery(localVarQueryParams, "after", r.after, "")
+		parameterAddToQuery(localVarQueryParams, "after", r.after, "")
 	}
 	if r.paginationToken != nil {
-	    parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
+		parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -176,8 +176,8 @@ func (a *BalancesApiService) GetBalancesExecute(r ApiGetBalancesRequest) (*GetBa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -249,7 +249,7 @@ func (a *BalancesApiService) GetBalancesAggregatedExecute(r ApiGetBalancesAggreg
 	localVarFormParams := url.Values{}
 
 	if r.address != nil {
-	    parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -297,8 +297,8 @@ func (a *BalancesApiService) GetBalancesAggregatedExecute(r ApiGetBalancesAggreg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

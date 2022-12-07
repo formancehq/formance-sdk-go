@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.8
+API version: develop
 Contact: support@formance.com
 */
 
@@ -29,14 +29,11 @@ type ScriptApi interface {
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param ledger Name of the ledger.
 	@return ApiRunScriptRequest
-
-	Deprecated
 	*/
 	RunScript(ctx context.Context, ledger string) ApiRunScriptRequest
 
 	// RunScriptExecute executes the request
 	//  @return ScriptResult
-	// Deprecated
 	RunScriptExecute(r ApiRunScriptRequest) (*ScriptResult, *http.Response, error)
 }
 
@@ -72,8 +69,6 @@ RunScript Execute a Numscript.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ledger Name of the ledger.
  @return ApiRunScriptRequest
-
-Deprecated
 */
 func (a *ScriptApiService) RunScript(ctx context.Context, ledger string) ApiRunScriptRequest {
 	return ApiRunScriptRequest{
@@ -85,7 +80,6 @@ func (a *ScriptApiService) RunScript(ctx context.Context, ledger string) ApiRunS
 
 // Execute executes the request
 //  @return ScriptResult
-// Deprecated
 func (a *ScriptApiService) RunScriptExecute(r ApiRunScriptRequest) (*ScriptResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -110,7 +104,7 @@ func (a *ScriptApiService) RunScriptExecute(r ApiRunScriptRequest) (*ScriptResul
 	}
 
 	if r.preview != nil {
-	    parameterAddToQuery(localVarQueryParams, "preview", r.preview, "")
+		parameterAddToQuery(localVarQueryParams, "preview", r.preview, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -152,6 +146,27 @@ func (a *ScriptApiService) RunScriptExecute(r ApiRunScriptRequest) (*ScriptResul
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v RunScript400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AddMetadataToAccount409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
