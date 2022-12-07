@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## CountTransactions
 
-> CountTransactions(ctx, ledger).Reference(reference).Account(account).Source(source).Destination(destination).StartTime(startTime).EndTime(endTime).Metadata(metadata).Execute()
+> CountTransactions(ctx, ledger).Reference(reference).Account(account).Source(source).Destination(destination).Metadata(metadata).Execute()
 
 Count the transactions from a ledger.
 
@@ -109,13 +109,11 @@ func main() {
     account := "users:001" // string | Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $). (optional)
     source := "users:001" // string | Filter transactions with postings involving given account at source (regular expression placed between ^ and $). (optional)
     destination := "users:001" // string | Filter transactions with postings involving given account at destination (regular expression placed between ^ and $). (optional)
-    startTime := "startTime_example" // string | Filter transactions that occurred after this timestamp. The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute).  (optional)
-    endTime := "endTime_example" // string | Filter transactions that occurred before this timestamp. The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute).  (optional)
     metadata := map[string]interface{}{"key": map[string]interface{}(123)} // map[string]interface{} | Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below. (optional)
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionsApi.CountTransactions(context.Background(), ledger).Reference(reference).Account(account).Source(source).Destination(destination).StartTime(startTime).EndTime(endTime).Metadata(metadata).Execute()
+    resp, r, err := apiClient.TransactionsApi.CountTransactions(context.Background(), ledger).Reference(reference).Account(account).Source(source).Destination(destination).Metadata(metadata).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.CountTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -143,8 +141,6 @@ Name | Type | Description  | Notes
  **account** | **string** | Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $). | 
  **source** | **string** | Filter transactions with postings involving given account at source (regular expression placed between ^ and $). | 
  **destination** | **string** | Filter transactions with postings involving given account at destination (regular expression placed between ^ and $). | 
- **startTime** | **string** | Filter transactions that occurred after this timestamp. The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute).  | 
- **endTime** | **string** | Filter transactions that occurred before this timestamp. The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute).  | 
  **metadata** | [**map[string]interface{}**](map[string]interface{}.md) | Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below. | 
 
 ### Return type
@@ -167,7 +163,7 @@ Name | Type | Description  | Notes
 
 ## CreateTransaction
 
-> TransactionsResponse CreateTransaction(ctx, ledger).PostTransaction(postTransaction).Preview(preview).Execute()
+> TransactionsResponse CreateTransaction(ctx, ledger).TransactionData(transactionData).Preview(preview).Execute()
 
 Create a new transaction to a ledger.
 
@@ -185,12 +181,12 @@ import (
 
 func main() {
     ledger := "ledger001" // string | Name of the ledger.
-    postTransaction := *client.NewPostTransaction() // PostTransaction | The request body must contain one of the following objects:   - `postings`: suitable for simple transactions   - `script`: enabling more complex transactions with Numscript 
+    transactionData := *client.NewTransactionData([]client.Posting{*client.NewPosting(int32(100), "COIN", "users:002", "users:001")}) // TransactionData | 
     preview := true // bool | Set the preview mode. Preview mode doesn't add the logs to the database or publish a message to the message broker. (optional)
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionsApi.CreateTransaction(context.Background(), ledger).PostTransaction(postTransaction).Preview(preview).Execute()
+    resp, r, err := apiClient.TransactionsApi.CreateTransaction(context.Background(), ledger).TransactionData(transactionData).Preview(preview).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.CreateTransaction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -216,7 +212,7 @@ Other parameters are passed through a pointer to a apiCreateTransactionRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **postTransaction** | [**PostTransaction**](PostTransaction.md) | The request body must contain one of the following objects:   - &#x60;postings&#x60;: suitable for simple transactions   - &#x60;script&#x60;: enabling more complex transactions with Numscript  | 
+ **transactionData** | [**TransactionData**](TransactionData.md) |  | 
  **preview** | **bool** | Set the preview mode. Preview mode doesn&#39;t add the logs to the database or publish a message to the message broker. | 
 
 ### Return type
@@ -403,12 +399,12 @@ func main() {
     pageSize := int32(100) // int32 | The maximum number of results to return per page (optional) (default to 15)
     after := "1234" // string | Pagination cursor, will return transactions after given txid (in descending order). (optional)
     reference := "ref:001" // string | Find transactions by reference field. (optional)
-    account := "users:001" // string | Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $). (optional)
-    source := "users:001" // string | Filter transactions with postings involving given account at source (regular expression placed between ^ and $). (optional)
-    destination := "users:001" // string | Filter transactions with postings involving given account at destination (regular expression placed between ^ and $). (optional)
+    account := "users:001" // string | Find transactions with postings involving given account, either as source or destination. (optional)
+    source := "users:001" // string | Find transactions with postings involving given account at source. (optional)
+    destination := "users:001" // string | Find transactions with postings involving given account at destination. (optional)
     startTime := "startTime_example" // string | Filter transactions that occurred after this timestamp. The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute).  (optional)
     endTime := "endTime_example" // string | Filter transactions that occurred before this timestamp. The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute).  (optional)
-    paginationToken := "aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ==" // string | Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set.  (optional)
+    paginationToken := "aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ==" // string | Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set.  (optional)
     metadata := map[string]interface{}{"key": map[string]interface{}(123)} // map[string]interface{} | Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below. (optional)
 
     configuration := client.NewConfiguration()
@@ -442,12 +438,12 @@ Name | Type | Description  | Notes
  **pageSize** | **int32** | The maximum number of results to return per page | [default to 15]
  **after** | **string** | Pagination cursor, will return transactions after given txid (in descending order). | 
  **reference** | **string** | Find transactions by reference field. | 
- **account** | **string** | Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $). | 
- **source** | **string** | Filter transactions with postings involving given account at source (regular expression placed between ^ and $). | 
- **destination** | **string** | Filter transactions with postings involving given account at destination (regular expression placed between ^ and $). | 
+ **account** | **string** | Find transactions with postings involving given account, either as source or destination. | 
+ **source** | **string** | Find transactions with postings involving given account at source. | 
+ **destination** | **string** | Find transactions with postings involving given account at destination. | 
  **startTime** | **string** | Filter transactions that occurred after this timestamp. The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute).  | 
  **endTime** | **string** | Filter transactions that occurred before this timestamp. The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute).  | 
- **paginationToken** | **string** | Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set.  | 
+ **paginationToken** | **string** | Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set.  | 
  **metadata** | [**map[string]interface{}**](map[string]interface{}.md) | Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below. | 
 
 ### Return type
