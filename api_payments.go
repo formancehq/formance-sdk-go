@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.8
+API version: v1.0.0-beta.4
 Contact: support@formance.com
 */
 
@@ -23,6 +23,19 @@ import (
 
 
 type PaymentsApi interface {
+
+	/*
+	ConnectorsStripeTransfer Transfer funds between Stripe accounts
+
+	Execute a transfer between two Stripe accounts
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsStripeTransferRequest
+	*/
+	ConnectorsStripeTransfer(ctx context.Context) ApiConnectorsStripeTransferRequest
+
+	// ConnectorsStripeTransferExecute executes the request
+	ConnectorsStripeTransferExecute(r ApiConnectorsStripeTransferRequest) (*http.Response, error)
 
 	/*
 	GetAllConnectors Get all installed connectors
@@ -168,6 +181,105 @@ type PaymentsApi interface {
 
 // PaymentsApiService PaymentsApi service
 type PaymentsApiService service
+
+type ApiConnectorsStripeTransferRequest struct {
+	ctx context.Context
+	ApiService PaymentsApi
+	stripeTransferRequest *StripeTransferRequest
+}
+
+func (r ApiConnectorsStripeTransferRequest) StripeTransferRequest(stripeTransferRequest StripeTransferRequest) ApiConnectorsStripeTransferRequest {
+	r.stripeTransferRequest = &stripeTransferRequest
+	return r
+}
+
+func (r ApiConnectorsStripeTransferRequest) Execute() (*http.Response, error) {
+	return r.ApiService.ConnectorsStripeTransferExecute(r)
+}
+
+/*
+ConnectorsStripeTransfer Transfer funds between Stripe accounts
+
+Execute a transfer between two Stripe accounts
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiConnectorsStripeTransferRequest
+*/
+func (a *PaymentsApiService) ConnectorsStripeTransfer(ctx context.Context) ApiConnectorsStripeTransferRequest {
+	return ApiConnectorsStripeTransferRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+func (a *PaymentsApiService) ConnectorsStripeTransferExecute(r ApiConnectorsStripeTransferRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentsApiService.ConnectorsStripeTransfer")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/payments/connectors/stripe/transfer"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.stripeTransferRequest == nil {
+		return nil, reportError("stripeTransferRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.stripeTransferRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
 
 type ApiGetAllConnectorsRequest struct {
 	ctx context.Context
@@ -846,10 +958,10 @@ func (a *PaymentsApiService) ListPaymentsExecute(r ApiListPaymentsRequest) (*Lis
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-	    parameterAddToQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToQuery(localVarQueryParams, "limit", r.limit, "")
 	}
 	if r.skip != nil {
-	    parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
+		parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
 	}
 	if r.sort != nil {
 		t := *r.sort

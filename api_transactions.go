@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.8
+API version: v1.0.0-beta.4
 Contact: support@formance.com
 */
 
@@ -225,8 +225,8 @@ func (a *TransactionsApiService) AddMetadataOnTransactionExecute(r ApiAddMetadat
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -236,8 +236,19 @@ func (a *TransactionsApiService) AddMetadataOnTransactionExecute(r ApiAddMetadat
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AddMetadataToAccount409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -253,8 +264,6 @@ type ApiCountTransactionsRequest struct {
 	account *string
 	source *string
 	destination *string
-	startTime *string
-	endTime *string
 	metadata *map[string]interface{}
 }
 
@@ -279,18 +288,6 @@ func (r ApiCountTransactionsRequest) Source(source string) ApiCountTransactionsR
 // Filter transactions with postings involving given account at destination (regular expression placed between ^ and $).
 func (r ApiCountTransactionsRequest) Destination(destination string) ApiCountTransactionsRequest {
 	r.destination = &destination
-	return r
-}
-
-// Filter transactions that occurred after this timestamp. The format is RFC3339 and is inclusive (for example, 12:00:01 includes the first second of the minute). 
-func (r ApiCountTransactionsRequest) StartTime(startTime string) ApiCountTransactionsRequest {
-	r.startTime = &startTime
-	return r
-}
-
-// Filter transactions that occurred before this timestamp. The format is RFC3339 and is exclusive (for example, 12:00:01 excludes the first second of the minute). 
-func (r ApiCountTransactionsRequest) EndTime(endTime string) ApiCountTransactionsRequest {
-	r.endTime = &endTime
 	return r
 }
 
@@ -340,25 +337,19 @@ func (a *TransactionsApiService) CountTransactionsExecute(r ApiCountTransactions
 	localVarFormParams := url.Values{}
 
 	if r.reference != nil {
-	    parameterAddToQuery(localVarQueryParams, "reference", r.reference, "")
+		parameterAddToQuery(localVarQueryParams, "reference", r.reference, "")
 	}
 	if r.account != nil {
-	    parameterAddToQuery(localVarQueryParams, "account", r.account, "")
+		parameterAddToQuery(localVarQueryParams, "account", r.account, "")
 	}
 	if r.source != nil {
-	    parameterAddToQuery(localVarQueryParams, "source", r.source, "")
+		parameterAddToQuery(localVarQueryParams, "source", r.source, "")
 	}
 	if r.destination != nil {
-	    parameterAddToQuery(localVarQueryParams, "destination", r.destination, "")
-	}
-	if r.startTime != nil {
-	    parameterAddToQuery(localVarQueryParams, "start_time", r.startTime, "")
-	}
-	if r.endTime != nil {
-	    parameterAddToQuery(localVarQueryParams, "end_time", r.endTime, "")
+		parameterAddToQuery(localVarQueryParams, "destination", r.destination, "")
 	}
 	if r.metadata != nil {
-	    parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -409,13 +400,12 @@ type ApiCreateTransactionRequest struct {
 	ctx context.Context
 	ApiService TransactionsApi
 	ledger string
-	postTransaction *PostTransaction
+	transactionData *TransactionData
 	preview *bool
 }
 
-// The request body must contain one of the following objects:   - &#x60;postings&#x60;: suitable for simple transactions   - &#x60;script&#x60;: enabling more complex transactions with Numscript 
-func (r ApiCreateTransactionRequest) PostTransaction(postTransaction PostTransaction) ApiCreateTransactionRequest {
-	r.postTransaction = &postTransaction
+func (r ApiCreateTransactionRequest) TransactionData(transactionData TransactionData) ApiCreateTransactionRequest {
+	r.transactionData = &transactionData
 	return r
 }
 
@@ -465,12 +455,12 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.postTransaction == nil {
-		return localVarReturnValue, nil, reportError("postTransaction is required and must be specified")
+	if r.transactionData == nil {
+		return localVarReturnValue, nil, reportError("transactionData is required and must be specified")
 	}
 
 	if r.preview != nil {
-	    parameterAddToQuery(localVarQueryParams, "preview", r.preview, "")
+		parameterAddToQuery(localVarQueryParams, "preview", r.preview, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -490,7 +480,7 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.postTransaction
+	localVarPostBody = r.transactionData
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -513,6 +503,17 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 304 {
+			var v TransactionsResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v CreateTransaction400Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -520,8 +521,8 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -531,8 +532,8 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -653,8 +654,8 @@ func (a *TransactionsApiService) CreateTransactionsExecute(r ApiCreateTransactio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -664,8 +665,8 @@ func (a *TransactionsApiService) CreateTransactionsExecute(r ApiCreateTransactio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -779,8 +780,8 @@ func (a *TransactionsApiService) GetTransactionExecute(r ApiGetTransactionReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -790,8 +791,8 @@ func (a *TransactionsApiService) GetTransactionExecute(r ApiGetTransactionReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -842,19 +843,19 @@ func (r ApiListTransactionsRequest) Reference(reference string) ApiListTransacti
 	return r
 }
 
-// Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $).
+// Find transactions with postings involving given account, either as source or destination.
 func (r ApiListTransactionsRequest) Account(account string) ApiListTransactionsRequest {
 	r.account = &account
 	return r
 }
 
-// Filter transactions with postings involving given account at source (regular expression placed between ^ and $).
+// Find transactions with postings involving given account at source.
 func (r ApiListTransactionsRequest) Source(source string) ApiListTransactionsRequest {
 	r.source = &source
 	return r
 }
 
-// Filter transactions with postings involving given account at destination (regular expression placed between ^ and $).
+// Find transactions with postings involving given account at destination.
 func (r ApiListTransactionsRequest) Destination(destination string) ApiListTransactionsRequest {
 	r.destination = &destination
 	return r
@@ -872,7 +873,7 @@ func (r ApiListTransactionsRequest) EndTime(endTime string) ApiListTransactionsR
 	return r
 }
 
-// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set. 
+// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set. 
 func (r ApiListTransactionsRequest) PaginationToken(paginationToken string) ApiListTransactionsRequest {
 	r.paginationToken = &paginationToken
 	return r
@@ -928,34 +929,34 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	localVarFormParams := url.Values{}
 
 	if r.pageSize != nil {
-	    parameterAddToQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToQuery(localVarQueryParams, "page_size", r.pageSize, "")
 	}
 	if r.after != nil {
-	    parameterAddToQuery(localVarQueryParams, "after", r.after, "")
+		parameterAddToQuery(localVarQueryParams, "after", r.after, "")
 	}
 	if r.reference != nil {
-	    parameterAddToQuery(localVarQueryParams, "reference", r.reference, "")
+		parameterAddToQuery(localVarQueryParams, "reference", r.reference, "")
 	}
 	if r.account != nil {
-	    parameterAddToQuery(localVarQueryParams, "account", r.account, "")
+		parameterAddToQuery(localVarQueryParams, "account", r.account, "")
 	}
 	if r.source != nil {
-	    parameterAddToQuery(localVarQueryParams, "source", r.source, "")
+		parameterAddToQuery(localVarQueryParams, "source", r.source, "")
 	}
 	if r.destination != nil {
-	    parameterAddToQuery(localVarQueryParams, "destination", r.destination, "")
+		parameterAddToQuery(localVarQueryParams, "destination", r.destination, "")
 	}
 	if r.startTime != nil {
-	    parameterAddToQuery(localVarQueryParams, "start_time", r.startTime, "")
+		parameterAddToQuery(localVarQueryParams, "start_time", r.startTime, "")
 	}
 	if r.endTime != nil {
-	    parameterAddToQuery(localVarQueryParams, "end_time", r.endTime, "")
+		parameterAddToQuery(localVarQueryParams, "end_time", r.endTime, "")
 	}
 	if r.paginationToken != nil {
-	    parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
+		parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
 	}
 	if r.metadata != nil {
-	    parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1003,8 +1004,8 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1118,8 +1119,8 @@ func (a *TransactionsApiService) RevertTransactionExecute(r ApiRevertTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1129,8 +1130,19 @@ func (a *TransactionsApiService) RevertTransactionExecute(r ApiRevertTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AddMetadataToAccount409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

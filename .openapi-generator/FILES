@@ -20,6 +20,7 @@ configuration.go
 docs/Account.md
 docs/AccountWithVolumesAndBalances.md
 docs/AccountsApi.md
+docs/AddMetadataToAccount409Response.md
 docs/Attempt.md
 docs/AttemptResponse.md
 docs/BalancesApi.md
@@ -85,8 +86,6 @@ docs/MappingResponse.md
 docs/ModulrConfig.md
 docs/Payment.md
 docs/PaymentsApi.md
-docs/PostTransaction.md
-docs/PostTransactionScript.md
 docs/Posting.md
 docs/Query.md
 docs/ReadClientResponse.md
@@ -94,6 +93,7 @@ docs/ReadUserResponse.md
 docs/Response.md
 docs/ResponseCursor.md
 docs/ResponseCursorTotal.md
+docs/RunScript400Response.md
 docs/Scope.md
 docs/ScopeAllOf.md
 docs/ScopeOptions.md
@@ -111,6 +111,7 @@ docs/StatsApi.md
 docs/StatsResponse.md
 docs/StripeConfig.md
 docs/StripeTask.md
+docs/StripeTransferRequest.md
 docs/Transaction.md
 docs/TransactionData.md
 docs/TransactionResponse.md
@@ -129,6 +130,7 @@ go.mod
 go.sum
 model_account.go
 model_account_with_volumes_and_balances.go
+model_add_metadata_to_account_409_response.go
 model_attempt.go
 model_attempt_response.go
 model_banking_circle_config.go
@@ -190,8 +192,6 @@ model_mapping.go
 model_mapping_response.go
 model_modulr_config.go
 model_payment.go
-model_post_transaction.go
-model_post_transaction_script.go
 model_posting.go
 model_query.go
 model_read_client_response.go
@@ -199,6 +199,7 @@ model_read_user_response.go
 model_response.go
 model_response_cursor.go
 model_response_cursor_total.go
+model_run_script_400_response.go
 model_scope.go
 model_scope_all_of.go
 model_scope_options.go
@@ -211,6 +212,7 @@ model_stats.go
 model_stats_response.go
 model_stripe_config.go
 model_stripe_task.go
+model_stripe_transfer_request.go
 model_transaction.go
 model_transaction_data.go
 model_transaction_response.go
