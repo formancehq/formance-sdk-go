@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**ConnectorsStripeTransfer**](PaymentsApi.md#ConnectorsStripeTransfer) | **Post** /api/payments/connectors/stripe/transfer | Transfer funds between Stripe accounts
 [**GetAllConnectors**](PaymentsApi.md#GetAllConnectors) | **Get** /api/payments/connectors | Get all installed connectors
 [**GetAllConnectorsConfigs**](PaymentsApi.md#GetAllConnectorsConfigs) | **Get** /api/payments/connectors/configs | Get all available connectors configs
 [**GetConnectorTask**](PaymentsApi.md#GetConnectorTask) | **Get** /api/payments/connectors/{connector}/tasks/{taskId} | Read a specific task of the connector
@@ -15,6 +16,70 @@ Method | HTTP request | Description
 [**ResetConnector**](PaymentsApi.md#ResetConnector) | **Post** /api/payments/connectors/{connector}/reset | Reset connector
 [**UninstallConnector**](PaymentsApi.md#UninstallConnector) | **Delete** /api/payments/connectors/{connector} | Uninstall connector
 
+
+
+## ConnectorsStripeTransfer
+
+> ConnectorsStripeTransfer(ctx).StripeTransferRequest(stripeTransferRequest).Execute()
+
+Transfer funds between Stripe accounts
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    client "./openapi"
+)
+
+func main() {
+    stripeTransferRequest := *client.NewStripeTransferRequest() // StripeTransferRequest | 
+
+    configuration := client.NewConfiguration()
+    apiClient := client.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentsApi.ConnectorsStripeTransfer(context.Background()).StripeTransferRequest(stripeTransferRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentsApi.ConnectorsStripeTransfer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiConnectorsStripeTransferRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **stripeTransferRequest** | [**StripeTransferRequest**](StripeTransferRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Authorization](../README.md#Authorization)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetAllConnectors

@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetTransaction400Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetTransaction400Response{}
+// checks if the AddMetadataToAccount409Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AddMetadataToAccount409Response{}
 
-// GetTransaction400Response struct for GetTransaction400Response
-type GetTransaction400Response struct {
+// AddMetadataToAccount409Response struct for AddMetadataToAccount409Response
+type AddMetadataToAccount409Response struct {
 	ErrorCode string `json:"error_code"`
 	ErrorMessage *string `json:"error_message,omitempty"`
 }
 
-// NewGetTransaction400Response instantiates a new GetTransaction400Response object
+// NewAddMetadataToAccount409Response instantiates a new AddMetadataToAccount409Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetTransaction400Response(errorCode string) *GetTransaction400Response {
-	this := GetTransaction400Response{}
+func NewAddMetadataToAccount409Response(errorCode string) *AddMetadataToAccount409Response {
+	this := AddMetadataToAccount409Response{}
 	this.ErrorCode = errorCode
 	return &this
 }
 
-// NewGetTransaction400ResponseWithDefaults instantiates a new GetTransaction400Response object
+// NewAddMetadataToAccount409ResponseWithDefaults instantiates a new AddMetadataToAccount409Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetTransaction400ResponseWithDefaults() *GetTransaction400Response {
-	this := GetTransaction400Response{}
+func NewAddMetadataToAccount409ResponseWithDefaults() *AddMetadataToAccount409Response {
+	this := AddMetadataToAccount409Response{}
 	return &this
 }
 
 // GetErrorCode returns the ErrorCode field value
-func (o *GetTransaction400Response) GetErrorCode() string {
+func (o *AddMetadataToAccount409Response) GetErrorCode() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *GetTransaction400Response) GetErrorCode() string {
 
 // GetErrorCodeOk returns a tuple with the ErrorCode field value
 // and a boolean to check if the value has been set.
-func (o *GetTransaction400Response) GetErrorCodeOk() (*string, bool) {
+func (o *AddMetadataToAccount409Response) GetErrorCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,12 +62,12 @@ func (o *GetTransaction400Response) GetErrorCodeOk() (*string, bool) {
 }
 
 // SetErrorCode sets field value
-func (o *GetTransaction400Response) SetErrorCode(v string) {
+func (o *AddMetadataToAccount409Response) SetErrorCode(v string) {
 	o.ErrorCode = v
 }
 
 // GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
-func (o *GetTransaction400Response) GetErrorMessage() string {
+func (o *AddMetadataToAccount409Response) GetErrorMessage() string {
 	if o == nil || isNil(o.ErrorMessage) {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *GetTransaction400Response) GetErrorMessage() string {
 
 // GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetTransaction400Response) GetErrorMessageOk() (*string, bool) {
+func (o *AddMetadataToAccount409Response) GetErrorMessageOk() (*string, bool) {
 	if o == nil || isNil(o.ErrorMessage) {
 		return nil, false
 	}
@@ -85,7 +85,7 @@ func (o *GetTransaction400Response) GetErrorMessageOk() (*string, bool) {
 }
 
 // HasErrorMessage returns a boolean if a field has been set.
-func (o *GetTransaction400Response) HasErrorMessage() bool {
+func (o *AddMetadataToAccount409Response) HasErrorMessage() bool {
 	if o != nil && !isNil(o.ErrorMessage) {
 		return true
 	}
@@ -94,11 +94,11 @@ func (o *GetTransaction400Response) HasErrorMessage() bool {
 }
 
 // SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
-func (o *GetTransaction400Response) SetErrorMessage(v string) {
+func (o *AddMetadataToAccount409Response) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
-func (o GetTransaction400Response) MarshalJSON() ([]byte, error) {
+func (o AddMetadataToAccount409Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -106,7 +106,7 @@ func (o GetTransaction400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetTransaction400Response) ToMap() (map[string]interface{}, error) {
+func (o AddMetadataToAccount409Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["error_code"] = o.ErrorCode
 	if !isNil(o.ErrorMessage) {
@@ -115,38 +115,38 @@ func (o GetTransaction400Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableGetTransaction400Response struct {
-	value *GetTransaction400Response
+type NullableAddMetadataToAccount409Response struct {
+	value *AddMetadataToAccount409Response
 	isSet bool
 }
 
-func (v NullableGetTransaction400Response) Get() *GetTransaction400Response {
+func (v NullableAddMetadataToAccount409Response) Get() *AddMetadataToAccount409Response {
 	return v.value
 }
 
-func (v *NullableGetTransaction400Response) Set(val *GetTransaction400Response) {
+func (v *NullableAddMetadataToAccount409Response) Set(val *AddMetadataToAccount409Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetTransaction400Response) IsSet() bool {
+func (v NullableAddMetadataToAccount409Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetTransaction400Response) Unset() {
+func (v *NullableAddMetadataToAccount409Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetTransaction400Response(val *GetTransaction400Response) *NullableGetTransaction400Response {
-	return &NullableGetTransaction400Response{value: val, isSet: true}
+func NewNullableAddMetadataToAccount409Response(val *AddMetadataToAccount409Response) *NullableAddMetadataToAccount409Response {
+	return &NullableAddMetadataToAccount409Response{value: val, isSet: true}
 }
 
-func (v NullableGetTransaction400Response) MarshalJSON() ([]byte, error) {
+func (v NullableAddMetadataToAccount409Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetTransaction400Response) UnmarshalJSON(src []byte) error {
+func (v *NullableAddMetadataToAccount409Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

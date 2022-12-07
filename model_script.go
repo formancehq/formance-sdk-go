@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.8
+API version: v1.0.0-beta.4
 Contact: support@formance.com
 */
 
@@ -20,11 +20,11 @@ var _ MappedNullable = &Script{}
 
 // Script struct for Script
 type Script struct {
-	Plain string `json:"plain"`
-	Vars map[string]interface{} `json:"vars,omitempty"`
 	// Reference to attach to the generated transaction
 	Reference *string `json:"reference,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Plain string `json:"plain"`
+	Vars map[string]interface{} `json:"vars,omitempty"`
 }
 
 // NewScript instantiates a new Script object
@@ -43,62 +43,6 @@ func NewScript(plain string) *Script {
 func NewScriptWithDefaults() *Script {
 	this := Script{}
 	return &this
-}
-
-// GetPlain returns the Plain field value
-func (o *Script) GetPlain() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Plain
-}
-
-// GetPlainOk returns a tuple with the Plain field value
-// and a boolean to check if the value has been set.
-func (o *Script) GetPlainOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Plain, true
-}
-
-// SetPlain sets field value
-func (o *Script) SetPlain(v string) {
-	o.Plain = v
-}
-
-// GetVars returns the Vars field value if set, zero value otherwise.
-func (o *Script) GetVars() map[string]interface{} {
-	if o == nil || isNil(o.Vars) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Vars
-}
-
-// GetVarsOk returns a tuple with the Vars field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Script) GetVarsOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.Vars) {
-		return map[string]interface{}{}, false
-	}
-	return o.Vars, true
-}
-
-// HasVars returns a boolean if a field has been set.
-func (o *Script) HasVars() bool {
-	if o != nil && !isNil(o.Vars) {
-		return true
-	}
-
-	return false
-}
-
-// SetVars gets a reference to the given map[string]interface{} and assigns it to the Vars field.
-func (o *Script) SetVars(v map[string]interface{}) {
-	o.Vars = v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -166,6 +110,62 @@ func (o *Script) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
+// GetPlain returns the Plain field value
+func (o *Script) GetPlain() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Plain
+}
+
+// GetPlainOk returns a tuple with the Plain field value
+// and a boolean to check if the value has been set.
+func (o *Script) GetPlainOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Plain, true
+}
+
+// SetPlain sets field value
+func (o *Script) SetPlain(v string) {
+	o.Plain = v
+}
+
+// GetVars returns the Vars field value if set, zero value otherwise.
+func (o *Script) GetVars() map[string]interface{} {
+	if o == nil || isNil(o.Vars) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Vars
+}
+
+// GetVarsOk returns a tuple with the Vars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Script) GetVarsOk() (map[string]interface{}, bool) {
+	if o == nil || isNil(o.Vars) {
+		return map[string]interface{}{}, false
+	}
+	return o.Vars, true
+}
+
+// HasVars returns a boolean if a field has been set.
+func (o *Script) HasVars() bool {
+	if o != nil && !isNil(o.Vars) {
+		return true
+	}
+
+	return false
+}
+
+// SetVars gets a reference to the given map[string]interface{} and assigns it to the Vars field.
+func (o *Script) SetVars(v map[string]interface{}) {
+	o.Vars = v
+}
+
 func (o Script) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -176,15 +176,15 @@ func (o Script) MarshalJSON() ([]byte, error) {
 
 func (o Script) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["plain"] = o.Plain
-	if !isNil(o.Vars) {
-		toSerialize["vars"] = o.Vars
-	}
 	if !isNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	toSerialize["plain"] = o.Plain
+	if !isNil(o.Vars) {
+		toSerialize["vars"] = o.Vars
 	}
 	return toSerialize, nil
 }
