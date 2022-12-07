@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v0.2.8
+API version: SDK_VERSION
 Contact: support@formance.com
 */
 
@@ -188,8 +188,19 @@ func (a *AccountsApiService) AddMetadataToAccountExecute(r ApiAddMetadataToAccou
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AddMetadataToAccount409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -257,10 +268,10 @@ func (a *AccountsApiService) CountAccountsExecute(r ApiCountAccountsRequest) (*h
 	localVarFormParams := url.Values{}
 
 	if r.address != nil {
-	    parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
 	}
 	if r.metadata != nil {
-	    parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -404,8 +415,8 @@ func (a *AccountsApiService) GetAccountExecute(r ApiGetAccountRequest) (*GetAcco
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -471,7 +482,7 @@ func (r ApiListAccountsRequest) BalanceOperator(balanceOperator string) ApiListA
 	return r
 }
 
-// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set. 
+// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set. 
 func (r ApiListAccountsRequest) PaginationToken(paginationToken string) ApiListAccountsRequest {
 	r.paginationToken = &paginationToken
 	return r
@@ -521,25 +532,25 @@ func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*Lis
 	localVarFormParams := url.Values{}
 
 	if r.pageSize != nil {
-	    parameterAddToQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToQuery(localVarQueryParams, "page_size", r.pageSize, "")
 	}
 	if r.after != nil {
-	    parameterAddToQuery(localVarQueryParams, "after", r.after, "")
+		parameterAddToQuery(localVarQueryParams, "after", r.after, "")
 	}
 	if r.address != nil {
-	    parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
 	}
 	if r.metadata != nil {
-	    parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
 	}
 	if r.balance != nil {
-	    parameterAddToQuery(localVarQueryParams, "balance", r.balance, "")
+		parameterAddToQuery(localVarQueryParams, "balance", r.balance, "")
 	}
 	if r.balanceOperator != nil {
-	    parameterAddToQuery(localVarQueryParams, "balance_operator", r.balanceOperator, "")
+		parameterAddToQuery(localVarQueryParams, "balance_operator", r.balanceOperator, "")
 	}
 	if r.paginationToken != nil {
-	    parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
+		parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -587,8 +598,8 @@ func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*Lis
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

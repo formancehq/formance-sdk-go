@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## Search
 
-> Response Search(ctx).Query(query).Execute()
+> Search(ctx).Query(query).Execute()
 
 Search
 
@@ -38,8 +38,6 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SearchApi.Search``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `Search`: Response
-    fmt.Fprintf(os.Stdout, "Response from `SearchApi.Search`: %v\n", resp)
 }
 ```
 
@@ -58,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response**](Response.md)
+ (empty response body)
 
 ### Authorization
 
@@ -67,7 +65,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

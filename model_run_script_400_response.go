@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateTransactions400Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateTransactions400Response{}
+// checks if the RunScript400Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RunScript400Response{}
 
-// CreateTransactions400Response struct for CreateTransactions400Response
-type CreateTransactions400Response struct {
+// RunScript400Response struct for RunScript400Response
+type RunScript400Response struct {
 	ErrorCode string `json:"error_code"`
 	ErrorMessage *string `json:"error_message,omitempty"`
 }
 
-// NewCreateTransactions400Response instantiates a new CreateTransactions400Response object
+// NewRunScript400Response instantiates a new RunScript400Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateTransactions400Response(errorCode string) *CreateTransactions400Response {
-	this := CreateTransactions400Response{}
+func NewRunScript400Response(errorCode string) *RunScript400Response {
+	this := RunScript400Response{}
 	this.ErrorCode = errorCode
 	return &this
 }
 
-// NewCreateTransactions400ResponseWithDefaults instantiates a new CreateTransactions400Response object
+// NewRunScript400ResponseWithDefaults instantiates a new RunScript400Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateTransactions400ResponseWithDefaults() *CreateTransactions400Response {
-	this := CreateTransactions400Response{}
+func NewRunScript400ResponseWithDefaults() *RunScript400Response {
+	this := RunScript400Response{}
 	return &this
 }
 
 // GetErrorCode returns the ErrorCode field value
-func (o *CreateTransactions400Response) GetErrorCode() string {
+func (o *RunScript400Response) GetErrorCode() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *CreateTransactions400Response) GetErrorCode() string {
 
 // GetErrorCodeOk returns a tuple with the ErrorCode field value
 // and a boolean to check if the value has been set.
-func (o *CreateTransactions400Response) GetErrorCodeOk() (*string, bool) {
+func (o *RunScript400Response) GetErrorCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,12 +62,12 @@ func (o *CreateTransactions400Response) GetErrorCodeOk() (*string, bool) {
 }
 
 // SetErrorCode sets field value
-func (o *CreateTransactions400Response) SetErrorCode(v string) {
+func (o *RunScript400Response) SetErrorCode(v string) {
 	o.ErrorCode = v
 }
 
 // GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
-func (o *CreateTransactions400Response) GetErrorMessage() string {
+func (o *RunScript400Response) GetErrorMessage() string {
 	if o == nil || isNil(o.ErrorMessage) {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *CreateTransactions400Response) GetErrorMessage() string {
 
 // GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateTransactions400Response) GetErrorMessageOk() (*string, bool) {
+func (o *RunScript400Response) GetErrorMessageOk() (*string, bool) {
 	if o == nil || isNil(o.ErrorMessage) {
 		return nil, false
 	}
@@ -85,7 +85,7 @@ func (o *CreateTransactions400Response) GetErrorMessageOk() (*string, bool) {
 }
 
 // HasErrorMessage returns a boolean if a field has been set.
-func (o *CreateTransactions400Response) HasErrorMessage() bool {
+func (o *RunScript400Response) HasErrorMessage() bool {
 	if o != nil && !isNil(o.ErrorMessage) {
 		return true
 	}
@@ -94,11 +94,11 @@ func (o *CreateTransactions400Response) HasErrorMessage() bool {
 }
 
 // SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
-func (o *CreateTransactions400Response) SetErrorMessage(v string) {
+func (o *RunScript400Response) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
-func (o CreateTransactions400Response) MarshalJSON() ([]byte, error) {
+func (o RunScript400Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -106,7 +106,7 @@ func (o CreateTransactions400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateTransactions400Response) ToMap() (map[string]interface{}, error) {
+func (o RunScript400Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["error_code"] = o.ErrorCode
 	if !isNil(o.ErrorMessage) {
@@ -115,38 +115,38 @@ func (o CreateTransactions400Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateTransactions400Response struct {
-	value *CreateTransactions400Response
+type NullableRunScript400Response struct {
+	value *RunScript400Response
 	isSet bool
 }
 
-func (v NullableCreateTransactions400Response) Get() *CreateTransactions400Response {
+func (v NullableRunScript400Response) Get() *RunScript400Response {
 	return v.value
 }
 
-func (v *NullableCreateTransactions400Response) Set(val *CreateTransactions400Response) {
+func (v *NullableRunScript400Response) Set(val *RunScript400Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateTransactions400Response) IsSet() bool {
+func (v NullableRunScript400Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateTransactions400Response) Unset() {
+func (v *NullableRunScript400Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateTransactions400Response(val *CreateTransactions400Response) *NullableCreateTransactions400Response {
-	return &NullableCreateTransactions400Response{value: val, isSet: true}
+func NewNullableRunScript400Response(val *RunScript400Response) *NullableRunScript400Response {
+	return &NullableRunScript400Response{value: val, isSet: true}
 }
 
-func (v NullableCreateTransactions400Response) MarshalJSON() ([]byte, error) {
+func (v NullableRunScript400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateTransactions400Response) UnmarshalJSON(src []byte) error {
+func (v *NullableRunScript400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
