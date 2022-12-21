@@ -15,57 +15,57 @@ import (
 	"encoding/json"
 )
 
-// checks if the Mapping type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Mapping{}
+// checks if the ServerInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ServerInfo{}
 
-// Mapping struct for Mapping
-type Mapping struct {
-	Contracts []Contract `json:"contracts"`
+// ServerInfo struct for ServerInfo
+type ServerInfo struct {
+	Version string `json:"version"`
 }
 
-// NewMapping instantiates a new Mapping object
+// NewServerInfo instantiates a new ServerInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMapping(contracts []Contract) *Mapping {
-	this := Mapping{}
-	this.Contracts = contracts
+func NewServerInfo(version string) *ServerInfo {
+	this := ServerInfo{}
+	this.Version = version
 	return &this
 }
 
-// NewMappingWithDefaults instantiates a new Mapping object
+// NewServerInfoWithDefaults instantiates a new ServerInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMappingWithDefaults() *Mapping {
-	this := Mapping{}
+func NewServerInfoWithDefaults() *ServerInfo {
+	this := ServerInfo{}
 	return &this
 }
 
-// GetContracts returns the Contracts field value
-func (o *Mapping) GetContracts() []Contract {
+// GetVersion returns the Version field value
+func (o *ServerInfo) GetVersion() string {
 	if o == nil {
-		var ret []Contract
+		var ret string
 		return ret
 	}
 
-	return o.Contracts
+	return o.Version
 }
 
-// GetContractsOk returns a tuple with the Contracts field value
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *Mapping) GetContractsOk() ([]Contract, bool) {
+func (o *ServerInfo) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Contracts, true
+	return &o.Version, true
 }
 
-// SetContracts sets field value
-func (o *Mapping) SetContracts(v []Contract) {
-	o.Contracts = v
+// SetVersion sets field value
+func (o *ServerInfo) SetVersion(v string) {
+	o.Version = v
 }
 
-func (o Mapping) MarshalJSON() ([]byte, error) {
+func (o ServerInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -73,44 +73,44 @@ func (o Mapping) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Mapping) ToMap() (map[string]interface{}, error) {
+func (o ServerInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["contracts"] = o.Contracts
+	toSerialize["version"] = o.Version
 	return toSerialize, nil
 }
 
-type NullableMapping struct {
-	value *Mapping
+type NullableServerInfo struct {
+	value *ServerInfo
 	isSet bool
 }
 
-func (v NullableMapping) Get() *Mapping {
+func (v NullableServerInfo) Get() *ServerInfo {
 	return v.value
 }
 
-func (v *NullableMapping) Set(val *Mapping) {
+func (v *NullableServerInfo) Set(val *ServerInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMapping) IsSet() bool {
+func (v NullableServerInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMapping) Unset() {
+func (v *NullableServerInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMapping(val *Mapping) *NullableMapping {
-	return &NullableMapping{value: val, isSet: true}
+func NewNullableServerInfo(val *ServerInfo) *NullableServerInfo {
+	return &NullableServerInfo{value: val, isSet: true}
 }
 
-func (v NullableMapping) MarshalJSON() ([]byte, error) {
+func (v NullableServerInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMapping) UnmarshalJSON(src []byte) error {
+func (v *NullableServerInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

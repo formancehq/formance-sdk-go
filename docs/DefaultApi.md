@@ -1,20 +1,18 @@
-# \SearchApi
+# \DefaultApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Search**](SearchApi.md#Search) | **Post** /api/search/ | Search
+[**GetServerInfo**](DefaultApi.md#GetServerInfo) | **Get** /api/search/_info | Get server info
 
 
 
-## Search
+## GetServerInfo
 
-> Response Search(ctx).Query(query).Execute()
+> ServerInfo GetServerInfo(ctx).Execute()
 
-Search
-
-
+Get server info
 
 ### Example
 
@@ -29,36 +27,31 @@ import (
 )
 
 func main() {
-    query := *client.NewQuery() // Query | 
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.SearchApi.Search(context.Background()).Query(query).Execute()
+    resp, r, err := apiClient.DefaultApi.GetServerInfo(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SearchApi.Search``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetServerInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `Search`: Response
-    fmt.Fprintf(os.Stdout, "Response from `SearchApi.Search`: %v\n", resp)
+    // response from `GetServerInfo`: ServerInfo
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetServerInfo`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSearchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetServerInfoRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **query** | [**Query**](Query.md) |  | 
 
 ### Return type
 
-[**Response**](Response.md)
+[**ServerInfo**](ServerInfo.md)
 
 ### Authorization
 
@@ -66,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

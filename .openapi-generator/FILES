@@ -5,6 +5,7 @@ api/openapi.yaml
 api_accounts.go
 api_balances.go
 api_clients.go
+api_default.go
 api_mapping.go
 api_payments.go
 api_scopes.go
@@ -48,6 +49,7 @@ docs/CreateTransaction409Response.md
 docs/CreateTransactions400Response.md
 docs/CurrencyCloudConfig.md
 docs/Cursor.md
+docs/DefaultApi.md
 docs/DummyPayConfig.md
 docs/ErrorCode.md
 docs/ErrorResponse.md
@@ -106,6 +108,7 @@ docs/Secret.md
 docs/SecretAllOf.md
 docs/SecretOptions.md
 docs/ServerApi.md
+docs/ServerInfo.md
 docs/Stats.md
 docs/StatsApi.md
 docs/StatsResponse.md
@@ -208,6 +211,7 @@ model_script_result.go
 model_secret.go
 model_secret_all_of.go
 model_secret_options.go
+model_server_info.go
 model_stats.go
 model_stats_response.go
 model_stripe_config.go
@@ -224,4 +228,5 @@ model_webhooks_config.go
 model_webhooks_cursor.go
 model_wise_config.go
 response.go
+test/api_default_test.go
 utils.go
