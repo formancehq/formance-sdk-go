@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-beta.4
+API version: v1.0.0-rc.1
 Contact: support@formance.com
 */
 
@@ -27,7 +27,7 @@ type WebhooksConfig struct {
 	EventTypes []string `json:"eventTypes,omitempty"`
 	Active *bool `json:"active,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	ModifiedAt *time.Time `json:"modifiedAt,omitempty"`
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 
 // NewWebhooksConfig instantiates a new WebhooksConfig object
@@ -239,36 +239,36 @@ func (o *WebhooksConfig) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetModifiedAt returns the ModifiedAt field value if set, zero value otherwise.
-func (o *WebhooksConfig) GetModifiedAt() time.Time {
-	if o == nil || isNil(o.ModifiedAt) {
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *WebhooksConfig) GetUpdatedAt() time.Time {
+	if o == nil || isNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.ModifiedAt
+	return *o.UpdatedAt
 }
 
-// GetModifiedAtOk returns a tuple with the ModifiedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WebhooksConfig) GetModifiedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.ModifiedAt) {
+func (o *WebhooksConfig) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil || isNil(o.UpdatedAt) {
 		return nil, false
 	}
-	return o.ModifiedAt, true
+	return o.UpdatedAt, true
 }
 
-// HasModifiedAt returns a boolean if a field has been set.
-func (o *WebhooksConfig) HasModifiedAt() bool {
-	if o != nil && !isNil(o.ModifiedAt) {
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *WebhooksConfig) HasUpdatedAt() bool {
+	if o != nil && !isNil(o.UpdatedAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetModifiedAt gets a reference to the given time.Time and assigns it to the ModifiedAt field.
-func (o *WebhooksConfig) SetModifiedAt(v time.Time) {
-	o.ModifiedAt = &v
+// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+func (o *WebhooksConfig) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = &v
 }
 
 func (o WebhooksConfig) MarshalJSON() ([]byte, error) {
@@ -299,8 +299,8 @@ func (o WebhooksConfig) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !isNil(o.ModifiedAt) {
-		toSerialize["modifiedAt"] = o.ModifiedAt
+	if !isNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

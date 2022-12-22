@@ -206,7 +206,7 @@ Other parameters are passed through a pointer to a apiGetAllConnectorsConfigsReq
 
 ## GetConnectorTask
 
-> ConnectorTask GetConnectorTask(ctx, connector, taskId).Execute()
+> ListConnectorTasks200ResponseInner GetConnectorTask(ctx, connector, taskId).Execute()
 
 Read a specific task of the connector
 
@@ -225,7 +225,7 @@ import (
 )
 
 func main() {
-    connector := "connector_example" // string | The connector code
+    connector := client.Connectors("STRIPE") // Connectors | The connector code
     taskId := "task1" // string | The task id
 
     configuration := client.NewConfiguration()
@@ -235,7 +235,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentsApi.GetConnectorTask``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetConnectorTask`: ConnectorTask
+    // response from `GetConnectorTask`: ListConnectorTasks200ResponseInner
     fmt.Fprintf(os.Stdout, "Response from `PaymentsApi.GetConnectorTask`: %v\n", resp)
 }
 ```
@@ -246,7 +246,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connector** | **string** | The connector code | 
+**connector** | [**Connectors**](.md) | The connector code | 
 **taskId** | **string** | The task id | 
 
 ### Other Parameters
@@ -261,7 +261,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectorTask**](ConnectorTask.md)
+[**ListConnectorTasks200ResponseInner**](ListConnectorTasks200ResponseInner.md)
 
 ### Authorization
 
@@ -366,7 +366,7 @@ import (
 )
 
 func main() {
-    connector := "connector_example" // string | The connector code
+    connector := client.Connectors("STRIPE") // Connectors | The connector code
     connectorConfig := client.ConnectorConfig{BankingCircleConfig: client.NewBankingCircleConfig("XXX", "XXX", "XXX", "XXX")} // ConnectorConfig | 
 
     configuration := client.NewConfiguration()
@@ -385,7 +385,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connector** | **string** | The connector code | 
+**connector** | [**Connectors**](.md) | The connector code | 
 
 ### Other Parameters
 
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 ## ListConnectorTasks
 
-> []ConnectorTask ListConnectorTasks(ctx, connector).Execute()
+> []ListConnectorTasks200ResponseInner ListConnectorTasks(ctx, connector).Execute()
 
 List connector tasks
 
@@ -436,7 +436,7 @@ import (
 )
 
 func main() {
-    connector := "connector_example" // string | The connector code
+    connector := client.Connectors("STRIPE") // Connectors | The connector code
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
@@ -445,7 +445,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentsApi.ListConnectorTasks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListConnectorTasks`: []ConnectorTask
+    // response from `ListConnectorTasks`: []ListConnectorTasks200ResponseInner
     fmt.Fprintf(os.Stdout, "Response from `PaymentsApi.ListConnectorTasks`: %v\n", resp)
 }
 ```
@@ -456,7 +456,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connector** | **string** | The connector code | 
+**connector** | [**Connectors**](.md) | The connector code | 
 
 ### Other Parameters
 
@@ -469,7 +469,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ConnectorTask**](ConnectorTask.md)
+[**[]ListConnectorTasks200ResponseInner**](ListConnectorTasks200ResponseInner.md)
 
 ### Authorization
 
@@ -574,7 +574,7 @@ import (
 )
 
 func main() {
-    connector := "connector_example" // string | The connector code
+    connector := client.Connectors("STRIPE") // Connectors | The connector code
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
@@ -594,7 +594,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connector** | **string** | The connector code | 
+**connector** | [**Connectors**](.md) | The connector code | 
 
 ### Other Parameters
 
@@ -644,7 +644,7 @@ import (
 )
 
 func main() {
-    connector := "connector_example" // string | The connector code
+    connector := client.Connectors("STRIPE") // Connectors | The connector code
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
@@ -662,7 +662,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connector** | **string** | The connector code | 
+**connector** | [**Connectors**](.md) | The connector code | 
 
 ### Other Parameters
 
@@ -712,7 +712,7 @@ import (
 )
 
 func main() {
-    connector := "connector_example" // string | The connector code
+    connector := client.Connectors("STRIPE") // Connectors | The connector code
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
@@ -730,7 +730,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connector** | **string** | The connector code | 
+**connector** | [**Connectors**](.md) | The connector code | 
 
 ### Other Parameters
 
