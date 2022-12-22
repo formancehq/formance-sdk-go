@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-beta.4
+API version: v1.0.0-rc.1
 Contact: support@formance.com
 */
 
@@ -33,7 +33,8 @@ type SearchApi interface {
 	Search(ctx context.Context) ApiSearchRequest
 
 	// SearchExecute executes the request
-	SearchExecute(r ApiSearchRequest) (*http.Response, error)
+	//  @return Response
+	SearchExecute(r ApiSearchRequest) (*Response, *http.Response, error)
 }
 
 // SearchApiService SearchApi service
@@ -50,7 +51,7 @@ func (r ApiSearchRequest) Query(query Query) ApiSearchRequest {
 	return r
 }
 
-func (r ApiSearchRequest) Execute() (*http.Response, error) {
+func (r ApiSearchRequest) Execute() (*Response, *http.Response, error) {
 	return r.ApiService.SearchExecute(r)
 }
 
@@ -70,16 +71,18 @@ func (a *SearchApiService) Search(ctx context.Context) ApiSearchRequest {
 }
 
 // Execute executes the request
-func (a *SearchApiService) SearchExecute(r ApiSearchRequest) (*http.Response, error) {
+//  @return Response
+func (a *SearchApiService) SearchExecute(r ApiSearchRequest) (*Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SearchApiService.Search")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/search/"
@@ -88,7 +91,7 @@ func (a *SearchApiService) SearchExecute(r ApiSearchRequest) (*http.Response, er
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.query == nil {
-		return nil, reportError("query is required and must be specified")
+		return localVarReturnValue, nil, reportError("query is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -101,7 +104,7 @@ func (a *SearchApiService) SearchExecute(r ApiSearchRequest) (*http.Response, er
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -112,19 +115,19 @@ func (a *SearchApiService) SearchExecute(r ApiSearchRequest) (*http.Response, er
 	localVarPostBody = r.query
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -132,8 +135,17 @@ func (a *SearchApiService) SearchExecute(r ApiSearchRequest) (*http.Response, er
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

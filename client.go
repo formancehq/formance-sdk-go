@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-beta.4
+API version: v1.0.0-rc.1
 Contact: support@formance.com
 */
 
@@ -44,7 +44,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the Formance Stack API API vv1.0.0-beta.4
+// APIClient manages communication with the Formance Stack API API vv1.0.0-rc.1
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -57,6 +57,8 @@ type APIClient struct {
 	BalancesApi BalancesApi
 
 	ClientsApi ClientsApi
+
+	DefaultApi DefaultApi
 
 	MappingApi MappingApi
 
@@ -98,6 +100,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountsApi = (*AccountsApiService)(&c.common)
 	c.BalancesApi = (*BalancesApiService)(&c.common)
 	c.ClientsApi = (*ClientsApiService)(&c.common)
+	c.DefaultApi = (*DefaultApiService)(&c.common)
 	c.MappingApi = (*MappingApiService)(&c.common)
 	c.PaymentsApi = (*PaymentsApiService)(&c.common)
 	c.ScopesApi = (*ScopesApiService)(&c.common)

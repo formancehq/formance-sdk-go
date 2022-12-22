@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-beta.4
+API version: v1.0.0-rc.1
 Contact: support@formance.com
 */
 
@@ -75,11 +75,11 @@ type PaymentsApi interface {
 	@param taskId The task id
 	@return ApiGetConnectorTaskRequest
 	*/
-	GetConnectorTask(ctx context.Context, connector string, taskId string) ApiGetConnectorTaskRequest
+	GetConnectorTask(ctx context.Context, connector Connectors, taskId string) ApiGetConnectorTaskRequest
 
 	// GetConnectorTaskExecute executes the request
-	//  @return ConnectorTask
-	GetConnectorTaskExecute(r ApiGetConnectorTaskRequest) (*ConnectorTask, *http.Response, error)
+	//  @return ListConnectorTasks200ResponseInner
+	GetConnectorTaskExecute(r ApiGetConnectorTaskRequest) (*ListConnectorTasks200ResponseInner, *http.Response, error)
 
 	/*
 	GetPayment Returns a payment.
@@ -103,7 +103,7 @@ type PaymentsApi interface {
 	@param connector The connector code
 	@return ApiInstallConnectorRequest
 	*/
-	InstallConnector(ctx context.Context, connector string) ApiInstallConnectorRequest
+	InstallConnector(ctx context.Context, connector Connectors) ApiInstallConnectorRequest
 
 	// InstallConnectorExecute executes the request
 	InstallConnectorExecute(r ApiInstallConnectorRequest) (*http.Response, error)
@@ -117,11 +117,11 @@ type PaymentsApi interface {
 	@param connector The connector code
 	@return ApiListConnectorTasksRequest
 	*/
-	ListConnectorTasks(ctx context.Context, connector string) ApiListConnectorTasksRequest
+	ListConnectorTasks(ctx context.Context, connector Connectors) ApiListConnectorTasksRequest
 
 	// ListConnectorTasksExecute executes the request
-	//  @return []ConnectorTask
-	ListConnectorTasksExecute(r ApiListConnectorTasksRequest) ([]ConnectorTask, *http.Response, error)
+	//  @return []ListConnectorTasks200ResponseInner
+	ListConnectorTasksExecute(r ApiListConnectorTasksRequest) ([]ListConnectorTasks200ResponseInner, *http.Response, error)
 
 	/*
 	ListPayments Returns a list of payments.
@@ -144,7 +144,7 @@ type PaymentsApi interface {
 	@param connector The connector code
 	@return ApiReadConnectorConfigRequest
 	*/
-	ReadConnectorConfig(ctx context.Context, connector string) ApiReadConnectorConfigRequest
+	ReadConnectorConfig(ctx context.Context, connector Connectors) ApiReadConnectorConfigRequest
 
 	// ReadConnectorConfigExecute executes the request
 	//  @return ConnectorConfig
@@ -159,7 +159,7 @@ type PaymentsApi interface {
 	@param connector The connector code
 	@return ApiResetConnectorRequest
 	*/
-	ResetConnector(ctx context.Context, connector string) ApiResetConnectorRequest
+	ResetConnector(ctx context.Context, connector Connectors) ApiResetConnectorRequest
 
 	// ResetConnectorExecute executes the request
 	ResetConnectorExecute(r ApiResetConnectorRequest) (*http.Response, error)
@@ -173,7 +173,7 @@ type PaymentsApi interface {
 	@param connector The connector code
 	@return ApiUninstallConnectorRequest
 	*/
-	UninstallConnector(ctx context.Context, connector string) ApiUninstallConnectorRequest
+	UninstallConnector(ctx context.Context, connector Connectors) ApiUninstallConnectorRequest
 
 	// UninstallConnectorExecute executes the request
 	UninstallConnectorExecute(r ApiUninstallConnectorRequest) (*http.Response, error)
@@ -482,11 +482,11 @@ func (a *PaymentsApiService) GetAllConnectorsConfigsExecute(r ApiGetAllConnector
 type ApiGetConnectorTaskRequest struct {
 	ctx context.Context
 	ApiService PaymentsApi
-	connector string
+	connector Connectors
 	taskId string
 }
 
-func (r ApiGetConnectorTaskRequest) Execute() (*ConnectorTask, *http.Response, error) {
+func (r ApiGetConnectorTaskRequest) Execute() (*ListConnectorTasks200ResponseInner, *http.Response, error) {
 	return r.ApiService.GetConnectorTaskExecute(r)
 }
 
@@ -500,7 +500,7 @@ Get a specific task associated to the connector
  @param taskId The task id
  @return ApiGetConnectorTaskRequest
 */
-func (a *PaymentsApiService) GetConnectorTask(ctx context.Context, connector string, taskId string) ApiGetConnectorTaskRequest {
+func (a *PaymentsApiService) GetConnectorTask(ctx context.Context, connector Connectors, taskId string) ApiGetConnectorTaskRequest {
 	return ApiGetConnectorTaskRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -510,13 +510,13 @@ func (a *PaymentsApiService) GetConnectorTask(ctx context.Context, connector str
 }
 
 // Execute executes the request
-//  @return ConnectorTask
-func (a *PaymentsApiService) GetConnectorTaskExecute(r ApiGetConnectorTaskRequest) (*ConnectorTask, *http.Response, error) {
+//  @return ListConnectorTasks200ResponseInner
+func (a *PaymentsApiService) GetConnectorTaskExecute(r ApiGetConnectorTaskRequest) (*ListConnectorTasks200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ConnectorTask
+		localVarReturnValue  *ListConnectorTasks200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentsApiService.GetConnectorTask")
@@ -690,7 +690,7 @@ func (a *PaymentsApiService) GetPaymentExecute(r ApiGetPaymentRequest) (*Payment
 type ApiInstallConnectorRequest struct {
 	ctx context.Context
 	ApiService PaymentsApi
-	connector string
+	connector Connectors
 	connectorConfig *ConnectorConfig
 }
 
@@ -712,7 +712,7 @@ Install connector
  @param connector The connector code
  @return ApiInstallConnectorRequest
 */
-func (a *PaymentsApiService) InstallConnector(ctx context.Context, connector string) ApiInstallConnectorRequest {
+func (a *PaymentsApiService) InstallConnector(ctx context.Context, connector Connectors) ApiInstallConnectorRequest {
 	return ApiInstallConnectorRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -793,10 +793,10 @@ func (a *PaymentsApiService) InstallConnectorExecute(r ApiInstallConnectorReques
 type ApiListConnectorTasksRequest struct {
 	ctx context.Context
 	ApiService PaymentsApi
-	connector string
+	connector Connectors
 }
 
-func (r ApiListConnectorTasksRequest) Execute() ([]ConnectorTask, *http.Response, error) {
+func (r ApiListConnectorTasksRequest) Execute() ([]ListConnectorTasks200ResponseInner, *http.Response, error) {
 	return r.ApiService.ListConnectorTasksExecute(r)
 }
 
@@ -809,7 +809,7 @@ List all tasks associated with this connector.
  @param connector The connector code
  @return ApiListConnectorTasksRequest
 */
-func (a *PaymentsApiService) ListConnectorTasks(ctx context.Context, connector string) ApiListConnectorTasksRequest {
+func (a *PaymentsApiService) ListConnectorTasks(ctx context.Context, connector Connectors) ApiListConnectorTasksRequest {
 	return ApiListConnectorTasksRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -818,13 +818,13 @@ func (a *PaymentsApiService) ListConnectorTasks(ctx context.Context, connector s
 }
 
 // Execute executes the request
-//  @return []ConnectorTask
-func (a *PaymentsApiService) ListConnectorTasksExecute(r ApiListConnectorTasksRequest) ([]ConnectorTask, *http.Response, error) {
+//  @return []ListConnectorTasks200ResponseInner
+func (a *PaymentsApiService) ListConnectorTasksExecute(r ApiListConnectorTasksRequest) ([]ListConnectorTasks200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []ConnectorTask
+		localVarReturnValue  []ListConnectorTasks200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentsApiService.ListConnectorTasks")
@@ -1031,7 +1031,7 @@ func (a *PaymentsApiService) ListPaymentsExecute(r ApiListPaymentsRequest) (*Lis
 type ApiReadConnectorConfigRequest struct {
 	ctx context.Context
 	ApiService PaymentsApi
-	connector string
+	connector Connectors
 }
 
 func (r ApiReadConnectorConfigRequest) Execute() (*ConnectorConfig, *http.Response, error) {
@@ -1047,7 +1047,7 @@ Read connector config
  @param connector The connector code
  @return ApiReadConnectorConfigRequest
 */
-func (a *PaymentsApiService) ReadConnectorConfig(ctx context.Context, connector string) ApiReadConnectorConfigRequest {
+func (a *PaymentsApiService) ReadConnectorConfig(ctx context.Context, connector Connectors) ApiReadConnectorConfigRequest {
 	return ApiReadConnectorConfigRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1134,7 +1134,7 @@ func (a *PaymentsApiService) ReadConnectorConfigExecute(r ApiReadConnectorConfig
 type ApiResetConnectorRequest struct {
 	ctx context.Context
 	ApiService PaymentsApi
-	connector string
+	connector Connectors
 }
 
 func (r ApiResetConnectorRequest) Execute() (*http.Response, error) {
@@ -1150,7 +1150,7 @@ Reset connector. Will remove the connector and ALL PAYMENTS generated with it.
  @param connector The connector code
  @return ApiResetConnectorRequest
 */
-func (a *PaymentsApiService) ResetConnector(ctx context.Context, connector string) ApiResetConnectorRequest {
+func (a *PaymentsApiService) ResetConnector(ctx context.Context, connector Connectors) ApiResetConnectorRequest {
 	return ApiResetConnectorRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1226,7 +1226,7 @@ func (a *PaymentsApiService) ResetConnectorExecute(r ApiResetConnectorRequest) (
 type ApiUninstallConnectorRequest struct {
 	ctx context.Context
 	ApiService PaymentsApi
-	connector string
+	connector Connectors
 }
 
 func (r ApiUninstallConnectorRequest) Execute() (*http.Response, error) {
@@ -1242,7 +1242,7 @@ Uninstall  connector
  @param connector The connector code
  @return ApiUninstallConnectorRequest
 */
-func (a *PaymentsApiService) UninstallConnector(ctx context.Context, connector string) ApiUninstallConnectorRequest {
+func (a *PaymentsApiService) UninstallConnector(ctx context.Context, connector Connectors) ApiUninstallConnectorRequest {
 	return ApiUninstallConnectorRequest{
 		ApiService: a,
 		ctx: ctx,
