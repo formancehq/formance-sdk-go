@@ -17,7 +17,7 @@ info:
     and standard method from web, mobile and desktop applications.
     <SecurityDefinitions />
   title: Formance Stack API
-  version: v1.0.0-rc.1
+  version: develop
   x-logo:
     url: https://avatars.githubusercontent.com/u/84325077?s=200&v=4
     altText: Formance
@@ -1849,6 +1849,244 @@ paths:
       summary: Change the signing secret of a config
       tags:
       - Webhooks
+  /api/wallets/wallets:
+    get:
+      operationId: getWallets
+      parameters:
+      - description: The maximum number of results to return per page
+        example: 100
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 15
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Pagination cursor, will return accounts after given address,\
+          \ in descending order."
+        explode: true
+        in: query
+        name: after
+        required: false
+        schema:
+          example: users:003
+          type: string
+        style: form
+      - description: |
+          Parameter used in pagination requests. Maximum page size is set to 15.
+          Set to the value of next for the next page of results.
+          Set to the value of previous for the previous page of results.
+          No other parameters can be set when the pagination token is set.
+        explode: true
+        in: query
+        name: pagination_token
+        required: false
+        schema:
+          example: aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ==
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWalletsResponse'
+          description: OK
+      summary: Get all wallets
+      tags:
+      - Wallets
+    post:
+      operationId: createWallet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWalletRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWalletResponse'
+          description: Wallet created
+      summary: Create a new wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}:
+    get:
+      operationId: getWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWalletResponse'
+          description: Wallet
+        "404":
+          description: Wallet not found
+      summary: Get a wallet
+      tags:
+      - Wallets
+    patch:
+      operationId: updateWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateWallet_request'
+      responses:
+        "204":
+          description: Wallet successfully updated
+      summary: Update a wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}/debit:
+    post:
+      operationId: debitWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              amount:
+                asset: USD/2
+                amount: 100
+              pending: true
+            schema:
+              $ref: '#/components/schemas/debitWallet_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebitWalletResponse'
+          description: Wallet successfully debited as a pending hold
+        "204":
+          description: Wallet successfully debited
+      summary: Debit a wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}/credit:
+    post:
+      operationId: creditWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              amount:
+                asset: USD/2
+                amount: 100
+            schema:
+              $ref: '#/components/schemas/creditWallet_request'
+      responses:
+        "204":
+          description: Wallet successfully credited
+      summary: Credit a wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}/holds:
+    get:
+      operationId: getHolds
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHoldsResponse'
+          description: Holds
+      summary: Get all holds for a wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}/holds/{hold_id}/confirm:
+    post:
+      operationId: confirmHold
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: hold_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: "Hold successfully confirmed, funds moved back to initial destination"
+      summary: Confirm a hold
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}/holds/{hold_id}/void:
+    post:
+      operationId: voidHold
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: hold_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: "Hold successfully cancelled, funds returned to wallet"
+      summary: Cancel a hold
+      tags:
+      - Wallets
 components:
   schemas:
     Metadata:
@@ -3114,7 +3352,7 @@ components:
             order_id: "6735"
           type: object
       type: object
-    ConnectorTaskBase:
+    TaskDescriptorStripe:
       properties:
         provider:
           description: The connector code
@@ -3143,31 +3381,169 @@ components:
           description: The task state
           example: {}
           type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorStripe_descriptor'
       type: object
-    TaskDescriptorStripe:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorStripe_allOf'
     TaskDescriptorWise:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorWise_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorWise_descriptor'
+      type: object
     TaskDescriptorModulr:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorModulr_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorModulr_descriptor'
+      type: object
     TaskDescriptorDummyPay:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorDummyPay_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorDummyPay_descriptor'
+      type: object
     TaskDescriptorCurrencyCloud:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_descriptor'
+      type: object
     TaskDescriptorBankingCircle:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorBankingCircle_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorBankingCircle_descriptor'
+      type: object
     Query:
       example:
         size: 0
@@ -3391,6 +3767,170 @@ components:
         has_more:
           example: false
           type: boolean
+      type: object
+    Monetary:
+      properties:
+        asset:
+          description: The asset of the monetary value.
+          type: string
+        amount:
+          description: The amount of the monetary value.
+          type: number
+      required:
+      - amount
+      - asset
+      type: object
+    Wallet:
+      example:
+        metadata:
+          key: ""
+        balances:
+          key: 0.8008281904610115
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The unique ID of the wallet.
+          format: uuid
+          type: string
+        metadata:
+          additionalProperties: {}
+          description: Metadata associated with the wallet.
+          type: object
+        balances:
+          additionalProperties:
+            description: The balance of the wallet in the specified currency.
+            type: number
+          description: The balances of the wallet.
+          type: object
+        name:
+          type: string
+      required:
+      - balances
+      - id
+      - metadata
+      - name
+      type: object
+    WalletWithBalances:
+      allOf:
+      - $ref: '#/components/schemas/Wallet'
+      - $ref: '#/components/schemas/WalletWithBalances_allOf'
+    Hold:
+      example:
+        wallet_id: wallet_id
+        metadata:
+          key: ""
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The unique ID of the hold.
+          format: uuid
+          type: string
+        wallet_id:
+          description: The ID of the wallet the hold is associated with.
+          type: string
+        metadata:
+          additionalProperties: {}
+          description: Metadata associated with the hold.
+          type: object
+      required:
+      - id
+      - metadata
+      - wallet_id
+      type: object
+    GetWalletsResponse:
+      example:
+        data:
+        - metadata:
+            key: ""
+          balances:
+            key: 0.8008281904610115
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - metadata:
+            key: ""
+          balances:
+            key: 0.8008281904610115
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Wallet'
+          type: array
+      required:
+      - data
+      type: object
+    CreateWalletResponse:
+      example:
+        data:
+          metadata:
+            key: ""
+          balances:
+            key: 0.8008281904610115
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        data:
+          $ref: '#/components/schemas/Wallet'
+      required:
+      - data
+      type: object
+    GetWalletResponse:
+      example:
+        data: null
+      properties:
+        data:
+          $ref: '#/components/schemas/WalletWithBalances'
+      required:
+      - data
+      type: object
+    DebitWalletResponse:
+      example:
+        data:
+          wallet_id: wallet_id
+          metadata:
+            key: ""
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        data:
+          $ref: '#/components/schemas/Hold'
+      required:
+      - data
+      type: object
+    GetHoldsResponse:
+      example:
+        data:
+        - wallet_id: wallet_id
+          metadata:
+            key: ""
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - wallet_id: wallet_id
+          metadata:
+            key: ""
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Hold'
+          type: array
+      required:
+      - data
+      type: object
+    CreateWalletRequest:
+      example:
+        metadata:
+          key: ""
+        name: name
+      properties:
+        metadata:
+          additionalProperties: {}
+          description: Custom metadata to attach to this wallet.
+          type: object
+        name:
+          type: string
+      required:
+      - name
       type: object
     listAccounts_200_response_cursor_allOf:
       properties:
@@ -3642,6 +4182,31 @@ components:
       required:
       - secret
       type: object
+    updateWallet_request:
+      properties:
+        metadata:
+          additionalProperties: {}
+          description: Custom metadata to attach to this wallet.
+          type: object
+      type: object
+    debitWallet_request:
+      properties:
+        amount:
+          $ref: '#/components/schemas/Monetary'
+        pending:
+          description: "Set to true to create a pending hold. If false, the wallet\
+            \ will be debited immediately."
+          type: boolean
+      required:
+      - amount
+      type: object
+    creditWallet_request:
+      properties:
+        amount:
+          $ref: '#/components/schemas/Monetary'
+      required:
+      - amount
+      type: object
     Client_allOf:
       properties:
         id:
@@ -3703,7 +4268,7 @@ components:
         key:
           $ref: '#/components/schemas/ListConnectorsConfigsResponse_connector_key'
       type: object
-    TaskDescriptorStripe_allOf_descriptor:
+    TaskDescriptorStripe_descriptor:
       properties:
         name:
           type: string
@@ -3712,14 +4277,7 @@ components:
         account:
           type: string
       type: object
-      example: null
-    TaskDescriptorStripe_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorStripe_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorWise_allOf_descriptor:
+    TaskDescriptorWise_descriptor:
       properties:
         name:
           type: string
@@ -3728,14 +4286,7 @@ components:
         profileID:
           type: integer
       type: object
-      example: null
-    TaskDescriptorWise_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorWise_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorModulr_allOf_descriptor:
+    TaskDescriptorModulr_descriptor:
       properties:
         name:
           type: string
@@ -3744,14 +4295,7 @@ components:
         accountID:
           type: string
       type: object
-      example: null
-    TaskDescriptorModulr_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorModulr_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorDummyPay_allOf_descriptor:
+    TaskDescriptorDummyPay_descriptor:
       properties:
         name:
           type: string
@@ -3760,39 +4304,18 @@ components:
         fileName:
           type: string
       type: object
-      example: null
-    TaskDescriptorDummyPay_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorDummyPay_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorCurrencyCloud_allOf_descriptor:
+    TaskDescriptorCurrencyCloud_descriptor:
       properties:
         name:
           type: string
       type: object
-      example: null
-    TaskDescriptorCurrencyCloud_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorBankingCircle_allOf_descriptor:
+    TaskDescriptorBankingCircle_descriptor:
       properties:
         name:
           type: string
         key:
           type: string
       type: object
-      example: null
-    TaskDescriptorBankingCircle_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorBankingCircle_allOf_descriptor'
-      type: object
-      example: null
     Response_cursor_total:
       example:
         value: 6.027456183070403
@@ -3832,6 +4355,16 @@ components:
             - type: object
           type: array
       type: object
+    WalletWithBalances_allOf:
+      properties:
+        balances:
+          additionalProperties:
+            type: number
+          type: object
+      required:
+      - balances
+      type: object
+      example: null
   securitySchemes:
     Authorization:
       flows:
@@ -3871,3 +4404,9 @@ x-tagGroups:
 - name: Webhooks
   tags:
   - Webhooks
+- name: Wallets
+  tags:
+  - Wallets
+- name: Counterparties
+  tags:
+  - Counterparties
