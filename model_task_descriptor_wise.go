@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: v1.0.0-rc.3
 Contact: support@formance.com
 */
 
@@ -13,6 +13,7 @@ package formance
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the TaskDescriptorWise type satisfies the MappedNullable interface at compile time
@@ -30,7 +31,7 @@ type TaskDescriptorWise struct {
 	Error *string `json:"error,omitempty"`
 	// The task state
 	State map[string]interface{} `json:"state,omitempty"`
-	Descriptor *TaskDescriptorWiseAllOfDescriptor `json:"descriptor,omitempty"`
+	Descriptor *TaskDescriptorWiseDescriptor `json:"descriptor,omitempty"`
 }
 
 // NewTaskDescriptorWise instantiates a new TaskDescriptorWise object
@@ -211,9 +212,9 @@ func (o *TaskDescriptorWise) SetState(v map[string]interface{}) {
 }
 
 // GetDescriptor returns the Descriptor field value if set, zero value otherwise.
-func (o *TaskDescriptorWise) GetDescriptor() TaskDescriptorWiseAllOfDescriptor {
+func (o *TaskDescriptorWise) GetDescriptor() TaskDescriptorWiseDescriptor {
 	if o == nil || isNil(o.Descriptor) {
-		var ret TaskDescriptorWiseAllOfDescriptor
+		var ret TaskDescriptorWiseDescriptor
 		return ret
 	}
 	return *o.Descriptor
@@ -221,7 +222,7 @@ func (o *TaskDescriptorWise) GetDescriptor() TaskDescriptorWiseAllOfDescriptor {
 
 // GetDescriptorOk returns a tuple with the Descriptor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TaskDescriptorWise) GetDescriptorOk() (*TaskDescriptorWiseAllOfDescriptor, bool) {
+func (o *TaskDescriptorWise) GetDescriptorOk() (*TaskDescriptorWiseDescriptor, bool) {
 	if o == nil || isNil(o.Descriptor) {
 		return nil, false
 	}
@@ -237,8 +238,8 @@ func (o *TaskDescriptorWise) HasDescriptor() bool {
 	return false
 }
 
-// SetDescriptor gets a reference to the given TaskDescriptorWiseAllOfDescriptor and assigns it to the Descriptor field.
-func (o *TaskDescriptorWise) SetDescriptor(v TaskDescriptorWiseAllOfDescriptor) {
+// SetDescriptor gets a reference to the given TaskDescriptorWiseDescriptor and assigns it to the Descriptor field.
+func (o *TaskDescriptorWise) SetDescriptor(v TaskDescriptorWiseDescriptor) {
 	o.Descriptor = &v
 }
 
