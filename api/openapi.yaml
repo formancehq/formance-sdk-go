@@ -17,7 +17,7 @@ info:
     and standard method from web, mobile and desktop applications.
     <SecurityDefinitions />
   title: Formance Stack API
-  version: v1.0.0-rc.1
+  version: develop
   x-logo:
     url: https://avatars.githubusercontent.com/u/84325077?s=200&v=4
     altText: Formance
@@ -1678,14 +1678,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getManyConfigs_200_response'
+                $ref: '#/components/schemas/ConfigsResponse'
           description: OK
       summary: Get many configs
       tags:
       - Webhooks
     post:
       description: |
-        Insert a new config.
+        Insert a new webhooks config.
 
         The endpoint should be a valid https URL and be unique.
 
@@ -1694,7 +1694,7 @@ paths:
         The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 
         All eventTypes are converted to lower-case when inserted.
-      operationId: insertOneConfig
+      operationId: insertConfig
       requestBody:
         content:
           application/json:
@@ -1715,13 +1715,13 @@ paths:
                 example: endpoints should be valid urls
                 type: string
           description: Bad Request
-      summary: |
-        Insert a new config
+      summary: Insert a new config
       tags:
       - Webhooks
   /api/webhooks/configs/{id}:
     delete:
-      operationId: deleteOneConfig
+      description: Delete a webhooks config by ID.
+      operationId: deleteConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1741,9 +1741,8 @@ paths:
       - Webhooks
   /api/webhooks/configs/{id}/test:
     get:
-      description: |
-        Test one config by sending a webhook to its endpoint.
-      operationId: testOneConfig
+      description: Test a config by sending a webhook to its endpoint.
+      operationId: testConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1766,7 +1765,9 @@ paths:
       - Webhooks
   /api/webhooks/configs/{id}/activate:
     put:
-      operationId: activateOneConfig
+      description: "Activate a webhooks config by ID, to start receiving webhooks\
+        \ to its endpoint."
+      operationId: activateConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1792,7 +1793,9 @@ paths:
       - Webhooks
   /api/webhooks/configs/{id}/deactivate:
     put:
-      operationId: deactivateOneConfig
+      description: "Deactivate a webhooks config by ID, to stop receiving webhooks\
+        \ to its endpoint."
+      operationId: deactivateConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1819,11 +1822,11 @@ paths:
   /api/webhooks/configs/{id}/secret/change:
     put:
       description: |
-        Change the signing secret of the endpoint of a config.
+        Change the signing secret of the endpoint of a webhooks config.
 
         If not passed or empty, a secret is automatically generated.
         The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
-      operationId: changeOneConfigSecret
+      operationId: changeConfigSecret
       parameters:
       - description: Config ID
         explode: false
@@ -1838,7 +1841,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/changeOneConfigSecret_request'
+              $ref: '#/components/schemas/ConfigChangeSecret'
       responses:
         "200":
           content:
@@ -3114,7 +3117,7 @@ components:
             order_id: "6735"
           type: object
       type: object
-    ConnectorTaskBase:
+    TaskDescriptorStripe:
       properties:
         provider:
           description: The connector code
@@ -3143,31 +3146,169 @@ components:
           description: The task state
           example: {}
           type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorStripe_descriptor'
       type: object
-    TaskDescriptorStripe:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorStripe_allOf'
     TaskDescriptorWise:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorWise_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorWise_descriptor'
+      type: object
     TaskDescriptorModulr:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorModulr_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorModulr_descriptor'
+      type: object
     TaskDescriptorDummyPay:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorDummyPay_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorDummyPay_descriptor'
+      type: object
     TaskDescriptorCurrencyCloud:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_descriptor'
+      type: object
     TaskDescriptorBankingCircle:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorBankingCircle_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorBankingCircle_descriptor'
+      type: object
     Query:
       example:
         size: 0
@@ -3255,6 +3396,73 @@ components:
             example: TYPE1
             type: string
           type: array
+      required:
+      - endpoint
+      - eventTypes
+      type: object
+    ConfigsResponse:
+      example:
+        cursor:
+          data:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            endpoint: https://example.com
+            active: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+            eventTypes:
+            - TYPE1
+            - TYPE2
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            endpoint: https://example.com
+            active: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+            eventTypes:
+            - TYPE1
+            - TYPE2
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          hasMore: false
+      properties:
+        cursor:
+          $ref: '#/components/schemas/webhooksCursor'
+      required:
+      - cursor
+      type: object
+    webhooksCursor:
+      example:
+        data:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          endpoint: https://example.com
+          active: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          eventTypes:
+          - TYPE1
+          - TYPE2
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          endpoint: https://example.com
+          active: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          eventTypes:
+          - TYPE1
+          - TYPE2
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        hasMore: false
+      properties:
+        hasMore:
+          example: false
+          type: boolean
+        data:
+          items:
+            $ref: '#/components/schemas/webhooksConfig'
+          type: array
+      required:
+      - data
+      - hasMore
+      type: object
     ConfigResponse:
       example:
         data:
@@ -3270,6 +3478,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/webhooksConfig'
+      required:
+      - data
       type: object
     webhooksConfig:
       example:
@@ -3309,6 +3519,14 @@ components:
         updatedAt:
           format: date-time
           type: string
+    ConfigChangeSecret:
+      example:
+        secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+      properties:
+        secret:
+          example: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          type: string
+      type: object
     AttemptResponse:
       example:
         data:
@@ -3334,6 +3552,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Attempt'
+      required:
+      - data
       type: object
     Attempt:
       example:
@@ -3386,12 +3606,6 @@ components:
         nextRetryAfter:
           format: date-time
           type: string
-    webhooksCursor:
-      properties:
-        has_more:
-          example: false
-          type: boolean
-      type: object
     listAccounts_200_response_cursor_allOf:
       properties:
         data:
@@ -3612,36 +3826,6 @@ components:
       - $ref: '#/components/schemas/TaskDescriptorDummyPay'
       - $ref: '#/components/schemas/TaskDescriptorModulr'
       - $ref: '#/components/schemas/TaskDescriptorBankingCircle'
-    getManyConfigs_200_response_cursor_allOf:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/webhooksConfig'
-          type: array
-      required:
-      - data
-      type: object
-    getManyConfigs_200_response_cursor:
-      allOf:
-      - $ref: '#/components/schemas/webhooksCursor'
-      - $ref: '#/components/schemas/getManyConfigs_200_response_cursor_allOf'
-    getManyConfigs_200_response:
-      example:
-        cursor: null
-      properties:
-        cursor:
-          $ref: '#/components/schemas/getManyConfigs_200_response_cursor'
-      required:
-      - cursor
-      type: object
-    changeOneConfigSecret_request:
-      properties:
-        secret:
-          example: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
-          type: string
-      required:
-      - secret
-      type: object
     Client_allOf:
       properties:
         id:
@@ -3703,7 +3887,7 @@ components:
         key:
           $ref: '#/components/schemas/ListConnectorsConfigsResponse_connector_key'
       type: object
-    TaskDescriptorStripe_allOf_descriptor:
+    TaskDescriptorStripe_descriptor:
       properties:
         name:
           type: string
@@ -3712,14 +3896,7 @@ components:
         account:
           type: string
       type: object
-      example: null
-    TaskDescriptorStripe_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorStripe_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorWise_allOf_descriptor:
+    TaskDescriptorWise_descriptor:
       properties:
         name:
           type: string
@@ -3728,14 +3905,7 @@ components:
         profileID:
           type: integer
       type: object
-      example: null
-    TaskDescriptorWise_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorWise_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorModulr_allOf_descriptor:
+    TaskDescriptorModulr_descriptor:
       properties:
         name:
           type: string
@@ -3744,14 +3914,7 @@ components:
         accountID:
           type: string
       type: object
-      example: null
-    TaskDescriptorModulr_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorModulr_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorDummyPay_allOf_descriptor:
+    TaskDescriptorDummyPay_descriptor:
       properties:
         name:
           type: string
@@ -3760,39 +3923,18 @@ components:
         fileName:
           type: string
       type: object
-      example: null
-    TaskDescriptorDummyPay_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorDummyPay_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorCurrencyCloud_allOf_descriptor:
+    TaskDescriptorCurrencyCloud_descriptor:
       properties:
         name:
           type: string
       type: object
-      example: null
-    TaskDescriptorCurrencyCloud_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorBankingCircle_allOf_descriptor:
+    TaskDescriptorBankingCircle_descriptor:
       properties:
         name:
           type: string
         key:
           type: string
       type: object
-      example: null
-    TaskDescriptorBankingCircle_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorBankingCircle_allOf_descriptor'
-      type: object
-      example: null
     Response_cursor_total:
       example:
         value: 6.027456183070403
