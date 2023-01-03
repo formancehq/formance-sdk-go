@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: v1.0.0-rc.5
 Contact: support@formance.com
 */
 
@@ -20,17 +20,19 @@ var _ MappedNullable = &ConfigUser{}
 
 // ConfigUser struct for ConfigUser
 type ConfigUser struct {
-	Endpoint *string `json:"endpoint,omitempty"`
+	Endpoint string `json:"endpoint"`
 	Secret *string `json:"secret,omitempty"`
-	EventTypes []string `json:"eventTypes,omitempty"`
+	EventTypes []string `json:"eventTypes"`
 }
 
 // NewConfigUser instantiates a new ConfigUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigUser() *ConfigUser {
+func NewConfigUser(endpoint string, eventTypes []string) *ConfigUser {
 	this := ConfigUser{}
+	this.Endpoint = endpoint
+	this.EventTypes = eventTypes
 	return &this
 }
 
@@ -42,36 +44,28 @@ func NewConfigUserWithDefaults() *ConfigUser {
 	return &this
 }
 
-// GetEndpoint returns the Endpoint field value if set, zero value otherwise.
+// GetEndpoint returns the Endpoint field value
 func (o *ConfigUser) GetEndpoint() string {
-	if o == nil || isNil(o.Endpoint) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Endpoint
+
+	return o.Endpoint
 }
 
-// GetEndpointOk returns a tuple with the Endpoint field value if set, nil otherwise
+// GetEndpointOk returns a tuple with the Endpoint field value
 // and a boolean to check if the value has been set.
 func (o *ConfigUser) GetEndpointOk() (*string, bool) {
-	if o == nil || isNil(o.Endpoint) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Endpoint, true
+	return &o.Endpoint, true
 }
 
-// HasEndpoint returns a boolean if a field has been set.
-func (o *ConfigUser) HasEndpoint() bool {
-	if o != nil && !isNil(o.Endpoint) {
-		return true
-	}
-
-	return false
-}
-
-// SetEndpoint gets a reference to the given string and assigns it to the Endpoint field.
+// SetEndpoint sets field value
 func (o *ConfigUser) SetEndpoint(v string) {
-	o.Endpoint = &v
+	o.Endpoint = v
 }
 
 // GetSecret returns the Secret field value if set, zero value otherwise.
@@ -106,34 +100,26 @@ func (o *ConfigUser) SetSecret(v string) {
 	o.Secret = &v
 }
 
-// GetEventTypes returns the EventTypes field value if set, zero value otherwise.
+// GetEventTypes returns the EventTypes field value
 func (o *ConfigUser) GetEventTypes() []string {
-	if o == nil || isNil(o.EventTypes) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.EventTypes
 }
 
-// GetEventTypesOk returns a tuple with the EventTypes field value if set, nil otherwise
+// GetEventTypesOk returns a tuple with the EventTypes field value
 // and a boolean to check if the value has been set.
 func (o *ConfigUser) GetEventTypesOk() ([]string, bool) {
-	if o == nil || isNil(o.EventTypes) {
+	if o == nil {
 		return nil, false
 	}
 	return o.EventTypes, true
 }
 
-// HasEventTypes returns a boolean if a field has been set.
-func (o *ConfigUser) HasEventTypes() bool {
-	if o != nil && !isNil(o.EventTypes) {
-		return true
-	}
-
-	return false
-}
-
-// SetEventTypes gets a reference to the given []string and assigns it to the EventTypes field.
+// SetEventTypes sets field value
 func (o *ConfigUser) SetEventTypes(v []string) {
 	o.EventTypes = v
 }
@@ -148,15 +134,11 @@ func (o ConfigUser) MarshalJSON() ([]byte, error) {
 
 func (o ConfigUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Endpoint) {
-		toSerialize["endpoint"] = o.Endpoint
-	}
+	toSerialize["endpoint"] = o.Endpoint
 	if !isNil(o.Secret) {
 		toSerialize["secret"] = o.Secret
 	}
-	if !isNil(o.EventTypes) {
-		toSerialize["eventTypes"] = o.EventTypes
-	}
+	toSerialize["eventTypes"] = o.EventTypes
 	return toSerialize, nil
 }
 

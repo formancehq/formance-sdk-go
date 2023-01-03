@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | The task status | [optional] 
 **Error** | Pointer to **string** | The error message if the task failed | [optional] 
 **State** | Pointer to **map[string]interface{}** | The task state | [optional] 
-**Descriptor** | Pointer to [**TaskDescriptorStripeAllOfDescriptor**](TaskDescriptorStripeAllOfDescriptor.md) |  | [optional] 
+**Descriptor** | Pointer to [**TaskDescriptorStripeDescriptor**](TaskDescriptorStripeDescriptor.md) |  | [optional] 
 
 ## Methods
 
@@ -157,20 +157,20 @@ HasState returns a boolean if a field has been set.
 
 ### GetDescriptor
 
-`func (o *TaskDescriptorStripe) GetDescriptor() TaskDescriptorStripeAllOfDescriptor`
+`func (o *TaskDescriptorStripe) GetDescriptor() TaskDescriptorStripeDescriptor`
 
 GetDescriptor returns the Descriptor field if non-nil, zero value otherwise.
 
 ### GetDescriptorOk
 
-`func (o *TaskDescriptorStripe) GetDescriptorOk() (*TaskDescriptorStripeAllOfDescriptor, bool)`
+`func (o *TaskDescriptorStripe) GetDescriptorOk() (*TaskDescriptorStripeDescriptor, bool)`
 
 GetDescriptorOk returns a tuple with the Descriptor field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescriptor
 
-`func (o *TaskDescriptorStripe) SetDescriptor(v TaskDescriptorStripeAllOfDescriptor)`
+`func (o *TaskDescriptorStripe) SetDescriptor(v TaskDescriptorStripeDescriptor)`
 
 SetDescriptor sets Descriptor field to given value.
 
