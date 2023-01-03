@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Endpoint** | Pointer to **string** |  | [optional] 
+**Endpoint** | **string** |  | 
 **Secret** | Pointer to **string** |  | [optional] 
-**EventTypes** | Pointer to **[]string** |  | [optional] 
+**EventTypes** | **[]string** |  | 
 
 ## Methods
 
 ### NewConfigUser
 
-`func NewConfigUser() *ConfigUser`
+`func NewConfigUser(endpoint string, eventTypes []string, ) *ConfigUser`
 
 NewConfigUser instantiates a new ConfigUser object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetEndpoint sets Endpoint field to given value.
 
-### HasEndpoint
-
-`func (o *ConfigUser) HasEndpoint() bool`
-
-HasEndpoint returns a boolean if a field has been set.
 
 ### GetSecret
 
@@ -96,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetEventTypes sets EventTypes field to given value.
 
-### HasEventTypes
-
-`func (o *ConfigUser) HasEventTypes() bool`
-
-HasEventTypes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,21 +4,23 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ActivateOneConfig**](WebhooksApi.md#ActivateOneConfig) | **Put** /api/webhooks/configs/{id}/activate | Activate one config
-[**ChangeOneConfigSecret**](WebhooksApi.md#ChangeOneConfigSecret) | **Put** /api/webhooks/configs/{id}/secret/change | Change the signing secret of a config
-[**DeactivateOneConfig**](WebhooksApi.md#DeactivateOneConfig) | **Put** /api/webhooks/configs/{id}/deactivate | Deactivate one config
-[**DeleteOneConfig**](WebhooksApi.md#DeleteOneConfig) | **Delete** /api/webhooks/configs/{id} | Delete one config
+[**ActivateConfig**](WebhooksApi.md#ActivateConfig) | **Put** /api/webhooks/configs/{id}/activate | Activate one config
+[**ChangeConfigSecret**](WebhooksApi.md#ChangeConfigSecret) | **Put** /api/webhooks/configs/{id}/secret/change | Change the signing secret of a config
+[**DeactivateConfig**](WebhooksApi.md#DeactivateConfig) | **Put** /api/webhooks/configs/{id}/deactivate | Deactivate one config
+[**DeleteConfig**](WebhooksApi.md#DeleteConfig) | **Delete** /api/webhooks/configs/{id} | Delete one config
 [**GetManyConfigs**](WebhooksApi.md#GetManyConfigs) | **Get** /api/webhooks/configs | Get many configs
-[**InsertOneConfig**](WebhooksApi.md#InsertOneConfig) | **Post** /api/webhooks/configs | Insert a new config 
-[**TestOneConfig**](WebhooksApi.md#TestOneConfig) | **Get** /api/webhooks/configs/{id}/test | Test one config
+[**InsertConfig**](WebhooksApi.md#InsertConfig) | **Post** /api/webhooks/configs | Insert a new config
+[**TestConfig**](WebhooksApi.md#TestConfig) | **Get** /api/webhooks/configs/{id}/test | Test one config
 
 
 
-## ActivateOneConfig
+## ActivateConfig
 
-> ConfigResponse ActivateOneConfig(ctx, id).Execute()
+> ConfigResponse ActivateConfig(ctx, id).Execute()
 
 Activate one config
+
+
 
 ### Example
 
@@ -37,13 +39,13 @@ func main() {
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.ActivateOneConfig(context.Background(), id).Execute()
+    resp, r, err := apiClient.WebhooksApi.ActivateConfig(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ActivateOneConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ActivateConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ActivateOneConfig`: ConfigResponse
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ActivateOneConfig`: %v\n", resp)
+    // response from `ActivateConfig`: ConfigResponse
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ActivateConfig`: %v\n", resp)
 }
 ```
 
@@ -57,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiActivateOneConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiActivateConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -82,9 +84,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ChangeOneConfigSecret
+## ChangeConfigSecret
 
-> ConfigResponse ChangeOneConfigSecret(ctx, id).ChangeOneConfigSecretRequest(changeOneConfigSecretRequest).Execute()
+> ConfigResponse ChangeConfigSecret(ctx, id).ConfigChangeSecret(configChangeSecret).Execute()
 
 Change the signing secret of a config
 
@@ -104,17 +106,17 @@ import (
 
 func main() {
     id := "4997257d-dfb6-445b-929c-cbe2ab182818" // string | Config ID
-    changeOneConfigSecretRequest := *client.NewChangeOneConfigSecretRequest("V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3") // ChangeOneConfigSecretRequest |  (optional)
+    configChangeSecret := *client.NewConfigChangeSecret() // ConfigChangeSecret |  (optional)
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.ChangeOneConfigSecret(context.Background(), id).ChangeOneConfigSecretRequest(changeOneConfigSecretRequest).Execute()
+    resp, r, err := apiClient.WebhooksApi.ChangeConfigSecret(context.Background(), id).ConfigChangeSecret(configChangeSecret).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ChangeOneConfigSecret``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ChangeConfigSecret``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ChangeOneConfigSecret`: ConfigResponse
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ChangeOneConfigSecret`: %v\n", resp)
+    // response from `ChangeConfigSecret`: ConfigResponse
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ChangeConfigSecret`: %v\n", resp)
 }
 ```
 
@@ -128,13 +130,13 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiChangeOneConfigSecretRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiChangeConfigSecretRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changeOneConfigSecretRequest** | [**ChangeOneConfigSecretRequest**](ChangeOneConfigSecretRequest.md) |  | 
+ **configChangeSecret** | [**ConfigChangeSecret**](ConfigChangeSecret.md) |  | 
 
 ### Return type
 
@@ -154,11 +156,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeactivateOneConfig
+## DeactivateConfig
 
-> ConfigResponse DeactivateOneConfig(ctx, id).Execute()
+> ConfigResponse DeactivateConfig(ctx, id).Execute()
 
 Deactivate one config
+
+
 
 ### Example
 
@@ -177,13 +181,13 @@ func main() {
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.DeactivateOneConfig(context.Background(), id).Execute()
+    resp, r, err := apiClient.WebhooksApi.DeactivateConfig(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeactivateOneConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeactivateConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeactivateOneConfig`: ConfigResponse
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.DeactivateOneConfig`: %v\n", resp)
+    // response from `DeactivateConfig`: ConfigResponse
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.DeactivateConfig`: %v\n", resp)
 }
 ```
 
@@ -197,7 +201,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeactivateOneConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeactivateConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -222,11 +226,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteOneConfig
+## DeleteConfig
 
-> DeleteOneConfig(ctx, id).Execute()
+> DeleteConfig(ctx, id).Execute()
 
 Delete one config
+
+
 
 ### Example
 
@@ -245,9 +251,9 @@ func main() {
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.DeleteOneConfig(context.Background(), id).Execute()
+    resp, r, err := apiClient.WebhooksApi.DeleteConfig(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeleteOneConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.DeleteConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -263,7 +269,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteOneConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -290,7 +296,7 @@ Name | Type | Description  | Notes
 
 ## GetManyConfigs
 
-> GetManyConfigs200Response GetManyConfigs(ctx).Id(id).Endpoint(endpoint).Execute()
+> ConfigsResponse GetManyConfigs(ctx).Id(id).Endpoint(endpoint).Execute()
 
 Get many configs
 
@@ -319,7 +325,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.GetManyConfigs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetManyConfigs`: GetManyConfigs200Response
+    // response from `GetManyConfigs`: ConfigsResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.GetManyConfigs`: %v\n", resp)
 }
 ```
@@ -340,7 +346,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetManyConfigs200Response**](GetManyConfigs200Response.md)
+[**ConfigsResponse**](ConfigsResponse.md)
 
 ### Authorization
 
@@ -356,11 +362,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## InsertOneConfig
+## InsertConfig
 
-> ConfigResponse InsertOneConfig(ctx).ConfigUser(configUser).Execute()
+> ConfigResponse InsertConfig(ctx).ConfigUser(configUser).Execute()
 
-Insert a new config 
+Insert a new config
 
 
 
@@ -377,17 +383,17 @@ import (
 )
 
 func main() {
-    configUser := *client.NewConfigUser() // ConfigUser | 
+    configUser := *client.NewConfigUser("https://example.com", []string{"TYPE1"}) // ConfigUser | 
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.InsertOneConfig(context.Background()).ConfigUser(configUser).Execute()
+    resp, r, err := apiClient.WebhooksApi.InsertConfig(context.Background()).ConfigUser(configUser).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.InsertOneConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.InsertConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `InsertOneConfig`: ConfigResponse
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.InsertOneConfig`: %v\n", resp)
+    // response from `InsertConfig`: ConfigResponse
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.InsertConfig`: %v\n", resp)
 }
 ```
 
@@ -397,7 +403,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiInsertOneConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiInsertConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -422,9 +428,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## TestOneConfig
+## TestConfig
 
-> AttemptResponse TestOneConfig(ctx, id).Execute()
+> AttemptResponse TestConfig(ctx, id).Execute()
 
 Test one config
 
@@ -447,13 +453,13 @@ func main() {
 
     configuration := client.NewConfiguration()
     apiClient := client.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.TestOneConfig(context.Background(), id).Execute()
+    resp, r, err := apiClient.WebhooksApi.TestConfig(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.TestOneConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.TestConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TestOneConfig`: AttemptResponse
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.TestOneConfig`: %v\n", resp)
+    // response from `TestConfig`: AttemptResponse
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.TestConfig`: %v\n", resp)
 }
 ```
 
@@ -467,7 +473,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTestOneConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiTestConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
