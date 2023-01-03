@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: v1.0.0-rc.5
 Contact: support@formance.com
 */
 
@@ -13,6 +13,7 @@ package formance
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the TaskDescriptorCurrencyCloud type satisfies the MappedNullable interface at compile time
@@ -30,7 +31,7 @@ type TaskDescriptorCurrencyCloud struct {
 	Error *string `json:"error,omitempty"`
 	// The task state
 	State map[string]interface{} `json:"state,omitempty"`
-	Descriptor *TaskDescriptorCurrencyCloudAllOfDescriptor `json:"descriptor,omitempty"`
+	Descriptor *TaskDescriptorCurrencyCloudDescriptor `json:"descriptor,omitempty"`
 }
 
 // NewTaskDescriptorCurrencyCloud instantiates a new TaskDescriptorCurrencyCloud object
@@ -211,9 +212,9 @@ func (o *TaskDescriptorCurrencyCloud) SetState(v map[string]interface{}) {
 }
 
 // GetDescriptor returns the Descriptor field value if set, zero value otherwise.
-func (o *TaskDescriptorCurrencyCloud) GetDescriptor() TaskDescriptorCurrencyCloudAllOfDescriptor {
+func (o *TaskDescriptorCurrencyCloud) GetDescriptor() TaskDescriptorCurrencyCloudDescriptor {
 	if o == nil || isNil(o.Descriptor) {
-		var ret TaskDescriptorCurrencyCloudAllOfDescriptor
+		var ret TaskDescriptorCurrencyCloudDescriptor
 		return ret
 	}
 	return *o.Descriptor
@@ -221,7 +222,7 @@ func (o *TaskDescriptorCurrencyCloud) GetDescriptor() TaskDescriptorCurrencyClou
 
 // GetDescriptorOk returns a tuple with the Descriptor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TaskDescriptorCurrencyCloud) GetDescriptorOk() (*TaskDescriptorCurrencyCloudAllOfDescriptor, bool) {
+func (o *TaskDescriptorCurrencyCloud) GetDescriptorOk() (*TaskDescriptorCurrencyCloudDescriptor, bool) {
 	if o == nil || isNil(o.Descriptor) {
 		return nil, false
 	}
@@ -237,8 +238,8 @@ func (o *TaskDescriptorCurrencyCloud) HasDescriptor() bool {
 	return false
 }
 
-// SetDescriptor gets a reference to the given TaskDescriptorCurrencyCloudAllOfDescriptor and assigns it to the Descriptor field.
-func (o *TaskDescriptorCurrencyCloud) SetDescriptor(v TaskDescriptorCurrencyCloudAllOfDescriptor) {
+// SetDescriptor gets a reference to the given TaskDescriptorCurrencyCloudDescriptor and assigns it to the Descriptor field.
+func (o *TaskDescriptorCurrencyCloud) SetDescriptor(v TaskDescriptorCurrencyCloudDescriptor) {
 	o.Descriptor = &v
 }
 

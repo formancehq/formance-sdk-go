@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: v1.0.0-rc.5
 Contact: support@formance.com
 */
 
@@ -24,22 +24,24 @@ import (
 type WebhooksApi interface {
 
 	/*
-	ActivateOneConfig Activate one config
+	ActivateConfig Activate one config
+
+	Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Config ID
-	@return ApiActivateOneConfigRequest
+	@return ApiActivateConfigRequest
 	*/
-	ActivateOneConfig(ctx context.Context, id string) ApiActivateOneConfigRequest
+	ActivateConfig(ctx context.Context, id string) ApiActivateConfigRequest
 
-	// ActivateOneConfigExecute executes the request
+	// ActivateConfigExecute executes the request
 	//  @return ConfigResponse
-	ActivateOneConfigExecute(r ApiActivateOneConfigRequest) (*ConfigResponse, *http.Response, error)
+	ActivateConfigExecute(r ApiActivateConfigRequest) (*ConfigResponse, *http.Response, error)
 
 	/*
-	ChangeOneConfigSecret Change the signing secret of a config
+	ChangeConfigSecret Change the signing secret of a config
 
-	Change the signing secret of the endpoint of a config.
+	Change the signing secret of the endpoint of a webhooks config.
 
 If not passed or empty, a secret is automatically generated.
 The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
@@ -47,38 +49,42 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Config ID
-	@return ApiChangeOneConfigSecretRequest
+	@return ApiChangeConfigSecretRequest
 	*/
-	ChangeOneConfigSecret(ctx context.Context, id string) ApiChangeOneConfigSecretRequest
+	ChangeConfigSecret(ctx context.Context, id string) ApiChangeConfigSecretRequest
 
-	// ChangeOneConfigSecretExecute executes the request
+	// ChangeConfigSecretExecute executes the request
 	//  @return ConfigResponse
-	ChangeOneConfigSecretExecute(r ApiChangeOneConfigSecretRequest) (*ConfigResponse, *http.Response, error)
+	ChangeConfigSecretExecute(r ApiChangeConfigSecretRequest) (*ConfigResponse, *http.Response, error)
 
 	/*
-	DeactivateOneConfig Deactivate one config
+	DeactivateConfig Deactivate one config
+
+	Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Config ID
-	@return ApiDeactivateOneConfigRequest
+	@return ApiDeactivateConfigRequest
 	*/
-	DeactivateOneConfig(ctx context.Context, id string) ApiDeactivateOneConfigRequest
+	DeactivateConfig(ctx context.Context, id string) ApiDeactivateConfigRequest
 
-	// DeactivateOneConfigExecute executes the request
+	// DeactivateConfigExecute executes the request
 	//  @return ConfigResponse
-	DeactivateOneConfigExecute(r ApiDeactivateOneConfigRequest) (*ConfigResponse, *http.Response, error)
+	DeactivateConfigExecute(r ApiDeactivateConfigRequest) (*ConfigResponse, *http.Response, error)
 
 	/*
-	DeleteOneConfig Delete one config
+	DeleteConfig Delete one config
+
+	Delete a webhooks config by ID.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Config ID
-	@return ApiDeleteOneConfigRequest
+	@return ApiDeleteConfigRequest
 	*/
-	DeleteOneConfig(ctx context.Context, id string) ApiDeleteOneConfigRequest
+	DeleteConfig(ctx context.Context, id string) ApiDeleteConfigRequest
 
-	// DeleteOneConfigExecute executes the request
-	DeleteOneConfigExecute(r ApiDeleteOneConfigRequest) (*http.Response, error)
+	// DeleteConfigExecute executes the request
+	DeleteConfigExecute(r ApiDeleteConfigRequest) (*http.Response, error)
 
 	/*
 	GetManyConfigs Get many configs
@@ -91,13 +97,13 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 	GetManyConfigs(ctx context.Context) ApiGetManyConfigsRequest
 
 	// GetManyConfigsExecute executes the request
-	//  @return GetManyConfigs200Response
-	GetManyConfigsExecute(r ApiGetManyConfigsRequest) (*GetManyConfigs200Response, *http.Response, error)
+	//  @return ConfigsResponse
+	GetManyConfigsExecute(r ApiGetManyConfigsRequest) (*ConfigsResponse, *http.Response, error)
 
 	/*
-	InsertOneConfig Insert a new config 
+	InsertConfig Insert a new config
 
-	Insert a new config.
+	Insert a new webhooks config.
 
 The endpoint should be a valid https URL and be unique.
 
@@ -109,53 +115,54 @@ All eventTypes are converted to lower-case when inserted.
 
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiInsertOneConfigRequest
+	@return ApiInsertConfigRequest
 	*/
-	InsertOneConfig(ctx context.Context) ApiInsertOneConfigRequest
+	InsertConfig(ctx context.Context) ApiInsertConfigRequest
 
-	// InsertOneConfigExecute executes the request
+	// InsertConfigExecute executes the request
 	//  @return ConfigResponse
-	InsertOneConfigExecute(r ApiInsertOneConfigRequest) (*ConfigResponse, *http.Response, error)
+	InsertConfigExecute(r ApiInsertConfigRequest) (*ConfigResponse, *http.Response, error)
 
 	/*
-	TestOneConfig Test one config
+	TestConfig Test one config
 
-	Test one config by sending a webhook to its endpoint.
-
+	Test a config by sending a webhook to its endpoint.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Config ID
-	@return ApiTestOneConfigRequest
+	@return ApiTestConfigRequest
 	*/
-	TestOneConfig(ctx context.Context, id string) ApiTestOneConfigRequest
+	TestConfig(ctx context.Context, id string) ApiTestConfigRequest
 
-	// TestOneConfigExecute executes the request
+	// TestConfigExecute executes the request
 	//  @return AttemptResponse
-	TestOneConfigExecute(r ApiTestOneConfigRequest) (*AttemptResponse, *http.Response, error)
+	TestConfigExecute(r ApiTestConfigRequest) (*AttemptResponse, *http.Response, error)
 }
 
 // WebhooksApiService WebhooksApi service
 type WebhooksApiService service
 
-type ApiActivateOneConfigRequest struct {
+type ApiActivateConfigRequest struct {
 	ctx context.Context
 	ApiService WebhooksApi
 	id string
 }
 
-func (r ApiActivateOneConfigRequest) Execute() (*ConfigResponse, *http.Response, error) {
-	return r.ApiService.ActivateOneConfigExecute(r)
+func (r ApiActivateConfigRequest) Execute() (*ConfigResponse, *http.Response, error) {
+	return r.ApiService.ActivateConfigExecute(r)
 }
 
 /*
-ActivateOneConfig Activate one config
+ActivateConfig Activate one config
+
+Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Config ID
- @return ApiActivateOneConfigRequest
+ @return ApiActivateConfigRequest
 */
-func (a *WebhooksApiService) ActivateOneConfig(ctx context.Context, id string) ApiActivateOneConfigRequest {
-	return ApiActivateOneConfigRequest{
+func (a *WebhooksApiService) ActivateConfig(ctx context.Context, id string) ApiActivateConfigRequest {
+	return ApiActivateConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -164,7 +171,7 @@ func (a *WebhooksApiService) ActivateOneConfig(ctx context.Context, id string) A
 
 // Execute executes the request
 //  @return ConfigResponse
-func (a *WebhooksApiService) ActivateOneConfigExecute(r ApiActivateOneConfigRequest) (*ConfigResponse, *http.Response, error) {
+func (a *WebhooksApiService) ActivateConfigExecute(r ApiActivateConfigRequest) (*ConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -172,7 +179,7 @@ func (a *WebhooksApiService) ActivateOneConfigExecute(r ApiActivateOneConfigRequ
 		localVarReturnValue  *ConfigResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ActivateOneConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ActivateConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -238,26 +245,26 @@ func (a *WebhooksApiService) ActivateOneConfigExecute(r ApiActivateOneConfigRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiChangeOneConfigSecretRequest struct {
+type ApiChangeConfigSecretRequest struct {
 	ctx context.Context
 	ApiService WebhooksApi
 	id string
-	changeOneConfigSecretRequest *ChangeOneConfigSecretRequest
+	configChangeSecret *ConfigChangeSecret
 }
 
-func (r ApiChangeOneConfigSecretRequest) ChangeOneConfigSecretRequest(changeOneConfigSecretRequest ChangeOneConfigSecretRequest) ApiChangeOneConfigSecretRequest {
-	r.changeOneConfigSecretRequest = &changeOneConfigSecretRequest
+func (r ApiChangeConfigSecretRequest) ConfigChangeSecret(configChangeSecret ConfigChangeSecret) ApiChangeConfigSecretRequest {
+	r.configChangeSecret = &configChangeSecret
 	return r
 }
 
-func (r ApiChangeOneConfigSecretRequest) Execute() (*ConfigResponse, *http.Response, error) {
-	return r.ApiService.ChangeOneConfigSecretExecute(r)
+func (r ApiChangeConfigSecretRequest) Execute() (*ConfigResponse, *http.Response, error) {
+	return r.ApiService.ChangeConfigSecretExecute(r)
 }
 
 /*
-ChangeOneConfigSecret Change the signing secret of a config
+ChangeConfigSecret Change the signing secret of a config
 
-Change the signing secret of the endpoint of a config.
+Change the signing secret of the endpoint of a webhooks config.
 
 If not passed or empty, a secret is automatically generated.
 The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
@@ -265,10 +272,10 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Config ID
- @return ApiChangeOneConfigSecretRequest
+ @return ApiChangeConfigSecretRequest
 */
-func (a *WebhooksApiService) ChangeOneConfigSecret(ctx context.Context, id string) ApiChangeOneConfigSecretRequest {
-	return ApiChangeOneConfigSecretRequest{
+func (a *WebhooksApiService) ChangeConfigSecret(ctx context.Context, id string) ApiChangeConfigSecretRequest {
+	return ApiChangeConfigSecretRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -277,7 +284,7 @@ func (a *WebhooksApiService) ChangeOneConfigSecret(ctx context.Context, id strin
 
 // Execute executes the request
 //  @return ConfigResponse
-func (a *WebhooksApiService) ChangeOneConfigSecretExecute(r ApiChangeOneConfigSecretRequest) (*ConfigResponse, *http.Response, error) {
+func (a *WebhooksApiService) ChangeConfigSecretExecute(r ApiChangeConfigSecretRequest) (*ConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -285,7 +292,7 @@ func (a *WebhooksApiService) ChangeOneConfigSecretExecute(r ApiChangeOneConfigSe
 		localVarReturnValue  *ConfigResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ChangeOneConfigSecret")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ChangeConfigSecret")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -315,7 +322,7 @@ func (a *WebhooksApiService) ChangeOneConfigSecretExecute(r ApiChangeOneConfigSe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.changeOneConfigSecretRequest
+	localVarPostBody = r.configChangeSecret
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -353,25 +360,27 @@ func (a *WebhooksApiService) ChangeOneConfigSecretExecute(r ApiChangeOneConfigSe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeactivateOneConfigRequest struct {
+type ApiDeactivateConfigRequest struct {
 	ctx context.Context
 	ApiService WebhooksApi
 	id string
 }
 
-func (r ApiDeactivateOneConfigRequest) Execute() (*ConfigResponse, *http.Response, error) {
-	return r.ApiService.DeactivateOneConfigExecute(r)
+func (r ApiDeactivateConfigRequest) Execute() (*ConfigResponse, *http.Response, error) {
+	return r.ApiService.DeactivateConfigExecute(r)
 }
 
 /*
-DeactivateOneConfig Deactivate one config
+DeactivateConfig Deactivate one config
+
+Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Config ID
- @return ApiDeactivateOneConfigRequest
+ @return ApiDeactivateConfigRequest
 */
-func (a *WebhooksApiService) DeactivateOneConfig(ctx context.Context, id string) ApiDeactivateOneConfigRequest {
-	return ApiDeactivateOneConfigRequest{
+func (a *WebhooksApiService) DeactivateConfig(ctx context.Context, id string) ApiDeactivateConfigRequest {
+	return ApiDeactivateConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -380,7 +389,7 @@ func (a *WebhooksApiService) DeactivateOneConfig(ctx context.Context, id string)
 
 // Execute executes the request
 //  @return ConfigResponse
-func (a *WebhooksApiService) DeactivateOneConfigExecute(r ApiDeactivateOneConfigRequest) (*ConfigResponse, *http.Response, error) {
+func (a *WebhooksApiService) DeactivateConfigExecute(r ApiDeactivateConfigRequest) (*ConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -388,7 +397,7 @@ func (a *WebhooksApiService) DeactivateOneConfigExecute(r ApiDeactivateOneConfig
 		localVarReturnValue  *ConfigResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.DeactivateOneConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.DeactivateConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -454,25 +463,27 @@ func (a *WebhooksApiService) DeactivateOneConfigExecute(r ApiDeactivateOneConfig
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOneConfigRequest struct {
+type ApiDeleteConfigRequest struct {
 	ctx context.Context
 	ApiService WebhooksApi
 	id string
 }
 
-func (r ApiDeleteOneConfigRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteOneConfigExecute(r)
+func (r ApiDeleteConfigRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteConfigExecute(r)
 }
 
 /*
-DeleteOneConfig Delete one config
+DeleteConfig Delete one config
+
+Delete a webhooks config by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Config ID
- @return ApiDeleteOneConfigRequest
+ @return ApiDeleteConfigRequest
 */
-func (a *WebhooksApiService) DeleteOneConfig(ctx context.Context, id string) ApiDeleteOneConfigRequest {
-	return ApiDeleteOneConfigRequest{
+func (a *WebhooksApiService) DeleteConfig(ctx context.Context, id string) ApiDeleteConfigRequest {
+	return ApiDeleteConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -480,14 +491,14 @@ func (a *WebhooksApiService) DeleteOneConfig(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-func (a *WebhooksApiService) DeleteOneConfigExecute(r ApiDeleteOneConfigRequest) (*http.Response, error) {
+func (a *WebhooksApiService) DeleteConfigExecute(r ApiDeleteConfigRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.DeleteOneConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.DeleteConfig")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -563,7 +574,7 @@ func (r ApiGetManyConfigsRequest) Endpoint(endpoint string) ApiGetManyConfigsReq
 	return r
 }
 
-func (r ApiGetManyConfigsRequest) Execute() (*GetManyConfigs200Response, *http.Response, error) {
+func (r ApiGetManyConfigsRequest) Execute() (*ConfigsResponse, *http.Response, error) {
 	return r.ApiService.GetManyConfigsExecute(r)
 }
 
@@ -583,13 +594,13 @@ func (a *WebhooksApiService) GetManyConfigs(ctx context.Context) ApiGetManyConfi
 }
 
 // Execute executes the request
-//  @return GetManyConfigs200Response
-func (a *WebhooksApiService) GetManyConfigsExecute(r ApiGetManyConfigsRequest) (*GetManyConfigs200Response, *http.Response, error) {
+//  @return ConfigsResponse
+func (a *WebhooksApiService) GetManyConfigsExecute(r ApiGetManyConfigsRequest) (*ConfigsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetManyConfigs200Response
+		localVarReturnValue  *ConfigsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.GetManyConfigs")
@@ -663,25 +674,25 @@ func (a *WebhooksApiService) GetManyConfigsExecute(r ApiGetManyConfigsRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiInsertOneConfigRequest struct {
+type ApiInsertConfigRequest struct {
 	ctx context.Context
 	ApiService WebhooksApi
 	configUser *ConfigUser
 }
 
-func (r ApiInsertOneConfigRequest) ConfigUser(configUser ConfigUser) ApiInsertOneConfigRequest {
+func (r ApiInsertConfigRequest) ConfigUser(configUser ConfigUser) ApiInsertConfigRequest {
 	r.configUser = &configUser
 	return r
 }
 
-func (r ApiInsertOneConfigRequest) Execute() (*ConfigResponse, *http.Response, error) {
-	return r.ApiService.InsertOneConfigExecute(r)
+func (r ApiInsertConfigRequest) Execute() (*ConfigResponse, *http.Response, error) {
+	return r.ApiService.InsertConfigExecute(r)
 }
 
 /*
-InsertOneConfig Insert a new config 
+InsertConfig Insert a new config
 
-Insert a new config.
+Insert a new webhooks config.
 
 The endpoint should be a valid https URL and be unique.
 
@@ -693,10 +704,10 @@ All eventTypes are converted to lower-case when inserted.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiInsertOneConfigRequest
+ @return ApiInsertConfigRequest
 */
-func (a *WebhooksApiService) InsertOneConfig(ctx context.Context) ApiInsertOneConfigRequest {
-	return ApiInsertOneConfigRequest{
+func (a *WebhooksApiService) InsertConfig(ctx context.Context) ApiInsertConfigRequest {
+	return ApiInsertConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -704,7 +715,7 @@ func (a *WebhooksApiService) InsertOneConfig(ctx context.Context) ApiInsertOneCo
 
 // Execute executes the request
 //  @return ConfigResponse
-func (a *WebhooksApiService) InsertOneConfigExecute(r ApiInsertOneConfigRequest) (*ConfigResponse, *http.Response, error) {
+func (a *WebhooksApiService) InsertConfigExecute(r ApiInsertConfigRequest) (*ConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -712,7 +723,7 @@ func (a *WebhooksApiService) InsertOneConfigExecute(r ApiInsertOneConfigRequest)
 		localVarReturnValue  *ConfigResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.InsertOneConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.InsertConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -792,28 +803,27 @@ func (a *WebhooksApiService) InsertOneConfigExecute(r ApiInsertOneConfigRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiTestOneConfigRequest struct {
+type ApiTestConfigRequest struct {
 	ctx context.Context
 	ApiService WebhooksApi
 	id string
 }
 
-func (r ApiTestOneConfigRequest) Execute() (*AttemptResponse, *http.Response, error) {
-	return r.ApiService.TestOneConfigExecute(r)
+func (r ApiTestConfigRequest) Execute() (*AttemptResponse, *http.Response, error) {
+	return r.ApiService.TestConfigExecute(r)
 }
 
 /*
-TestOneConfig Test one config
+TestConfig Test one config
 
-Test one config by sending a webhook to its endpoint.
-
+Test a config by sending a webhook to its endpoint.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Config ID
- @return ApiTestOneConfigRequest
+ @return ApiTestConfigRequest
 */
-func (a *WebhooksApiService) TestOneConfig(ctx context.Context, id string) ApiTestOneConfigRequest {
-	return ApiTestOneConfigRequest{
+func (a *WebhooksApiService) TestConfig(ctx context.Context, id string) ApiTestConfigRequest {
+	return ApiTestConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -822,7 +832,7 @@ func (a *WebhooksApiService) TestOneConfig(ctx context.Context, id string) ApiTe
 
 // Execute executes the request
 //  @return AttemptResponse
-func (a *WebhooksApiService) TestOneConfigExecute(r ApiTestOneConfigRequest) (*AttemptResponse, *http.Response, error) {
+func (a *WebhooksApiService) TestConfigExecute(r ApiTestConfigRequest) (*AttemptResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -830,7 +840,7 @@ func (a *WebhooksApiService) TestOneConfigExecute(r ApiTestOneConfigRequest) (*A
 		localVarReturnValue  *AttemptResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.TestOneConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.TestConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

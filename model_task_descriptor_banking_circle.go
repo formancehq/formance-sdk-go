@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: v1.0.0-rc.5
 Contact: support@formance.com
 */
 
@@ -13,6 +13,7 @@ package formance
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the TaskDescriptorBankingCircle type satisfies the MappedNullable interface at compile time
@@ -30,7 +31,7 @@ type TaskDescriptorBankingCircle struct {
 	Error *string `json:"error,omitempty"`
 	// The task state
 	State map[string]interface{} `json:"state,omitempty"`
-	Descriptor *TaskDescriptorBankingCircleAllOfDescriptor `json:"descriptor,omitempty"`
+	Descriptor *TaskDescriptorBankingCircleDescriptor `json:"descriptor,omitempty"`
 }
 
 // NewTaskDescriptorBankingCircle instantiates a new TaskDescriptorBankingCircle object
@@ -211,9 +212,9 @@ func (o *TaskDescriptorBankingCircle) SetState(v map[string]interface{}) {
 }
 
 // GetDescriptor returns the Descriptor field value if set, zero value otherwise.
-func (o *TaskDescriptorBankingCircle) GetDescriptor() TaskDescriptorBankingCircleAllOfDescriptor {
+func (o *TaskDescriptorBankingCircle) GetDescriptor() TaskDescriptorBankingCircleDescriptor {
 	if o == nil || isNil(o.Descriptor) {
-		var ret TaskDescriptorBankingCircleAllOfDescriptor
+		var ret TaskDescriptorBankingCircleDescriptor
 		return ret
 	}
 	return *o.Descriptor
@@ -221,7 +222,7 @@ func (o *TaskDescriptorBankingCircle) GetDescriptor() TaskDescriptorBankingCircl
 
 // GetDescriptorOk returns a tuple with the Descriptor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TaskDescriptorBankingCircle) GetDescriptorOk() (*TaskDescriptorBankingCircleAllOfDescriptor, bool) {
+func (o *TaskDescriptorBankingCircle) GetDescriptorOk() (*TaskDescriptorBankingCircleDescriptor, bool) {
 	if o == nil || isNil(o.Descriptor) {
 		return nil, false
 	}
@@ -237,8 +238,8 @@ func (o *TaskDescriptorBankingCircle) HasDescriptor() bool {
 	return false
 }
 
-// SetDescriptor gets a reference to the given TaskDescriptorBankingCircleAllOfDescriptor and assigns it to the Descriptor field.
-func (o *TaskDescriptorBankingCircle) SetDescriptor(v TaskDescriptorBankingCircleAllOfDescriptor) {
+// SetDescriptor gets a reference to the given TaskDescriptorBankingCircleDescriptor and assigns it to the Descriptor field.
+func (o *TaskDescriptorBankingCircle) SetDescriptor(v TaskDescriptorBankingCircleDescriptor) {
 	o.Descriptor = &v
 }
 
