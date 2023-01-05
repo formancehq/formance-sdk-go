@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HasMore** | Pointer to **bool** |  | [optional] 
+**HasMore** | **bool** |  | 
+**Data** | [**[]WebhooksConfig**](WebhooksConfig.md) |  | 
 
 ## Methods
 
 ### NewWebhooksCursor
 
-`func NewWebhooksCursor() *WebhooksCursor`
+`func NewWebhooksCursor(hasMore bool, data []WebhooksConfig, ) *WebhooksCursor`
 
 NewWebhooksCursor instantiates a new WebhooksCursor object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +45,26 @@ and a boolean to check if the value has been set.
 
 SetHasMore sets HasMore field to given value.
 
-### HasHasMore
 
-`func (o *WebhooksCursor) HasHasMore() bool`
+### GetData
 
-HasHasMore returns a boolean if a field has been set.
+`func (o *WebhooksCursor) GetData() []WebhooksConfig`
+
+GetData returns the Data field if non-nil, zero value otherwise.
+
+### GetDataOk
+
+`func (o *WebhooksCursor) GetDataOk() (*[]WebhooksConfig, bool)`
+
+GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetData
+
+`func (o *WebhooksCursor) SetData(v []WebhooksConfig)`
+
+SetData sets Data field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

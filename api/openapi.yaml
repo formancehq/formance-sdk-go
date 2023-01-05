@@ -17,7 +17,7 @@ info:
     and standard method from web, mobile and desktop applications.
     <SecurityDefinitions />
   title: Formance Stack API
-  version: v1.0.0-rc.1
+  version: develop
   x-logo:
     url: https://avatars.githubusercontent.com/u/84325077?s=200&v=4
     altText: Formance
@@ -33,6 +33,17 @@ servers:
 security:
 - Authorization: []
 paths:
+  /api/auth/_info:
+    get:
+      operationId: getServerInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInfo'
+          description: Server information
+      summary: Get server info
   /api/auth/clients:
     get:
       operationId: listClients
@@ -1621,7 +1632,7 @@ paths:
       - Payments
   /api/search/_info:
     get:
-      operationId: getServerInfo
+      operationId: searchgetServerInfo
       responses:
         "200":
           content:
@@ -1678,14 +1689,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getManyConfigs_200_response'
+                $ref: '#/components/schemas/ConfigsResponse'
           description: OK
       summary: Get many configs
       tags:
       - Webhooks
     post:
       description: |
-        Insert a new config.
+        Insert a new webhooks config.
 
         The endpoint should be a valid https URL and be unique.
 
@@ -1694,7 +1705,7 @@ paths:
         The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 
         All eventTypes are converted to lower-case when inserted.
-      operationId: insertOneConfig
+      operationId: insertConfig
       requestBody:
         content:
           application/json:
@@ -1715,13 +1726,13 @@ paths:
                 example: endpoints should be valid urls
                 type: string
           description: Bad Request
-      summary: |
-        Insert a new config
+      summary: Insert a new config
       tags:
       - Webhooks
   /api/webhooks/configs/{id}:
     delete:
-      operationId: deleteOneConfig
+      description: Delete a webhooks config by ID.
+      operationId: deleteConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1741,9 +1752,8 @@ paths:
       - Webhooks
   /api/webhooks/configs/{id}/test:
     get:
-      description: |
-        Test one config by sending a webhook to its endpoint.
-      operationId: testOneConfig
+      description: Test a config by sending a webhook to its endpoint.
+      operationId: testConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1766,7 +1776,9 @@ paths:
       - Webhooks
   /api/webhooks/configs/{id}/activate:
     put:
-      operationId: activateOneConfig
+      description: "Activate a webhooks config by ID, to start receiving webhooks\
+        \ to its endpoint."
+      operationId: activateConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1792,7 +1804,9 @@ paths:
       - Webhooks
   /api/webhooks/configs/{id}/deactivate:
     put:
-      operationId: deactivateOneConfig
+      description: "Deactivate a webhooks config by ID, to stop receiving webhooks\
+        \ to its endpoint."
+      operationId: deactivateConfig
       parameters:
       - description: Config ID
         explode: false
@@ -1819,11 +1833,11 @@ paths:
   /api/webhooks/configs/{id}/secret/change:
     put:
       description: |
-        Change the signing secret of the endpoint of a config.
+        Change the signing secret of the endpoint of a webhooks config.
 
         If not passed or empty, a secret is automatically generated.
         The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
-      operationId: changeOneConfigSecret
+      operationId: changeConfigSecret
       parameters:
       - description: Config ID
         explode: false
@@ -1838,7 +1852,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/changeOneConfigSecret_request'
+              $ref: '#/components/schemas/ConfigChangeSecret'
       responses:
         "200":
           content:
@@ -1849,6 +1863,426 @@ paths:
       summary: Change the signing secret of a config
       tags:
       - Webhooks
+  /api/wallets/_info:
+    get:
+      operationId: walletsgetServerInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInfo'
+          description: Server information
+      summary: Get server info
+  /api/wallets/transactions:
+    get:
+      operationId: getTransactions
+      parameters:
+      - description: The maximum number of results to return per page
+        example: 100
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 15
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: A wallet ID to filter on
+        example: wallet1
+        explode: true
+        in: query
+        name: wallet_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: |
+          Parameter used in pagination requests.
+          Set to the value of next for the next page of results.
+          Set to the value of previous for the previous page of results.
+          No other parameters can be set when the cursor is set.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ==
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionsResponse'
+          description: OK
+      tags:
+      - Wallets
+  /api/wallets/wallets:
+    get:
+      operationId: listWallets
+      parameters:
+      - description: Filter on wallet name
+        example: wallet1
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter wallets by metadata key value pairs. Nested objects can
+          be used as seen in the example below.
+        example: "metadata[key]=value1&metadata[a.nested.key]=value2"
+        explode: true
+        in: query
+        name: metadata
+        required: false
+        schema:
+          properties: {}
+          type: object
+        style: deepObject
+      - description: The maximum number of results to return per page
+        example: 100
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 15
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: |
+          Parameter used in pagination requests.
+          Set to the value of next for the next page of results.
+          Set to the value of previous for the previous page of results.
+          No other parameters can be set when the pagination token is set.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ==
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWalletsResponse'
+          description: OK
+      summary: List all wallets
+      tags:
+      - Wallets
+    post:
+      operationId: createWallet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWalletRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWalletResponse'
+          description: Wallet created
+      summary: Create a new wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}:
+    get:
+      operationId: getWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWalletResponse'
+          description: Wallet
+        "404":
+          description: Wallet not found
+      summary: Get a wallet
+      tags:
+      - Wallets
+    patch:
+      operationId: updateWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateWallet_request'
+      responses:
+        "204":
+          description: Wallet successfully updated
+      summary: Update a wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}/balances:
+    get:
+      operationId: listBalances
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBalancesResponse'
+          description: Balances list
+      summary: List balances of a wallet
+    post:
+      operationId: createBalance
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBalanceRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBalanceResponse'
+          description: Created balance
+      summary: Create a balance
+  /api/wallets/wallets/{id}/balances/{balanceName}:
+    get:
+      operationId: getBalance
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: balanceName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBalanceResponse'
+          description: Balance summary
+      summary: Get detailed balance
+  /api/wallets/wallets/{id}/debit:
+    post:
+      operationId: debitWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebitWalletRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebitWalletResponse'
+          description: Wallet successfully debited as a pending hold
+        "204":
+          description: Wallet successfully debited
+      summary: Debit a wallet
+      tags:
+      - Wallets
+  /api/wallets/wallets/{id}/credit:
+    post:
+      operationId: creditWallet
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              amount:
+                asset: USD/2
+                amount: 100
+            schema:
+              $ref: '#/components/schemas/CreditWalletRequest'
+      responses:
+        "204":
+          description: Wallet successfully credited
+      summary: Credit a wallet
+      tags:
+      - Wallets
+  /api/wallets/holds:
+    get:
+      operationId: getHolds
+      parameters:
+      - description: The maximum number of results to return per page
+        example: 100
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 15
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: The wallet to filter on
+        example: wallet1
+        explode: true
+        in: query
+        name: walletID
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter holds by metadata key value pairs. Nested objects can
+          be used as seen in the example below.
+        example: "metadata[key]=value1&metadata[a.nested.key]=value2"
+        explode: true
+        in: query
+        name: metadata
+        required: false
+        schema:
+          properties: {}
+          type: object
+        style: deepObject
+      - description: |
+          Parameter used in pagination requests.
+          Set to the value of next for the next page of results.
+          Set to the value of previous for the previous page of results.
+          No other parameters can be set when the pagination token is set.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ==
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHoldsResponse'
+          description: Holds
+      summary: Get all holds for a wallet
+      tags:
+      - Wallets
+  /api/wallets/holds/{holdID}:
+    get:
+      operationId: getHold
+      parameters:
+      - description: The hold ID
+        explode: false
+        in: path
+        name: holdID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHoldResponse'
+          description: Holds
+      summary: Get a hold
+      tags:
+      - Wallets
+  /api/wallets/holds/{hold_id}/confirm:
+    post:
+      operationId: confirmHold
+      parameters:
+      - explode: false
+        in: path
+        name: hold_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmHoldRequest'
+      responses:
+        "204":
+          description: "Hold successfully confirmed, funds moved back to initial destination"
+      summary: Confirm a hold
+      tags:
+      - Wallets
+  /api/wallets/holds/{hold_id}/void:
+    post:
+      operationId: voidHold
+      parameters:
+      - explode: false
+        in: path
+        name: hold_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: "Hold successfully cancelled, funds returned to wallet"
+      summary: Cancel a hold
+      tags:
+      - Wallets
 components:
   schemas:
     Metadata:
@@ -2053,6 +2487,15 @@ components:
           items:
             $ref: '#/components/schemas/User'
           type: array
+      type: object
+    ServerInfo:
+      example:
+        version: version
+      properties:
+        version:
+          type: string
+      required:
+      - version
       type: object
     Config:
       example:
@@ -3114,7 +3557,7 @@ components:
             order_id: "6735"
           type: object
       type: object
-    ConnectorTaskBase:
+    TaskDescriptorStripe:
       properties:
         provider:
           description: The connector code
@@ -3143,31 +3586,169 @@ components:
           description: The task state
           example: {}
           type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorStripe_descriptor'
       type: object
-    TaskDescriptorStripe:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorStripe_allOf'
     TaskDescriptorWise:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorWise_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorWise_descriptor'
+      type: object
     TaskDescriptorModulr:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorModulr_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorModulr_descriptor'
+      type: object
     TaskDescriptorDummyPay:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorDummyPay_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorDummyPay_descriptor'
+      type: object
     TaskDescriptorCurrencyCloud:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_descriptor'
+      type: object
     TaskDescriptorBankingCircle:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorTaskBase'
-      - $ref: '#/components/schemas/TaskDescriptorBankingCircle_allOf'
+      properties:
+        provider:
+          description: The connector code
+          example: stripe
+          type: string
+        createdAt:
+          description: The date when the task was created
+          example: 2020-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          description: The task status
+          enum:
+          - stopped
+          - pending
+          - terminated
+          - active
+          - failed
+          example: stopped
+          type: string
+        error:
+          description: The error message if the task failed
+          example: "Error: Something went wrong"
+          type: string
+        state:
+          description: The task state
+          example: {}
+          type: object
+        descriptor:
+          $ref: '#/components/schemas/TaskDescriptorBankingCircle_descriptor'
+      type: object
     Query:
       example:
         size: 0
@@ -3224,15 +3805,6 @@ components:
           description: The ledger
           type: string
       type: object
-    ServerInfo:
-      example:
-        version: version
-      properties:
-        version:
-          type: string
-      required:
-      - version
-      type: object
     ConfigUser:
       example:
         endpoint: https://example.com
@@ -3255,6 +3827,73 @@ components:
             example: TYPE1
             type: string
           type: array
+      required:
+      - endpoint
+      - eventTypes
+      type: object
+    ConfigsResponse:
+      example:
+        cursor:
+          data:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            endpoint: https://example.com
+            active: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+            eventTypes:
+            - TYPE1
+            - TYPE2
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            endpoint: https://example.com
+            active: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+            eventTypes:
+            - TYPE1
+            - TYPE2
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          hasMore: false
+      properties:
+        cursor:
+          $ref: '#/components/schemas/webhooksCursor'
+      required:
+      - cursor
+      type: object
+    webhooksCursor:
+      example:
+        data:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          endpoint: https://example.com
+          active: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          eventTypes:
+          - TYPE1
+          - TYPE2
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          endpoint: https://example.com
+          active: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          eventTypes:
+          - TYPE1
+          - TYPE2
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        hasMore: false
+      properties:
+        hasMore:
+          example: false
+          type: boolean
+        data:
+          items:
+            $ref: '#/components/schemas/webhooksConfig'
+          type: array
+      required:
+      - data
+      - hasMore
+      type: object
     ConfigResponse:
       example:
         data:
@@ -3270,6 +3909,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/webhooksConfig'
+      required:
+      - data
       type: object
     webhooksConfig:
       example:
@@ -3309,6 +3950,14 @@ components:
         updatedAt:
           format: date-time
           type: string
+    ConfigChangeSecret:
+      example:
+        secret: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+      properties:
+        secret:
+          example: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
+          type: string
+      type: object
     AttemptResponse:
       example:
         data:
@@ -3334,6 +3983,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Attempt'
+      required:
+      - data
       type: object
     Attempt:
       example:
@@ -3386,11 +4037,468 @@ components:
         nextRetryAfter:
           format: date-time
           type: string
-    webhooksCursor:
+    Monetary:
+      example:
+        amount: 0
+        asset: asset
       properties:
-        has_more:
+        asset:
+          description: The asset of the monetary value.
+          type: string
+        amount:
+          description: The amount of the monetary value.
+          format: int64
+          type: integer
+      required:
+      - amount
+      - asset
+      type: object
+    Wallet:
+      example:
+        metadata:
+          key: ""
+        balances:
+          key: 0
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The unique ID of the wallet.
+          format: uuid
+          type: string
+        metadata:
+          additionalProperties: {}
+          description: Metadata associated with the wallet.
+          type: object
+        balances:
+          additionalProperties:
+            description: The balance of the wallet in the specified currency.
+            type: integer
+          description: The balances of the wallet.
+          type: object
+        name:
+          type: string
+      required:
+      - balances
+      - id
+      - metadata
+      - name
+      type: object
+    WalletWithBalances:
+      allOf:
+      - $ref: '#/components/schemas/Wallet'
+      - $ref: '#/components/schemas/WalletWithBalances_allOf'
+    Hold:
+      example:
+        walletID: walletID
+        metadata:
+          key: ""
+        description: description
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The unique ID of the hold.
+          format: uuid
+          type: string
+        walletID:
+          description: The ID of the wallet the hold is associated with.
+          type: string
+        metadata:
+          additionalProperties: {}
+          description: Metadata associated with the hold.
+          type: object
+        description:
+          type: string
+      required:
+      - description
+      - id
+      - metadata
+      - walletID
+      type: object
+    ExpandedDebitHold:
+      allOf:
+      - $ref: '#/components/schemas/Hold'
+      - $ref: '#/components/schemas/ExpandedDebitHold_allOf'
+    ListWalletsResponse:
+      example:
+        cursor: null
+      properties:
+        cursor:
+          $ref: '#/components/schemas/ListWalletsResponse_cursor'
+      required:
+      - cursor
+      type: object
+    CreateWalletResponse:
+      example:
+        data:
+          metadata:
+            key: ""
+          balances:
+            key: 0
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        data:
+          $ref: '#/components/schemas/Wallet'
+      required:
+      - data
+      type: object
+    GetWalletResponse:
+      example:
+        data: null
+      properties:
+        data:
+          $ref: '#/components/schemas/WalletWithBalances'
+      required:
+      - data
+      type: object
+    DebitWalletResponse:
+      example:
+        data:
+          walletID: walletID
+          metadata:
+            key: ""
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        data:
+          $ref: '#/components/schemas/Hold'
+      required:
+      - data
+      type: object
+    walletsAggregatedVolumes:
+      additionalProperties:
+        $ref: '#/components/schemas/walletsVolumes'
+      type: object
+      x-go-type:
+        type: AggregatedVolumes
+    walletsMetadata:
+      additionalProperties: {}
+      example:
+        admin: true
+        a:
+          nested:
+            key: value
+      nullable: true
+      type: object
+    walletsPosting:
+      properties:
+        amount:
+          example: 100
+          format: int64
+          minimum: 0
+          type: integer
+        asset:
+          example: COIN
+          type: string
+        destination:
+          example: users:002
+          type: string
+        source:
+          example: users:001
+          type: string
+      required:
+      - amount
+      - asset
+      - destination
+      - source
+      type: object
+    walletsTransaction:
+      properties:
+        timestamp:
+          format: date-time
+          type: string
+        postings:
+          items:
+            $ref: '#/components/schemas/walletsPosting'
+          type: array
+        reference:
+          example: ref:001
+          type: string
+        metadata:
+          additionalProperties: {}
+          example:
+            admin: true
+            a:
+              nested:
+                key: value
+          nullable: true
+          type: object
+        txid:
+          format: int64
+          minimum: 0
+          type: integer
+        preCommitVolumes:
+          additionalProperties:
+            $ref: '#/components/schemas/walletsVolumes'
+          type: object
+          x-go-type:
+            type: AggregatedVolumes
+        postCommitVolumes:
+          additionalProperties:
+            $ref: '#/components/schemas/walletsVolumes'
+          type: object
+          x-go-type:
+            type: AggregatedVolumes
+      required:
+      - postings
+      - timestamp
+      - txid
+      type: object
+    walletsCursor:
+      properties:
+        pageSize:
+          example: 15
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+        hasMore:
           example: false
           type: boolean
+        previous:
+          example: YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol=
+          type: string
+        next:
+          example: ""
+          type: string
+      required:
+      - pageSize
+      type: object
+    GetTransactionsResponse:
+      example:
+        cursor: null
+      properties:
+        cursor:
+          $ref: '#/components/schemas/GetTransactionsResponse_cursor'
+      required:
+      - cursor
+      type: object
+    GetHoldsResponse:
+      example:
+        cursor: null
+      properties:
+        cursor:
+          $ref: '#/components/schemas/GetHoldsResponse_cursor'
+      required:
+      - cursor
+      type: object
+    GetHoldResponse:
+      example:
+        data: null
+      properties:
+        data:
+          $ref: '#/components/schemas/ExpandedDebitHold'
+      required:
+      - data
+      type: object
+    CreateWalletRequest:
+      example:
+        metadata:
+          key: ""
+        name: name
+      properties:
+        metadata:
+          additionalProperties: {}
+          description: Custom metadata to attach to this wallet.
+          type: object
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    walletsVolume:
+      example:
+        input: 100
+        output: 20
+        balance: 80
+      properties:
+        input:
+          type: integer
+        output:
+          type: integer
+        balance:
+          type: integer
+      required:
+      - balance
+      - input
+      - output
+      type: object
+    walletsVolumes:
+      additionalProperties:
+        $ref: '#/components/schemas/walletsVolume'
+      example:
+        USD:
+          input: 100
+          output: 10
+          balance: 90
+        EUR:
+          input: 100
+          output: 10
+          balance: 90
+      type: object
+    ConfirmHoldRequest:
+      example:
+        amount: 100
+        final: true
+      properties:
+        amount:
+          description: Define the amount to transfer.
+          example: 100
+          format: int64
+          type: integer
+        final:
+          description: Define a final confirmation. Remaining funds will be returned
+            to the wallet.
+          example: true
+          type: boolean
+      type: object
+    LedgerAccountSubject:
+      properties:
+        type:
+          type: string
+        identifier:
+          type: string
+      required:
+      - identifier
+      - type
+    WalletSubject:
+      properties:
+        type:
+          type: string
+        identifier:
+          type: string
+        balance:
+          type: string
+      required:
+      - identifier
+      - type
+    Subject:
+      discriminator:
+        mapping:
+          ACCOUNT: '#/components/schemas/LedgerAccountSubject'
+          WALLET: '#/components/schemas/WalletSubject'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/LedgerAccountSubject'
+      - $ref: '#/components/schemas/WalletSubject'
+    Subjects:
+      items:
+        $ref: '#/components/schemas/Subject'
+      type: array
+    CreditWalletRequest:
+      example:
+        reference: reference
+        amount:
+          amount: 0
+          asset: asset
+        metadata:
+          admin: true
+          a:
+            nested:
+              key: value
+        sources:
+        - null
+        - null
+        balance: balance
+      properties:
+        amount:
+          $ref: '#/components/schemas/Monetary'
+        metadata:
+          additionalProperties: {}
+          example:
+            admin: true
+            a:
+              nested:
+                key: value
+          nullable: true
+          type: object
+        reference:
+          type: string
+        sources:
+          items:
+            $ref: '#/components/schemas/Subject'
+          type: array
+        balance:
+          description: The balance to credit
+          type: string
+      required:
+      - amount
+      type: object
+    DebitWalletRequest:
+      example:
+        amount:
+          asset: USD/2
+          amount: 100
+        pending: true
+      properties:
+        amount:
+          $ref: '#/components/schemas/Monetary'
+        pending:
+          description: "Set to true to create a pending hold. If false, the wallet\
+            \ will be debited immediately."
+          type: boolean
+        metadata:
+          additionalProperties: {}
+          example:
+            admin: true
+            a:
+              nested:
+                key: value
+          nullable: true
+          type: object
+        description:
+          type: string
+        destination:
+          $ref: '#/components/schemas/Subject'
+        balance:
+          description: The targeted balance
+          type: string
+      required:
+      - amount
+      type: object
+    Balance:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    BalanceWithAssets:
+      allOf:
+      - $ref: '#/components/schemas/Balance'
+      - $ref: '#/components/schemas/BalanceWithAssets_allOf'
+    ListBalancesResponse:
+      example:
+        cursor: null
+      properties:
+        cursor:
+          $ref: '#/components/schemas/ListBalancesResponse_cursor'
+      required:
+      - cursor
+      type: object
+    GetBalanceResponse:
+      example:
+        data: null
+      properties:
+        data:
+          $ref: '#/components/schemas/BalanceWithAssets'
+      required:
+      - data
+      type: object
+    CreateBalanceRequest:
+      $ref: '#/components/schemas/Balance'
+    CreateBalanceResponse:
+      example:
+        data:
+          name: name
+      properties:
+        data:
+          $ref: '#/components/schemas/Balance'
+      required:
+      - data
       type: object
     listAccounts_200_response_cursor_allOf:
       properties:
@@ -3612,35 +4720,12 @@ components:
       - $ref: '#/components/schemas/TaskDescriptorDummyPay'
       - $ref: '#/components/schemas/TaskDescriptorModulr'
       - $ref: '#/components/schemas/TaskDescriptorBankingCircle'
-    getManyConfigs_200_response_cursor_allOf:
+    updateWallet_request:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/webhooksConfig'
-          type: array
-      required:
-      - data
-      type: object
-    getManyConfigs_200_response_cursor:
-      allOf:
-      - $ref: '#/components/schemas/webhooksCursor'
-      - $ref: '#/components/schemas/getManyConfigs_200_response_cursor_allOf'
-    getManyConfigs_200_response:
-      example:
-        cursor: null
-      properties:
-        cursor:
-          $ref: '#/components/schemas/getManyConfigs_200_response_cursor'
-      required:
-      - cursor
-      type: object
-    changeOneConfigSecret_request:
-      properties:
-        secret:
-          example: V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3
-          type: string
-      required:
-      - secret
+        metadata:
+          additionalProperties: {}
+          description: Custom metadata to attach to this wallet.
+          type: object
       type: object
     Client_allOf:
       properties:
@@ -3703,7 +4788,7 @@ components:
         key:
           $ref: '#/components/schemas/ListConnectorsConfigsResponse_connector_key'
       type: object
-    TaskDescriptorStripe_allOf_descriptor:
+    TaskDescriptorStripe_descriptor:
       properties:
         name:
           type: string
@@ -3712,14 +4797,7 @@ components:
         account:
           type: string
       type: object
-      example: null
-    TaskDescriptorStripe_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorStripe_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorWise_allOf_descriptor:
+    TaskDescriptorWise_descriptor:
       properties:
         name:
           type: string
@@ -3728,14 +4806,7 @@ components:
         profileID:
           type: integer
       type: object
-      example: null
-    TaskDescriptorWise_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorWise_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorModulr_allOf_descriptor:
+    TaskDescriptorModulr_descriptor:
       properties:
         name:
           type: string
@@ -3744,14 +4815,7 @@ components:
         accountID:
           type: string
       type: object
-      example: null
-    TaskDescriptorModulr_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorModulr_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorDummyPay_allOf_descriptor:
+    TaskDescriptorDummyPay_descriptor:
       properties:
         name:
           type: string
@@ -3760,39 +4824,18 @@ components:
         fileName:
           type: string
       type: object
-      example: null
-    TaskDescriptorDummyPay_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorDummyPay_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorCurrencyCloud_allOf_descriptor:
+    TaskDescriptorCurrencyCloud_descriptor:
       properties:
         name:
           type: string
       type: object
-      example: null
-    TaskDescriptorCurrencyCloud_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorCurrencyCloud_allOf_descriptor'
-      type: object
-      example: null
-    TaskDescriptorBankingCircle_allOf_descriptor:
+    TaskDescriptorBankingCircle_descriptor:
       properties:
         name:
           type: string
         key:
           type: string
       type: object
-      example: null
-    TaskDescriptorBankingCircle_allOf:
-      properties:
-        descriptor:
-          $ref: '#/components/schemas/TaskDescriptorBankingCircle_allOf_descriptor'
-      type: object
-      example: null
     Response_cursor_total:
       example:
         value: 6.027456183070403
@@ -3832,6 +4875,95 @@ components:
             - type: object
           type: array
       type: object
+    WalletWithBalances_allOf:
+      properties:
+        balances:
+          additionalProperties:
+            type: integer
+          type: object
+      required:
+      - balances
+      type: object
+      example: null
+    ExpandedDebitHold_allOf:
+      properties:
+        remaining:
+          description: Remaining amount on hold
+          example: 10
+          format: int64
+          type: integer
+        originalAmount:
+          description: Original amount on hold
+          example: 100
+          format: int64
+          type: integer
+      required:
+      - originalAmount
+      - remaining
+      type: object
+      example: null
+    ListWalletsResponse_cursor_allOf:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Wallet'
+          type: array
+      required:
+      - data
+      type: object
+    ListWalletsResponse_cursor:
+      allOf:
+      - $ref: '#/components/schemas/walletsCursor'
+      - $ref: '#/components/schemas/ListWalletsResponse_cursor_allOf'
+    GetTransactionsResponse_cursor_allOf:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/walletsTransaction'
+          type: array
+      required:
+      - data
+      type: object
+    GetTransactionsResponse_cursor:
+      allOf:
+      - $ref: '#/components/schemas/walletsCursor'
+      - $ref: '#/components/schemas/GetTransactionsResponse_cursor_allOf'
+    GetHoldsResponse_cursor_allOf:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Hold'
+          type: array
+      required:
+      - data
+      type: object
+    GetHoldsResponse_cursor:
+      allOf:
+      - $ref: '#/components/schemas/walletsCursor'
+      - $ref: '#/components/schemas/GetHoldsResponse_cursor_allOf'
+    BalanceWithAssets_allOf:
+      properties:
+        assets:
+          additionalProperties:
+            type: number
+          type: object
+      required:
+      - assets
+      type: object
+      example: null
+    ListBalancesResponse_cursor_allOf:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Balance'
+          type: array
+      required:
+      - data
+      type: object
+    ListBalancesResponse_cursor:
+      allOf:
+      - $ref: '#/components/schemas/walletsCursor'
+      - $ref: '#/components/schemas/ListBalancesResponse_cursor_allOf'
   securitySchemes:
     Authorization:
       flows:
@@ -3871,3 +5003,9 @@ x-tagGroups:
 - name: Webhooks
   tags:
   - Webhooks
+- name: Wallets
+  tags:
+  - Wallets
+- name: Counterparties
+  tags:
+  - Counterparties
