@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -183,8 +183,8 @@ func (a *ClientsApiService) AddScopeToClientExecute(r ApiAddScopeToClientRequest
 	}
 
 	localVarPath := localBasePath + "/api/auth/clients/{clientId}/scopes/{scopeId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterValueToString(r.clientId, "clientId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"scopeId"+"}", url.PathEscape(parameterValueToString(r.scopeId, "scopeId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterToString(r.clientId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scopeId"+"}", url.PathEscape(parameterToString(r.scopeId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -387,7 +387,7 @@ func (a *ClientsApiService) CreateSecretExecute(r ApiCreateSecretRequest) (*Crea
 	}
 
 	localVarPath := localBasePath + "/api/auth/clients/{clientId}/secrets"
-	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterValueToString(r.clientId, "clientId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterToString(r.clientId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -488,7 +488,7 @@ func (a *ClientsApiService) DeleteClientExecute(r ApiDeleteClientRequest) (*http
 	}
 
 	localVarPath := localBasePath + "/api/auth/clients/{clientId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterValueToString(r.clientId, "clientId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterToString(r.clientId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -581,8 +581,8 @@ func (a *ClientsApiService) DeleteScopeFromClientExecute(r ApiDeleteScopeFromCli
 	}
 
 	localVarPath := localBasePath + "/api/auth/clients/{clientId}/scopes/{scopeId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterValueToString(r.clientId, "clientId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"scopeId"+"}", url.PathEscape(parameterValueToString(r.scopeId, "scopeId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterToString(r.clientId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scopeId"+"}", url.PathEscape(parameterToString(r.scopeId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -675,8 +675,8 @@ func (a *ClientsApiService) DeleteSecretExecute(r ApiDeleteSecretRequest) (*http
 	}
 
 	localVarPath := localBasePath + "/api/auth/clients/{clientId}/secrets/{secretId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterValueToString(r.clientId, "clientId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"secretId"+"}", url.PathEscape(parameterValueToString(r.secretId, "secretId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterToString(r.clientId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"secretId"+"}", url.PathEscape(parameterToString(r.secretId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -865,7 +865,7 @@ func (a *ClientsApiService) ReadClientExecute(r ApiReadClientRequest) (*ReadClie
 	}
 
 	localVarPath := localBasePath + "/api/auth/clients/{clientId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterValueToString(r.clientId, "clientId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterToString(r.clientId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -972,7 +972,7 @@ func (a *ClientsApiService) UpdateClientExecute(r ApiUpdateClientRequest) (*Crea
 	}
 
 	localVarPath := localBasePath + "/api/auth/clients/{clientId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterValueToString(r.clientId, "clientId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"clientId"+"}", url.PathEscape(parameterToString(r.clientId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

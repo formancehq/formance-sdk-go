@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -25,7 +25,7 @@ type SearchApi interface {
 	/*
 	Search Search
 
-	Search with Query
+	ElasticSearch query engine
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiSearchRequest
@@ -58,7 +58,7 @@ func (r ApiSearchRequest) Execute() (*Response, *http.Response, error) {
 /*
 Search Search
 
-Search with Query
+ElasticSearch query engine
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchRequest

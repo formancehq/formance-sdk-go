@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 	"time"
 )
-
-// checks if the TransactionData type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TransactionData{}
 
 // TransactionData struct for TransactionData
 type TransactionData struct {
@@ -58,7 +55,7 @@ func (o *TransactionData) GetTimestamp() time.Time {
 // and a boolean to check if the value has been set.
 func (o *TransactionData) GetTimestampOk() (*time.Time, bool) {
 	if o == nil || isNil(o.Timestamp) {
-		return nil, false
+    return nil, false
 	}
 	return o.Timestamp, true
 }
@@ -91,7 +88,7 @@ func (o *TransactionData) GetPostings() []Posting {
 // and a boolean to check if the value has been set.
 func (o *TransactionData) GetPostingsOk() ([]Posting, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Postings, true
 }
@@ -114,7 +111,7 @@ func (o *TransactionData) GetReference() string {
 // and a boolean to check if the value has been set.
 func (o *TransactionData) GetReferenceOk() (*string, bool) {
 	if o == nil || isNil(o.Reference) {
-		return nil, false
+    return nil, false
 	}
 	return o.Reference, true
 }
@@ -147,7 +144,7 @@ func (o *TransactionData) GetMetadata() map[string]interface{} {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionData) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Metadata) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -167,26 +164,20 @@ func (o *TransactionData) SetMetadata(v map[string]interface{}) {
 }
 
 func (o TransactionData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o TransactionData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-	toSerialize["postings"] = o.Postings
+	if true {
+		toSerialize["postings"] = o.Postings
+	}
 	if !isNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableTransactionData struct {

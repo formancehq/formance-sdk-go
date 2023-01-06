@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ListTransactions200ResponseCursor type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListTransactions200ResponseCursor{}
 
 // ListTransactions200ResponseCursor struct for ListTransactions200ResponseCursor
 type ListTransactions200ResponseCursor struct {
@@ -60,7 +57,7 @@ func (o *ListTransactions200ResponseCursor) GetPageSize() int32 {
 // and a boolean to check if the value has been set.
 func (o *ListTransactions200ResponseCursor) GetPageSizeOk() (*int32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.PageSize, true
 }
@@ -83,7 +80,7 @@ func (o *ListTransactions200ResponseCursor) GetHasMore() bool {
 // and a boolean to check if the value has been set.
 func (o *ListTransactions200ResponseCursor) GetHasMoreOk() (*bool, bool) {
 	if o == nil || isNil(o.HasMore) {
-		return nil, false
+    return nil, false
 	}
 	return o.HasMore, true
 }
@@ -115,7 +112,7 @@ func (o *ListTransactions200ResponseCursor) GetPrevious() string {
 // and a boolean to check if the value has been set.
 func (o *ListTransactions200ResponseCursor) GetPreviousOk() (*string, bool) {
 	if o == nil || isNil(o.Previous) {
-		return nil, false
+    return nil, false
 	}
 	return o.Previous, true
 }
@@ -147,7 +144,7 @@ func (o *ListTransactions200ResponseCursor) GetNext() string {
 // and a boolean to check if the value has been set.
 func (o *ListTransactions200ResponseCursor) GetNextOk() (*string, bool) {
 	if o == nil || isNil(o.Next) {
-		return nil, false
+    return nil, false
 	}
 	return o.Next, true
 }
@@ -180,7 +177,7 @@ func (o *ListTransactions200ResponseCursor) GetData() []Transaction {
 // and a boolean to check if the value has been set.
 func (o *ListTransactions200ResponseCursor) GetDataOk() ([]Transaction, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Data, true
 }
@@ -191,16 +188,10 @@ func (o *ListTransactions200ResponseCursor) SetData(v []Transaction) {
 }
 
 func (o ListTransactions200ResponseCursor) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ListTransactions200ResponseCursor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["page_size"] = o.PageSize
+	if true {
+		toSerialize["page_size"] = o.PageSize
+	}
 	if !isNil(o.HasMore) {
 		toSerialize["has_more"] = o.HasMore
 	}
@@ -210,8 +201,10 @@ func (o ListTransactions200ResponseCursor) ToMap() (map[string]interface{}, erro
 	if !isNil(o.Next) {
 		toSerialize["next"] = o.Next
 	}
-	toSerialize["data"] = o.Data
-	return toSerialize, nil
+	if true {
+		toSerialize["data"] = o.Data
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableListTransactions200ResponseCursor struct {

@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -130,8 +130,8 @@ func (a *AccountsApiService) AddMetadataToAccountExecute(r ApiAddMetadataToAccou
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts/{address}/metadata"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterValueToString(r.address, "address")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterToString(r.address, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -188,8 +188,8 @@ func (a *AccountsApiService) AddMetadataToAccountExecute(r ApiAddMetadataToAccou
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -199,8 +199,8 @@ func (a *AccountsApiService) AddMetadataToAccountExecute(r ApiAddMetadataToAccou
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -261,17 +261,17 @@ func (a *AccountsApiService) CountAccountsExecute(r ApiCountAccountsRequest) (*h
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.address != nil {
-		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		localVarQueryParams.Add("address", parameterToString(*r.address, ""))
 	}
 	if r.metadata != nil {
-		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		localVarQueryParams.Add("metadata", parameterToString(*r.metadata, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -362,8 +362,8 @@ func (a *AccountsApiService) GetAccountExecute(r ApiGetAccountRequest) (*GetAcco
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts/{address}"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterValueToString(r.address, "address")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterToString(r.address, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -415,8 +415,8 @@ func (a *AccountsApiService) GetAccountExecute(r ApiGetAccountRequest) (*GetAcco
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -525,32 +525,32 @@ func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*Lis
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.pageSize != nil {
-		parameterAddToQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
 	if r.after != nil {
-		parameterAddToQuery(localVarQueryParams, "after", r.after, "")
+		localVarQueryParams.Add("after", parameterToString(*r.after, ""))
 	}
 	if r.address != nil {
-		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		localVarQueryParams.Add("address", parameterToString(*r.address, ""))
 	}
 	if r.metadata != nil {
-		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		localVarQueryParams.Add("metadata", parameterToString(*r.metadata, ""))
 	}
 	if r.balance != nil {
-		parameterAddToQuery(localVarQueryParams, "balance", r.balance, "")
+		localVarQueryParams.Add("balance", parameterToString(*r.balance, ""))
 	}
 	if r.balanceOperator != nil {
-		parameterAddToQuery(localVarQueryParams, "balance_operator", r.balanceOperator, "")
+		localVarQueryParams.Add("balance_operator", parameterToString(*r.balanceOperator, ""))
 	}
 	if r.paginationToken != nil {
-		parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
+		localVarQueryParams.Add("pagination_token", parameterToString(*r.paginationToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -598,8 +598,8 @@ func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*Lis
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

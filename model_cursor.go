@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -15,24 +15,22 @@ import (
 	"encoding/json"
 )
 
-// checks if the Cursor type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Cursor{}
-
 // Cursor struct for Cursor
 type Cursor struct {
-	PageSize int32 `json:"page_size"`
-	HasMore *bool `json:"has_more,omitempty"`
-	Previous *string `json:"previous,omitempty"`
+	PageSize *int64 `json:"pageSize,omitempty"`
+	HasMore *bool `json:"hasMore,omitempty"`
+	Total *Total `json:"total,omitempty"`
 	Next *string `json:"next,omitempty"`
+	Previous *string `json:"previous,omitempty"`
+	Data []interface{} `json:"data,omitempty"`
 }
 
 // NewCursor instantiates a new Cursor object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCursor(pageSize int32) *Cursor {
+func NewCursor() *Cursor {
 	this := Cursor{}
-	this.PageSize = pageSize
 	return &this
 }
 
@@ -44,28 +42,36 @@ func NewCursorWithDefaults() *Cursor {
 	return &this
 }
 
-// GetPageSize returns the PageSize field value
-func (o *Cursor) GetPageSize() int32 {
-	if o == nil {
-		var ret int32
+// GetPageSize returns the PageSize field value if set, zero value otherwise.
+func (o *Cursor) GetPageSize() int64 {
+	if o == nil || isNil(o.PageSize) {
+		var ret int64
 		return ret
 	}
-
-	return o.PageSize
+	return *o.PageSize
 }
 
-// GetPageSizeOk returns a tuple with the PageSize field value
+// GetPageSizeOk returns a tuple with the PageSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Cursor) GetPageSizeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
+func (o *Cursor) GetPageSizeOk() (*int64, bool) {
+	if o == nil || isNil(o.PageSize) {
+    return nil, false
 	}
-	return &o.PageSize, true
+	return o.PageSize, true
 }
 
-// SetPageSize sets field value
-func (o *Cursor) SetPageSize(v int32) {
-	o.PageSize = v
+// HasPageSize returns a boolean if a field has been set.
+func (o *Cursor) HasPageSize() bool {
+	if o != nil && !isNil(o.PageSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetPageSize gets a reference to the given int64 and assigns it to the PageSize field.
+func (o *Cursor) SetPageSize(v int64) {
+	o.PageSize = &v
 }
 
 // GetHasMore returns the HasMore field value if set, zero value otherwise.
@@ -81,7 +87,7 @@ func (o *Cursor) GetHasMore() bool {
 // and a boolean to check if the value has been set.
 func (o *Cursor) GetHasMoreOk() (*bool, bool) {
 	if o == nil || isNil(o.HasMore) {
-		return nil, false
+    return nil, false
 	}
 	return o.HasMore, true
 }
@@ -100,36 +106,36 @@ func (o *Cursor) SetHasMore(v bool) {
 	o.HasMore = &v
 }
 
-// GetPrevious returns the Previous field value if set, zero value otherwise.
-func (o *Cursor) GetPrevious() string {
-	if o == nil || isNil(o.Previous) {
-		var ret string
+// GetTotal returns the Total field value if set, zero value otherwise.
+func (o *Cursor) GetTotal() Total {
+	if o == nil || isNil(o.Total) {
+		var ret Total
 		return ret
 	}
-	return *o.Previous
+	return *o.Total
 }
 
-// GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
+// GetTotalOk returns a tuple with the Total field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Cursor) GetPreviousOk() (*string, bool) {
-	if o == nil || isNil(o.Previous) {
-		return nil, false
+func (o *Cursor) GetTotalOk() (*Total, bool) {
+	if o == nil || isNil(o.Total) {
+    return nil, false
 	}
-	return o.Previous, true
+	return o.Total, true
 }
 
-// HasPrevious returns a boolean if a field has been set.
-func (o *Cursor) HasPrevious() bool {
-	if o != nil && !isNil(o.Previous) {
+// HasTotal returns a boolean if a field has been set.
+func (o *Cursor) HasTotal() bool {
+	if o != nil && !isNil(o.Total) {
 		return true
 	}
 
 	return false
 }
 
-// SetPrevious gets a reference to the given string and assigns it to the Previous field.
-func (o *Cursor) SetPrevious(v string) {
-	o.Previous = &v
+// SetTotal gets a reference to the given Total and assigns it to the Total field.
+func (o *Cursor) SetTotal(v Total) {
+	o.Total = &v
 }
 
 // GetNext returns the Next field value if set, zero value otherwise.
@@ -145,7 +151,7 @@ func (o *Cursor) GetNext() string {
 // and a boolean to check if the value has been set.
 func (o *Cursor) GetNextOk() (*string, bool) {
 	if o == nil || isNil(o.Next) {
-		return nil, false
+    return nil, false
 	}
 	return o.Next, true
 }
@@ -164,27 +170,91 @@ func (o *Cursor) SetNext(v string) {
 	o.Next = &v
 }
 
-func (o Cursor) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+// GetPrevious returns the Previous field value if set, zero value otherwise.
+func (o *Cursor) GetPrevious() string {
+	if o == nil || isNil(o.Previous) {
+		var ret string
+		return ret
 	}
-	return json.Marshal(toSerialize)
+	return *o.Previous
 }
 
-func (o Cursor) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["page_size"] = o.PageSize
-	if !isNil(o.HasMore) {
-		toSerialize["has_more"] = o.HasMore
+// GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Cursor) GetPreviousOk() (*string, bool) {
+	if o == nil || isNil(o.Previous) {
+    return nil, false
 	}
-	if !isNil(o.Previous) {
-		toSerialize["previous"] = o.Previous
+	return o.Previous, true
+}
+
+// HasPrevious returns a boolean if a field has been set.
+func (o *Cursor) HasPrevious() bool {
+	if o != nil && !isNil(o.Previous) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrevious gets a reference to the given string and assigns it to the Previous field.
+func (o *Cursor) SetPrevious(v string) {
+	o.Previous = &v
+}
+
+// GetData returns the Data field value if set, zero value otherwise.
+func (o *Cursor) GetData() []interface{} {
+	if o == nil || isNil(o.Data) {
+		var ret []interface{}
+		return ret
+	}
+	return o.Data
+}
+
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Cursor) GetDataOk() ([]interface{}, bool) {
+	if o == nil || isNil(o.Data) {
+    return nil, false
+	}
+	return o.Data, true
+}
+
+// HasData returns a boolean if a field has been set.
+func (o *Cursor) HasData() bool {
+	if o != nil && !isNil(o.Data) {
+		return true
+	}
+
+	return false
+}
+
+// SetData gets a reference to the given []interface{} and assigns it to the Data field.
+func (o *Cursor) SetData(v []interface{}) {
+	o.Data = v
+}
+
+func (o Cursor) MarshalJSON() ([]byte, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.PageSize) {
+		toSerialize["pageSize"] = o.PageSize
+	}
+	if !isNil(o.HasMore) {
+		toSerialize["hasMore"] = o.HasMore
+	}
+	if !isNil(o.Total) {
+		toSerialize["total"] = o.Total
 	}
 	if !isNil(o.Next) {
 		toSerialize["next"] = o.Next
 	}
-	return toSerialize, nil
+	if !isNil(o.Previous) {
+		toSerialize["previous"] = o.Previous
+	}
+	if !isNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableCursor struct {

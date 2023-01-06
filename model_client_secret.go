@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ClientSecret type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ClientSecret{}
 
 // ClientSecret struct for ClientSecret
 type ClientSecret struct {
@@ -60,7 +57,7 @@ func (o *ClientSecret) GetLastDigits() string {
 // and a boolean to check if the value has been set.
 func (o *ClientSecret) GetLastDigitsOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.LastDigits, true
 }
@@ -84,7 +81,7 @@ func (o *ClientSecret) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ClientSecret) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -108,7 +105,7 @@ func (o *ClientSecret) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *ClientSecret) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -131,7 +128,7 @@ func (o *ClientSecret) GetMetadata() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *ClientSecret) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Metadata) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -151,22 +148,20 @@ func (o *ClientSecret) SetMetadata(v map[string]interface{}) {
 }
 
 func (o ClientSecret) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ClientSecret) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["lastDigits"] = o.LastDigits
-	toSerialize["name"] = o.Name
-	toSerialize["id"] = o.Id
+	if true {
+		toSerialize["lastDigits"] = o.LastDigits
+	}
+	if true {
+		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["id"] = o.Id
+	}
 	if !isNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableClientSecret struct {

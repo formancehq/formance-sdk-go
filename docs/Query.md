@@ -5,10 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Ledgers** | Pointer to **[]string** |  | [optional] 
-**NextToken** | Pointer to **string** |  | [optional] 
-**Size** | Pointer to **int32** |  | [optional] 
+**After** | Pointer to **[]string** |  | [optional] 
+**PageSize** | Pointer to **int64** |  | [optional] 
 **Terms** | Pointer to **[]string** |  | [optional] 
+**Sort** | Pointer to **string** |  | [optional] 
+**Policy** | Pointer to **string** |  | [optional] 
 **Target** | Pointer to **string** |  | [optional] 
+**Cursor** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -54,55 +57,55 @@ SetLedgers sets Ledgers field to given value.
 
 HasLedgers returns a boolean if a field has been set.
 
-### GetNextToken
+### GetAfter
 
-`func (o *Query) GetNextToken() string`
+`func (o *Query) GetAfter() []string`
 
-GetNextToken returns the NextToken field if non-nil, zero value otherwise.
+GetAfter returns the After field if non-nil, zero value otherwise.
 
-### GetNextTokenOk
+### GetAfterOk
 
-`func (o *Query) GetNextTokenOk() (*string, bool)`
+`func (o *Query) GetAfterOk() (*[]string, bool)`
 
-GetNextTokenOk returns a tuple with the NextToken field if it's non-nil, zero value otherwise
+GetAfterOk returns a tuple with the After field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNextToken
+### SetAfter
 
-`func (o *Query) SetNextToken(v string)`
+`func (o *Query) SetAfter(v []string)`
 
-SetNextToken sets NextToken field to given value.
+SetAfter sets After field to given value.
 
-### HasNextToken
+### HasAfter
 
-`func (o *Query) HasNextToken() bool`
+`func (o *Query) HasAfter() bool`
 
-HasNextToken returns a boolean if a field has been set.
+HasAfter returns a boolean if a field has been set.
 
-### GetSize
+### GetPageSize
 
-`func (o *Query) GetSize() int32`
+`func (o *Query) GetPageSize() int64`
 
-GetSize returns the Size field if non-nil, zero value otherwise.
+GetPageSize returns the PageSize field if non-nil, zero value otherwise.
 
-### GetSizeOk
+### GetPageSizeOk
 
-`func (o *Query) GetSizeOk() (*int32, bool)`
+`func (o *Query) GetPageSizeOk() (*int64, bool)`
 
-GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+GetPageSizeOk returns a tuple with the PageSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSize
+### SetPageSize
 
-`func (o *Query) SetSize(v int32)`
+`func (o *Query) SetPageSize(v int64)`
 
-SetSize sets Size field to given value.
+SetPageSize sets PageSize field to given value.
 
-### HasSize
+### HasPageSize
 
-`func (o *Query) HasSize() bool`
+`func (o *Query) HasPageSize() bool`
 
-HasSize returns a boolean if a field has been set.
+HasPageSize returns a boolean if a field has been set.
 
 ### GetTerms
 
@@ -129,6 +132,56 @@ SetTerms sets Terms field to given value.
 
 HasTerms returns a boolean if a field has been set.
 
+### GetSort
+
+`func (o *Query) GetSort() string`
+
+GetSort returns the Sort field if non-nil, zero value otherwise.
+
+### GetSortOk
+
+`func (o *Query) GetSortOk() (*string, bool)`
+
+GetSortOk returns a tuple with the Sort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSort
+
+`func (o *Query) SetSort(v string)`
+
+SetSort sets Sort field to given value.
+
+### HasSort
+
+`func (o *Query) HasSort() bool`
+
+HasSort returns a boolean if a field has been set.
+
+### GetPolicy
+
+`func (o *Query) GetPolicy() string`
+
+GetPolicy returns the Policy field if non-nil, zero value otherwise.
+
+### GetPolicyOk
+
+`func (o *Query) GetPolicyOk() (*string, bool)`
+
+GetPolicyOk returns a tuple with the Policy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicy
+
+`func (o *Query) SetPolicy(v string)`
+
+SetPolicy sets Policy field to given value.
+
+### HasPolicy
+
+`func (o *Query) HasPolicy() bool`
+
+HasPolicy returns a boolean if a field has been set.
+
 ### GetTarget
 
 `func (o *Query) GetTarget() string`
@@ -153,6 +206,31 @@ SetTarget sets Target field to given value.
 `func (o *Query) HasTarget() bool`
 
 HasTarget returns a boolean if a field has been set.
+
+### GetCursor
+
+`func (o *Query) GetCursor() string`
+
+GetCursor returns the Cursor field if non-nil, zero value otherwise.
+
+### GetCursorOk
+
+`func (o *Query) GetCursorOk() (*string, bool)`
+
+GetCursorOk returns a tuple with the Cursor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursor
+
+`func (o *Query) SetCursor(v string)`
+
+SetCursor sets Cursor field to given value.
+
+### HasCursor
+
+`func (o *Query) HasCursor() bool`
+
+HasCursor returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

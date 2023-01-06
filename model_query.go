@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -15,16 +15,16 @@ import (
 	"encoding/json"
 )
 
-// checks if the Query type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Query{}
-
 // Query struct for Query
 type Query struct {
 	Ledgers []string `json:"ledgers,omitempty"`
-	NextToken *string `json:"nextToken,omitempty"`
-	Size *int32 `json:"size,omitempty"`
+	After []string `json:"after,omitempty"`
+	PageSize *int64 `json:"pageSize,omitempty"`
 	Terms []string `json:"terms,omitempty"`
+	Sort *string `json:"sort,omitempty"`
+	Policy *string `json:"policy,omitempty"`
 	Target *string `json:"target,omitempty"`
+	Cursor *string `json:"cursor,omitempty"`
 }
 
 // NewQuery instantiates a new Query object
@@ -57,7 +57,7 @@ func (o *Query) GetLedgers() []string {
 // and a boolean to check if the value has been set.
 func (o *Query) GetLedgersOk() ([]string, bool) {
 	if o == nil || isNil(o.Ledgers) {
-		return nil, false
+    return nil, false
 	}
 	return o.Ledgers, true
 }
@@ -76,68 +76,68 @@ func (o *Query) SetLedgers(v []string) {
 	o.Ledgers = v
 }
 
-// GetNextToken returns the NextToken field value if set, zero value otherwise.
-func (o *Query) GetNextToken() string {
-	if o == nil || isNil(o.NextToken) {
-		var ret string
+// GetAfter returns the After field value if set, zero value otherwise.
+func (o *Query) GetAfter() []string {
+	if o == nil || isNil(o.After) {
+		var ret []string
 		return ret
 	}
-	return *o.NextToken
+	return o.After
 }
 
-// GetNextTokenOk returns a tuple with the NextToken field value if set, nil otherwise
+// GetAfterOk returns a tuple with the After field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Query) GetNextTokenOk() (*string, bool) {
-	if o == nil || isNil(o.NextToken) {
-		return nil, false
+func (o *Query) GetAfterOk() ([]string, bool) {
+	if o == nil || isNil(o.After) {
+    return nil, false
 	}
-	return o.NextToken, true
+	return o.After, true
 }
 
-// HasNextToken returns a boolean if a field has been set.
-func (o *Query) HasNextToken() bool {
-	if o != nil && !isNil(o.NextToken) {
+// HasAfter returns a boolean if a field has been set.
+func (o *Query) HasAfter() bool {
+	if o != nil && !isNil(o.After) {
 		return true
 	}
 
 	return false
 }
 
-// SetNextToken gets a reference to the given string and assigns it to the NextToken field.
-func (o *Query) SetNextToken(v string) {
-	o.NextToken = &v
+// SetAfter gets a reference to the given []string and assigns it to the After field.
+func (o *Query) SetAfter(v []string) {
+	o.After = v
 }
 
-// GetSize returns the Size field value if set, zero value otherwise.
-func (o *Query) GetSize() int32 {
-	if o == nil || isNil(o.Size) {
-		var ret int32
+// GetPageSize returns the PageSize field value if set, zero value otherwise.
+func (o *Query) GetPageSize() int64 {
+	if o == nil || isNil(o.PageSize) {
+		var ret int64
 		return ret
 	}
-	return *o.Size
+	return *o.PageSize
 }
 
-// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// GetPageSizeOk returns a tuple with the PageSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Query) GetSizeOk() (*int32, bool) {
-	if o == nil || isNil(o.Size) {
-		return nil, false
+func (o *Query) GetPageSizeOk() (*int64, bool) {
+	if o == nil || isNil(o.PageSize) {
+    return nil, false
 	}
-	return o.Size, true
+	return o.PageSize, true
 }
 
-// HasSize returns a boolean if a field has been set.
-func (o *Query) HasSize() bool {
-	if o != nil && !isNil(o.Size) {
+// HasPageSize returns a boolean if a field has been set.
+func (o *Query) HasPageSize() bool {
+	if o != nil && !isNil(o.PageSize) {
 		return true
 	}
 
 	return false
 }
 
-// SetSize gets a reference to the given int32 and assigns it to the Size field.
-func (o *Query) SetSize(v int32) {
-	o.Size = &v
+// SetPageSize gets a reference to the given int64 and assigns it to the PageSize field.
+func (o *Query) SetPageSize(v int64) {
+	o.PageSize = &v
 }
 
 // GetTerms returns the Terms field value if set, zero value otherwise.
@@ -153,7 +153,7 @@ func (o *Query) GetTerms() []string {
 // and a boolean to check if the value has been set.
 func (o *Query) GetTermsOk() ([]string, bool) {
 	if o == nil || isNil(o.Terms) {
-		return nil, false
+    return nil, false
 	}
 	return o.Terms, true
 }
@@ -172,6 +172,70 @@ func (o *Query) SetTerms(v []string) {
 	o.Terms = v
 }
 
+// GetSort returns the Sort field value if set, zero value otherwise.
+func (o *Query) GetSort() string {
+	if o == nil || isNil(o.Sort) {
+		var ret string
+		return ret
+	}
+	return *o.Sort
+}
+
+// GetSortOk returns a tuple with the Sort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Query) GetSortOk() (*string, bool) {
+	if o == nil || isNil(o.Sort) {
+    return nil, false
+	}
+	return o.Sort, true
+}
+
+// HasSort returns a boolean if a field has been set.
+func (o *Query) HasSort() bool {
+	if o != nil && !isNil(o.Sort) {
+		return true
+	}
+
+	return false
+}
+
+// SetSort gets a reference to the given string and assigns it to the Sort field.
+func (o *Query) SetSort(v string) {
+	o.Sort = &v
+}
+
+// GetPolicy returns the Policy field value if set, zero value otherwise.
+func (o *Query) GetPolicy() string {
+	if o == nil || isNil(o.Policy) {
+		var ret string
+		return ret
+	}
+	return *o.Policy
+}
+
+// GetPolicyOk returns a tuple with the Policy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Query) GetPolicyOk() (*string, bool) {
+	if o == nil || isNil(o.Policy) {
+    return nil, false
+	}
+	return o.Policy, true
+}
+
+// HasPolicy returns a boolean if a field has been set.
+func (o *Query) HasPolicy() bool {
+	if o != nil && !isNil(o.Policy) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicy gets a reference to the given string and assigns it to the Policy field.
+func (o *Query) SetPolicy(v string) {
+	o.Policy = &v
+}
+
 // GetTarget returns the Target field value if set, zero value otherwise.
 func (o *Query) GetTarget() string {
 	if o == nil || isNil(o.Target) {
@@ -185,7 +249,7 @@ func (o *Query) GetTarget() string {
 // and a boolean to check if the value has been set.
 func (o *Query) GetTargetOk() (*string, bool) {
 	if o == nil || isNil(o.Target) {
-		return nil, false
+    return nil, false
 	}
 	return o.Target, true
 }
@@ -204,32 +268,65 @@ func (o *Query) SetTarget(v string) {
 	o.Target = &v
 }
 
-func (o Query) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+// GetCursor returns the Cursor field value if set, zero value otherwise.
+func (o *Query) GetCursor() string {
+	if o == nil || isNil(o.Cursor) {
+		var ret string
+		return ret
 	}
-	return json.Marshal(toSerialize)
+	return *o.Cursor
 }
 
-func (o Query) ToMap() (map[string]interface{}, error) {
+// GetCursorOk returns a tuple with the Cursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Query) GetCursorOk() (*string, bool) {
+	if o == nil || isNil(o.Cursor) {
+    return nil, false
+	}
+	return o.Cursor, true
+}
+
+// HasCursor returns a boolean if a field has been set.
+func (o *Query) HasCursor() bool {
+	if o != nil && !isNil(o.Cursor) {
+		return true
+	}
+
+	return false
+}
+
+// SetCursor gets a reference to the given string and assigns it to the Cursor field.
+func (o *Query) SetCursor(v string) {
+	o.Cursor = &v
+}
+
+func (o Query) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Ledgers) {
 		toSerialize["ledgers"] = o.Ledgers
 	}
-	if !isNil(o.NextToken) {
-		toSerialize["nextToken"] = o.NextToken
+	if !isNil(o.After) {
+		toSerialize["after"] = o.After
 	}
-	if !isNil(o.Size) {
-		toSerialize["size"] = o.Size
+	if !isNil(o.PageSize) {
+		toSerialize["pageSize"] = o.PageSize
 	}
 	if !isNil(o.Terms) {
 		toSerialize["terms"] = o.Terms
 	}
+	if !isNil(o.Sort) {
+		toSerialize["sort"] = o.Sort
+	}
+	if !isNil(o.Policy) {
+		toSerialize["policy"] = o.Policy
+	}
 	if !isNil(o.Target) {
 		toSerialize["target"] = o.Target
 	}
-	return toSerialize, nil
+	if !isNil(o.Cursor) {
+		toSerialize["cursor"] = o.Cursor
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableQuery struct {
