@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the DummyPayConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DummyPayConfig{}
 
 // DummyPayConfig struct for DummyPayConfig
 type DummyPayConfig struct {
@@ -66,7 +63,7 @@ func (o *DummyPayConfig) GetFilePollingPeriod() string {
 // and a boolean to check if the value has been set.
 func (o *DummyPayConfig) GetFilePollingPeriodOk() (*string, bool) {
 	if o == nil || isNil(o.FilePollingPeriod) {
-		return nil, false
+    return nil, false
 	}
 	return o.FilePollingPeriod, true
 }
@@ -98,7 +95,7 @@ func (o *DummyPayConfig) GetFileGenerationPeriod() string {
 // and a boolean to check if the value has been set.
 func (o *DummyPayConfig) GetFileGenerationPeriodOk() (*string, bool) {
 	if o == nil || isNil(o.FileGenerationPeriod) {
-		return nil, false
+    return nil, false
 	}
 	return o.FileGenerationPeriod, true
 }
@@ -131,7 +128,7 @@ func (o *DummyPayConfig) GetDirectory() string {
 // and a boolean to check if the value has been set.
 func (o *DummyPayConfig) GetDirectoryOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Directory, true
 }
@@ -142,14 +139,6 @@ func (o *DummyPayConfig) SetDirectory(v string) {
 }
 
 func (o DummyPayConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o DummyPayConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.FilePollingPeriod) {
 		toSerialize["filePollingPeriod"] = o.FilePollingPeriod
@@ -157,8 +146,10 @@ func (o DummyPayConfig) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.FileGenerationPeriod) {
 		toSerialize["fileGenerationPeriod"] = o.FileGenerationPeriod
 	}
-	toSerialize["directory"] = o.Directory
-	return toSerialize, nil
+	if true {
+		toSerialize["directory"] = o.Directory
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableDummyPayConfig struct {

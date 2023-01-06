@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 	"time"
 )
-
-// checks if the Transaction type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Transaction{}
 
 // Transaction struct for Transaction
 type Transaction struct {
@@ -64,7 +61,7 @@ func (o *Transaction) GetTimestamp() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetTimestampOk() (*time.Time, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Timestamp, true
 }
@@ -88,7 +85,7 @@ func (o *Transaction) GetPostings() []Posting {
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetPostingsOk() ([]Posting, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Postings, true
 }
@@ -111,7 +108,7 @@ func (o *Transaction) GetReference() string {
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetReferenceOk() (*string, bool) {
 	if o == nil || isNil(o.Reference) {
-		return nil, false
+    return nil, false
 	}
 	return o.Reference, true
 }
@@ -144,7 +141,7 @@ func (o *Transaction) GetMetadata() map[string]interface{} {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Metadata) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -177,7 +174,7 @@ func (o *Transaction) GetTxid() int32 {
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetTxidOk() (*int32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Txid, true
 }
@@ -200,7 +197,7 @@ func (o *Transaction) GetPreCommitVolumes() map[string]map[string]Volume {
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetPreCommitVolumesOk() (*map[string]map[string]Volume, bool) {
 	if o == nil || isNil(o.PreCommitVolumes) {
-		return nil, false
+    return nil, false
 	}
 	return o.PreCommitVolumes, true
 }
@@ -232,7 +229,7 @@ func (o *Transaction) GetPostCommitVolumes() map[string]map[string]Volume {
 // and a boolean to check if the value has been set.
 func (o *Transaction) GetPostCommitVolumesOk() (*map[string]map[string]Volume, bool) {
 	if o == nil || isNil(o.PostCommitVolumes) {
-		return nil, false
+    return nil, false
 	}
 	return o.PostCommitVolumes, true
 }
@@ -252,31 +249,29 @@ func (o *Transaction) SetPostCommitVolumes(v map[string]map[string]Volume) {
 }
 
 func (o Transaction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o Transaction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["timestamp"] = o.Timestamp
-	toSerialize["postings"] = o.Postings
+	if true {
+		toSerialize["timestamp"] = o.Timestamp
+	}
+	if true {
+		toSerialize["postings"] = o.Postings
+	}
 	if !isNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	toSerialize["txid"] = o.Txid
+	if true {
+		toSerialize["txid"] = o.Txid
+	}
 	if !isNil(o.PreCommitVolumes) {
 		toSerialize["preCommitVolumes"] = o.PreCommitVolumes
 	}
 	if !isNil(o.PostCommitVolumes) {
 		toSerialize["postCommitVolumes"] = o.PostCommitVolumes
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableTransaction struct {

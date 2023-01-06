@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ScriptResult type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ScriptResult{}
 
 // ScriptResult struct for ScriptResult
 type ScriptResult struct {
@@ -56,7 +53,7 @@ func (o *ScriptResult) GetDetails() string {
 // and a boolean to check if the value has been set.
 func (o *ScriptResult) GetDetailsOk() (*string, bool) {
 	if o == nil || isNil(o.Details) {
-		return nil, false
+    return nil, false
 	}
 	return o.Details, true
 }
@@ -88,7 +85,7 @@ func (o *ScriptResult) GetErrorCode() string {
 // and a boolean to check if the value has been set.
 func (o *ScriptResult) GetErrorCodeOk() (*string, bool) {
 	if o == nil || isNil(o.ErrorCode) {
-		return nil, false
+    return nil, false
 	}
 	return o.ErrorCode, true
 }
@@ -120,7 +117,7 @@ func (o *ScriptResult) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 func (o *ScriptResult) GetErrorMessageOk() (*string, bool) {
 	if o == nil || isNil(o.ErrorMessage) {
-		return nil, false
+    return nil, false
 	}
 	return o.ErrorMessage, true
 }
@@ -152,7 +149,7 @@ func (o *ScriptResult) GetTransaction() Transaction {
 // and a boolean to check if the value has been set.
 func (o *ScriptResult) GetTransactionOk() (*Transaction, bool) {
 	if o == nil || isNil(o.Transaction) {
-		return nil, false
+    return nil, false
 	}
 	return o.Transaction, true
 }
@@ -172,14 +169,6 @@ func (o *ScriptResult) SetTransaction(v Transaction) {
 }
 
 func (o ScriptResult) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ScriptResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Details) {
 		toSerialize["details"] = o.Details
@@ -193,7 +182,7 @@ func (o ScriptResult) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Transaction) {
 		toSerialize["transaction"] = o.Transaction
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableScriptResult struct {

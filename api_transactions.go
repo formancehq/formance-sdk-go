@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -170,8 +170,8 @@ func (a *TransactionsApiService) AddMetadataOnTransactionExecute(r ApiAddMetadat
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/transactions/{txid}/metadata"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"txid"+"}", url.PathEscape(parameterValueToString(r.txid, "txid")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"txid"+"}", url.PathEscape(parameterToString(r.txid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -225,8 +225,8 @@ func (a *TransactionsApiService) AddMetadataOnTransactionExecute(r ApiAddMetadat
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -236,8 +236,8 @@ func (a *TransactionsApiService) AddMetadataOnTransactionExecute(r ApiAddMetadat
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -247,8 +247,8 @@ func (a *TransactionsApiService) AddMetadataOnTransactionExecute(r ApiAddMetadat
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -330,26 +330,26 @@ func (a *TransactionsApiService) CountTransactionsExecute(r ApiCountTransactions
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/transactions"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.reference != nil {
-		parameterAddToQuery(localVarQueryParams, "reference", r.reference, "")
+		localVarQueryParams.Add("reference", parameterToString(*r.reference, ""))
 	}
 	if r.account != nil {
-		parameterAddToQuery(localVarQueryParams, "account", r.account, "")
+		localVarQueryParams.Add("account", parameterToString(*r.account, ""))
 	}
 	if r.source != nil {
-		parameterAddToQuery(localVarQueryParams, "source", r.source, "")
+		localVarQueryParams.Add("source", parameterToString(*r.source, ""))
 	}
 	if r.destination != nil {
-		parameterAddToQuery(localVarQueryParams, "destination", r.destination, "")
+		localVarQueryParams.Add("destination", parameterToString(*r.destination, ""))
 	}
 	if r.metadata != nil {
-		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		localVarQueryParams.Add("metadata", parameterToString(*r.metadata, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -450,7 +450,7 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/transactions"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -460,7 +460,7 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 	}
 
 	if r.preview != nil {
-		parameterAddToQuery(localVarQueryParams, "preview", r.preview, "")
+		localVarQueryParams.Add("preview", parameterToString(*r.preview, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -510,8 +510,8 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
@@ -521,8 +521,8 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -532,8 +532,8 @@ func (a *TransactionsApiService) CreateTransactionExecute(r ApiCreateTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -597,7 +597,7 @@ func (a *TransactionsApiService) CreateTransactionsExecute(r ApiCreateTransactio
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/transactions/batch"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -654,8 +654,8 @@ func (a *TransactionsApiService) CreateTransactionsExecute(r ApiCreateTransactio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -665,8 +665,8 @@ func (a *TransactionsApiService) CreateTransactionsExecute(r ApiCreateTransactio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -727,8 +727,8 @@ func (a *TransactionsApiService) GetTransactionExecute(r ApiGetTransactionReques
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/transactions/{txid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"txid"+"}", url.PathEscape(parameterValueToString(r.txid, "txid")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"txid"+"}", url.PathEscape(parameterToString(r.txid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -780,8 +780,8 @@ func (a *TransactionsApiService) GetTransactionExecute(r ApiGetTransactionReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -791,8 +791,8 @@ func (a *TransactionsApiService) GetTransactionExecute(r ApiGetTransactionReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -922,41 +922,41 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/transactions"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.pageSize != nil {
-		parameterAddToQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
 	if r.after != nil {
-		parameterAddToQuery(localVarQueryParams, "after", r.after, "")
+		localVarQueryParams.Add("after", parameterToString(*r.after, ""))
 	}
 	if r.reference != nil {
-		parameterAddToQuery(localVarQueryParams, "reference", r.reference, "")
+		localVarQueryParams.Add("reference", parameterToString(*r.reference, ""))
 	}
 	if r.account != nil {
-		parameterAddToQuery(localVarQueryParams, "account", r.account, "")
+		localVarQueryParams.Add("account", parameterToString(*r.account, ""))
 	}
 	if r.source != nil {
-		parameterAddToQuery(localVarQueryParams, "source", r.source, "")
+		localVarQueryParams.Add("source", parameterToString(*r.source, ""))
 	}
 	if r.destination != nil {
-		parameterAddToQuery(localVarQueryParams, "destination", r.destination, "")
+		localVarQueryParams.Add("destination", parameterToString(*r.destination, ""))
 	}
 	if r.startTime != nil {
-		parameterAddToQuery(localVarQueryParams, "start_time", r.startTime, "")
+		localVarQueryParams.Add("start_time", parameterToString(*r.startTime, ""))
 	}
 	if r.endTime != nil {
-		parameterAddToQuery(localVarQueryParams, "end_time", r.endTime, "")
+		localVarQueryParams.Add("end_time", parameterToString(*r.endTime, ""))
 	}
 	if r.paginationToken != nil {
-		parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
+		localVarQueryParams.Add("pagination_token", parameterToString(*r.paginationToken, ""))
 	}
 	if r.metadata != nil {
-		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		localVarQueryParams.Add("metadata", parameterToString(*r.metadata, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1004,8 +1004,8 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1066,8 +1066,8 @@ func (a *TransactionsApiService) RevertTransactionExecute(r ApiRevertTransaction
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/transactions/{txid}/revert"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"txid"+"}", url.PathEscape(parameterValueToString(r.txid, "txid")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"txid"+"}", url.PathEscape(parameterToString(r.txid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1119,8 +1119,8 @@ func (a *TransactionsApiService) RevertTransactionExecute(r ApiRevertTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1130,8 +1130,8 @@ func (a *TransactionsApiService) RevertTransactionExecute(r ApiRevertTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -1141,8 +1141,8 @@ func (a *TransactionsApiService) RevertTransactionExecute(r ApiRevertTransaction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

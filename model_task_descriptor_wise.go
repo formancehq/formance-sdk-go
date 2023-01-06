@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -13,10 +13,8 @@ package formance
 
 import (
 	"encoding/json"
+	"time"
 )
-
-// checks if the TaskDescriptorWise type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TaskDescriptorWise{}
 
 // TaskDescriptorWise struct for TaskDescriptorWise
 type TaskDescriptorWise struct {
@@ -30,7 +28,7 @@ type TaskDescriptorWise struct {
 	Error *string `json:"error,omitempty"`
 	// The task state
 	State map[string]interface{} `json:"state,omitempty"`
-	Descriptor *TaskDescriptorWiseAllOfDescriptor `json:"descriptor,omitempty"`
+	Descriptor *TaskDescriptorWiseDescriptor `json:"descriptor,omitempty"`
 }
 
 // NewTaskDescriptorWise instantiates a new TaskDescriptorWise object
@@ -63,7 +61,7 @@ func (o *TaskDescriptorWise) GetProvider() string {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorWise) GetProviderOk() (*string, bool) {
 	if o == nil || isNil(o.Provider) {
-		return nil, false
+    return nil, false
 	}
 	return o.Provider, true
 }
@@ -95,7 +93,7 @@ func (o *TaskDescriptorWise) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorWise) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CreatedAt) {
-		return nil, false
+    return nil, false
 	}
 	return o.CreatedAt, true
 }
@@ -127,7 +125,7 @@ func (o *TaskDescriptorWise) GetStatus() string {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorWise) GetStatusOk() (*string, bool) {
 	if o == nil || isNil(o.Status) {
-		return nil, false
+    return nil, false
 	}
 	return o.Status, true
 }
@@ -159,7 +157,7 @@ func (o *TaskDescriptorWise) GetError() string {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorWise) GetErrorOk() (*string, bool) {
 	if o == nil || isNil(o.Error) {
-		return nil, false
+    return nil, false
 	}
 	return o.Error, true
 }
@@ -191,7 +189,7 @@ func (o *TaskDescriptorWise) GetState() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorWise) GetStateOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.State) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.State, true
 }
@@ -211,9 +209,9 @@ func (o *TaskDescriptorWise) SetState(v map[string]interface{}) {
 }
 
 // GetDescriptor returns the Descriptor field value if set, zero value otherwise.
-func (o *TaskDescriptorWise) GetDescriptor() TaskDescriptorWiseAllOfDescriptor {
+func (o *TaskDescriptorWise) GetDescriptor() TaskDescriptorWiseDescriptor {
 	if o == nil || isNil(o.Descriptor) {
-		var ret TaskDescriptorWiseAllOfDescriptor
+		var ret TaskDescriptorWiseDescriptor
 		return ret
 	}
 	return *o.Descriptor
@@ -221,9 +219,9 @@ func (o *TaskDescriptorWise) GetDescriptor() TaskDescriptorWiseAllOfDescriptor {
 
 // GetDescriptorOk returns a tuple with the Descriptor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TaskDescriptorWise) GetDescriptorOk() (*TaskDescriptorWiseAllOfDescriptor, bool) {
+func (o *TaskDescriptorWise) GetDescriptorOk() (*TaskDescriptorWiseDescriptor, bool) {
 	if o == nil || isNil(o.Descriptor) {
-		return nil, false
+    return nil, false
 	}
 	return o.Descriptor, true
 }
@@ -237,20 +235,12 @@ func (o *TaskDescriptorWise) HasDescriptor() bool {
 	return false
 }
 
-// SetDescriptor gets a reference to the given TaskDescriptorWiseAllOfDescriptor and assigns it to the Descriptor field.
-func (o *TaskDescriptorWise) SetDescriptor(v TaskDescriptorWiseAllOfDescriptor) {
+// SetDescriptor gets a reference to the given TaskDescriptorWiseDescriptor and assigns it to the Descriptor field.
+func (o *TaskDescriptorWise) SetDescriptor(v TaskDescriptorWiseDescriptor) {
 	o.Descriptor = &v
 }
 
 func (o TaskDescriptorWise) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o TaskDescriptorWise) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Provider) {
 		toSerialize["provider"] = o.Provider
@@ -270,7 +260,7 @@ func (o TaskDescriptorWise) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Descriptor) {
 		toSerialize["descriptor"] = o.Descriptor
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableTaskDescriptorWise struct {

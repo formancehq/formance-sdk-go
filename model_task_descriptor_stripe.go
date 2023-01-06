@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -13,10 +13,8 @@ package formance
 
 import (
 	"encoding/json"
+	"time"
 )
-
-// checks if the TaskDescriptorStripe type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TaskDescriptorStripe{}
 
 // TaskDescriptorStripe struct for TaskDescriptorStripe
 type TaskDescriptorStripe struct {
@@ -30,7 +28,7 @@ type TaskDescriptorStripe struct {
 	Error *string `json:"error,omitempty"`
 	// The task state
 	State map[string]interface{} `json:"state,omitempty"`
-	Descriptor *TaskDescriptorStripeAllOfDescriptor `json:"descriptor,omitempty"`
+	Descriptor *TaskDescriptorStripeDescriptor `json:"descriptor,omitempty"`
 }
 
 // NewTaskDescriptorStripe instantiates a new TaskDescriptorStripe object
@@ -63,7 +61,7 @@ func (o *TaskDescriptorStripe) GetProvider() string {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorStripe) GetProviderOk() (*string, bool) {
 	if o == nil || isNil(o.Provider) {
-		return nil, false
+    return nil, false
 	}
 	return o.Provider, true
 }
@@ -95,7 +93,7 @@ func (o *TaskDescriptorStripe) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorStripe) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CreatedAt) {
-		return nil, false
+    return nil, false
 	}
 	return o.CreatedAt, true
 }
@@ -127,7 +125,7 @@ func (o *TaskDescriptorStripe) GetStatus() string {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorStripe) GetStatusOk() (*string, bool) {
 	if o == nil || isNil(o.Status) {
-		return nil, false
+    return nil, false
 	}
 	return o.Status, true
 }
@@ -159,7 +157,7 @@ func (o *TaskDescriptorStripe) GetError() string {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorStripe) GetErrorOk() (*string, bool) {
 	if o == nil || isNil(o.Error) {
-		return nil, false
+    return nil, false
 	}
 	return o.Error, true
 }
@@ -191,7 +189,7 @@ func (o *TaskDescriptorStripe) GetState() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *TaskDescriptorStripe) GetStateOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.State) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.State, true
 }
@@ -211,9 +209,9 @@ func (o *TaskDescriptorStripe) SetState(v map[string]interface{}) {
 }
 
 // GetDescriptor returns the Descriptor field value if set, zero value otherwise.
-func (o *TaskDescriptorStripe) GetDescriptor() TaskDescriptorStripeAllOfDescriptor {
+func (o *TaskDescriptorStripe) GetDescriptor() TaskDescriptorStripeDescriptor {
 	if o == nil || isNil(o.Descriptor) {
-		var ret TaskDescriptorStripeAllOfDescriptor
+		var ret TaskDescriptorStripeDescriptor
 		return ret
 	}
 	return *o.Descriptor
@@ -221,9 +219,9 @@ func (o *TaskDescriptorStripe) GetDescriptor() TaskDescriptorStripeAllOfDescript
 
 // GetDescriptorOk returns a tuple with the Descriptor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TaskDescriptorStripe) GetDescriptorOk() (*TaskDescriptorStripeAllOfDescriptor, bool) {
+func (o *TaskDescriptorStripe) GetDescriptorOk() (*TaskDescriptorStripeDescriptor, bool) {
 	if o == nil || isNil(o.Descriptor) {
-		return nil, false
+    return nil, false
 	}
 	return o.Descriptor, true
 }
@@ -237,20 +235,12 @@ func (o *TaskDescriptorStripe) HasDescriptor() bool {
 	return false
 }
 
-// SetDescriptor gets a reference to the given TaskDescriptorStripeAllOfDescriptor and assigns it to the Descriptor field.
-func (o *TaskDescriptorStripe) SetDescriptor(v TaskDescriptorStripeAllOfDescriptor) {
+// SetDescriptor gets a reference to the given TaskDescriptorStripeDescriptor and assigns it to the Descriptor field.
+func (o *TaskDescriptorStripe) SetDescriptor(v TaskDescriptorStripeDescriptor) {
 	o.Descriptor = &v
 }
 
 func (o TaskDescriptorStripe) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o TaskDescriptorStripe) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Provider) {
 		toSerialize["provider"] = o.Provider
@@ -270,7 +260,7 @@ func (o TaskDescriptorStripe) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Descriptor) {
 		toSerialize["descriptor"] = o.Descriptor
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableTaskDescriptorStripe struct {

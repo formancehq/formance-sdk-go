@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the GetBalances200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetBalances200Response{}
 
 // GetBalances200Response struct for GetBalances200Response
 type GetBalances200Response struct {
@@ -55,7 +52,7 @@ func (o *GetBalances200Response) GetCursor() GetBalances200ResponseCursor {
 // and a boolean to check if the value has been set.
 func (o *GetBalances200Response) GetCursorOk() (*GetBalances200ResponseCursor, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Cursor, true
 }
@@ -66,17 +63,11 @@ func (o *GetBalances200Response) SetCursor(v GetBalances200ResponseCursor) {
 }
 
 func (o GetBalances200Response) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["cursor"] = o.Cursor
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o GetBalances200Response) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["cursor"] = o.Cursor
-	return toSerialize, nil
 }
 
 type NullableGetBalances200Response struct {

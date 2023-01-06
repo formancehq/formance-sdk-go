@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ClientAllOf type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ClientAllOf{}
 
 // ClientAllOf struct for ClientAllOf
 type ClientAllOf struct {
@@ -57,7 +54,7 @@ func (o *ClientAllOf) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *ClientAllOf) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -80,7 +77,7 @@ func (o *ClientAllOf) GetScopes() []string {
 // and a boolean to check if the value has been set.
 func (o *ClientAllOf) GetScopesOk() ([]string, bool) {
 	if o == nil || isNil(o.Scopes) {
-		return nil, false
+    return nil, false
 	}
 	return o.Scopes, true
 }
@@ -112,7 +109,7 @@ func (o *ClientAllOf) GetSecrets() []ClientSecret {
 // and a boolean to check if the value has been set.
 func (o *ClientAllOf) GetSecretsOk() ([]ClientSecret, bool) {
 	if o == nil || isNil(o.Secrets) {
-		return nil, false
+    return nil, false
 	}
 	return o.Secrets, true
 }
@@ -132,23 +129,17 @@ func (o *ClientAllOf) SetSecrets(v []ClientSecret) {
 }
 
 func (o ClientAllOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ClientAllOf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
+	if true {
+		toSerialize["id"] = o.Id
+	}
 	if !isNil(o.Scopes) {
 		toSerialize["scopes"] = o.Scopes
 	}
 	if !isNil(o.Secrets) {
 		toSerialize["secrets"] = o.Secrets
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableClientAllOf struct {

@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ListConnectorsConfigsResponseConnectorKey type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListConnectorsConfigsResponseConnectorKey{}
 
 // ListConnectorsConfigsResponseConnectorKey struct for ListConnectorsConfigsResponseConnectorKey
 type ListConnectorsConfigsResponseConnectorKey struct {
@@ -54,7 +51,7 @@ func (o *ListConnectorsConfigsResponseConnectorKey) GetDatatype() string {
 // and a boolean to check if the value has been set.
 func (o *ListConnectorsConfigsResponseConnectorKey) GetDatatypeOk() (*string, bool) {
 	if o == nil || isNil(o.Datatype) {
-		return nil, false
+    return nil, false
 	}
 	return o.Datatype, true
 }
@@ -86,7 +83,7 @@ func (o *ListConnectorsConfigsResponseConnectorKey) GetRequired() bool {
 // and a boolean to check if the value has been set.
 func (o *ListConnectorsConfigsResponseConnectorKey) GetRequiredOk() (*bool, bool) {
 	if o == nil || isNil(o.Required) {
-		return nil, false
+    return nil, false
 	}
 	return o.Required, true
 }
@@ -106,14 +103,6 @@ func (o *ListConnectorsConfigsResponseConnectorKey) SetRequired(v bool) {
 }
 
 func (o ListConnectorsConfigsResponseConnectorKey) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ListConnectorsConfigsResponseConnectorKey) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Datatype) {
 		toSerialize["datatype"] = o.Datatype
@@ -121,7 +110,7 @@ func (o ListConnectorsConfigsResponseConnectorKey) ToMap() (map[string]interface
 	if !isNil(o.Required) {
 		toSerialize["required"] = o.Required
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableListConnectorsConfigsResponseConnectorKey struct {

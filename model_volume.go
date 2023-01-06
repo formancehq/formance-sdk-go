@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the Volume type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Volume{}
 
 // Volume struct for Volume
 type Volume struct {
@@ -58,7 +55,7 @@ func (o *Volume) GetInput() float32 {
 // and a boolean to check if the value has been set.
 func (o *Volume) GetInputOk() (*float32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Input, true
 }
@@ -82,7 +79,7 @@ func (o *Volume) GetOutput() float32 {
 // and a boolean to check if the value has been set.
 func (o *Volume) GetOutputOk() (*float32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Output, true
 }
@@ -105,7 +102,7 @@ func (o *Volume) GetBalance() float32 {
 // and a boolean to check if the value has been set.
 func (o *Volume) GetBalanceOk() (*float32, bool) {
 	if o == nil || isNil(o.Balance) {
-		return nil, false
+    return nil, false
 	}
 	return o.Balance, true
 }
@@ -125,21 +122,17 @@ func (o *Volume) SetBalance(v float32) {
 }
 
 func (o Volume) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o Volume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["input"] = o.Input
-	toSerialize["output"] = o.Output
+	if true {
+		toSerialize["input"] = o.Input
+	}
+	if true {
+		toSerialize["output"] = o.Output
+	}
 	if !isNil(o.Balance) {
 		toSerialize["balance"] = o.Balance
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableVolume struct {
