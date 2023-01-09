@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PageSize** | **int32** |  | 
+**PageSize** | Pointer to **int64** |  | [optional] 
 **HasMore** | Pointer to **bool** |  | [optional] 
-**Previous** | Pointer to **string** |  | [optional] 
+**Total** | Pointer to [**Total**](Total.md) |  | [optional] 
 **Next** | Pointer to **string** |  | [optional] 
+**Previous** | Pointer to **string** |  | [optional] 
+**Data** | Pointer to **[]interface{}** |  | [optional] 
 
 ## Methods
 
 ### NewCursor
 
-`func NewCursor(pageSize int32, ) *Cursor`
+`func NewCursor() *Cursor`
 
 NewCursor instantiates a new Cursor object
 This constructor will assign default values to properties that have it defined,
@@ -30,23 +32,28 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPageSize
 
-`func (o *Cursor) GetPageSize() int32`
+`func (o *Cursor) GetPageSize() int64`
 
 GetPageSize returns the PageSize field if non-nil, zero value otherwise.
 
 ### GetPageSizeOk
 
-`func (o *Cursor) GetPageSizeOk() (*int32, bool)`
+`func (o *Cursor) GetPageSizeOk() (*int64, bool)`
 
 GetPageSizeOk returns a tuple with the PageSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPageSize
 
-`func (o *Cursor) SetPageSize(v int32)`
+`func (o *Cursor) SetPageSize(v int64)`
 
 SetPageSize sets PageSize field to given value.
 
+### HasPageSize
+
+`func (o *Cursor) HasPageSize() bool`
+
+HasPageSize returns a boolean if a field has been set.
 
 ### GetHasMore
 
@@ -73,30 +80,30 @@ SetHasMore sets HasMore field to given value.
 
 HasHasMore returns a boolean if a field has been set.
 
-### GetPrevious
+### GetTotal
 
-`func (o *Cursor) GetPrevious() string`
+`func (o *Cursor) GetTotal() Total`
 
-GetPrevious returns the Previous field if non-nil, zero value otherwise.
+GetTotal returns the Total field if non-nil, zero value otherwise.
 
-### GetPreviousOk
+### GetTotalOk
 
-`func (o *Cursor) GetPreviousOk() (*string, bool)`
+`func (o *Cursor) GetTotalOk() (*Total, bool)`
 
-GetPreviousOk returns a tuple with the Previous field if it's non-nil, zero value otherwise
+GetTotalOk returns a tuple with the Total field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPrevious
+### SetTotal
 
-`func (o *Cursor) SetPrevious(v string)`
+`func (o *Cursor) SetTotal(v Total)`
 
-SetPrevious sets Previous field to given value.
+SetTotal sets Total field to given value.
 
-### HasPrevious
+### HasTotal
 
-`func (o *Cursor) HasPrevious() bool`
+`func (o *Cursor) HasTotal() bool`
 
-HasPrevious returns a boolean if a field has been set.
+HasTotal returns a boolean if a field has been set.
 
 ### GetNext
 
@@ -122,6 +129,56 @@ SetNext sets Next field to given value.
 `func (o *Cursor) HasNext() bool`
 
 HasNext returns a boolean if a field has been set.
+
+### GetPrevious
+
+`func (o *Cursor) GetPrevious() string`
+
+GetPrevious returns the Previous field if non-nil, zero value otherwise.
+
+### GetPreviousOk
+
+`func (o *Cursor) GetPreviousOk() (*string, bool)`
+
+GetPreviousOk returns a tuple with the Previous field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrevious
+
+`func (o *Cursor) SetPrevious(v string)`
+
+SetPrevious sets Previous field to given value.
+
+### HasPrevious
+
+`func (o *Cursor) HasPrevious() bool`
+
+HasPrevious returns a boolean if a field has been set.
+
+### GetData
+
+`func (o *Cursor) GetData() []interface{}`
+
+GetData returns the Data field if non-nil, zero value otherwise.
+
+### GetDataOk
+
+`func (o *Cursor) GetDataOk() (*[]interface{}, bool)`
+
+GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetData
+
+`func (o *Cursor) SetData(v []interface{})`
+
+SetData sets Data field to given value.
+
+### HasData
+
+`func (o *Cursor) HasData() bool`
+
+HasData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

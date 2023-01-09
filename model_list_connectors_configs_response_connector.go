@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ListConnectorsConfigsResponseConnector type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListConnectorsConfigsResponseConnector{}
 
 // ListConnectorsConfigsResponseConnector struct for ListConnectorsConfigsResponseConnector
 type ListConnectorsConfigsResponseConnector struct {
@@ -53,7 +50,7 @@ func (o *ListConnectorsConfigsResponseConnector) GetKey() ListConnectorsConfigsR
 // and a boolean to check if the value has been set.
 func (o *ListConnectorsConfigsResponseConnector) GetKeyOk() (*ListConnectorsConfigsResponseConnectorKey, bool) {
 	if o == nil || isNil(o.Key) {
-		return nil, false
+    return nil, false
 	}
 	return o.Key, true
 }
@@ -73,19 +70,11 @@ func (o *ListConnectorsConfigsResponseConnector) SetKey(v ListConnectorsConfigsR
 }
 
 func (o ListConnectorsConfigsResponseConnector) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ListConnectorsConfigsResponseConnector) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableListConnectorsConfigsResponseConnector struct {

@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -40,11 +40,9 @@ import (
 var (
 	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:vnd\.[^;]+\+)?json)`)
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
-	queryParamSplit = regexp.MustCompile(`(^|&)([^&]+)`)
-	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the Formance Stack API API vv1.0.0-rc.1
+// APIClient manages communication with the Formance Stack API API vdevelop
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -59,6 +57,10 @@ type APIClient struct {
 	ClientsApi ClientsApi
 
 	DefaultApi DefaultApi
+
+	LedgerApi LedgerApi
+
+	LogsApi LogsApi
 
 	MappingApi MappingApi
 
@@ -77,6 +79,8 @@ type APIClient struct {
 	TransactionsApi TransactionsApi
 
 	UsersApi UsersApi
+
+	WalletsApi WalletsApi
 
 	WebhooksApi WebhooksApi
 }
@@ -101,6 +105,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BalancesApi = (*BalancesApiService)(&c.common)
 	c.ClientsApi = (*ClientsApiService)(&c.common)
 	c.DefaultApi = (*DefaultApiService)(&c.common)
+	c.LedgerApi = (*LedgerApiService)(&c.common)
+	c.LogsApi = (*LogsApiService)(&c.common)
 	c.MappingApi = (*MappingApiService)(&c.common)
 	c.PaymentsApi = (*PaymentsApiService)(&c.common)
 	c.ScopesApi = (*ScopesApiService)(&c.common)
@@ -110,6 +116,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.StatsApi = (*StatsApiService)(&c.common)
 	c.TransactionsApi = (*TransactionsApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
+	c.WalletsApi = (*WalletsApiService)(&c.common)
 	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 
 	return c
@@ -167,101 +174,28 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 	return nil
 }
 
-func parameterValueToString( obj interface{}, key string ) string {
-	if reflect.TypeOf(obj).Kind() != reflect.Ptr {
-		return fmt.Sprintf("%v", obj)
-	}
-	var param,ok = obj.(MappedNullable)
-	if !ok {
-		return ""
-	}
-	dataMap,err := param.ToMap()
-	if err != nil {
-		return ""
-	}
-	return fmt.Sprintf("%v", dataMap[key])
-}
+// parameterToString convert interface{} parameters to string, using a delimiter if format is provided.
+func parameterToString(obj interface{}, collectionFormat string) string {
+	var delimiter string
 
-// parameterAddToQuery adds the provided object to the url query supporting deep object syntax
-func parameterAddToQuery(queryParams interface{}, keyPrefix string, obj interface{}, collectionType string) {
-	var v = reflect.ValueOf(obj)
-	var value = ""
-	if v == reflect.ValueOf(nil) {
-		value = "null"
-	} else {
-		switch v.Kind() {
-			case reflect.Invalid:
-				value = "invalid"
-
-			case reflect.Struct:
-				if t,ok := obj.(MappedNullable); ok {
-					dataMap,err := t.ToMap()
-					if err != nil {
-						return
-					}
-					parameterAddToQuery(queryParams, keyPrefix, dataMap, collectionType)
-					return
-				}
-				if t, ok := obj.(time.Time); ok {
-					parameterAddToQuery(queryParams, keyPrefix, t.Format(time.RFC3339), collectionType)
-					return
-				}
-				value = v.Type().String() + " value"
-			case reflect.Slice:
-				var indValue = reflect.ValueOf(obj)
-				if indValue == reflect.ValueOf(nil) {
-					return
-				}
-				var lenIndValue = indValue.Len()
-				for i:=0;i<lenIndValue;i++ {
-					var arrayValue = indValue.Index(i)
-					parameterAddToQuery(queryParams, keyPrefix, arrayValue.Interface(), collectionType)
-				}
-				return
-
-			case reflect.Map:
-				var indValue = reflect.ValueOf(obj)
-				if indValue == reflect.ValueOf(nil) {
-					return
-				}
-				iter := indValue.MapRange()
-				for iter.Next() {
-					k,v := iter.Key(), iter.Value()
-					parameterAddToQuery(queryParams, fmt.Sprintf("%s[%s]", keyPrefix, k.String()), v.Interface(), collectionType)
-				}
-				return
-
-			case reflect.Interface:
-				fallthrough
-			case reflect.Ptr:
-				parameterAddToQuery(queryParams, keyPrefix, v.Elem().Interface(), collectionType)
-				return
-
-			case reflect.Int, reflect.Int8, reflect.Int16,
-				reflect.Int32, reflect.Int64:
-				value = strconv.FormatInt(v.Int(), 10)
-			case reflect.Uint, reflect.Uint8, reflect.Uint16,
-				reflect.Uint32, reflect.Uint64, reflect.Uintptr:
-				value = strconv.FormatUint(v.Uint(), 10)
-			case reflect.Float32, reflect.Float64:
-				value = strconv.FormatFloat(v.Float(), 'g', -1, 32)
-			case reflect.Bool:
-				value = strconv.FormatBool(v.Bool())
-			case reflect.String:
-				value = v.String()
-			default:
-				value = v.Type().String() + " value"
-		}
+	switch collectionFormat {
+	case "pipes":
+		delimiter = "|"
+	case "ssv":
+		delimiter = " "
+	case "tsv":
+		delimiter = "\t"
+	case "csv":
+		delimiter = ","
 	}
 
-	switch valuesMap := queryParams.(type) {
-		case url.Values:
-			valuesMap.Add( keyPrefix, value )
-			break
-		case map[string]string:
-			valuesMap[keyPrefix] = value
-			break
+	if reflect.TypeOf(obj).Kind() == reflect.Slice {
+		return strings.Trim(strings.Replace(fmt.Sprint(obj), " ", delimiter, -1), "[]")
+	} else if t, ok := obj.(time.Time); ok {
+		return t.Format(time.RFC3339)
 	}
+
+	return fmt.Sprintf("%v", obj)
 }
 
 // helper for converting interface{} parameters to json strings
@@ -413,11 +347,7 @@ func (c *APIClient) prepareRequest(
 	}
 
 	// Encode the parameters.
-	url.RawQuery = queryParamSplit.ReplaceAllStringFunc(query.Encode(), func(s string) string {
-		pieces := strings.Split(s, "=")
-		pieces[0] = queryDescape.Replace(pieces[0])
-		return strings.Join(pieces, "=")
-	})
+	url.RawQuery = query.Encode()
 
 	// Generate a new request
 	if body != nil {
@@ -458,6 +388,16 @@ func (c *APIClient) prepareRequest(
 			latestToken.SetAuthHeader(localVarRequest)
 		}
 
+		// Basic HTTP Authentication
+		if auth, ok := ctx.Value(ContextBasicAuth).(BasicAuth); ok {
+			localVarRequest.SetBasicAuth(auth.UserName, auth.Password)
+		}
+
+		// AccessToken Authentication
+		if auth, ok := ctx.Value(ContextAccessToken).(string); ok {
+			localVarRequest.Header.Add("Authorization", "Bearer "+auth)
+		}
+
 	}
 
 	for header, value := range c.cfg.DefaultHeader {
@@ -473,18 +413,6 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 	if s, ok := v.(*string); ok {
 		*s = string(b)
 		return nil
-	}
-	if f, ok := v.(*os.File); ok {
-		f, err = ioutil.TempFile("", "HttpClientFile")
-		if err != nil {
-			return
-		}
-		_, err = f.Write(b)
-		if err != nil {
-			return
-		}
-		_, err = f.Seek(0, io.SeekStart)
-		return
 	}
 	if f, ok := v.(**os.File); ok {
 		*f, err = ioutil.TempFile("", "HttpClientFile")
@@ -561,8 +489,8 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 
 	if reader, ok := body.(io.Reader); ok {
 		_, err = bodyBuf.ReadFrom(reader)
-	} else if fp, ok := body.(*os.File); ok {
-		_, err = bodyBuf.ReadFrom(fp)
+	} else if fp, ok := body.(**os.File); ok {
+		_, err = bodyBuf.ReadFrom(*fp)
 	} else if b, ok := body.([]byte); ok {
 		_, err = bodyBuf.Write(b)
 	} else if s, ok := body.(string); ok {
@@ -685,19 +613,20 @@ func (e GenericOpenAPIError) Model() interface{} {
 
 // format error message using title and detail when model implements rfc7807
 func formatErrorMessage(status string, v interface{}) string {
-	str := ""
-	metaValue := reflect.ValueOf(v).Elem()
 
-	field := metaValue.FieldByName("Title")
-	if field != (reflect.Value{}) {
-		str = fmt.Sprintf("%s", field.Interface())
-	}
+    str := ""
+    metaValue := reflect.ValueOf(v).Elem()
 
-	field = metaValue.FieldByName("Detail")
-	if field != (reflect.Value{}) {
-		str = fmt.Sprintf("%s (%s)", str, field.Interface())
-	}
+    field := metaValue.FieldByName("Title")
+    if field != (reflect.Value{}) {
+        str = fmt.Sprintf("%s", field.Interface())
+    }
 
-	// status title (detail)
-	return strings.TrimSpace(fmt.Sprintf("%s %s", status, str))
+    field = metaValue.FieldByName("Detail")
+    if field != (reflect.Value{}) {
+        str = fmt.Sprintf("%s (%s)", str, field.Interface())
+    }
+
+    // status title (detail)
+    return fmt.Sprintf("%s %s", status, str)
 }

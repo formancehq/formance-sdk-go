@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ConnectorBaseInfo type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ConnectorBaseInfo{}
 
 // ConnectorBaseInfo struct for ConnectorBaseInfo
 type ConnectorBaseInfo struct {
@@ -54,7 +51,7 @@ func (o *ConnectorBaseInfo) GetProvider() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectorBaseInfo) GetProviderOk() (*string, bool) {
 	if o == nil || isNil(o.Provider) {
-		return nil, false
+    return nil, false
 	}
 	return o.Provider, true
 }
@@ -86,7 +83,7 @@ func (o *ConnectorBaseInfo) GetDisabled() bool {
 // and a boolean to check if the value has been set.
 func (o *ConnectorBaseInfo) GetDisabledOk() (*bool, bool) {
 	if o == nil || isNil(o.Disabled) {
-		return nil, false
+    return nil, false
 	}
 	return o.Disabled, true
 }
@@ -106,14 +103,6 @@ func (o *ConnectorBaseInfo) SetDisabled(v bool) {
 }
 
 func (o ConnectorBaseInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ConnectorBaseInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Provider) {
 		toSerialize["provider"] = o.Provider
@@ -121,7 +110,7 @@ func (o ConnectorBaseInfo) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Disabled) {
 		toSerialize["disabled"] = o.Disabled
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableConnectorBaseInfo struct {

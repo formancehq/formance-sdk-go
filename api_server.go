@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -23,7 +23,7 @@ import (
 type ServerApi interface {
 
 	/*
-	GetInfo Show server information.
+	GetInfo Show server information
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetInfoRequest
@@ -48,7 +48,7 @@ func (r ApiGetInfoRequest) Execute() (*ConfigInfoResponse, *http.Response, error
 }
 
 /*
-GetInfo Show server information.
+GetInfo Show server information
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetInfoRequest
@@ -120,6 +120,14 @@ func (a *ServerApiService) GetInfoExecute(r ApiGetInfoRequest) (*ConfigInfoRespo
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the MappingResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &MappingResponse{}
 
 // MappingResponse struct for MappingResponse
 type MappingResponse struct {
@@ -54,7 +51,7 @@ func (o *MappingResponse) GetData() Mapping {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MappingResponse) GetDataOk() (*Mapping, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Data.Get(), o.Data.IsSet()
 }
@@ -83,19 +80,11 @@ func (o *MappingResponse) UnsetData() {
 }
 
 func (o MappingResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o MappingResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Data.IsSet() {
 		toSerialize["data"] = o.Data.Get()
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableMappingResponse struct {

@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the CurrencyCloudConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CurrencyCloudConfig{}
 
 // CurrencyCloudConfig struct for CurrencyCloudConfig
 type CurrencyCloudConfig struct {
@@ -62,7 +59,7 @@ func (o *CurrencyCloudConfig) GetApiKey() string {
 // and a boolean to check if the value has been set.
 func (o *CurrencyCloudConfig) GetApiKeyOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ApiKey, true
 }
@@ -86,7 +83,7 @@ func (o *CurrencyCloudConfig) GetLoginID() string {
 // and a boolean to check if the value has been set.
 func (o *CurrencyCloudConfig) GetLoginIDOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.LoginID, true
 }
@@ -109,7 +106,7 @@ func (o *CurrencyCloudConfig) GetPollingPeriod() string {
 // and a boolean to check if the value has been set.
 func (o *CurrencyCloudConfig) GetPollingPeriodOk() (*string, bool) {
 	if o == nil || isNil(o.PollingPeriod) {
-		return nil, false
+    return nil, false
 	}
 	return o.PollingPeriod, true
 }
@@ -141,7 +138,7 @@ func (o *CurrencyCloudConfig) GetEndpoint() string {
 // and a boolean to check if the value has been set.
 func (o *CurrencyCloudConfig) GetEndpointOk() (*string, bool) {
 	if o == nil || isNil(o.Endpoint) {
-		return nil, false
+    return nil, false
 	}
 	return o.Endpoint, true
 }
@@ -161,24 +158,20 @@ func (o *CurrencyCloudConfig) SetEndpoint(v string) {
 }
 
 func (o CurrencyCloudConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o CurrencyCloudConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["apiKey"] = o.ApiKey
-	toSerialize["loginID"] = o.LoginID
+	if true {
+		toSerialize["apiKey"] = o.ApiKey
+	}
+	if true {
+		toSerialize["loginID"] = o.LoginID
+	}
 	if !isNil(o.PollingPeriod) {
 		toSerialize["pollingPeriod"] = o.PollingPeriod
 	}
 	if !isNil(o.Endpoint) {
 		toSerialize["endpoint"] = o.Endpoint
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableCurrencyCloudConfig struct {

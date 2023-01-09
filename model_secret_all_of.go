@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the SecretAllOf type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SecretAllOf{}
 
 // SecretAllOf struct for SecretAllOf
 type SecretAllOf struct {
@@ -59,7 +56,7 @@ func (o *SecretAllOf) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *SecretAllOf) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -83,7 +80,7 @@ func (o *SecretAllOf) GetLastDigits() string {
 // and a boolean to check if the value has been set.
 func (o *SecretAllOf) GetLastDigitsOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.LastDigits, true
 }
@@ -107,7 +104,7 @@ func (o *SecretAllOf) GetClear() string {
 // and a boolean to check if the value has been set.
 func (o *SecretAllOf) GetClearOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Clear, true
 }
@@ -118,19 +115,17 @@ func (o *SecretAllOf) SetClear(v string) {
 }
 
 func (o SecretAllOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["lastDigits"] = o.LastDigits
+	}
+	if true {
+		toSerialize["clear"] = o.Clear
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o SecretAllOf) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["lastDigits"] = o.LastDigits
-	toSerialize["clear"] = o.Clear
-	return toSerialize, nil
 }
 
 type NullableSecretAllOf struct {

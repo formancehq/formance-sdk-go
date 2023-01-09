@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the ClientOptions type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ClientOptions{}
 
 // ClientOptions struct for ClientOptions
 type ClientOptions struct {
@@ -60,7 +57,7 @@ func (o *ClientOptions) GetPublic() bool {
 // and a boolean to check if the value has been set.
 func (o *ClientOptions) GetPublicOk() (*bool, bool) {
 	if o == nil || isNil(o.Public) {
-		return nil, false
+    return nil, false
 	}
 	return o.Public, true
 }
@@ -92,7 +89,7 @@ func (o *ClientOptions) GetRedirectUris() []string {
 // and a boolean to check if the value has been set.
 func (o *ClientOptions) GetRedirectUrisOk() ([]string, bool) {
 	if o == nil || isNil(o.RedirectUris) {
-		return nil, false
+    return nil, false
 	}
 	return o.RedirectUris, true
 }
@@ -124,7 +121,7 @@ func (o *ClientOptions) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *ClientOptions) GetDescriptionOk() (*string, bool) {
 	if o == nil || isNil(o.Description) {
-		return nil, false
+    return nil, false
 	}
 	return o.Description, true
 }
@@ -157,7 +154,7 @@ func (o *ClientOptions) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ClientOptions) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -180,7 +177,7 @@ func (o *ClientOptions) GetTrusted() bool {
 // and a boolean to check if the value has been set.
 func (o *ClientOptions) GetTrustedOk() (*bool, bool) {
 	if o == nil || isNil(o.Trusted) {
-		return nil, false
+    return nil, false
 	}
 	return o.Trusted, true
 }
@@ -212,7 +209,7 @@ func (o *ClientOptions) GetPostLogoutRedirectUris() []string {
 // and a boolean to check if the value has been set.
 func (o *ClientOptions) GetPostLogoutRedirectUrisOk() ([]string, bool) {
 	if o == nil || isNil(o.PostLogoutRedirectUris) {
-		return nil, false
+    return nil, false
 	}
 	return o.PostLogoutRedirectUris, true
 }
@@ -244,7 +241,7 @@ func (o *ClientOptions) GetMetadata() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *ClientOptions) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Metadata) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -264,14 +261,6 @@ func (o *ClientOptions) SetMetadata(v map[string]interface{}) {
 }
 
 func (o ClientOptions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ClientOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Public) {
 		toSerialize["public"] = o.Public
@@ -282,7 +271,9 @@ func (o ClientOptions) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["name"] = o.Name
+	if true {
+		toSerialize["name"] = o.Name
+	}
 	if !isNil(o.Trusted) {
 		toSerialize["trusted"] = o.Trusted
 	}
@@ -292,7 +283,7 @@ func (o ClientOptions) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableClientOptions struct {

@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -15,16 +15,13 @@ import (
 	"encoding/json"
 )
 
-// checks if the AccountWithVolumesAndBalances type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AccountWithVolumesAndBalances{}
-
 // AccountWithVolumesAndBalances struct for AccountWithVolumesAndBalances
 type AccountWithVolumesAndBalances struct {
 	Address string `json:"address"`
 	Type *string `json:"type,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	Volumes *map[string]map[string]int32 `json:"volumes,omitempty"`
-	Balances *map[string]int32 `json:"balances,omitempty"`
+	Volumes *map[string]map[string]int64 `json:"volumes,omitempty"`
+	Balances *map[string]int64 `json:"balances,omitempty"`
 }
 
 // NewAccountWithVolumesAndBalances instantiates a new AccountWithVolumesAndBalances object
@@ -59,7 +56,7 @@ func (o *AccountWithVolumesAndBalances) GetAddress() string {
 // and a boolean to check if the value has been set.
 func (o *AccountWithVolumesAndBalances) GetAddressOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Address, true
 }
@@ -82,7 +79,7 @@ func (o *AccountWithVolumesAndBalances) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *AccountWithVolumesAndBalances) GetTypeOk() (*string, bool) {
 	if o == nil || isNil(o.Type) {
-		return nil, false
+    return nil, false
 	}
 	return o.Type, true
 }
@@ -114,7 +111,7 @@ func (o *AccountWithVolumesAndBalances) GetMetadata() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *AccountWithVolumesAndBalances) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Metadata) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -134,9 +131,9 @@ func (o *AccountWithVolumesAndBalances) SetMetadata(v map[string]interface{}) {
 }
 
 // GetVolumes returns the Volumes field value if set, zero value otherwise.
-func (o *AccountWithVolumesAndBalances) GetVolumes() map[string]map[string]int32 {
+func (o *AccountWithVolumesAndBalances) GetVolumes() map[string]map[string]int64 {
 	if o == nil || isNil(o.Volumes) {
-		var ret map[string]map[string]int32
+		var ret map[string]map[string]int64
 		return ret
 	}
 	return *o.Volumes
@@ -144,9 +141,9 @@ func (o *AccountWithVolumesAndBalances) GetVolumes() map[string]map[string]int32
 
 // GetVolumesOk returns a tuple with the Volumes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountWithVolumesAndBalances) GetVolumesOk() (*map[string]map[string]int32, bool) {
+func (o *AccountWithVolumesAndBalances) GetVolumesOk() (*map[string]map[string]int64, bool) {
 	if o == nil || isNil(o.Volumes) {
-		return nil, false
+    return nil, false
 	}
 	return o.Volumes, true
 }
@@ -160,15 +157,15 @@ func (o *AccountWithVolumesAndBalances) HasVolumes() bool {
 	return false
 }
 
-// SetVolumes gets a reference to the given map[string]map[string]int32 and assigns it to the Volumes field.
-func (o *AccountWithVolumesAndBalances) SetVolumes(v map[string]map[string]int32) {
+// SetVolumes gets a reference to the given map[string]map[string]int64 and assigns it to the Volumes field.
+func (o *AccountWithVolumesAndBalances) SetVolumes(v map[string]map[string]int64) {
 	o.Volumes = &v
 }
 
 // GetBalances returns the Balances field value if set, zero value otherwise.
-func (o *AccountWithVolumesAndBalances) GetBalances() map[string]int32 {
+func (o *AccountWithVolumesAndBalances) GetBalances() map[string]int64 {
 	if o == nil || isNil(o.Balances) {
-		var ret map[string]int32
+		var ret map[string]int64
 		return ret
 	}
 	return *o.Balances
@@ -176,9 +173,9 @@ func (o *AccountWithVolumesAndBalances) GetBalances() map[string]int32 {
 
 // GetBalancesOk returns a tuple with the Balances field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountWithVolumesAndBalances) GetBalancesOk() (*map[string]int32, bool) {
+func (o *AccountWithVolumesAndBalances) GetBalancesOk() (*map[string]int64, bool) {
 	if o == nil || isNil(o.Balances) {
-		return nil, false
+    return nil, false
 	}
 	return o.Balances, true
 }
@@ -192,22 +189,16 @@ func (o *AccountWithVolumesAndBalances) HasBalances() bool {
 	return false
 }
 
-// SetBalances gets a reference to the given map[string]int32 and assigns it to the Balances field.
-func (o *AccountWithVolumesAndBalances) SetBalances(v map[string]int32) {
+// SetBalances gets a reference to the given map[string]int64 and assigns it to the Balances field.
+func (o *AccountWithVolumesAndBalances) SetBalances(v map[string]int64) {
 	o.Balances = &v
 }
 
 func (o AccountWithVolumesAndBalances) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o AccountWithVolumesAndBalances) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["address"] = o.Address
+	if true {
+		toSerialize["address"] = o.Address
+	}
 	if !isNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -220,7 +211,7 @@ func (o AccountWithVolumesAndBalances) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Balances) {
 		toSerialize["balances"] = o.Balances
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableAccountWithVolumesAndBalances struct {

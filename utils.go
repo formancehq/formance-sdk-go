@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -13,7 +13,7 @@ package formance
 
 import (
 	"encoding/json"
-	"reflect"
+    "reflect"
 	"time"
 )
 
@@ -331,18 +331,14 @@ func (v *NullableTime) UnmarshalJSON(src []byte) error {
 
 // isNil checks if an input is nil
 func isNil(i interface{}) bool {
-	if i == nil {
-		return true
-	}
-	switch reflect.TypeOf(i).Kind() {
-	case reflect.Chan, reflect.Func, reflect.Map, reflect.Ptr, reflect.UnsafePointer, reflect.Interface, reflect.Slice:
-		return reflect.ValueOf(i).IsNil()
-	case reflect.Array:
-		return reflect.ValueOf(i).IsZero()
-	}
-	return false
-}
-
-type MappedNullable interface {
-	ToMap() (map[string]interface{}, error)
+    if i == nil {
+        return true
+    }
+    switch reflect.TypeOf(i).Kind() {
+    case reflect.Chan, reflect.Func, reflect.Map, reflect.Ptr, reflect.UnsafePointer, reflect.Interface, reflect.Slice:
+        return reflect.ValueOf(i).IsNil()
+    case reflect.Array:
+        return reflect.ValueOf(i).IsZero()
+    }
+    return false
 }

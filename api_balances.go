@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -33,8 +33,8 @@ type BalancesApi interface {
 	GetBalances(ctx context.Context, ledger string) ApiGetBalancesRequest
 
 	// GetBalancesExecute executes the request
-	//  @return GetBalances200Response
-	GetBalancesExecute(r ApiGetBalancesRequest) (*GetBalances200Response, *http.Response, error)
+	//  @return BalancesCursorResponse
+	GetBalancesExecute(r ApiGetBalancesRequest) (*BalancesCursorResponse, *http.Response, error)
 
 	/*
 	GetBalancesAggregated Get the aggregated balances from selected accounts
@@ -46,8 +46,8 @@ type BalancesApi interface {
 	GetBalancesAggregated(ctx context.Context, ledger string) ApiGetBalancesAggregatedRequest
 
 	// GetBalancesAggregatedExecute executes the request
-	//  @return GetBalancesAggregated200Response
-	GetBalancesAggregatedExecute(r ApiGetBalancesAggregatedRequest) (*GetBalancesAggregated200Response, *http.Response, error)
+	//  @return AggregateBalancesResponse
+	GetBalancesAggregatedExecute(r ApiGetBalancesAggregatedRequest) (*AggregateBalancesResponse, *http.Response, error)
 }
 
 // BalancesApiService BalancesApi service
@@ -59,6 +59,7 @@ type ApiGetBalancesRequest struct {
 	ledger string
 	address *string
 	after *string
+	cursor *string
 	paginationToken *string
 }
 
@@ -74,13 +75,20 @@ func (r ApiGetBalancesRequest) After(after string) ApiGetBalancesRequest {
 	return r
 }
 
-// Parameter used in pagination requests.  Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results.
+// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set. 
+func (r ApiGetBalancesRequest) Cursor(cursor string) ApiGetBalancesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. Deprecated, please use &#x60;cursor&#x60; instead.
+// Deprecated
 func (r ApiGetBalancesRequest) PaginationToken(paginationToken string) ApiGetBalancesRequest {
 	r.paginationToken = &paginationToken
 	return r
 }
 
-func (r ApiGetBalancesRequest) Execute() (*GetBalances200Response, *http.Response, error) {
+func (r ApiGetBalancesRequest) Execute() (*BalancesCursorResponse, *http.Response, error) {
 	return r.ApiService.GetBalancesExecute(r)
 }
 
@@ -100,13 +108,13 @@ func (a *BalancesApiService) GetBalances(ctx context.Context, ledger string) Api
 }
 
 // Execute executes the request
-//  @return GetBalances200Response
-func (a *BalancesApiService) GetBalancesExecute(r ApiGetBalancesRequest) (*GetBalances200Response, *http.Response, error) {
+//  @return BalancesCursorResponse
+func (a *BalancesApiService) GetBalancesExecute(r ApiGetBalancesRequest) (*BalancesCursorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetBalances200Response
+		localVarReturnValue  *BalancesCursorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BalancesApiService.GetBalances")
@@ -115,20 +123,23 @@ func (a *BalancesApiService) GetBalancesExecute(r ApiGetBalancesRequest) (*GetBa
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/balances"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.address != nil {
-		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		localVarQueryParams.Add("address", parameterToString(*r.address, ""))
 	}
 	if r.after != nil {
-		parameterAddToQuery(localVarQueryParams, "after", r.after, "")
+		localVarQueryParams.Add("after", parameterToString(*r.after, ""))
+	}
+	if r.cursor != nil {
+		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
 	}
 	if r.paginationToken != nil {
-		parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
+		localVarQueryParams.Add("pagination_token", parameterToString(*r.paginationToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -169,16 +180,14 @@ func (a *BalancesApiService) GetBalancesExecute(r ApiGetBalancesRequest) (*GetBa
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListAccounts400Response
+			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -207,7 +216,7 @@ func (r ApiGetBalancesAggregatedRequest) Address(address string) ApiGetBalancesA
 	return r
 }
 
-func (r ApiGetBalancesAggregatedRequest) Execute() (*GetBalancesAggregated200Response, *http.Response, error) {
+func (r ApiGetBalancesAggregatedRequest) Execute() (*AggregateBalancesResponse, *http.Response, error) {
 	return r.ApiService.GetBalancesAggregatedExecute(r)
 }
 
@@ -227,13 +236,13 @@ func (a *BalancesApiService) GetBalancesAggregated(ctx context.Context, ledger s
 }
 
 // Execute executes the request
-//  @return GetBalancesAggregated200Response
-func (a *BalancesApiService) GetBalancesAggregatedExecute(r ApiGetBalancesAggregatedRequest) (*GetBalancesAggregated200Response, *http.Response, error) {
+//  @return AggregateBalancesResponse
+func (a *BalancesApiService) GetBalancesAggregatedExecute(r ApiGetBalancesAggregatedRequest) (*AggregateBalancesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetBalancesAggregated200Response
+		localVarReturnValue  *AggregateBalancesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BalancesApiService.GetBalancesAggregated")
@@ -242,14 +251,14 @@ func (a *BalancesApiService) GetBalancesAggregatedExecute(r ApiGetBalancesAggreg
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/aggregate/balances"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.address != nil {
-		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		localVarQueryParams.Add("address", parameterToString(*r.address, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -290,16 +299,14 @@ func (a *BalancesApiService) GetBalancesAggregatedExecute(r ApiGetBalancesAggreg
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v GetBalancesAggregated400Response
+			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

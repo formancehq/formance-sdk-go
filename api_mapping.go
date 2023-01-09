@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -24,7 +24,7 @@ import (
 type MappingApi interface {
 
 	/*
-	GetMapping Get the mapping of a ledger.
+	GetMapping Get the mapping of a ledger
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param ledger Name of the ledger.
@@ -37,7 +37,7 @@ type MappingApi interface {
 	GetMappingExecute(r ApiGetMappingRequest) (*MappingResponse, *http.Response, error)
 
 	/*
-	UpdateMapping Update the mapping of a ledger.
+	UpdateMapping Update the mapping of a ledger
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param ledger Name of the ledger.
@@ -64,7 +64,7 @@ func (r ApiGetMappingRequest) Execute() (*MappingResponse, *http.Response, error
 }
 
 /*
-GetMapping Get the mapping of a ledger.
+GetMapping Get the mapping of a ledger
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ledger Name of the ledger.
@@ -94,7 +94,7 @@ func (a *MappingApiService) GetMappingExecute(r ApiGetMappingRequest) (*MappingR
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/mapping"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -139,6 +139,14 @@ func (a *MappingApiService) GetMappingExecute(r ApiGetMappingRequest) (*MappingR
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -171,7 +179,7 @@ func (r ApiUpdateMappingRequest) Execute() (*MappingResponse, *http.Response, er
 }
 
 /*
-UpdateMapping Update the mapping of a ledger.
+UpdateMapping Update the mapping of a ledger
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ledger Name of the ledger.
@@ -201,7 +209,7 @@ func (a *MappingApiService) UpdateMappingExecute(r ApiUpdateMappingRequest) (*Ma
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/mapping"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -251,6 +259,14 @@ func (a *MappingApiService) UpdateMappingExecute(r ApiUpdateMappingRequest) (*Ma
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

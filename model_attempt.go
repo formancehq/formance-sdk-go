@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 	"time"
 )
-
-// checks if the Attempt type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Attempt{}
 
 // Attempt struct for Attempt
 type Attempt struct {
@@ -63,7 +60,7 @@ func (o *Attempt) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
-		return nil, false
+    return nil, false
 	}
 	return o.Id, true
 }
@@ -95,7 +92,7 @@ func (o *Attempt) GetWebhookID() string {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetWebhookIDOk() (*string, bool) {
 	if o == nil || isNil(o.WebhookID) {
-		return nil, false
+    return nil, false
 	}
 	return o.WebhookID, true
 }
@@ -127,7 +124,7 @@ func (o *Attempt) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CreatedAt) {
-		return nil, false
+    return nil, false
 	}
 	return o.CreatedAt, true
 }
@@ -159,7 +156,7 @@ func (o *Attempt) GetUpdatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.UpdatedAt) {
-		return nil, false
+    return nil, false
 	}
 	return o.UpdatedAt, true
 }
@@ -191,7 +188,7 @@ func (o *Attempt) GetConfig() WebhooksConfig {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetConfigOk() (*WebhooksConfig, bool) {
 	if o == nil || isNil(o.Config) {
-		return nil, false
+    return nil, false
 	}
 	return o.Config, true
 }
@@ -223,7 +220,7 @@ func (o *Attempt) GetPayload() string {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetPayloadOk() (*string, bool) {
 	if o == nil || isNil(o.Payload) {
-		return nil, false
+    return nil, false
 	}
 	return o.Payload, true
 }
@@ -255,7 +252,7 @@ func (o *Attempt) GetStatusCode() int32 {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetStatusCodeOk() (*int32, bool) {
 	if o == nil || isNil(o.StatusCode) {
-		return nil, false
+    return nil, false
 	}
 	return o.StatusCode, true
 }
@@ -287,7 +284,7 @@ func (o *Attempt) GetRetryAttempt() int32 {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetRetryAttemptOk() (*int32, bool) {
 	if o == nil || isNil(o.RetryAttempt) {
-		return nil, false
+    return nil, false
 	}
 	return o.RetryAttempt, true
 }
@@ -319,7 +316,7 @@ func (o *Attempt) GetStatus() string {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetStatusOk() (*string, bool) {
 	if o == nil || isNil(o.Status) {
-		return nil, false
+    return nil, false
 	}
 	return o.Status, true
 }
@@ -351,7 +348,7 @@ func (o *Attempt) GetNextRetryAfter() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Attempt) GetNextRetryAfterOk() (*time.Time, bool) {
 	if o == nil || isNil(o.NextRetryAfter) {
-		return nil, false
+    return nil, false
 	}
 	return o.NextRetryAfter, true
 }
@@ -371,14 +368,6 @@ func (o *Attempt) SetNextRetryAfter(v time.Time) {
 }
 
 func (o Attempt) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o Attempt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -410,7 +399,7 @@ func (o Attempt) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.NextRetryAfter) {
 		toSerialize["nextRetryAfter"] = o.NextRetryAfter
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableAttempt struct {

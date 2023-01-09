@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -24,7 +24,7 @@ import (
 type AccountsApi interface {
 
 	/*
-	AddMetadataToAccount Add metadata to an account.
+	AddMetadataToAccount Add metadata to an account
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param ledger Name of the ledger.
@@ -37,7 +37,7 @@ type AccountsApi interface {
 	AddMetadataToAccountExecute(r ApiAddMetadataToAccountRequest) (*http.Response, error)
 
 	/*
-	CountAccounts Count the accounts from a ledger.
+	CountAccounts Count the accounts from a ledger
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param ledger Name of the ledger.
@@ -49,7 +49,7 @@ type AccountsApi interface {
 	CountAccountsExecute(r ApiCountAccountsRequest) (*http.Response, error)
 
 	/*
-	GetAccount Get account by its address.
+	GetAccount Get account by its address
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param ledger Name of the ledger.
@@ -59,11 +59,11 @@ type AccountsApi interface {
 	GetAccount(ctx context.Context, ledger string, address string) ApiGetAccountRequest
 
 	// GetAccountExecute executes the request
-	//  @return GetAccount200Response
-	GetAccountExecute(r ApiGetAccountRequest) (*GetAccount200Response, *http.Response, error)
+	//  @return AccountResponse
+	GetAccountExecute(r ApiGetAccountRequest) (*AccountResponse, *http.Response, error)
 
 	/*
-	ListAccounts List accounts from a ledger.
+	ListAccounts List accounts from a ledger
 
 	List accounts from a ledger, sorted by address in descending order.
 
@@ -74,8 +74,8 @@ type AccountsApi interface {
 	ListAccounts(ctx context.Context, ledger string) ApiListAccountsRequest
 
 	// ListAccountsExecute executes the request
-	//  @return ListAccounts200Response
-	ListAccountsExecute(r ApiListAccountsRequest) (*ListAccounts200Response, *http.Response, error)
+	//  @return AccountsCursorResponse
+	ListAccountsExecute(r ApiListAccountsRequest) (*AccountsCursorResponse, *http.Response, error)
 }
 
 // AccountsApiService AccountsApi service
@@ -100,7 +100,7 @@ func (r ApiAddMetadataToAccountRequest) Execute() (*http.Response, error) {
 }
 
 /*
-AddMetadataToAccount Add metadata to an account.
+AddMetadataToAccount Add metadata to an account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ledger Name of the ledger.
@@ -130,8 +130,8 @@ func (a *AccountsApiService) AddMetadataToAccountExecute(r ApiAddMetadataToAccou
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts/{address}/metadata"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterValueToString(r.address, "address")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterToString(r.address, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -181,27 +181,14 @@ func (a *AccountsApiService) AddMetadataToAccountExecute(r ApiAddMetadataToAccou
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v GetAccount400Response
+			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v AddMetadataToAccount409Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -233,7 +220,7 @@ func (r ApiCountAccountsRequest) Execute() (*http.Response, error) {
 }
 
 /*
-CountAccounts Count the accounts from a ledger.
+CountAccounts Count the accounts from a ledger
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ledger Name of the ledger.
@@ -261,17 +248,17 @@ func (a *AccountsApiService) CountAccountsExecute(r ApiCountAccountsRequest) (*h
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.address != nil {
-		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		localVarQueryParams.Add("address", parameterToString(*r.address, ""))
 	}
 	if r.metadata != nil {
-		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		localVarQueryParams.Add("metadata", parameterToString(*r.metadata, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -283,7 +270,7 @@ func (a *AccountsApiService) CountAccountsExecute(r ApiCountAccountsRequest) (*h
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -312,6 +299,14 @@ func (a *AccountsApiService) CountAccountsExecute(r ApiCountAccountsRequest) (*h
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarHTTPResponse, newErr
 	}
 
@@ -325,12 +320,12 @@ type ApiGetAccountRequest struct {
 	address string
 }
 
-func (r ApiGetAccountRequest) Execute() (*GetAccount200Response, *http.Response, error) {
+func (r ApiGetAccountRequest) Execute() (*AccountResponse, *http.Response, error) {
 	return r.ApiService.GetAccountExecute(r)
 }
 
 /*
-GetAccount Get account by its address.
+GetAccount Get account by its address
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ledger Name of the ledger.
@@ -347,13 +342,13 @@ func (a *AccountsApiService) GetAccount(ctx context.Context, ledger string, addr
 }
 
 // Execute executes the request
-//  @return GetAccount200Response
-func (a *AccountsApiService) GetAccountExecute(r ApiGetAccountRequest) (*GetAccount200Response, *http.Response, error) {
+//  @return AccountResponse
+func (a *AccountsApiService) GetAccountExecute(r ApiGetAccountRequest) (*AccountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetAccount200Response
+		localVarReturnValue  *AccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsApiService.GetAccount")
@@ -362,8 +357,8 @@ func (a *AccountsApiService) GetAccountExecute(r ApiGetAccountRequest) (*GetAcco
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts/{address}"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterValueToString(r.address, "address")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"address"+"}", url.PathEscape(parameterToString(r.address, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -408,16 +403,14 @@ func (a *AccountsApiService) GetAccountExecute(r ApiGetAccountRequest) (*GetAcco
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v GetAccount400Response
+			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -437,18 +430,28 @@ type ApiListAccountsRequest struct {
 	ctx context.Context
 	ApiService AccountsApi
 	ledger string
-	pageSize *int32
+	pageSize *int64
+	pageSize2 *int64
 	after *string
 	address *string
 	metadata *map[string]interface{}
 	balance *int64
 	balanceOperator *string
+	balanceOperator2 *string
+	cursor *string
 	paginationToken *string
 }
 
-// The maximum number of results to return per page
-func (r ApiListAccountsRequest) PageSize(pageSize int32) ApiListAccountsRequest {
+// The maximum number of results to return per page. 
+func (r ApiListAccountsRequest) PageSize(pageSize int64) ApiListAccountsRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// The maximum number of results to return per page. Deprecated, please use &#x60;pageSize&#x60; instead. 
+// Deprecated
+func (r ApiListAccountsRequest) PageSize2(pageSize2 int64) ApiListAccountsRequest {
+	r.pageSize2 = &pageSize2
 	return r
 }
 
@@ -476,24 +479,38 @@ func (r ApiListAccountsRequest) Balance(balance int64) ApiListAccountsRequest {
 	return r
 }
 
-// Operator used for the filtering of balances can be greater than/equal, less than/equal, greater than, less than, or equal
+// Operator used for the filtering of balances can be greater than/equal, less than/equal, greater than, less than, equal or not. 
 func (r ApiListAccountsRequest) BalanceOperator(balanceOperator string) ApiListAccountsRequest {
 	r.balanceOperator = &balanceOperator
 	return r
 }
 
-// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results.  Set to the value of previous for the previous page of results. No other parameters can be set when the pagination token is set. 
+// Operator used for the filtering of balances can be greater than/equal, less than/equal, greater than, less than, equal or not. Deprecated, please use &#x60;balanceOperator&#x60; instead. 
+// Deprecated
+func (r ApiListAccountsRequest) BalanceOperator2(balanceOperator2 string) ApiListAccountsRequest {
+	r.balanceOperator2 = &balanceOperator2
+	return r
+}
+
+// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set. 
+func (r ApiListAccountsRequest) Cursor(cursor string) ApiListAccountsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Parameter used in pagination requests. Maximum page size is set to 15. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set. Deprecated, please use &#x60;cursor&#x60; instead. 
+// Deprecated
 func (r ApiListAccountsRequest) PaginationToken(paginationToken string) ApiListAccountsRequest {
 	r.paginationToken = &paginationToken
 	return r
 }
 
-func (r ApiListAccountsRequest) Execute() (*ListAccounts200Response, *http.Response, error) {
+func (r ApiListAccountsRequest) Execute() (*AccountsCursorResponse, *http.Response, error) {
 	return r.ApiService.ListAccountsExecute(r)
 }
 
 /*
-ListAccounts List accounts from a ledger.
+ListAccounts List accounts from a ledger
 
 List accounts from a ledger, sorted by address in descending order.
 
@@ -510,13 +527,13 @@ func (a *AccountsApiService) ListAccounts(ctx context.Context, ledger string) Ap
 }
 
 // Execute executes the request
-//  @return ListAccounts200Response
-func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*ListAccounts200Response, *http.Response, error) {
+//  @return AccountsCursorResponse
+func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*AccountsCursorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListAccounts200Response
+		localVarReturnValue  *AccountsCursorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsApiService.ListAccounts")
@@ -525,32 +542,41 @@ func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*Lis
 	}
 
 	localVarPath := localBasePath + "/api/ledger/{ledger}/accounts"
-	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterValueToString(r.ledger, "ledger")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ledger"+"}", url.PathEscape(parameterToString(r.ledger, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.pageSize != nil {
-		parameterAddToQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+	}
+	if r.pageSize2 != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize2, ""))
 	}
 	if r.after != nil {
-		parameterAddToQuery(localVarQueryParams, "after", r.after, "")
+		localVarQueryParams.Add("after", parameterToString(*r.after, ""))
 	}
 	if r.address != nil {
-		parameterAddToQuery(localVarQueryParams, "address", r.address, "")
+		localVarQueryParams.Add("address", parameterToString(*r.address, ""))
 	}
 	if r.metadata != nil {
-		parameterAddToQuery(localVarQueryParams, "metadata", r.metadata, "")
+		localVarQueryParams.Add("metadata", parameterToString(*r.metadata, ""))
 	}
 	if r.balance != nil {
-		parameterAddToQuery(localVarQueryParams, "balance", r.balance, "")
+		localVarQueryParams.Add("balance", parameterToString(*r.balance, ""))
 	}
 	if r.balanceOperator != nil {
-		parameterAddToQuery(localVarQueryParams, "balance_operator", r.balanceOperator, "")
+		localVarQueryParams.Add("balanceOperator", parameterToString(*r.balanceOperator, ""))
+	}
+	if r.balanceOperator2 != nil {
+		localVarQueryParams.Add("balance_operator", parameterToString(*r.balanceOperator2, ""))
+	}
+	if r.cursor != nil {
+		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
 	}
 	if r.paginationToken != nil {
-		parameterAddToQuery(localVarQueryParams, "pagination_token", r.paginationToken, "")
+		localVarQueryParams.Add("pagination_token", parameterToString(*r.paginationToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -591,16 +617,14 @@ func (a *AccountsApiService) ListAccountsExecute(r ApiListAccountsRequest) (*Lis
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ListAccounts400Response
+			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

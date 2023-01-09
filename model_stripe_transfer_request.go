@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -14,9 +14,6 @@ package formance
 import (
 	"encoding/json"
 )
-
-// checks if the StripeTransferRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &StripeTransferRequest{}
 
 // StripeTransferRequest struct for StripeTransferRequest
 type StripeTransferRequest struct {
@@ -57,7 +54,7 @@ func (o *StripeTransferRequest) GetAmount() int32 {
 // and a boolean to check if the value has been set.
 func (o *StripeTransferRequest) GetAmountOk() (*int32, bool) {
 	if o == nil || isNil(o.Amount) {
-		return nil, false
+    return nil, false
 	}
 	return o.Amount, true
 }
@@ -89,7 +86,7 @@ func (o *StripeTransferRequest) GetAsset() string {
 // and a boolean to check if the value has been set.
 func (o *StripeTransferRequest) GetAssetOk() (*string, bool) {
 	if o == nil || isNil(o.Asset) {
-		return nil, false
+    return nil, false
 	}
 	return o.Asset, true
 }
@@ -121,7 +118,7 @@ func (o *StripeTransferRequest) GetDestination() string {
 // and a boolean to check if the value has been set.
 func (o *StripeTransferRequest) GetDestinationOk() (*string, bool) {
 	if o == nil || isNil(o.Destination) {
-		return nil, false
+    return nil, false
 	}
 	return o.Destination, true
 }
@@ -153,7 +150,7 @@ func (o *StripeTransferRequest) GetMetadata() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *StripeTransferRequest) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Metadata) {
-		return map[string]interface{}{}, false
+    return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -173,14 +170,6 @@ func (o *StripeTransferRequest) SetMetadata(v map[string]interface{}) {
 }
 
 func (o StripeTransferRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o StripeTransferRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
@@ -194,7 +183,7 @@ func (o StripeTransferRequest) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableStripeTransferRequest struct {

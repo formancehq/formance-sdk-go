@@ -3,7 +3,7 @@ Formance Stack API
 
 Open, modular foundation for unique payments flows  # Introduction This API is documented in **OpenAPI format**.  # Authentication Formance Stack offers one forms of authentication:   - OAuth2 OAuth2 - an open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications. <SecurityDefinitions /> 
 
-API version: v1.0.0-rc.1
+API version: develop
 Contact: support@formance.com
 */
 
@@ -15,12 +15,9 @@ import (
 	"encoding/json"
 )
 
-// checks if the Posting type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Posting{}
-
 // Posting struct for Posting
 type Posting struct {
-	Amount int32 `json:"amount"`
+	Amount int64 `json:"amount"`
 	Asset string `json:"asset"`
 	Destination string `json:"destination"`
 	Source string `json:"source"`
@@ -30,7 +27,7 @@ type Posting struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPosting(amount int32, asset string, destination string, source string) *Posting {
+func NewPosting(amount int64, asset string, destination string, source string) *Posting {
 	this := Posting{}
 	this.Amount = amount
 	this.Asset = asset
@@ -48,9 +45,9 @@ func NewPostingWithDefaults() *Posting {
 }
 
 // GetAmount returns the Amount field value
-func (o *Posting) GetAmount() int32 {
+func (o *Posting) GetAmount() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -59,15 +56,15 @@ func (o *Posting) GetAmount() int32 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *Posting) GetAmountOk() (*int32, bool) {
+func (o *Posting) GetAmountOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Amount, true
 }
 
 // SetAmount sets field value
-func (o *Posting) SetAmount(v int32) {
+func (o *Posting) SetAmount(v int64) {
 	o.Amount = v
 }
 
@@ -85,7 +82,7 @@ func (o *Posting) GetAsset() string {
 // and a boolean to check if the value has been set.
 func (o *Posting) GetAssetOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Asset, true
 }
@@ -109,7 +106,7 @@ func (o *Posting) GetDestination() string {
 // and a boolean to check if the value has been set.
 func (o *Posting) GetDestinationOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Destination, true
 }
@@ -133,7 +130,7 @@ func (o *Posting) GetSource() string {
 // and a boolean to check if the value has been set.
 func (o *Posting) GetSourceOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Source, true
 }
@@ -144,20 +141,20 @@ func (o *Posting) SetSource(v string) {
 }
 
 func (o Posting) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["amount"] = o.Amount
+	}
+	if true {
+		toSerialize["asset"] = o.Asset
+	}
+	if true {
+		toSerialize["destination"] = o.Destination
+	}
+	if true {
+		toSerialize["source"] = o.Source
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o Posting) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["amount"] = o.Amount
-	toSerialize["asset"] = o.Asset
-	toSerialize["destination"] = o.Destination
-	toSerialize["source"] = o.Source
-	return toSerialize, nil
 }
 
 type NullablePosting struct {
