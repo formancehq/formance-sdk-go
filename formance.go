@@ -154,9 +154,9 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v1.0.20230623",
-			SDKVersion:        "v1.0.20230627",
-			GenVersion:        "2.58.0",
+			OpenAPIDocVersion: "v1.0.20230710",
+			SDKVersion:        "v1.0.20230710",
+			GenVersion:        "2.58.2",
 			ServerDefaults: []map[string]string{
 				{},
 				{
