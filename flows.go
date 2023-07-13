@@ -14,21 +14,83 @@ import (
 	"strings"
 )
 
-type orchestration struct {
+type flows struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newOrchestration(sdkConfig sdkConfiguration) *orchestration {
-	return &orchestration{
+func newFlows(sdkConfig sdkConfiguration) *flows {
+	return &flows{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
+// FlowsgetServerInfo - Get server info
+func (s *flows) FlowsgetServerInfo(ctx context.Context) (*operations.FlowsgetServerInfoResponse, error) {
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/_info"
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+
+	client := s.sdkConfiguration.SecurityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	if httpRes == nil {
+		return nil, fmt.Errorf("error sending request: no response")
+	}
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.FlowsgetServerInfoResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: contentType,
+		RawResponse: httpRes,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.ServerInfo
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+				return nil, err
+			}
+
+			res.ServerInfo = out
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+				return nil, err
+			}
+
+			res.Error = out
+		}
+	}
+
+	return res, nil
+}
+
 // CancelEvent - Cancel a running workflow
 // Cancel a running workflow
-func (s *orchestration) CancelEvent(ctx context.Context, request operations.CancelEventRequest) (*operations.CancelEventResponse, error) {
+func (s *flows) CancelEvent(ctx context.Context, request operations.CancelEventRequest) (*operations.CancelEventResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/abort", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/abort", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -83,9 +145,9 @@ func (s *orchestration) CancelEvent(ctx context.Context, request operations.Canc
 
 // CreateWorkflow - Create workflow
 // Create a workflow
-func (s *orchestration) CreateWorkflow(ctx context.Context, request shared.CreateWorkflowRequest) (*operations.CreateWorkflowResponse, error) {
+func (s *flows) CreateWorkflow(ctx context.Context, request shared.CreateWorkflowRequest) (*operations.CreateWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/workflows"
+	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/workflows"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
@@ -153,9 +215,9 @@ func (s *orchestration) CreateWorkflow(ctx context.Context, request shared.Creat
 
 // GetInstance - Get a workflow instance by id
 // Get a workflow instance by id
-func (s *orchestration) GetInstance(ctx context.Context, request operations.GetInstanceRequest) (*operations.GetInstanceResponse, error) {
+func (s *flows) GetInstance(ctx context.Context, request operations.GetInstanceRequest) (*operations.GetInstanceResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -219,9 +281,9 @@ func (s *orchestration) GetInstance(ctx context.Context, request operations.GetI
 
 // GetInstanceHistory - Get a workflow instance history by id
 // Get a workflow instance history by id
-func (s *orchestration) GetInstanceHistory(ctx context.Context, request operations.GetInstanceHistoryRequest) (*operations.GetInstanceHistoryResponse, error) {
+func (s *flows) GetInstanceHistory(ctx context.Context, request operations.GetInstanceHistoryRequest) (*operations.GetInstanceHistoryResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/history", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -285,9 +347,9 @@ func (s *orchestration) GetInstanceHistory(ctx context.Context, request operatio
 
 // GetInstanceStageHistory - Get a workflow instance stage history
 // Get a workflow instance stage history
-func (s *orchestration) GetInstanceStageHistory(ctx context.Context, request operations.GetInstanceStageHistoryRequest) (*operations.GetInstanceStageHistoryResponse, error) {
+func (s *flows) GetInstanceStageHistory(ctx context.Context, request operations.GetInstanceStageHistoryRequest) (*operations.GetInstanceStageHistoryResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/stages/{number}/history", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/stages/{number}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -351,9 +413,9 @@ func (s *orchestration) GetInstanceStageHistory(ctx context.Context, request ope
 
 // GetWorkflow - Get a flow by id
 // Get a flow by id
-func (s *orchestration) GetWorkflow(ctx context.Context, request operations.GetWorkflowRequest) (*operations.GetWorkflowResponse, error) {
+func (s *flows) GetWorkflow(ctx context.Context, request operations.GetWorkflowRequest) (*operations.GetWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{flowId}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -417,9 +479,9 @@ func (s *orchestration) GetWorkflow(ctx context.Context, request operations.GetW
 
 // ListInstances - List instances of a workflow
 // List instances of a workflow
-func (s *orchestration) ListInstances(ctx context.Context, request operations.ListInstancesRequest) (*operations.ListInstancesResponse, error) {
+func (s *flows) ListInstances(ctx context.Context, request operations.ListInstancesRequest) (*operations.ListInstancesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/instances"
+	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/instances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -484,9 +546,9 @@ func (s *orchestration) ListInstances(ctx context.Context, request operations.Li
 
 // ListWorkflows - List registered workflows
 // List registered workflows
-func (s *orchestration) ListWorkflows(ctx context.Context) (*operations.ListWorkflowsResponse, error) {
+func (s *flows) ListWorkflows(ctx context.Context) (*operations.ListWorkflowsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/workflows"
+	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/workflows"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -545,73 +607,11 @@ func (s *orchestration) ListWorkflows(ctx context.Context) (*operations.ListWork
 	return res, nil
 }
 
-// OrchestrationgetServerInfo - Get server info
-func (s *orchestration) OrchestrationgetServerInfo(ctx context.Context) (*operations.OrchestrationgetServerInfoResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/_info"
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
-
-	client := s.sdkConfiguration.SecurityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
-	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.OrchestrationgetServerInfoResponse{
-		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
-		RawResponse: httpRes,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.ServerInfo
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return nil, err
-			}
-
-			res.ServerInfo = out
-		}
-	default:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.Error
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return nil, err
-			}
-
-			res.Error = out
-		}
-	}
-
-	return res, nil
-}
-
 // RunWorkflow - Run workflow
 // Run workflow
-func (s *orchestration) RunWorkflow(ctx context.Context, request operations.RunWorkflowRequest) (*operations.RunWorkflowResponse, error) {
+func (s *flows) RunWorkflow(ctx context.Context, request operations.RunWorkflowRequest) (*operations.RunWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{workflowID}/instances", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/workflows/{workflowID}/instances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -686,9 +686,9 @@ func (s *orchestration) RunWorkflow(ctx context.Context, request operations.RunW
 
 // SendEvent - Send an event to a running workflow
 // Send an event to a running workflow
-func (s *orchestration) SendEvent(ctx context.Context, request operations.SendEventRequest) (*operations.SendEventResponse, error) {
+func (s *flows) SendEvent(ctx context.Context, request operations.SendEventRequest) (*operations.SendEventResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/events", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/events", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}

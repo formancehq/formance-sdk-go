@@ -32,6 +32,7 @@ func main() {
     res, err := s.Search.Search(ctx, shared.Query{
         After: []string{
             "users:002",
+            "users:002",
         },
         Cursor: formance.String("YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="),
         Ledgers: []string{
@@ -40,12 +41,14 @@ func main() {
             "quickstart",
             "quickstart",
         },
-        PageSize: formance.Int64(952749),
+        PageSize: formance.Int64(433288),
         Policy: formance.String("OR"),
         Raw: &shared.QueryRaw{},
         Sort: formance.String("txid:asc"),
-        Target: formance.String("dolorum"),
+        Target: formance.String("non"),
         Terms: []string{
+            "destination=central_bank1",
+            "destination=central_bank1",
             "destination=central_bank1",
             "destination=central_bank1",
         },

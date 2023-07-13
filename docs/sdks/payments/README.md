@@ -155,8 +155,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetConnectorTask(ctx, operations.GetConnectorTaskRequest{
-        Connector: shared.ConnectorModulr,
-        TaskID: "perferendis",
+        Connector: shared.ConnectorCurrencyCloud,
+        TaskID: "quibusdam",
     })
     if err != nil {
         log.Fatal(err)
@@ -206,7 +206,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetPayment(ctx, operations.GetPaymentRequest{
-        PaymentID: "magni",
+        PaymentID: "labore",
     })
     if err != nil {
         log.Fatal(err)
@@ -257,13 +257,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.InstallConnector(ctx, operations.InstallConnectorRequest{
-        RequestBody: shared.CurrencyCloudConfig{
-            APIKey: "XXX",
-            Endpoint: formance.String("XXX"),
-            LoginID: "XXX",
-            PollingPeriod: formance.String("60s"),
+        RequestBody: shared.DummyPayConfig{
+            Directory: "/tmp/dummypay",
+            FileGenerationPeriod: formance.String("60s"),
+            FilePollingPeriod: formance.String("60s"),
         },
-        Connector: shared.ConnectorWise,
+        Connector: shared.ConnectorDummyPay,
     })
     if err != nil {
         log.Fatal(err)
@@ -406,9 +405,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.ListConnectorTasks(ctx, operations.ListConnectorTasksRequest{
-        Connector: shared.ConnectorStripe,
+        Connector: shared.ConnectorWise,
         Cursor: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formance.Int64(146441),
+        PageSize: formance.Int64(586513),
     })
     if err != nil {
         log.Fatal(err)
@@ -459,7 +458,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.ListConnectorsTransfers(ctx, operations.ListConnectorsTransfersRequest{
-        Connector: shared.ConnectorCurrencyCloud,
+        Connector: shared.ConnectorModulr,
     })
     if err != nil {
         log.Fatal(err)
@@ -510,10 +509,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ListPayments(ctx, operations.ListPaymentsRequest{
         Cursor: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formance.Int64(569618),
+        PageSize: formance.Int64(20107),
         Sort: []string{
-            "facilis",
-            "tempore",
+            "assumenda",
         },
     })
     if err != nil {
@@ -611,12 +609,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.PaymentslistAccounts(ctx, operations.PaymentslistAccountsRequest{
         Cursor: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formance.Int64(288476),
+        PageSize: formance.Int64(369808),
         Sort: []string{
-            "eum",
-            "non",
-            "eligendi",
-            "sint",
+            "fugit",
         },
     })
     if err != nil {
@@ -668,7 +663,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.ReadConnectorConfig(ctx, operations.ReadConnectorConfigRequest{
-        Connector: shared.ConnectorWise,
+        Connector: shared.ConnectorCurrencyCloud,
     })
     if err != nil {
         log.Fatal(err)
@@ -772,7 +767,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.UninstallConnector(ctx, operations.UninstallConnectorRequest{
-        Connector: shared.ConnectorBankingCircle,
+        Connector: shared.ConnectorDummyPay,
     })
     if err != nil {
         log.Fatal(err)
@@ -824,9 +819,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.UpdateMetadata(ctx, operations.UpdateMetadataRequest{
         PaymentMetadata: shared.PaymentMetadata{
-            Key: formance.String("sint"),
+            Key: formance.String("facilis"),
         },
-        PaymentID: "officia",
+        PaymentID: "tempore",
     })
     if err != nil {
         log.Fatal(err)

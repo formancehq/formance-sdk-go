@@ -54,8 +54,7 @@ func main() {
             Transactions: []shared.TransactionData{
                 shared.TransactionData{
                     Metadata: map[string]interface{}{
-                        "explicabo": "nobis",
-                        "enim": "omnis",
+                        "error": "temporibus",
                     },
                     Postings: []shared.Posting{
                         shared.Posting{
@@ -70,9 +69,15 @@ func main() {
                             Destination: "users:002",
                             Source: "users:001",
                         },
+                        shared.Posting{
+                            Amount: 100,
+                            Asset: "COIN",
+                            Destination: "users:002",
+                            Source: "users:001",
+                        },
                     },
                     Reference: formance.String("ref:001"),
-                    Timestamp: types.MustTimeFromString("2022-06-06T21:04:34.044Z"),
+                    Timestamp: types.MustTimeFromString("2022-01-11T05:45:42.485Z"),
                 },
             },
         },
@@ -127,7 +132,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Ledger.AddMetadataOnTransaction(ctx, operations.AddMetadataOnTransactionRequest{
         RequestBody: map[string]interface{}{
-            "iure": "culpa",
+            "vero": "nihil",
+            "praesentium": "voluptatibus",
+            "ipsa": "omnis",
+            "voluptate": "cum",
         },
         Ledger: "ledger001",
         Txid: 1234,
@@ -181,10 +189,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Ledger.AddMetadataToAccount(ctx, operations.AddMetadataToAccountRequest{
         RequestBody: map[string]interface{}{
-            "sapiente": "architecto",
-            "mollitia": "dolorem",
-            "culpa": "consequuntur",
-            "repellat": "mollitia",
+            "doloremque": "reprehenderit",
         },
         Address: "users:001",
         Ledger: "ledger001",
@@ -292,12 +297,12 @@ func main() {
     res, err := s.Ledger.CountTransactions(ctx, operations.CountTransactionsRequest{
         Account: formance.String("users:001"),
         Destination: formance.String("users:001"),
-        EndTime: types.MustTimeFromString("2022-06-30T02:19:51.375Z"),
+        EndTime: types.MustTimeFromString("2022-01-08T10:49:12.847Z"),
         Ledger: "ledger001",
         Metadata: &operations.CountTransactionsMetadata{},
         Reference: formance.String("ref:001"),
         Source: formance.String("users:001"),
-        StartTime: types.MustTimeFromString("2022-07-14T19:07:02.935Z"),
+        StartTime: types.MustTimeFromString("2022-08-22T19:15:58.586Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -351,10 +356,28 @@ func main() {
     res, err := s.Ledger.CreateTransaction(ctx, operations.CreateTransactionRequest{
         PostTransaction: shared.PostTransaction{
             Metadata: map[string]interface{}{
-                "velit": "error",
-                "quia": "quis",
+                "iusto": "dicta",
+                "harum": "enim",
             },
             Postings: []shared.Posting{
+                shared.Posting{
+                    Amount: 100,
+                    Asset: "COIN",
+                    Destination: "users:002",
+                    Source: "users:001",
+                },
+                shared.Posting{
+                    Amount: 100,
+                    Asset: "COIN",
+                    Destination: "users:002",
+                    Source: "users:001",
+                },
+                shared.Posting{
+                    Amount: 100,
+                    Asset: "COIN",
+                    Destination: "users:002",
+                    Source: "users:001",
+                },
                 shared.Posting{
                     Amount: 100,
                     Asset: "COIN",
@@ -374,7 +397,7 @@ func main() {
             ",
                 Vars: &shared.PostTransactionScriptVars{},
             },
-            Timestamp: types.MustTimeFromString("2021-09-08T21:06:19.630Z"),
+            Timestamp: types.MustTimeFromString("2022-01-30T20:15:26.045Z"),
         },
         Ledger: "ledger001",
         Preview: formance.Bool(true),
@@ -787,7 +810,7 @@ func main() {
         Cursor: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
         Metadata: &operations.ListAccountsMetadata{},
-        PageSize: formance.Int64(317202),
+        PageSize: formance.Int64(64147),
         PaginationToken: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
     })
     if err != nil {
@@ -841,11 +864,11 @@ func main() {
     res, err := s.Ledger.ListLogs(ctx, operations.ListLogsRequest{
         After: formance.String("1234"),
         Cursor: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        EndTime: types.MustTimeFromString("2022-03-22T21:41:36.666Z"),
+        EndTime: types.MustTimeFromString("2022-04-23T05:56:38.936Z"),
         Ledger: "ledger001",
-        PageSize: formance.Int64(196582),
+        PageSize: formance.Int64(565189),
         PaginationToken: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        StartTime: types.MustTimeFromString("2021-11-23T05:54:08.890Z"),
+        StartTime: types.MustTimeFromString("2021-04-09T11:24:10.949Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -900,14 +923,14 @@ func main() {
         After: formance.String("1234"),
         Cursor: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Destination: formance.String("users:001"),
-        EndTime: types.MustTimeFromString("2021-05-11T16:11:54.761Z"),
+        EndTime: types.MustTimeFromString("2022-06-29T05:25:54.356Z"),
         Ledger: "ledger001",
         Metadata: &operations.ListTransactionsMetadata{},
-        PageSize: formance.Int64(13571),
+        PageSize: formance.Int64(523248),
         PaginationToken: formance.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Reference: formance.String("ref:001"),
         Source: formance.String("users:001"),
-        StartTime: types.MustTimeFromString("2022-05-18T15:52:05.226Z"),
+        StartTime: types.MustTimeFromString("2022-09-20T03:14:35.704Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -1065,10 +1088,10 @@ func main() {
     res, err := s.Ledger.RunScript(ctx, operations.RunScriptRequest{
         Script: shared.Script{
             Metadata: map[string]interface{}{
-                "laborum": "quasi",
-                "reiciendis": "voluptatibus",
-                "vero": "nihil",
-                "praesentium": "voluptatibus",
+                "sint": "veritatis",
+                "itaque": "incidunt",
+                "enim": "consequatur",
+                "est": "quibusdam",
             },
             Plain: "vars {
         account $user

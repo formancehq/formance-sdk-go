@@ -80,13 +80,13 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // and standard method from web, mobile and desktop applications.
 // <SecurityDefinitions />
 type Formance struct {
-	Auth          *auth
-	Ledger        *ledger
-	Orchestration *orchestration
-	Payments      *payments
-	Search        *search
-	Wallets       *wallets
-	Webhooks      *webhooks
+	Auth     *auth
+	Flows    *flows
+	Ledger   *ledger
+	Payments *payments
+	Search   *search
+	Wallets  *wallets
+	Webhooks *webhooks
 
 	sdkConfiguration sdkConfiguration
 }
@@ -154,9 +154,9 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v1.0.20230710",
-			SDKVersion:        "v1.0.20230710",
-			GenVersion:        "2.58.2",
+			OpenAPIDocVersion: "v1.0.20230713",
+			SDKVersion:        "v1.0.20230713",
+			GenVersion:        "2.64.0",
 			ServerDefaults: []map[string]string{
 				{},
 				{
@@ -183,9 +183,9 @@ func New(opts ...SDKOption) *Formance {
 
 	sdk.Auth = newAuth(sdk.sdkConfiguration)
 
-	sdk.Ledger = newLedger(sdk.sdkConfiguration)
+	sdk.Flows = newFlows(sdk.sdkConfiguration)
 
-	sdk.Orchestration = newOrchestration(sdk.sdkConfiguration)
+	sdk.Ledger = newLedger(sdk.sdkConfiguration)
 
 	sdk.Payments = newPayments(sdk.sdkConfiguration)
 
