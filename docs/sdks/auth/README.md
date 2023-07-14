@@ -35,6 +35,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -86,6 +87,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -261,8 +263,8 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
-	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
 func main() {
@@ -321,6 +323,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -371,6 +374,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -421,6 +425,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -472,6 +477,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -523,6 +529,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -574,6 +581,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 )
 
 func main() {
@@ -620,6 +628,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 )
 
 func main() {
@@ -666,6 +675,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 )
 
 func main() {
@@ -712,6 +722,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 )
 
 func main() {
@@ -758,6 +769,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -808,6 +820,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -858,6 +871,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
@@ -908,8 +922,8 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
-	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
 func main() {
@@ -979,8 +993,8 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
-	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 )
 
 func main() {

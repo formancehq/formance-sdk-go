@@ -27,7 +27,7 @@ func newFlows(sdkConfig sdkConfiguration) *flows {
 // FlowsgetServerInfo - Get server info
 func (s *flows) FlowsgetServerInfo(ctx context.Context) (*operations.FlowsgetServerInfoResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/_info"
+	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -90,7 +90,7 @@ func (s *flows) FlowsgetServerInfo(ctx context.Context) (*operations.FlowsgetSer
 // Cancel a running workflow
 func (s *flows) CancelEvent(ctx context.Context, request operations.CancelEventRequest) (*operations.CancelEventResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/abort", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/abort", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -147,7 +147,7 @@ func (s *flows) CancelEvent(ctx context.Context, request operations.CancelEventR
 // Create a workflow
 func (s *flows) CreateWorkflow(ctx context.Context, request shared.CreateWorkflowRequest) (*operations.CreateWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/workflows"
+	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/workflows"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
@@ -217,7 +217,7 @@ func (s *flows) CreateWorkflow(ctx context.Context, request shared.CreateWorkflo
 // Get a workflow instance by id
 func (s *flows) GetInstance(ctx context.Context, request operations.GetInstanceRequest) (*operations.GetInstanceResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -283,7 +283,7 @@ func (s *flows) GetInstance(ctx context.Context, request operations.GetInstanceR
 // Get a workflow instance history by id
 func (s *flows) GetInstanceHistory(ctx context.Context, request operations.GetInstanceHistoryRequest) (*operations.GetInstanceHistoryResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/history", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -349,7 +349,7 @@ func (s *flows) GetInstanceHistory(ctx context.Context, request operations.GetIn
 // Get a workflow instance stage history
 func (s *flows) GetInstanceStageHistory(ctx context.Context, request operations.GetInstanceStageHistoryRequest) (*operations.GetInstanceStageHistoryResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/stages/{number}/history", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/stages/{number}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -415,7 +415,7 @@ func (s *flows) GetInstanceStageHistory(ctx context.Context, request operations.
 // Get a flow by id
 func (s *flows) GetWorkflow(ctx context.Context, request operations.GetWorkflowRequest) (*operations.GetWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/workflows/{flowId}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -481,7 +481,7 @@ func (s *flows) GetWorkflow(ctx context.Context, request operations.GetWorkflowR
 // List instances of a workflow
 func (s *flows) ListInstances(ctx context.Context, request operations.ListInstancesRequest) (*operations.ListInstancesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/instances"
+	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/instances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -548,7 +548,7 @@ func (s *flows) ListInstances(ctx context.Context, request operations.ListInstan
 // List registered workflows
 func (s *flows) ListWorkflows(ctx context.Context) (*operations.ListWorkflowsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/api/Flows/workflows"
+	url := strings.TrimSuffix(baseURL, "/") + "/api/orchestration/workflows"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -611,7 +611,7 @@ func (s *flows) ListWorkflows(ctx context.Context) (*operations.ListWorkflowsRes
 // Run workflow
 func (s *flows) RunWorkflow(ctx context.Context, request operations.RunWorkflowRequest) (*operations.RunWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/workflows/{workflowID}/instances", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{workflowID}/instances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -688,7 +688,7 @@ func (s *flows) RunWorkflow(ctx context.Context, request operations.RunWorkflowR
 // Send an event to a running workflow
 func (s *flows) SendEvent(ctx context.Context, request operations.SendEventRequest) (*operations.SendEventResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/api/Flows/instances/{instanceID}/events", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/events", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}

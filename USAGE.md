@@ -1,4 +1,6 @@
 <!-- Start SDK Example Usage -->
+
+
 ```go
 package main
 
@@ -6,6 +8,7 @@ import(
 	"context"
 	"log"
 	"github.com/formancehq/formance-sdk-go"
+	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 )
 
 func main() {
