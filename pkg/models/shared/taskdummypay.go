@@ -12,16 +12,13 @@ type TaskDummyPayDescriptor struct {
 	Name     *string `json:"name,omitempty"`
 }
 
-type TaskDummyPayState struct {
-}
-
 type TaskDummyPay struct {
 	ConnectorID string                 `json:"connectorId"`
 	CreatedAt   time.Time              `json:"createdAt"`
 	Descriptor  TaskDummyPayDescriptor `json:"descriptor"`
 	Error       *string                `json:"error,omitempty"`
 	ID          string                 `json:"id"`
-	State       TaskDummyPayState      `json:"state"`
+	State       map[string]interface{} `json:"state"`
 	Status      PaymentStatus          `json:"status"`
 	UpdatedAt   time.Time              `json:"updatedAt"`
 }

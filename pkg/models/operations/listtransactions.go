@@ -8,10 +8,6 @@ import (
 	"time"
 )
 
-// ListTransactionsMetadata - Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below.
-type ListTransactionsMetadata struct {
-}
-
 type ListTransactionsRequest struct {
 	// Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $).
 	Account *string `queryParam:"style=form,explode=true,name=account"`
@@ -32,7 +28,7 @@ type ListTransactionsRequest struct {
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below.
-	Metadata *ListTransactionsMetadata `queryParam:"style=deepObject,explode=true,name=metadata"`
+	Metadata map[string]interface{} `queryParam:"style=deepObject,explode=true,name=metadata"`
 	// The maximum number of results to return per page.
 	//
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`

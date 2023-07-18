@@ -6,13 +6,10 @@ import (
 	"time"
 )
 
-type PaymentAdjustmentRaw struct {
-}
-
 type PaymentAdjustment struct {
-	Absolute bool                 `json:"absolute"`
-	Amount   int64                `json:"amount"`
-	Date     time.Time            `json:"date"`
-	Raw      PaymentAdjustmentRaw `json:"raw"`
-	Status   PaymentStatus        `json:"status"`
+	Absolute bool                   `json:"absolute"`
+	Amount   int64                  `json:"amount"`
+	Date     time.Time              `json:"date"`
+	Raw      map[string]interface{} `json:"raw"`
+	Status   PaymentStatus          `json:"status"`
 }

@@ -2,13 +2,10 @@
 
 package shared
 
-type ScriptVars struct {
-}
-
 type Script struct {
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Plain    string                 `json:"plain"`
 	// Reference to attach to the generated transaction
-	Reference *string     `json:"reference,omitempty"`
-	Vars      *ScriptVars `json:"vars,omitempty"`
+	Reference *string                `json:"reference,omitempty"`
+	Vars      map[string]interface{} `json:"vars,omitempty"`
 }

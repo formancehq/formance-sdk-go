@@ -3,30 +3,38 @@
 package formance
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/utils"
-	"io"
 	"net/http"
 	"strings"
 )
 
 type auth struct {
-	sdkConfiguration sdkConfiguration
+	defaultClient  HTTPClient
+	securityClient HTTPClient
+	serverURL      string
+	language       string
+	sdkVersion     string
+	genVersion     string
 }
 
-func newAuth(sdkConfig sdkConfiguration) *auth {
+func newAuth(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *auth {
 	return &auth{
-		sdkConfiguration: sdkConfig,
+		defaultClient:  defaultClient,
+		securityClient: securityClient,
+		serverURL:      serverURL,
+		language:       language,
+		sdkVersion:     sdkVersion,
+		genVersion:     genVersion,
 	}
 }
 
 // AddScopeToClient - Add scope to client
 func (s *auth) AddScopeToClient(ctx context.Context, request operations.AddScopeToClientRequest) (*operations.AddScopeToClientResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}/scopes/{scopeId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -37,9 +45,9 @@ func (s *auth) AddScopeToClient(ctx context.Context, request operations.AddScope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -48,13 +56,7 @@ func (s *auth) AddScopeToClient(ctx context.Context, request operations.AddScope
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -73,7 +75,7 @@ func (s *auth) AddScopeToClient(ctx context.Context, request operations.AddScope
 // AddTransientScope - Add a transient scope to a scope
 // Add a transient scope to a scope
 func (s *auth) AddTransientScope(ctx context.Context, request operations.AddTransientScopeRequest) (*operations.AddTransientScopeResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/scopes/{scopeId}/transient/{transientScopeId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -84,9 +86,9 @@ func (s *auth) AddTransientScope(ctx context.Context, request operations.AddTran
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -95,13 +97,7 @@ func (s *auth) AddTransientScope(ctx context.Context, request operations.AddTran
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -119,7 +115,7 @@ func (s *auth) AddTransientScope(ctx context.Context, request operations.AddTran
 
 // CreateClient - Create client
 func (s *auth) CreateClient(ctx context.Context, request shared.CreateClientRequest) (*operations.CreateClientResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/auth/clients"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -132,11 +128,11 @@ func (s *auth) CreateClient(ctx context.Context, request shared.CreateClientRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -145,13 +141,7 @@ func (s *auth) CreateClient(ctx context.Context, request shared.CreateClientRequ
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -165,7 +155,7 @@ func (s *auth) CreateClient(ctx context.Context, request shared.CreateClientRequ
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateClientResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -179,7 +169,7 @@ func (s *auth) CreateClient(ctx context.Context, request shared.CreateClientRequ
 // CreateScope - Create scope
 // Create scope
 func (s *auth) CreateScope(ctx context.Context, request shared.CreateScopeRequest) (*operations.CreateScopeResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/auth/scopes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -192,11 +182,11 @@ func (s *auth) CreateScope(ctx context.Context, request shared.CreateScopeReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -205,13 +195,7 @@ func (s *auth) CreateScope(ctx context.Context, request shared.CreateScopeReques
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -225,7 +209,7 @@ func (s *auth) CreateScope(ctx context.Context, request shared.CreateScopeReques
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateScopeResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -238,7 +222,7 @@ func (s *auth) CreateScope(ctx context.Context, request shared.CreateScopeReques
 
 // CreateSecret - Add a secret to a client
 func (s *auth) CreateSecret(ctx context.Context, request operations.CreateSecretRequest) (*operations.CreateSecretResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}/secrets", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -254,11 +238,11 @@ func (s *auth) CreateSecret(ctx context.Context, request operations.CreateSecret
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -267,13 +251,7 @@ func (s *auth) CreateSecret(ctx context.Context, request operations.CreateSecret
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -287,7 +265,7 @@ func (s *auth) CreateSecret(ctx context.Context, request operations.CreateSecret
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateSecretResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -300,7 +278,7 @@ func (s *auth) CreateSecret(ctx context.Context, request operations.CreateSecret
 
 // DeleteClient - Delete client
 func (s *auth) DeleteClient(ctx context.Context, request operations.DeleteClientRequest) (*operations.DeleteClientResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -311,9 +289,9 @@ func (s *auth) DeleteClient(ctx context.Context, request operations.DeleteClient
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -322,13 +300,7 @@ func (s *auth) DeleteClient(ctx context.Context, request operations.DeleteClient
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -347,7 +319,7 @@ func (s *auth) DeleteClient(ctx context.Context, request operations.DeleteClient
 // DeleteScope - Delete scope
 // Delete scope
 func (s *auth) DeleteScope(ctx context.Context, request operations.DeleteScopeRequest) (*operations.DeleteScopeResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/scopes/{scopeId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -358,9 +330,9 @@ func (s *auth) DeleteScope(ctx context.Context, request operations.DeleteScopeRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -369,13 +341,7 @@ func (s *auth) DeleteScope(ctx context.Context, request operations.DeleteScopeRe
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -393,7 +359,7 @@ func (s *auth) DeleteScope(ctx context.Context, request operations.DeleteScopeRe
 
 // DeleteScopeFromClient - Delete scope from client
 func (s *auth) DeleteScopeFromClient(ctx context.Context, request operations.DeleteScopeFromClientRequest) (*operations.DeleteScopeFromClientResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}/scopes/{scopeId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -404,9 +370,9 @@ func (s *auth) DeleteScopeFromClient(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -415,13 +381,7 @@ func (s *auth) DeleteScopeFromClient(ctx context.Context, request operations.Del
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -439,7 +399,7 @@ func (s *auth) DeleteScopeFromClient(ctx context.Context, request operations.Del
 
 // DeleteSecret - Delete a secret from a client
 func (s *auth) DeleteSecret(ctx context.Context, request operations.DeleteSecretRequest) (*operations.DeleteSecretResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}/secrets/{secretId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -450,9 +410,9 @@ func (s *auth) DeleteSecret(ctx context.Context, request operations.DeleteSecret
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -461,13 +421,7 @@ func (s *auth) DeleteSecret(ctx context.Context, request operations.DeleteSecret
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -486,7 +440,7 @@ func (s *auth) DeleteSecret(ctx context.Context, request operations.DeleteSecret
 // DeleteTransientScope - Delete a transient scope from a scope
 // Delete a transient scope from a scope
 func (s *auth) DeleteTransientScope(ctx context.Context, request operations.DeleteTransientScopeRequest) (*operations.DeleteTransientScopeResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/scopes/{scopeId}/transient/{transientScopeId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -497,9 +451,9 @@ func (s *auth) DeleteTransientScope(ctx context.Context, request operations.Dele
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -508,13 +462,7 @@ func (s *auth) DeleteTransientScope(ctx context.Context, request operations.Dele
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -532,7 +480,7 @@ func (s *auth) DeleteTransientScope(ctx context.Context, request operations.Dele
 
 // GetServerInfo - Get server info
 func (s *auth) GetServerInfo(ctx context.Context) (*operations.GetServerInfoResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/auth/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -540,9 +488,9 @@ func (s *auth) GetServerInfo(ctx context.Context) (*operations.GetServerInfoResp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -551,13 +499,7 @@ func (s *auth) GetServerInfo(ctx context.Context) (*operations.GetServerInfoResp
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -571,7 +513,7 @@ func (s *auth) GetServerInfo(ctx context.Context) (*operations.GetServerInfoResp
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ServerInfo
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -584,7 +526,7 @@ func (s *auth) GetServerInfo(ctx context.Context) (*operations.GetServerInfoResp
 
 // ListClients - List clients
 func (s *auth) ListClients(ctx context.Context) (*operations.ListClientsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/auth/clients"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -592,9 +534,9 @@ func (s *auth) ListClients(ctx context.Context) (*operations.ListClientsResponse
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -603,13 +545,7 @@ func (s *auth) ListClients(ctx context.Context) (*operations.ListClientsResponse
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -623,7 +559,7 @@ func (s *auth) ListClients(ctx context.Context) (*operations.ListClientsResponse
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListClientsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -637,7 +573,7 @@ func (s *auth) ListClients(ctx context.Context) (*operations.ListClientsResponse
 // ListScopes - List scopes
 // List Scopes
 func (s *auth) ListScopes(ctx context.Context) (*operations.ListScopesResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/auth/scopes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -645,9 +581,9 @@ func (s *auth) ListScopes(ctx context.Context) (*operations.ListScopesResponse, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -656,13 +592,7 @@ func (s *auth) ListScopes(ctx context.Context) (*operations.ListScopesResponse, 
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -676,7 +606,7 @@ func (s *auth) ListScopes(ctx context.Context) (*operations.ListScopesResponse, 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListScopesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -690,7 +620,7 @@ func (s *auth) ListScopes(ctx context.Context) (*operations.ListScopesResponse, 
 // ListUsers - List users
 // List users
 func (s *auth) ListUsers(ctx context.Context) (*operations.ListUsersResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/auth/users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -698,9 +628,9 @@ func (s *auth) ListUsers(ctx context.Context) (*operations.ListUsersResponse, er
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -709,13 +639,7 @@ func (s *auth) ListUsers(ctx context.Context) (*operations.ListUsersResponse, er
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -729,7 +653,7 @@ func (s *auth) ListUsers(ctx context.Context) (*operations.ListUsersResponse, er
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListUsersResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -742,7 +666,7 @@ func (s *auth) ListUsers(ctx context.Context) (*operations.ListUsersResponse, er
 
 // ReadClient - Read client
 func (s *auth) ReadClient(ctx context.Context, request operations.ReadClientRequest) (*operations.ReadClientResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -753,9 +677,9 @@ func (s *auth) ReadClient(ctx context.Context, request operations.ReadClientRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -764,13 +688,7 @@ func (s *auth) ReadClient(ctx context.Context, request operations.ReadClientRequ
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -784,7 +702,7 @@ func (s *auth) ReadClient(ctx context.Context, request operations.ReadClientRequ
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ReadClientResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -798,7 +716,7 @@ func (s *auth) ReadClient(ctx context.Context, request operations.ReadClientRequ
 // ReadScope - Read scope
 // Read scope
 func (s *auth) ReadScope(ctx context.Context, request operations.ReadScopeRequest) (*operations.ReadScopeResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/scopes/{scopeId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -809,9 +727,9 @@ func (s *auth) ReadScope(ctx context.Context, request operations.ReadScopeReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -820,13 +738,7 @@ func (s *auth) ReadScope(ctx context.Context, request operations.ReadScopeReques
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -840,7 +752,7 @@ func (s *auth) ReadScope(ctx context.Context, request operations.ReadScopeReques
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ReadScopeResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -854,7 +766,7 @@ func (s *auth) ReadScope(ctx context.Context, request operations.ReadScopeReques
 // ReadUser - Read user
 // Read user
 func (s *auth) ReadUser(ctx context.Context, request operations.ReadUserRequest) (*operations.ReadUserResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/users/{userId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -865,9 +777,9 @@ func (s *auth) ReadUser(ctx context.Context, request operations.ReadUserRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -876,13 +788,7 @@ func (s *auth) ReadUser(ctx context.Context, request operations.ReadUserRequest)
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -896,7 +802,7 @@ func (s *auth) ReadUser(ctx context.Context, request operations.ReadUserRequest)
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ReadUserResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -909,7 +815,7 @@ func (s *auth) ReadUser(ctx context.Context, request operations.ReadUserRequest)
 
 // UpdateClient - Update client
 func (s *auth) UpdateClient(ctx context.Context, request operations.UpdateClientRequest) (*operations.UpdateClientResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -925,11 +831,11 @@ func (s *auth) UpdateClient(ctx context.Context, request operations.UpdateClient
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -938,13 +844,7 @@ func (s *auth) UpdateClient(ctx context.Context, request operations.UpdateClient
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -958,7 +858,7 @@ func (s *auth) UpdateClient(ctx context.Context, request operations.UpdateClient
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.UpdateClientResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -972,7 +872,7 @@ func (s *auth) UpdateClient(ctx context.Context, request operations.UpdateClient
 // UpdateScope - Update scope
 // Update scope
 func (s *auth) UpdateScope(ctx context.Context, request operations.UpdateScopeRequest) (*operations.UpdateScopeResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/auth/scopes/{scopeId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -988,11 +888,11 @@ func (s *auth) UpdateScope(ctx context.Context, request operations.UpdateScopeRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1001,13 +901,7 @@ func (s *auth) UpdateScope(ctx context.Context, request operations.UpdateScopeRe
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1021,7 +915,7 @@ func (s *auth) UpdateScope(ctx context.Context, request operations.UpdateScopeRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.UpdateScopeResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 

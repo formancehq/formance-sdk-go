@@ -3,31 +3,39 @@
 package formance
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/utils"
-	"io"
 	"net/http"
 	"strings"
 )
 
 type webhooks struct {
-	sdkConfiguration sdkConfiguration
+	defaultClient  HTTPClient
+	securityClient HTTPClient
+	serverURL      string
+	language       string
+	sdkVersion     string
+	genVersion     string
 }
 
-func newWebhooks(sdkConfig sdkConfiguration) *webhooks {
+func newWebhooks(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *webhooks {
 	return &webhooks{
-		sdkConfiguration: sdkConfig,
+		defaultClient:  defaultClient,
+		securityClient: securityClient,
+		serverURL:      serverURL,
+		language:       language,
+		sdkVersion:     sdkVersion,
+		genVersion:     genVersion,
 	}
 }
 
 // ActivateConfig - Activate one config
 // Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
 func (s *webhooks) ActivateConfig(ctx context.Context, request operations.ActivateConfigRequest) (*operations.ActivateConfigResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/activate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -38,9 +46,9 @@ func (s *webhooks) ActivateConfig(ctx context.Context, request operations.Activa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -49,13 +57,7 @@ func (s *webhooks) ActivateConfig(ctx context.Context, request operations.Activa
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -69,7 +71,7 @@ func (s *webhooks) ActivateConfig(ctx context.Context, request operations.Activa
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ConfigResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -79,7 +81,7 @@ func (s *webhooks) ActivateConfig(ctx context.Context, request operations.Activa
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WebhooksErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -96,7 +98,7 @@ func (s *webhooks) ActivateConfig(ctx context.Context, request operations.Activa
 // If not passed or empty, a secret is automatically generated.
 // The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 func (s *webhooks) ChangeConfigSecret(ctx context.Context, request operations.ChangeConfigSecretRequest) (*operations.ChangeConfigSecretResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/secret/change", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -112,11 +114,11 @@ func (s *webhooks) ChangeConfigSecret(ctx context.Context, request operations.Ch
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -125,13 +127,7 @@ func (s *webhooks) ChangeConfigSecret(ctx context.Context, request operations.Ch
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -145,7 +141,7 @@ func (s *webhooks) ChangeConfigSecret(ctx context.Context, request operations.Ch
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ConfigResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -155,7 +151,7 @@ func (s *webhooks) ChangeConfigSecret(ctx context.Context, request operations.Ch
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WebhooksErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -169,7 +165,7 @@ func (s *webhooks) ChangeConfigSecret(ctx context.Context, request operations.Ch
 // DeactivateConfig - Deactivate one config
 // Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
 func (s *webhooks) DeactivateConfig(ctx context.Context, request operations.DeactivateConfigRequest) (*operations.DeactivateConfigResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/deactivate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -180,9 +176,9 @@ func (s *webhooks) DeactivateConfig(ctx context.Context, request operations.Deac
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -191,13 +187,7 @@ func (s *webhooks) DeactivateConfig(ctx context.Context, request operations.Deac
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -211,7 +201,7 @@ func (s *webhooks) DeactivateConfig(ctx context.Context, request operations.Deac
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ConfigResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -221,7 +211,7 @@ func (s *webhooks) DeactivateConfig(ctx context.Context, request operations.Deac
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WebhooksErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -235,7 +225,7 @@ func (s *webhooks) DeactivateConfig(ctx context.Context, request operations.Deac
 // DeleteConfig - Delete one config
 // Delete a webhooks config by ID.
 func (s *webhooks) DeleteConfig(ctx context.Context, request operations.DeleteConfigRequest) (*operations.DeleteConfigResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -246,9 +236,9 @@ func (s *webhooks) DeleteConfig(ctx context.Context, request operations.DeleteCo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -257,13 +247,7 @@ func (s *webhooks) DeleteConfig(ctx context.Context, request operations.DeleteCo
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -278,7 +262,7 @@ func (s *webhooks) DeleteConfig(ctx context.Context, request operations.DeleteCo
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WebhooksErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -292,7 +276,7 @@ func (s *webhooks) DeleteConfig(ctx context.Context, request operations.DeleteCo
 // GetManyConfigs - Get many configs
 // Sorted by updated date descending
 func (s *webhooks) GetManyConfigs(ctx context.Context, request operations.GetManyConfigsRequest) (*operations.GetManyConfigsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/webhooks/configs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -300,13 +284,13 @@ func (s *webhooks) GetManyConfigs(ctx context.Context, request operations.GetMan
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -315,13 +299,7 @@ func (s *webhooks) GetManyConfigs(ctx context.Context, request operations.GetMan
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -335,7 +313,7 @@ func (s *webhooks) GetManyConfigs(ctx context.Context, request operations.GetMan
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ConfigsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -345,7 +323,7 @@ func (s *webhooks) GetManyConfigs(ctx context.Context, request operations.GetMan
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WebhooksErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -367,7 +345,7 @@ func (s *webhooks) GetManyConfigs(ctx context.Context, request operations.GetMan
 //
 // All eventTypes are converted to lower-case when inserted.
 func (s *webhooks) InsertConfig(ctx context.Context, request shared.ConfigUser) (*operations.InsertConfigResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/webhooks/configs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -383,11 +361,11 @@ func (s *webhooks) InsertConfig(ctx context.Context, request shared.ConfigUser) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -396,13 +374,7 @@ func (s *webhooks) InsertConfig(ctx context.Context, request shared.ConfigUser) 
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -416,7 +388,7 @@ func (s *webhooks) InsertConfig(ctx context.Context, request shared.ConfigUser) 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ConfigResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -426,7 +398,7 @@ func (s *webhooks) InsertConfig(ctx context.Context, request shared.ConfigUser) 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WebhooksErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -440,7 +412,7 @@ func (s *webhooks) InsertConfig(ctx context.Context, request shared.ConfigUser) 
 // TestConfig - Test one config
 // Test a config by sending a webhook to its endpoint.
 func (s *webhooks) TestConfig(ctx context.Context, request operations.TestConfigRequest) (*operations.TestConfigResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/test", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -451,9 +423,9 @@ func (s *webhooks) TestConfig(ctx context.Context, request operations.TestConfig
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -462,13 +434,7 @@ func (s *webhooks) TestConfig(ctx context.Context, request operations.TestConfig
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -482,7 +448,7 @@ func (s *webhooks) TestConfig(ctx context.Context, request operations.TestConfig
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.AttemptResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -492,7 +458,7 @@ func (s *webhooks) TestConfig(ctx context.Context, request operations.TestConfig
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WebhooksErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 

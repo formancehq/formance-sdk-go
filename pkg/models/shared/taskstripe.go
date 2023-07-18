@@ -12,16 +12,13 @@ type TaskStripeDescriptor struct {
 	Name    string `json:"name"`
 }
 
-type TaskStripeState struct {
-}
-
 type TaskStripe struct {
-	ConnectorID string               `json:"connectorId"`
-	CreatedAt   time.Time            `json:"createdAt"`
-	Descriptor  TaskStripeDescriptor `json:"descriptor"`
-	Error       *string              `json:"error,omitempty"`
-	ID          string               `json:"id"`
-	State       TaskStripeState      `json:"state"`
-	Status      PaymentStatus        `json:"status"`
-	UpdatedAt   time.Time            `json:"updatedAt"`
+	ConnectorID string                 `json:"connectorId"`
+	CreatedAt   time.Time              `json:"createdAt"`
+	Descriptor  TaskStripeDescriptor   `json:"descriptor"`
+	Error       *string                `json:"error,omitempty"`
+	ID          string                 `json:"id"`
+	State       map[string]interface{} `json:"state"`
+	Status      PaymentStatus          `json:"status"`
+	UpdatedAt   time.Time              `json:"updatedAt"`
 }

@@ -12,16 +12,13 @@ type TaskModulrDescriptor struct {
 	Name      *string `json:"name,omitempty"`
 }
 
-type TaskModulrState struct {
-}
-
 type TaskModulr struct {
-	ConnectorID string               `json:"connectorId"`
-	CreatedAt   time.Time            `json:"createdAt"`
-	Descriptor  TaskModulrDescriptor `json:"descriptor"`
-	Error       *string              `json:"error,omitempty"`
-	ID          string               `json:"id"`
-	State       TaskModulrState      `json:"state"`
-	Status      PaymentStatus        `json:"status"`
-	UpdatedAt   time.Time            `json:"updatedAt"`
+	ConnectorID string                 `json:"connectorId"`
+	CreatedAt   time.Time              `json:"createdAt"`
+	Descriptor  TaskModulrDescriptor   `json:"descriptor"`
+	Error       *string                `json:"error,omitempty"`
+	ID          string                 `json:"id"`
+	State       map[string]interface{} `json:"state"`
+	Status      PaymentStatus          `json:"status"`
+	UpdatedAt   time.Time              `json:"updatedAt"`
 }

@@ -2,11 +2,8 @@
 
 package shared
 
-type AccountMetadata struct {
-}
-
 type Account struct {
-	Address  string           `json:"address"`
-	Metadata *AccountMetadata `json:"metadata,omitempty"`
-	Type     *string          `json:"type,omitempty"`
+	Address  string                 `json:"address"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Type     *string                `json:"type,omitempty"`
 }

@@ -6,12 +6,9 @@ import (
 	"time"
 )
 
-type PostTransactionScriptVars struct {
-}
-
 type PostTransactionScript struct {
-	Plain string                     `json:"plain"`
-	Vars  *PostTransactionScriptVars `json:"vars,omitempty"`
+	Plain string                 `json:"plain"`
+	Vars  map[string]interface{} `json:"vars,omitempty"`
 }
 
 // PostTransaction - The request body must contain at least one of the following objects:

@@ -3,30 +3,38 @@
 package formance
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/utils"
-	"io"
 	"net/http"
 	"strings"
 )
 
 type ledger struct {
-	sdkConfiguration sdkConfiguration
+	defaultClient  HTTPClient
+	securityClient HTTPClient
+	serverURL      string
+	language       string
+	sdkVersion     string
+	genVersion     string
 }
 
-func newLedger(sdkConfig sdkConfiguration) *ledger {
+func newLedger(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *ledger {
 	return &ledger{
-		sdkConfiguration: sdkConfig,
+		defaultClient:  defaultClient,
+		securityClient: securityClient,
+		serverURL:      serverURL,
+		language:       language,
+		sdkVersion:     sdkVersion,
+		genVersion:     genVersion,
 	}
 }
 
 // CreateTransactions - Create a new batch of transactions to a ledger
 func (s *ledger) CreateTransactions(ctx context.Context, request operations.CreateTransactionsRequest) (*operations.CreateTransactionsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/batch", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -45,11 +53,11 @@ func (s *ledger) CreateTransactions(ctx context.Context, request operations.Crea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -58,13 +66,7 @@ func (s *ledger) CreateTransactions(ctx context.Context, request operations.Crea
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -78,7 +80,7 @@ func (s *ledger) CreateTransactions(ctx context.Context, request operations.Crea
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.TransactionsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -88,7 +90,7 @@ func (s *ledger) CreateTransactions(ctx context.Context, request operations.Crea
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -101,7 +103,7 @@ func (s *ledger) CreateTransactions(ctx context.Context, request operations.Crea
 
 // AddMetadataOnTransaction - Set the metadata of a transaction by its ID
 func (s *ledger) AddMetadataOnTransaction(ctx context.Context, request operations.AddMetadataOnTransactionRequest) (*operations.AddMetadataOnTransactionResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -117,11 +119,11 @@ func (s *ledger) AddMetadataOnTransaction(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -130,13 +132,7 @@ func (s *ledger) AddMetadataOnTransaction(ctx context.Context, request operation
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -151,7 +147,7 @@ func (s *ledger) AddMetadataOnTransaction(ctx context.Context, request operation
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -164,7 +160,7 @@ func (s *ledger) AddMetadataOnTransaction(ctx context.Context, request operation
 
 // AddMetadataToAccount - Add metadata to an account
 func (s *ledger) AddMetadataToAccount(ctx context.Context, request operations.AddMetadataToAccountRequest) (*operations.AddMetadataToAccountResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts/{address}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -183,11 +179,11 @@ func (s *ledger) AddMetadataToAccount(ctx context.Context, request operations.Ad
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -196,13 +192,7 @@ func (s *ledger) AddMetadataToAccount(ctx context.Context, request operations.Ad
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -217,7 +207,7 @@ func (s *ledger) AddMetadataToAccount(ctx context.Context, request operations.Ad
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -230,7 +220,7 @@ func (s *ledger) AddMetadataToAccount(ctx context.Context, request operations.Ad
 
 // CountAccounts - Count the accounts from a ledger
 func (s *ledger) CountAccounts(ctx context.Context, request operations.CountAccountsRequest) (*operations.CountAccountsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -241,13 +231,13 @@ func (s *ledger) CountAccounts(ctx context.Context, request operations.CountAcco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -256,13 +246,7 @@ func (s *ledger) CountAccounts(ctx context.Context, request operations.CountAcco
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -279,7 +263,7 @@ func (s *ledger) CountAccounts(ctx context.Context, request operations.CountAcco
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -292,7 +276,7 @@ func (s *ledger) CountAccounts(ctx context.Context, request operations.CountAcco
 
 // CountTransactions - Count the transactions from a ledger
 func (s *ledger) CountTransactions(ctx context.Context, request operations.CountTransactionsRequest) (*operations.CountTransactionsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -303,13 +287,13 @@ func (s *ledger) CountTransactions(ctx context.Context, request operations.Count
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -318,13 +302,7 @@ func (s *ledger) CountTransactions(ctx context.Context, request operations.Count
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -341,7 +319,7 @@ func (s *ledger) CountTransactions(ctx context.Context, request operations.Count
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -354,7 +332,7 @@ func (s *ledger) CountTransactions(ctx context.Context, request operations.Count
 
 // CreateTransaction - Create a new transaction to a ledger
 func (s *ledger) CreateTransaction(ctx context.Context, request operations.CreateTransactionRequest) (*operations.CreateTransactionResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -373,7 +351,7 @@ func (s *ledger) CreateTransaction(ctx context.Context, request operations.Creat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -381,7 +359,7 @@ func (s *ledger) CreateTransaction(ctx context.Context, request operations.Creat
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -390,13 +368,7 @@ func (s *ledger) CreateTransaction(ctx context.Context, request operations.Creat
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -410,7 +382,7 @@ func (s *ledger) CreateTransaction(ctx context.Context, request operations.Creat
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.TransactionsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -420,7 +392,7 @@ func (s *ledger) CreateTransaction(ctx context.Context, request operations.Creat
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -433,7 +405,7 @@ func (s *ledger) CreateTransaction(ctx context.Context, request operations.Creat
 
 // GetAccount - Get account by its address
 func (s *ledger) GetAccount(ctx context.Context, request operations.GetAccountRequest) (*operations.GetAccountResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts/{address}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -444,9 +416,9 @@ func (s *ledger) GetAccount(ctx context.Context, request operations.GetAccountRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -455,13 +427,7 @@ func (s *ledger) GetAccount(ctx context.Context, request operations.GetAccountRe
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -475,7 +441,7 @@ func (s *ledger) GetAccount(ctx context.Context, request operations.GetAccountRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.AccountResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -485,7 +451,7 @@ func (s *ledger) GetAccount(ctx context.Context, request operations.GetAccountRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -498,7 +464,7 @@ func (s *ledger) GetAccount(ctx context.Context, request operations.GetAccountRe
 
 // GetBalances - Get the balances from a ledger's account
 func (s *ledger) GetBalances(ctx context.Context, request operations.GetBalancesRequest) (*operations.GetBalancesResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -509,13 +475,13 @@ func (s *ledger) GetBalances(ctx context.Context, request operations.GetBalances
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -524,13 +490,7 @@ func (s *ledger) GetBalances(ctx context.Context, request operations.GetBalances
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -544,7 +504,7 @@ func (s *ledger) GetBalances(ctx context.Context, request operations.GetBalances
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.BalancesCursorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -554,7 +514,7 @@ func (s *ledger) GetBalances(ctx context.Context, request operations.GetBalances
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -567,7 +527,7 @@ func (s *ledger) GetBalances(ctx context.Context, request operations.GetBalances
 
 // GetBalancesAggregated - Get the aggregated balances from selected accounts
 func (s *ledger) GetBalancesAggregated(ctx context.Context, request operations.GetBalancesAggregatedRequest) (*operations.GetBalancesAggregatedResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/aggregate/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -578,13 +538,13 @@ func (s *ledger) GetBalancesAggregated(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -593,13 +553,7 @@ func (s *ledger) GetBalancesAggregated(ctx context.Context, request operations.G
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -613,7 +567,7 @@ func (s *ledger) GetBalancesAggregated(ctx context.Context, request operations.G
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.AggregateBalancesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -623,7 +577,7 @@ func (s *ledger) GetBalancesAggregated(ctx context.Context, request operations.G
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -636,7 +590,7 @@ func (s *ledger) GetBalancesAggregated(ctx context.Context, request operations.G
 
 // GetInfo - Show server information
 func (s *ledger) GetInfo(ctx context.Context) (*operations.GetInfoResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/ledger/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -644,9 +598,9 @@ func (s *ledger) GetInfo(ctx context.Context) (*operations.GetInfoResponse, erro
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -655,13 +609,7 @@ func (s *ledger) GetInfo(ctx context.Context) (*operations.GetInfoResponse, erro
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -675,7 +623,7 @@ func (s *ledger) GetInfo(ctx context.Context) (*operations.GetInfoResponse, erro
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ConfigInfoResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -685,7 +633,7 @@ func (s *ledger) GetInfo(ctx context.Context) (*operations.GetInfoResponse, erro
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -698,7 +646,7 @@ func (s *ledger) GetInfo(ctx context.Context) (*operations.GetInfoResponse, erro
 
 // GetLedgerInfo - Get information about a ledger
 func (s *ledger) GetLedgerInfo(ctx context.Context, request operations.GetLedgerInfoRequest) (*operations.GetLedgerInfoResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/_info", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -709,9 +657,9 @@ func (s *ledger) GetLedgerInfo(ctx context.Context, request operations.GetLedger
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -720,13 +668,7 @@ func (s *ledger) GetLedgerInfo(ctx context.Context, request operations.GetLedger
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -740,7 +682,7 @@ func (s *ledger) GetLedgerInfo(ctx context.Context, request operations.GetLedger
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.LedgerInfoResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -750,7 +692,7 @@ func (s *ledger) GetLedgerInfo(ctx context.Context, request operations.GetLedger
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -763,7 +705,7 @@ func (s *ledger) GetLedgerInfo(ctx context.Context, request operations.GetLedger
 
 // GetMapping - Get the mapping of a ledger
 func (s *ledger) GetMapping(ctx context.Context, request operations.GetMappingRequest) (*operations.GetMappingResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/mapping", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -774,9 +716,9 @@ func (s *ledger) GetMapping(ctx context.Context, request operations.GetMappingRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -785,13 +727,7 @@ func (s *ledger) GetMapping(ctx context.Context, request operations.GetMappingRe
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -805,7 +741,7 @@ func (s *ledger) GetMapping(ctx context.Context, request operations.GetMappingRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.MappingResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -815,7 +751,7 @@ func (s *ledger) GetMapping(ctx context.Context, request operations.GetMappingRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -828,7 +764,7 @@ func (s *ledger) GetMapping(ctx context.Context, request operations.GetMappingRe
 
 // GetTransaction - Get transaction from a ledger by its ID
 func (s *ledger) GetTransaction(ctx context.Context, request operations.GetTransactionRequest) (*operations.GetTransactionResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -839,9 +775,9 @@ func (s *ledger) GetTransaction(ctx context.Context, request operations.GetTrans
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -850,13 +786,7 @@ func (s *ledger) GetTransaction(ctx context.Context, request operations.GetTrans
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -870,7 +800,7 @@ func (s *ledger) GetTransaction(ctx context.Context, request operations.GetTrans
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.TransactionResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -880,7 +810,7 @@ func (s *ledger) GetTransaction(ctx context.Context, request operations.GetTrans
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -894,7 +824,7 @@ func (s *ledger) GetTransaction(ctx context.Context, request operations.GetTrans
 // ListAccounts - List accounts from a ledger
 // List accounts from a ledger, sorted by address in descending order.
 func (s *ledger) ListAccounts(ctx context.Context, request operations.ListAccountsRequest) (*operations.ListAccountsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -905,13 +835,13 @@ func (s *ledger) ListAccounts(ctx context.Context, request operations.ListAccoun
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -920,13 +850,7 @@ func (s *ledger) ListAccounts(ctx context.Context, request operations.ListAccoun
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -940,7 +864,7 @@ func (s *ledger) ListAccounts(ctx context.Context, request operations.ListAccoun
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.AccountsCursorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -950,7 +874,7 @@ func (s *ledger) ListAccounts(ctx context.Context, request operations.ListAccoun
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -964,7 +888,7 @@ func (s *ledger) ListAccounts(ctx context.Context, request operations.ListAccoun
 // ListLogs - List the logs from a ledger
 // List the logs from a ledger, sorted by ID in descending order.
 func (s *ledger) ListLogs(ctx context.Context, request operations.ListLogsRequest) (*operations.ListLogsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/logs", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -975,13 +899,13 @@ func (s *ledger) ListLogs(ctx context.Context, request operations.ListLogsReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -990,13 +914,7 @@ func (s *ledger) ListLogs(ctx context.Context, request operations.ListLogsReques
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1010,7 +928,7 @@ func (s *ledger) ListLogs(ctx context.Context, request operations.ListLogsReques
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.LogsCursorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1020,7 +938,7 @@ func (s *ledger) ListLogs(ctx context.Context, request operations.ListLogsReques
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1034,7 +952,7 @@ func (s *ledger) ListLogs(ctx context.Context, request operations.ListLogsReques
 // ListTransactions - List transactions from a ledger
 // List transactions from a ledger, sorted by txid in descending order.
 func (s *ledger) ListTransactions(ctx context.Context, request operations.ListTransactionsRequest) (*operations.ListTransactionsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1045,13 +963,13 @@ func (s *ledger) ListTransactions(ctx context.Context, request operations.ListTr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1060,13 +978,7 @@ func (s *ledger) ListTransactions(ctx context.Context, request operations.ListTr
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1080,7 +992,7 @@ func (s *ledger) ListTransactions(ctx context.Context, request operations.ListTr
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.TransactionsCursorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1090,7 +1002,7 @@ func (s *ledger) ListTransactions(ctx context.Context, request operations.ListTr
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1104,7 +1016,7 @@ func (s *ledger) ListTransactions(ctx context.Context, request operations.ListTr
 // ReadStats - Get statistics from a ledger
 // Get statistics from a ledger. (aggregate metrics on accounts and transactions)
 func (s *ledger) ReadStats(ctx context.Context, request operations.ReadStatsRequest) (*operations.ReadStatsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/stats", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1115,9 +1027,9 @@ func (s *ledger) ReadStats(ctx context.Context, request operations.ReadStatsRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1126,13 +1038,7 @@ func (s *ledger) ReadStats(ctx context.Context, request operations.ReadStatsRequ
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1146,7 +1052,7 @@ func (s *ledger) ReadStats(ctx context.Context, request operations.ReadStatsRequ
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.StatsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1156,7 +1062,7 @@ func (s *ledger) ReadStats(ctx context.Context, request operations.ReadStatsRequ
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1169,7 +1075,7 @@ func (s *ledger) ReadStats(ctx context.Context, request operations.ReadStatsRequ
 
 // RevertTransaction - Revert a ledger transaction by its ID
 func (s *ledger) RevertTransaction(ctx context.Context, request operations.RevertTransactionRequest) (*operations.RevertTransactionResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}/revert", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1180,9 +1086,9 @@ func (s *ledger) RevertTransaction(ctx context.Context, request operations.Rever
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1191,13 +1097,7 @@ func (s *ledger) RevertTransaction(ctx context.Context, request operations.Rever
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1211,7 +1111,7 @@ func (s *ledger) RevertTransaction(ctx context.Context, request operations.Rever
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.TransactionResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1221,7 +1121,7 @@ func (s *ledger) RevertTransaction(ctx context.Context, request operations.Rever
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1237,7 +1137,7 @@ func (s *ledger) RevertTransaction(ctx context.Context, request operations.Rever
 //
 // Deprecated: this method will be removed in a future release, please migrate away from it as soon as possible.
 func (s *ledger) RunScript(ctx context.Context, request operations.RunScriptRequest) (*operations.RunScriptResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/script", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1256,7 +1156,7 @@ func (s *ledger) RunScript(ctx context.Context, request operations.RunScriptRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
@@ -1264,7 +1164,7 @@ func (s *ledger) RunScript(ctx context.Context, request operations.RunScriptRequ
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1273,13 +1173,7 @@ func (s *ledger) RunScript(ctx context.Context, request operations.RunScriptRequ
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1293,7 +1187,7 @@ func (s *ledger) RunScript(ctx context.Context, request operations.RunScriptRequ
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ScriptResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1306,7 +1200,7 @@ func (s *ledger) RunScript(ctx context.Context, request operations.RunScriptRequ
 
 // UpdateMapping - Update the mapping of a ledger
 func (s *ledger) UpdateMapping(ctx context.Context, request operations.UpdateMappingRequest) (*operations.UpdateMappingResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/mapping", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1325,11 +1219,11 @@ func (s *ledger) UpdateMapping(ctx context.Context, request operations.UpdateMap
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1338,13 +1232,7 @@ func (s *ledger) UpdateMapping(ctx context.Context, request operations.UpdateMap
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1358,7 +1246,7 @@ func (s *ledger) UpdateMapping(ctx context.Context, request operations.UpdateMap
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.MappingResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1368,7 +1256,7 @@ func (s *ledger) UpdateMapping(ctx context.Context, request operations.UpdateMap
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 

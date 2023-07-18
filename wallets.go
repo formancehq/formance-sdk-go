@@ -3,30 +3,38 @@
 package formance
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/pkg/utils"
-	"io"
 	"net/http"
 	"strings"
 )
 
 type wallets struct {
-	sdkConfiguration sdkConfiguration
+	defaultClient  HTTPClient
+	securityClient HTTPClient
+	serverURL      string
+	language       string
+	sdkVersion     string
+	genVersion     string
 }
 
-func newWallets(sdkConfig sdkConfiguration) *wallets {
+func newWallets(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *wallets {
 	return &wallets{
-		sdkConfiguration: sdkConfig,
+		defaultClient:  defaultClient,
+		securityClient: securityClient,
+		serverURL:      serverURL,
+		language:       language,
+		sdkVersion:     sdkVersion,
+		genVersion:     genVersion,
 	}
 }
 
 // ConfirmHold - Confirm a hold
 func (s *wallets) ConfirmHold(ctx context.Context, request operations.ConfirmHoldRequest) (*operations.ConfirmHoldResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{hold_id}/confirm", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -42,11 +50,11 @@ func (s *wallets) ConfirmHold(ctx context.Context, request operations.ConfirmHol
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -55,13 +63,7 @@ func (s *wallets) ConfirmHold(ctx context.Context, request operations.ConfirmHol
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -76,7 +78,7 @@ func (s *wallets) ConfirmHold(ctx context.Context, request operations.ConfirmHol
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -89,7 +91,7 @@ func (s *wallets) ConfirmHold(ctx context.Context, request operations.ConfirmHol
 
 // CreateBalance - Create a balance
 func (s *wallets) CreateBalance(ctx context.Context, request operations.CreateBalanceRequest) (*operations.CreateBalanceResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -105,11 +107,11 @@ func (s *wallets) CreateBalance(ctx context.Context, request operations.CreateBa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -118,13 +120,7 @@ func (s *wallets) CreateBalance(ctx context.Context, request operations.CreateBa
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -138,7 +134,7 @@ func (s *wallets) CreateBalance(ctx context.Context, request operations.CreateBa
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateBalanceResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -148,7 +144,7 @@ func (s *wallets) CreateBalance(ctx context.Context, request operations.CreateBa
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -161,7 +157,7 @@ func (s *wallets) CreateBalance(ctx context.Context, request operations.CreateBa
 
 // CreateWallet - Create a new wallet
 func (s *wallets) CreateWallet(ctx context.Context, request shared.CreateWalletRequest) (*operations.CreateWalletResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/wallets/wallets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -174,11 +170,11 @@ func (s *wallets) CreateWallet(ctx context.Context, request shared.CreateWalletR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -187,13 +183,7 @@ func (s *wallets) CreateWallet(ctx context.Context, request shared.CreateWalletR
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -207,7 +197,7 @@ func (s *wallets) CreateWallet(ctx context.Context, request shared.CreateWalletR
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateWalletResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -217,7 +207,7 @@ func (s *wallets) CreateWallet(ctx context.Context, request shared.CreateWalletR
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -230,7 +220,7 @@ func (s *wallets) CreateWallet(ctx context.Context, request shared.CreateWalletR
 
 // CreditWallet - Credit a wallet
 func (s *wallets) CreditWallet(ctx context.Context, request operations.CreditWalletRequest) (*operations.CreditWalletResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/credit", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -246,11 +236,11 @@ func (s *wallets) CreditWallet(ctx context.Context, request operations.CreditWal
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -259,13 +249,7 @@ func (s *wallets) CreditWallet(ctx context.Context, request operations.CreditWal
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -280,7 +264,7 @@ func (s *wallets) CreditWallet(ctx context.Context, request operations.CreditWal
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -293,7 +277,7 @@ func (s *wallets) CreditWallet(ctx context.Context, request operations.CreditWal
 
 // DebitWallet - Debit a wallet
 func (s *wallets) DebitWallet(ctx context.Context, request operations.DebitWalletRequest) (*operations.DebitWalletResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/debit", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -309,11 +293,11 @@ func (s *wallets) DebitWallet(ctx context.Context, request operations.DebitWalle
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -322,13 +306,7 @@ func (s *wallets) DebitWallet(ctx context.Context, request operations.DebitWalle
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -342,7 +320,7 @@ func (s *wallets) DebitWallet(ctx context.Context, request operations.DebitWalle
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.DebitWalletResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -353,7 +331,7 @@ func (s *wallets) DebitWallet(ctx context.Context, request operations.DebitWalle
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -366,7 +344,7 @@ func (s *wallets) DebitWallet(ctx context.Context, request operations.DebitWalle
 
 // GetBalance - Get detailed balance
 func (s *wallets) GetBalance(ctx context.Context, request operations.GetBalanceRequest) (*operations.GetBalanceResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances/{balanceName}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -377,9 +355,9 @@ func (s *wallets) GetBalance(ctx context.Context, request operations.GetBalanceR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -388,13 +366,7 @@ func (s *wallets) GetBalance(ctx context.Context, request operations.GetBalanceR
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -408,7 +380,7 @@ func (s *wallets) GetBalance(ctx context.Context, request operations.GetBalanceR
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.GetBalanceResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -418,7 +390,7 @@ func (s *wallets) GetBalance(ctx context.Context, request operations.GetBalanceR
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -431,7 +403,7 @@ func (s *wallets) GetBalance(ctx context.Context, request operations.GetBalanceR
 
 // GetHold - Get a hold
 func (s *wallets) GetHold(ctx context.Context, request operations.GetHoldRequest) (*operations.GetHoldResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{holdID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -442,9 +414,9 @@ func (s *wallets) GetHold(ctx context.Context, request operations.GetHoldRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -453,13 +425,7 @@ func (s *wallets) GetHold(ctx context.Context, request operations.GetHoldRequest
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -473,7 +439,7 @@ func (s *wallets) GetHold(ctx context.Context, request operations.GetHoldRequest
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.GetHoldResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -483,7 +449,7 @@ func (s *wallets) GetHold(ctx context.Context, request operations.GetHoldRequest
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -496,7 +462,7 @@ func (s *wallets) GetHold(ctx context.Context, request operations.GetHoldRequest
 
 // GetHolds - Get all holds for a wallet
 func (s *wallets) GetHolds(ctx context.Context, request operations.GetHoldsRequest) (*operations.GetHoldsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/wallets/holds"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -504,13 +470,13 @@ func (s *wallets) GetHolds(ctx context.Context, request operations.GetHoldsReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -519,13 +485,7 @@ func (s *wallets) GetHolds(ctx context.Context, request operations.GetHoldsReque
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -539,7 +499,7 @@ func (s *wallets) GetHolds(ctx context.Context, request operations.GetHoldsReque
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.GetHoldsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -549,7 +509,7 @@ func (s *wallets) GetHolds(ctx context.Context, request operations.GetHoldsReque
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -561,7 +521,7 @@ func (s *wallets) GetHolds(ctx context.Context, request operations.GetHoldsReque
 }
 
 func (s *wallets) GetTransactions(ctx context.Context, request operations.GetTransactionsRequest) (*operations.GetTransactionsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/wallets/transactions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -569,13 +529,13 @@ func (s *wallets) GetTransactions(ctx context.Context, request operations.GetTra
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -584,13 +544,7 @@ func (s *wallets) GetTransactions(ctx context.Context, request operations.GetTra
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -604,7 +558,7 @@ func (s *wallets) GetTransactions(ctx context.Context, request operations.GetTra
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.GetTransactionsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -614,7 +568,7 @@ func (s *wallets) GetTransactions(ctx context.Context, request operations.GetTra
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -627,7 +581,7 @@ func (s *wallets) GetTransactions(ctx context.Context, request operations.GetTra
 
 // GetWallet - Get a wallet
 func (s *wallets) GetWallet(ctx context.Context, request operations.GetWalletRequest) (*operations.GetWalletResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -638,9 +592,9 @@ func (s *wallets) GetWallet(ctx context.Context, request operations.GetWalletReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -649,13 +603,7 @@ func (s *wallets) GetWallet(ctx context.Context, request operations.GetWalletReq
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -669,7 +617,7 @@ func (s *wallets) GetWallet(ctx context.Context, request operations.GetWalletReq
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.GetWalletResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -680,7 +628,7 @@ func (s *wallets) GetWallet(ctx context.Context, request operations.GetWalletReq
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -693,7 +641,7 @@ func (s *wallets) GetWallet(ctx context.Context, request operations.GetWalletReq
 
 // GetWalletSummary - Get wallet summary
 func (s *wallets) GetWalletSummary(ctx context.Context, request operations.GetWalletSummaryRequest) (*operations.GetWalletSummaryResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/summary", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -704,9 +652,9 @@ func (s *wallets) GetWalletSummary(ctx context.Context, request operations.GetWa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -715,13 +663,7 @@ func (s *wallets) GetWalletSummary(ctx context.Context, request operations.GetWa
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -735,7 +677,7 @@ func (s *wallets) GetWalletSummary(ctx context.Context, request operations.GetWa
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.GetWalletSummaryResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -746,7 +688,7 @@ func (s *wallets) GetWalletSummary(ctx context.Context, request operations.GetWa
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -759,7 +701,7 @@ func (s *wallets) GetWalletSummary(ctx context.Context, request operations.GetWa
 
 // ListBalances - List balances of a wallet
 func (s *wallets) ListBalances(ctx context.Context, request operations.ListBalancesRequest) (*operations.ListBalancesResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -770,9 +712,9 @@ func (s *wallets) ListBalances(ctx context.Context, request operations.ListBalan
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -781,13 +723,7 @@ func (s *wallets) ListBalances(ctx context.Context, request operations.ListBalan
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -801,7 +737,7 @@ func (s *wallets) ListBalances(ctx context.Context, request operations.ListBalan
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListBalancesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -814,7 +750,7 @@ func (s *wallets) ListBalances(ctx context.Context, request operations.ListBalan
 
 // ListWallets - List all wallets
 func (s *wallets) ListWallets(ctx context.Context, request operations.ListWalletsRequest) (*operations.ListWalletsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/wallets/wallets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -822,13 +758,13 @@ func (s *wallets) ListWallets(ctx context.Context, request operations.ListWallet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -837,13 +773,7 @@ func (s *wallets) ListWallets(ctx context.Context, request operations.ListWallet
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -857,7 +787,7 @@ func (s *wallets) ListWallets(ctx context.Context, request operations.ListWallet
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListWalletsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -870,7 +800,7 @@ func (s *wallets) ListWallets(ctx context.Context, request operations.ListWallet
 
 // UpdateWallet - Update a wallet
 func (s *wallets) UpdateWallet(ctx context.Context, request operations.UpdateWalletRequest) (*operations.UpdateWalletResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -886,11 +816,11 @@ func (s *wallets) UpdateWallet(ctx context.Context, request operations.UpdateWal
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -899,13 +829,7 @@ func (s *wallets) UpdateWallet(ctx context.Context, request operations.UpdateWal
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -920,7 +844,7 @@ func (s *wallets) UpdateWallet(ctx context.Context, request operations.UpdateWal
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -933,7 +857,7 @@ func (s *wallets) UpdateWallet(ctx context.Context, request operations.UpdateWal
 
 // VoidHold - Cancel a hold
 func (s *wallets) VoidHold(ctx context.Context, request operations.VoidHoldRequest) (*operations.VoidHoldResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{hold_id}/void", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -944,9 +868,9 @@ func (s *wallets) VoidHold(ctx context.Context, request operations.VoidHoldReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -955,13 +879,7 @@ func (s *wallets) VoidHold(ctx context.Context, request operations.VoidHoldReque
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -976,7 +894,7 @@ func (s *wallets) VoidHold(ctx context.Context, request operations.VoidHoldReque
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -989,7 +907,7 @@ func (s *wallets) VoidHold(ctx context.Context, request operations.VoidHoldReque
 
 // WalletsgetServerInfo - Get server info
 func (s *wallets) WalletsgetServerInfo(ctx context.Context) (*operations.WalletsgetServerInfoResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/wallets/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -997,9 +915,9 @@ func (s *wallets) WalletsgetServerInfo(ctx context.Context) (*operations.Wallets
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1008,13 +926,7 @@ func (s *wallets) WalletsgetServerInfo(ctx context.Context) (*operations.Wallets
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	defer httpRes.Body.Close()
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1028,7 +940,7 @@ func (s *wallets) WalletsgetServerInfo(ctx context.Context) (*operations.Wallets
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ServerInfo
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
@@ -1038,7 +950,7 @@ func (s *wallets) WalletsgetServerInfo(ctx context.Context) (*operations.Wallets
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.WalletsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
