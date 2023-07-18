@@ -2,8 +2,10 @@
 
 package shared
 
-type WiseConfig struct {
-	APIKey string `json:"apiKey"`
+type MoneycorpConfig struct {
+	APIKey   string `json:"apiKey"`
+	ClientID string `json:"clientID"`
+	Endpoint string `json:"endpoint"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Stripe API.
 	//
 	PollingPeriod *string `json:"pollingPeriod,omitempty"`

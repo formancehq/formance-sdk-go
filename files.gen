@@ -39,15 +39,16 @@ pkg/models/operations/readscope.go
 pkg/models/operations/readuser.go
 pkg/models/operations/updateclient.go
 pkg/models/operations/updatescope.go
-pkg/models/operations/flowsgetserverinfo.go
 pkg/models/operations/cancelevent.go
 pkg/models/operations/createworkflow.go
+pkg/models/operations/deleteworkflow.go
 pkg/models/operations/getinstance.go
 pkg/models/operations/getinstancehistory.go
 pkg/models/operations/getinstancestagehistory.go
 pkg/models/operations/getworkflow.go
 pkg/models/operations/listinstances.go
 pkg/models/operations/listworkflows.go
+pkg/models/operations/orchestrationgetserverinfo.go
 pkg/models/operations/runworkflow.go
 pkg/models/operations/sendevent.go
 pkg/models/operations/createtransactions.go
@@ -236,6 +237,8 @@ pkg/models/shared/taskcurrencycloud.go
 pkg/models/shared/taskdummypay.go
 pkg/models/shared/taskmodulr.go
 pkg/models/shared/taskbankingcircle.go
+pkg/models/shared/taskmangopay.go
+pkg/models/shared/taskmoneycorp.go
 pkg/models/shared/paymentresponse.go
 pkg/models/shared/stripeconfig.go
 pkg/models/shared/dummypayconfig.go
@@ -243,6 +246,8 @@ pkg/models/shared/wiseconfig.go
 pkg/models/shared/modulrconfig.go
 pkg/models/shared/currencycloudconfig.go
 pkg/models/shared/bankingcircleconfig.go
+pkg/models/shared/mangopayconfig.go
+pkg/models/shared/moneycorpconfig.go
 pkg/models/shared/connectorsresponse.go
 pkg/models/shared/connectorsconfigsresponse.go
 pkg/models/shared/taskscursor.go
@@ -270,6 +275,7 @@ pkg/models/shared/getholdsresponse.go
 pkg/models/shared/gettransactionsresponse.go
 pkg/models/shared/walletstransaction.go
 pkg/models/shared/walletsvolume.go
+pkg/models/shared/walletsposting.go
 pkg/models/shared/getwalletresponse.go
 pkg/models/shared/getwalletsummaryresponse.go
 pkg/models/shared/listbalancesresponse.go

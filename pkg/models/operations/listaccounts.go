@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"math/big"
 	"net/http"
 )
 
@@ -55,7 +56,7 @@ type ListAccountsRequest struct {
 	// Pagination cursor, will return accounts after given address, in descending order.
 	After *string `queryParam:"style=form,explode=true,name=after"`
 	// Filter accounts by their balance (default operator is gte)
-	Balance *int64 `queryParam:"style=form,explode=true,name=balance"`
+	Balance *big.Int `queryParam:"style=form,explode=true,name=balance"`
 	// Operator used for the filtering of balances can be greater than/equal, less than/equal, greater than, less than, equal or not.
 	//
 	BalanceOperator *ListAccountsBalanceOperator `queryParam:"style=form,explode=true,name=balanceOperator"`

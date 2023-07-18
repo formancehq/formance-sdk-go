@@ -70,15 +70,16 @@ func main() {
 
 ### [Flows](docs/flows/README.md)
 
-* [FlowsgetServerInfo](docs/flows/README.md#flowsgetserverinfo) - Get server info
 * [CancelEvent](docs/flows/README.md#cancelevent) - Cancel a running workflow
 * [CreateWorkflow](docs/flows/README.md#createworkflow) - Create workflow
+* [DeleteWorkflow](docs/flows/README.md#deleteworkflow) - Delete a flow by id
 * [GetInstance](docs/flows/README.md#getinstance) - Get a workflow instance by id
 * [GetInstanceHistory](docs/flows/README.md#getinstancehistory) - Get a workflow instance history by id
 * [GetInstanceStageHistory](docs/flows/README.md#getinstancestagehistory) - Get a workflow instance stage history
 * [GetWorkflow](docs/flows/README.md#getworkflow) - Get a flow by id
 * [ListInstances](docs/flows/README.md#listinstances) - List instances of a workflow
 * [ListWorkflows](docs/flows/README.md#listworkflows) - List registered workflows
+* [OrchestrationgetServerInfo](docs/flows/README.md#orchestrationgetserverinfo) - Get server info
 * [RunWorkflow](docs/flows/README.md#runworkflow) - Run workflow
 * [SendEvent](docs/flows/README.md#sendevent) - Send an event to a running workflow
 

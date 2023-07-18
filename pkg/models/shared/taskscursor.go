@@ -17,6 +17,8 @@ const (
 	TasksCursorCursorDataTypeTaskDummyPay      TasksCursorCursorDataType = "TaskDummyPay"
 	TasksCursorCursorDataTypeTaskModulr        TasksCursorCursorDataType = "TaskModulr"
 	TasksCursorCursorDataTypeTaskBankingCircle TasksCursorCursorDataType = "TaskBankingCircle"
+	TasksCursorCursorDataTypeTaskMangoPay      TasksCursorCursorDataType = "TaskMangoPay"
+	TasksCursorCursorDataTypeTaskMoneycorp     TasksCursorCursorDataType = "TaskMoneycorp"
 )
 
 type TasksCursorCursorData struct {
@@ -26,6 +28,8 @@ type TasksCursorCursorData struct {
 	TaskDummyPay      *TaskDummyPay
 	TaskModulr        *TaskModulr
 	TaskBankingCircle *TaskBankingCircle
+	TaskMangoPay      *TaskMangoPay
+	TaskMoneycorp     *TaskMoneycorp
 
 	Type TasksCursorCursorDataType
 }
@@ -81,6 +85,24 @@ func CreateTasksCursorCursorDataTaskBankingCircle(taskBankingCircle TaskBankingC
 	return TasksCursorCursorData{
 		TaskBankingCircle: &taskBankingCircle,
 		Type:              typ,
+	}
+}
+
+func CreateTasksCursorCursorDataTaskMangoPay(taskMangoPay TaskMangoPay) TasksCursorCursorData {
+	typ := TasksCursorCursorDataTypeTaskMangoPay
+
+	return TasksCursorCursorData{
+		TaskMangoPay: &taskMangoPay,
+		Type:         typ,
+	}
+}
+
+func CreateTasksCursorCursorDataTaskMoneycorp(taskMoneycorp TaskMoneycorp) TasksCursorCursorData {
+	typ := TasksCursorCursorDataTypeTaskMoneycorp
+
+	return TasksCursorCursorData{
+		TaskMoneycorp: &taskMoneycorp,
+		Type:          typ,
 	}
 }
 
@@ -141,6 +163,24 @@ func (u *TasksCursorCursorData) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	taskMangoPay := new(TaskMangoPay)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&taskMangoPay); err == nil {
+		u.TaskMangoPay = taskMangoPay
+		u.Type = TasksCursorCursorDataTypeTaskMangoPay
+		return nil
+	}
+
+	taskMoneycorp := new(TaskMoneycorp)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&taskMoneycorp); err == nil {
+		u.TaskMoneycorp = taskMoneycorp
+		u.Type = TasksCursorCursorDataTypeTaskMoneycorp
+		return nil
+	}
+
 	return errors.New("could not unmarshal into supported union types")
 }
 
@@ -167,6 +207,14 @@ func (u TasksCursorCursorData) MarshalJSON() ([]byte, error) {
 
 	if u.TaskBankingCircle != nil {
 		return json.Marshal(u.TaskBankingCircle)
+	}
+
+	if u.TaskMangoPay != nil {
+		return json.Marshal(u.TaskMangoPay)
+	}
+
+	if u.TaskMoneycorp != nil {
+		return json.Marshal(u.TaskMoneycorp)
 	}
 
 	return nil, nil

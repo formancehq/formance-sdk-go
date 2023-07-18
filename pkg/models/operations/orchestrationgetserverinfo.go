@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type FlowsgetServerInfoResponse struct {
+type OrchestrationgetServerInfoResponse struct {
 	ContentType string
 	// General error
 	Error *shared.Error

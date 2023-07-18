@@ -2,10 +2,14 @@
 
 package shared
 
+import (
+	"math/big"
+)
+
 type AccountWithVolumesAndBalances struct {
-	Address  string                      `json:"address"`
-	Balances map[string]int64            `json:"balances,omitempty"`
-	Metadata map[string]interface{}      `json:"metadata,omitempty"`
-	Type     *string                     `json:"type,omitempty"`
-	Volumes  map[string]map[string]int64 `json:"volumes,omitempty"`
+	Address  string                         `json:"address"`
+	Balances map[string]*big.Int            `json:"balances,omitempty"`
+	Metadata map[string]interface{}         `json:"metadata,omitempty"`
+	Type     *string                        `json:"type,omitempty"`
+	Volumes  map[string]map[string]*big.Int `json:"volumes,omitempty"`
 }
