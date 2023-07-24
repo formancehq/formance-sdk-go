@@ -38,6 +38,7 @@ import(
 	"github.com/formancehq/formance-sdk-go"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"math/big"
 	"github.com/formancehq/formance-sdk-go/pkg/types"
 )
 
@@ -60,7 +61,7 @@ func main() {
                     },
                     Postings: []shared.Posting{
                         shared.Posting{
-                            Amount: 100,
+                            Amount: big.NewInt(100),
                             Asset: "COIN",
                             Destination: "users:002",
                             Source: "users:001",
@@ -78,7 +79,7 @@ func main() {
                     },
                     Postings: []shared.Posting{
                         shared.Posting{
-                            Amount: 100,
+                            Amount: big.NewInt(100),
                             Asset: "COIN",
                             Destination: "users:002",
                             Source: "users:001",
@@ -294,6 +295,7 @@ import(
 	"github.com/formancehq/formance-sdk-go"
 	"github.com/formancehq/formance-sdk-go/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"math/big"
 	"github.com/formancehq/formance-sdk-go/pkg/types"
 )
 
@@ -314,19 +316,19 @@ func main() {
             },
             Postings: []shared.Posting{
                 shared.Posting{
-                    Amount: 100,
+                    Amount: big.NewInt(100),
                     Asset: "COIN",
                     Destination: "users:002",
                     Source: "users:001",
                 },
                 shared.Posting{
-                    Amount: 100,
+                    Amount: big.NewInt(100),
                     Asset: "COIN",
                     Destination: "users:002",
                     Source: "users:001",
                 },
                 shared.Posting{
-                    Amount: 100,
+                    Amount: big.NewInt(100),
                     Asset: "COIN",
                     Destination: "users:002",
                     Source: "users:001",
