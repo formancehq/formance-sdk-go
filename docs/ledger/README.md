@@ -837,6 +837,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Ledger.RevertTransaction(ctx, operations.RevertTransactionRequest{
+        DisableChecks: formance.Bool(false),
         Ledger: "ledger001",
         Txid: 1234,
     })

@@ -8,6 +8,8 @@ import (
 )
 
 type RevertTransactionRequest struct {
+	// Allow to disable balances checks
+	DisableChecks *bool `queryParam:"style=form,explode=true,name=disableChecks"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Transaction ID.
