@@ -2,12 +2,29 @@
 
 package shared
 
-import (
-	"math/big"
-)
-
 type Volume struct {
-	Balance *big.Int `json:"balance,omitempty"`
-	Input   *big.Int `json:"input"`
-	Output  *big.Int `json:"output"`
+	Balance *int64 `json:"balance,omitempty"`
+	Input   int64  `json:"input"`
+	Output  int64  `json:"output"`
+}
+
+func (o *Volume) GetBalance() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Balance
+}
+
+func (o *Volume) GetInput() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Input
+}
+
+func (o *Volume) GetOutput() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Output
 }

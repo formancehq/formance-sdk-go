@@ -2,7 +2,13 @@
 
 package shared
 
-// ConfigResponse - Config created successfully.
 type ConfigResponse struct {
 	Data WebhooksConfig `json:"data"`
+}
+
+func (o *ConfigResponse) GetData() WebhooksConfig {
+	if o == nil {
+		return WebhooksConfig{}
+	}
+	return o.Data
 }

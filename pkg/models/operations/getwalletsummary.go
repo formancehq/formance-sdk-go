@@ -11,12 +11,57 @@ type GetWalletSummaryRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+func (o *GetWalletSummaryRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type GetWalletSummaryResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Wallet summary
 	GetWalletSummaryResponse *shared.GetWalletSummaryResponse
-	StatusCode               int
-	RawResponse              *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// Error
 	WalletsErrorResponse *shared.WalletsErrorResponse
+}
+
+func (o *GetWalletSummaryResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetWalletSummaryResponse) GetGetWalletSummaryResponse() *shared.GetWalletSummaryResponse {
+	if o == nil {
+		return nil
+	}
+	return o.GetWalletSummaryResponse
+}
+
+func (o *GetWalletSummaryResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetWalletSummaryResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetWalletSummaryResponse) GetWalletsErrorResponse() *shared.WalletsErrorResponse {
+	if o == nil {
+		return nil
+	}
+	return o.WalletsErrorResponse
 }

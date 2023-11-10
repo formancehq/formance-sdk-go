@@ -14,12 +14,64 @@ type GetTransactionRequest struct {
 	Txid int64 `pathParam:"style=simple,explode=false,name=txid"`
 }
 
+func (o *GetTransactionRequest) GetLedger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Ledger
+}
+
+func (o *GetTransactionRequest) GetTxid() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Txid
+}
+
 type GetTransactionResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Error
 	ErrorResponse *shared.ErrorResponse
-	StatusCode    int
-	RawResponse   *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	TransactionResponse *shared.TransactionResponse
+}
+
+func (o *GetTransactionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetTransactionResponse) GetErrorResponse() *shared.ErrorResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ErrorResponse
+}
+
+func (o *GetTransactionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetTransactionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetTransactionResponse) GetTransactionResponse() *shared.TransactionResponse {
+	if o == nil {
+		return nil
+	}
+	return o.TransactionResponse
 }

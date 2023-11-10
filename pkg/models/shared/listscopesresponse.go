@@ -2,7 +2,13 @@
 
 package shared
 
-// ListScopesResponse - List of scopes
 type ListScopesResponse struct {
 	Data []Scope `json:"data,omitempty"`
+}
+
+func (o *ListScopesResponse) GetData() []Scope {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }

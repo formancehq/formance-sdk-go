@@ -8,9 +8,40 @@ import (
 )
 
 type CreateScopeResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Created scope
 	CreateScopeResponse *shared.CreateScopeResponse
-	StatusCode          int
-	RawResponse         *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *CreateScopeResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateScopeResponse) GetCreateScopeResponse() *shared.CreateScopeResponse {
+	if o == nil {
+		return nil
+	}
+	return o.CreateScopeResponse
+}
+
+func (o *CreateScopeResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateScopeResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

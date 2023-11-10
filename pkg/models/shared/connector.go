@@ -7,7 +7,6 @@ import (
 	"fmt"
 )
 
-// Connector - The name of the connector.
 type Connector string
 
 const (

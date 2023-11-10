@@ -2,7 +2,13 @@
 
 package shared
 
-// CreateScopeResponse - Created scope
 type CreateScopeResponse struct {
 	Data *Scope `json:"data,omitempty"`
+}
+
+func (o *CreateScopeResponse) GetData() *Scope {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }

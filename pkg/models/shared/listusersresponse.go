@@ -2,7 +2,13 @@
 
 package shared
 
-// ListUsersResponse - List of users
 type ListUsersResponse struct {
 	Data []User `json:"data,omitempty"`
+}
+
+func (o *ListUsersResponse) GetData() []User {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }

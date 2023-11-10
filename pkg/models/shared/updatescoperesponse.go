@@ -2,7 +2,13 @@
 
 package shared
 
-// UpdateScopeResponse - Updated scope
 type UpdateScopeResponse struct {
 	Data *Scope `json:"data,omitempty"`
+}
+
+func (o *UpdateScopeResponse) GetData() *Scope {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }

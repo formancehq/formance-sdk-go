@@ -3,7 +3,6 @@
 package utils
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"math/big"
@@ -12,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/formancehq/formance-sdk-go/pkg/types"
+	"github.com/ericlagergren/decimal"
 )
 
 const (
@@ -32,12 +31,12 @@ var (
 	}
 )
 
-func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}) error {
+func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}, tag string) error {
 	data, err := io.ReadAll(body)
 	if err != nil {
 		return fmt.Errorf("error reading response body: %w", err)
 	}
-	if err := json.Unmarshal(data, &out); err != nil {
+	if err := UnmarshalJSON(data, out, reflect.StructTag(tag), true, false); err != nil {
 		return fmt.Errorf("error unmarshalling json response body: %w", err)
 	}
 
@@ -45,6 +44,10 @@ func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}) error {
 }
 
 func ReplaceParameters(stringWithParams string, params map[string]string) string {
+	if len(params) == 0 {
+		return stringWithParams
+	}
+
 	return paramRegex.ReplaceAllStringFunc(stringWithParams, func(match string) string {
 		match = match[1 : len(match)-1]
 		return params[match]
@@ -123,9 +126,9 @@ func valToString(val interface{}) string {
 	switch v := val.(type) {
 	case time.Time:
 		return v.Format(time.RFC3339Nano)
-	case types.BigInt:
-		return v.String()
 	case big.Int:
+		return v.String()
+	case decimal.Big:
 		return v.String()
 	default:
 		return fmt.Sprintf("%v", v)
@@ -149,4 +152,20 @@ func populateFromGlobals(fieldType reflect.StructField, valType reflect.Value, p
 	}
 
 	return valType
+}
+
+func isNil(typ reflect.Type, val reflect.Value) bool {
+	// `reflect.TypeOf(nil) == nil` so calling typ.Kind() will cause a nil pointer
+	// dereference panic. Catch it and return early.
+	// https://github.com/golang/go/issues/51649
+	// https://github.com/golang/go/issues/54208
+	if typ == nil {
+		return true
+	}
+
+	if typ.Kind() == reflect.Ptr || typ.Kind() == reflect.Map || typ.Kind() == reflect.Slice || typ.Kind() == reflect.Interface {
+		return val.IsNil()
+	}
+
+	return false
 }

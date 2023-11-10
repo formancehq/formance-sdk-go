@@ -2,10 +2,46 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
+)
+
 type DummyPayConfig struct {
 	Directory string `json:"directory"`
 	// The frequency at which the connector will create new payment objects in the directory
-	FileGenerationPeriod *string `json:"fileGenerationPeriod,omitempty"`
+	FileGenerationPeriod *string `default:"10s" json:"fileGenerationPeriod"`
 	// The frequency at which the connector will try to fetch new payment objects from the directory
-	FilePollingPeriod *string `json:"filePollingPeriod,omitempty"`
+	FilePollingPeriod *string `default:"10s" json:"filePollingPeriod"`
+}
+
+func (d DummyPayConfig) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DummyPayConfig) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *DummyPayConfig) GetDirectory() string {
+	if o == nil {
+		return ""
+	}
+	return o.Directory
+}
+
+func (o *DummyPayConfig) GetFileGenerationPeriod() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileGenerationPeriod
+}
+
+func (o *DummyPayConfig) GetFilePollingPeriod() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FilePollingPeriod
 }

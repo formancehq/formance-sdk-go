@@ -2,11 +2,54 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
+)
+
 type MoneycorpConfig struct {
 	APIKey   string `json:"apiKey"`
 	ClientID string `json:"clientID"`
 	Endpoint string `json:"endpoint"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Stripe API.
 	//
-	PollingPeriod *string `json:"pollingPeriod,omitempty"`
+	PollingPeriod *string `default:"120s" json:"pollingPeriod"`
+}
+
+func (m MoneycorpConfig) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *MoneycorpConfig) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *MoneycorpConfig) GetAPIKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIKey
+}
+
+func (o *MoneycorpConfig) GetClientID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ClientID
+}
+
+func (o *MoneycorpConfig) GetEndpoint() string {
+	if o == nil {
+		return ""
+	}
+	return o.Endpoint
+}
+
+func (o *MoneycorpConfig) GetPollingPeriod() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PollingPeriod
 }

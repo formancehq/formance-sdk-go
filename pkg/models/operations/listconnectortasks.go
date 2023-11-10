@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"net/http"
 )
 
@@ -18,13 +19,76 @@ type ListConnectorTasksRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (l ListConnectorTasksRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListConnectorTasksRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ListConnectorTasksRequest) GetConnector() shared.Connector {
+	if o == nil {
+		return shared.Connector("")
+	}
+	return o.Connector
+}
+
+func (o *ListConnectorTasksRequest) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}
+
+func (o *ListConnectorTasksRequest) GetPageSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.PageSize
 }
 
 type ListConnectorTasksResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
 	TasksCursor *shared.TasksCursor
+}
+
+func (o *ListConnectorTasksResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListConnectorTasksResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListConnectorTasksResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListConnectorTasksResponse) GetTasksCursor() *shared.TasksCursor {
+	if o == nil {
+		return nil
+	}
+	return o.TasksCursor
 }

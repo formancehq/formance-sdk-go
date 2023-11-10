@@ -5,6 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"time"
 )
 
@@ -40,4 +41,43 @@ type MigrationInfo struct {
 	Name    *string             `json:"name,omitempty"`
 	State   *MigrationInfoState `json:"state,omitempty"`
 	Version *int64              `json:"version,omitempty"`
+}
+
+func (m MigrationInfo) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *MigrationInfo) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *MigrationInfo) GetDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.Date
+}
+
+func (o *MigrationInfo) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *MigrationInfo) GetState() *MigrationInfoState {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
+func (o *MigrationInfo) GetVersion() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Version
 }

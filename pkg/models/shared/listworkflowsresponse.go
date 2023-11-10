@@ -2,7 +2,13 @@
 
 package shared
 
-// ListWorkflowsResponse - List of workflows
 type ListWorkflowsResponse struct {
 	Data []Workflow `json:"data"`
+}
+
+func (o *ListWorkflowsResponse) GetData() []Workflow {
+	if o == nil {
+		return []Workflow{}
+	}
+	return o.Data
 }

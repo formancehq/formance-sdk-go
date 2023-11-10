@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"net/http"
 )
 
@@ -19,13 +20,83 @@ type ListWalletsRequest struct {
 	// Filter on wallet name
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 	// The maximum number of results to return per page
-	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (l ListWalletsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListWalletsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ListWalletsRequest) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}
+
+func (o *ListWalletsRequest) GetMetadata() map[string]string {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *ListWalletsRequest) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *ListWalletsRequest) GetPageSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.PageSize
 }
 
 type ListWalletsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// OK
 	ListWalletsResponse *shared.ListWalletsResponse
-	StatusCode          int
-	RawResponse         *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListWalletsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListWalletsResponse) GetListWalletsResponse() *shared.ListWalletsResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ListWalletsResponse
+}
+
+func (o *ListWalletsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListWalletsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

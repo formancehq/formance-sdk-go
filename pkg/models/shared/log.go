@@ -5,8 +5,12 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"time"
 )
+
+type LogData struct {
+}
 
 type LogType string
 
@@ -36,9 +40,55 @@ func (e *LogType) UnmarshalJSON(data []byte) error {
 }
 
 type Log struct {
-	Data map[string]interface{} `json:"data"`
-	Date time.Time              `json:"date"`
-	Hash string                 `json:"hash"`
-	ID   int64                  `json:"id"`
-	Type LogType                `json:"type"`
+	Data LogData   `json:"data"`
+	Date time.Time `json:"date"`
+	Hash string    `json:"hash"`
+	ID   int64     `json:"id"`
+	Type LogType   `json:"type"`
+}
+
+func (l Log) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *Log) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Log) GetData() LogData {
+	if o == nil {
+		return LogData{}
+	}
+	return o.Data
+}
+
+func (o *Log) GetDate() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.Date
+}
+
+func (o *Log) GetHash() string {
+	if o == nil {
+		return ""
+	}
+	return o.Hash
+}
+
+func (o *Log) GetID() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.ID
+}
+
+func (o *Log) GetType() LogType {
+	if o == nil {
+		return LogType("")
+	}
+	return o.Type
 }
