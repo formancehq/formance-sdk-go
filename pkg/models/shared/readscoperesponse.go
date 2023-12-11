@@ -2,7 +2,13 @@
 
 package shared
 
-// ReadScopeResponse - Retrieved scope
 type ReadScopeResponse struct {
 	Data *Scope `json:"data,omitempty"`
+}
+
+func (o *ReadScopeResponse) GetData() *Scope {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }

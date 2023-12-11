@@ -5,7 +5,6 @@ package utils
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -26,21 +25,25 @@ var (
 	urlEncodedEncodingRegex = regexp.MustCompile(`application\/x-www-form-urlencoded.*`)
 )
 
-func SerializeRequestBody(ctx context.Context, request interface{}, requestFieldName string, serializationMethod string) (*bytes.Buffer, string, error) {
+func SerializeRequestBody(ctx context.Context, request interface{}, nullable, optional bool, requestFieldName, serializationMethod, tag string) (io.Reader, string, error) {
 	requestStructType := reflect.TypeOf(request)
 	requestValType := reflect.ValueOf(request)
 
-	if requestStructType.Kind() == reflect.Pointer {
-		if requestValType.IsNil() {
+	if isNil(requestStructType, requestValType) {
+		if !nullable && optional {
 			return nil, "", nil
 		}
 
+		return serializeContentType(requestFieldName, SerializationMethodToContentType[serializationMethod], requestValType, tag)
+	}
+
+	if requestStructType.Kind() == reflect.Pointer {
 		requestStructType = requestStructType.Elem()
 		requestValType = requestValType.Elem()
 	}
 
 	if requestStructType.Kind() != reflect.Struct {
-		return serializeContentType(requestFieldName, SerializationMethodToContentType[serializationMethod], requestValType)
+		return serializeContentType(requestFieldName, SerializationMethodToContentType[serializationMethod], requestValType, tag)
 	}
 
 	requestField, ok := requestStructType.FieldByName(requestFieldName)
@@ -50,24 +53,44 @@ func SerializeRequestBody(ctx context.Context, request interface{}, requestField
 		if tag != nil {
 			// request object (non-flattened)
 			requestVal := requestValType.FieldByName(requestFieldName)
-			if requestField.Type.Kind() == reflect.Pointer && requestVal.IsNil() {
-				return nil, "", nil
+			if isNil(requestField.Type, requestVal) {
+				if !nullable && optional {
+					return nil, "", nil
+				}
+
+				return serializeContentType(requestFieldName, tag.MediaType, requestVal, string(requestField.Tag))
 			}
 
-			return serializeContentType(requestFieldName, tag.MediaType, requestVal)
+			return serializeContentType(requestFieldName, tag.MediaType, requestVal, string(requestField.Tag))
 		}
 	}
 
 	// flattened request object
-	return serializeContentType(requestFieldName, SerializationMethodToContentType[serializationMethod], requestValType)
+	return serializeContentType(requestFieldName, SerializationMethodToContentType[serializationMethod], reflect.ValueOf(request), tag)
 }
 
-func serializeContentType(fieldName string, mediaType string, val reflect.Value) (*bytes.Buffer, string, error) {
+func serializeContentType(fieldName string, mediaType string, val reflect.Value, tag string) (*bytes.Buffer, string, error) {
 	buf := &bytes.Buffer{}
+
+	if isNil(val.Type(), val) {
+		// TODO: what does a null mean for other content types? Just returning an empty buffer for now
+		if jsonEncodingRegex.MatchString(mediaType) {
+			if _, err := buf.Write([]byte("null")); err != nil {
+				return nil, "", err
+			}
+		}
+
+		return buf, mediaType, nil
+	}
 
 	switch {
 	case jsonEncodingRegex.MatchString(mediaType):
-		if err := json.NewEncoder(buf).Encode(val.Interface()); err != nil {
+		data, err := MarshalJSON(val.Interface(), reflect.StructTag(tag), true)
+		if err != nil {
+			return nil, "", err
+		}
+
+		if _, err := buf.Write(data); err != nil {
 			return nil, "", err
 		}
 	case multipartEncodingRegex.MatchString(mediaType):
@@ -116,11 +139,11 @@ func encodeMultipartFormData(w io.Writer, data interface{}) (string, error) {
 		fieldType := field.Type
 		valType := requestValType.Field(i)
 
-		if fieldType.Kind() == reflect.Pointer {
-			if valType.IsNil() {
-				continue
-			}
+		if isNil(fieldType, valType) {
+			continue
+		}
 
+		if fieldType.Kind() == reflect.Pointer {
 			fieldType = fieldType.Elem()
 			valType = valType.Elem()
 		}
@@ -137,7 +160,7 @@ func encodeMultipartFormData(w io.Writer, data interface{}) (string, error) {
 				writer.Close()
 				return "", err
 			}
-			d, err := json.Marshal(valType.Interface())
+			d, err := MarshalJSON(valType.Interface(), field.Tag, true)
 			if err != nil {
 				writer.Close()
 				return "", err
@@ -231,18 +254,18 @@ func encodeFormData(fieldName string, w io.Writer, data interface{}) error {
 			fieldType := field.Type
 			valType := requestValType.Field(i)
 
-			if fieldType.Kind() == reflect.Pointer {
-				if valType.IsNil() {
-					continue
-				}
+			if isNil(fieldType, valType) {
+				continue
+			}
 
+			if fieldType.Kind() == reflect.Pointer {
 				fieldType = fieldType.Elem()
 				valType = valType.Elem()
 			}
 
 			tag := parseFormTag(field)
 			if tag.JSON {
-				data, err := json.Marshal(valType.Interface())
+				data, err := MarshalJSON(valType.Interface(), field.Tag, true)
 				if err != nil {
 					return err
 				}

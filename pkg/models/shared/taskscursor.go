@@ -3,9 +3,8 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 )
 
 type TasksCursorCursorDataType string
@@ -107,76 +106,59 @@ func CreateTasksCursorCursorDataTaskMoneycorp(taskMoneycorp TaskMoneycorp) Tasks
 }
 
 func (u *TasksCursorCursorData) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
-	taskStripe := new(TaskStripe)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskStripe); err == nil {
-		u.TaskStripe = taskStripe
+	taskStripe := TaskStripe{}
+	if err := utils.UnmarshalJSON(data, &taskStripe, "", true, true); err == nil {
+		u.TaskStripe = &taskStripe
 		u.Type = TasksCursorCursorDataTypeTaskStripe
 		return nil
 	}
 
-	taskWise := new(TaskWise)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskWise); err == nil {
-		u.TaskWise = taskWise
+	taskWise := TaskWise{}
+	if err := utils.UnmarshalJSON(data, &taskWise, "", true, true); err == nil {
+		u.TaskWise = &taskWise
 		u.Type = TasksCursorCursorDataTypeTaskWise
 		return nil
 	}
 
-	taskCurrencyCloud := new(TaskCurrencyCloud)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskCurrencyCloud); err == nil {
-		u.TaskCurrencyCloud = taskCurrencyCloud
+	taskCurrencyCloud := TaskCurrencyCloud{}
+	if err := utils.UnmarshalJSON(data, &taskCurrencyCloud, "", true, true); err == nil {
+		u.TaskCurrencyCloud = &taskCurrencyCloud
 		u.Type = TasksCursorCursorDataTypeTaskCurrencyCloud
 		return nil
 	}
 
-	taskDummyPay := new(TaskDummyPay)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskDummyPay); err == nil {
-		u.TaskDummyPay = taskDummyPay
+	taskDummyPay := TaskDummyPay{}
+	if err := utils.UnmarshalJSON(data, &taskDummyPay, "", true, true); err == nil {
+		u.TaskDummyPay = &taskDummyPay
 		u.Type = TasksCursorCursorDataTypeTaskDummyPay
 		return nil
 	}
 
-	taskModulr := new(TaskModulr)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskModulr); err == nil {
-		u.TaskModulr = taskModulr
+	taskModulr := TaskModulr{}
+	if err := utils.UnmarshalJSON(data, &taskModulr, "", true, true); err == nil {
+		u.TaskModulr = &taskModulr
 		u.Type = TasksCursorCursorDataTypeTaskModulr
 		return nil
 	}
 
-	taskBankingCircle := new(TaskBankingCircle)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskBankingCircle); err == nil {
-		u.TaskBankingCircle = taskBankingCircle
+	taskBankingCircle := TaskBankingCircle{}
+	if err := utils.UnmarshalJSON(data, &taskBankingCircle, "", true, true); err == nil {
+		u.TaskBankingCircle = &taskBankingCircle
 		u.Type = TasksCursorCursorDataTypeTaskBankingCircle
 		return nil
 	}
 
-	taskMangoPay := new(TaskMangoPay)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskMangoPay); err == nil {
-		u.TaskMangoPay = taskMangoPay
+	taskMangoPay := TaskMangoPay{}
+	if err := utils.UnmarshalJSON(data, &taskMangoPay, "", true, true); err == nil {
+		u.TaskMangoPay = &taskMangoPay
 		u.Type = TasksCursorCursorDataTypeTaskMangoPay
 		return nil
 	}
 
-	taskMoneycorp := new(TaskMoneycorp)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&taskMoneycorp); err == nil {
-		u.TaskMoneycorp = taskMoneycorp
+	taskMoneycorp := TaskMoneycorp{}
+	if err := utils.UnmarshalJSON(data, &taskMoneycorp, "", true, true); err == nil {
+		u.TaskMoneycorp = &taskMoneycorp
 		u.Type = TasksCursorCursorDataTypeTaskMoneycorp
 		return nil
 	}
@@ -186,38 +168,38 @@ func (u *TasksCursorCursorData) UnmarshalJSON(data []byte) error {
 
 func (u TasksCursorCursorData) MarshalJSON() ([]byte, error) {
 	if u.TaskStripe != nil {
-		return json.Marshal(u.TaskStripe)
+		return utils.MarshalJSON(u.TaskStripe, "", true)
 	}
 
 	if u.TaskWise != nil {
-		return json.Marshal(u.TaskWise)
+		return utils.MarshalJSON(u.TaskWise, "", true)
 	}
 
 	if u.TaskCurrencyCloud != nil {
-		return json.Marshal(u.TaskCurrencyCloud)
+		return utils.MarshalJSON(u.TaskCurrencyCloud, "", true)
 	}
 
 	if u.TaskDummyPay != nil {
-		return json.Marshal(u.TaskDummyPay)
+		return utils.MarshalJSON(u.TaskDummyPay, "", true)
 	}
 
 	if u.TaskModulr != nil {
-		return json.Marshal(u.TaskModulr)
+		return utils.MarshalJSON(u.TaskModulr, "", true)
 	}
 
 	if u.TaskBankingCircle != nil {
-		return json.Marshal(u.TaskBankingCircle)
+		return utils.MarshalJSON(u.TaskBankingCircle, "", true)
 	}
 
 	if u.TaskMangoPay != nil {
-		return json.Marshal(u.TaskMangoPay)
+		return utils.MarshalJSON(u.TaskMangoPay, "", true)
 	}
 
 	if u.TaskMoneycorp != nil {
-		return json.Marshal(u.TaskMoneycorp)
+		return utils.MarshalJSON(u.TaskMoneycorp, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type TasksCursorCursor struct {
@@ -228,7 +210,48 @@ type TasksCursorCursor struct {
 	Previous *string                 `json:"previous,omitempty"`
 }
 
-// TasksCursor - OK
+func (o *TasksCursorCursor) GetData() []TasksCursorCursorData {
+	if o == nil {
+		return []TasksCursorCursorData{}
+	}
+	return o.Data
+}
+
+func (o *TasksCursorCursor) GetHasMore() bool {
+	if o == nil {
+		return false
+	}
+	return o.HasMore
+}
+
+func (o *TasksCursorCursor) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *TasksCursorCursor) GetPageSize() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.PageSize
+}
+
+func (o *TasksCursorCursor) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
 type TasksCursor struct {
 	Cursor TasksCursorCursor `json:"cursor"`
+}
+
+func (o *TasksCursor) GetCursor() TasksCursorCursor {
+	if o == nil {
+		return TasksCursorCursor{}
+	}
+	return o.Cursor
 }

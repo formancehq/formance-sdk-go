@@ -3,6 +3,7 @@
 package utils
 
 import (
+	"context"
 	"encoding/base64"
 	"fmt"
 	"net/http"
@@ -26,59 +27,79 @@ type securityTag struct {
 	SubType string
 }
 
-type SecurityClient struct {
-	client      HTTPClient
+type securityConfig struct {
 	headers     map[string]string
 	queryParams map[string]string
 }
 
-func newSecurityClient(client HTTPClient) *SecurityClient {
+type SecurityClient struct {
+	HTTPClient
+	security func(ctx context.Context) (interface{}, error)
+}
+
+func newSecurityClient(client HTTPClient, security func(ctx context.Context) (interface{}, error)) *SecurityClient {
 	return &SecurityClient{
-		client:      client,
-		headers:     make(map[string]string),
-		queryParams: make(map[string]string),
+		HTTPClient: client,
+		security:   security,
 	}
 }
 
 func (c *SecurityClient) Do(req *http.Request) (*http.Response, error) {
-	for k, v := range c.headers {
+	securityCtx, err := c.security(req.Context())
+	if err != nil {
+		return nil, err
+	}
+
+	ctx := securityConfig{
+		headers:     make(map[string]string),
+		queryParams: make(map[string]string),
+	}
+	parseSecurityStruct(&ctx, securityCtx)
+
+	for k, v := range ctx.headers {
 		req.Header.Set(k, v)
 	}
 
 	queryParams := req.URL.Query()
 
-	for k, v := range c.queryParams {
-		queryParams.Set(k, v)
+	for k, v := range ctx.queryParams {
+		queryParams.Add(k, v)
 	}
 
 	req.URL.RawQuery = queryParams.Encode()
 
-	return c.client.Do(req)
+	return c.HTTPClient.Do(req)
 }
 
-func ConfigureSecurityClient(c HTTPClient, security interface{}) *SecurityClient {
-	client := parseSecurityStruct(c, security)
-	if client != nil {
-		return client
+func ConfigureSecurityClient(c HTTPClient, security func(ctx context.Context) (interface{}, error)) *SecurityClient {
+	return newSecurityClient(c, security)
+}
+
+func trueReflectValue(val reflect.Value) reflect.Value {
+	kind := val.Type().Kind()
+	for kind == reflect.Interface || kind == reflect.Ptr {
+		innerVal := val.Elem()
+		if !innerVal.IsValid() {
+			break
+		}
+		val = innerVal
+		kind = val.Type().Kind()
+	}
+	return val
+}
+
+func parseSecurityStruct(c *securityConfig, security interface{}) {
+	securityValType := trueReflectValue(reflect.ValueOf(security))
+	securityStructType := securityValType.Type()
+
+	if isNil(securityStructType, securityValType) {
+		return
 	}
 
-	return newSecurityClient(c)
-}
-
-func parseSecurityStruct(c HTTPClient, security interface{}) *SecurityClient {
-	securityStructType := reflect.TypeOf(security)
-	securityValType := reflect.ValueOf(security)
-
 	if securityStructType.Kind() == reflect.Ptr {
-		if securityValType.IsNil() {
-			return nil
-		}
-
 		securityStructType = securityStructType.Elem()
 		securityValType = securityValType.Elem()
 	}
-
-	client := newSecurityClient(c)
 
 	for i := 0; i < securityStructType.NumField(); i++ {
 		fieldType := securityStructType.Field(i)
@@ -86,47 +107,37 @@ func parseSecurityStruct(c HTTPClient, security interface{}) *SecurityClient {
 
 		kind := valType.Kind()
 
-		if fieldType.Type.Kind() == reflect.Pointer {
-			if valType.IsNil() {
-				continue
-			}
+		if isNil(fieldType.Type, valType) {
+			continue
+		}
 
+		if fieldType.Type.Kind() == reflect.Pointer {
 			kind = valType.Elem().Kind()
 		}
 
 		secTag := parseSecurityTag(fieldType)
 		if secTag != nil {
 			if secTag.Option {
-				return parseSecurityOption(c, valType.Interface())
+				handleSecurityOption(c, valType.Interface())
 			} else if secTag.Scheme {
 				// Special case for basic auth which could be a flattened struct
 				if secTag.SubType == "basic" && kind != reflect.Struct {
-					parseSecurityScheme(client, secTag, security)
-					return client
+					parseSecurityScheme(c, secTag, security)
 				} else {
-					parseSecurityScheme(client, secTag, valType.Interface())
+					parseSecurityScheme(c, secTag, valType.Interface())
 				}
 			}
 		}
 	}
-
-	return client
 }
 
-func parseSecurityOption(c HTTPClient, option interface{}) *SecurityClient {
-	optionStructType := reflect.TypeOf(option)
-	optionValType := reflect.ValueOf(option)
+func handleSecurityOption(c *securityConfig, option interface{}) error {
+	optionValType := trueReflectValue(reflect.ValueOf(option))
+	optionStructType := optionValType.Type()
 
-	if optionStructType.Kind() == reflect.Ptr {
-		if optionValType.IsNil() {
-			return nil
-		}
-
-		optionStructType = optionStructType.Elem()
-		optionValType = optionValType.Elem()
+	if isNil(optionStructType, optionValType) {
+		return nil
 	}
-
-	client := newSecurityClient(c)
 
 	for i := 0; i < optionStructType.NumField(); i++ {
 		fieldType := optionStructType.Field(i)
@@ -134,29 +145,24 @@ func parseSecurityOption(c HTTPClient, option interface{}) *SecurityClient {
 
 		secTag := parseSecurityTag(fieldType)
 		if secTag != nil && secTag.Scheme {
-			parseSecurityScheme(client, secTag, valType.Interface())
+			parseSecurityScheme(c, secTag, valType.Interface())
 		}
 	}
 
-	return client
+	return nil
 }
 
-func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme interface{}) {
-	schemeType := reflect.TypeOf(scheme)
-	schemeVal := reflect.ValueOf(scheme)
+func parseSecurityScheme(client *securityConfig, schemeTag *securityTag, scheme interface{}) {
+	schemeVal := trueReflectValue(reflect.ValueOf(scheme))
+	schemeType := schemeVal.Type()
 
-	if schemeType.Kind() == reflect.Ptr {
-		if schemeVal.IsNil() {
-			return
-		}
-
-		schemeType = schemeType.Elem()
-		schemeVal = schemeVal.Elem()
+	if isNil(schemeType, schemeVal) {
+		return
 	}
 
 	if schemeType.Kind() == reflect.Struct {
 		if schemeTag.Type == "http" && schemeTag.SubType == "basic" {
-			parseBasicAuthScheme(client, schemeVal.Interface())
+			handleBasicAuthScheme(client, schemeVal.Interface())
 			return
 		}
 
@@ -164,11 +170,11 @@ func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme 
 			fieldType := schemeType.Field(i)
 			valType := schemeVal.Field(i)
 
-			if fieldType.Type.Kind() == reflect.Ptr {
-				if valType.IsNil() {
-					continue
-				}
+			if isNil(fieldType.Type, valType) {
+				continue
+			}
 
+			if fieldType.Type.Kind() == reflect.Ptr {
 				valType = valType.Elem()
 			}
 
@@ -184,7 +190,7 @@ func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme 
 	}
 }
 
-func parseSecuritySchemeValue(client *SecurityClient, schemeTag *securityTag, secTag *securityTag, val interface{}) {
+func parseSecuritySchemeValue(client *securityConfig, schemeTag *securityTag, secTag *securityTag, val interface{}) {
 	switch schemeTag.Type {
 	case "apiKey":
 		switch schemeTag.SubType {
@@ -221,7 +227,7 @@ func prefixBearer(authHeaderValue string) string {
 	return fmt.Sprintf("Bearer %s", authHeaderValue)
 }
 
-func parseBasicAuthScheme(client *SecurityClient, scheme interface{}) {
+func handleBasicAuthScheme(client *securityConfig, scheme interface{}) {
 	schemeStructType := reflect.TypeOf(scheme)
 	schemeValType := reflect.ValueOf(scheme)
 

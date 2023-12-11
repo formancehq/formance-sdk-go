@@ -2,9 +2,38 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
+)
+
 type WiseConfig struct {
 	APIKey string `json:"apiKey"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Stripe API.
 	//
-	PollingPeriod *string `json:"pollingPeriod,omitempty"`
+	PollingPeriod *string `default:"120s" json:"pollingPeriod"`
+}
+
+func (w WiseConfig) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *WiseConfig) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *WiseConfig) GetAPIKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIKey
+}
+
+func (o *WiseConfig) GetPollingPeriod() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PollingPeriod
 }

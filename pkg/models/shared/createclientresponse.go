@@ -2,7 +2,13 @@
 
 package shared
 
-// CreateClientResponse - Client created
 type CreateClientResponse struct {
 	Data *Client `json:"data,omitempty"`
+}
+
+func (o *CreateClientResponse) GetData() *Client {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }

@@ -1,0 +1,14 @@
+# Transaction
+
+
+## Fields
+
+| Field                                                         | Type                                                          | Required                                                      | Description                                                   | Example                                                       |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `Metadata`                                                    | map[string]*interface{}*                                      | :heavy_minus_sign:                                            | N/A                                                           | [object Object]                                               |
+| `PostCommitVolumes`                                           | map[string]map[string][Volume](../../models/shared/volume.md) | :heavy_minus_sign:                                            | N/A                                                           | [object Object]                                               |
+| `Postings`                                                    | [][Posting](../../models/shared/posting.md)                   | :heavy_check_mark:                                            | N/A                                                           |                                                               |
+| `PreCommitVolumes`                                            | map[string]map[string][Volume](../../models/shared/volume.md) | :heavy_minus_sign:                                            | N/A                                                           | [object Object]                                               |
+| `Reference`                                                   | **string*                                                     | :heavy_minus_sign:                                            | N/A                                                           | ref:001                                                       |
+| `Timestamp`                                                   | [time.Time](https://pkg.go.dev/time#Time)                     | :heavy_check_mark:                                            | N/A                                                           |                                                               |
+| `Txid`                                                        | *int64*                                                       | :heavy_check_mark:                                            | N/A                                                           |                                                               |

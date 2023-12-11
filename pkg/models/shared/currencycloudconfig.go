@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
+)
+
 type CurrencyCloudConfig struct {
 	APIKey string `json:"apiKey"`
 	// The endpoint to use for the API. Defaults to https://devapi.currencycloud.com
@@ -9,5 +13,44 @@ type CurrencyCloudConfig struct {
 	// Username of the API Key holder
 	LoginID string `json:"loginID"`
 	// The frequency at which the connector will fetch transactions
-	PollingPeriod *string `json:"pollingPeriod,omitempty"`
+	PollingPeriod *string `default:"120s" json:"pollingPeriod"`
+}
+
+func (c CurrencyCloudConfig) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CurrencyCloudConfig) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CurrencyCloudConfig) GetAPIKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIKey
+}
+
+func (o *CurrencyCloudConfig) GetEndpoint() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Endpoint
+}
+
+func (o *CurrencyCloudConfig) GetLoginID() string {
+	if o == nil {
+		return ""
+	}
+	return o.LoginID
+}
+
+func (o *CurrencyCloudConfig) GetPollingPeriod() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PollingPeriod
 }

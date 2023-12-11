@@ -2,7 +2,13 @@
 
 package shared
 
-// AttemptResponse - OK
 type AttemptResponse struct {
 	Data Attempt `json:"data"`
+}
+
+func (o *AttemptResponse) GetData() Attempt {
+	if o == nil {
+		return Attempt{}
+	}
+	return o.Data
 }

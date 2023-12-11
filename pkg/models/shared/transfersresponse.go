@@ -2,18 +2,96 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
+	"math/big"
+)
+
 type TransfersResponseData struct {
-	Amount      *int64  `json:"amount,omitempty"`
-	Asset       *string `json:"asset,omitempty"`
-	Currency    *string `json:"currency,omitempty"`
-	Destination *string `json:"destination,omitempty"`
-	Error       *string `json:"error,omitempty"`
-	ID          *string `json:"id,omitempty"`
-	Source      *string `json:"source,omitempty"`
-	Status      *string `json:"status,omitempty"`
+	Amount      *big.Int `json:"amount,omitempty"`
+	Asset       *string  `json:"asset,omitempty"`
+	Currency    *string  `json:"currency,omitempty"`
+	Destination *string  `json:"destination,omitempty"`
+	Error       *string  `json:"error,omitempty"`
+	ID          *string  `json:"id,omitempty"`
+	Source      *string  `json:"source,omitempty"`
+	Status      *string  `json:"status,omitempty"`
 }
 
-// TransfersResponse - OK
+func (t TransfersResponseData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TransfersResponseData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *TransfersResponseData) GetAmount() *big.Int {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
+}
+
+func (o *TransfersResponseData) GetAsset() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Asset
+}
+
+func (o *TransfersResponseData) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *TransfersResponseData) GetDestination() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Destination
+}
+
+func (o *TransfersResponseData) GetError() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *TransfersResponseData) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *TransfersResponseData) GetSource() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Source
+}
+
+func (o *TransfersResponseData) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
 type TransfersResponse struct {
 	Data []TransfersResponseData `json:"data,omitempty"`
+}
+
+func (o *TransfersResponse) GetData() []TransfersResponseData {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }
