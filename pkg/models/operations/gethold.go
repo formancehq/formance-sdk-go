@@ -12,12 +12,57 @@ type GetHoldRequest struct {
 	HoldID string `pathParam:"style=simple,explode=false,name=holdID"`
 }
 
+func (o *GetHoldRequest) GetHoldID() string {
+	if o == nil {
+		return ""
+	}
+	return o.HoldID
+}
+
 type GetHoldResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Holds
 	GetHoldResponse *shared.GetHoldResponse
-	StatusCode      int
-	RawResponse     *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// Error
 	WalletsErrorResponse *shared.WalletsErrorResponse
+}
+
+func (o *GetHoldResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetHoldResponse) GetGetHoldResponse() *shared.GetHoldResponse {
+	if o == nil {
+		return nil
+	}
+	return o.GetHoldResponse
+}
+
+func (o *GetHoldResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetHoldResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetHoldResponse) GetWalletsErrorResponse() *shared.WalletsErrorResponse {
+	if o == nil {
+		return nil
+	}
+	return o.WalletsErrorResponse
 }

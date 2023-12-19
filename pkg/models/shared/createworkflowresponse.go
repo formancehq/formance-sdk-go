@@ -2,7 +2,13 @@
 
 package shared
 
-// CreateWorkflowResponse - Created workflow
 type CreateWorkflowResponse struct {
 	Data Workflow `json:"data"`
+}
+
+func (o *CreateWorkflowResponse) GetData() Workflow {
+	if o == nil {
+		return Workflow{}
+	}
+	return o.Data
 }

@@ -11,10 +11,48 @@ type VoidHoldRequest struct {
 	HoldID string `pathParam:"style=simple,explode=false,name=hold_id"`
 }
 
+func (o *VoidHoldRequest) GetHoldID() string {
+	if o == nil {
+		return ""
+	}
+	return o.HoldID
+}
+
 type VoidHoldResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	WalletsErrorResponse *shared.WalletsErrorResponse
+}
+
+func (o *VoidHoldResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *VoidHoldResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *VoidHoldResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *VoidHoldResponse) GetWalletsErrorResponse() *shared.WalletsErrorResponse {
+	if o == nil {
+		return nil
+	}
+	return o.WalletsErrorResponse
 }

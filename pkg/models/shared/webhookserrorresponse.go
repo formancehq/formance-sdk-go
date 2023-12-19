@@ -2,9 +2,29 @@
 
 package shared
 
-// WebhooksErrorResponse - Error
 type WebhooksErrorResponse struct {
 	Details      *string            `json:"details,omitempty"`
 	ErrorCode    WebhooksErrorsEnum `json:"errorCode"`
 	ErrorMessage string             `json:"errorMessage"`
+}
+
+func (o *WebhooksErrorResponse) GetDetails() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Details
+}
+
+func (o *WebhooksErrorResponse) GetErrorCode() WebhooksErrorsEnum {
+	if o == nil {
+		return WebhooksErrorsEnum("")
+	}
+	return o.ErrorCode
+}
+
+func (o *WebhooksErrorResponse) GetErrorMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.ErrorMessage
 }

@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"math/big"
 	"time"
 )
@@ -12,4 +13,43 @@ type BalanceWithAssets struct {
 	ExpiresAt *time.Time          `json:"expiresAt,omitempty"`
 	Name      string              `json:"name"`
 	Priority  *big.Int            `json:"priority,omitempty"`
+}
+
+func (b BalanceWithAssets) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(b, "", false)
+}
+
+func (b *BalanceWithAssets) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *BalanceWithAssets) GetAssets() map[string]*big.Int {
+	if o == nil {
+		return map[string]*big.Int{}
+	}
+	return o.Assets
+}
+
+func (o *BalanceWithAssets) GetExpiresAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ExpiresAt
+}
+
+func (o *BalanceWithAssets) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *BalanceWithAssets) GetPriority() *big.Int {
+	if o == nil {
+		return nil
+	}
+	return o.Priority
 }

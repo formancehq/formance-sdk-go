@@ -4,16 +4,18 @@ generation:
   singleTagPerOp: true
   telemetryEnabled: false
 features:
-  version: ""
   go:
-    core: 2.86.4
+    constsAndDefaults: 0.1.1
+    core: 2.94.0
     deprecations: 2.81.1
-    globalSecurity: 2.81.1
+    errors: 2.81.7
+    getRequestBodies: 2.81.1
     globalServerURLs: 2.82.0
     ignores: 2.81.1
-    unions: 2.81.2
+    unions: 2.84.1
 go:
-  version: v1.0.20230915
+  version: ""
   author: Formance
+  flattenGlobalSecurity: false
   maxMethodParams: 0
   packageName: github.com/formancehq/formance-sdk-go

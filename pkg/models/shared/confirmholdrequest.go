@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"math/big"
 )
 
@@ -11,4 +12,29 @@ type ConfirmHoldRequest struct {
 	Amount *big.Int `json:"amount,omitempty"`
 	// Define a final confirmation. Remaining funds will be returned to the wallet.
 	Final *bool `json:"final,omitempty"`
+}
+
+func (c ConfirmHoldRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ConfirmHoldRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ConfirmHoldRequest) GetAmount() *big.Int {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
+}
+
+func (o *ConfirmHoldRequest) GetFinal() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Final
 }

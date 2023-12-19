@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"net/http"
 )
 
@@ -15,17 +16,87 @@ type GetTransactionsRequest struct {
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of results to return per page
-	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
 	// A wallet ID to filter on
 	WalletID *string `queryParam:"style=form,explode=true,name=walletID"`
 }
 
+func (g GetTransactionsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTransactionsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetTransactionsRequest) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}
+
+func (o *GetTransactionsRequest) GetPageSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.PageSize
+}
+
+func (o *GetTransactionsRequest) GetWalletID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.WalletID
+}
+
 type GetTransactionsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// OK
 	GetTransactionsResponse *shared.GetTransactionsResponse
-	StatusCode              int
-	RawResponse             *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// Error
 	WalletsErrorResponse *shared.WalletsErrorResponse
+}
+
+func (o *GetTransactionsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetTransactionsResponse) GetGetTransactionsResponse() *shared.GetTransactionsResponse {
+	if o == nil {
+		return nil
+	}
+	return o.GetTransactionsResponse
+}
+
+func (o *GetTransactionsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetTransactionsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetTransactionsResponse) GetWalletsErrorResponse() *shared.WalletsErrorResponse {
+	if o == nil {
+		return nil
+	}
+	return o.WalletsErrorResponse
 }
