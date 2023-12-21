@@ -9,3 +9,31 @@ type Script struct {
 	Reference *string                `json:"reference,omitempty"`
 	Vars      map[string]interface{} `json:"vars,omitempty"`
 }
+
+func (o *Script) GetMetadata() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *Script) GetPlain() string {
+	if o == nil {
+		return ""
+	}
+	return o.Plain
+}
+
+func (o *Script) GetReference() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Reference
+}
+
+func (o *Script) GetVars() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Vars
+}

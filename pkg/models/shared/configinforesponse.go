@@ -2,7 +2,13 @@
 
 package shared
 
-// ConfigInfoResponse - OK
 type ConfigInfoResponse struct {
 	Data ConfigInfo `json:"data"`
+}
+
+func (o *ConfigInfoResponse) GetData() ConfigInfo {
+	if o == nil {
+		return ConfigInfo{}
+	}
+	return o.Data
 }

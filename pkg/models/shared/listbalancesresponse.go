@@ -10,7 +10,48 @@ type ListBalancesResponseCursor struct {
 	Previous *string   `json:"previous,omitempty"`
 }
 
-// ListBalancesResponse - Balances list
+func (o *ListBalancesResponseCursor) GetData() []Balance {
+	if o == nil {
+		return []Balance{}
+	}
+	return o.Data
+}
+
+func (o *ListBalancesResponseCursor) GetHasMore() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.HasMore
+}
+
+func (o *ListBalancesResponseCursor) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *ListBalancesResponseCursor) GetPageSize() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.PageSize
+}
+
+func (o *ListBalancesResponseCursor) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
 type ListBalancesResponse struct {
 	Cursor ListBalancesResponseCursor `json:"cursor"`
+}
+
+func (o *ListBalancesResponse) GetCursor() ListBalancesResponseCursor {
+	if o == nil {
+		return ListBalancesResponseCursor{}
+	}
+	return o.Cursor
 }

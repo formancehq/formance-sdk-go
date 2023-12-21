@@ -3,10 +3,10 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 )
 
 type SubjectType string
@@ -46,7 +46,6 @@ func CreateSubjectWallet(wallet WalletSubject) Subject {
 }
 
 func (u *Subject) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		Type string
@@ -59,10 +58,8 @@ func (u *Subject) UnmarshalJSON(data []byte) error {
 
 	switch dis.Type {
 	case "ACCOUNT":
-		d = json.NewDecoder(bytes.NewReader(data))
-		d.DisallowUnknownFields()
 		ledgerAccountSubject := new(LedgerAccountSubject)
-		if err := d.Decode(&ledgerAccountSubject); err != nil {
+		if err := utils.UnmarshalJSON(data, &ledgerAccountSubject, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -70,10 +67,8 @@ func (u *Subject) UnmarshalJSON(data []byte) error {
 		u.Type = SubjectTypeAccount
 		return nil
 	case "WALLET":
-		d = json.NewDecoder(bytes.NewReader(data))
-		d.DisallowUnknownFields()
 		walletSubject := new(WalletSubject)
-		if err := d.Decode(&walletSubject); err != nil {
+		if err := utils.UnmarshalJSON(data, &walletSubject, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -87,12 +82,12 @@ func (u *Subject) UnmarshalJSON(data []byte) error {
 
 func (u Subject) MarshalJSON() ([]byte, error) {
 	if u.LedgerAccountSubject != nil {
-		return json.Marshal(u.LedgerAccountSubject)
+		return utils.MarshalJSON(u.LedgerAccountSubject, "", true)
 	}
 
 	if u.WalletSubject != nil {
-		return json.Marshal(u.WalletSubject)
+		return utils.MarshalJSON(u.WalletSubject, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }

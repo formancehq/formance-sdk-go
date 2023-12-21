@@ -10,7 +10,48 @@ type GetTransactionsResponseCursor struct {
 	Previous *string              `json:"previous,omitempty"`
 }
 
-// GetTransactionsResponse - OK
+func (o *GetTransactionsResponseCursor) GetData() []WalletsTransaction {
+	if o == nil {
+		return []WalletsTransaction{}
+	}
+	return o.Data
+}
+
+func (o *GetTransactionsResponseCursor) GetHasMore() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.HasMore
+}
+
+func (o *GetTransactionsResponseCursor) GetNext() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Next
+}
+
+func (o *GetTransactionsResponseCursor) GetPageSize() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.PageSize
+}
+
+func (o *GetTransactionsResponseCursor) GetPrevious() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Previous
+}
+
 type GetTransactionsResponse struct {
 	Cursor GetTransactionsResponseCursor `json:"cursor"`
+}
+
+func (o *GetTransactionsResponse) GetCursor() GetTransactionsResponseCursor {
+	if o == nil {
+		return GetTransactionsResponseCursor{}
+	}
+	return o.Cursor
 }

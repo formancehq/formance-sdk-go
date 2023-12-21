@@ -3,5 +3,12 @@
 package shared
 
 type ActivityGetPaymentOutput struct {
-	Data Payment `json:"data"`
+	Data OrchestrationPayment `json:"data"`
+}
+
+func (o *ActivityGetPaymentOutput) GetData() OrchestrationPayment {
+	if o == nil {
+		return OrchestrationPayment{}
+	}
+	return o.Data
 }

@@ -10,16 +10,9 @@ import (
 type WebhooksErrorsEnum string
 
 const (
-	WebhooksErrorsEnumInternal          WebhooksErrorsEnum = "INTERNAL"
-	WebhooksErrorsEnumInsufficientFund  WebhooksErrorsEnum = "INSUFFICIENT_FUND"
-	WebhooksErrorsEnumValidation        WebhooksErrorsEnum = "VALIDATION"
-	WebhooksErrorsEnumConflict          WebhooksErrorsEnum = "CONFLICT"
-	WebhooksErrorsEnumNoScript          WebhooksErrorsEnum = "NO_SCRIPT"
-	WebhooksErrorsEnumCompilationFailed WebhooksErrorsEnum = "COMPILATION_FAILED"
-	WebhooksErrorsEnumMetadataOverride  WebhooksErrorsEnum = "METADATA_OVERRIDE"
-	WebhooksErrorsEnumNotFound          WebhooksErrorsEnum = "NOT_FOUND"
-	WebhooksErrorsEnumContextCancelled  WebhooksErrorsEnum = "CONTEXT_CANCELLED"
-	WebhooksErrorsEnumStore             WebhooksErrorsEnum = "STORE"
+	WebhooksErrorsEnumInternal   WebhooksErrorsEnum = "INTERNAL"
+	WebhooksErrorsEnumValidation WebhooksErrorsEnum = "VALIDATION"
+	WebhooksErrorsEnumNotFound   WebhooksErrorsEnum = "NOT_FOUND"
 )
 
 func (e WebhooksErrorsEnum) ToPointer() *WebhooksErrorsEnum {
@@ -34,23 +27,9 @@ func (e *WebhooksErrorsEnum) UnmarshalJSON(data []byte) error {
 	switch v {
 	case "INTERNAL":
 		fallthrough
-	case "INSUFFICIENT_FUND":
-		fallthrough
 	case "VALIDATION":
 		fallthrough
-	case "CONFLICT":
-		fallthrough
-	case "NO_SCRIPT":
-		fallthrough
-	case "COMPILATION_FAILED":
-		fallthrough
-	case "METADATA_OVERRIDE":
-		fallthrough
 	case "NOT_FOUND":
-		fallthrough
-	case "CONTEXT_CANCELLED":
-		fallthrough
-	case "STORE":
 		*e = WebhooksErrorsEnum(v)
 		return nil
 	default:

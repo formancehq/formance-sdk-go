@@ -19,12 +19,71 @@ type CreateTransactionRequest struct {
 	Preview *bool `queryParam:"style=form,explode=true,name=preview"`
 }
 
+func (o *CreateTransactionRequest) GetPostTransaction() shared.PostTransaction {
+	if o == nil {
+		return shared.PostTransaction{}
+	}
+	return o.PostTransaction
+}
+
+func (o *CreateTransactionRequest) GetLedger() string {
+	if o == nil {
+		return ""
+	}
+	return o.Ledger
+}
+
+func (o *CreateTransactionRequest) GetPreview() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Preview
+}
+
 type CreateTransactionResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Error
 	ErrorResponse *shared.ErrorResponse
-	StatusCode    int
-	RawResponse   *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
 	TransactionsResponse *shared.TransactionsResponse
+}
+
+func (o *CreateTransactionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateTransactionResponse) GetErrorResponse() *shared.ErrorResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ErrorResponse
+}
+
+func (o *CreateTransactionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateTransactionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CreateTransactionResponse) GetTransactionsResponse() *shared.TransactionsResponse {
+	if o == nil {
+		return nil
+	}
+	return o.TransactionsResponse
 }

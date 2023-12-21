@@ -3,42 +3,112 @@
 package shared
 
 import (
-	"encoding/json"
-	"fmt"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"time"
 )
 
-type PaymentsAccountType string
-
-const (
-	PaymentsAccountTypeTarget PaymentsAccountType = "TARGET"
-	PaymentsAccountTypeSource PaymentsAccountType = "SOURCE"
-)
-
-func (e PaymentsAccountType) ToPointer() *PaymentsAccountType {
-	return &e
-}
-
-func (e *PaymentsAccountType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TARGET":
-		fallthrough
-	case "SOURCE":
-		*e = PaymentsAccountType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PaymentsAccountType: %v", v)
-	}
+type PaymentsAccountRaw struct {
 }
 
 type PaymentsAccount struct {
-	CreatedAt time.Time           `json:"createdAt"`
-	ID        string              `json:"id"`
-	Provider  Connector           `json:"provider"`
-	Reference string              `json:"reference"`
-	Type      PaymentsAccountType `json:"type"`
+	AccountName  string    `json:"accountName"`
+	ConnectorID  string    `json:"connectorID"`
+	CreatedAt    time.Time `json:"createdAt"`
+	DefaultAsset string    `json:"defaultAsset"`
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	DefaultCurrency string              `json:"defaultCurrency"`
+	ID              string              `json:"id"`
+	Metadata        map[string]string   `json:"metadata"`
+	Pools           []string            `json:"pools,omitempty"`
+	Raw             *PaymentsAccountRaw `json:"raw"`
+	Reference       string              `json:"reference"`
+	Type            string              `json:"type"`
+}
+
+func (p PaymentsAccount) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentsAccount) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentsAccount) GetAccountName() string {
+	if o == nil {
+		return ""
+	}
+	return o.AccountName
+}
+
+func (o *PaymentsAccount) GetConnectorID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ConnectorID
+}
+
+func (o *PaymentsAccount) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *PaymentsAccount) GetDefaultAsset() string {
+	if o == nil {
+		return ""
+	}
+	return o.DefaultAsset
+}
+
+func (o *PaymentsAccount) GetDefaultCurrency() string {
+	if o == nil {
+		return ""
+	}
+	return o.DefaultCurrency
+}
+
+func (o *PaymentsAccount) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *PaymentsAccount) GetMetadata() map[string]string {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *PaymentsAccount) GetPools() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Pools
+}
+
+func (o *PaymentsAccount) GetRaw() *PaymentsAccountRaw {
+	if o == nil {
+		return nil
+	}
+	return o.Raw
+}
+
+func (o *PaymentsAccount) GetReference() string {
+	if o == nil {
+		return ""
+	}
+	return o.Reference
+}
+
+func (o *PaymentsAccount) GetType() string {
+	if o == nil {
+		return ""
+	}
+	return o.Type
 }

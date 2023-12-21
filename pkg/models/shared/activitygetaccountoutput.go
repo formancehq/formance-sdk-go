@@ -3,5 +3,12 @@
 package shared
 
 type ActivityGetAccountOutput struct {
-	Data AccountWithVolumesAndBalances `json:"data"`
+	Data OrchestrationAccount `json:"data"`
+}
+
+func (o *ActivityGetAccountOutput) GetData() OrchestrationAccount {
+	if o == nil {
+		return OrchestrationAccount{}
+	}
+	return o.Data
 }

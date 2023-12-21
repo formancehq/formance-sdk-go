@@ -3,13 +3,64 @@
 package shared
 
 import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
+	"math/big"
 	"time"
 )
 
+type PaymentAdjustmentRaw struct {
+}
+
 type PaymentAdjustment struct {
-	Absolute bool                   `json:"absolute"`
-	Amount   int64                  `json:"amount"`
-	Date     time.Time              `json:"date"`
-	Raw      map[string]interface{} `json:"raw"`
-	Status   PaymentStatus          `json:"status"`
+	Absolute bool                 `json:"absolute"`
+	Amount   *big.Int             `json:"amount"`
+	Date     time.Time            `json:"date"`
+	Raw      PaymentAdjustmentRaw `json:"raw"`
+	Status   PaymentStatus        `json:"status"`
+}
+
+func (p PaymentAdjustment) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentAdjustment) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentAdjustment) GetAbsolute() bool {
+	if o == nil {
+		return false
+	}
+	return o.Absolute
+}
+
+func (o *PaymentAdjustment) GetAmount() *big.Int {
+	if o == nil {
+		return big.NewInt(0)
+	}
+	return o.Amount
+}
+
+func (o *PaymentAdjustment) GetDate() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.Date
+}
+
+func (o *PaymentAdjustment) GetRaw() PaymentAdjustmentRaw {
+	if o == nil {
+		return PaymentAdjustmentRaw{}
+	}
+	return o.Raw
+}
+
+func (o *PaymentAdjustment) GetStatus() PaymentStatus {
+	if o == nil {
+		return PaymentStatus("")
+	}
+	return o.Status
 }
