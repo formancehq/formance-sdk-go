@@ -3,5 +3,12 @@
 package shared
 
 type ActivityRevertTransactionOutput struct {
-	Data Transaction `json:"data"`
+	Data OrchestrationTransaction `json:"data"`
+}
+
+func (o *ActivityRevertTransactionOutput) GetData() OrchestrationTransaction {
+	if o == nil {
+		return OrchestrationTransaction{}
+	}
+	return o.Data
 }
