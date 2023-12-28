@@ -12,12 +12,57 @@ type DeactivateConfigRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+func (o *DeactivateConfigRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type DeactivateConfigResponse struct {
 	// Config successfully deactivated.
 	ConfigResponse *shared.ConfigResponse
-	ContentType    string
-	StatusCode     int
-	RawResponse    *http.Response
+	// HTTP response content type for this operation
+	ContentType string
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// Error
 	WebhooksErrorResponse *shared.WebhooksErrorResponse
+}
+
+func (o *DeactivateConfigResponse) GetConfigResponse() *shared.ConfigResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigResponse
+}
+
+func (o *DeactivateConfigResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeactivateConfigResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeactivateConfigResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DeactivateConfigResponse) GetWebhooksErrorResponse() *shared.WebhooksErrorResponse {
+	if o == nil {
+		return nil
+	}
+	return o.WebhooksErrorResponse
 }

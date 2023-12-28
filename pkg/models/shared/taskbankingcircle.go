@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"time"
 )
 
@@ -11,13 +12,97 @@ type TaskBankingCircleDescriptor struct {
 	Name *string `json:"name,omitempty"`
 }
 
+func (o *TaskBankingCircleDescriptor) GetKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Key
+}
+
+func (o *TaskBankingCircleDescriptor) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+type TaskBankingCircleState struct {
+}
+
 type TaskBankingCircle struct {
-	ConnectorID string                      `json:"connectorId"`
+	ConnectorID string                      `json:"connectorID"`
 	CreatedAt   time.Time                   `json:"createdAt"`
 	Descriptor  TaskBankingCircleDescriptor `json:"descriptor"`
 	Error       *string                     `json:"error,omitempty"`
 	ID          string                      `json:"id"`
-	State       map[string]interface{}      `json:"state"`
+	State       TaskBankingCircleState      `json:"state"`
 	Status      PaymentStatus               `json:"status"`
 	UpdatedAt   time.Time                   `json:"updatedAt"`
+}
+
+func (t TaskBankingCircle) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskBankingCircle) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *TaskBankingCircle) GetConnectorID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ConnectorID
+}
+
+func (o *TaskBankingCircle) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *TaskBankingCircle) GetDescriptor() TaskBankingCircleDescriptor {
+	if o == nil {
+		return TaskBankingCircleDescriptor{}
+	}
+	return o.Descriptor
+}
+
+func (o *TaskBankingCircle) GetError() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *TaskBankingCircle) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *TaskBankingCircle) GetState() TaskBankingCircleState {
+	if o == nil {
+		return TaskBankingCircleState{}
+	}
+	return o.State
+}
+
+func (o *TaskBankingCircle) GetStatus() PaymentStatus {
+	if o == nil {
+		return PaymentStatus("")
+	}
+	return o.Status
+}
+
+func (o *TaskBankingCircle) GetUpdatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.UpdatedAt
 }

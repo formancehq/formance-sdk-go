@@ -7,7 +7,6 @@ import (
 	"fmt"
 )
 
-// Connector - The name of the connector.
 type Connector string
 
 const (
@@ -19,6 +18,8 @@ const (
 	ConnectorBankingCircle Connector = "BANKING-CIRCLE"
 	ConnectorMangopay      Connector = "MANGOPAY"
 	ConnectorMoneycorp     Connector = "MONEYCORP"
+	ConnectorAtlar         Connector = "ATLAR"
+	ConnectorAdyen         Connector = "ADYEN"
 )
 
 func (e Connector) ToPointer() *Connector {
@@ -46,6 +47,10 @@ func (e *Connector) UnmarshalJSON(data []byte) error {
 	case "MANGOPAY":
 		fallthrough
 	case "MONEYCORP":
+		fallthrough
+	case "ATLAR":
+		fallthrough
+	case "ADYEN":
 		*e = Connector(v)
 		return nil
 	default:

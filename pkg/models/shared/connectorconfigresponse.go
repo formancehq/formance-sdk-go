@@ -2,7 +2,13 @@
 
 package shared
 
-// ConnectorConfigResponse - OK
 type ConnectorConfigResponse struct {
-	Data interface{} `json:"data"`
+	Data ConnectorConfig `json:"data"`
+}
+
+func (o *ConnectorConfigResponse) GetData() ConnectorConfig {
+	if o == nil {
+		return ConnectorConfig{}
+	}
+	return o.Data
 }

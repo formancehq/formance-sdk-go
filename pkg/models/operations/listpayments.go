@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/pkg/utils"
 	"net/http"
 )
 
@@ -16,15 +17,78 @@ type ListPaymentsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
 	// Fields used to sort payments (default is date:desc).
 	Sort []string `queryParam:"style=form,explode=true,name=sort"`
 }
 
+func (l ListPaymentsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListPaymentsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ListPaymentsRequest) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}
+
+func (o *ListPaymentsRequest) GetPageSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.PageSize
+}
+
+func (o *ListPaymentsRequest) GetSort() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Sort
+}
+
 type ListPaymentsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// OK
 	PaymentsCursor *shared.PaymentsCursor
-	StatusCode     int
-	RawResponse    *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListPaymentsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListPaymentsResponse) GetPaymentsCursor() *shared.PaymentsCursor {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentsCursor
+}
+
+func (o *ListPaymentsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListPaymentsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

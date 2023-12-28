@@ -7,3 +7,24 @@ type Account struct {
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Type     *string                `json:"type,omitempty"`
 }
+
+func (o *Account) GetAddress() string {
+	if o == nil {
+		return ""
+	}
+	return o.Address
+}
+
+func (o *Account) GetMetadata() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *Account) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}

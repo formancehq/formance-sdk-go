@@ -2,9 +2,29 @@
 
 package shared
 
-// ErrorResponse - Error
 type ErrorResponse struct {
-	Details      *string     `json:"details,omitempty"`
-	ErrorCode    *ErrorsEnum `json:"errorCode,omitempty"`
-	ErrorMessage *string     `json:"errorMessage,omitempty"`
+	Details      *string    `json:"details,omitempty"`
+	ErrorCode    ErrorsEnum `json:"errorCode"`
+	ErrorMessage string     `json:"errorMessage"`
+}
+
+func (o *ErrorResponse) GetDetails() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Details
+}
+
+func (o *ErrorResponse) GetErrorCode() ErrorsEnum {
+	if o == nil {
+		return ErrorsEnum("")
+	}
+	return o.ErrorCode
+}
+
+func (o *ErrorResponse) GetErrorMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.ErrorMessage
 }
