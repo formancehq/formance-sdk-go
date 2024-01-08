@@ -80,14 +80,14 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // and standard method from web, mobile and desktop applications.
 // <SecurityDefinitions />
 type Formance struct {
-	Auth           *auth
-	Ledger         *ledger
-	Orchestration  *orchestration
-	Payments       *payments
-	Reconciliation *reconciliation
-	Search         *search
-	Wallets        *wallets
-	Webhooks       *webhooks
+	Auth           *Auth
+	Ledger         *Ledger
+	Orchestration  *Orchestration
+	Payments       *Payments
+	Reconciliation *Reconciliation
+	Search         *Search
+	Wallets        *Wallets
+	Webhooks       *Webhooks
 
 	sdkConfiguration sdkConfiguration
 }
@@ -137,7 +137,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *Formance) {
 		sdk.sdkConfiguration.Security = withSecurity(security)
@@ -164,10 +163,10 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v2.0.0-beta.5",
-			SDKVersion:        "v2.0.0-beta.5",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go v2.0.0-beta.5 2.173.0 v2.0.0-beta.5 github.com/formancehq/formance-sdk-go",
+			OpenAPIDocVersion: "v2.0.0-beta.6",
+			SDKVersion:        "v2.0.0-beta.6",
+			GenVersion:        "2.214.10",
+			UserAgent:         "speakeasy-sdk/go v2.0.0-beta.6 2.214.10 v2.0.0-beta.6 github.com/formancehq/formance-sdk-go",
 		},
 	}
 	for _, opt := range opts {
