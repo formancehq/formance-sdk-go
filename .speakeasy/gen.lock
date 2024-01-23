@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
-id: b941565d-73cf-4620-acc4-9cd8529f80ed
+id: c55e493b-6b8c-4fd0-993c-2734230e36f5
 management:
-  docChecksum: 62528734db388452295a3642ad792516
-  docVersion: v2.0.0-beta.12
+  docChecksum: e3879c02fea2e4914c9d924447572b5d
+  docVersion: v2.0.0-beta.13
   speakeasyVersion: internal
   generationVersion: 2.237.2
-  releaseVersion: v2.0.0-beta.12
-  configChecksum: 48aed5afef5eb0901abcc4a91c9138d0
+  releaseVersion: v2.0.0-beta.13
+  configChecksum: 1aad074741c8a3482a90e6b7a0bd9a41
 features:
   go:
     constsAndDefaults: 0.1.2
@@ -168,6 +168,7 @@ generatedFiles:
   - /pkg/models/operations/resetconnector.go
   - /pkg/models/operations/resetconnectorv1.go
   - /pkg/models/operations/retrytransferinitiation.go
+  - /pkg/models/operations/reversetransferinitiation.go
   - /pkg/models/operations/udpatetransferinitiationstatus.go
   - /pkg/models/operations/uninstallconnector.go
   - /pkg/models/operations/uninstallconnectorv1.go
@@ -493,6 +494,7 @@ generatedFiles:
   - /pkg/models/shared/paymentsaccount.go
   - /pkg/models/shared/accountscursor.go
   - /pkg/models/shared/connectorconfigresponse.go
+  - /pkg/models/shared/reversetransferinitiationrequest.go
   - /pkg/models/shared/updatetransferinitiationstatusrequest.go
   - /pkg/models/shared/reconciliationerrorresponse.go
   - /pkg/models/shared/policyresponse.go
@@ -759,6 +761,8 @@ generatedFiles:
   - docs/pkg/models/operations/resetconnectorv1response.md
   - docs/pkg/models/operations/retrytransferinitiationrequest.md
   - docs/pkg/models/operations/retrytransferinitiationresponse.md
+  - docs/pkg/models/operations/reversetransferinitiationrequest.md
+  - docs/pkg/models/operations/reversetransferinitiationresponse.md
   - docs/pkg/models/operations/udpatetransferinitiationstatusrequest.md
   - docs/pkg/models/operations/udpatetransferinitiationstatusresponse.md
   - docs/pkg/models/operations/uninstallconnectorrequest.md
@@ -1198,6 +1202,7 @@ generatedFiles:
   - docs/pkg/models/shared/cursor.md
   - docs/pkg/models/shared/accountscursor.md
   - docs/pkg/models/shared/connectorconfigresponse.md
+  - docs/pkg/models/shared/reversetransferinitiationrequest.md
   - docs/pkg/models/shared/status.md
   - docs/pkg/models/shared/updatetransferinitiationstatusrequest.md
   - docs/pkg/models/shared/reconciliationerrorresponse.md
