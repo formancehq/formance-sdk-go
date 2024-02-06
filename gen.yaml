@@ -7,7 +7,7 @@ generation:
     nameResolutionDec2023: false
   telemetryEnabled: false
 go:
-  version: v2.0.0-rc.3
+  version: v2.0.0-rc.4
   author: Formance
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false
