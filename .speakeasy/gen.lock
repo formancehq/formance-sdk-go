@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
-id: 5feb80dd-f889-4248-8a96-6a953506dcba
+id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: 5d24de084aa582df481914f9765a2d91
-  docVersion: v2.0.0-rc.4
+  docChecksum: 9498362bd3de88c7492796ec40c09297
+  docVersion: v2.0.0-rc.7
   speakeasyVersion: internal
   generationVersion: 2.237.2
-  releaseVersion: v2.0.0-rc.4
-  configChecksum: 4edb814164f7b9fbf181093cb77979a3
+  releaseVersion: v2.0.0-rc.7
+  configChecksum: 7bfe2544cdb99977e68c81b58708da76
 features:
   go:
     constsAndDefaults: 0.1.2
@@ -173,6 +173,7 @@ generatedFiles:
   - /pkg/models/operations/udpatetransferinitiationstatus.go
   - /pkg/models/operations/uninstallconnector.go
   - /pkg/models/operations/uninstallconnectorv1.go
+  - /pkg/models/operations/updatebankaccountmetadata.go
   - /pkg/models/operations/updateconnectorconfigv1.go
   - /pkg/models/operations/updatemetadata.go
   - /pkg/models/operations/createpolicy.go
@@ -441,7 +442,7 @@ generatedFiles:
   - /pkg/models/shared/transferrequest.go
   - /pkg/models/shared/bankaccountresponse.go
   - /pkg/models/shared/bankaccount.go
-  - /pkg/models/shared/bankaccountadjustment.go
+  - /pkg/models/shared/bankaccountrelatedaccounts.go
   - /pkg/models/shared/bankaccountrequest.go
   - /pkg/models/shared/paymentresponse.go
   - /pkg/models/shared/payment.go
@@ -499,6 +500,7 @@ generatedFiles:
   - /pkg/models/shared/connectorconfigresponse.go
   - /pkg/models/shared/reversetransferinitiationrequest.go
   - /pkg/models/shared/updatetransferinitiationstatusrequest.go
+  - /pkg/models/shared/updatebankaccountmetadatarequest.go
   - /pkg/models/shared/reconciliationerrorresponse.go
   - /pkg/models/shared/policyresponse.go
   - /pkg/models/shared/policy.go
@@ -774,6 +776,8 @@ generatedFiles:
   - docs/pkg/models/operations/uninstallconnectorresponse.md
   - docs/pkg/models/operations/uninstallconnectorv1request.md
   - docs/pkg/models/operations/uninstallconnectorv1response.md
+  - docs/pkg/models/operations/updatebankaccountmetadatarequest.md
+  - docs/pkg/models/operations/updatebankaccountmetadataresponse.md
   - docs/pkg/models/operations/updateconnectorconfigv1request.md
   - docs/pkg/models/operations/updateconnectorconfigv1response.md
   - docs/pkg/models/operations/updatemetadatarequest.md
@@ -1118,7 +1122,7 @@ generatedFiles:
   - docs/pkg/models/shared/transferrequest.md
   - docs/pkg/models/shared/bankaccountresponse.md
   - docs/pkg/models/shared/bankaccount.md
-  - docs/pkg/models/shared/bankaccountadjustment.md
+  - docs/pkg/models/shared/bankaccountrelatedaccounts.md
   - docs/pkg/models/shared/bankaccountrequest.md
   - docs/pkg/models/shared/paymentresponse.md
   - docs/pkg/models/shared/raw.md
@@ -1212,6 +1216,7 @@ generatedFiles:
   - docs/pkg/models/shared/reversetransferinitiationrequest.md
   - docs/pkg/models/shared/status.md
   - docs/pkg/models/shared/updatetransferinitiationstatusrequest.md
+  - docs/pkg/models/shared/updatebankaccountmetadatarequest.md
   - docs/pkg/models/shared/reconciliationerrorresponse.md
   - docs/pkg/models/shared/policyresponse.md
   - docs/pkg/models/shared/policy.md
