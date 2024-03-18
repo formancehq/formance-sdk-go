@@ -24,38 +24,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Auth.CreateClient(ctx, &shared.CreateClientRequest{
-        Metadata: map[string]interface{}{
-            "key": "string",
-        },
-        Name: "string",
-        PostLogoutRedirectUris: []string{
-            "string",
-        },
-        RedirectUris: []string{
-            "string",
-        },
-        Scopes: []string{
-            "string",
-        },
+        Name: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateClientResponse != nil {
         // handle response
     }
@@ -88,33 +75,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Auth.CreateSecret(ctx, operations.CreateSecretRequest{
-        CreateSecretRequest: &shared.CreateSecretRequest{
-            Metadata: map[string]interface{}{
-                "key": "string",
-            },
-            Name: "string",
-        },
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateSecretResponse != nil {
         // handle response
     }
@@ -147,29 +127,27 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Auth.DeleteClient(ctx, operations.DeleteClientRequest{
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -201,30 +179,28 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Auth.DeleteSecret(ctx, operations.DeleteSecretRequest{
-        ClientID: "string",
-        SecretID: "string",
+        ClientID: "<value>",
+        SecretID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -256,14 +232,14 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -273,7 +249,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListClientsResponse != nil {
         // handle response
     }
@@ -305,14 +280,14 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -322,7 +297,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListUsersResponse != nil {
         // handle response
     }
@@ -354,27 +328,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Auth.ReadClient(ctx, operations.ReadClientRequest{
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReadClientResponse != nil {
         // handle response
     }
@@ -407,27 +380,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Auth.ReadUser(ctx, operations.ReadUserRequest{
-        UserID: "string",
+        UserID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReadUserResponse != nil {
         // handle response
     }
@@ -460,42 +432,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Auth.UpdateClient(ctx, operations.UpdateClientRequest{
-        UpdateClientRequest: &shared.UpdateClientRequest{
-            Metadata: map[string]interface{}{
-                "key": "string",
-            },
-            Name: "string",
-            PostLogoutRedirectUris: []string{
-                "string",
-            },
-            RedirectUris: []string{
-                "string",
-            },
-            Scopes: []string{
-                "string",
-            },
-        },
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.UpdateClientResponse != nil {
         // handle response
     }
