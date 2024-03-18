@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/utils"
 )
 
 type V2BulkElementResultErrorSchemas struct {
@@ -187,7 +187,7 @@ func CreateV2BulkElementResultRevertTransaction(revertTransaction V2BulkElementR
 func (u *V2BulkElementResult) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
-		ResponseType string
+		ResponseType string `json:"responseType"`
 	}
 
 	dis := new(discriminator)

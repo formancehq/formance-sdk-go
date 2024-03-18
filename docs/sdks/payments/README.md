@@ -56,12 +56,11 @@ Add an account to a pool
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -74,15 +73,14 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.AddAccountToPool(ctx, operations.AddAccountToPoolRequest{
         AddAccountToPoolRequest: shared.AddAccountToPoolRequest{
-            AccountID: "string",
+            AccountID: "<value>",
         },
-        PoolID: "string",
+        PoolID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -113,11 +111,11 @@ Execute a transfer between two accounts.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -141,7 +139,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TransferResponse != nil {
         // handle response
     }
@@ -173,8 +170,8 @@ Create a bank account in Payments and on the PSP.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -188,17 +185,13 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.CreateBankAccount(ctx, shared.BankAccountRequest{
-        ConnectorID: "string",
+        ConnectorID: "<value>",
         Country: "GB",
-        Metadata: map[string]string{
-            "key": "string",
-        },
         Name: "My account",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.BankAccountResponse != nil {
         // handle response
     }
@@ -230,11 +223,11 @@ Create a payment
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/types"
 	"log"
 )
 
@@ -249,9 +242,9 @@ func main() {
     res, err := s.Payments.CreatePayment(ctx, shared.PaymentRequest{
         Amount: big.NewInt(100),
         Asset: "USD",
-        ConnectorID: "string",
+        ConnectorID: "<value>",
         CreatedAt: types.MustTimeFromString("2024-11-09T01:03:21.153Z"),
-        Reference: "string",
+        Reference: "<value>",
         Scheme: shared.PaymentSchemeGooglePay,
         Status: shared.PaymentStatusDisputeWon,
         Type: shared.PaymentTypeTransfer,
@@ -259,7 +252,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PaymentResponse != nil {
         // handle response
     }
@@ -291,8 +283,8 @@ Create a Pool
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -307,14 +299,13 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.CreatePool(ctx, shared.PoolRequest{
         AccountIDs: []string{
-            "string",
+            "<value>",
         },
-        Name: "string",
+        Name: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PoolResponse != nil {
         // handle response
     }
@@ -346,11 +337,11 @@ Create a transfer initiation
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/types"
 	"log"
 )
 
@@ -366,20 +357,16 @@ func main() {
         Amount: big.NewInt(256698),
         Asset: "USD",
         Description: "Multi-tiered incremental methodology",
-        DestinationAccountID: "string",
-        Metadata: map[string]string{
-            "key": "string",
-        },
+        DestinationAccountID: "<value>",
         Reference: "XXX",
         ScheduledAt: types.MustTimeFromString("2023-05-04T22:47:54.364Z"),
-        SourceAccountID: "string",
+        SourceAccountID: "<value>",
         Type: shared.TransferInitiationRequestTypeTransfer,
         Validated: false,
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TransferInitiationResponse != nil {
         // handle response
     }
@@ -411,12 +398,11 @@ Delete a pool by its id.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -428,13 +414,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.DeletePool(ctx, operations.DeletePoolRequest{
-        PoolID: "string",
+        PoolID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -465,12 +450,11 @@ Delete a transfer initiation by its id.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -482,13 +466,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.DeleteTransferInitiation(ctx, operations.DeleteTransferInitiationRequest{
-        TransferID: "string",
+        TransferID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -519,10 +502,10 @@ Forward a bank account to a connector
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -536,14 +519,13 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ForwardBankAccount(ctx, operations.ForwardBankAccountRequest{
         ForwardBankAccountRequest: shared.ForwardBankAccountRequest{
-            ConnectorID: "string",
+            ConnectorID: "<value>",
         },
-        BankAccountID: "string",
+        BankAccountID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.BankAccountResponse != nil {
         // handle response
     }
@@ -575,10 +557,10 @@ Get account balances
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -591,16 +573,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetAccountBalances(ctx, operations.GetAccountBalancesRequest{
-        AccountID: "string",
+        AccountID: "<value>",
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Sort: []string{
-            "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.BalancesCursor != nil {
         // handle response
     }
@@ -632,10 +610,10 @@ Get a bank account created by user on Formance
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -648,12 +626,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetBankAccount(ctx, operations.GetBankAccountRequest{
-        BankAccountID: "string",
+        BankAccountID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.BankAccountResponse != nil {
         // handle response
     }
@@ -687,10 +664,10 @@ Get a specific task associated to the connector.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -704,12 +681,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.GetConnectorTask(ctx, operations.GetConnectorTaskRequest{
         Connector: shared.ConnectorAtlar,
-        TaskID: "string",
+        TaskID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TaskResponse != nil {
         // handle response
     }
@@ -741,10 +717,10 @@ Get a specific task associated to the connector.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -758,13 +734,12 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.GetConnectorTaskV1(ctx, operations.GetConnectorTaskV1Request{
         Connector: shared.ConnectorCurrencyCloud,
-        ConnectorID: "string",
-        TaskID: "string",
+        ConnectorID: "<value>",
+        TaskID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TaskResponse != nil {
         // handle response
     }
@@ -796,10 +771,10 @@ Get a payment
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -812,12 +787,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetPayment(ctx, operations.GetPaymentRequest{
-        PaymentID: "string",
+        PaymentID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PaymentResponse != nil {
         // handle response
     }
@@ -849,10 +823,10 @@ Get a Pool
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -865,12 +839,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetPool(ctx, operations.GetPoolRequest{
-        PoolID: "string",
+        PoolID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PoolResponse != nil {
         // handle response
     }
@@ -902,11 +875,11 @@ Get pool balances
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -920,12 +893,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.GetPoolBalances(ctx, operations.GetPoolBalancesRequest{
         At: types.MustTimeFromString("2023-05-05T06:40:23.018Z"),
-        PoolID: "string",
+        PoolID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PoolBalancesResponse != nil {
         // handle response
     }
@@ -957,10 +929,10 @@ Get a transfer initiation
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -973,12 +945,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetTransferInitiation(ctx, operations.GetTransferInitiationRequest{
-        TransferID: "string",
+        TransferID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TransferInitiationResponse != nil {
         // handle response
     }
@@ -1010,10 +981,10 @@ Install a connector by its name and config.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1038,7 +1009,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConnectorResponse != nil {
         // handle response
     }
@@ -1070,8 +1040,8 @@ List all installed connectors.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1088,7 +1058,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConnectorsResponse != nil {
         // handle response
     }
@@ -1119,10 +1088,10 @@ List all bank accounts created by user on Formance.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1136,14 +1105,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ListBankAccounts(ctx, operations.ListBankAccountsRequest{
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Sort: []string{
-            "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.BankAccountsCursor != nil {
         // handle response
     }
@@ -1175,8 +1140,8 @@ List the configs of each available connector.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1193,7 +1158,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConnectorsConfigsResponse != nil {
         // handle response
     }
@@ -1226,10 +1190,10 @@ List all tasks associated with this connector.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1248,7 +1212,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TasksCursor != nil {
         // handle response
     }
@@ -1280,10 +1243,10 @@ List all tasks associated with this connector.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1297,13 +1260,12 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ListConnectorTasksV1(ctx, operations.ListConnectorTasksV1Request{
         Connector: shared.ConnectorBankingCircle,
-        ConnectorID: "string",
+        ConnectorID: "<value>",
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TasksCursor != nil {
         // handle response
     }
@@ -1335,10 +1297,10 @@ List payments
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1352,14 +1314,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ListPayments(ctx, operations.ListPaymentsRequest{
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Sort: []string{
-            "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PaymentsCursor != nil {
         // handle response
     }
@@ -1391,10 +1349,10 @@ List Pools
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1408,14 +1366,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ListPools(ctx, operations.ListPoolsRequest{
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Sort: []string{
-            "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PoolsCursor != nil {
         // handle response
     }
@@ -1447,10 +1401,10 @@ List Transfer Initiations
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1464,14 +1418,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ListTransferInitiations(ctx, operations.ListTransferInitiationsRequest{
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Sort: []string{
-            "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TransferInitiationsCursor != nil {
         // handle response
     }
@@ -1503,10 +1453,10 @@ Get an account
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1519,12 +1469,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.PaymentsgetAccount(ctx, operations.PaymentsgetAccountRequest{
-        AccountID: "string",
+        AccountID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PaymentsAccountResponse != nil {
         // handle response
     }
@@ -1556,8 +1505,8 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1574,7 +1523,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ServerInfo != nil {
         // handle response
     }
@@ -1605,10 +1553,10 @@ List accounts
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1622,14 +1570,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.PaymentslistAccounts(ctx, operations.PaymentslistAccountsRequest{
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Sort: []string{
-            "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AccountsCursor != nil {
         // handle response
     }
@@ -1663,10 +1607,10 @@ Read connector config
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1684,7 +1628,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConnectorConfigResponse != nil {
         // handle response
     }
@@ -1716,10 +1659,10 @@ Read connector config
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1733,12 +1676,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ReadConnectorConfigV1(ctx, operations.ReadConnectorConfigV1Request{
         Connector: shared.ConnectorCurrencyCloud,
-        ConnectorID: "string",
+        ConnectorID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConnectorConfigResponse != nil {
         // handle response
     }
@@ -1770,12 +1712,11 @@ Remove an account from a pool by its id.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1787,14 +1728,13 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.RemoveAccountFromPool(ctx, operations.RemoveAccountFromPoolRequest{
-        AccountID: "string",
-        PoolID: "string",
+        AccountID: "<value>",
+        PoolID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -1829,12 +1769,11 @@ It will remove the connector and ALL PAYMENTS generated with it.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1851,8 +1790,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -1885,12 +1823,11 @@ It will remove the connector and ALL PAYMENTS generated with it.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1903,13 +1840,12 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.ResetConnectorV1(ctx, operations.ResetConnectorV1Request{
         Connector: shared.ConnectorAdyen,
-        ConnectorID: "string",
+        ConnectorID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -1940,12 +1876,11 @@ Retry a failed transfer initiation
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1957,13 +1892,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.RetryTransferInitiation(ctx, operations.RetryTransferInitiationRequest{
-        TransferID: "string",
+        TransferID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -1994,13 +1928,12 @@ Reverse transfer initiation
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -2017,17 +1950,16 @@ func main() {
             Asset: "USD",
             Description: "Streamlined high-level local area network",
             Metadata: map[string]string{
-                "key": "string",
+                "key": "<value>",
             },
             Reference: "XXX",
         },
-        TransferID: "string",
+        TransferID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -2058,12 +1990,11 @@ Update a transfer initiation status
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -2078,13 +2009,12 @@ func main() {
         UpdateTransferInitiationStatusRequest: shared.UpdateTransferInitiationStatusRequest{
             Status: shared.StatusValidated,
         },
-        TransferID: "string",
+        TransferID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -2117,12 +2047,11 @@ Uninstall a connector by its name.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -2139,8 +2068,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -2171,12 +2099,11 @@ Uninstall a connector by its name.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -2189,13 +2116,12 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.UninstallConnectorV1(ctx, operations.UninstallConnectorV1Request{
         Connector: shared.ConnectorAdyen,
-        ConnectorID: "string",
+        ConnectorID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -2226,12 +2152,11 @@ Update metadata of a bank account
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -2245,16 +2170,15 @@ func main() {
     res, err := s.Payments.UpdateBankAccountMetadata(ctx, operations.UpdateBankAccountMetadataRequest{
         UpdateBankAccountMetadataRequest: shared.UpdateBankAccountMetadataRequest{
             Metadata: map[string]string{
-                "key": "string",
+                "key": "<value>",
             },
         },
-        BankAccountID: "string",
+        BankAccountID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -2285,12 +2209,11 @@ Update connector config
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -2311,13 +2234,12 @@ func main() {
                 },
         ),
         Connector: shared.ConnectorStripe,
-        ConnectorID: "string",
+        ConnectorID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -2348,12 +2270,11 @@ Update metadata
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -2366,15 +2287,14 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.UpdateMetadata(ctx, operations.UpdateMetadataRequest{
         RequestBody: map[string]string{
-            "key": "string",
+            "key": "<value>",
         },
-        PaymentID: "string",
+        PaymentID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }

@@ -23,8 +23,8 @@ Create client
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -38,24 +38,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.CreateClient(ctx, &shared.CreateClientRequest{
-        Metadata: map[string]interface{}{
-            "key": "string",
-        },
-        Name: "string",
-        PostLogoutRedirectUris: []string{
-            "string",
-        },
-        RedirectUris: []string{
-            "string",
-        },
-        Scopes: []string{
-            "string",
-        },
+        Name: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateClientResponse != nil {
         // handle response
     }
@@ -87,10 +74,10 @@ Add a secret to a client
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -103,18 +90,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.CreateSecret(ctx, operations.CreateSecretRequest{
-        CreateSecretRequest: &shared.CreateSecretRequest{
-            Metadata: map[string]interface{}{
-                "key": "string",
-            },
-            Name: "string",
-        },
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateSecretResponse != nil {
         // handle response
     }
@@ -146,12 +126,11 @@ Delete client
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -163,13 +142,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.DeleteClient(ctx, operations.DeleteClientRequest{
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -200,12 +178,11 @@ Delete a secret from a client
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -217,14 +194,13 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.DeleteSecret(ctx, operations.DeleteSecretRequest{
-        ClientID: "string",
-        SecretID: "string",
+        ClientID: "<value>",
+        SecretID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -255,8 +231,8 @@ List clients
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -273,7 +249,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListClientsResponse != nil {
         // handle response
     }
@@ -304,8 +279,8 @@ List users
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -322,7 +297,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListUsersResponse != nil {
         // handle response
     }
@@ -353,10 +327,10 @@ Read client
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -369,12 +343,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.ReadClient(ctx, operations.ReadClientRequest{
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReadClientResponse != nil {
         // handle response
     }
@@ -406,10 +379,10 @@ Read user
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -422,12 +395,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.ReadUser(ctx, operations.ReadUserRequest{
-        UserID: "string",
+        UserID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReadUserResponse != nil {
         // handle response
     }
@@ -459,10 +431,10 @@ Update client
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -475,27 +447,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.UpdateClient(ctx, operations.UpdateClientRequest{
-        UpdateClientRequest: &shared.UpdateClientRequest{
-            Metadata: map[string]interface{}{
-                "key": "string",
-            },
-            Name: "string",
-            PostLogoutRedirectUris: []string{
-                "string",
-            },
-            RedirectUris: []string{
-                "string",
-            },
-            Scopes: []string{
-                "string",
-            },
-        },
-        ClientID: "string",
+        ClientID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.UpdateClientResponse != nil {
         // handle response
     }

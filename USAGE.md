@@ -4,8 +4,8 @@ package main
 
 import (
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
 	"log"
 )
 
@@ -21,7 +21,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.GetVersionsResponse != nil {
 		// handle response
 	}

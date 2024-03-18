@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/utils"
 )
 
 type V2BulkElementType string
@@ -78,7 +78,7 @@ func CreateV2BulkElementRevertTransaction(revertTransaction V2BulkElementRevertT
 func (u *V2BulkElement) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
-		Action string
+		Action string `json:"action"`
 	}
 
 	dis := new(discriminator)

@@ -4,7 +4,7 @@ package shared
 
 import (
 	"errors"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/utils"
 )
 
 type ConnectorConfigType string

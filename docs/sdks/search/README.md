@@ -16,8 +16,8 @@ ElasticSearch query engine
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -31,24 +31,14 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Search.Search(ctx, shared.Query{
-        After: []string{
-            "users:002",
-        },
         Cursor: v2.String("YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="),
-        Ledgers: []string{
-            "quickstart",
-        },
         Policy: v2.String("OR"),
         Raw: &shared.QueryRaw{},
         Sort: v2.String("id:asc"),
-        Terms: []string{
-            "destination=central_bank1",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Response != nil {
         // handle response
     }
@@ -80,8 +70,8 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -98,7 +88,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ServerInfo != nil {
         // handle response
     }

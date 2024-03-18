@@ -3,12 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/utils"
 	"net/http"
 )
 
 type PaymentslistAccountsRequest struct {
+	RequestBody map[string]interface{} `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -31,6 +32,13 @@ func (p *PaymentslistAccountsRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (o *PaymentslistAccountsRequest) GetRequestBody() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
 }
 
 func (o *PaymentslistAccountsRequest) GetCursor() *string {

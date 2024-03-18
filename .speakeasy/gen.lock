@@ -1,24 +1,29 @@
 lockVersion: 2.0.0
 id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: 5e9a79dbe7142aa90188e21ea54c7198
-  docVersion: v2.0.0-rc.15
-  speakeasyVersion: internal
-  generationVersion: 2.237.2
-  releaseVersion: v2.0.0-rc.15
-  configChecksum: ed2362f5b75a0c7afd973388d90e308b
+  docChecksum: 254f15d23bfd21d49b8db8ecb44639be
+  docVersion: v2.0.0-rc.16
+  speakeasyVersion: 1.209.3
+  generationVersion: 2.281.2
+  releaseVersion: 2.1.0
+  configChecksum: 1e1dc47df107e1533d54d67244e2a91d
+  repoURL: https://github.com/formancehq/formance-sdk-go.git
+  repoSubDirectory: .
+  installationURL: https://github.com/formancehq/formance-sdk-go
+  published: true
 features:
   go:
-    constsAndDefaults: 0.1.2
-    core: 3.3.1
+    constsAndDefaults: 0.1.4
+    core: 3.4.4
     deprecations: 2.81.1
     errors: 2.81.8
     getRequestBodies: 2.81.1
-    globalSecurity: 2.82.4
-    globalServerURLs: 2.82.1
+    globalSecurity: 2.82.8
+    globalServerURLs: 2.82.2
     groups: 2.81.2
     ignores: 2.81.1
-    unions: 2.85.2
+    responseFormat: 0.1.0
+    unions: 2.85.4
 generatedFiles:
   - auth.go
   - ledger.go
@@ -30,7 +35,6 @@ generatedFiles:
   - webhooks.go
   - formance.go
   - go.mod
-  - go.sum
   - pkg/models/sdkerrors/sdkerror.go
   - pkg/types/bigint.go
   - pkg/types/date.go
@@ -1284,3 +1288,4 @@ generatedFiles:
   - docs/sdks/webhooks/README.md
   - USAGE.md
   - .gitattributes
+  - internal/hooks/hooks.go

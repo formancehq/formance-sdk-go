@@ -21,10 +21,10 @@ Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -42,7 +42,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConfigResponse != nil {
         // handle response
     }
@@ -78,10 +77,10 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -94,15 +93,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Webhooks.ChangeConfigSecret(ctx, operations.ChangeConfigSecretRequest{
-        ConfigChangeSecret: &shared.ConfigChangeSecret{
-            Secret: "V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3",
-        },
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConfigResponse != nil {
         // handle response
     }
@@ -135,10 +130,10 @@ Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -156,7 +151,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConfigResponse != nil {
         // handle response
     }
@@ -189,12 +183,11 @@ Delete a webhooks config by ID.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -211,8 +204,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -244,10 +236,10 @@ Sorted by updated date descending
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -266,7 +258,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConfigsResponse != nil {
         // handle response
     }
@@ -307,8 +298,8 @@ All eventTypes are converted to lower-case when inserted.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -333,7 +324,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ConfigResponse != nil {
         // handle response
     }
@@ -366,10 +356,10 @@ Test a config by sending a webhook to its endpoint.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -387,7 +377,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AttemptResponse != nil {
         // handle response
     }

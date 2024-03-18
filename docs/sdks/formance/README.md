@@ -31,8 +31,8 @@ Show stack version information
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -49,7 +49,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetVersionsResponse != nil {
         // handle response
     }
@@ -78,11 +77,10 @@ func main() {
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -97,8 +95,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }

@@ -12,7 +12,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/types"
 
 	"github.com/ericlagergren/decimal"
 )
@@ -358,7 +358,7 @@ func handleDefaultConstValue(tagValue string, val interface{}, tag reflect.Struc
 		return []byte(fmt.Sprintf(`"%s"`, tagValue))
 	default:
 		if typ.Kind() == reflect.String {
-			return []byte(fmt.Sprintf(`"%s"`, tagValue))
+			return []byte(fmt.Sprintf("%q", tagValue))
 		}
 	}
 

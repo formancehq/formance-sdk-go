@@ -49,12 +49,11 @@ Cancel a running workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -66,13 +65,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.CancelEvent(ctx, operations.CancelEventRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -103,8 +101,8 @@ Create trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -118,16 +116,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.CreateTrigger(ctx, &shared.TriggerData{
-        Event: "string",
-        Vars: map[string]interface{}{
-            "key": "string",
-        },
-        WorkflowID: "string",
+        Event: "<value>",
+        WorkflowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateTriggerResponse != nil {
         // handle response
     }
@@ -159,8 +153,8 @@ Create a workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -176,14 +170,13 @@ func main() {
     res, err := s.Orchestration.CreateWorkflow(ctx, &shared.CreateWorkflowRequest{
         Stages: []map[string]interface{}{
             map[string]interface{}{
-                "key": "string",
+                "key": "<value>",
             },
         },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWorkflowResponse != nil {
         // handle response
     }
@@ -215,12 +208,11 @@ Read trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -232,13 +224,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.DeleteTrigger(ctx, operations.DeleteTriggerRequest{
-        TriggerID: "string",
+        TriggerID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -269,12 +260,11 @@ Delete a flow by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -286,13 +276,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.DeleteWorkflow(ctx, operations.DeleteWorkflowRequest{
-        FlowID: "string",
+        FlowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -323,10 +312,10 @@ Get a workflow instance by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -339,12 +328,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.GetInstance(ctx, operations.GetInstanceRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetWorkflowInstanceResponse != nil {
         // handle response
     }
@@ -376,10 +364,10 @@ Get a workflow instance history by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -392,12 +380,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.GetInstanceHistory(ctx, operations.GetInstanceHistoryRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetWorkflowInstanceHistoryResponse != nil {
         // handle response
     }
@@ -429,10 +416,10 @@ Get a workflow instance stage history
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -445,13 +432,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.GetInstanceStageHistory(ctx, operations.GetInstanceStageHistoryRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
         Number: 600636,
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetWorkflowInstanceHistoryStageResponse != nil {
         // handle response
     }
@@ -483,10 +469,10 @@ Get a flow by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -499,12 +485,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.GetWorkflow(ctx, operations.GetWorkflowRequest{
-        FlowID: "string",
+        FlowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetWorkflowResponse != nil {
         // handle response
     }
@@ -536,10 +521,10 @@ List instances of a workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -555,7 +540,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListRunsResponse != nil {
         // handle response
     }
@@ -587,8 +571,8 @@ List triggers
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -605,7 +589,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListTriggersResponse != nil {
         // handle response
     }
@@ -636,10 +619,10 @@ List triggers occurrences
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -652,12 +635,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.ListTriggersOccurrences(ctx, operations.ListTriggersOccurrencesRequest{
-        TriggerID: "string",
+        TriggerID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListTriggersOccurrencesResponse != nil {
         // handle response
     }
@@ -689,8 +671,8 @@ List registered workflows
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -707,7 +689,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListWorkflowsResponse != nil {
         // handle response
     }
@@ -738,8 +719,8 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -756,7 +737,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ServerInfo != nil {
         // handle response
     }
@@ -787,10 +767,10 @@ Read trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -803,12 +783,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.ReadTrigger(ctx, operations.ReadTriggerRequest{
-        TriggerID: "string",
+        TriggerID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReadTriggerResponse != nil {
         // handle response
     }
@@ -840,10 +819,10 @@ Run workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -856,15 +835,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.RunWorkflow(ctx, operations.RunWorkflowRequest{
-        RequestBody: map[string]string{
-            "key": "string",
-        },
-        WorkflowID: "string",
+        WorkflowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunWorkflowResponse != nil {
         // handle response
     }
@@ -896,12 +871,11 @@ Send an event to a running workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -913,16 +887,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.SendEvent(ctx, operations.SendEventRequest{
-        RequestBody: &operations.SendEventRequestBody{
-            Name: "string",
-        },
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -953,10 +923,10 @@ Test trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -969,15 +939,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.TestTrigger(ctx, operations.TestTriggerRequest{
-        RequestBody: map[string]interface{}{
-            "key": "string",
-        },
-        TriggerID: "string",
+        TriggerID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2TestTriggerResponse != nil {
         // handle response
     }
@@ -1009,12 +975,11 @@ Cancel a running workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1026,13 +991,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2CancelEvent(ctx, operations.V2CancelEventRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -1063,8 +1027,8 @@ Create trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1078,16 +1042,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2CreateTrigger(ctx, &shared.V2TriggerData{
-        Event: "string",
-        Vars: map[string]interface{}{
-            "key": "string",
-        },
-        WorkflowID: "string",
+        Event: "<value>",
+        WorkflowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2CreateTriggerResponse != nil {
         // handle response
     }
@@ -1119,8 +1079,8 @@ Create a workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1136,14 +1096,13 @@ func main() {
     res, err := s.Orchestration.V2CreateWorkflow(ctx, &shared.V2CreateWorkflowRequest{
         Stages: []map[string]interface{}{
             map[string]interface{}{
-                "key": "string",
+                "key": "<value>",
             },
         },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2CreateWorkflowResponse != nil {
         // handle response
     }
@@ -1175,12 +1134,11 @@ Read trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1192,13 +1150,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2DeleteTrigger(ctx, operations.V2DeleteTriggerRequest{
-        TriggerID: "string",
+        TriggerID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -1230,12 +1187,11 @@ Delete a flow by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1247,13 +1203,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2DeleteWorkflow(ctx, operations.V2DeleteWorkflowRequest{
-        FlowID: "string",
+        FlowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -1285,10 +1240,10 @@ Get a workflow instance by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1301,12 +1256,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2GetInstance(ctx, operations.V2GetInstanceRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2GetWorkflowInstanceResponse != nil {
         // handle response
     }
@@ -1338,10 +1292,10 @@ Get a workflow instance history by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1354,12 +1308,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2GetInstanceHistory(ctx, operations.V2GetInstanceHistoryRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2GetWorkflowInstanceHistoryResponse != nil {
         // handle response
     }
@@ -1391,10 +1344,10 @@ Get a workflow instance stage history
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1407,13 +1360,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2GetInstanceStageHistory(ctx, operations.V2GetInstanceStageHistoryRequest{
-        InstanceID: "string",
+        InstanceID: "<value>",
         Number: 465454,
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2GetWorkflowInstanceHistoryStageResponse != nil {
         // handle response
     }
@@ -1445,8 +1397,8 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1463,7 +1415,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2ServerInfo != nil {
         // handle response
     }
@@ -1494,10 +1445,10 @@ Get a flow by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1510,12 +1461,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2GetWorkflow(ctx, operations.V2GetWorkflowRequest{
-        FlowID: "string",
+        FlowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2GetWorkflowResponse != nil {
         // handle response
     }
@@ -1547,10 +1497,10 @@ List instances of a workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1566,7 +1516,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2ListRunsResponse != nil {
         // handle response
     }
@@ -1598,8 +1547,8 @@ List triggers
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1616,7 +1565,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2ListTriggersResponse != nil {
         // handle response
     }
@@ -1647,10 +1595,10 @@ List triggers occurrences
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1663,12 +1611,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2ListTriggersOccurrences(ctx, operations.V2ListTriggersOccurrencesRequest{
-        TriggerID: "string",
+        TriggerID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2ListTriggersOccurrencesResponse != nil {
         // handle response
     }
@@ -1700,8 +1647,8 @@ List registered workflows
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -1718,7 +1665,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2ListWorkflowsResponse != nil {
         // handle response
     }
@@ -1749,10 +1695,10 @@ Read trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1765,12 +1711,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2ReadTrigger(ctx, operations.V2ReadTriggerRequest{
-        TriggerID: "string",
+        TriggerID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2ReadTriggerResponse != nil {
         // handle response
     }
@@ -1802,10 +1747,10 @@ Run workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1818,15 +1763,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2RunWorkflow(ctx, operations.V2RunWorkflowRequest{
-        RequestBody: map[string]string{
-            "key": "string",
-        },
-        WorkflowID: "string",
+        WorkflowID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.V2RunWorkflowResponse != nil {
         // handle response
     }
@@ -1858,12 +1799,11 @@ Send an event to a running workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -1875,16 +1815,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Orchestration.V2SendEvent(ctx, operations.V2SendEventRequest{
-        RequestBody: &operations.V2SendEventRequestBody{
-            Name: "string",
-        },
-        InstanceID: "string",
+        InstanceID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }

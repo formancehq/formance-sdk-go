@@ -5,9 +5,14 @@ generation:
     optionalPropertyRendering: withExample
   fixes:
     nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
+  auth:
+    oAuth2ClientCredentialsEnabled: false
   telemetryEnabled: false
 go:
-  version: v2.0.0-rc.15
+  version: 2.1.0
+  additionalDependencies: {}
   author: Formance
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false
@@ -23,3 +28,4 @@ go:
   maxMethodParams: 0
   outputModelSuffix: output
   packageName: github.com/formancehq/formance-sdk-go/v2
+  responseFormat: envelope

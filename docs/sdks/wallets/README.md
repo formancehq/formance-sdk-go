@@ -30,13 +30,11 @@ Confirm a hold
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"math/big"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -48,17 +46,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.ConfirmHold(ctx, operations.ConfirmHoldRequest{
-        ConfirmHoldRequest: &shared.ConfirmHoldRequest{
-            Amount: big.NewInt(100),
-            Final: v2.Bool(true),
-        },
-        HoldID: "string",
+        HoldID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -89,10 +82,10 @@ Create a balance
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -105,15 +98,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.CreateBalance(ctx, operations.CreateBalanceRequest{
-        CreateBalanceRequest: &shared.CreateBalanceRequest{
-            Name: "string",
-        },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateBalanceResponse != nil {
         // handle response
     }
@@ -145,8 +134,8 @@ Create a new wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -161,14 +150,13 @@ func main() {
     ctx := context.Background()
     res, err := s.Wallets.CreateWallet(ctx, &shared.CreateWalletRequest{
         Metadata: map[string]string{
-            "key": "string",
+            "key": "<value>",
         },
-        Name: "string",
+        Name: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWalletResponse != nil {
         // handle response
     }
@@ -200,13 +188,12 @@ Credit a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -220,28 +207,27 @@ func main() {
     res, err := s.Wallets.CreditWallet(ctx, operations.CreditWalletRequest{
         CreditWalletRequest: &shared.CreditWalletRequest{
             Amount: shared.Monetary{
-                Amount: big.NewInt(201874),
-                Asset: "string",
+                Amount: big.NewInt(100),
+                Asset: "USD/2",
             },
             Metadata: map[string]string{
-                "key": "string",
+                "key": "",
             },
             Sources: []shared.Subject{
                 shared.CreateSubjectLedgerAccountSubject(
                     shared.LedgerAccountSubject{
-                        Identifier: "string",
-                        Type: "string",
+                        Identifier: "<value>",
+                        Type: "<value>",
                     },
                 ),
             },
         },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -272,11 +258,11 @@ Debit a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -291,28 +277,19 @@ func main() {
     res, err := s.Wallets.DebitWallet(ctx, operations.DebitWalletRequest{
         DebitWalletRequest: &shared.DebitWalletRequest{
             Amount: shared.Monetary{
-                Amount: big.NewInt(245256),
-                Asset: "string",
+                Amount: big.NewInt(100),
+                Asset: "USD/2",
             },
-            Balances: []string{
-                "string",
-            },
-            Destination: shared.CreateSubjectLedgerAccountSubject(
-                    shared.LedgerAccountSubject{
-                        Identifier: "string",
-                        Type: "string",
-                    },
-            ),
             Metadata: map[string]string{
-                "key": "string",
+                "key": "",
             },
+            Pending: v2.Bool(true),
         },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DebitWalletResponse != nil {
         // handle response
     }
@@ -344,10 +321,10 @@ Get detailed balance
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -360,13 +337,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.GetBalance(ctx, operations.GetBalanceRequest{
-        BalanceName: "string",
-        ID: "<ID>",
+        BalanceName: "<value>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetBalanceResponse != nil {
         // handle response
     }
@@ -398,10 +374,10 @@ Get a hold
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -414,12 +390,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.GetHold(ctx, operations.GetHoldRequest{
-        HoldID: "string",
+        HoldID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetHoldResponse != nil {
         // handle response
     }
@@ -451,10 +426,10 @@ Get all holds for a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -468,14 +443,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Wallets.GetHolds(ctx, operations.GetHoldsRequest{
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Metadata: map[string]string{
-            "key": "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetHoldsResponse != nil {
         // handle response
     }
@@ -505,10 +476,10 @@ func main() {
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -526,7 +497,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetTransactionsResponse != nil {
         // handle response
     }
@@ -558,10 +528,10 @@ Get a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -574,12 +544,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.GetWallet(ctx, operations.GetWalletRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetWalletResponse != nil {
         // handle response
     }
@@ -611,10 +580,10 @@ Get wallet summary
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -627,12 +596,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.GetWalletSummary(ctx, operations.GetWalletSummaryRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetWalletSummaryResponse != nil {
         // handle response
     }
@@ -664,10 +632,10 @@ List balances of a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -680,12 +648,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.ListBalances(ctx, operations.ListBalancesRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListBalancesResponse != nil {
         // handle response
     }
@@ -717,10 +684,10 @@ List all wallets
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -734,14 +701,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Wallets.ListWallets(ctx, operations.ListWalletsRequest{
         Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Metadata: map[string]string{
-            "key": "string",
-        },
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListWalletsResponse != nil {
         // handle response
     }
@@ -773,12 +736,11 @@ Update a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -790,18 +752,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.UpdateWallet(ctx, operations.UpdateWalletRequest{
-        RequestBody: &operations.UpdateWalletRequestBody{
-            Metadata: map[string]string{
-                "key": "string",
-            },
-        },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -832,12 +788,11 @@ Cancel a hold
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -849,13 +804,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.VoidHold(ctx, operations.VoidHoldRequest{
-        HoldID: "string",
+        HoldID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -886,8 +840,8 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -904,7 +858,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ServerInfo != nil {
         // handle response
     }

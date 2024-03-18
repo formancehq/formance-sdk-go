@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/utils"
 )
 
 type V2SubjectType string
@@ -50,7 +50,7 @@ func CreateV2SubjectWallet(wallet V2WalletSubject) V2Subject {
 func (u *V2Subject) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
-		Type string
+		Type string `json:"type"`
 	}
 
 	dis := new(discriminator)

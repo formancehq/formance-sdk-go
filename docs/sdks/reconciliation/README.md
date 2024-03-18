@@ -22,8 +22,8 @@ Create a policy
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -39,7 +39,7 @@ func main() {
     res, err := s.Reconciliation.CreatePolicy(ctx, shared.PolicyRequest{
         LedgerName: "default",
         LedgerQuery: map[string]interface{}{
-            "key": "string",
+            "key": "<value>",
         },
         Name: "XXX",
         PaymentsPoolID: "XXX",
@@ -47,7 +47,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PolicyResponse != nil {
         // handle response
     }
@@ -79,12 +78,11 @@ Delete a policy by its id.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -96,13 +94,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Reconciliation.DeletePolicy(ctx, operations.DeletePolicyRequest{
-        PolicyID: "string",
+        PolicyID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -133,10 +130,10 @@ Get a policy
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -149,12 +146,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Reconciliation.GetPolicy(ctx, operations.GetPolicyRequest{
-        PolicyID: "string",
+        PolicyID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PolicyResponse != nil {
         // handle response
     }
@@ -186,10 +182,10 @@ Get a reconciliation
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -202,12 +198,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Reconciliation.GetReconciliation(ctx, operations.GetReconciliationRequest{
-        ReconciliationID: "string",
+        ReconciliationID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReconciliationResponse != nil {
         // handle response
     }
@@ -239,10 +234,10 @@ List policies
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -260,7 +255,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PoliciesCursorResponse != nil {
         // handle response
     }
@@ -292,10 +286,10 @@ List reconciliations
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -313,7 +307,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReconciliationsCursorResponse != nil {
         // handle response
     }
@@ -345,11 +338,11 @@ Reconcile using a policy
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/operations"
 	"log"
 )
 
@@ -366,12 +359,11 @@ func main() {
             ReconciledAtLedger: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
             ReconciledAtPayments: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
         },
-        PolicyID: "string",
+        PolicyID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReconciliationResponse != nil {
         // handle response
     }
@@ -403,8 +395,8 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/v2"
 	"context"
 	"log"
 )
@@ -421,7 +413,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ServerInfo != nil {
         // handle response
     }
