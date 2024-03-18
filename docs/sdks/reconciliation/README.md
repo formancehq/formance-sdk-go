@@ -23,14 +23,14 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -39,7 +39,7 @@ func main() {
     res, err := s.Reconciliation.CreatePolicy(ctx, shared.PolicyRequest{
         LedgerName: "default",
         LedgerQuery: map[string]interface{}{
-            "key": "string",
+            "key": "<value>",
         },
         Name: "XXX",
         PaymentsPoolID: "XXX",
@@ -47,7 +47,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PolicyResponse != nil {
         // handle response
     }
@@ -80,29 +79,27 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Reconciliation.DeletePolicy(ctx, operations.DeletePolicyRequest{
-        PolicyID: "string",
+        PolicyID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -134,27 +131,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Reconciliation.GetPolicy(ctx, operations.GetPolicyRequest{
-        PolicyID: "string",
+        PolicyID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PolicyResponse != nil {
         // handle response
     }
@@ -187,27 +183,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Reconciliation.GetReconciliation(ctx, operations.GetReconciliationRequest{
-        ReconciliationID: "string",
+        ReconciliationID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReconciliationResponse != nil {
         // handle response
     }
@@ -240,27 +235,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Reconciliation.ListPolicies(ctx, operations.ListPoliciesRequest{
-        Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PoliciesCursorResponse != nil {
         // handle response
     }
@@ -293,27 +287,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Reconciliation.ListReconciliations(ctx, operations.ListReconciliationsRequest{
-        Cursor: v2.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReconciliationsCursorResponse != nil {
         // handle response
     }
@@ -346,7 +339,7 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
@@ -354,8 +347,8 @@ import(
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -366,12 +359,11 @@ func main() {
             ReconciledAtLedger: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
             ReconciledAtPayments: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
         },
-        PolicyID: "string",
+        PolicyID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ReconciliationResponse != nil {
         // handle response
     }
@@ -404,14 +396,14 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -421,7 +413,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ServerInfo != nil {
         // handle response
     }

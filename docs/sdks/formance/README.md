@@ -32,14 +32,14 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -49,7 +49,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GetVersionsResponse != nil {
         // handle response
     }
@@ -79,15 +78,14 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
-	"net/http"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -97,8 +95,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }

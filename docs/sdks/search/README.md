@@ -17,38 +17,28 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Search.Search(ctx, shared.Query{
-        After: []string{
-            "users:002",
-        },
-        Cursor: v2.String("YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="),
-        Ledgers: []string{
-            "quickstart",
-        },
-        Policy: v2.String("OR"),
+        Cursor: formancesdkgo.String("YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="),
+        Policy: formancesdkgo.String("OR"),
         Raw: &shared.QueryRaw{},
-        Sort: v2.String("id:asc"),
-        Terms: []string{
-            "destination=central_bank1",
-        },
+        Sort: formancesdkgo.String("id:asc"),
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Response != nil {
         // handle response
     }
@@ -81,14 +71,14 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
 )
 
 func main() {
-    s := v2.New(
-        v2.WithSecurity(shared.Security{
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
             Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
         }),
     )
@@ -98,7 +88,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ServerInfo != nil {
         // handle response
     }

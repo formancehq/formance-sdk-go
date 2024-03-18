@@ -20,7 +20,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 ## SDK Installation
 
 ```bash
-go get github.com/formancehq/formance-sdk-go/v2
+go get github.com/formancehq/formance-sdk-go
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -34,14 +34,14 @@ package main
 
 import (
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := v2.New(
-		v2.WithSecurity(shared.Security{
+	s := formancesdkgo.New(
+		formancesdkgo.WithSecurity(shared.Security{
 			Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
 		}),
 	)
@@ -51,7 +51,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.GetVersionsResponse != nil {
 		// handle response
 	}
@@ -271,7 +270,7 @@ package main
 import (
 	"context"
 	"errors"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
@@ -279,8 +278,8 @@ import (
 )
 
 func main() {
-	s := v2.New(
-		v2.WithSecurity(shared.Security{
+	s := formancesdkgo.New(
+		formancesdkgo.WithSecurity(shared.Security{
 			Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
 		}),
 	)
@@ -288,7 +287,7 @@ func main() {
 	ctx := context.Background()
 	res, err := s.Ledger.AddMetadataToAccount(ctx, operations.AddMetadataToAccountRequest{
 		RequestBody: map[string]interface{}{
-			"key": "string",
+			"key": "<value>",
 		},
 		Address: "users:001",
 		Ledger:  "ledger001",
@@ -330,15 +329,15 @@ package main
 
 import (
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := v2.New(
-		v2.WithServerIndex(0),
-		v2.WithSecurity(shared.Security{
+	s := formancesdkgo.New(
+		formancesdkgo.WithServerIndex(0),
+		formancesdkgo.WithSecurity(shared.Security{
 			Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
 		}),
 	)
@@ -348,7 +347,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.GetVersionsResponse != nil {
 		// handle response
 	}
@@ -365,15 +363,15 @@ package main
 
 import (
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := v2.New(
-		v2.WithServerURL("http://localhost"),
-		v2.WithSecurity(shared.Security{
+	s := formancesdkgo.New(
+		formancesdkgo.WithServerURL("http://localhost"),
+		formancesdkgo.WithSecurity(shared.Security{
 			Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
 		}),
 	)
@@ -383,7 +381,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.GetVersionsResponse != nil {
 		// handle response
 	}
@@ -438,14 +435,14 @@ package main
 
 import (
 	"context"
-	"github.com/formancehq/formance-sdk-go/v2"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := v2.New(
-		v2.WithSecurity(shared.Security{
+	s := formancesdkgo.New(
+		formancesdkgo.WithSecurity(shared.Security{
 			Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
 		}),
 	)
@@ -455,7 +452,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.GetVersionsResponse != nil {
 		// handle response
 	}
