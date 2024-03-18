@@ -1,31 +1,17 @@
 name: Publish
-"on":
-  push:
+
+on:
+  push: # Will trigger when the RELEASES.md file is updated by the merged PR from the generation workflow
+    paths:
+      - 'RELEASES.md'
     branches:
-      - release/v*.*.*
-      - release/v*.*.*-alpha.*
-      - release/v*.*.*-beta.*
-      - release/v*.*.*-rc.*version
+      - main
+
 jobs:
-  Release:
-    name: 'Release'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/release/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ steps.extract_branch.outputs.branch }}
-          release_name: ${{ steps.extract_branch.outputs.branch }}
-          draft: false
-          prerelease: false
-      - run: gh repo edit --default-branch=release/${{ steps.extract_branch.outputs.branch }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.NUMARY_GITHUB_TOKEN }}
+  publish:
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v14 # Import the SDK publishing workflow to handle publishing to the package managers
+    with:
+      create_release: true
+    secrets:
+      github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
