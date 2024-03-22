@@ -244,9 +244,10 @@ func main() {
 ### Response
 
 **[*operations.CreditWalletResponse](../../pkg/models/operations/creditwalletresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                   | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| sdkerrors.WalletsErrorResponse | 400                            | application/json               |
+| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
 
 ## DebitWallet
 
@@ -307,9 +308,10 @@ func main() {
 ### Response
 
 **[*operations.DebitWalletResponse](../../pkg/models/operations/debitwalletresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                   | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| sdkerrors.WalletsErrorResponse | 400                            | application/json               |
+| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
 
 ## GetBalance
 
