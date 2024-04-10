@@ -134,7 +134,7 @@ func main() {
             Destination: "acct_1Gqj58KZcSIg2N2q",
             Source: formancesdkgo.String("acct_1Gqj58KZcSIg2N2q"),
         },
-        Connector: shared.ConnectorCurrencyCloud,
+        Connector: shared.ConnectorBankingCircle,
     })
     if err != nil {
         log.Fatal(err)
@@ -680,7 +680,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetConnectorTask(ctx, operations.GetConnectorTaskRequest{
-        Connector: shared.ConnectorAtlar,
+        Connector: shared.ConnectorAdyen,
         TaskID: "<value>",
     })
     if err != nil {
@@ -733,7 +733,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.GetConnectorTaskV1(ctx, operations.GetConnectorTaskV1Request{
-        Connector: shared.ConnectorCurrencyCloud,
+        Connector: shared.ConnectorBankingCircle,
         ConnectorID: "<value>",
         TaskID: "<value>",
     })
@@ -1004,7 +1004,7 @@ func main() {
                     PollingPeriod: formancesdkgo.String("60s"),
                 },
         ),
-        Connector: shared.ConnectorAtlar,
+        Connector: shared.ConnectorAdyen,
     })
     if err != nil {
         log.Fatal(err)
@@ -1206,7 +1206,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.ListConnectorTasks(ctx, operations.ListConnectorTasksRequest{
-        Connector: shared.ConnectorWise,
+        Connector: shared.ConnectorModulr,
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
     })
     if err != nil {
@@ -1623,7 +1623,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.ReadConnectorConfig(ctx, operations.ReadConnectorConfigRequest{
-        Connector: shared.ConnectorAdyen,
+        Connector: shared.ConnectorGeneric,
     })
     if err != nil {
         log.Fatal(err)
@@ -1785,7 +1785,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.ResetConnector(ctx, operations.ResetConnectorRequest{
-        Connector: shared.ConnectorMoneycorp,
+        Connector: shared.ConnectorAtlar,
     })
     if err != nil {
         log.Fatal(err)
@@ -1839,7 +1839,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.ResetConnectorV1(ctx, operations.ResetConnectorV1Request{
-        Connector: shared.ConnectorAdyen,
+        Connector: shared.ConnectorGeneric,
         ConnectorID: "<value>",
     })
     if err != nil {
@@ -2063,7 +2063,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.UninstallConnector(ctx, operations.UninstallConnectorRequest{
-        Connector: shared.ConnectorWise,
+        Connector: shared.ConnectorModulr,
     })
     if err != nil {
         log.Fatal(err)
@@ -2115,7 +2115,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.UninstallConnectorV1(ctx, operations.UninstallConnectorV1Request{
-        Connector: shared.ConnectorAdyen,
+        Connector: shared.ConnectorGeneric,
         ConnectorID: "<value>",
     })
     if err != nil {

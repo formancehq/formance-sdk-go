@@ -89,6 +89,7 @@ func main() {
 **[*operations.CancelEventResponse](../../pkg/models/operations/canceleventresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateTrigger
@@ -141,6 +142,7 @@ func main() {
 **[*operations.CreateTriggerResponse](../../pkg/models/operations/createtriggerresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateWorkflow
@@ -196,6 +198,7 @@ func main() {
 **[*operations.CreateWorkflowResponse](../../pkg/models/operations/createworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DeleteTrigger
@@ -248,6 +251,7 @@ func main() {
 **[*operations.DeleteTriggerResponse](../../pkg/models/operations/deletetriggerresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DeleteWorkflow
@@ -300,6 +304,7 @@ func main() {
 **[*operations.DeleteWorkflowResponse](../../pkg/models/operations/deleteworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetInstance
@@ -352,6 +357,7 @@ func main() {
 **[*operations.GetInstanceResponse](../../pkg/models/operations/getinstanceresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetInstanceHistory
@@ -404,6 +410,7 @@ func main() {
 **[*operations.GetInstanceHistoryResponse](../../pkg/models/operations/getinstancehistoryresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetInstanceStageHistory
@@ -457,6 +464,7 @@ func main() {
 **[*operations.GetInstanceStageHistoryResponse](../../pkg/models/operations/getinstancestagehistoryresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetWorkflow
@@ -509,6 +517,7 @@ func main() {
 **[*operations.GetWorkflowResponse](../../pkg/models/operations/getworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListInstances
@@ -559,6 +568,7 @@ func main() {
 **[*operations.ListInstancesResponse](../../pkg/models/operations/listinstancesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListTriggers
@@ -607,6 +617,7 @@ func main() {
 **[*operations.ListTriggersResponse](../../pkg/models/operations/listtriggersresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListTriggersOccurrences
@@ -659,6 +670,7 @@ func main() {
 **[*operations.ListTriggersOccurrencesResponse](../../pkg/models/operations/listtriggersoccurrencesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListWorkflows
@@ -707,6 +719,7 @@ func main() {
 **[*operations.ListWorkflowsResponse](../../pkg/models/operations/listworkflowsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## OrchestrationgetServerInfo
@@ -755,6 +768,7 @@ func main() {
 **[*operations.OrchestrationgetServerInfoResponse](../../pkg/models/operations/orchestrationgetserverinforesponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ReadTrigger
@@ -807,6 +821,7 @@ func main() {
 **[*operations.ReadTriggerResponse](../../pkg/models/operations/readtriggerresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## RunWorkflow
@@ -859,6 +874,7 @@ func main() {
 **[*operations.RunWorkflowResponse](../../pkg/models/operations/runworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## SendEvent
@@ -911,6 +927,7 @@ func main() {
 **[*operations.SendEventResponse](../../pkg/models/operations/sendeventresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## TestTrigger
@@ -963,6 +980,7 @@ func main() {
 **[*operations.TestTriggerResponse](../../pkg/models/operations/testtriggerresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2CancelEvent
@@ -1015,6 +1033,7 @@ func main() {
 **[*operations.V2CancelEventResponse](../../pkg/models/operations/v2canceleventresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2CreateTrigger
@@ -1067,6 +1086,7 @@ func main() {
 **[*operations.V2CreateTriggerResponse](../../pkg/models/operations/v2createtriggerresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2CreateWorkflow
@@ -1122,6 +1142,7 @@ func main() {
 **[*operations.V2CreateWorkflowResponse](../../pkg/models/operations/v2createworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2DeleteTrigger
@@ -1174,7 +1195,7 @@ func main() {
 **[*operations.V2DeleteTriggerResponse](../../pkg/models/operations/v2deletetriggerresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | 404                | application/json   |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2DeleteWorkflow
@@ -1227,7 +1248,7 @@ func main() {
 **[*operations.V2DeleteWorkflowResponse](../../pkg/models/operations/v2deleteworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | 400,404            | application/json   |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2GetInstance
@@ -1280,6 +1301,7 @@ func main() {
 **[*operations.V2GetInstanceResponse](../../pkg/models/operations/v2getinstanceresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2GetInstanceHistory
@@ -1332,6 +1354,7 @@ func main() {
 **[*operations.V2GetInstanceHistoryResponse](../../pkg/models/operations/v2getinstancehistoryresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2GetInstanceStageHistory
@@ -1385,6 +1408,7 @@ func main() {
 **[*operations.V2GetInstanceStageHistoryResponse](../../pkg/models/operations/v2getinstancestagehistoryresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2GetServerInfo
@@ -1433,6 +1457,7 @@ func main() {
 **[*operations.V2GetServerInfoResponse](../../pkg/models/operations/v2getserverinforesponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2GetWorkflow
@@ -1485,6 +1510,7 @@ func main() {
 **[*operations.V2GetWorkflowResponse](../../pkg/models/operations/v2getworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2ListInstances
@@ -1535,6 +1561,7 @@ func main() {
 **[*operations.V2ListInstancesResponse](../../pkg/models/operations/v2listinstancesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2ListTriggers
@@ -1583,6 +1610,7 @@ func main() {
 **[*operations.V2ListTriggersResponse](../../pkg/models/operations/v2listtriggersresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2ListTriggersOccurrences
@@ -1635,6 +1663,7 @@ func main() {
 **[*operations.V2ListTriggersOccurrencesResponse](../../pkg/models/operations/v2listtriggersoccurrencesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2ListWorkflows
@@ -1683,6 +1712,7 @@ func main() {
 **[*operations.V2ListWorkflowsResponse](../../pkg/models/operations/v2listworkflowsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2ReadTrigger
@@ -1735,6 +1765,7 @@ func main() {
 **[*operations.V2ReadTriggerResponse](../../pkg/models/operations/v2readtriggerresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2RunWorkflow
@@ -1787,6 +1818,7 @@ func main() {
 **[*operations.V2RunWorkflowResponse](../../pkg/models/operations/v2runworkflowresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## V2SendEvent
@@ -1839,4 +1871,5 @@ func main() {
 **[*operations.V2SendEventResponse](../../pkg/models/operations/v2sendeventresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

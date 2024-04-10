@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: b48bcb11c6ebfbb0f797aef5364a5064
-  docVersion: v2.0.0-rc.18
-  speakeasyVersion: 1.219.2
-  generationVersion: 2.286.7
-  releaseVersion: 2.1.2
-  configChecksum: 472d0c45bfc168d46ca8c56eb8a2a894
+  docChecksum: 1c0c06fbfb1fa7dfd4a7da5ce409a49e
+  docVersion: v2.0.0-rc.20
+  speakeasyVersion: 1.245.0
+  generationVersion: 2.301.3
+  releaseVersion: 2.1.3
+  configChecksum: c57f56a46fb9b92faf2bf90052972e60
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -14,7 +14,7 @@ management:
 features:
   go:
     constsAndDefaults: 0.1.4
-    core: 3.4.4
+    core: 3.4.6
     deprecations: 2.81.1
     errors: 2.81.8
     getRequestBodies: 2.81.1
@@ -51,8 +51,8 @@ generatedFiles:
   - pkg/utils/retries.go
   - pkg/utils/security.go
   - pkg/utils/utils.go
+  - /pkg/models/operations/getoidcwellknowns.go
   - /pkg/models/operations/getversions.go
-  - /pkg/models/operations/getapiauthwellknownopenidconfiguration.go
   - /pkg/models/operations/createclient.go
   - /pkg/models/operations/createsecret.go
   - /pkg/models/operations/deleteclient.go
@@ -90,6 +90,7 @@ generatedFiles:
   - /pkg/models/operations/v2createledger.go
   - /pkg/models/operations/v2createtransaction.go
   - /pkg/models/operations/v2deleteaccountmetadata.go
+  - /pkg/models/operations/v2deleteledgermetadata.go
   - /pkg/models/operations/v2deletetransactionmetadata.go
   - /pkg/models/operations/v2getaccount.go
   - /pkg/models/operations/v2getbalancesaggregated.go
@@ -103,6 +104,7 @@ generatedFiles:
   - /pkg/models/operations/v2listtransactions.go
   - /pkg/models/operations/v2readstats.go
   - /pkg/models/operations/v2reverttransaction.go
+  - /pkg/models/operations/v2updateledgermetadata.go
   - /pkg/models/operations/cancelevent.go
   - /pkg/models/operations/createtrigger.go
   - /pkg/models/operations/createworkflow.go
@@ -281,6 +283,7 @@ generatedFiles:
   - /pkg/models/shared/v2volume.go
   - /pkg/models/shared/v2aggregatebalancesresponse.go
   - /pkg/models/shared/v2configinforesponse.go
+  - /pkg/models/shared/v2getledgerresponse.go
   - /pkg/models/shared/v2ledger.go
   - /pkg/models/shared/v2ledgerinforesponse.go
   - /pkg/models/shared/v2ledgerinfo.go
@@ -295,7 +298,6 @@ generatedFiles:
   - /pkg/models/shared/v2statsresponse.go
   - /pkg/models/shared/v2stats.go
   - /pkg/models/shared/v2reverttransactionresponse.go
-  - /pkg/models/shared/error.go
   - /pkg/models/shared/createtriggerresponse.go
   - /pkg/models/shared/trigger.go
   - /pkg/models/shared/triggerdata.go
@@ -491,6 +493,7 @@ generatedFiles:
   - /pkg/models/shared/moneycorpconfig.go
   - /pkg/models/shared/atlarconfig.go
   - /pkg/models/shared/adyenconfig.go
+  - /pkg/models/shared/genericconfig.go
   - /pkg/models/shared/connectorsresponse.go
   - /pkg/models/shared/bankaccountscursor.go
   - /pkg/models/shared/connectorsconfigsresponse.go
@@ -505,7 +508,6 @@ generatedFiles:
   - /pkg/models/shared/reversetransferinitiationrequest.go
   - /pkg/models/shared/updatetransferinitiationstatusrequest.go
   - /pkg/models/shared/updatebankaccountmetadatarequest.go
-  - /pkg/models/shared/reconciliationerrorresponse.go
   - /pkg/models/shared/policyresponse.go
   - /pkg/models/shared/policy.go
   - /pkg/models/shared/policyrequest.go
@@ -535,9 +537,9 @@ generatedFiles:
   - /pkg/models/shared/getwalletsummaryresponse.go
   - /pkg/models/shared/listbalancesresponse.go
   - /pkg/models/shared/listwalletsresponse.go
-  - /pkg/models/shared/webhookserrorsenum.go
   - /pkg/models/shared/configresponse.go
   - /pkg/models/shared/webhooksconfig.go
+  - /pkg/models/shared/webhookserrorsenum.go
   - /pkg/models/shared/configchangesecret.go
   - /pkg/models/shared/configsresponse.go
   - /pkg/models/shared/configuser.go
@@ -546,11 +548,13 @@ generatedFiles:
   - /pkg/models/shared/security.go
   - /pkg/models/sdkerrors/errorresponse.go
   - /pkg/models/sdkerrors/v2errorresponse.go
+  - /pkg/models/sdkerrors/error.go
   - /pkg/models/sdkerrors/v2error.go
+  - /pkg/models/sdkerrors/reconciliationerrorresponse.go
   - /pkg/models/sdkerrors/walletserrorresponse.go
   - /pkg/models/sdkerrors/webhookserrorresponse.go
+  - docs/pkg/models/operations/getoidcwellknownsresponse.md
   - docs/pkg/models/operations/getversionsresponse.md
-  - docs/pkg/models/operations/getapiauthwellknownopenidconfigurationresponse.md
   - docs/pkg/models/operations/createclientresponse.md
   - docs/pkg/models/operations/createsecretrequest.md
   - docs/pkg/models/operations/createsecretresponse.md
@@ -622,6 +626,8 @@ generatedFiles:
   - docs/pkg/models/operations/v2createtransactionresponse.md
   - docs/pkg/models/operations/v2deleteaccountmetadatarequest.md
   - docs/pkg/models/operations/v2deleteaccountmetadataresponse.md
+  - docs/pkg/models/operations/v2deleteledgermetadatarequest.md
+  - docs/pkg/models/operations/v2deleteledgermetadataresponse.md
   - docs/pkg/models/operations/v2deletetransactionmetadatarequest.md
   - docs/pkg/models/operations/v2deletetransactionmetadataresponse.md
   - docs/pkg/models/operations/v2getaccountrequest.md
@@ -647,6 +653,8 @@ generatedFiles:
   - docs/pkg/models/operations/v2readstatsresponse.md
   - docs/pkg/models/operations/v2reverttransactionrequest.md
   - docs/pkg/models/operations/v2reverttransactionresponse.md
+  - docs/pkg/models/operations/v2updateledgermetadatarequest.md
+  - docs/pkg/models/operations/v2updateledgermetadataresponse.md
   - docs/pkg/models/operations/canceleventrequest.md
   - docs/pkg/models/operations/canceleventresponse.md
   - docs/pkg/models/operations/createtriggerresponse.md
@@ -932,6 +940,7 @@ generatedFiles:
   - docs/pkg/models/shared/v2volume.md
   - docs/pkg/models/shared/v2aggregatebalancesresponse.md
   - docs/pkg/models/shared/v2configinforesponse.md
+  - docs/pkg/models/shared/v2getledgerresponse.md
   - docs/pkg/models/shared/v2ledger.md
   - docs/pkg/models/shared/v2ledgerinforesponse.md
   - docs/pkg/models/shared/v2ledgerinfostorage.md
@@ -953,8 +962,6 @@ generatedFiles:
   - docs/pkg/models/shared/v2statsresponse.md
   - docs/pkg/models/shared/v2stats.md
   - docs/pkg/models/shared/v2reverttransactionresponse.md
-  - docs/pkg/models/shared/errorcode.md
-  - docs/pkg/models/shared/error.md
   - docs/pkg/models/shared/createtriggerresponse.md
   - docs/pkg/models/shared/trigger.md
   - docs/pkg/models/shared/triggerdata.md
@@ -1194,6 +1201,7 @@ generatedFiles:
   - docs/pkg/models/shared/moneycorpconfig.md
   - docs/pkg/models/shared/atlarconfig.md
   - docs/pkg/models/shared/adyenconfig.md
+  - docs/pkg/models/shared/genericconfig.md
   - docs/pkg/models/shared/connectorsresponsedata.md
   - docs/pkg/models/shared/connectorsresponse.md
   - docs/pkg/models/shared/bankaccountscursorcursor.md
@@ -1221,7 +1229,6 @@ generatedFiles:
   - docs/pkg/models/shared/status.md
   - docs/pkg/models/shared/updatetransferinitiationstatusrequest.md
   - docs/pkg/models/shared/updatebankaccountmetadatarequest.md
-  - docs/pkg/models/shared/reconciliationerrorresponse.md
   - docs/pkg/models/shared/policyresponse.md
   - docs/pkg/models/shared/policy.md
   - docs/pkg/models/shared/policyrequest.md
@@ -1260,9 +1267,9 @@ generatedFiles:
   - docs/pkg/models/shared/listbalancesresponse.md
   - docs/pkg/models/shared/listwalletsresponsecursor.md
   - docs/pkg/models/shared/listwalletsresponse.md
-  - docs/pkg/models/shared/webhookserrorsenum.md
   - docs/pkg/models/shared/configresponse.md
   - docs/pkg/models/shared/webhooksconfig.md
+  - docs/pkg/models/shared/webhookserrorsenum.md
   - docs/pkg/models/shared/configchangesecret.md
   - docs/pkg/models/shared/configsresponsecursor.md
   - docs/pkg/models/shared/configsresponse.md
@@ -1273,8 +1280,11 @@ generatedFiles:
   - docs/pkg/models/sdkerrors/errorresponse.md
   - docs/pkg/models/sdkerrors/v2errorresponse.md
   - docs/pkg/models/sdkerrors/errorcode.md
-  - docs/pkg/models/sdkerrors/v2error.md
+  - docs/pkg/models/sdkerrors/error.md
   - docs/pkg/models/sdkerrors/schemaserrorcode.md
+  - docs/pkg/models/sdkerrors/v2error.md
+  - docs/pkg/models/sdkerrors/reconciliationerrorresponse.md
+  - docs/pkg/models/sdkerrors/schemaswalletserrorresponseerrorcode.md
   - docs/pkg/models/sdkerrors/walletserrorresponse.md
   - docs/pkg/models/sdkerrors/webhookserrorresponse.md
   - docs/sdks/formance/README.md
