@@ -59,9 +59,10 @@ func main() {
 ### Response
 
 **[*operations.ActivateConfigResponse](../../pkg/models/operations/activateconfigresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ChangeConfigSecret
 
@@ -117,7 +118,7 @@ func main() {
 **[*operations.ChangeConfigSecretResponse](../../pkg/models/operations/changeconfigsecretresponse.md), error**
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | 400                             | application/json                |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## DeactivateConfig
@@ -170,7 +171,7 @@ func main() {
 **[*operations.DeactivateConfigResponse](../../pkg/models/operations/deactivateconfigresponse.md), error**
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | 404                             | application/json                |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## DeleteConfig
@@ -223,7 +224,7 @@ func main() {
 **[*operations.DeleteConfigResponse](../../pkg/models/operations/deleteconfigresponse.md), error**
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | 400,404                         | application/json                |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetManyConfigs
@@ -275,9 +276,10 @@ func main() {
 ### Response
 
 **[*operations.GetManyConfigsResponse](../../pkg/models/operations/getmanyconfigsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## InsertConfig
 
@@ -343,7 +345,7 @@ func main() {
 **[*operations.InsertConfigResponse](../../pkg/models/operations/insertconfigresponse.md), error**
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | 400                             | application/json                |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## TestConfig
@@ -396,5 +398,5 @@ func main() {
 **[*operations.TestConfigResponse](../../pkg/models/operations/testconfigresponse.md), error**
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | 400,404                         | application/json                |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |

@@ -64,9 +64,10 @@ func main() {
 ### Response
 
 **[*operations.CreatePolicyResponse](../../pkg/models/operations/createpolicyresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
 
 ## DeletePolicy
 
@@ -116,9 +117,10 @@ func main() {
 ### Response
 
 **[*operations.DeletePolicyResponse](../../pkg/models/operations/deletepolicyresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
 
 ## GetPolicy
 
@@ -168,9 +170,10 @@ func main() {
 ### Response
 
 **[*operations.GetPolicyResponse](../../pkg/models/operations/getpolicyresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
 
 ## GetReconciliation
 
@@ -220,9 +223,10 @@ func main() {
 ### Response
 
 **[*operations.GetReconciliationResponse](../../pkg/models/operations/getreconciliationresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
 
 ## ListPolicies
 
@@ -272,9 +276,10 @@ func main() {
 ### Response
 
 **[*operations.ListPoliciesResponse](../../pkg/models/operations/listpoliciesresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
 
 ## ListReconciliations
 
@@ -324,9 +329,10 @@ func main() {
 ### Response
 
 **[*operations.ListReconciliationsResponse](../../pkg/models/operations/listreconciliationsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
 
 ## Reconcile
 
@@ -381,9 +387,10 @@ func main() {
 ### Response
 
 **[*operations.ReconcileResponse](../../pkg/models/operations/reconcileresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
 
 ## ReconciliationgetServerInfo
 
@@ -429,6 +436,7 @@ func main() {
 ### Response
 
 **[*operations.ReconciliationgetServerInfoResponse](../../pkg/models/operations/reconciliationgetserverinforesponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
+| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |

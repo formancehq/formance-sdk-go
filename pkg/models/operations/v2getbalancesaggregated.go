@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
 	"net/http"
@@ -16,7 +15,7 @@ type V2GetBalancesAggregatedRequest struct {
 	Ledger string     `pathParam:"style=simple,explode=false,name=ledger"`
 	Pit    *time.Time `queryParam:"style=form,explode=true,name=pit"`
 	// Use insertion date instead of effective date
-	UseInsertionDate *bool `queryParam:"style=form,explode=true,name=use_insertion_date"`
+	UseInsertionDate *bool `queryParam:"style=form,explode=true,name=useInsertionDate"`
 }
 
 func (v V2GetBalancesAggregatedRequest) MarshalJSON() ([]byte, error) {
@@ -67,8 +66,6 @@ type V2GetBalancesAggregatedResponse struct {
 	RawResponse *http.Response
 	// OK
 	V2AggregateBalancesResponse *shared.V2AggregateBalancesResponse
-	// Error
-	V2ErrorResponse *sdkerrors.V2ErrorResponse
 }
 
 func (o *V2GetBalancesAggregatedResponse) GetContentType() string {
@@ -97,11 +94,4 @@ func (o *V2GetBalancesAggregatedResponse) GetV2AggregateBalancesResponse() *shar
 		return nil
 	}
 	return o.V2AggregateBalancesResponse
-}
-
-func (o *V2GetBalancesAggregatedResponse) GetV2ErrorResponse() *sdkerrors.V2ErrorResponse {
-	if o == nil {
-		return nil
-	}
-	return o.V2ErrorResponse
 }

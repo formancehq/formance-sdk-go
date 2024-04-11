@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
 	"math/big"
@@ -11,6 +10,8 @@ import (
 )
 
 type V2RevertTransactionRequest struct {
+	// Revert transaction at effective date of the original tx
+	AtEffectiveDate *bool `queryParam:"style=form,explode=true,name=atEffectiveDate"`
 	// Force revert
 	Force *bool `queryParam:"style=form,explode=true,name=force"`
 	// Transaction ID.
@@ -28,6 +29,13 @@ func (v *V2RevertTransactionRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (o *V2RevertTransactionRequest) GetAtEffectiveDate() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AtEffectiveDate
 }
 
 func (o *V2RevertTransactionRequest) GetForce() *bool {
@@ -58,8 +66,6 @@ type V2RevertTransactionResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Error
-	V2ErrorResponse *sdkerrors.V2ErrorResponse
 	// OK
 	V2RevertTransactionResponse *shared.V2RevertTransactionResponse
 }
@@ -83,13 +89,6 @@ func (o *V2RevertTransactionResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *V2RevertTransactionResponse) GetV2ErrorResponse() *sdkerrors.V2ErrorResponse {
-	if o == nil {
-		return nil
-	}
-	return o.V2ErrorResponse
 }
 
 func (o *V2RevertTransactionResponse) GetV2RevertTransactionResponse() *shared.V2RevertTransactionResponse {

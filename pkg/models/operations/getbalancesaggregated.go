@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
@@ -14,7 +13,7 @@ type GetBalancesAggregatedRequest struct {
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Use insertion date instead of effective date
-	UseInsertionDate *bool `queryParam:"style=form,explode=true,name=use_insertion_date"`
+	UseInsertionDate *bool `queryParam:"style=form,explode=true,name=useInsertionDate"`
 }
 
 func (o *GetBalancesAggregatedRequest) GetAddress() *string {
@@ -43,8 +42,6 @@ type GetBalancesAggregatedResponse struct {
 	AggregateBalancesResponse *shared.AggregateBalancesResponse
 	// HTTP response content type for this operation
 	ContentType string
-	// Error
-	ErrorResponse *sdkerrors.ErrorResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -63,13 +60,6 @@ func (o *GetBalancesAggregatedResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *GetBalancesAggregatedResponse) GetErrorResponse() *sdkerrors.ErrorResponse {
-	if o == nil {
-		return nil
-	}
-	return o.ErrorResponse
 }
 
 func (o *GetBalancesAggregatedResponse) GetStatusCode() int {
