@@ -47,11 +47,11 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.GetVersions(ctx)
+	res, err := s.GetOIDCWellKnowns(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.GetVersionsResponse != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -64,8 +64,8 @@ func main() {
 
 ### [Formance SDK](docs/sdks/formance/README.md)
 
+* [GetOIDCWellKnowns](docs/sdks/formance/README.md#getoidcwellknowns) - Retrieve OpenID connect well-knowns.
 * [GetVersions](docs/sdks/formance/README.md#getversions) - Show stack version information
-* [GetAPIAuthWellKnownOpenidConfiguration](docs/sdks/formance/README.md#getapiauthwellknownopenidconfiguration)
 
 ### [Auth](docs/sdks/auth/README.md)
 
@@ -109,6 +109,7 @@ func main() {
 * [V2CreateLedger](docs/sdks/ledger/README.md#v2createledger) - Create a ledger
 * [V2CreateTransaction](docs/sdks/ledger/README.md#v2createtransaction) - Create a new transaction to a ledger
 * [V2DeleteAccountMetadata](docs/sdks/ledger/README.md#v2deleteaccountmetadata) - Delete metadata by key
+* [V2DeleteLedgerMetadata](docs/sdks/ledger/README.md#v2deleteledgermetadata) - Delete ledger metadata by key
 * [V2DeleteTransactionMetadata](docs/sdks/ledger/README.md#v2deletetransactionmetadata) - Delete metadata by key
 * [V2GetAccount](docs/sdks/ledger/README.md#v2getaccount) - Get account by its address
 * [V2GetBalancesAggregated](docs/sdks/ledger/README.md#v2getbalancesaggregated) - Get the aggregated balances from selected accounts
@@ -122,6 +123,7 @@ func main() {
 * [V2ListTransactions](docs/sdks/ledger/README.md#v2listtransactions) - List transactions from a ledger
 * [V2ReadStats](docs/sdks/ledger/README.md#v2readstats) - Get statistics from a ledger
 * [V2RevertTransaction](docs/sdks/ledger/README.md#v2reverttransaction) - Revert a ledger transaction by its ID
+* [V2UpdateLedgerMetadata](docs/sdks/ledger/README.md#v2updateledgermetadata) - Update ledger metadata
 
 ### [Orchestration](docs/sdks/orchestration/README.md)
 
@@ -259,7 +261,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | 400,404                 | application/json        |
+| sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
 
 ### Example
@@ -275,6 +277,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
+	"math/big"
 )
 
 func main() {
@@ -285,12 +288,23 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Ledger.AddMetadataToAccount(ctx, operations.AddMetadataToAccountRequest{
-		RequestBody: map[string]interface{}{
-			"key": "<value>",
+	res, err := s.Ledger.CreateTransactions(ctx, operations.CreateTransactionsRequest{
+		Transactions: shared.Transactions{
+			Transactions: []shared.TransactionData{
+				shared.TransactionData{
+					Postings: []shared.Posting{
+						shared.Posting{
+							Amount:      big.NewInt(100),
+							Asset:       "COIN",
+							Destination: "users:002",
+							Source:      "users:001",
+						},
+					},
+					Reference: formancesdkgo.String("ref:001"),
+				},
+			},
 		},
-		Address: "users:001",
-		Ledger:  "ledger001",
+		Ledger: "ledger001",
 	})
 	if err != nil {
 
@@ -343,11 +357,11 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.GetVersions(ctx)
+	res, err := s.GetOIDCWellKnowns(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.GetVersionsResponse != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -377,11 +391,11 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.GetVersions(ctx)
+	res, err := s.GetOIDCWellKnowns(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.GetVersionsResponse != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -448,11 +462,11 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.GetVersions(ctx)
+	res, err := s.GetOIDCWellKnowns(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.GetVersionsResponse != nil {
+	if res != nil {
 		// handle response
 	}
 }
