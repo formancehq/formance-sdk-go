@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: 1c0c06fbfb1fa7dfd4a7da5ce409a49e
-  docVersion: v2.0.0-rc.20
-  speakeasyVersion: 1.246.1
-  generationVersion: 2.302.1
-  releaseVersion: 2.1.3
-  configChecksum: c57f56a46fb9b92faf2bf90052972e60
+  docChecksum: 68e0f776ba164f3551b4b29494444ee0
+  docVersion: v2.0.0-rc.22
+  speakeasyVersion: 1.253.1
+  generationVersion: 2.306.0
+  releaseVersion: 2.1.4
+  configChecksum: 64d70847c1d5d308bcb1404fbc2f371e
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -98,6 +98,7 @@ generatedFiles:
   - /pkg/models/operations/v2getledger.go
   - /pkg/models/operations/v2getledgerinfo.go
   - /pkg/models/operations/v2gettransaction.go
+  - /pkg/models/operations/v2getvolumeswithbalances.go
   - /pkg/models/operations/v2listaccounts.go
   - /pkg/models/operations/v2listledgers.go
   - /pkg/models/operations/v2listlogs.go
@@ -290,6 +291,8 @@ generatedFiles:
   - /pkg/models/shared/v2migrationinfo.go
   - /pkg/models/shared/v2gettransactionresponse.go
   - /pkg/models/shared/v2expandedtransaction.go
+  - /pkg/models/shared/v2volumeswithbalancecursorresponse.go
+  - /pkg/models/shared/v2volumeswithbalance.go
   - /pkg/models/shared/v2accountscursorresponse.go
   - /pkg/models/shared/v2ledgerlistresponse.go
   - /pkg/models/shared/v2logscursorresponse.go
@@ -641,6 +644,8 @@ generatedFiles:
   - docs/pkg/models/operations/v2getledgerinforesponse.md
   - docs/pkg/models/operations/v2gettransactionrequest.md
   - docs/pkg/models/operations/v2gettransactionresponse.md
+  - docs/pkg/models/operations/v2getvolumeswithbalancesrequest.md
+  - docs/pkg/models/operations/v2getvolumeswithbalancesresponse.md
   - docs/pkg/models/operations/v2listaccountsrequest.md
   - docs/pkg/models/operations/v2listaccountsresponse.md
   - docs/pkg/models/operations/v2listledgersrequest.md
@@ -949,6 +954,9 @@ generatedFiles:
   - docs/pkg/models/shared/v2migrationinfo.md
   - docs/pkg/models/shared/v2gettransactionresponse.md
   - docs/pkg/models/shared/v2expandedtransaction.md
+  - docs/pkg/models/shared/v2volumeswithbalancecursorresponsecursor.md
+  - docs/pkg/models/shared/v2volumeswithbalancecursorresponse.md
+  - docs/pkg/models/shared/v2volumeswithbalance.md
   - docs/pkg/models/shared/v2accountscursorresponsecursor.md
   - docs/pkg/models/shared/v2accountscursorresponse.md
   - docs/pkg/models/shared/v2ledgerlistresponsecursor.md
