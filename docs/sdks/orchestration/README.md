@@ -59,7 +59,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -111,7 +111,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -164,7 +164,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -221,7 +221,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -274,7 +274,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -327,7 +327,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -380,7 +380,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -433,7 +433,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -487,7 +487,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -540,7 +540,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -590,7 +590,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -640,7 +640,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -692,7 +692,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -741,7 +741,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -791,7 +791,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -844,7 +844,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -897,7 +897,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -950,7 +950,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1003,7 +1003,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1055,7 +1055,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1108,7 +1108,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1165,7 +1165,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1218,7 +1218,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1271,7 +1271,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1324,7 +1324,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1377,7 +1377,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1430,7 +1430,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1480,7 +1480,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1533,12 +1533,14 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
     ctx := context.Background()
-    res, err := s.Orchestration.V2ListInstances(ctx, operations.V2ListInstancesRequest{})
+    res, err := s.Orchestration.V2ListInstances(ctx, operations.V2ListInstancesRequest{
+        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1577,18 +1579,21 @@ import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
     ctx := context.Background()
-    res, err := s.Orchestration.V2ListTriggers(ctx)
+    res, err := s.Orchestration.V2ListTriggers(ctx, operations.V2ListTriggersRequest{
+        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1600,9 +1605,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.V2ListTriggersRequest](../../pkg/models/operations/v2listtriggersrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
@@ -1633,12 +1639,13 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Orchestration.V2ListTriggersOccurrences(ctx, operations.V2ListTriggersOccurrencesRequest{
+        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         TriggerID: "<value>",
     })
     if err != nil {
@@ -1679,18 +1686,21 @@ import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
     ctx := context.Background()
-    res, err := s.Orchestration.V2ListWorkflows(ctx)
+    res, err := s.Orchestration.V2ListWorkflows(ctx, operations.V2ListWorkflowsRequest{
+        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1702,9 +1712,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.V2ListWorkflowsRequest](../../pkg/models/operations/v2listworkflowsrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
@@ -1735,7 +1746,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1788,7 +1799,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1841,7 +1852,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
