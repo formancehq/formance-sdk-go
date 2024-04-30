@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: f82424cbd31992df4c912ba2ffe8f66c
-  docVersion: v2.0.0-rc.24
-  speakeasyVersion: 1.274.1
-  generationVersion: 2.314.0
-  releaseVersion: 2.1.5
-  configChecksum: d442700231304a01f781d6cf55728b1f
+  docChecksum: de4ce37109543835d271fd330d36d4f0
+  docVersion: v2.0.0-rc.26
+  speakeasyVersion: 1.277.0
+  generationVersion: 2.317.0
+  releaseVersion: 2.1.6
+  configChecksum: 93a0b508139a624b40d3a67f0747c041
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -681,6 +681,7 @@ generatedFiles:
   - docs/pkg/models/operations/getworkflowresponse.md
   - docs/pkg/models/operations/listinstancesrequest.md
   - docs/pkg/models/operations/listinstancesresponse.md
+  - docs/pkg/models/operations/listtriggersrequest.md
   - docs/pkg/models/operations/listtriggersresponse.md
   - docs/pkg/models/operations/listtriggersoccurrencesrequest.md
   - docs/pkg/models/operations/listtriggersoccurrencesresponse.md
