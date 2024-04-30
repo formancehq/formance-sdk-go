@@ -1785,7 +1785,7 @@ func (s *Ledger) RevertTransaction(ctx context.Context, request operations.Rever
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	switch {
-	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.TransactionResponse
