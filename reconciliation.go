@@ -129,6 +129,7 @@ func (s *Reconciliation) CreatePolicy(ctx context.Context, request shared.Policy
 	}
 
 	return res, nil
+
 }
 
 // DeletePolicy - Delete a policy
@@ -217,6 +218,7 @@ func (s *Reconciliation) DeletePolicy(ctx context.Context, request operations.De
 	}
 
 	return res, nil
+
 }
 
 // GetPolicy - Get a policy
@@ -315,6 +317,7 @@ func (s *Reconciliation) GetPolicy(ctx context.Context, request operations.GetPo
 	}
 
 	return res, nil
+
 }
 
 // GetReconciliation - Get a reconciliation
@@ -413,6 +416,7 @@ func (s *Reconciliation) GetReconciliation(ctx context.Context, request operatio
 	}
 
 	return res, nil
+
 }
 
 // ListPolicies - List policies
@@ -515,6 +519,7 @@ func (s *Reconciliation) ListPolicies(ctx context.Context, request operations.Li
 	}
 
 	return res, nil
+
 }
 
 // ListReconciliations - List reconciliations
@@ -617,6 +622,7 @@ func (s *Reconciliation) ListReconciliations(ctx context.Context, request operat
 	}
 
 	return res, nil
+
 }
 
 // Reconcile using a policy
@@ -722,6 +728,7 @@ func (s *Reconciliation) Reconcile(ctx context.Context, request operations.Recon
 	}
 
 	return res, nil
+
 }
 
 // ReconciliationgetServerInfo - Get server info
@@ -820,4 +827,5 @@ func (s *Reconciliation) ReconciliationgetServerInfo(ctx context.Context) (*oper
 	}
 
 	return res, nil
+
 }

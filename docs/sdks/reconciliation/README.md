@@ -34,16 +34,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Reconciliation.CreatePolicy(ctx, shared.PolicyRequest{
+    request := shared.PolicyRequest{
         LedgerName: "default",
-        LedgerQuery: map[string]interface{}{
+        LedgerQuery: map[string]any{
             "key": "<value>",
         },
         Name: "XXX",
         PaymentsPoolID: "XXX",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Reconciliation.CreatePolicy(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -81,8 +81,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -92,11 +92,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.DeletePolicyRequest{
+        PolicyID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Reconciliation.DeletePolicy(ctx, operations.DeletePolicyRequest{
-        PolicyID: "<value>",
-    })
+    res, err := s.Reconciliation.DeletePolicy(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -134,8 +134,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -145,11 +145,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.GetPolicyRequest{
+        PolicyID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Reconciliation.GetPolicy(ctx, operations.GetPolicyRequest{
-        PolicyID: "<value>",
-    })
+    res, err := s.Reconciliation.GetPolicy(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -187,8 +187,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -198,11 +198,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.GetReconciliationRequest{
+        ReconciliationID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Reconciliation.GetReconciliation(ctx, operations.GetReconciliationRequest{
-        ReconciliationID: "<value>",
-    })
+    res, err := s.Reconciliation.GetReconciliation(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -240,8 +240,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -251,11 +251,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Reconciliation.ListPolicies(ctx, operations.ListPoliciesRequest{
+    request := operations.ListPoliciesRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Reconciliation.ListPolicies(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -293,8 +294,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -304,11 +305,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Reconciliation.ListReconciliations(ctx, operations.ListReconciliationsRequest{
+    request := operations.ListReconciliationsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Reconciliation.ListReconciliations(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -346,9 +348,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -358,15 +360,15 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Reconciliation.Reconcile(ctx, operations.ReconcileRequest{
+    request := operations.ReconcileRequest{
         ReconciliationRequest: shared.ReconciliationRequest{
             ReconciledAtLedger: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
             ReconciledAtPayments: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
         },
-        PolicyID: "<value>",
-    })
+        PolicyID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Reconciliation.Reconcile(ctx, request)
     if err != nil {
         log.Fatal(err)
     }

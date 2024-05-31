@@ -4,6 +4,7 @@ package shared
 
 import (
 	"errors"
+	"fmt"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
 	"math/big"
 )
@@ -42,21 +43,21 @@ func CreateV2TargetIDBigint(bigint *big.Int) V2TargetID {
 
 func (u *V2TargetID) UnmarshalJSON(data []byte) error {
 
-	str := ""
+	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = &str
 		u.Type = V2TargetIDTypeStr
 		return nil
 	}
 
-	bigint := big.NewInt(0)
+	var bigint *big.Int = big.NewInt(0)
 	if err := utils.UnmarshalJSON(data, &bigint, "", true, true); err == nil {
 		u.Bigint = bigint
 		u.Type = V2TargetIDTypeBigint
 		return nil
 	}
 
-	return errors.New("could not unmarshal into supported union types")
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for V2TargetID", string(data))
 }
 
 func (u V2TargetID) MarshalJSON() ([]byte, error) {
@@ -68,5 +69,5 @@ func (u V2TargetID) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Bigint, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type: all fields are null")
+	return nil, errors.New("could not marshal union type V2TargetID: all fields are null")
 }

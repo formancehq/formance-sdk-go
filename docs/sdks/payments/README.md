@@ -59,8 +59,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -70,14 +70,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.AddAccountToPool(ctx, operations.AddAccountToPoolRequest{
+    request := operations.AddAccountToPoolRequest{
         AddAccountToPoolRequest: shared.AddAccountToPoolRequest{
             AccountID: "<value>",
         },
-        PoolID: "<value>",
-    })
+        PoolID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.AddAccountToPool(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -98,9 +98,10 @@ func main() {
 ### Response
 
 **[*operations.AddAccountToPoolResponse](../../pkg/models/operations/addaccounttopoolresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ConnectorsTransfer
 
@@ -114,9 +115,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -126,9 +127,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ConnectorsTransfer(ctx, operations.ConnectorsTransferRequest{
+    request := operations.ConnectorsTransferRequest{
         TransferRequest: shared.TransferRequest{
             Amount: big.NewInt(100),
             Asset: "USD",
@@ -136,7 +135,9 @@ func main() {
             Source: formancesdkgo.String("acct_1Gqj58KZcSIg2N2q"),
         },
         Connector: shared.ConnectorBankingCircle,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ConnectorsTransfer(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -157,9 +158,10 @@ func main() {
 ### Response
 
 **[*operations.ConnectorsTransferResponse](../../pkg/models/operations/connectorstransferresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## CreateAccount
 
@@ -173,8 +175,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
+	"context"
 	"log"
 )
 
@@ -184,14 +186,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.CreateAccount(ctx, shared.AccountRequest{
+    request := shared.AccountRequest{
         ConnectorID: "<value>",
         CreatedAt: types.MustTimeFromString("2024-08-19T02:15:08.668Z"),
         Reference: "<value>",
         Type: shared.AccountTypeUnknown,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.CreateAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -212,9 +214,10 @@ func main() {
 ### Response
 
 **[*operations.CreateAccountResponse](../../pkg/models/operations/createaccountresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## CreateBankAccount
 
@@ -238,13 +241,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.CreateBankAccount(ctx, shared.BankAccountRequest{
+    request := shared.BankAccountRequest{
         ConnectorID: "<value>",
         Country: "GB",
         Name: "My account",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.CreateBankAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -265,9 +268,10 @@ func main() {
 ### Response
 
 **[*operations.CreateBankAccountResponse](../../pkg/models/operations/createbankaccountresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## CreatePayment
 
@@ -281,9 +285,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
+	"context"
 	"log"
 )
 
@@ -293,9 +297,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.CreatePayment(ctx, shared.PaymentRequest{
+    request := shared.PaymentRequest{
         Amount: big.NewInt(100),
         Asset: "USD",
         ConnectorID: "<value>",
@@ -304,7 +306,9 @@ func main() {
         Scheme: shared.PaymentSchemeGooglePay,
         Status: shared.PaymentStatusDisputeWon,
         Type: shared.PaymentTypeTransfer,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.CreatePayment(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -325,9 +329,10 @@ func main() {
 ### Response
 
 **[*operations.CreatePaymentResponse](../../pkg/models/operations/createpaymentresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## CreatePool
 
@@ -351,14 +356,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.CreatePool(ctx, shared.PoolRequest{
+    request := shared.PoolRequest{
         AccountIDs: []string{
             "<value>",
         },
         Name: "<value>",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.CreatePool(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -379,9 +384,10 @@ func main() {
 ### Response
 
 **[*operations.CreatePoolResponse](../../pkg/models/operations/createpoolresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## CreateTransferInitiation
 
@@ -395,9 +401,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
+	"context"
 	"log"
 )
 
@@ -407,9 +413,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.CreateTransferInitiation(ctx, shared.TransferInitiationRequest{
+    request := shared.TransferInitiationRequest{
         Amount: big.NewInt(256698),
         Asset: "USD",
         Description: "Multi-tiered incremental methodology",
@@ -419,7 +423,9 @@ func main() {
         SourceAccountID: "<value>",
         Type: shared.TransferInitiationRequestTypeTransfer,
         Validated: false,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.CreateTransferInitiation(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -440,9 +446,10 @@ func main() {
 ### Response
 
 **[*operations.CreateTransferInitiationResponse](../../pkg/models/operations/createtransferinitiationresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## DeletePool
 
@@ -456,8 +463,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -467,11 +474,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.DeletePoolRequest{
+        PoolID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.DeletePool(ctx, operations.DeletePoolRequest{
-        PoolID: "<value>",
-    })
+    res, err := s.Payments.DeletePool(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -492,9 +499,10 @@ func main() {
 ### Response
 
 **[*operations.DeletePoolResponse](../../pkg/models/operations/deletepoolresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## DeleteTransferInitiation
 
@@ -508,8 +516,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -519,11 +527,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.DeleteTransferInitiationRequest{
+        TransferID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.DeleteTransferInitiation(ctx, operations.DeleteTransferInitiationRequest{
-        TransferID: "<value>",
-    })
+    res, err := s.Payments.DeleteTransferInitiation(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -544,9 +552,10 @@ func main() {
 ### Response
 
 **[*operations.DeleteTransferInitiationResponse](../../pkg/models/operations/deletetransferinitiationresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ForwardBankAccount
 
@@ -560,8 +569,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -571,14 +580,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ForwardBankAccount(ctx, operations.ForwardBankAccountRequest{
+    request := operations.ForwardBankAccountRequest{
         ForwardBankAccountRequest: shared.ForwardBankAccountRequest{
             ConnectorID: "<value>",
         },
-        BankAccountID: "<value>",
-    })
+        BankAccountID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ForwardBankAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -599,9 +608,10 @@ func main() {
 ### Response
 
 **[*operations.ForwardBankAccountResponse](../../pkg/models/operations/forwardbankaccountresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetAccountBalances
 
@@ -615,8 +625,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -626,12 +636,17 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.GetAccountBalances(ctx, operations.GetAccountBalancesRequest{
-        AccountID: "<value>",
+    request := operations.GetAccountBalancesRequest{
+        AccountID: "XXX",
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+        Sort: []string{
+            "date:asc",
+            "status:desc",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Payments.GetAccountBalances(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -652,9 +667,10 @@ func main() {
 ### Response
 
 **[*operations.GetAccountBalancesResponse](../../pkg/models/operations/getaccountbalancesresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetBankAccount
 
@@ -668,8 +684,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -679,11 +695,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.GetBankAccountRequest{
+        BankAccountID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.GetBankAccount(ctx, operations.GetBankAccountRequest{
-        BankAccountID: "<value>",
-    })
+    res, err := s.Payments.GetBankAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -704,9 +720,10 @@ func main() {
 ### Response
 
 **[*operations.GetBankAccountResponse](../../pkg/models/operations/getbankaccountresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ~~GetConnectorTask~~
 
@@ -722,8 +739,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -733,12 +750,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.GetConnectorTask(ctx, operations.GetConnectorTaskRequest{
+    request := operations.GetConnectorTaskRequest{
         Connector: shared.ConnectorAdyen,
-        TaskID: "<value>",
-    })
+        TaskID: "task1",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.GetConnectorTask(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -759,9 +776,10 @@ func main() {
 ### Response
 
 **[*operations.GetConnectorTaskResponse](../../pkg/models/operations/getconnectortaskresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetConnectorTaskV1
 
@@ -775,8 +793,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -786,13 +804,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.GetConnectorTaskV1(ctx, operations.GetConnectorTaskV1Request{
+    request := operations.GetConnectorTaskV1Request{
         Connector: shared.ConnectorBankingCircle,
-        ConnectorID: "<value>",
-        TaskID: "<value>",
-    })
+        ConnectorID: "XXX",
+        TaskID: "task1",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.GetConnectorTaskV1(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -813,9 +831,10 @@ func main() {
 ### Response
 
 **[*operations.GetConnectorTaskV1Response](../../pkg/models/operations/getconnectortaskv1response.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetPayment
 
@@ -829,8 +848,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -840,11 +859,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.GetPaymentRequest{
+        PaymentID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.GetPayment(ctx, operations.GetPaymentRequest{
-        PaymentID: "<value>",
-    })
+    res, err := s.Payments.GetPayment(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -865,9 +884,10 @@ func main() {
 ### Response
 
 **[*operations.GetPaymentResponse](../../pkg/models/operations/getpaymentresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetPool
 
@@ -881,8 +901,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -892,11 +912,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.GetPoolRequest{
+        PoolID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.GetPool(ctx, operations.GetPoolRequest{
-        PoolID: "<value>",
-    })
+    res, err := s.Payments.GetPool(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -917,9 +937,10 @@ func main() {
 ### Response
 
 **[*operations.GetPoolResponse](../../pkg/models/operations/getpoolresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetPoolBalances
 
@@ -933,9 +954,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -945,12 +966,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.GetPoolBalances(ctx, operations.GetPoolBalancesRequest{
+    request := operations.GetPoolBalancesRequest{
         At: types.MustTimeFromString("2023-05-05T06:40:23.018Z"),
-        PoolID: "<value>",
-    })
+        PoolID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.GetPoolBalances(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -971,9 +992,10 @@ func main() {
 ### Response
 
 **[*operations.GetPoolBalancesResponse](../../pkg/models/operations/getpoolbalancesresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## GetTransferInitiation
 
@@ -987,8 +1009,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -998,11 +1020,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.GetTransferInitiationRequest{
+        TransferID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.GetTransferInitiation(ctx, operations.GetTransferInitiationRequest{
-        TransferID: "<value>",
-    })
+    res, err := s.Payments.GetTransferInitiation(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1023,9 +1045,10 @@ func main() {
 ### Response
 
 **[*operations.GetTransferInitiationResponse](../../pkg/models/operations/gettransferinitiationresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## InstallConnector
 
@@ -1039,8 +1062,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1050,9 +1073,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.InstallConnector(ctx, operations.InstallConnectorRequest{
+    request := operations.InstallConnectorRequest{
         ConnectorConfig: shared.CreateConnectorConfigWiseConfig(
                 shared.WiseConfig{
                     APIKey: "XXX",
@@ -1061,7 +1082,9 @@ func main() {
                 },
         ),
         Connector: shared.ConnectorAdyen,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.InstallConnector(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1082,9 +1105,10 @@ func main() {
 ### Response
 
 **[*operations.InstallConnectorResponse](../../pkg/models/operations/installconnectorresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ListAllConnectors
 
@@ -1130,9 +1154,10 @@ func main() {
 ### Response
 
 **[*operations.ListAllConnectorsResponse](../../pkg/models/operations/listallconnectorsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ListBankAccounts
 
@@ -1146,8 +1171,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1157,11 +1182,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ListBankAccounts(ctx, operations.ListBankAccountsRequest{
+    request := operations.ListBankAccountsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+        Sort: []string{
+            "date:asc",
+            "status:desc",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ListBankAccounts(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1182,9 +1212,10 @@ func main() {
 ### Response
 
 **[*operations.ListBankAccountsResponse](../../pkg/models/operations/listbankaccountsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ListConfigsAvailableConnectors
 
@@ -1230,9 +1261,10 @@ func main() {
 ### Response
 
 **[*operations.ListConfigsAvailableConnectorsResponse](../../pkg/models/operations/listconfigsavailableconnectorsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ~~ListConnectorTasks~~
 
@@ -1248,8 +1280,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1259,12 +1291,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ListConnectorTasks(ctx, operations.ListConnectorTasksRequest{
+    request := operations.ListConnectorTasksRequest{
         Connector: shared.ConnectorModulr,
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ListConnectorTasks(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1285,9 +1318,10 @@ func main() {
 ### Response
 
 **[*operations.ListConnectorTasksResponse](../../pkg/models/operations/listconnectortasksresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ListConnectorTasksV1
 
@@ -1301,8 +1335,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1312,13 +1346,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ListConnectorTasksV1(ctx, operations.ListConnectorTasksV1Request{
+    request := operations.ListConnectorTasksV1Request{
         Connector: shared.ConnectorBankingCircle,
-        ConnectorID: "<value>",
+        ConnectorID: "XXX",
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ListConnectorTasksV1(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1339,9 +1374,10 @@ func main() {
 ### Response
 
 **[*operations.ListConnectorTasksV1Response](../../pkg/models/operations/listconnectortasksv1response.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ListPayments
 
@@ -1355,8 +1391,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1366,11 +1402,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ListPayments(ctx, operations.ListPaymentsRequest{
+    request := operations.ListPaymentsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+        Sort: []string{
+            "date:asc",
+            "status:desc",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ListPayments(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1391,9 +1432,10 @@ func main() {
 ### Response
 
 **[*operations.ListPaymentsResponse](../../pkg/models/operations/listpaymentsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ListPools
 
@@ -1407,8 +1449,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1418,11 +1460,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ListPools(ctx, operations.ListPoolsRequest{
+    request := operations.ListPoolsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+        Sort: []string{
+            "date:asc",
+            "status:desc",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ListPools(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1443,9 +1490,10 @@ func main() {
 ### Response
 
 **[*operations.ListPoolsResponse](../../pkg/models/operations/listpoolsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ListTransferInitiations
 
@@ -1459,8 +1507,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1470,11 +1518,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ListTransferInitiations(ctx, operations.ListTransferInitiationsRequest{
+    request := operations.ListTransferInitiationsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+        Sort: []string{
+            "date:asc",
+            "status:desc",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ListTransferInitiations(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1495,9 +1548,10 @@ func main() {
 ### Response
 
 **[*operations.ListTransferInitiationsResponse](../../pkg/models/operations/listtransferinitiationsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## PaymentsgetAccount
 
@@ -1511,8 +1565,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1522,11 +1576,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.PaymentsgetAccountRequest{
+        AccountID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.PaymentsgetAccount(ctx, operations.PaymentsgetAccountRequest{
-        AccountID: "<value>",
-    })
+    res, err := s.Payments.PaymentsgetAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1547,9 +1601,10 @@ func main() {
 ### Response
 
 **[*operations.PaymentsgetAccountResponse](../../pkg/models/operations/paymentsgetaccountresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## PaymentsgetServerInfo
 
@@ -1595,9 +1650,10 @@ func main() {
 ### Response
 
 **[*operations.PaymentsgetServerInfoResponse](../../pkg/models/operations/paymentsgetserverinforesponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## PaymentslistAccounts
 
@@ -1611,8 +1667,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1622,11 +1678,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.PaymentslistAccounts(ctx, operations.PaymentslistAccountsRequest{
+    request := operations.PaymentslistAccountsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+        Sort: []string{
+            "date:asc",
+            "status:desc",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Payments.PaymentslistAccounts(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1647,9 +1708,10 @@ func main() {
 ### Response
 
 **[*operations.PaymentslistAccountsResponse](../../pkg/models/operations/paymentslistaccountsresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ~~ReadConnectorConfig~~
 
@@ -1665,8 +1727,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1676,11 +1738,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ReadConnectorConfig(ctx, operations.ReadConnectorConfigRequest{
+    request := operations.ReadConnectorConfigRequest{
         Connector: shared.ConnectorGeneric,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ReadConnectorConfig(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1701,9 +1763,10 @@ func main() {
 ### Response
 
 **[*operations.ReadConnectorConfigResponse](../../pkg/models/operations/readconnectorconfigresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ReadConnectorConfigV1
 
@@ -1717,8 +1780,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1728,12 +1791,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ReadConnectorConfigV1(ctx, operations.ReadConnectorConfigV1Request{
+    request := operations.ReadConnectorConfigV1Request{
         Connector: shared.ConnectorCurrencyCloud,
-        ConnectorID: "<value>",
-    })
+        ConnectorID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ReadConnectorConfigV1(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1754,9 +1817,10 @@ func main() {
 ### Response
 
 **[*operations.ReadConnectorConfigV1Response](../../pkg/models/operations/readconnectorconfigv1response.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## RemoveAccountFromPool
 
@@ -1770,8 +1834,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1781,12 +1845,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.RemoveAccountFromPoolRequest{
+        AccountID: "XXX",
+        PoolID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.RemoveAccountFromPool(ctx, operations.RemoveAccountFromPoolRequest{
-        AccountID: "<value>",
-        PoolID: "<value>",
-    })
+    res, err := s.Payments.RemoveAccountFromPool(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1807,9 +1871,10 @@ func main() {
 ### Response
 
 **[*operations.RemoveAccountFromPoolResponse](../../pkg/models/operations/removeaccountfrompoolresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ~~ResetConnector~~
 
@@ -1827,8 +1892,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1838,11 +1903,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ResetConnector(ctx, operations.ResetConnectorRequest{
+    request := operations.ResetConnectorRequest{
         Connector: shared.ConnectorAtlar,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ResetConnector(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1863,9 +1928,10 @@ func main() {
 ### Response
 
 **[*operations.ResetConnectorResponse](../../pkg/models/operations/resetconnectorresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ResetConnectorV1
 
@@ -1881,8 +1947,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1892,12 +1958,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ResetConnectorV1(ctx, operations.ResetConnectorV1Request{
+    request := operations.ResetConnectorV1Request{
         Connector: shared.ConnectorGeneric,
-        ConnectorID: "<value>",
-    })
+        ConnectorID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ResetConnectorV1(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1918,9 +1984,10 @@ func main() {
 ### Response
 
 **[*operations.ResetConnectorV1Response](../../pkg/models/operations/resetconnectorv1response.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## RetryTransferInitiation
 
@@ -1934,8 +2001,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1945,11 +2012,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
+    request := operations.RetryTransferInitiationRequest{
+        TransferID: "XXX",
+    }
     ctx := context.Background()
-    res, err := s.Payments.RetryTransferInitiation(ctx, operations.RetryTransferInitiationRequest{
-        TransferID: "<value>",
-    })
+    res, err := s.Payments.RetryTransferInitiation(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1970,9 +2037,10 @@ func main() {
 ### Response
 
 **[*operations.RetryTransferInitiationResponse](../../pkg/models/operations/retrytransferinitiationresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ReverseTransferInitiation
 
@@ -1986,9 +2054,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1998,9 +2066,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.ReverseTransferInitiation(ctx, operations.ReverseTransferInitiationRequest{
+    request := operations.ReverseTransferInitiationRequest{
         ReverseTransferInitiationRequest: shared.ReverseTransferInitiationRequest{
             Amount: big.NewInt(327549),
             Asset: "USD",
@@ -2010,8 +2076,10 @@ func main() {
             },
             Reference: "XXX",
         },
-        TransferID: "<value>",
-    })
+        TransferID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.ReverseTransferInitiation(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2032,9 +2100,10 @@ func main() {
 ### Response
 
 **[*operations.ReverseTransferInitiationResponse](../../pkg/models/operations/reversetransferinitiationresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## UdpateTransferInitiationStatus
 
@@ -2048,8 +2117,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2059,14 +2128,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.UdpateTransferInitiationStatus(ctx, operations.UdpateTransferInitiationStatusRequest{
+    request := operations.UdpateTransferInitiationStatusRequest{
         UpdateTransferInitiationStatusRequest: shared.UpdateTransferInitiationStatusRequest{
             Status: shared.StatusValidated,
         },
-        TransferID: "<value>",
-    })
+        TransferID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.UdpateTransferInitiationStatus(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2087,9 +2156,10 @@ func main() {
 ### Response
 
 **[*operations.UdpateTransferInitiationStatusResponse](../../pkg/models/operations/udpatetransferinitiationstatusresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## ~~UninstallConnector~~
 
@@ -2105,8 +2175,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2116,11 +2186,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.UninstallConnector(ctx, operations.UninstallConnectorRequest{
+    request := operations.UninstallConnectorRequest{
         Connector: shared.ConnectorModulr,
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Payments.UninstallConnector(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2141,9 +2211,10 @@ func main() {
 ### Response
 
 **[*operations.UninstallConnectorResponse](../../pkg/models/operations/uninstallconnectorresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## UninstallConnectorV1
 
@@ -2157,8 +2228,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2168,12 +2239,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.UninstallConnectorV1(ctx, operations.UninstallConnectorV1Request{
+    request := operations.UninstallConnectorV1Request{
         Connector: shared.ConnectorGeneric,
-        ConnectorID: "<value>",
-    })
+        ConnectorID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.UninstallConnectorV1(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2194,9 +2265,10 @@ func main() {
 ### Response
 
 **[*operations.UninstallConnectorV1Response](../../pkg/models/operations/uninstallconnectorv1response.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## UpdateBankAccountMetadata
 
@@ -2210,8 +2282,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2221,16 +2293,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.UpdateBankAccountMetadata(ctx, operations.UpdateBankAccountMetadataRequest{
+    request := operations.UpdateBankAccountMetadataRequest{
         UpdateBankAccountMetadataRequest: shared.UpdateBankAccountMetadataRequest{
             Metadata: map[string]string{
                 "key": "<value>",
             },
         },
-        BankAccountID: "<value>",
-    })
+        BankAccountID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.UpdateBankAccountMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2251,9 +2323,10 @@ func main() {
 ### Response
 
 **[*operations.UpdateBankAccountMetadataResponse](../../pkg/models/operations/updatebankaccountmetadataresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## UpdateConnectorConfigV1
 
@@ -2267,8 +2340,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2278,9 +2351,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.UpdateConnectorConfigV1(ctx, operations.UpdateConnectorConfigV1Request{
+    request := operations.UpdateConnectorConfigV1Request{
         ConnectorConfig: shared.CreateConnectorConfigStripeConfig(
                 shared.StripeConfig{
                     APIKey: "XXX",
@@ -2290,8 +2361,10 @@ func main() {
                 },
         ),
         Connector: shared.ConnectorStripe,
-        ConnectorID: "<value>",
-    })
+        ConnectorID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.UpdateConnectorConfigV1(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2312,9 +2385,10 @@ func main() {
 ### Response
 
 **[*operations.UpdateConnectorConfigV1Response](../../pkg/models/operations/updateconnectorconfigv1response.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
 
 ## UpdateMetadata
 
@@ -2328,8 +2402,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2339,14 +2413,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Payments.UpdateMetadata(ctx, operations.UpdateMetadataRequest{
+    request := operations.UpdateMetadataRequest{
         RequestBody: map[string]string{
             "key": "<value>",
         },
-        PaymentID: "<value>",
-    })
+        PaymentID: "XXX",
+    }
+    ctx := context.Background()
+    res, err := s.Payments.UpdateMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2367,6 +2441,7 @@ func main() {
 ### Response
 
 **[*operations.UpdateMetadataResponse](../../pkg/models/operations/updatemetadataresponse.md), error**
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |

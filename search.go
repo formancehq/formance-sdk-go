@@ -119,6 +119,7 @@ func (s *Search) Search(ctx context.Context, request shared.Query) (*operations.
 	}
 
 	return res, nil
+
 }
 
 // SearchgetServerInfo - Get server info
@@ -207,4 +208,5 @@ func (s *Search) SearchgetServerInfo(ctx context.Context) (*operations.Searchget
 	}
 
 	return res, nil
+
 }

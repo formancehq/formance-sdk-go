@@ -117,6 +117,7 @@ func (s *Wallets) ConfirmHold(ctx context.Context, request operations.ConfirmHol
 	}
 
 	return res, nil
+
 }
 
 // CreateBalance - Create a balance
@@ -221,6 +222,7 @@ func (s *Wallets) CreateBalance(ctx context.Context, request operations.CreateBa
 	}
 
 	return res, nil
+
 }
 
 // CreateWallet - Create a new wallet
@@ -325,6 +327,7 @@ func (s *Wallets) CreateWallet(ctx context.Context, request *shared.CreateWallet
 	}
 
 	return res, nil
+
 }
 
 // CreditWallet - Credit a wallet
@@ -418,6 +421,7 @@ func (s *Wallets) CreditWallet(ctx context.Context, request operations.CreditWal
 	}
 
 	return res, nil
+
 }
 
 // DebitWallet - Debit a wallet
@@ -523,6 +527,7 @@ func (s *Wallets) DebitWallet(ctx context.Context, request operations.DebitWalle
 	}
 
 	return res, nil
+
 }
 
 // GetBalance - Get detailed balance
@@ -621,6 +626,7 @@ func (s *Wallets) GetBalance(ctx context.Context, request operations.GetBalanceR
 	}
 
 	return res, nil
+
 }
 
 // GetHold - Get a hold
@@ -719,6 +725,7 @@ func (s *Wallets) GetHold(ctx context.Context, request operations.GetHoldRequest
 	}
 
 	return res, nil
+
 }
 
 // GetHolds - Get all holds for a wallet
@@ -821,6 +828,7 @@ func (s *Wallets) GetHolds(ctx context.Context, request operations.GetHoldsReque
 	}
 
 	return res, nil
+
 }
 
 func (s *Wallets) GetTransactions(ctx context.Context, request operations.GetTransactionsRequest) (*operations.GetTransactionsResponse, error) {
@@ -922,6 +930,7 @@ func (s *Wallets) GetTransactions(ctx context.Context, request operations.GetTra
 	}
 
 	return res, nil
+
 }
 
 // GetWallet - Get a wallet
@@ -1021,6 +1030,7 @@ func (s *Wallets) GetWallet(ctx context.Context, request operations.GetWalletReq
 	}
 
 	return res, nil
+
 }
 
 // GetWalletSummary - Get wallet summary
@@ -1120,6 +1130,7 @@ func (s *Wallets) GetWalletSummary(ctx context.Context, request operations.GetWa
 	}
 
 	return res, nil
+
 }
 
 // ListBalances - List balances of a wallet
@@ -1208,6 +1219,7 @@ func (s *Wallets) ListBalances(ctx context.Context, request operations.ListBalan
 	}
 
 	return res, nil
+
 }
 
 // ListWallets - List all wallets
@@ -1310,6 +1322,7 @@ func (s *Wallets) ListWallets(ctx context.Context, request operations.ListWallet
 	}
 
 	return res, nil
+
 }
 
 // UpdateWallet - Update a wallet
@@ -1403,6 +1416,7 @@ func (s *Wallets) UpdateWallet(ctx context.Context, request operations.UpdateWal
 	}
 
 	return res, nil
+
 }
 
 // VoidHold - Cancel a hold
@@ -1490,6 +1504,7 @@ func (s *Wallets) VoidHold(ctx context.Context, request operations.VoidHoldReque
 	}
 
 	return res, nil
+
 }
 
 // WalletsgetServerInfo - Get server info
@@ -1588,4 +1603,5 @@ func (s *Wallets) WalletsgetServerInfo(ctx context.Context) (*operations.Wallets
 	}
 
 	return res, nil
+
 }

@@ -131,16 +131,10 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
-func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
-	return func(context.Context) (interface{}, error) {
-		return security, nil
-	}
-}
-
 // WithSecurity configures the SDK to use the provided security details
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *Formance) {
-		sdk.sdkConfiguration.Security = withSecurity(security)
+		sdk.sdkConfiguration.Security = utils.AsSecuritySource(security)
 	}
 }
 
@@ -164,10 +158,10 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v2.0.0-rc.26",
-			SDKVersion:        "2.1.6",
-			GenVersion:        "2.317.0",
-			UserAgent:         "speakeasy-sdk/go 2.1.6 2.317.0 v2.0.0-rc.26 github.com/formancehq/formance-sdk-go",
+			OpenAPIDocVersion: "v2.0.0-rc.31",
+			SDKVersion:        "2.2.0",
+			GenVersion:        "2.338.7",
+			UserAgent:         "speakeasy-sdk/go 2.2.0 2.338.7 v2.0.0-rc.31 github.com/formancehq/formance-sdk-go",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -281,6 +275,7 @@ func (s *Formance) GetOIDCWellKnowns(ctx context.Context) (*operations.GetOIDCWe
 	}
 
 	return res, nil
+
 }
 
 // GetVersions - Show stack version information
@@ -369,4 +364,5 @@ func (s *Formance) GetVersions(ctx context.Context) (*operations.GetVersionsResp
 	}
 
 	return res, nil
+
 }

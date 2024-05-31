@@ -112,6 +112,7 @@ func (s *Orchestration) CancelEvent(ctx context.Context, request operations.Canc
 	}
 
 	return res, nil
+
 }
 
 // CreateTrigger - Create trigger
@@ -217,6 +218,7 @@ func (s *Orchestration) CreateTrigger(ctx context.Context, request *shared.Trigg
 	}
 
 	return res, nil
+
 }
 
 // CreateWorkflow - Create workflow
@@ -322,6 +324,7 @@ func (s *Orchestration) CreateWorkflow(ctx context.Context, request *shared.Crea
 	}
 
 	return res, nil
+
 }
 
 // DeleteTrigger - Delete trigger
@@ -410,6 +413,7 @@ func (s *Orchestration) DeleteTrigger(ctx context.Context, request operations.De
 	}
 
 	return res, nil
+
 }
 
 // DeleteWorkflow - Delete a flow by id
@@ -498,6 +502,7 @@ func (s *Orchestration) DeleteWorkflow(ctx context.Context, request operations.D
 	}
 
 	return res, nil
+
 }
 
 // GetInstance - Get a workflow instance by id
@@ -597,6 +602,7 @@ func (s *Orchestration) GetInstance(ctx context.Context, request operations.GetI
 	}
 
 	return res, nil
+
 }
 
 // GetInstanceHistory - Get a workflow instance history by id
@@ -696,6 +702,7 @@ func (s *Orchestration) GetInstanceHistory(ctx context.Context, request operatio
 	}
 
 	return res, nil
+
 }
 
 // GetInstanceStageHistory - Get a workflow instance stage history
@@ -795,6 +802,7 @@ func (s *Orchestration) GetInstanceStageHistory(ctx context.Context, request ope
 	}
 
 	return res, nil
+
 }
 
 // GetWorkflow - Get a flow by id
@@ -894,6 +902,7 @@ func (s *Orchestration) GetWorkflow(ctx context.Context, request operations.GetW
 	}
 
 	return res, nil
+
 }
 
 // ListInstances - List instances of a workflow
@@ -997,6 +1006,7 @@ func (s *Orchestration) ListInstances(ctx context.Context, request operations.Li
 	}
 
 	return res, nil
+
 }
 
 // ListTriggers - List triggers
@@ -1100,6 +1110,7 @@ func (s *Orchestration) ListTriggers(ctx context.Context, request operations.Lis
 	}
 
 	return res, nil
+
 }
 
 // ListTriggersOccurrences - List triggers occurrences
@@ -1199,6 +1210,7 @@ func (s *Orchestration) ListTriggersOccurrences(ctx context.Context, request ope
 	}
 
 	return res, nil
+
 }
 
 // ListWorkflows - List registered workflows
@@ -1298,6 +1310,7 @@ func (s *Orchestration) ListWorkflows(ctx context.Context) (*operations.ListWork
 	}
 
 	return res, nil
+
 }
 
 // OrchestrationgetServerInfo - Get server info
@@ -1396,6 +1409,7 @@ func (s *Orchestration) OrchestrationgetServerInfo(ctx context.Context) (*operat
 	}
 
 	return res, nil
+
 }
 
 // ReadTrigger - Read trigger
@@ -1495,6 +1509,7 @@ func (s *Orchestration) ReadTrigger(ctx context.Context, request operations.Read
 	}
 
 	return res, nil
+
 }
 
 // RunWorkflow - Run workflow
@@ -1604,6 +1619,7 @@ func (s *Orchestration) RunWorkflow(ctx context.Context, request operations.RunW
 	}
 
 	return res, nil
+
 }
 
 // SendEvent - Send an event to a running workflow
@@ -1698,6 +1714,7 @@ func (s *Orchestration) SendEvent(ctx context.Context, request operations.SendEv
 	}
 
 	return res, nil
+
 }
 
 // TestTrigger - Test trigger
@@ -1803,6 +1820,7 @@ func (s *Orchestration) TestTrigger(ctx context.Context, request operations.Test
 	}
 
 	return res, nil
+
 }
 
 // V2CancelEvent - Cancel a running workflow
@@ -1891,6 +1909,7 @@ func (s *Orchestration) V2CancelEvent(ctx context.Context, request operations.V2
 	}
 
 	return res, nil
+
 }
 
 // V2CreateTrigger - Create trigger
@@ -1996,6 +2015,7 @@ func (s *Orchestration) V2CreateTrigger(ctx context.Context, request *shared.V2T
 	}
 
 	return res, nil
+
 }
 
 // V2CreateWorkflow - Create workflow
@@ -2101,6 +2121,7 @@ func (s *Orchestration) V2CreateWorkflow(ctx context.Context, request *shared.V2
 	}
 
 	return res, nil
+
 }
 
 // V2DeleteTrigger - Delete trigger
@@ -2189,6 +2210,7 @@ func (s *Orchestration) V2DeleteTrigger(ctx context.Context, request operations.
 	}
 
 	return res, nil
+
 }
 
 // V2DeleteWorkflow - Delete a flow by id
@@ -2277,6 +2299,7 @@ func (s *Orchestration) V2DeleteWorkflow(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
 
 // V2GetInstance - Get a workflow instance by id
@@ -2376,6 +2399,7 @@ func (s *Orchestration) V2GetInstance(ctx context.Context, request operations.V2
 	}
 
 	return res, nil
+
 }
 
 // V2GetInstanceHistory - Get a workflow instance history by id
@@ -2475,6 +2499,7 @@ func (s *Orchestration) V2GetInstanceHistory(ctx context.Context, request operat
 	}
 
 	return res, nil
+
 }
 
 // V2GetInstanceStageHistory - Get a workflow instance stage history
@@ -2574,6 +2599,7 @@ func (s *Orchestration) V2GetInstanceStageHistory(ctx context.Context, request o
 	}
 
 	return res, nil
+
 }
 
 // V2GetServerInfo - Get server info
@@ -2672,6 +2698,7 @@ func (s *Orchestration) V2GetServerInfo(ctx context.Context) (*operations.V2GetS
 	}
 
 	return res, nil
+
 }
 
 // V2GetWorkflow - Get a flow by id
@@ -2771,6 +2798,7 @@ func (s *Orchestration) V2GetWorkflow(ctx context.Context, request operations.V2
 	}
 
 	return res, nil
+
 }
 
 // V2ListInstances - List instances of a workflow
@@ -2874,6 +2902,7 @@ func (s *Orchestration) V2ListInstances(ctx context.Context, request operations.
 	}
 
 	return res, nil
+
 }
 
 // V2ListTriggers - List triggers
@@ -2977,6 +3006,7 @@ func (s *Orchestration) V2ListTriggers(ctx context.Context, request operations.V
 	}
 
 	return res, nil
+
 }
 
 // V2ListTriggersOccurrences - List triggers occurrences
@@ -3080,6 +3110,7 @@ func (s *Orchestration) V2ListTriggersOccurrences(ctx context.Context, request o
 	}
 
 	return res, nil
+
 }
 
 // V2ListWorkflows - List registered workflows
@@ -3183,6 +3214,7 @@ func (s *Orchestration) V2ListWorkflows(ctx context.Context, request operations.
 	}
 
 	return res, nil
+
 }
 
 // V2ReadTrigger - Read trigger
@@ -3282,6 +3314,7 @@ func (s *Orchestration) V2ReadTrigger(ctx context.Context, request operations.V2
 	}
 
 	return res, nil
+
 }
 
 // V2RunWorkflow - Run workflow
@@ -3391,6 +3424,7 @@ func (s *Orchestration) V2RunWorkflow(ctx context.Context, request operations.V2
 	}
 
 	return res, nil
+
 }
 
 // V2SendEvent - Send an event to a running workflow
@@ -3485,4 +3519,5 @@ func (s *Orchestration) V2SendEvent(ctx context.Context, request operations.V2Se
 	}
 
 	return res, nil
+
 }

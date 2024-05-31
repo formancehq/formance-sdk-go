@@ -123,6 +123,7 @@ func (s *Webhooks) ActivateConfig(ctx context.Context, request operations.Activa
 	}
 
 	return res, nil
+
 }
 
 // ChangeConfigSecret - Change the signing secret of a config
@@ -231,6 +232,7 @@ func (s *Webhooks) ChangeConfigSecret(ctx context.Context, request operations.Ch
 	}
 
 	return res, nil
+
 }
 
 // DeactivateConfig - Deactivate one config
@@ -330,6 +332,7 @@ func (s *Webhooks) DeactivateConfig(ctx context.Context, request operations.Deac
 	}
 
 	return res, nil
+
 }
 
 // DeleteConfig - Delete one config
@@ -418,6 +421,7 @@ func (s *Webhooks) DeleteConfig(ctx context.Context, request operations.DeleteCo
 	}
 
 	return res, nil
+
 }
 
 // GetManyConfigs - Get many configs
@@ -521,6 +525,7 @@ func (s *Webhooks) GetManyConfigs(ctx context.Context, request operations.GetMan
 	}
 
 	return res, nil
+
 }
 
 // InsertConfig - Insert a new config
@@ -634,6 +639,7 @@ func (s *Webhooks) InsertConfig(ctx context.Context, request shared.ConfigUser) 
 	}
 
 	return res, nil
+
 }
 
 // TestConfig - Test one config
@@ -733,4 +739,5 @@ func (s *Webhooks) TestConfig(ctx context.Context, request operations.TestConfig
 	}
 
 	return res, nil
+
 }
