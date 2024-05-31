@@ -4,6 +4,7 @@ package shared
 
 import (
 	"errors"
+	"fmt"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
 )
 
@@ -107,63 +108,63 @@ func CreateTaskResponseDataTaskMoneycorp(taskMoneycorp TaskMoneycorp) TaskRespon
 
 func (u *TaskResponseData) UnmarshalJSON(data []byte) error {
 
-	taskStripe := TaskStripe{}
+	var taskStripe TaskStripe = TaskStripe{}
 	if err := utils.UnmarshalJSON(data, &taskStripe, "", true, true); err == nil {
 		u.TaskStripe = &taskStripe
 		u.Type = TaskResponseDataTypeTaskStripe
 		return nil
 	}
 
-	taskWise := TaskWise{}
+	var taskWise TaskWise = TaskWise{}
 	if err := utils.UnmarshalJSON(data, &taskWise, "", true, true); err == nil {
 		u.TaskWise = &taskWise
 		u.Type = TaskResponseDataTypeTaskWise
 		return nil
 	}
 
-	taskCurrencyCloud := TaskCurrencyCloud{}
+	var taskCurrencyCloud TaskCurrencyCloud = TaskCurrencyCloud{}
 	if err := utils.UnmarshalJSON(data, &taskCurrencyCloud, "", true, true); err == nil {
 		u.TaskCurrencyCloud = &taskCurrencyCloud
 		u.Type = TaskResponseDataTypeTaskCurrencyCloud
 		return nil
 	}
 
-	taskDummyPay := TaskDummyPay{}
+	var taskDummyPay TaskDummyPay = TaskDummyPay{}
 	if err := utils.UnmarshalJSON(data, &taskDummyPay, "", true, true); err == nil {
 		u.TaskDummyPay = &taskDummyPay
 		u.Type = TaskResponseDataTypeTaskDummyPay
 		return nil
 	}
 
-	taskModulr := TaskModulr{}
+	var taskModulr TaskModulr = TaskModulr{}
 	if err := utils.UnmarshalJSON(data, &taskModulr, "", true, true); err == nil {
 		u.TaskModulr = &taskModulr
 		u.Type = TaskResponseDataTypeTaskModulr
 		return nil
 	}
 
-	taskBankingCircle := TaskBankingCircle{}
+	var taskBankingCircle TaskBankingCircle = TaskBankingCircle{}
 	if err := utils.UnmarshalJSON(data, &taskBankingCircle, "", true, true); err == nil {
 		u.TaskBankingCircle = &taskBankingCircle
 		u.Type = TaskResponseDataTypeTaskBankingCircle
 		return nil
 	}
 
-	taskMangoPay := TaskMangoPay{}
+	var taskMangoPay TaskMangoPay = TaskMangoPay{}
 	if err := utils.UnmarshalJSON(data, &taskMangoPay, "", true, true); err == nil {
 		u.TaskMangoPay = &taskMangoPay
 		u.Type = TaskResponseDataTypeTaskMangoPay
 		return nil
 	}
 
-	taskMoneycorp := TaskMoneycorp{}
+	var taskMoneycorp TaskMoneycorp = TaskMoneycorp{}
 	if err := utils.UnmarshalJSON(data, &taskMoneycorp, "", true, true); err == nil {
 		u.TaskMoneycorp = &taskMoneycorp
 		u.Type = TaskResponseDataTypeTaskMoneycorp
 		return nil
 	}
 
-	return errors.New("could not unmarshal into supported union types")
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for TaskResponseData", string(data))
 }
 
 func (u TaskResponseData) MarshalJSON() ([]byte, error) {
@@ -199,7 +200,7 @@ func (u TaskResponseData) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.TaskMoneycorp, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type: all fields are null")
+	return nil, errors.New("could not marshal union type TaskResponseData: all fields are null")
 }
 
 type TaskResponse struct {

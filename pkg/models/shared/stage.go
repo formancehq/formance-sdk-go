@@ -4,6 +4,7 @@ package shared
 
 import (
 	"errors"
+	"fmt"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
 )
 
@@ -13,12 +14,14 @@ const (
 	StageTypeStageSend      StageType = "StageSend"
 	StageTypeStageDelay     StageType = "StageDelay"
 	StageTypeStageWaitEvent StageType = "StageWaitEvent"
+	StageTypeUpdate         StageType = "Update"
 )
 
 type Stage struct {
 	StageSend      *StageSend
 	StageDelay     *StageDelay
 	StageWaitEvent *StageWaitEvent
+	Update         *Update
 
 	Type StageType
 }
@@ -50,30 +53,46 @@ func CreateStageStageWaitEvent(stageWaitEvent StageWaitEvent) Stage {
 	}
 }
 
+func CreateStageUpdate(update Update) Stage {
+	typ := StageTypeUpdate
+
+	return Stage{
+		Update: &update,
+		Type:   typ,
+	}
+}
+
 func (u *Stage) UnmarshalJSON(data []byte) error {
 
-	stageWaitEvent := StageWaitEvent{}
+	var stageWaitEvent StageWaitEvent = StageWaitEvent{}
 	if err := utils.UnmarshalJSON(data, &stageWaitEvent, "", true, true); err == nil {
 		u.StageWaitEvent = &stageWaitEvent
 		u.Type = StageTypeStageWaitEvent
 		return nil
 	}
 
-	stageDelay := StageDelay{}
+	var update Update = Update{}
+	if err := utils.UnmarshalJSON(data, &update, "", true, true); err == nil {
+		u.Update = &update
+		u.Type = StageTypeUpdate
+		return nil
+	}
+
+	var stageDelay StageDelay = StageDelay{}
 	if err := utils.UnmarshalJSON(data, &stageDelay, "", true, true); err == nil {
 		u.StageDelay = &stageDelay
 		u.Type = StageTypeStageDelay
 		return nil
 	}
 
-	stageSend := StageSend{}
+	var stageSend StageSend = StageSend{}
 	if err := utils.UnmarshalJSON(data, &stageSend, "", true, true); err == nil {
 		u.StageSend = &stageSend
 		u.Type = StageTypeStageSend
 		return nil
 	}
 
-	return errors.New("could not unmarshal into supported union types")
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Stage", string(data))
 }
 
 func (u Stage) MarshalJSON() ([]byte, error) {
@@ -89,5 +108,9 @@ func (u Stage) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.StageWaitEvent, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type: all fields are null")
+	if u.Update != nil {
+		return utils.MarshalJSON(u.Update, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Stage: all fields are null")
 }

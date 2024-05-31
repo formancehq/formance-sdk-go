@@ -60,9 +60,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -72,9 +72,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.CreateTransactions(ctx, operations.CreateTransactionsRequest{
+    request := operations.CreateTransactionsRequest{
         Transactions: shared.Transactions{
             Transactions: []shared.TransactionData{
                 shared.TransactionData{
@@ -91,7 +89,9 @@ func main() {
             },
         },
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.CreateTransactions(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -129,9 +129,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -141,12 +141,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.AddMetadataOnTransaction(ctx, operations.AddMetadataOnTransactionRequest{
+    request := operations.AddMetadataOnTransactionRequest{
         Ledger: "ledger001",
         Txid: big.NewInt(1234),
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.AddMetadataOnTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -184,8 +184,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -195,15 +195,15 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.AddMetadataToAccount(ctx, operations.AddMetadataToAccountRequest{
-        RequestBody: map[string]interface{}{
+    request := operations.AddMetadataToAccountRequest{
+        RequestBody: map[string]any{
             "key": "<value>",
         },
         Address: "users:001",
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.AddMetadataToAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -241,8 +241,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -252,12 +252,64 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.CountAccounts(ctx, operations.CountAccountsRequest{
+    request := operations.CountAccountsRequest{
         Address: formancesdkgo.String("users:.+"),
         Ledger: "ledger001",
-    })
+        Metadata: map[string]any{
+            "0": "m",
+            "1": "e",
+            "2": "t",
+            "3": "a",
+            "4": "d",
+            "5": "a",
+            "6": "t",
+            "7": "a",
+            "8": "[",
+            "9": "k",
+            "10": "e",
+            "11": "y",
+            "12": "]",
+            "13": "=",
+            "14": "v",
+            "15": "a",
+            "16": "l",
+            "17": "u",
+            "18": "e",
+            "19": "1",
+            "20": "&",
+            "21": "m",
+            "22": "e",
+            "23": "t",
+            "24": "a",
+            "25": "d",
+            "26": "a",
+            "27": "t",
+            "28": "a",
+            "29": "[",
+            "30": "a",
+            "31": ".",
+            "32": "n",
+            "33": "e",
+            "34": "s",
+            "35": "t",
+            "36": "e",
+            "37": "d",
+            "38": ".",
+            "39": "k",
+            "40": "e",
+            "41": "y",
+            "42": "]",
+            "43": "=",
+            "44": "v",
+            "45": "a",
+            "46": "l",
+            "47": "u",
+            "48": "e",
+            "49": "2",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.CountAccounts(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -295,8 +347,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -306,15 +358,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.CountTransactions(ctx, operations.CountTransactionsRequest{
+    request := operations.CountTransactionsRequest{
         Account: formancesdkgo.String("users:001"),
         Destination: formancesdkgo.String("users:001"),
         Ledger: "ledger001",
+        Metadata: &operations.Metadata{},
         Reference: formancesdkgo.String("ref:001"),
         Source: formancesdkgo.String("users:001"),
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.CountTransactions(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -352,8 +405,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
+	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -363,15 +417,36 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.CreateTransaction(ctx, operations.CreateTransactionRequest{
+    request := operations.CreateTransactionRequest{
         PostTransaction: shared.PostTransaction{
+            Postings: []shared.Posting{
+                shared.Posting{
+                    Amount: big.NewInt(100),
+                    Asset: "COIN",
+                    Destination: "users:002",
+                    Source: "users:001",
+                },
+            },
             Reference: formancesdkgo.String("ref:001"),
+            Script: &shared.PostTransactionScript{
+                Plain: "vars {
+            account $user
+            }
+            send [COIN 10] (
+            	source = @world
+            	destination = $user
+            )
+            ",
+                Vars: map[string]any{
+                    "user": "users:042",
+                },
+            },
         },
         Ledger: "ledger001",
         Preview: formancesdkgo.Bool(true),
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.CreateTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -409,8 +484,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -420,12 +495,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.GetAccount(ctx, operations.GetAccountRequest{
+    request := operations.GetAccountRequest{
         Address: "users:001",
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.GetAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -463,8 +538,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -474,14 +549,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.GetBalances(ctx, operations.GetBalancesRequest{
+    request := operations.GetBalancesRequest{
         Address: formancesdkgo.String("users:001"),
         After: formancesdkgo.String("users:003"),
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.GetBalances(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -519,8 +594,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -530,12 +605,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.GetBalancesAggregated(ctx, operations.GetBalancesAggregatedRequest{
+    request := operations.GetBalancesAggregatedRequest{
         Address: formancesdkgo.String("users:001"),
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.GetBalancesAggregated(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -622,8 +697,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -633,11 +708,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.GetLedgerInfo(ctx, operations.GetLedgerInfoRequest{
+    request := operations.GetLedgerInfoRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.GetLedgerInfo(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -675,8 +750,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -686,11 +761,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.GetMapping(ctx, operations.GetMappingRequest{
+    request := operations.GetMappingRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.GetMapping(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -728,9 +803,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -740,12 +815,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.GetTransaction(ctx, operations.GetTransactionRequest{
+    request := operations.GetTransactionRequest{
         Ledger: "ledger001",
         Txid: big.NewInt(1234),
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.GetTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -783,8 +858,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -794,16 +869,68 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.ListAccounts(ctx, operations.ListAccountsRequest{
+    request := operations.ListAccountsRequest{
         Address: formancesdkgo.String("users:.+"),
         After: formancesdkgo.String("users:003"),
         Balance: formancesdkgo.Int64(2400),
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-        PaginationToken: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        Metadata: map[string]any{
+            "0": "m",
+            "1": "e",
+            "2": "t",
+            "3": "a",
+            "4": "d",
+            "5": "a",
+            "6": "t",
+            "7": "a",
+            "8": "[",
+            "9": "k",
+            "10": "e",
+            "11": "y",
+            "12": "]",
+            "13": "=",
+            "14": "v",
+            "15": "a",
+            "16": "l",
+            "17": "u",
+            "18": "e",
+            "19": "1",
+            "20": "&",
+            "21": "m",
+            "22": "e",
+            "23": "t",
+            "24": "a",
+            "25": "d",
+            "26": "a",
+            "27": "t",
+            "28": "a",
+            "29": "[",
+            "30": "a",
+            "31": ".",
+            "32": "n",
+            "33": "e",
+            "34": "s",
+            "35": "t",
+            "36": "e",
+            "37": "d",
+            "38": ".",
+            "39": "k",
+            "40": "e",
+            "41": "y",
+            "42": "]",
+            "43": "=",
+            "44": "v",
+            "45": "a",
+            "46": "l",
+            "47": "u",
+            "48": "e",
+            "49": "2",
+        },
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.ListAccounts(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -841,8 +968,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -852,13 +979,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.ListLogs(ctx, operations.ListLogsRequest{
+    request := operations.ListLogsRequest{
         After: formancesdkgo.String("1234"),
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.ListLogs(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -896,8 +1024,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -907,17 +1035,18 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.ListTransactions(ctx, operations.ListTransactionsRequest{
+    request := operations.ListTransactionsRequest{
         Account: formancesdkgo.String("users:001"),
         After: formancesdkgo.String("1234"),
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Destination: formancesdkgo.String("users:001"),
         Ledger: "ledger001",
+        PageSize: formancesdkgo.Int64(100),
         Reference: formancesdkgo.String("ref:001"),
         Source: formancesdkgo.String("users:001"),
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.ListTransactions(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -956,8 +1085,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -967,11 +1096,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.ReadStats(ctx, operations.ReadStatsRequest{
+    request := operations.ReadStatsRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.ReadStats(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1009,9 +1138,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1021,12 +1150,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.RevertTransaction(ctx, operations.RevertTransactionRequest{
+    request := operations.RevertTransactionRequest{
         Ledger: "ledger001",
         Txid: big.NewInt(1234),
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.RevertTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1067,8 +1196,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1078,9 +1207,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.RunScript(ctx, operations.RunScriptRequest{
+    request := operations.RunScriptRequest{
         Script: shared.Script{
             Plain: "vars {
         account $user
@@ -1091,13 +1218,15 @@ func main() {
         )
         ",
             Reference: formancesdkgo.String("order_1234"),
-            Vars: map[string]interface{}{
+            Vars: map[string]any{
                 "user": "users:042",
             },
         },
         Ledger: "ledger001",
         Preview: formancesdkgo.Bool(true),
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.RunScript(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1134,8 +1263,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1145,9 +1274,7 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.UpdateMapping(ctx, operations.UpdateMappingRequest{
+    request := operations.UpdateMappingRequest{
         Mapping: &shared.Mapping{
             Contracts: []shared.Contract{
                 shared.Contract{
@@ -1157,7 +1284,9 @@ func main() {
             },
         },
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.UpdateMapping(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1195,9 +1324,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1207,16 +1336,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2AddMetadataOnTransaction(ctx, operations.V2AddMetadataOnTransactionRequest{
+    request := operations.V2AddMetadataOnTransactionRequest{
         RequestBody: map[string]string{
             "admin": "true",
         },
         DryRun: formancesdkgo.Bool(true),
         ID: big.NewInt(1234),
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2AddMetadataOnTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1254,8 +1383,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1265,16 +1394,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2AddMetadataToAccount(ctx, operations.V2AddMetadataToAccountRequest{
+    request := operations.V2AddMetadataToAccountRequest{
         RequestBody: map[string]string{
             "admin": "true",
         },
         Address: "users:001",
         DryRun: formancesdkgo.Bool(true),
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2AddMetadataToAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1312,8 +1441,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1323,11 +1452,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2CountAccounts(ctx, operations.V2CountAccountsRequest{
+    request := operations.V2CountAccountsRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2CountAccounts(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1365,8 +1494,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1376,11 +1505,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2CountTransactions(ctx, operations.V2CountTransactionsRequest{
+    request := operations.V2CountTransactionsRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2CountTransactions(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1418,8 +1547,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1429,11 +1558,18 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2CreateBulk(ctx, operations.V2CreateBulkRequest{
+    request := operations.V2CreateBulkRequest{
+        RequestBody: []shared.V2BulkElement{
+            shared.CreateV2BulkElementV2BulkElementAddMetadata(
+                shared.V2BulkElementAddMetadata{
+                    Action: "<value>",
+                },
+            ),
+        },
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2CreateBulk(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1471,8 +1607,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1482,11 +1618,16 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2CreateLedger(ctx, operations.V2CreateLedgerRequest{
+    request := operations.V2CreateLedgerRequest{
+        V2CreateLedgerRequest: &shared.V2CreateLedgerRequest{
+            Metadata: map[string]string{
+                "admin": "true",
+            },
+        },
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2CreateLedger(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1524,8 +1665,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
+	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1535,18 +1677,39 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2CreateTransaction(ctx, operations.V2CreateTransactionRequest{
+    request := operations.V2CreateTransactionRequest{
         V2PostTransaction: shared.V2PostTransaction{
             Metadata: map[string]string{
                 "admin": "true",
             },
+            Postings: []shared.V2Posting{
+                shared.V2Posting{
+                    Amount: big.NewInt(100),
+                    Asset: "COIN",
+                    Destination: "users:002",
+                    Source: "users:001",
+                },
+            },
             Reference: formancesdkgo.String("ref:001"),
+            Script: &shared.V2PostTransactionScript{
+                Plain: "vars {
+            account $user
+            }
+            send [COIN 10] (
+            	source = @world
+            	destination = $user
+            )
+            ",
+                Vars: map[string]any{
+                    "user": "users:042",
+                },
+            },
         },
         DryRun: formancesdkgo.Bool(true),
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2CreateTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1584,8 +1747,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1595,13 +1758,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2DeleteAccountMetadata(ctx, operations.V2DeleteAccountMetadataRequest{
+    request := operations.V2DeleteAccountMetadataRequest{
         Address: "3680 Emile Grove",
         Key: "foo",
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2DeleteAccountMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1638,8 +1801,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1649,12 +1812,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2DeleteLedgerMetadata(ctx, operations.V2DeleteLedgerMetadataRequest{
+    request := operations.V2DeleteLedgerMetadataRequest{
         Key: "foo",
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2DeleteLedgerMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1692,9 +1855,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1704,13 +1867,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2DeleteTransactionMetadata(ctx, operations.V2DeleteTransactionMetadataRequest{
+    request := operations.V2DeleteTransactionMetadataRequest{
         ID: big.NewInt(1234),
         Key: "foo",
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2DeleteTransactionMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1748,8 +1911,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1759,12 +1922,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2GetAccount(ctx, operations.V2GetAccountRequest{
+    request := operations.V2GetAccountRequest{
         Address: "users:001",
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2GetAccount(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1802,8 +1965,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1813,11 +1976,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2GetBalancesAggregated(ctx, operations.V2GetBalancesAggregatedRequest{
+    request := operations.V2GetBalancesAggregatedRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2GetBalancesAggregated(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1904,8 +2067,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1915,11 +2078,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2GetLedger(ctx, operations.V2GetLedgerRequest{
+    request := operations.V2GetLedgerRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2GetLedger(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -1957,8 +2120,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -1968,11 +2131,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2GetLedgerInfo(ctx, operations.V2GetLedgerInfoRequest{
+    request := operations.V2GetLedgerInfoRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2GetLedgerInfo(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2010,9 +2173,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2022,12 +2185,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2GetTransaction(ctx, operations.V2GetTransactionRequest{
+    request := operations.V2GetTransactionRequest{
         ID: big.NewInt(1234),
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2GetTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2065,8 +2228,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2076,12 +2239,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2GetVolumesWithBalances(ctx, operations.V2GetVolumesWithBalancesRequest{
+    request := operations.V2GetVolumesWithBalancesRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        GroupBy: formancesdkgo.Int64(3),
         Ledger: "ledger001",
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2GetVolumesWithBalances(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2119,8 +2284,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2130,12 +2295,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2ListAccounts(ctx, operations.V2ListAccountsRequest{
+    request := operations.V2ListAccountsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2ListAccounts(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2173,8 +2339,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2184,11 +2350,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2ListLedgers(ctx, operations.V2ListLedgersRequest{
+    request := operations.V2ListLedgersRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2ListLedgers(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2226,8 +2393,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2237,12 +2404,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2ListLogs(ctx, operations.V2ListLogsRequest{
+    request := operations.V2ListLogsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2ListLogs(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2280,8 +2448,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2291,12 +2459,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2ListTransactions(ctx, operations.V2ListTransactionsRequest{
+    request := operations.V2ListTransactionsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-    })
+        PageSize: formancesdkgo.Int64(100),
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2ListTransactions(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2335,8 +2504,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2346,11 +2515,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2ReadStats(ctx, operations.V2ReadStatsRequest{
+    request := operations.V2ReadStatsRequest{
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2ReadStats(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2388,9 +2557,9 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2400,12 +2569,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2RevertTransaction(ctx, operations.V2RevertTransactionRequest{
+    request := operations.V2RevertTransactionRequest{
         ID: big.NewInt(1234),
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2RevertTransaction(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -2443,8 +2612,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -2454,14 +2623,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Ledger.V2UpdateLedgerMetadata(ctx, operations.V2UpdateLedgerMetadataRequest{
+    request := operations.V2UpdateLedgerMetadataRequest{
         RequestBody: map[string]string{
             "admin": "true",
         },
         Ledger: "ledger001",
-    })
+    }
+    ctx := context.Background()
+    res, err := s.Ledger.V2UpdateLedgerMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }

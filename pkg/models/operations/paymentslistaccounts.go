@@ -9,7 +9,7 @@ import (
 )
 
 type PaymentslistAccountsRequest struct {
-	RequestBody map[string]interface{} `request:"mediaType=application/json"`
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -19,6 +19,9 @@ type PaymentslistAccountsRequest struct {
 	// The maximum number of results to return per page.
 	//
 	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
+	// Filters used to filter resources.
+	//
+	Query *string `queryParam:"style=form,explode=true,name=query"`
 	// Fields used to sort payments (default is date:desc).
 	Sort []string `queryParam:"style=form,explode=true,name=sort"`
 }
@@ -34,7 +37,7 @@ func (p *PaymentslistAccountsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentslistAccountsRequest) GetRequestBody() map[string]interface{} {
+func (o *PaymentslistAccountsRequest) GetRequestBody() map[string]any {
 	if o == nil {
 		return nil
 	}
@@ -53,6 +56,13 @@ func (o *PaymentslistAccountsRequest) GetPageSize() *int64 {
 		return nil
 	}
 	return o.PageSize
+}
+
+func (o *PaymentslistAccountsRequest) GetQuery() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Query
 }
 
 func (o *PaymentslistAccountsRequest) GetSort() []string {

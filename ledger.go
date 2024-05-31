@@ -128,6 +128,7 @@ func (s *Ledger) CreateTransactions(ctx context.Context, request operations.Crea
 	}
 
 	return res, nil
+
 }
 
 // AddMetadataOnTransaction - Set the metadata of a transaction by its ID
@@ -221,6 +222,7 @@ func (s *Ledger) AddMetadataOnTransaction(ctx context.Context, request operation
 	}
 
 	return res, nil
+
 }
 
 // AddMetadataToAccount - Add metadata to an account
@@ -314,6 +316,7 @@ func (s *Ledger) AddMetadataToAccount(ctx context.Context, request operations.Ad
 	}
 
 	return res, nil
+
 }
 
 // CountAccounts - Count the accounts from a ledger
@@ -407,6 +410,7 @@ func (s *Ledger) CountAccounts(ctx context.Context, request operations.CountAcco
 	}
 
 	return res, nil
+
 }
 
 // CountTransactions - Count the transactions from a ledger
@@ -500,6 +504,7 @@ func (s *Ledger) CountTransactions(ctx context.Context, request operations.Count
 	}
 
 	return res, nil
+
 }
 
 // CreateTransaction - Create a new transaction to a ledger
@@ -608,6 +613,7 @@ func (s *Ledger) CreateTransaction(ctx context.Context, request operations.Creat
 	}
 
 	return res, nil
+
 }
 
 // GetAccount - Get account by its address
@@ -706,6 +712,7 @@ func (s *Ledger) GetAccount(ctx context.Context, request operations.GetAccountRe
 	}
 
 	return res, nil
+
 }
 
 // GetBalances - Get the balances from a ledger's account
@@ -808,6 +815,7 @@ func (s *Ledger) GetBalances(ctx context.Context, request operations.GetBalances
 	}
 
 	return res, nil
+
 }
 
 // GetBalancesAggregated - Get the aggregated balances from selected accounts
@@ -910,6 +918,7 @@ func (s *Ledger) GetBalancesAggregated(ctx context.Context, request operations.G
 	}
 
 	return res, nil
+
 }
 
 // GetInfo - Show server information
@@ -1008,6 +1017,7 @@ func (s *Ledger) GetInfo(ctx context.Context) (*operations.GetInfoResponse, erro
 	}
 
 	return res, nil
+
 }
 
 // GetLedgerInfo - Get information about a ledger
@@ -1106,6 +1116,7 @@ func (s *Ledger) GetLedgerInfo(ctx context.Context, request operations.GetLedger
 	}
 
 	return res, nil
+
 }
 
 // GetMapping - Get the mapping of a ledger
@@ -1204,6 +1215,7 @@ func (s *Ledger) GetMapping(ctx context.Context, request operations.GetMappingRe
 	}
 
 	return res, nil
+
 }
 
 // GetTransaction - Get transaction from a ledger by its ID
@@ -1302,6 +1314,7 @@ func (s *Ledger) GetTransaction(ctx context.Context, request operations.GetTrans
 	}
 
 	return res, nil
+
 }
 
 // ListAccounts - List accounts from a ledger
@@ -1405,6 +1418,7 @@ func (s *Ledger) ListAccounts(ctx context.Context, request operations.ListAccoun
 	}
 
 	return res, nil
+
 }
 
 // ListLogs - List the logs from a ledger
@@ -1508,6 +1522,7 @@ func (s *Ledger) ListLogs(ctx context.Context, request operations.ListLogsReques
 	}
 
 	return res, nil
+
 }
 
 // ListTransactions - List transactions from a ledger
@@ -1611,6 +1626,7 @@ func (s *Ledger) ListTransactions(ctx context.Context, request operations.ListTr
 	}
 
 	return res, nil
+
 }
 
 // ReadStats - Get statistics from a ledger
@@ -1710,6 +1726,7 @@ func (s *Ledger) ReadStats(ctx context.Context, request operations.ReadStatsRequ
 	}
 
 	return res, nil
+
 }
 
 // RevertTransaction - Revert a ledger transaction by its ID
@@ -1812,6 +1829,7 @@ func (s *Ledger) RevertTransaction(ctx context.Context, request operations.Rever
 	}
 
 	return res, nil
+
 }
 
 // RunScript - Execute a Numscript
@@ -1913,6 +1931,7 @@ func (s *Ledger) RunScript(ctx context.Context, request operations.RunScriptRequ
 	}
 
 	return res, nil
+
 }
 
 // UpdateMapping - Update the mapping of a ledger
@@ -2017,6 +2036,7 @@ func (s *Ledger) UpdateMapping(ctx context.Context, request operations.UpdateMap
 	}
 
 	return res, nil
+
 }
 
 // V2AddMetadataOnTransaction - Set the metadata of a transaction by its ID
@@ -2116,6 +2136,7 @@ func (s *Ledger) V2AddMetadataOnTransaction(ctx context.Context, request operati
 	}
 
 	return res, nil
+
 }
 
 // V2AddMetadataToAccount - Add metadata to an account
@@ -2215,6 +2236,7 @@ func (s *Ledger) V2AddMetadataToAccount(ctx context.Context, request operations.
 	}
 
 	return res, nil
+
 }
 
 // V2CountAccounts - Count the accounts from a ledger
@@ -2314,6 +2336,7 @@ func (s *Ledger) V2CountAccounts(ctx context.Context, request operations.V2Count
 	}
 
 	return res, nil
+
 }
 
 // V2CountTransactions - Count the transactions from a ledger
@@ -2413,6 +2436,7 @@ func (s *Ledger) V2CountTransactions(ctx context.Context, request operations.V2C
 	}
 
 	return res, nil
+
 }
 
 // V2CreateBulk - Bulk request
@@ -2519,6 +2543,7 @@ func (s *Ledger) V2CreateBulk(ctx context.Context, request operations.V2CreateBu
 	}
 
 	return res, nil
+
 }
 
 // V2CreateLedger - Create a ledger
@@ -2612,6 +2637,7 @@ func (s *Ledger) V2CreateLedger(ctx context.Context, request operations.V2Create
 	}
 
 	return res, nil
+
 }
 
 // V2CreateTransaction - Create a new transaction to a ledger
@@ -2722,6 +2748,7 @@ func (s *Ledger) V2CreateTransaction(ctx context.Context, request operations.V2C
 	}
 
 	return res, nil
+
 }
 
 // V2DeleteAccountMetadata - Delete metadata by key
@@ -2800,6 +2827,7 @@ func (s *Ledger) V2DeleteAccountMetadata(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
 
 // V2DeleteLedgerMetadata - Delete ledger metadata by key
@@ -2887,6 +2915,7 @@ func (s *Ledger) V2DeleteLedgerMetadata(ctx context.Context, request operations.
 	}
 
 	return res, nil
+
 }
 
 // V2DeleteTransactionMetadata - Delete metadata by key
@@ -2975,6 +3004,7 @@ func (s *Ledger) V2DeleteTransactionMetadata(ctx context.Context, request operat
 	}
 
 	return res, nil
+
 }
 
 // V2GetAccount - Get account by its address
@@ -3077,6 +3107,7 @@ func (s *Ledger) V2GetAccount(ctx context.Context, request operations.V2GetAccou
 	}
 
 	return res, nil
+
 }
 
 // V2GetBalancesAggregated - Get the aggregated balances from selected accounts
@@ -3185,6 +3216,7 @@ func (s *Ledger) V2GetBalancesAggregated(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
 
 // V2GetInfo - Show server information
@@ -3283,6 +3315,7 @@ func (s *Ledger) V2GetInfo(ctx context.Context) (*operations.V2GetInfoResponse, 
 	}
 
 	return res, nil
+
 }
 
 // V2GetLedger - Get a ledger
@@ -3381,6 +3414,7 @@ func (s *Ledger) V2GetLedger(ctx context.Context, request operations.V2GetLedger
 	}
 
 	return res, nil
+
 }
 
 // V2GetLedgerInfo - Get information about a ledger
@@ -3479,6 +3513,7 @@ func (s *Ledger) V2GetLedgerInfo(ctx context.Context, request operations.V2GetLe
 	}
 
 	return res, nil
+
 }
 
 // V2GetTransaction - Get transaction from a ledger by its ID
@@ -3581,6 +3616,7 @@ func (s *Ledger) V2GetTransaction(ctx context.Context, request operations.V2GetT
 	}
 
 	return res, nil
+
 }
 
 // V2GetVolumesWithBalances - Get list of volumes with balances for (account/asset)
@@ -3689,6 +3725,7 @@ func (s *Ledger) V2GetVolumesWithBalances(ctx context.Context, request operation
 	}
 
 	return res, nil
+
 }
 
 // V2ListAccounts - List accounts from a ledger
@@ -3798,6 +3835,7 @@ func (s *Ledger) V2ListAccounts(ctx context.Context, request operations.V2ListAc
 	}
 
 	return res, nil
+
 }
 
 // V2ListLedgers - List ledgers
@@ -3900,6 +3938,7 @@ func (s *Ledger) V2ListLedgers(ctx context.Context, request operations.V2ListLed
 	}
 
 	return res, nil
+
 }
 
 // V2ListLogs - List the logs from a ledger
@@ -4009,6 +4048,7 @@ func (s *Ledger) V2ListLogs(ctx context.Context, request operations.V2ListLogsRe
 	}
 
 	return res, nil
+
 }
 
 // V2ListTransactions - List transactions from a ledger
@@ -4118,6 +4158,7 @@ func (s *Ledger) V2ListTransactions(ctx context.Context, request operations.V2Li
 	}
 
 	return res, nil
+
 }
 
 // V2ReadStats - Get statistics from a ledger
@@ -4217,6 +4258,7 @@ func (s *Ledger) V2ReadStats(ctx context.Context, request operations.V2ReadStats
 	}
 
 	return res, nil
+
 }
 
 // V2RevertTransaction - Revert a ledger transaction by its ID
@@ -4319,6 +4361,7 @@ func (s *Ledger) V2RevertTransaction(ctx context.Context, request operations.V2R
 	}
 
 	return res, nil
+
 }
 
 // V2UpdateLedgerMetadata - Update ledger metadata
@@ -4412,4 +4455,5 @@ func (s *Ledger) V2UpdateLedgerMetadata(ctx context.Context, request operations.
 	}
 
 	return res, nil
+
 }

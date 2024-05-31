@@ -28,14 +28,23 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Search.Search(ctx, shared.Query{
+    request := shared.Query{
+        After: []string{
+            "users:002",
+        },
         Cursor: formancesdkgo.String("YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="),
+        Ledgers: []string{
+            "quickstart",
+        },
         Policy: formancesdkgo.String("OR"),
         Raw: &shared.QueryRaw{},
         Sort: formancesdkgo.String("id:asc"),
-    })
+        Terms: []string{
+            "destination=central_bank1",
+        },
+    }
+    ctx := context.Background()
+    res, err := s.Search.Search(ctx, request)
     if err != nil {
         log.Fatal(err)
     }

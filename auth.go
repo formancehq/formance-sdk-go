@@ -118,6 +118,7 @@ func (s *Auth) CreateClient(ctx context.Context, request *shared.CreateClientReq
 	}
 
 	return res, nil
+
 }
 
 // CreateSecret - Add a secret to a client
@@ -212,6 +213,7 @@ func (s *Auth) CreateSecret(ctx context.Context, request operations.CreateSecret
 	}
 
 	return res, nil
+
 }
 
 // DeleteClient - Delete client
@@ -289,6 +291,7 @@ func (s *Auth) DeleteClient(ctx context.Context, request operations.DeleteClient
 	}
 
 	return res, nil
+
 }
 
 // DeleteSecret - Delete a secret from a client
@@ -366,6 +369,7 @@ func (s *Auth) DeleteSecret(ctx context.Context, request operations.DeleteSecret
 	}
 
 	return res, nil
+
 }
 
 // ListClients - List clients
@@ -454,6 +458,7 @@ func (s *Auth) ListClients(ctx context.Context) (*operations.ListClientsResponse
 	}
 
 	return res, nil
+
 }
 
 // ListUsers - List users
@@ -543,6 +548,7 @@ func (s *Auth) ListUsers(ctx context.Context) (*operations.ListUsersResponse, er
 	}
 
 	return res, nil
+
 }
 
 // ReadClient - Read client
@@ -631,6 +637,7 @@ func (s *Auth) ReadClient(ctx context.Context, request operations.ReadClientRequ
 	}
 
 	return res, nil
+
 }
 
 // ReadUser - Read user
@@ -720,6 +727,7 @@ func (s *Auth) ReadUser(ctx context.Context, request operations.ReadUserRequest)
 	}
 
 	return res, nil
+
 }
 
 // UpdateClient - Update client
@@ -814,4 +822,5 @@ func (s *Auth) UpdateClient(ctx context.Context, request operations.UpdateClient
 	}
 
 	return res, nil
+
 }

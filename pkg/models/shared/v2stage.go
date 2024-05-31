@@ -4,6 +4,7 @@ package shared
 
 import (
 	"errors"
+	"fmt"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/utils"
 )
 
@@ -13,12 +14,14 @@ const (
 	V2StageTypeV2StageSend      V2StageType = "V2StageSend"
 	V2StageTypeV2StageDelay     V2StageType = "V2StageDelay"
 	V2StageTypeV2StageWaitEvent V2StageType = "V2StageWaitEvent"
+	V2StageTypeV2Update         V2StageType = "V2Update"
 )
 
 type V2Stage struct {
 	V2StageSend      *V2StageSend
 	V2StageDelay     *V2StageDelay
 	V2StageWaitEvent *V2StageWaitEvent
+	V2Update         *V2Update
 
 	Type V2StageType
 }
@@ -50,30 +53,46 @@ func CreateV2StageV2StageWaitEvent(v2StageWaitEvent V2StageWaitEvent) V2Stage {
 	}
 }
 
+func CreateV2StageV2Update(v2Update V2Update) V2Stage {
+	typ := V2StageTypeV2Update
+
+	return V2Stage{
+		V2Update: &v2Update,
+		Type:     typ,
+	}
+}
+
 func (u *V2Stage) UnmarshalJSON(data []byte) error {
 
-	v2StageWaitEvent := V2StageWaitEvent{}
+	var v2StageWaitEvent V2StageWaitEvent = V2StageWaitEvent{}
 	if err := utils.UnmarshalJSON(data, &v2StageWaitEvent, "", true, true); err == nil {
 		u.V2StageWaitEvent = &v2StageWaitEvent
 		u.Type = V2StageTypeV2StageWaitEvent
 		return nil
 	}
 
-	v2StageDelay := V2StageDelay{}
+	var v2Update V2Update = V2Update{}
+	if err := utils.UnmarshalJSON(data, &v2Update, "", true, true); err == nil {
+		u.V2Update = &v2Update
+		u.Type = V2StageTypeV2Update
+		return nil
+	}
+
+	var v2StageDelay V2StageDelay = V2StageDelay{}
 	if err := utils.UnmarshalJSON(data, &v2StageDelay, "", true, true); err == nil {
 		u.V2StageDelay = &v2StageDelay
 		u.Type = V2StageTypeV2StageDelay
 		return nil
 	}
 
-	v2StageSend := V2StageSend{}
+	var v2StageSend V2StageSend = V2StageSend{}
 	if err := utils.UnmarshalJSON(data, &v2StageSend, "", true, true); err == nil {
 		u.V2StageSend = &v2StageSend
 		u.Type = V2StageTypeV2StageSend
 		return nil
 	}
 
-	return errors.New("could not unmarshal into supported union types")
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for V2Stage", string(data))
 }
 
 func (u V2Stage) MarshalJSON() ([]byte, error) {
@@ -89,5 +108,9 @@ func (u V2Stage) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.V2StageWaitEvent, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type: all fields are null")
+	if u.V2Update != nil {
+		return utils.MarshalJSON(u.V2Update, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type V2Stage: all fields are null")
 }
