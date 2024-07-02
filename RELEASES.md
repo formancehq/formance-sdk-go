@@ -99,3 +99,13 @@ Based on:
 - [go v2.2.2] .
 ### Releases
 - [Go v2.2.2] https://github.com/formancehq/formance-sdk-go/releases/tag/v2.2.2 - .
+
+## 2024-07-02 00:11:09
+### Changes
+Based on:
+- OpenAPI Doc v2.0.2 
+- Speakeasy CLI 1.325.0 (2.356.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v2.2.3] .
+### Releases
+- [Go v2.2.3] https://github.com/formancehq/formance-sdk-go/releases/tag/v2.2.3 - .
