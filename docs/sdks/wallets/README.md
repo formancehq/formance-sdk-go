@@ -722,6 +722,7 @@ func main() {
     )
     request := operations.ListWalletsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Expand: formancesdkgo.String("balances"),
         Metadata: map[string]string{
             "admin": "true",
         },
