@@ -37,12 +37,13 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
+	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: "<YOUR_AUTHORIZATION_HERE>",
+			Authorization: os.Getenv("AUTHORIZATION"),
 		}),
 	)
 
@@ -280,12 +281,13 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
 	"math/big"
+	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: "<YOUR_AUTHORIZATION_HERE>",
+			Authorization: os.Getenv("AUTHORIZATION"),
 		}),
 	)
 	request := operations.CreateTransactionsRequest{
@@ -348,13 +350,14 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
+	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerIndex(0),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: "<YOUR_AUTHORIZATION_HERE>",
+			Authorization: os.Getenv("AUTHORIZATION"),
 		}),
 	)
 
@@ -382,13 +385,14 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
+	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerURL("http://localhost"),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: "<YOUR_AUTHORIZATION_HERE>",
+			Authorization: os.Getenv("AUTHORIZATION"),
 		}),
 	)
 
@@ -454,12 +458,13 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
+	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: "<YOUR_AUTHORIZATION_HERE>",
+			Authorization: os.Getenv("AUTHORIZATION"),
 		}),
 	)
 
@@ -481,6 +486,98 @@ func main() {
 
 
 <!-- End Special Types [types] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a `retry.Config` object to the call by using the `WithRetries` option:
+```go
+package main
+
+import (
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/retry"
+	"log"
+	"os"
+	"pkg/models/operations"
+)
+
+func main() {
+	s := formancesdkgo.New(
+		formancesdkgo.WithSecurity(shared.Security{
+			Authorization: os.Getenv("AUTHORIZATION"),
+		}),
+	)
+
+	ctx := context.Background()
+	res, err := s.GetOIDCWellKnowns(ctx, operations.WithRetries(
+		retry.Config{
+			Strategy: "backoff",
+			Backoff: &retry.BackoffStrategy{
+				InitialInterval: 1,
+				MaxInterval:     50,
+				Exponent:        1.1,
+				MaxElapsedTime:  100,
+			},
+			RetryConnectionErrors: false,
+		}))
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
+}
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `WithRetryConfig` option at SDK initialization:
+```go
+package main
+
+import (
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/retry"
+	"log"
+	"os"
+)
+
+func main() {
+	s := formancesdkgo.New(
+		formancesdkgo.WithRetryConfig(
+			retry.Config{
+				Strategy: "backoff",
+				Backoff: &retry.BackoffStrategy{
+					InitialInterval: 1,
+					MaxInterval:     50,
+					Exponent:        1.1,
+					MaxElapsedTime:  100,
+				},
+				RetryConnectionErrors: false,
+			}),
+		formancesdkgo.WithSecurity(shared.Security{
+			Authorization: os.Getenv("AUTHORIZATION"),
+		}),
+	)
+
+	ctx := context.Background()
+	res, err := s.GetOIDCWellKnowns(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Retries [retries] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
