@@ -37,13 +37,12 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
 
@@ -281,13 +280,12 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
 	"math/big"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
 	request := operations.CreateTransactionsRequest{
@@ -350,14 +348,13 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerIndex(0),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
 
@@ -385,14 +382,13 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerURL("http://localhost"),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
 
@@ -458,13 +454,12 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
 
@@ -502,14 +497,13 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/retry"
 	"log"
-	"os"
 	"pkg/models/operations"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
 
@@ -545,7 +539,6 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/retry"
 	"log"
-	"os"
 )
 
 func main() {
@@ -562,7 +555,7 @@ func main() {
 				RetryConnectionErrors: false,
 			}),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
 

@@ -58,7 +58,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -68,7 +67,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.AddAccountToPoolRequest{
@@ -116,10 +115,9 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"math/big"
 	"context"
 	"log"
 )
@@ -127,7 +125,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ConnectorsTransferRequest{
@@ -178,7 +176,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
 	"context"
@@ -188,7 +185,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := shared.AccountRequest{
@@ -236,7 +233,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -245,7 +241,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := shared.BankAccountRequest{
@@ -292,7 +288,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
@@ -303,7 +298,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := shared.PaymentRequest{
@@ -355,7 +350,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -364,7 +358,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := shared.PoolRequest{
@@ -412,7 +406,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
@@ -423,7 +416,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := shared.TransferInitiationRequest{
@@ -476,7 +469,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -486,7 +478,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.DeletePoolRequest{
@@ -531,7 +523,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -541,7 +532,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.DeleteTransferInitiationRequest{
@@ -586,7 +577,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -596,7 +586,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ForwardBankAccountRequest{
@@ -644,7 +634,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -654,7 +643,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetAccountBalancesRequest{
@@ -705,7 +694,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -715,7 +703,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetBankAccountRequest{
@@ -762,7 +750,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -772,7 +759,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetConnectorTaskRequest{
@@ -818,7 +805,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -828,7 +814,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetConnectorTaskV1Request{
@@ -875,7 +861,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -885,7 +870,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetPaymentRequest{
@@ -930,7 +915,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -940,7 +924,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetPoolRequest{
@@ -985,10 +969,9 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
 	"context"
 	"log"
 )
@@ -996,7 +979,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetPoolBalancesRequest{
@@ -1042,7 +1025,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1052,7 +1034,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetTransferInitiationRequest{
@@ -1097,7 +1079,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1107,7 +1088,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.InstallConnectorRequest{
@@ -1159,7 +1140,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1168,7 +1148,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1210,7 +1190,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1220,7 +1199,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListBankAccountsRequest{
@@ -1270,7 +1249,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1279,7 +1257,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1323,7 +1301,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1333,7 +1310,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListConnectorTasksRequest{
@@ -1380,7 +1357,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1390,7 +1366,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListConnectorTasksV1Request{
@@ -1438,7 +1414,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1448,7 +1423,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListPaymentsRequest{
@@ -1498,7 +1473,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1508,7 +1482,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListPoolsRequest{
@@ -1558,7 +1532,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1568,7 +1541,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListTransferInitiationsRequest{
@@ -1618,7 +1591,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1628,7 +1600,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.PaymentsgetAccountRequest{
@@ -1673,7 +1645,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1682,7 +1653,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1724,7 +1695,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1734,7 +1704,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.PaymentslistAccountsRequest{
@@ -1786,7 +1756,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1796,7 +1765,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ReadConnectorConfigRequest{
@@ -1841,7 +1810,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1851,7 +1819,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ReadConnectorConfigV1Request{
@@ -1897,7 +1865,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1907,7 +1874,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.RemoveAccountFromPoolRequest{
@@ -1957,7 +1924,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1967,7 +1933,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ResetConnectorRequest{
@@ -2014,7 +1980,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2024,7 +1989,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ResetConnectorV1Request{
@@ -2070,7 +2035,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2080,7 +2044,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.RetryTransferInitiationRequest{
@@ -2125,10 +2089,9 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"math/big"
 	"context"
 	"log"
 )
@@ -2136,7 +2099,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ReverseTransferInitiationRequest{
@@ -2190,7 +2153,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2200,7 +2162,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.UdpateTransferInitiationStatusRequest{
@@ -2250,7 +2212,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2260,7 +2221,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.UninstallConnectorRequest{
@@ -2305,7 +2266,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2315,7 +2275,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.UninstallConnectorV1Request{
@@ -2361,7 +2321,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2371,7 +2330,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.UpdateBankAccountMetadataRequest{
@@ -2421,7 +2380,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2431,7 +2389,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.UpdateConnectorConfigV1Request{
@@ -2485,7 +2443,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -2495,7 +2452,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.UpdateMetadataRequest{

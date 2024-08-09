@@ -50,7 +50,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -60,7 +59,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.CancelEventRequest{
@@ -105,7 +104,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -114,15 +112,12 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    var request *shared.TriggerData = &shared.TriggerData{
-        Event: "<value>",
-        WorkflowID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.CreateTrigger(ctx, request)
+    res, err := s.Orchestration.CreateTrigger(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -160,7 +155,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -169,18 +163,12 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    var request *shared.CreateWorkflowRequest = &shared.CreateWorkflowRequest{
-        Stages: []map[string]any{
-            map[string]any{
-                "key": "<value>",
-            },
-        },
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.CreateWorkflow(ctx, request)
+    res, err := s.Orchestration.CreateWorkflow(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -218,7 +206,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -228,7 +215,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.DeleteTriggerRequest{
@@ -273,7 +260,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -283,7 +269,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.DeleteWorkflowRequest{
@@ -328,7 +314,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -338,7 +323,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetInstanceRequest{
@@ -383,7 +368,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -393,7 +377,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetInstanceHistoryRequest{
@@ -438,7 +422,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -448,7 +431,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetInstanceStageHistoryRequest{
@@ -494,7 +477,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -504,7 +486,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetWorkflowRequest{
@@ -549,7 +531,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -559,7 +540,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListInstancesRequest{
@@ -605,7 +586,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -615,7 +595,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListTriggersRequest{}
@@ -658,7 +638,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -668,7 +647,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListTriggersOccurrencesRequest{
@@ -713,7 +692,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -722,7 +700,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -764,7 +742,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -773,7 +750,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -815,7 +792,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -825,7 +801,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ReadTriggerRequest{
@@ -870,7 +846,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -880,7 +855,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.RunWorkflowRequest{
@@ -925,7 +900,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -935,7 +909,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.SendEventRequest{
@@ -980,7 +954,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -990,7 +963,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.TestTriggerRequest{
@@ -1035,7 +1008,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1045,7 +1017,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2CancelEventRequest{
@@ -1090,7 +1062,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1099,15 +1070,12 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    var request *shared.V2TriggerData = &shared.V2TriggerData{
-        Event: "<value>",
-        WorkflowID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2CreateTrigger(ctx, request)
+    res, err := s.Orchestration.V2CreateTrigger(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -1145,7 +1113,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1154,18 +1121,12 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    var request *shared.V2CreateWorkflowRequest = &shared.V2CreateWorkflowRequest{
-        Stages: []map[string]any{
-            map[string]any{
-                "key": "<value>",
-            },
-        },
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2CreateWorkflow(ctx, request)
+    res, err := s.Orchestration.V2CreateWorkflow(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -1203,7 +1164,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1213,7 +1173,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2DeleteTriggerRequest{
@@ -1258,7 +1218,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1268,7 +1227,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2DeleteWorkflowRequest{
@@ -1313,7 +1272,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1323,7 +1281,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2GetInstanceRequest{
@@ -1368,7 +1326,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1378,7 +1335,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2GetInstanceHistoryRequest{
@@ -1423,7 +1380,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1433,7 +1389,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2GetInstanceStageHistoryRequest{
@@ -1479,7 +1435,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1488,7 +1443,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
@@ -1530,7 +1485,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1540,7 +1494,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2GetWorkflowRequest{
@@ -1585,7 +1539,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1595,7 +1548,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2ListInstancesRequest{
@@ -1643,7 +1596,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1653,7 +1605,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2ListTriggersRequest{
@@ -1699,7 +1651,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1709,7 +1660,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2ListTriggersOccurrencesRequest{
@@ -1756,7 +1707,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1766,7 +1716,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2ListWorkflowsRequest{
@@ -1812,7 +1762,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1822,7 +1771,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2ReadTriggerRequest{
@@ -1867,7 +1816,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1877,7 +1825,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2RunWorkflowRequest{
@@ -1922,7 +1870,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -1932,7 +1879,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.V2SendEventRequest{

@@ -31,10 +31,9 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"math/big"
 	"context"
 	"log"
 )
@@ -42,7 +41,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ConfirmHoldRequest{
@@ -91,7 +90,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -101,7 +99,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.CreateBalanceRequest{
@@ -146,8 +144,8 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
 	"log"
 )
@@ -155,15 +153,10 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    var request *shared.CreateWalletRequest = &shared.CreateWalletRequest{
-        Metadata: map[string]string{
-            "key": "<value>",
-        },
-        Name: "<value>",
-    }
+    request := operations.CreateWalletRequest{}
     ctx := context.Background()
     res, err := s.Wallets.CreateWallet(ctx, request)
     if err != nil {
@@ -177,11 +170,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [shared.CreateWalletRequest](../../pkg/models/shared/createwalletrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.CreateWalletRequest](../../pkg/models/operations/createwalletrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 
 ### Response
@@ -203,10 +196,9 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"math/big"
 	"context"
 	"log"
 )
@@ -214,7 +206,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.CreditWalletRequest{
@@ -276,10 +268,9 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
+	"math/big"
 	"context"
 	"log"
 )
@@ -287,7 +278,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.DebitWalletRequest{
@@ -342,7 +333,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -352,7 +342,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetBalanceRequest{
@@ -398,7 +388,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -408,7 +397,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetHoldRequest{
@@ -453,7 +442,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -463,7 +451,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetHoldsRequest{
@@ -511,7 +499,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -521,7 +508,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetTransactionsRequest{
@@ -568,7 +555,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -578,7 +564,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetWalletRequest{
@@ -623,7 +609,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -633,7 +618,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.GetWalletSummaryRequest{
@@ -678,7 +663,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -688,7 +672,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListBalancesRequest{
@@ -732,7 +716,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -742,7 +725,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.ListWalletsRequest{
@@ -793,7 +776,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -803,7 +785,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.UpdateWalletRequest{
@@ -848,7 +830,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
@@ -858,7 +839,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
     request := operations.VoidHoldRequest{
@@ -903,7 +884,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -912,7 +892,7 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
 
