@@ -3,10 +3,10 @@ id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
   docChecksum: ce7ade45ab46c0be01f2b9f40d460d3a
   docVersion: v2.0.9
-  speakeasyVersion: 1.358.0
-  generationVersion: 2.390.6
-  releaseVersion: 2.4.0
-  configChecksum: 9aa3865375ab6abc9e3991b316c5158e
+  speakeasyVersion: 1.361.1
+  generationVersion: 2.393.4
+  releaseVersion: 2.4.1
+  configChecksum: 9b6c8d69c40e6754bfab279c784aca8e
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -14,7 +14,7 @@ management:
 features:
   go:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.5
+    constsAndDefaults: 0.1.6
     core: 3.5.3
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
@@ -31,7 +31,7 @@ features:
     responseFormat: 0.1.2
     retries: 2.83.0
     sdkHooks: 0.1.0
-    unions: 2.85.8
+    unions: 2.85.9
 generatedFiles:
   - auth.go
   - ledger.go
