@@ -168,10 +168,10 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v2.0.11",
-			SDKVersion:        "2.4.4",
-			GenVersion:        "2.402.5",
-			UserAgent:         "speakeasy-sdk/go 2.4.4 2.402.5 v2.0.11 github.com/formancehq/formance-sdk-go",
+			OpenAPIDocVersion: "v2.0.13",
+			SDKVersion:        "2.4.5",
+			GenVersion:        "2.404.2",
+			UserAgent:         "speakeasy-sdk/go 2.4.5 2.404.2 v2.0.13 github.com/formancehq/formance-sdk-go",
 			Hooks:             hooks.New(),
 		},
 	}

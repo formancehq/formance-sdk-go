@@ -1,6 +1,8 @@
 # Wallets
 (*Wallets*)
 
+## Overview
+
 ### Available Operations
 
 * [ConfirmHold](#confirmhold) - Confirm a hold
@@ -62,8 +64,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -72,14 +72,17 @@ func main() {
 | `request`                                                                          | [operations.ConfirmHoldRequest](../../pkg/models/operations/confirmholdrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.ConfirmHoldResponse](../../pkg/models/operations/confirmholdresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## CreateBalance
 
@@ -118,8 +121,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -128,14 +129,17 @@ func main() {
 | `request`                                                                              | [operations.CreateBalanceRequest](../../pkg/models/operations/createbalancerequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.CreateBalanceResponse](../../pkg/models/operations/createbalanceresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## CreateWallet
 
@@ -172,8 +176,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -182,14 +184,17 @@ func main() {
 | `request`                                                                            | [operations.CreateWalletRequest](../../pkg/models/operations/createwalletrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.CreateWalletResponse](../../pkg/models/operations/createwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## CreditWallet
 
@@ -246,8 +251,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -256,14 +259,17 @@ func main() {
 | `request`                                                                            | [operations.CreditWalletRequest](../../pkg/models/operations/creditwalletrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.CreditWalletResponse](../../pkg/models/operations/creditwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## DebitWallet
 
@@ -313,8 +319,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -323,14 +327,17 @@ func main() {
 | `request`                                                                          | [operations.DebitWalletRequest](../../pkg/models/operations/debitwalletrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.DebitWalletResponse](../../pkg/models/operations/debitwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetBalance
 
@@ -370,8 +377,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
@@ -380,14 +385,17 @@ func main() {
 | `request`                                                                        | [operations.GetBalanceRequest](../../pkg/models/operations/getbalancerequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.GetBalanceResponse](../../pkg/models/operations/getbalanceresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetHold
 
@@ -426,8 +434,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
@@ -436,14 +442,17 @@ func main() {
 | `request`                                                                  | [operations.GetHoldRequest](../../pkg/models/operations/getholdrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 | `opts`                                                                     | [][operations.Option](../../pkg/models/operations/option.md)               | :heavy_minus_sign:                                                         | The options for this request.                                              |
 
-
 ### Response
 
 **[*operations.GetHoldResponse](../../pkg/models/operations/getholdresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetHolds
 
@@ -487,8 +496,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
@@ -497,14 +504,17 @@ func main() {
 | `request`                                                                    | [operations.GetHoldsRequest](../../pkg/models/operations/getholdsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 | `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
-
 ### Response
 
 **[*operations.GetHoldsResponse](../../pkg/models/operations/getholdsresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetTransactions
 
@@ -543,8 +553,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -553,14 +561,17 @@ func main() {
 | `request`                                                                                  | [operations.GetTransactionsRequest](../../pkg/models/operations/gettransactionsrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.GetTransactionsResponse](../../pkg/models/operations/gettransactionsresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetWallet
 
@@ -599,8 +610,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -609,14 +618,17 @@ func main() {
 | `request`                                                                      | [operations.GetWalletRequest](../../pkg/models/operations/getwalletrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetWalletResponse](../../pkg/models/operations/getwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetWalletSummary
 
@@ -655,8 +667,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
@@ -665,14 +675,17 @@ func main() {
 | `request`                                                                                    | [operations.GetWalletSummaryRequest](../../pkg/models/operations/getwalletsummaryrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 | `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
-
 ### Response
 
 **[*operations.GetWalletSummaryResponse](../../pkg/models/operations/getwalletsummaryresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## ListBalances
 
@@ -711,8 +724,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -721,13 +732,16 @@ func main() {
 | `request`                                                                            | [operations.ListBalancesRequest](../../pkg/models/operations/listbalancesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.ListBalancesResponse](../../pkg/models/operations/listbalancesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ListWallets
 
@@ -772,8 +786,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -782,14 +794,17 @@ func main() {
 | `request`                                                                          | [operations.ListWalletsRequest](../../pkg/models/operations/listwalletsrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.ListWalletsResponse](../../pkg/models/operations/listwalletsresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## UpdateWallet
 
@@ -828,8 +843,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -838,14 +851,17 @@ func main() {
 | `request`                                                                            | [operations.UpdateWalletRequest](../../pkg/models/operations/updatewalletrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.UpdateWalletResponse](../../pkg/models/operations/updatewalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## VoidHold
 
@@ -884,8 +900,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
@@ -894,14 +908,17 @@ func main() {
 | `request`                                                                    | [operations.VoidHoldRequest](../../pkg/models/operations/voidholdrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 | `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
-
 ### Response
 
 **[*operations.VoidHoldResponse](../../pkg/models/operations/voidholdresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## WalletsgetServerInfo
 
@@ -937,8 +954,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
@@ -946,10 +961,12 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.WalletsgetServerInfoResponse](../../pkg/models/operations/walletsgetserverinforesponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |

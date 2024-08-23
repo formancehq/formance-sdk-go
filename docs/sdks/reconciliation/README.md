@@ -1,6 +1,8 @@
 # Reconciliation
 (*Reconciliation*)
 
+## Overview
+
 ### Available Operations
 
 * [CreatePolicy](#createpolicy) - Create a policy
@@ -53,8 +55,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
@@ -63,14 +63,17 @@ func main() {
 | `request`                                                        | [shared.PolicyRequest](../../pkg/models/shared/policyrequest.md) | :heavy_check_mark:                                               | The request object to use for the request.                       |
 | `opts`                                                           | [][operations.Option](../../pkg/models/operations/option.md)     | :heavy_minus_sign:                                               | The options for this request.                                    |
 
-
 ### Response
 
 **[*operations.CreatePolicyResponse](../../pkg/models/operations/createpolicyresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## DeletePolicy
 
@@ -109,8 +112,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -119,14 +120,17 @@ func main() {
 | `request`                                                                            | [operations.DeletePolicyRequest](../../pkg/models/operations/deletepolicyrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.DeletePolicyResponse](../../pkg/models/operations/deletepolicyresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## GetPolicy
 
@@ -165,8 +169,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -175,14 +177,17 @@ func main() {
 | `request`                                                                      | [operations.GetPolicyRequest](../../pkg/models/operations/getpolicyrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetPolicyResponse](../../pkg/models/operations/getpolicyresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## GetReconciliation
 
@@ -221,8 +226,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -231,14 +234,17 @@ func main() {
 | `request`                                                                                      | [operations.GetReconciliationRequest](../../pkg/models/operations/getreconciliationrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.GetReconciliationResponse](../../pkg/models/operations/getreconciliationresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## ListPolicies
 
@@ -278,8 +284,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -288,14 +292,17 @@ func main() {
 | `request`                                                                            | [operations.ListPoliciesRequest](../../pkg/models/operations/listpoliciesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.ListPoliciesResponse](../../pkg/models/operations/listpoliciesresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## ListReconciliations
 
@@ -335,8 +342,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -345,14 +350,17 @@ func main() {
 | `request`                                                                                          | [operations.ListReconciliationsRequest](../../pkg/models/operations/listreconciliationsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.ListReconciliationsResponse](../../pkg/models/operations/listreconciliationsresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## Reconcile
 
@@ -396,8 +404,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -406,14 +412,17 @@ func main() {
 | `request`                                                                      | [operations.ReconcileRequest](../../pkg/models/operations/reconcilerequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.ReconcileResponse](../../pkg/models/operations/reconcileresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## ReconciliationgetServerInfo
 
@@ -449,8 +458,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
@@ -458,10 +465,12 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.ReconciliationgetServerInfoResponse](../../pkg/models/operations/reconciliationgetserverinforesponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |

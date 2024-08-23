@@ -1,6 +1,8 @@
 # Ledger
 (*Ledger*)
 
+## Overview
+
 ### Available Operations
 
 * [CreateTransactions](#createtransactions) - Create a new batch of transactions to a ledger
@@ -101,8 +103,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -111,14 +111,17 @@ func main() {
 | `request`                                                                                        | [operations.CreateTransactionsRequest](../../pkg/models/operations/createtransactionsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.CreateTransactionsResponse](../../pkg/models/operations/createtransactionsresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## AddMetadataOnTransaction
 
@@ -159,8 +162,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
@@ -169,14 +170,17 @@ func main() {
 | `request`                                                                                                    | [operations.AddMetadataOnTransactionRequest](../../pkg/models/operations/addmetadataontransactionrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
 | `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
-
 ### Response
 
 **[*operations.AddMetadataOnTransactionResponse](../../pkg/models/operations/addmetadataontransactionresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## AddMetadataToAccount
 
@@ -219,8 +223,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
@@ -229,14 +231,17 @@ func main() {
 | `request`                                                                                            | [operations.AddMetadataToAccountRequest](../../pkg/models/operations/addmetadatatoaccountrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
 | `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
 
-
 ### Response
 
 **[*operations.AddMetadataToAccountResponse](../../pkg/models/operations/addmetadatatoaccountresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## CountAccounts
 
@@ -328,8 +333,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -338,14 +341,17 @@ func main() {
 | `request`                                                                              | [operations.CountAccountsRequest](../../pkg/models/operations/countaccountsrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.CountAccountsResponse](../../pkg/models/operations/countaccountsresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## CountTransactions
 
@@ -389,8 +395,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -399,14 +403,17 @@ func main() {
 | `request`                                                                                      | [operations.CountTransactionsRequest](../../pkg/models/operations/counttransactionsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.CountTransactionsResponse](../../pkg/models/operations/counttransactionsresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## CreateTransaction
 
@@ -471,8 +478,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -481,14 +486,17 @@ func main() {
 | `request`                                                                                      | [operations.CreateTransactionRequest](../../pkg/models/operations/createtransactionrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.CreateTransactionResponse](../../pkg/models/operations/createtransactionresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## GetAccount
 
@@ -528,8 +536,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
@@ -538,14 +544,17 @@ func main() {
 | `request`                                                                        | [operations.GetAccountRequest](../../pkg/models/operations/getaccountrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.GetAccountResponse](../../pkg/models/operations/getaccountresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## GetBalances
 
@@ -587,8 +596,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -597,14 +604,17 @@ func main() {
 | `request`                                                                          | [operations.GetBalancesRequest](../../pkg/models/operations/getbalancesrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.GetBalancesResponse](../../pkg/models/operations/getbalancesresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## GetBalancesAggregated
 
@@ -644,8 +654,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
@@ -654,14 +662,17 @@ func main() {
 | `request`                                                                                              | [operations.GetBalancesAggregatedRequest](../../pkg/models/operations/getbalancesaggregatedrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
 | `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
 
-
 ### Response
 
 **[*operations.GetBalancesAggregatedResponse](../../pkg/models/operations/getbalancesaggregatedresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## GetInfo
 
@@ -697,8 +708,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
@@ -706,14 +715,17 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.GetInfoResponse](../../pkg/models/operations/getinforesponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## GetLedgerInfo
 
@@ -752,8 +764,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -762,14 +772,17 @@ func main() {
 | `request`                                                                              | [operations.GetLedgerInfoRequest](../../pkg/models/operations/getledgerinforequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.GetLedgerInfoResponse](../../pkg/models/operations/getledgerinforesponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## GetMapping
 
@@ -808,8 +821,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
@@ -818,14 +829,17 @@ func main() {
 | `request`                                                                        | [operations.GetMappingRequest](../../pkg/models/operations/getmappingrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.GetMappingResponse](../../pkg/models/operations/getmappingresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## GetTransaction
 
@@ -866,8 +880,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -876,14 +888,17 @@ func main() {
 | `request`                                                                                | [operations.GetTransactionRequest](../../pkg/models/operations/gettransactionrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.GetTransactionResponse](../../pkg/models/operations/gettransactionresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## ListAccounts
 
@@ -979,8 +994,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -989,14 +1002,17 @@ func main() {
 | `request`                                                                            | [operations.ListAccountsRequest](../../pkg/models/operations/listaccountsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.ListAccountsResponse](../../pkg/models/operations/listaccountsresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## ListLogs
 
@@ -1038,8 +1054,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
@@ -1048,14 +1062,17 @@ func main() {
 | `request`                                                                    | [operations.ListLogsRequest](../../pkg/models/operations/listlogsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 | `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
-
 ### Response
 
 **[*operations.ListLogsResponse](../../pkg/models/operations/listlogsresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## ListTransactions
 
@@ -1101,8 +1118,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
@@ -1111,14 +1126,17 @@ func main() {
 | `request`                                                                                    | [operations.ListTransactionsRequest](../../pkg/models/operations/listtransactionsrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 | `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
-
 ### Response
 
 **[*operations.ListTransactionsResponse](../../pkg/models/operations/listtransactionsresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## ReadStats
 
@@ -1158,8 +1176,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -1168,14 +1184,17 @@ func main() {
 | `request`                                                                      | [operations.ReadStatsRequest](../../pkg/models/operations/readstatsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.ReadStatsResponse](../../pkg/models/operations/readstatsresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## RevertTransaction
 
@@ -1216,8 +1235,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -1226,14 +1243,17 @@ func main() {
 | `request`                                                                                      | [operations.RevertTransactionRequest](../../pkg/models/operations/reverttransactionrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.RevertTransactionResponse](../../pkg/models/operations/reverttransactionresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## ~~RunScript~~
 
@@ -1290,8 +1310,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -1300,13 +1318,16 @@ func main() {
 | `request`                                                                      | [operations.RunScriptRequest](../../pkg/models/operations/runscriptrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.RunScriptResponse](../../pkg/models/operations/runscriptresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## UpdateMapping
 
@@ -1353,8 +1374,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -1363,14 +1382,17 @@ func main() {
 | `request`                                                                              | [operations.UpdateMappingRequest](../../pkg/models/operations/updatemappingrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.UpdateMappingResponse](../../pkg/models/operations/updatemappingresponse.md), error**
+
+### Errors
+
 | Error Object            | Status Code             | Content Type            |
 | ----------------------- | ----------------------- | ----------------------- |
 | sdkerrors.ErrorResponse | default                 | application/json        |
 | sdkerrors.SDKError      | 4xx-5xx                 | */*                     |
+
 
 ## V2AddMetadataOnTransaction
 
@@ -1415,8 +1437,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
@@ -1425,14 +1445,17 @@ func main() {
 | `request`                                                                                                        | [operations.V2AddMetadataOnTransactionRequest](../../pkg/models/operations/v2addmetadataontransactionrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
 | `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
 
-
 ### Response
 
 **[*operations.V2AddMetadataOnTransactionResponse](../../pkg/models/operations/v2addmetadataontransactionresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2AddMetadataToAccount
 
@@ -1476,8 +1499,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -1486,14 +1507,17 @@ func main() {
 | `request`                                                                                                | [operations.V2AddMetadataToAccountRequest](../../pkg/models/operations/v2addmetadatatoaccountrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.V2AddMetadataToAccountResponse](../../pkg/models/operations/v2addmetadatatoaccountresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2CountAccounts
 
@@ -1532,8 +1556,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -1542,14 +1564,17 @@ func main() {
 | `request`                                                                                  | [operations.V2CountAccountsRequest](../../pkg/models/operations/v2countaccountsrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.V2CountAccountsResponse](../../pkg/models/operations/v2countaccountsresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2CountTransactions
 
@@ -1588,8 +1613,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -1598,14 +1621,17 @@ func main() {
 | `request`                                                                                          | [operations.V2CountTransactionsRequest](../../pkg/models/operations/v2counttransactionsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.V2CountTransactionsResponse](../../pkg/models/operations/v2counttransactionsresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2CreateBulk
 
@@ -1647,8 +1673,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -1657,14 +1681,17 @@ func main() {
 | `request`                                                                            | [operations.V2CreateBulkRequest](../../pkg/models/operations/v2createbulkrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.V2CreateBulkResponse](../../pkg/models/operations/v2createbulkresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2CreateLedger
 
@@ -1708,8 +1735,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -1718,14 +1743,17 @@ func main() {
 | `request`                                                                                | [operations.V2CreateLedgerRequest](../../pkg/models/operations/v2createledgerrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.V2CreateLedgerResponse](../../pkg/models/operations/v2createledgerresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2CreateTransaction
 
@@ -1793,8 +1821,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -1803,14 +1829,17 @@ func main() {
 | `request`                                                                                          | [operations.V2CreateTransactionRequest](../../pkg/models/operations/v2createtransactionrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.V2CreateTransactionResponse](../../pkg/models/operations/v2createtransactionresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2DeleteAccountMetadata
 
@@ -1851,8 +1880,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
@@ -1861,13 +1888,16 @@ func main() {
 | `request`                                                                                                  | [operations.V2DeleteAccountMetadataRequest](../../pkg/models/operations/v2deleteaccountmetadatarequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
-
 ### Response
 
 **[*operations.V2DeleteAccountMetadataResponse](../../pkg/models/operations/v2deleteaccountmetadataresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2DeleteLedgerMetadata
 
@@ -1907,8 +1937,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -1917,14 +1945,17 @@ func main() {
 | `request`                                                                                                | [operations.V2DeleteLedgerMetadataRequest](../../pkg/models/operations/v2deleteledgermetadatarequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.V2DeleteLedgerMetadataResponse](../../pkg/models/operations/v2deleteledgermetadataresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2DeleteTransactionMetadata
 
@@ -1966,8 +1997,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
@@ -1976,14 +2005,17 @@ func main() {
 | `request`                                                                                                          | [operations.V2DeleteTransactionMetadataRequest](../../pkg/models/operations/v2deletetransactionmetadatarequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
 | `opts`                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
 
-
 ### Response
 
 **[*operations.V2DeleteTransactionMetadataResponse](../../pkg/models/operations/v2deletetransactionmetadataresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2GetAccount
 
@@ -2023,8 +2055,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -2033,14 +2063,17 @@ func main() {
 | `request`                                                                            | [operations.V2GetAccountRequest](../../pkg/models/operations/v2getaccountrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.V2GetAccountResponse](../../pkg/models/operations/v2getaccountresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2GetBalancesAggregated
 
@@ -2079,8 +2112,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
@@ -2089,14 +2120,17 @@ func main() {
 | `request`                                                                                                  | [operations.V2GetBalancesAggregatedRequest](../../pkg/models/operations/v2getbalancesaggregatedrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
-
 ### Response
 
 **[*operations.V2GetBalancesAggregatedResponse](../../pkg/models/operations/v2getbalancesaggregatedresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2GetInfo
 
@@ -2132,8 +2166,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
@@ -2141,14 +2173,17 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.V2GetInfoResponse](../../pkg/models/operations/v2getinforesponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2GetLedger
 
@@ -2187,8 +2222,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -2197,14 +2230,17 @@ func main() {
 | `request`                                                                          | [operations.V2GetLedgerRequest](../../pkg/models/operations/v2getledgerrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.V2GetLedgerResponse](../../pkg/models/operations/v2getledgerresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2GetLedgerInfo
 
@@ -2243,8 +2279,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -2253,14 +2287,17 @@ func main() {
 | `request`                                                                                  | [operations.V2GetLedgerInfoRequest](../../pkg/models/operations/v2getledgerinforequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.V2GetLedgerInfoResponse](../../pkg/models/operations/v2getledgerinforesponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2GetTransaction
 
@@ -2301,8 +2338,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
@@ -2311,14 +2346,17 @@ func main() {
 | `request`                                                                                    | [operations.V2GetTransactionRequest](../../pkg/models/operations/v2gettransactionrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 | `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
-
 ### Response
 
 **[*operations.V2GetTransactionResponse](../../pkg/models/operations/v2gettransactionresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2GetVolumesWithBalances
 
@@ -2360,8 +2398,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
@@ -2370,14 +2406,17 @@ func main() {
 | `request`                                                                                                    | [operations.V2GetVolumesWithBalancesRequest](../../pkg/models/operations/v2getvolumeswithbalancesrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
 | `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
-
 ### Response
 
 **[*operations.V2GetVolumesWithBalancesResponse](../../pkg/models/operations/v2getvolumeswithbalancesresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2ListAccounts
 
@@ -2418,8 +2457,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -2428,14 +2465,17 @@ func main() {
 | `request`                                                                                | [operations.V2ListAccountsRequest](../../pkg/models/operations/v2listaccountsrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.V2ListAccountsResponse](../../pkg/models/operations/v2listaccountsresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2ListLedgers
 
@@ -2475,8 +2515,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -2485,14 +2523,17 @@ func main() {
 | `request`                                                                              | [operations.V2ListLedgersRequest](../../pkg/models/operations/v2listledgersrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.V2ListLedgersResponse](../../pkg/models/operations/v2listledgersresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2ListLogs
 
@@ -2533,8 +2574,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
@@ -2543,14 +2582,17 @@ func main() {
 | `request`                                                                        | [operations.V2ListLogsRequest](../../pkg/models/operations/v2listlogsrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.V2ListLogsResponse](../../pkg/models/operations/v2listlogsresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2ListTransactions
 
@@ -2591,8 +2633,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -2601,14 +2641,17 @@ func main() {
 | `request`                                                                                        | [operations.V2ListTransactionsRequest](../../pkg/models/operations/v2listtransactionsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.V2ListTransactionsResponse](../../pkg/models/operations/v2listtransactionsresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2ReadStats
 
@@ -2648,8 +2691,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -2658,14 +2699,17 @@ func main() {
 | `request`                                                                          | [operations.V2ReadStatsRequest](../../pkg/models/operations/v2readstatsrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.V2ReadStatsResponse](../../pkg/models/operations/v2readstatsresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2RevertTransaction
 
@@ -2706,8 +2750,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -2716,14 +2758,17 @@ func main() {
 | `request`                                                                                          | [operations.V2RevertTransactionRequest](../../pkg/models/operations/v2reverttransactionrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.V2RevertTransactionResponse](../../pkg/models/operations/v2reverttransactionresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+
 
 ## V2UpdateLedgerMetadata
 
@@ -2765,8 +2810,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -2775,10 +2818,12 @@ func main() {
 | `request`                                                                                                | [operations.V2UpdateLedgerMetadataRequest](../../pkg/models/operations/v2updateledgermetadatarequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.V2UpdateLedgerMetadataResponse](../../pkg/models/operations/v2updateledgermetadataresponse.md), error**
+
+### Errors
+
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |

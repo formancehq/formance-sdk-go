@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: a81ca98f038918e8b31083bd003e071d
-  docVersion: v2.0.11
-  speakeasyVersion: 1.376.0
-  generationVersion: 2.402.5
-  releaseVersion: 2.4.4
-  configChecksum: dfce73df6d9ca36d57ba8438ceed5985
+  docChecksum: 77cfa5d5a02379814b93e9b234868d87
+  docVersion: v2.0.13
+  speakeasyVersion: 1.377.3
+  generationVersion: 2.404.2
+  releaseVersion: 2.4.5
+  configChecksum: 01df0fe2f583ee09588880538832bf06
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
