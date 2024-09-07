@@ -53,8 +53,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -64,11 +64,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.CancelEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.CancelEvent(ctx, request)
+    res, err := s.Orchestration.CancelEvent(ctx, operations.CancelEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -218,8 +218,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -229,11 +229,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.DeleteTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.DeleteTrigger(ctx, request)
+    res, err := s.Orchestration.DeleteTrigger(ctx, operations.DeleteTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -275,8 +275,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -286,11 +286,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.DeleteWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.DeleteWorkflow(ctx, request)
+    res, err := s.Orchestration.DeleteWorkflow(ctx, operations.DeleteWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -332,8 +332,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -343,11 +343,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.GetInstanceRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.GetInstance(ctx, request)
+    res, err := s.Orchestration.GetInstance(ctx, operations.GetInstanceRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -389,8 +389,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -400,11 +400,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.GetInstanceHistoryRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.GetInstanceHistory(ctx, request)
+    res, err := s.Orchestration.GetInstanceHistory(ctx, operations.GetInstanceHistoryRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -446,8 +446,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -457,12 +457,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.GetInstanceStageHistoryRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.GetInstanceStageHistory(ctx, operations.GetInstanceStageHistoryRequest{
         InstanceID: "xxx",
         Number: 0,
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.GetInstanceStageHistory(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -504,8 +504,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -515,11 +515,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.GetWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.GetWorkflow(ctx, request)
+    res, err := s.Orchestration.GetWorkflow(ctx, operations.GetWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -561,8 +561,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -572,12 +572,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.ListInstancesRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.ListInstances(ctx, operations.ListInstancesRequest{
         Running: formancesdkgo.Bool(true),
         WorkflowID: formancesdkgo.String("xxx"),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.ListInstances(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -619,8 +619,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -630,9 +630,9 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.ListTriggersRequest{}
+
     ctx := context.Background()
-    res, err := s.Orchestration.ListTriggers(ctx, request)
+    res, err := s.Orchestration.ListTriggers(ctx, operations.ListTriggersRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -674,8 +674,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -685,11 +685,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.ListTriggersOccurrencesRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.ListTriggersOccurrences(ctx, request)
+    res, err := s.Orchestration.ListTriggersOccurrences(ctx, operations.ListTriggersOccurrencesRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -837,8 +837,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -848,11 +848,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.ReadTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.ReadTrigger(ctx, request)
+    res, err := s.Orchestration.ReadTrigger(ctx, operations.ReadTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -894,8 +894,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -905,11 +905,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.RunWorkflowRequest{
-        WorkflowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.RunWorkflow(ctx, request)
+    res, err := s.Orchestration.RunWorkflow(ctx, operations.RunWorkflowRequest{
+        WorkflowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -951,8 +951,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -962,11 +962,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.SendEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.SendEvent(ctx, request)
+    res, err := s.Orchestration.SendEvent(ctx, operations.SendEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1008,8 +1008,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1019,11 +1019,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.TestTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.TestTrigger(ctx, request)
+    res, err := s.Orchestration.TestTrigger(ctx, operations.TestTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1065,8 +1065,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1076,11 +1076,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2CancelEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2CancelEvent(ctx, request)
+    res, err := s.Orchestration.V2CancelEvent(ctx, operations.V2CancelEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1230,8 +1230,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1241,11 +1241,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2DeleteTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2DeleteTrigger(ctx, request)
+    res, err := s.Orchestration.V2DeleteTrigger(ctx, operations.V2DeleteTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1287,8 +1287,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1298,11 +1298,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2DeleteWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2DeleteWorkflow(ctx, request)
+    res, err := s.Orchestration.V2DeleteWorkflow(ctx, operations.V2DeleteWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1344,8 +1344,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1355,11 +1355,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2GetInstanceRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2GetInstance(ctx, request)
+    res, err := s.Orchestration.V2GetInstance(ctx, operations.V2GetInstanceRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1401,8 +1401,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1412,11 +1412,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2GetInstanceHistoryRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2GetInstanceHistory(ctx, request)
+    res, err := s.Orchestration.V2GetInstanceHistory(ctx, operations.V2GetInstanceHistoryRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1458,8 +1458,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1469,12 +1469,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2GetInstanceStageHistoryRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2GetInstanceStageHistory(ctx, operations.V2GetInstanceStageHistoryRequest{
         InstanceID: "xxx",
         Number: 0,
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2GetInstanceStageHistory(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1569,8 +1569,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1580,11 +1580,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2GetWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2GetWorkflow(ctx, request)
+    res, err := s.Orchestration.V2GetWorkflow(ctx, operations.V2GetWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1626,8 +1626,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1637,14 +1637,14 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2ListInstancesRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListInstances(ctx, operations.V2ListInstancesRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
         Running: formancesdkgo.Bool(true),
         WorkflowID: formancesdkgo.String("xxx"),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListInstances(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1686,8 +1686,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1697,12 +1697,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2ListTriggersRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListTriggers(ctx, operations.V2ListTriggersRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListTriggers(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1744,8 +1744,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1755,13 +1755,13 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2ListTriggersOccurrencesRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListTriggersOccurrences(ctx, operations.V2ListTriggersOccurrencesRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
         TriggerID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListTriggersOccurrences(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1803,8 +1803,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1814,12 +1814,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2ListWorkflowsRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListWorkflows(ctx, operations.V2ListWorkflowsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListWorkflows(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1861,8 +1861,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1872,11 +1872,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2ReadTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2ReadTrigger(ctx, request)
+    res, err := s.Orchestration.V2ReadTrigger(ctx, operations.V2ReadTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1918,8 +1918,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1929,11 +1929,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2RunWorkflowRequest{
-        WorkflowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2RunWorkflow(ctx, request)
+    res, err := s.Orchestration.V2RunWorkflow(ctx, operations.V2RunWorkflowRequest{
+        WorkflowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1975,8 +1975,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -1986,11 +1986,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.V2SendEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2SendEvent(ctx, request)
+    res, err := s.Orchestration.V2SendEvent(ctx, operations.V2SendEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }

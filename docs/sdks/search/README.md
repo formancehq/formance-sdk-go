@@ -30,7 +30,9 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := shared.Query{
+
+    ctx := context.Background()
+    res, err := s.Search.Search(ctx, shared.Query{
         After: []string{
             "users:002",
         },
@@ -44,9 +46,7 @@ func main() {
         Terms: []string{
             "destination=central_bank1",
         },
-    }
-    ctx := context.Background()
-    res, err := s.Search.Search(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }

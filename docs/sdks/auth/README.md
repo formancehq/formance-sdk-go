@@ -80,8 +80,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -91,11 +91,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.CreateSecretRequest{
-        ClientID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Auth.CreateSecret(ctx, request)
+    res, err := s.Auth.CreateSecret(ctx, operations.CreateSecretRequest{
+        ClientID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -136,8 +136,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -147,11 +147,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.DeleteClientRequest{
-        ClientID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Auth.DeleteClient(ctx, request)
+    res, err := s.Auth.DeleteClient(ctx, operations.DeleteClientRequest{
+        ClientID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -192,8 +192,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -203,12 +203,12 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.DeleteSecretRequest{
+
+    ctx := context.Background()
+    res, err := s.Auth.DeleteSecret(ctx, operations.DeleteSecretRequest{
         ClientID: "<value>",
         SecretID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Auth.DeleteSecret(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -353,8 +353,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -364,11 +364,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.ReadClientRequest{
-        ClientID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Auth.ReadClient(ctx, request)
+    res, err := s.Auth.ReadClient(ctx, operations.ReadClientRequest{
+        ClientID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -409,8 +409,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -420,11 +420,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.ReadUserRequest{
-        UserID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Auth.ReadUser(ctx, request)
+    res, err := s.Auth.ReadUser(ctx, operations.ReadUserRequest{
+        UserID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -465,8 +465,8 @@ package main
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
@@ -476,11 +476,11 @@ func main() {
             Authorization: "<YOUR_AUTHORIZATION_HERE>",
         }),
     )
-    request := operations.UpdateClientRequest{
-        ClientID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Auth.UpdateClient(ctx, request)
+    res, err := s.Auth.UpdateClient(ctx, operations.UpdateClientRequest{
+        ClientID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }

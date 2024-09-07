@@ -289,7 +289,9 @@ func main() {
 			Authorization: "<YOUR_AUTHORIZATION_HERE>",
 		}),
 	)
-	request := operations.CreateTransactionsRequest{
+
+	ctx := context.Background()
+	res, err := s.Ledger.CreateTransactions(ctx, operations.CreateTransactionsRequest{
 		Transactions: shared.Transactions{
 			Transactions: []shared.TransactionData{
 				shared.TransactionData{
@@ -306,9 +308,7 @@ func main() {
 			},
 		},
 		Ledger: "ledger001",
-	}
-	ctx := context.Background()
-	res, err := s.Ledger.CreateTransactions(ctx, request)
+	})
 	if err != nil {
 
 		var e *sdkerrors.ErrorResponse
