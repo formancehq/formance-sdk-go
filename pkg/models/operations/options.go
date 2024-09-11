@@ -22,8 +22,8 @@ const (
 type AcceptHeaderEnum string
 
 const (
-	AcceptHeaderEnumWildcardWildcard AcceptHeaderEnum = "*/*"
 	AcceptHeaderEnumApplicationJson  AcceptHeaderEnum = "application/json"
+	AcceptHeaderEnumWildcardWildcard AcceptHeaderEnum = "*/*"
 )
 
 func (e AcceptHeaderEnum) ToPointer() *AcceptHeaderEnum {

@@ -17,11 +17,11 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.GetOIDCWellKnowns(ctx)
+	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.GetVersionsResponse != nil {
 		// handle response
 	}
 }
