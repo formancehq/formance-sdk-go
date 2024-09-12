@@ -1,6 +1,8 @@
 # Search
 (*Search*)
 
+## Overview
+
 ### Available Operations
 
 * [Search](#search) - Search
@@ -17,7 +19,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -26,10 +27,13 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := shared.Query{
+
+    ctx := context.Background()
+    res, err := s.Search.Search(ctx, shared.Query{
         After: []string{
             "users:002",
         },
@@ -43,9 +47,7 @@ func main() {
         Terms: []string{
             "destination=central_bank1",
         },
-    }
-    ctx := context.Background()
-    res, err := s.Search.Search(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -63,13 +65,16 @@ func main() {
 | `request`                                                    | [shared.Query](../../pkg/models/shared/query.md)             | :heavy_check_mark:                                           | The request object to use for the request.                   |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.SearchResponse](../../pkg/models/operations/searchresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## SearchgetServerInfo
 
@@ -82,7 +87,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -91,7 +95,8 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
 
@@ -113,10 +118,12 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.SearchgetServerInfoResponse](../../pkg/models/operations/searchgetserverinforesponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
