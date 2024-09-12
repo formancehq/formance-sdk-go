@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: bb72b9e5f65512abfc137f36f5e4fd02
-  docVersion: v2.1.0-beta.1
-  speakeasyVersion: 1.395.1
-  generationVersion: 2.415.0
-  releaseVersion: 2.5.0
-  configChecksum: 8495aa4591b29408333750a6cd1647c2
+  docChecksum: 706ea24f6e5943004b89faa8c7200702
+  docVersion: v2.0.17
+  speakeasyVersion: 1.396.4
+  generationVersion: 2.415.6
+  releaseVersion: 2.6.0
+  configChecksum: 60af9af77fe7fe33ba27619cf0a12d5a
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -15,19 +15,18 @@ features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.6
-    core: 3.5.6
+    core: 3.5.8
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
-    downloadStreams: 0.1.2
     envVarSecurityUsage: 0.3.1
     errors: 2.81.9
     getRequestBodies: 2.81.1
     globalSecurity: 2.82.10
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.2
+    groups: 2.81.2
     ignores: 2.81.1
     intellisenseMarkdownSupport: 0.1.0
-    nameOverrides: 2.81.2
     nullables: 0.1.0
     responseFormat: 0.1.2
     retries: 2.83.0
@@ -94,7 +93,6 @@ generatedFiles:
   - /pkg/models/operations/getpool.go
   - /pkg/models/operations/getpoolbalances.go
   - /pkg/models/operations/getreconciliation.go
-  - /pkg/models/operations/getserverinfo.go
   - /pkg/models/operations/gettransaction.go
   - /pkg/models/operations/gettransactions.go
   - /pkg/models/operations/gettransferinitiation.go
@@ -174,7 +172,6 @@ generatedFiles:
   - /pkg/models/operations/v2deletetransactionmetadata.go
   - /pkg/models/operations/v2deletetrigger.go
   - /pkg/models/operations/v2deleteworkflow.go
-  - /pkg/models/operations/v2exportlogs.go
   - /pkg/models/operations/v2getaccount.go
   - /pkg/models/operations/v2getbalancesaggregated.go
   - /pkg/models/operations/v2getinfo.go
@@ -187,7 +184,6 @@ generatedFiles:
   - /pkg/models/operations/v2gettransaction.go
   - /pkg/models/operations/v2getvolumeswithbalances.go
   - /pkg/models/operations/v2getworkflow.go
-  - /pkg/models/operations/v2importlogs.go
   - /pkg/models/operations/v2listaccounts.go
   - /pkg/models/operations/v2listinstances.go
   - /pkg/models/operations/v2listledgers.go
@@ -666,7 +662,6 @@ generatedFiles:
   - docs/pkg/models/operations/getpoolresponse.md
   - docs/pkg/models/operations/getreconciliationrequest.md
   - docs/pkg/models/operations/getreconciliationresponse.md
-  - docs/pkg/models/operations/getserverinforesponse.md
   - docs/pkg/models/operations/gettransactionrequest.md
   - docs/pkg/models/operations/gettransactionresponse.md
   - docs/pkg/models/operations/gettransactionsrequest.md
@@ -723,7 +718,6 @@ generatedFiles:
   - docs/pkg/models/operations/metadata.md
   - docs/pkg/models/operations/option.md
   - docs/pkg/models/operations/orchestrationgetserverinforesponse.md
-  - docs/pkg/models/operations/order.md
   - docs/pkg/models/operations/paymentsgetaccountrequest.md
   - docs/pkg/models/operations/paymentsgetaccountresponse.md
   - docs/pkg/models/operations/paymentsgetserverinforesponse.md
@@ -816,8 +810,6 @@ generatedFiles:
   - docs/pkg/models/operations/v2deletetriggerresponse.md
   - docs/pkg/models/operations/v2deleteworkflowrequest.md
   - docs/pkg/models/operations/v2deleteworkflowresponse.md
-  - docs/pkg/models/operations/v2exportlogsrequest.md
-  - docs/pkg/models/operations/v2exportlogsresponse.md
   - docs/pkg/models/operations/v2getaccountrequest.md
   - docs/pkg/models/operations/v2getaccountresponse.md
   - docs/pkg/models/operations/v2getbalancesaggregatedrequest.md
@@ -840,8 +832,6 @@ generatedFiles:
   - docs/pkg/models/operations/v2getvolumeswithbalancesresponse.md
   - docs/pkg/models/operations/v2getworkflowrequest.md
   - docs/pkg/models/operations/v2getworkflowresponse.md
-  - docs/pkg/models/operations/v2importlogsrequest.md
-  - docs/pkg/models/operations/v2importlogsresponse.md
   - docs/pkg/models/operations/v2listaccountsrequest.md
   - docs/pkg/models/operations/v2listaccountsresponse.md
   - docs/pkg/models/operations/v2listinstancesrequest.md
@@ -1325,32 +1315,14 @@ generatedFiles:
   - docs/pkg/models/shared/workflowinstancehistorystageoutput.md
   - docs/sdks/auth/README.md
   - docs/sdks/formance/README.md
-  - docs/sdks/formanceorchestrationv1/README.md
-  - docs/sdks/formancepaymentsv1/README.md
-  - docs/sdks/formancereconciliationv1/README.md
-  - docs/sdks/formancesearchv1/README.md
-  - docs/sdks/formancev1/README.md
-  - docs/sdks/formancev2/README.md
-  - docs/sdks/formancewalletsv1/README.md
-  - docs/sdks/formancewebhooksv1/README.md
   - docs/sdks/ledger/README.md
   - docs/sdks/orchestration/README.md
   - docs/sdks/payments/README.md
   - docs/sdks/reconciliation/README.md
   - docs/sdks/search/README.md
-  - docs/sdks/v1/README.md
-  - docs/sdks/v2/README.md
   - docs/sdks/wallets/README.md
   - docs/sdks/webhooks/README.md
   - formance.go
-  - formanceorchestrationv1.go
-  - formancepaymentsv1.go
-  - formancereconciliationv1.go
-  - formancesearchv1.go
-  - formancev1.go
-  - formancev2.go
-  - formancewalletsv1.go
-  - formancewebhooksv1.go
   - go.mod
   - internal/hooks/hooks.go
   - ledger.go
@@ -1376,8 +1348,6 @@ generatedFiles:
   - pkg/utils/utils.go
   - reconciliation.go
   - search.go
-  - v1.go
-  - v2.go
   - wallets.go
   - webhooks.go
 examples:

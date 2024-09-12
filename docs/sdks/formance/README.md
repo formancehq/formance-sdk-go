@@ -17,7 +17,60 @@ and standard method from web, mobile and desktop applications.
 
 ### Available Operations
 
+* [GetOIDCWellKnowns](#getoidcwellknowns) - Retrieve OpenID connect well-knowns.
 * [GetVersions](#getversions) - Show stack version information
+
+## GetOIDCWellKnowns
+
+Retrieve OpenID connect well-knowns.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"context"
+	"log"
+)
+
+func main() {
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            Authorization: "<YOUR_AUTHORIZATION_HERE>",
+        }),
+    )
+
+    ctx := context.Background()
+    res, err := s.GetOIDCWellKnowns(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.GetOIDCWellKnownsResponse](../../pkg/models/operations/getoidcwellknownsresponse.md), error**
+
+### Errors
+
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetVersions
 
