@@ -4,25 +4,25 @@ package main
 
 import (
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 
 	ctx := context.Background()
-	res, err := s.GetOIDCWellKnowns(ctx)
+	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.GetVersionsResponse != nil {
 		// handle response
 	}
 }
