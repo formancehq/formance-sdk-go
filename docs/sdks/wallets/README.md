@@ -1,6 +1,8 @@
 # Wallets
 (*Wallets*)
 
+## Overview
+
 ### Available Operations
 
 * [ConfirmHold](#confirmhold) - Confirm a hold
@@ -31,29 +33,29 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
-	"context"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ConfirmHoldRequest{
+
+    ctx := context.Background()
+    res, err := s.Wallets.ConfirmHold(ctx, operations.ConfirmHoldRequest{
         ConfirmHoldRequest: &shared.ConfirmHoldRequest{
             Amount: big.NewInt(100),
             Final: formancesdkgo.Bool(true),
         },
         HoldID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Wallets.ConfirmHold(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -71,14 +73,17 @@ func main() {
 | `request`                                                                          | [operations.ConfirmHoldRequest](../../pkg/models/operations/confirmholdrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.ConfirmHoldResponse](../../pkg/models/operations/confirmholdresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## CreateBalance
 
@@ -91,24 +96,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.CreateBalanceRequest{
-        ID: "<id>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.CreateBalance(ctx, request)
+    res, err := s.Wallets.CreateBalance(ctx, operations.CreateBalanceRequest{
+        ID: "<id>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -126,14 +131,17 @@ func main() {
 | `request`                                                                              | [operations.CreateBalanceRequest](../../pkg/models/operations/createbalancerequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.CreateBalanceResponse](../../pkg/models/operations/createbalanceresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## CreateWallet
 
@@ -146,26 +154,22 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    var request *shared.CreateWalletRequest = &shared.CreateWalletRequest{
-        Metadata: map[string]string{
-            "key": "<value>",
-        },
-        Name: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.CreateWallet(ctx, request)
+    res, err := s.Wallets.CreateWallet(ctx, operations.CreateWalletRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -177,20 +181,23 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [shared.CreateWalletRequest](../../pkg/models/shared/createwalletrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
-
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.CreateWalletRequest](../../pkg/models/operations/createwalletrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
 
 **[*operations.CreateWalletResponse](../../pkg/models/operations/createwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## CreditWallet
 
@@ -203,21 +210,23 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
-	"context"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.CreditWalletRequest{
+
+    ctx := context.Background()
+    res, err := s.Wallets.CreditWallet(ctx, operations.CreditWalletRequest{
         CreditWalletRequest: &shared.CreditWalletRequest{
             Amount: shared.Monetary{
                 Amount: big.NewInt(100),
@@ -236,9 +245,7 @@ func main() {
             },
         },
         ID: "<id>",
-    }
-    ctx := context.Background()
-    res, err := s.Wallets.CreditWallet(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -256,14 +263,17 @@ func main() {
 | `request`                                                                            | [operations.CreditWalletRequest](../../pkg/models/operations/creditwalletrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.CreditWalletResponse](../../pkg/models/operations/creditwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## DebitWallet
 
@@ -276,21 +286,23 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"context"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
-	"context"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.DebitWalletRequest{
+
+    ctx := context.Background()
+    res, err := s.Wallets.DebitWallet(ctx, operations.DebitWalletRequest{
         DebitWalletRequest: &shared.DebitWalletRequest{
             Amount: shared.Monetary{
                 Amount: big.NewInt(100),
@@ -302,9 +314,7 @@ func main() {
             Pending: formancesdkgo.Bool(true),
         },
         ID: "<id>",
-    }
-    ctx := context.Background()
-    res, err := s.Wallets.DebitWallet(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -322,14 +332,17 @@ func main() {
 | `request`                                                                          | [operations.DebitWalletRequest](../../pkg/models/operations/debitwalletrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.DebitWalletResponse](../../pkg/models/operations/debitwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetBalance
 
@@ -342,25 +355,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetBalanceRequest{
+
+    ctx := context.Background()
+    res, err := s.Wallets.GetBalance(ctx, operations.GetBalanceRequest{
         BalanceName: "<value>",
         ID: "<id>",
-    }
-    ctx := context.Background()
-    res, err := s.Wallets.GetBalance(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -378,14 +391,17 @@ func main() {
 | `request`                                                                        | [operations.GetBalanceRequest](../../pkg/models/operations/getbalancerequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.GetBalanceResponse](../../pkg/models/operations/getbalanceresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetHold
 
@@ -398,24 +414,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetHoldRequest{
-        HoldID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.GetHold(ctx, request)
+    res, err := s.Wallets.GetHold(ctx, operations.GetHoldRequest{
+        HoldID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -433,14 +449,17 @@ func main() {
 | `request`                                                                  | [operations.GetHoldRequest](../../pkg/models/operations/getholdrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 | `opts`                                                                     | [][operations.Option](../../pkg/models/operations/option.md)               | :heavy_minus_sign:                                                         | The options for this request.                                              |
 
-
 ### Response
 
 **[*operations.GetHoldResponse](../../pkg/models/operations/getholdresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetHolds
 
@@ -453,29 +472,29 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetHoldsRequest{
+
+    ctx := context.Background()
+    res, err := s.Wallets.GetHolds(ctx, operations.GetHoldsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Metadata: map[string]string{
             "admin": "true",
         },
         PageSize: formancesdkgo.Int64(100),
         WalletID: formancesdkgo.String("wallet1"),
-    }
-    ctx := context.Background()
-    res, err := s.Wallets.GetHolds(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -493,14 +512,17 @@ func main() {
 | `request`                                                                    | [operations.GetHoldsRequest](../../pkg/models/operations/getholdsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 | `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
-
 ### Response
 
 **[*operations.GetHoldsResponse](../../pkg/models/operations/getholdsresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetTransactions
 
@@ -511,26 +533,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetTransactionsRequest{
+
+    ctx := context.Background()
+    res, err := s.Wallets.GetTransactions(ctx, operations.GetTransactionsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
         WalletID: formancesdkgo.String("wallet1"),
-    }
-    ctx := context.Background()
-    res, err := s.Wallets.GetTransactions(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -548,14 +570,17 @@ func main() {
 | `request`                                                                                  | [operations.GetTransactionsRequest](../../pkg/models/operations/gettransactionsrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.GetTransactionsResponse](../../pkg/models/operations/gettransactionsresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetWallet
 
@@ -568,24 +593,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetWalletRequest{
-        ID: "<id>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.GetWallet(ctx, request)
+    res, err := s.Wallets.GetWallet(ctx, operations.GetWalletRequest{
+        ID: "<id>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -603,14 +628,17 @@ func main() {
 | `request`                                                                      | [operations.GetWalletRequest](../../pkg/models/operations/getwalletrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetWalletResponse](../../pkg/models/operations/getwalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## GetWalletSummary
 
@@ -623,24 +651,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetWalletSummaryRequest{
-        ID: "<id>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.GetWalletSummary(ctx, request)
+    res, err := s.Wallets.GetWalletSummary(ctx, operations.GetWalletSummaryRequest{
+        ID: "<id>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -658,14 +686,17 @@ func main() {
 | `request`                                                                                    | [operations.GetWalletSummaryRequest](../../pkg/models/operations/getwalletsummaryrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 | `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
-
 ### Response
 
 **[*operations.GetWalletSummaryResponse](../../pkg/models/operations/getwalletsummaryresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## ListBalances
 
@@ -678,24 +709,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ListBalancesRequest{
-        ID: "<id>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.ListBalances(ctx, request)
+    res, err := s.Wallets.ListBalances(ctx, operations.ListBalancesRequest{
+        ID: "<id>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -713,13 +744,16 @@ func main() {
 | `request`                                                                            | [operations.ListBalancesRequest](../../pkg/models/operations/listbalancesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.ListBalancesResponse](../../pkg/models/operations/listbalancesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ListWallets
 
@@ -732,20 +766,22 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ListWalletsRequest{
+
+    ctx := context.Background()
+    res, err := s.Wallets.ListWallets(ctx, operations.ListWalletsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Expand: formancesdkgo.String("balances"),
         Metadata: map[string]string{
@@ -753,9 +789,7 @@ func main() {
         },
         Name: formancesdkgo.String("wallet1"),
         PageSize: formancesdkgo.Int64(100),
-    }
-    ctx := context.Background()
-    res, err := s.Wallets.ListWallets(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -773,14 +807,17 @@ func main() {
 | `request`                                                                          | [operations.ListWalletsRequest](../../pkg/models/operations/listwalletsrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.ListWalletsResponse](../../pkg/models/operations/listwalletsresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## UpdateWallet
 
@@ -793,24 +830,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.UpdateWalletRequest{
-        ID: "<id>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.UpdateWallet(ctx, request)
+    res, err := s.Wallets.UpdateWallet(ctx, operations.UpdateWalletRequest{
+        ID: "<id>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -828,14 +865,17 @@ func main() {
 | `request`                                                                            | [operations.UpdateWalletRequest](../../pkg/models/operations/updatewalletrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.UpdateWalletResponse](../../pkg/models/operations/updatewalletresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## VoidHold
 
@@ -848,24 +888,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.VoidHoldRequest{
-        HoldID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Wallets.VoidHold(ctx, request)
+    res, err := s.Wallets.VoidHold(ctx, operations.VoidHoldRequest{
+        HoldID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -883,14 +923,17 @@ func main() {
 | `request`                                                                    | [operations.VoidHoldRequest](../../pkg/models/operations/voidholdrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 | `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
-
 ### Response
 
 **[*operations.VoidHoldResponse](../../pkg/models/operations/voidholdresponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
 | sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+
 
 ## WalletsgetServerInfo
 
@@ -903,7 +946,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -912,7 +954,8 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
 
@@ -934,10 +977,12 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.WalletsgetServerInfoResponse](../../pkg/models/operations/walletsgetserverinforesponse.md), error**
+
+### Errors
+
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
