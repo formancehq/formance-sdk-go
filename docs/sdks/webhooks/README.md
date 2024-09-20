@@ -1,6 +1,8 @@
 # Webhooks
 (*Webhooks*)
 
+## Overview
+
 ### Available Operations
 
 * [ActivateConfig](#activateconfig) - Activate one config
@@ -22,24 +24,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ActivateConfigRequest{
-        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
-    }
+
     ctx := context.Background()
-    res, err := s.Webhooks.ActivateConfig(ctx, request)
+    res, err := s.Webhooks.ActivateConfig(ctx, operations.ActivateConfigRequest{
+        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -57,14 +59,17 @@ func main() {
 | `request`                                                                                | [operations.ActivateConfigRequest](../../pkg/models/operations/activateconfigrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.ActivateConfigResponse](../../pkg/models/operations/activateconfigresponse.md), error**
+
+### Errors
+
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+
 
 ## ChangeConfigSecret
 
@@ -81,27 +86,27 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ChangeConfigSecretRequest{
+
+    ctx := context.Background()
+    res, err := s.Webhooks.ChangeConfigSecret(ctx, operations.ChangeConfigSecretRequest{
         ConfigChangeSecret: &shared.ConfigChangeSecret{
             Secret: "V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3",
         },
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
-    }
-    ctx := context.Background()
-    res, err := s.Webhooks.ChangeConfigSecret(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -119,14 +124,17 @@ func main() {
 | `request`                                                                                        | [operations.ChangeConfigSecretRequest](../../pkg/models/operations/changeconfigsecretrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.ChangeConfigSecretResponse](../../pkg/models/operations/changeconfigsecretresponse.md), error**
+
+### Errors
+
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+
 
 ## DeactivateConfig
 
@@ -139,24 +147,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.DeactivateConfigRequest{
-        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
-    }
+
     ctx := context.Background()
-    res, err := s.Webhooks.DeactivateConfig(ctx, request)
+    res, err := s.Webhooks.DeactivateConfig(ctx, operations.DeactivateConfigRequest{
+        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -174,14 +182,17 @@ func main() {
 | `request`                                                                                    | [operations.DeactivateConfigRequest](../../pkg/models/operations/deactivateconfigrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 | `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
-
 ### Response
 
 **[*operations.DeactivateConfigResponse](../../pkg/models/operations/deactivateconfigresponse.md), error**
+
+### Errors
+
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+
 
 ## DeleteConfig
 
@@ -194,24 +205,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.DeleteConfigRequest{
-        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
-    }
+
     ctx := context.Background()
-    res, err := s.Webhooks.DeleteConfig(ctx, request)
+    res, err := s.Webhooks.DeleteConfig(ctx, operations.DeleteConfigRequest{
+        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -229,14 +240,17 @@ func main() {
 | `request`                                                                            | [operations.DeleteConfigRequest](../../pkg/models/operations/deleteconfigrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.DeleteConfigResponse](../../pkg/models/operations/deleteconfigresponse.md), error**
+
+### Errors
+
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+
 
 ## GetManyConfigs
 
@@ -249,25 +263,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetManyConfigsRequest{
+
+    ctx := context.Background()
+    res, err := s.Webhooks.GetManyConfigs(ctx, operations.GetManyConfigsRequest{
         Endpoint: formancesdkgo.String("https://example.com"),
         ID: formancesdkgo.String("4997257d-dfb6-445b-929c-cbe2ab182818"),
-    }
-    ctx := context.Background()
-    res, err := s.Webhooks.GetManyConfigs(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -285,14 +299,17 @@ func main() {
 | `request`                                                                                | [operations.GetManyConfigsRequest](../../pkg/models/operations/getmanyconfigsrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.GetManyConfigsResponse](../../pkg/models/operations/getmanyconfigsresponse.md), error**
+
+### Errors
+
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+
 
 ## InsertConfig
 
@@ -314,7 +331,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -323,20 +339,20 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := shared.ConfigUser{
+
+    ctx := context.Background()
+    res, err := s.Webhooks.InsertConfig(ctx, shared.ConfigUser{
         Endpoint: "https://example.com",
         EventTypes: []string{
             "TYPE1",
-            "TYPE2",
         },
         Name: formancesdkgo.String("customer_payment"),
         Secret: formancesdkgo.String("V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3"),
-    }
-    ctx := context.Background()
-    res, err := s.Webhooks.InsertConfig(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -354,14 +370,17 @@ func main() {
 | `request`                                                    | [shared.ConfigUser](../../pkg/models/shared/configuser.md)   | :heavy_check_mark:                                           | The request object to use for the request.                   |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.InsertConfigResponse](../../pkg/models/operations/insertconfigresponse.md), error**
+
+### Errors
+
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
 | sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+
 
 ## TestConfig
 
@@ -374,24 +393,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.TestConfigRequest{
-        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
-    }
+
     ctx := context.Background()
-    res, err := s.Webhooks.TestConfig(ctx, request)
+    res, err := s.Webhooks.TestConfig(ctx, operations.TestConfigRequest{
+        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -409,10 +428,12 @@ func main() {
 | `request`                                                                        | [operations.TestConfigRequest](../../pkg/models/operations/testconfigrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.TestConfigResponse](../../pkg/models/operations/testconfigresponse.md), error**
+
+### Errors
+
 | Error Object                    | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |

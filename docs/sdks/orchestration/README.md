@@ -1,6 +1,8 @@
 # Orchestration
 (*Orchestration*)
 
+## Overview
+
 ### Available Operations
 
 * [CancelEvent](#cancelevent) - Cancel a running workflow
@@ -50,24 +52,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.CancelEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.CancelEvent(ctx, request)
+    res, err := s.Orchestration.CancelEvent(ctx, operations.CancelEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -85,14 +87,17 @@ func main() {
 | `request`                                                                          | [operations.CancelEventRequest](../../pkg/models/operations/canceleventrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.CancelEventResponse](../../pkg/models/operations/canceleventresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## CreateTrigger
 
@@ -105,7 +110,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -114,15 +118,13 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    var request *shared.TriggerData = &shared.TriggerData{
-        Event: "<value>",
-        WorkflowID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.CreateTrigger(ctx, request)
+    res, err := s.Orchestration.CreateTrigger(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -140,14 +142,17 @@ func main() {
 | `request`                                                    | [shared.TriggerData](../../pkg/models/shared/triggerdata.md) | :heavy_check_mark:                                           | The request object to use for the request.                   |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.CreateTriggerResponse](../../pkg/models/operations/createtriggerresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## CreateWorkflow
 
@@ -160,7 +165,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -169,18 +173,13 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    var request *shared.CreateWorkflowRequest = &shared.CreateWorkflowRequest{
-        Stages: []map[string]any{
-            map[string]any{
-                "key": "<value>",
-            },
-        },
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.CreateWorkflow(ctx, request)
+    res, err := s.Orchestration.CreateWorkflow(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -198,14 +197,17 @@ func main() {
 | `request`                                                                        | [shared.CreateWorkflowRequest](../../pkg/models/shared/createworkflowrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.CreateWorkflowResponse](../../pkg/models/operations/createworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## DeleteTrigger
 
@@ -218,24 +220,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.DeleteTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.DeleteTrigger(ctx, request)
+    res, err := s.Orchestration.DeleteTrigger(ctx, operations.DeleteTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -253,14 +255,17 @@ func main() {
 | `request`                                                                              | [operations.DeleteTriggerRequest](../../pkg/models/operations/deletetriggerrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.DeleteTriggerResponse](../../pkg/models/operations/deletetriggerresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## DeleteWorkflow
 
@@ -273,24 +278,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.DeleteWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.DeleteWorkflow(ctx, request)
+    res, err := s.Orchestration.DeleteWorkflow(ctx, operations.DeleteWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -308,14 +313,17 @@ func main() {
 | `request`                                                                                | [operations.DeleteWorkflowRequest](../../pkg/models/operations/deleteworkflowrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.DeleteWorkflowResponse](../../pkg/models/operations/deleteworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetInstance
 
@@ -328,24 +336,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetInstanceRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.GetInstance(ctx, request)
+    res, err := s.Orchestration.GetInstance(ctx, operations.GetInstanceRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -363,14 +371,17 @@ func main() {
 | `request`                                                                          | [operations.GetInstanceRequest](../../pkg/models/operations/getinstancerequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.GetInstanceResponse](../../pkg/models/operations/getinstanceresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetInstanceHistory
 
@@ -383,24 +394,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetInstanceHistoryRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.GetInstanceHistory(ctx, request)
+    res, err := s.Orchestration.GetInstanceHistory(ctx, operations.GetInstanceHistoryRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -418,14 +429,17 @@ func main() {
 | `request`                                                                                        | [operations.GetInstanceHistoryRequest](../../pkg/models/operations/getinstancehistoryrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.GetInstanceHistoryResponse](../../pkg/models/operations/getinstancehistoryresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetInstanceStageHistory
 
@@ -438,25 +452,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetInstanceStageHistoryRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.GetInstanceStageHistory(ctx, operations.GetInstanceStageHistoryRequest{
         InstanceID: "xxx",
         Number: 0,
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.GetInstanceStageHistory(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -474,14 +488,17 @@ func main() {
 | `request`                                                                                                  | [operations.GetInstanceStageHistoryRequest](../../pkg/models/operations/getinstancestagehistoryrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
-
 ### Response
 
 **[*operations.GetInstanceStageHistoryResponse](../../pkg/models/operations/getinstancestagehistoryresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetWorkflow
 
@@ -494,24 +511,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.GetWorkflow(ctx, request)
+    res, err := s.Orchestration.GetWorkflow(ctx, operations.GetWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -529,14 +546,17 @@ func main() {
 | `request`                                                                          | [operations.GetWorkflowRequest](../../pkg/models/operations/getworkflowrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.GetWorkflowResponse](../../pkg/models/operations/getworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ListInstances
 
@@ -549,25 +569,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ListInstancesRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.ListInstances(ctx, operations.ListInstancesRequest{
         Running: formancesdkgo.Bool(true),
         WorkflowID: formancesdkgo.String("xxx"),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.ListInstances(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -585,14 +605,17 @@ func main() {
 | `request`                                                                              | [operations.ListInstancesRequest](../../pkg/models/operations/listinstancesrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.ListInstancesResponse](../../pkg/models/operations/listinstancesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ListTriggers
 
@@ -605,22 +628,22 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ListTriggersRequest{}
+
     ctx := context.Background()
-    res, err := s.Orchestration.ListTriggers(ctx, request)
+    res, err := s.Orchestration.ListTriggers(ctx, operations.ListTriggersRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -638,14 +661,17 @@ func main() {
 | `request`                                                                            | [operations.ListTriggersRequest](../../pkg/models/operations/listtriggersrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.ListTriggersResponse](../../pkg/models/operations/listtriggersresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ListTriggersOccurrences
 
@@ -658,24 +684,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ListTriggersOccurrencesRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.ListTriggersOccurrences(ctx, request)
+    res, err := s.Orchestration.ListTriggersOccurrences(ctx, operations.ListTriggersOccurrencesRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -693,14 +719,17 @@ func main() {
 | `request`                                                                                                  | [operations.ListTriggersOccurrencesRequest](../../pkg/models/operations/listtriggersoccurrencesrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
-
 ### Response
 
 **[*operations.ListTriggersOccurrencesResponse](../../pkg/models/operations/listtriggersoccurrencesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ListWorkflows
 
@@ -713,7 +742,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -722,7 +750,8 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
 
@@ -744,14 +773,17 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.ListWorkflowsResponse](../../pkg/models/operations/listworkflowsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## OrchestrationgetServerInfo
 
@@ -764,7 +796,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -773,7 +804,8 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
 
@@ -795,14 +827,17 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.OrchestrationgetServerInfoResponse](../../pkg/models/operations/orchestrationgetserverinforesponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ReadTrigger
 
@@ -815,24 +850,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ReadTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.ReadTrigger(ctx, request)
+    res, err := s.Orchestration.ReadTrigger(ctx, operations.ReadTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -850,14 +885,17 @@ func main() {
 | `request`                                                                          | [operations.ReadTriggerRequest](../../pkg/models/operations/readtriggerrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.ReadTriggerResponse](../../pkg/models/operations/readtriggerresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## RunWorkflow
 
@@ -870,24 +908,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.RunWorkflowRequest{
-        WorkflowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.RunWorkflow(ctx, request)
+    res, err := s.Orchestration.RunWorkflow(ctx, operations.RunWorkflowRequest{
+        WorkflowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -905,14 +943,17 @@ func main() {
 | `request`                                                                          | [operations.RunWorkflowRequest](../../pkg/models/operations/runworkflowrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.RunWorkflowResponse](../../pkg/models/operations/runworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## SendEvent
 
@@ -925,24 +966,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.SendEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.SendEvent(ctx, request)
+    res, err := s.Orchestration.SendEvent(ctx, operations.SendEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -960,14 +1001,17 @@ func main() {
 | `request`                                                                      | [operations.SendEventRequest](../../pkg/models/operations/sendeventrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.SendEventResponse](../../pkg/models/operations/sendeventresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## TestTrigger
 
@@ -980,24 +1024,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.TestTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.TestTrigger(ctx, request)
+    res, err := s.Orchestration.TestTrigger(ctx, operations.TestTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1015,14 +1059,17 @@ func main() {
 | `request`                                                                          | [operations.TestTriggerRequest](../../pkg/models/operations/testtriggerrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.TestTriggerResponse](../../pkg/models/operations/testtriggerresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2CancelEvent
 
@@ -1035,24 +1082,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2CancelEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2CancelEvent(ctx, request)
+    res, err := s.Orchestration.V2CancelEvent(ctx, operations.V2CancelEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1070,14 +1117,17 @@ func main() {
 | `request`                                                                              | [operations.V2CancelEventRequest](../../pkg/models/operations/v2canceleventrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.V2CancelEventResponse](../../pkg/models/operations/v2canceleventresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2CreateTrigger
 
@@ -1090,7 +1140,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1099,15 +1148,13 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    var request *shared.V2TriggerData = &shared.V2TriggerData{
-        Event: "<value>",
-        WorkflowID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2CreateTrigger(ctx, request)
+    res, err := s.Orchestration.V2CreateTrigger(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -1125,14 +1172,17 @@ func main() {
 | `request`                                                        | [shared.V2TriggerData](../../pkg/models/shared/v2triggerdata.md) | :heavy_check_mark:                                               | The request object to use for the request.                       |
 | `opts`                                                           | [][operations.Option](../../pkg/models/operations/option.md)     | :heavy_minus_sign:                                               | The options for this request.                                    |
 
-
 ### Response
 
 **[*operations.V2CreateTriggerResponse](../../pkg/models/operations/v2createtriggerresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2CreateWorkflow
 
@@ -1145,7 +1195,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1154,18 +1203,13 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    var request *shared.V2CreateWorkflowRequest = &shared.V2CreateWorkflowRequest{
-        Stages: []map[string]any{
-            map[string]any{
-                "key": "<value>",
-            },
-        },
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2CreateWorkflow(ctx, request)
+    res, err := s.Orchestration.V2CreateWorkflow(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -1183,14 +1227,17 @@ func main() {
 | `request`                                                                            | [shared.V2CreateWorkflowRequest](../../pkg/models/shared/v2createworkflowrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.V2CreateWorkflowResponse](../../pkg/models/operations/v2createworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2DeleteTrigger
 
@@ -1203,24 +1250,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2DeleteTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2DeleteTrigger(ctx, request)
+    res, err := s.Orchestration.V2DeleteTrigger(ctx, operations.V2DeleteTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1238,14 +1285,17 @@ func main() {
 | `request`                                                                                  | [operations.V2DeleteTriggerRequest](../../pkg/models/operations/v2deletetriggerrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.V2DeleteTriggerResponse](../../pkg/models/operations/v2deletetriggerresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2DeleteWorkflow
 
@@ -1258,24 +1308,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2DeleteWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2DeleteWorkflow(ctx, request)
+    res, err := s.Orchestration.V2DeleteWorkflow(ctx, operations.V2DeleteWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1293,14 +1343,17 @@ func main() {
 | `request`                                                                                    | [operations.V2DeleteWorkflowRequest](../../pkg/models/operations/v2deleteworkflowrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 | `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
-
 ### Response
 
 **[*operations.V2DeleteWorkflowResponse](../../pkg/models/operations/v2deleteworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2GetInstance
 
@@ -1313,24 +1366,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2GetInstanceRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2GetInstance(ctx, request)
+    res, err := s.Orchestration.V2GetInstance(ctx, operations.V2GetInstanceRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1348,14 +1401,17 @@ func main() {
 | `request`                                                                              | [operations.V2GetInstanceRequest](../../pkg/models/operations/v2getinstancerequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.V2GetInstanceResponse](../../pkg/models/operations/v2getinstanceresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2GetInstanceHistory
 
@@ -1368,24 +1424,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2GetInstanceHistoryRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2GetInstanceHistory(ctx, request)
+    res, err := s.Orchestration.V2GetInstanceHistory(ctx, operations.V2GetInstanceHistoryRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1403,14 +1459,17 @@ func main() {
 | `request`                                                                                            | [operations.V2GetInstanceHistoryRequest](../../pkg/models/operations/v2getinstancehistoryrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
 | `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
 
-
 ### Response
 
 **[*operations.V2GetInstanceHistoryResponse](../../pkg/models/operations/v2getinstancehistoryresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2GetInstanceStageHistory
 
@@ -1423,25 +1482,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2GetInstanceStageHistoryRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2GetInstanceStageHistory(ctx, operations.V2GetInstanceStageHistoryRequest{
         InstanceID: "xxx",
         Number: 0,
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2GetInstanceStageHistory(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1459,14 +1518,17 @@ func main() {
 | `request`                                                                                                      | [operations.V2GetInstanceStageHistoryRequest](../../pkg/models/operations/v2getinstancestagehistoryrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
 | `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
-
 ### Response
 
 **[*operations.V2GetInstanceStageHistoryResponse](../../pkg/models/operations/v2getinstancestagehistoryresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2GetServerInfo
 
@@ -1479,7 +1541,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -1488,7 +1549,8 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
 
@@ -1510,14 +1572,17 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.V2GetServerInfoResponse](../../pkg/models/operations/v2getserverinforesponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2GetWorkflow
 
@@ -1530,24 +1595,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2GetWorkflowRequest{
-        FlowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2GetWorkflow(ctx, request)
+    res, err := s.Orchestration.V2GetWorkflow(ctx, operations.V2GetWorkflowRequest{
+        FlowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1565,14 +1630,17 @@ func main() {
 | `request`                                                                              | [operations.V2GetWorkflowRequest](../../pkg/models/operations/v2getworkflowrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.V2GetWorkflowResponse](../../pkg/models/operations/v2getworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2ListInstances
 
@@ -1585,27 +1653,27 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2ListInstancesRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListInstances(ctx, operations.V2ListInstancesRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
         Running: formancesdkgo.Bool(true),
         WorkflowID: formancesdkgo.String("xxx"),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListInstances(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1623,14 +1691,17 @@ func main() {
 | `request`                                                                                  | [operations.V2ListInstancesRequest](../../pkg/models/operations/v2listinstancesrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.V2ListInstancesResponse](../../pkg/models/operations/v2listinstancesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2ListTriggers
 
@@ -1643,25 +1714,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2ListTriggersRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListTriggers(ctx, operations.V2ListTriggersRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListTriggers(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1679,14 +1750,17 @@ func main() {
 | `request`                                                                                | [operations.V2ListTriggersRequest](../../pkg/models/operations/v2listtriggersrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.V2ListTriggersResponse](../../pkg/models/operations/v2listtriggersresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2ListTriggersOccurrences
 
@@ -1699,26 +1773,26 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2ListTriggersOccurrencesRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListTriggersOccurrences(ctx, operations.V2ListTriggersOccurrencesRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
         TriggerID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListTriggersOccurrences(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1736,14 +1810,17 @@ func main() {
 | `request`                                                                                                      | [operations.V2ListTriggersOccurrencesRequest](../../pkg/models/operations/v2listtriggersoccurrencesrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
 | `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
-
 ### Response
 
 **[*operations.V2ListTriggersOccurrencesResponse](../../pkg/models/operations/v2listtriggersoccurrencesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2ListWorkflows
 
@@ -1756,25 +1833,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2ListWorkflowsRequest{
+
+    ctx := context.Background()
+    res, err := s.Orchestration.V2ListWorkflows(ctx, operations.V2ListWorkflowsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
-    }
-    ctx := context.Background()
-    res, err := s.Orchestration.V2ListWorkflows(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1792,14 +1869,17 @@ func main() {
 | `request`                                                                                  | [operations.V2ListWorkflowsRequest](../../pkg/models/operations/v2listworkflowsrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.V2ListWorkflowsResponse](../../pkg/models/operations/v2listworkflowsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2ReadTrigger
 
@@ -1812,24 +1892,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2ReadTriggerRequest{
-        TriggerID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2ReadTrigger(ctx, request)
+    res, err := s.Orchestration.V2ReadTrigger(ctx, operations.V2ReadTriggerRequest{
+        TriggerID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1847,14 +1927,17 @@ func main() {
 | `request`                                                                              | [operations.V2ReadTriggerRequest](../../pkg/models/operations/v2readtriggerrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.V2ReadTriggerResponse](../../pkg/models/operations/v2readtriggerresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2RunWorkflow
 
@@ -1867,24 +1950,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2RunWorkflowRequest{
-        WorkflowID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2RunWorkflow(ctx, request)
+    res, err := s.Orchestration.V2RunWorkflow(ctx, operations.V2RunWorkflowRequest{
+        WorkflowID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1902,14 +1985,17 @@ func main() {
 | `request`                                                                              | [operations.V2RunWorkflowRequest](../../pkg/models/operations/v2runworkflowrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.V2RunWorkflowResponse](../../pkg/models/operations/v2runworkflowresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## V2SendEvent
 
@@ -1922,24 +2008,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.V2SendEventRequest{
-        InstanceID: "xxx",
-    }
+
     ctx := context.Background()
-    res, err := s.Orchestration.V2SendEvent(ctx, request)
+    res, err := s.Orchestration.V2SendEvent(ctx, operations.V2SendEventRequest{
+        InstanceID: "xxx",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1957,10 +2043,12 @@ func main() {
 | `request`                                                                          | [operations.V2SendEventRequest](../../pkg/models/operations/v2sendeventrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.V2SendEventResponse](../../pkg/models/operations/v2sendeventresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.V2Error  | default            | application/json   |
