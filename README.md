@@ -16,9 +16,40 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 - [ ] 🎁 Publish your SDK to package managers by [configuring automatic publishing](https://www.speakeasyapi.dev/docs/productionize-sdks/publish-sdks)
 - [ ] ✨ When ready to productionize, delete this section from the README
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Formance Stack API: Open, modular foundation for unique payments flows
+
+# Introduction
+This API is documented in **OpenAPI format**.
+
+# Authentication
+Formance Stack offers one forms of authentication:
+  - OAuth2
+OAuth2 - an open protocol to allow secure authorization in a simple
+and standard method from web, mobile and desktop applications.
+<SecurityDefinitions />
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+
+* [SDK Installation](#sdk-installation)
+* [SDK Example Usage](#sdk-example-usage)
+* [Available Resources and Operations](#available-resources-and-operations)
+* [Retries](#retries)
+* [Error Handling](#error-handling)
+* [Server Selection](#server-selection)
+* [Custom HTTP Client](#custom-http-client)
+* [Authentication](#authentication)
+* [Special Types](#special-types)
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+To add the SDK as a dependency to your project:
 ```bash
 go get github.com/formancehq/formance-sdk-go
 ```
@@ -37,13 +68,13 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 
@@ -63,10 +94,8 @@ func main() {
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [Formance SDK](docs/sdks/formance/README.md)
-
-* [GetOIDCWellKnowns](docs/sdks/formance/README.md#getoidcwellknowns) - Retrieve OpenID connect well-knowns.
-* [GetVersions](docs/sdks/formance/README.md#getversions) - Show stack version information
+<details open>
+<summary>Available methods</summary>
 
 ### [Auth](docs/sdks/auth/README.md)
 
@@ -79,6 +108,11 @@ func main() {
 * [ReadClient](docs/sdks/auth/README.md#readclient) - Read client
 * [ReadUser](docs/sdks/auth/README.md#readuser) - Read user
 * [UpdateClient](docs/sdks/auth/README.md#updateclient) - Update client
+
+### [Formance SDK](docs/sdks/formance/README.md)
+
+* [GetOIDCWellKnowns](docs/sdks/formance/README.md#getoidcwellknowns) - Retrieve OpenID connect well-knowns.
+* [GetVersions](docs/sdks/formance/README.md#getversions) - Show stack version information
 
 ### [Ledger](docs/sdks/ledger/README.md)
 
@@ -255,6 +289,8 @@ func main() {
 * [GetManyConfigs](docs/sdks/webhooks/README.md#getmanyconfigs) - Get many configs
 * [InsertConfig](docs/sdks/webhooks/README.md#insertconfig) - Insert a new config
 * [TestConfig](docs/sdks/webhooks/README.md#testconfig) - Test one config
+
+</details>
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Error Handling [errors] -->
@@ -281,20 +317,34 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
 	"math/big"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
-	request := operations.CreateTransactionsRequest{
+
+	ctx := context.Background()
+	res, err := s.Ledger.CreateTransactions(ctx, operations.CreateTransactionsRequest{
 		Transactions: shared.Transactions{
 			Transactions: []shared.TransactionData{
 				shared.TransactionData{
 					Postings: []shared.Posting{
+						shared.Posting{
+							Amount:      big.NewInt(100),
+							Asset:       "COIN",
+							Destination: "users:002",
+							Source:      "users:001",
+						},
+						shared.Posting{
+							Amount:      big.NewInt(100),
+							Asset:       "COIN",
+							Destination: "users:002",
+							Source:      "users:001",
+						},
 						shared.Posting{
 							Amount:      big.NewInt(100),
 							Asset:       "COIN",
@@ -307,9 +357,7 @@ func main() {
 			},
 		},
 		Ledger: "ledger001",
-	}
-	ctx := context.Background()
-	res, err := s.Ledger.CreateTransactions(ctx, request)
+	})
 	if err != nil {
 
 		var e *sdkerrors.ErrorResponse
@@ -350,14 +398,14 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerIndex(0),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 
@@ -385,14 +433,14 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerURL("http://localhost"),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 
@@ -445,9 +493,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 This SDK supports the following security scheme globally:
 
-| Name            | Type            | Scheme          |
-| --------------- | --------------- | --------------- |
-| `Authorization` | oauth2          | OAuth2 token    |
+| Name                           | Type                           | Scheme                         |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| `ClientID` `ClientSecret`      | oauth2                         | OAuth2 Client Credentials Flow |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go
@@ -458,13 +506,13 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 
@@ -502,14 +550,14 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/retry"
 	"log"
-	"os"
 	"pkg/models/operations"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 
@@ -545,7 +593,6 @@ import (
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/retry"
 	"log"
-	"os"
 )
 
 func main() {
@@ -562,7 +609,8 @@ func main() {
 				RetryConnectionErrors: false,
 			}),
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 

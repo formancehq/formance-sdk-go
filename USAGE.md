@@ -7,13 +7,13 @@ import (
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
-			Authorization: os.Getenv("AUTHORIZATION"),
+			ClientID:     "<YOUR_CLIENT_ID_HERE>",
+			ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
 		}),
 	)
 
