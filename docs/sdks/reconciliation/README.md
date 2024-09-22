@@ -1,6 +1,8 @@
 # Reconciliation
 (*Reconciliation*)
 
+## Overview
+
 ### Available Operations
 
 * [CreatePolicy](#createpolicy) - Create a policy
@@ -23,7 +25,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -32,19 +33,20 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := shared.PolicyRequest{
+
+    ctx := context.Background()
+    res, err := s.Reconciliation.CreatePolicy(ctx, shared.PolicyRequest{
         LedgerName: "default",
         LedgerQuery: map[string]any{
             "key": "<value>",
         },
         Name: "XXX",
         PaymentsPoolID: "XXX",
-    }
-    ctx := context.Background()
-    res, err := s.Reconciliation.CreatePolicy(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -62,14 +64,17 @@ func main() {
 | `request`                                                        | [shared.PolicyRequest](../../pkg/models/shared/policyrequest.md) | :heavy_check_mark:                                               | The request object to use for the request.                       |
 | `opts`                                                           | [][operations.Option](../../pkg/models/operations/option.md)     | :heavy_minus_sign:                                               | The options for this request.                                    |
 
-
 ### Response
 
 **[*operations.CreatePolicyResponse](../../pkg/models/operations/createpolicyresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## DeletePolicy
 
@@ -82,24 +87,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.DeletePolicyRequest{
-        PolicyID: "XXX",
-    }
+
     ctx := context.Background()
-    res, err := s.Reconciliation.DeletePolicy(ctx, request)
+    res, err := s.Reconciliation.DeletePolicy(ctx, operations.DeletePolicyRequest{
+        PolicyID: "XXX",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -117,14 +122,17 @@ func main() {
 | `request`                                                                            | [operations.DeletePolicyRequest](../../pkg/models/operations/deletepolicyrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.DeletePolicyResponse](../../pkg/models/operations/deletepolicyresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## GetPolicy
 
@@ -137,24 +145,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetPolicyRequest{
-        PolicyID: "XXX",
-    }
+
     ctx := context.Background()
-    res, err := s.Reconciliation.GetPolicy(ctx, request)
+    res, err := s.Reconciliation.GetPolicy(ctx, operations.GetPolicyRequest{
+        PolicyID: "XXX",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -172,14 +180,17 @@ func main() {
 | `request`                                                                      | [operations.GetPolicyRequest](../../pkg/models/operations/getpolicyrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetPolicyResponse](../../pkg/models/operations/getpolicyresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## GetReconciliation
 
@@ -192,24 +203,24 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.GetReconciliationRequest{
-        ReconciliationID: "XXX",
-    }
+
     ctx := context.Background()
-    res, err := s.Reconciliation.GetReconciliation(ctx, request)
+    res, err := s.Reconciliation.GetReconciliation(ctx, operations.GetReconciliationRequest{
+        ReconciliationID: "XXX",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -227,14 +238,17 @@ func main() {
 | `request`                                                                                      | [operations.GetReconciliationRequest](../../pkg/models/operations/getreconciliationrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.GetReconciliationResponse](../../pkg/models/operations/getreconciliationresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## ListPolicies
 
@@ -247,25 +261,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ListPoliciesRequest{
+
+    ctx := context.Background()
+    res, err := s.Reconciliation.ListPolicies(ctx, operations.ListPoliciesRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
-    }
-    ctx := context.Background()
-    res, err := s.Reconciliation.ListPolicies(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -283,14 +297,17 @@ func main() {
 | `request`                                                                            | [operations.ListPoliciesRequest](../../pkg/models/operations/listpoliciesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.ListPoliciesResponse](../../pkg/models/operations/listpoliciesresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## ListReconciliations
 
@@ -303,25 +320,25 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
-	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"context"
+	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ListReconciliationsRequest{
+
+    ctx := context.Background()
+    res, err := s.Reconciliation.ListReconciliations(ctx, operations.ListReconciliationsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: formancesdkgo.Int64(100),
-    }
-    ctx := context.Background()
-    res, err := s.Reconciliation.ListReconciliations(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -339,14 +356,17 @@ func main() {
 | `request`                                                                                          | [operations.ListReconciliationsRequest](../../pkg/models/operations/listreconciliationsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.ListReconciliationsResponse](../../pkg/models/operations/listreconciliationsresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## Reconcile
 
@@ -359,29 +379,29 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
+	"context"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/types"
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/operations"
-	"context"
 	"log"
 )
 
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
-    request := operations.ReconcileRequest{
+
+    ctx := context.Background()
+    res, err := s.Reconciliation.Reconcile(ctx, operations.ReconcileRequest{
         ReconciliationRequest: shared.ReconciliationRequest{
             ReconciledAtLedger: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
             ReconciledAtPayments: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
         },
         PolicyID: "XXX",
-    }
-    ctx := context.Background()
-    res, err := s.Reconciliation.Reconcile(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -399,14 +419,17 @@ func main() {
 | `request`                                                                      | [operations.ReconcileRequest](../../pkg/models/operations/reconcilerequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.ReconcileResponse](../../pkg/models/operations/reconcileresponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
 | sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+
 
 ## ReconciliationgetServerInfo
 
@@ -419,7 +442,6 @@ package main
 
 import(
 	"github.com/formancehq/formance-sdk-go/v2/pkg/models/shared"
-	"os"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v2"
 	"context"
 	"log"
@@ -428,7 +450,8 @@ import(
 func main() {
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
-            Authorization: os.Getenv("AUTHORIZATION"),
+            ClientID: "<YOUR_CLIENT_ID_HERE>",
+            ClientSecret: "<YOUR_CLIENT_SECRET_HERE>",
         }),
     )
 
@@ -450,10 +473,12 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.ReconciliationgetServerInfoResponse](../../pkg/models/operations/reconciliationgetserverinforesponse.md), error**
+
+### Errors
+
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
