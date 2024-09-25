@@ -2,7 +2,7 @@ workflowVersion: 1.0.0
 sources:
     my-source:
         inputs:
-            - location: https://github.com/formancehq/stack/releases/download/v2.1.0-beta.2/generate.json
+            - location: https://github.com/formancehq/stack/releases/download/v2.1.0-beta.3/generate.json
 targets:
     formance-sdk-go:
         target: go
