@@ -2,6 +2,7 @@
 
 package shared
 
+// TransferInitiationResponse - OK
 type TransferInitiationResponse struct {
 	Data TransferInitiation `json:"data"`
 }

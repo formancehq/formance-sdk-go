@@ -2,6 +2,7 @@
 
 package shared
 
+// PoolBalancesResponse - OK
 type PoolBalancesResponse struct {
 	Data PoolBalances `json:"data"`
 }

@@ -70,11 +70,10 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
-
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
 
 ## DeletePolicy
 
@@ -128,11 +127,10 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
-
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
 
 ## GetPolicy
 
@@ -186,11 +184,10 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
-
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
 
 ## GetReconciliation
 
@@ -244,11 +241,10 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
-
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
 
 ## ListPolicies
 
@@ -303,11 +299,10 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
-
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
 
 ## ListReconciliations
 
@@ -362,11 +357,10 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
-
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
 
 ## Reconcile
 
@@ -425,11 +419,10 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
-
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
 
 ## ReconciliationgetServerInfo
 
@@ -479,7 +472,7 @@ func main() {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4xx-5xx                               | */*                                   |
+| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |

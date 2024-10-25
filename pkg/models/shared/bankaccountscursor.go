@@ -45,6 +45,7 @@ func (o *BankAccountsCursorCursor) GetPrevious() *string {
 	return o.Previous
 }
 
+// BankAccountsCursor - OK
 type BankAccountsCursor struct {
 	Cursor BankAccountsCursorCursor `json:"cursor"`
 }

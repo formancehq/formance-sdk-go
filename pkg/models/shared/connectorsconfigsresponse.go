@@ -43,6 +43,7 @@ func (o *ConnectorsConfigsResponseData) GetConnector() ConnectorsConfigsResponse
 	return o.Connector
 }
 
+// ConnectorsConfigsResponse - OK
 type ConnectorsConfigsResponse struct {
 	Data ConnectorsConfigsResponseData `json:"data"`
 }

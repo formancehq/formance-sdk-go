@@ -7,7 +7,6 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 )
 
-// WebhooksErrorResponse - Error
 type WebhooksErrorResponse struct {
 	Details      *string                   `json:"details,omitempty"`
 	ErrorCode    shared.WebhooksErrorsEnum `json:"errorCode"`

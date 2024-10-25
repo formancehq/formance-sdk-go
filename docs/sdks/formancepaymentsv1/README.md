@@ -104,11 +104,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ConnectorsTransfer
 
@@ -169,11 +168,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## CreateAccount
 
@@ -230,11 +228,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## CreateBankAccount
 
@@ -289,11 +286,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## CreatePayment
 
@@ -355,11 +351,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## CreatePool
 
@@ -417,11 +412,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## CreateTransferInitiation
 
@@ -484,11 +478,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## DeletePool
 
@@ -542,11 +535,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## DeleteTransferInitiation
 
@@ -600,11 +592,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ForwardBankAccount
 
@@ -661,11 +652,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetAccountBalances
 
@@ -725,11 +715,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetBankAccount
 
@@ -783,11 +772,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ~~GetConnectorTask~~
 
@@ -844,11 +832,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetConnectorTaskV1
 
@@ -904,11 +891,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetPayment
 
@@ -962,11 +948,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetPool
 
@@ -1020,11 +1005,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetPoolBalances
 
@@ -1080,11 +1064,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetTransferInitiation
 
@@ -1138,11 +1121,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## InstallConnector
 
@@ -1174,7 +1156,7 @@ func main() {
         ConnectorConfig: shared.CreateConnectorConfigStripeConfig(
             shared.StripeConfig{
                 APIKey: "XXX",
-                Name: "My Wise Account",
+                Name: "My Stripe Account",
                 PageSize: formancesdkgo.Int64(50),
                 PollingPeriod: formancesdkgo.String("60s"),
             },
@@ -1204,11 +1186,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ListAllConnectors
 
@@ -1258,11 +1239,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ListBankAccounts
 
@@ -1321,11 +1301,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ListConfigsAvailableConnectors
 
@@ -1375,11 +1354,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ~~ListConnectorTasks~~
 
@@ -1437,11 +1415,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ListConnectorTasksV1
 
@@ -1498,11 +1475,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ListPayments
 
@@ -1561,11 +1537,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ListPools
 
@@ -1624,11 +1599,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ListTransferInitiations
 
@@ -1687,11 +1661,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## PaymentsgetAccount
 
@@ -1745,11 +1718,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## PaymentsgetServerInfo
 
@@ -1799,11 +1771,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## PaymentslistAccounts
 
@@ -1862,11 +1833,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ~~ReadConnectorConfig~~
 
@@ -1922,11 +1892,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ReadConnectorConfigV1
 
@@ -1981,11 +1950,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## RemoveAccountFromPool
 
@@ -2040,11 +2008,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ~~ResetConnector~~
 
@@ -2102,11 +2069,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ResetConnectorV1
 
@@ -2163,11 +2129,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## RetryTransferInitiation
 
@@ -2221,11 +2186,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ReverseTransferInitiation
 
@@ -2290,11 +2254,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## UdpateTransferInitiationStatus
 
@@ -2351,11 +2314,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ~~UninstallConnector~~
 
@@ -2411,11 +2373,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## UninstallConnectorV1
 
@@ -2470,11 +2431,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## UpdateBankAccountMetadata
 
@@ -2533,11 +2493,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## UpdateConnectorConfigV1
 
@@ -2600,11 +2559,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## UpdateMetadata
 
@@ -2662,7 +2620,7 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |

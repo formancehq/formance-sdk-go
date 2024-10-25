@@ -1,5 +1,7 @@
 # TransferInitiationsCursor
 
+OK
+
 
 ## Fields
 

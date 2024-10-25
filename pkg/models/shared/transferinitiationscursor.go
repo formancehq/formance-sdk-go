@@ -45,6 +45,7 @@ func (o *TransferInitiationsCursorCursor) GetPrevious() *string {
 	return o.Previous
 }
 
+// TransferInitiationsCursor - OK
 type TransferInitiationsCursor struct {
 	Cursor TransferInitiationsCursorCursor `json:"cursor"`
 }

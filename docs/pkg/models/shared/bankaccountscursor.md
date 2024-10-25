@@ -1,5 +1,7 @@
 # BankAccountsCursor
 
+OK
+
 
 ## Fields
 

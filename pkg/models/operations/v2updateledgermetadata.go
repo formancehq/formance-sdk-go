@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"net/http"
 )
 
@@ -35,7 +35,7 @@ type V2UpdateLedgerMetadataResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
-	V2ErrorResponse *sdkerrors.V2ErrorResponse
+	V2ErrorResponse *shared.V2ErrorResponse
 }
 
 func (o *V2UpdateLedgerMetadataResponse) GetContentType() string {
@@ -59,7 +59,7 @@ func (o *V2UpdateLedgerMetadataResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *sdkerrors.V2ErrorResponse {
+func (o *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
 	if o == nil {
 		return nil
 	}

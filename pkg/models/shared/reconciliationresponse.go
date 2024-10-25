@@ -2,6 +2,7 @@
 
 package shared
 
+// ReconciliationResponse - OK
 type ReconciliationResponse struct {
 	Data Reconciliation `json:"data"`
 }

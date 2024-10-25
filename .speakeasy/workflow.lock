@@ -1,8 +1,8 @@
-speakeasyVersion: 1.402.14
+speakeasyVersion: 1.421.2
 sources:
     my-source:
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:d617ab8ac96003cbd31d3ca0e3ce273be1d94ada7261e5628e8e39f0270a0c3e
+        sourceRevisionDigest: sha256:6bc44a1fb7bc8487750c41c4c6e31f4d5d480a0f0e1ee43e7dc03d5541dc26e5
         sourceBlobDigest: sha256:289baef68db829be9ab3b7d551c2c8f06c9adf872c08c55eb3d4fb8cc570d555
         tags:
             - latest
@@ -11,7 +11,7 @@ targets:
     formance-sdk-go:
         source: my-source
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:d617ab8ac96003cbd31d3ca0e3ce273be1d94ada7261e5628e8e39f0270a0c3e
+        sourceRevisionDigest: sha256:6bc44a1fb7bc8487750c41c4c6e31f4d5d480a0f0e1ee43e7dc03d5541dc26e5
         sourceBlobDigest: sha256:289baef68db829be9ab3b7d551c2c8f06c9adf872c08c55eb3d4fb8cc570d555
 workflow:
     workflowVersion: 1.0.0

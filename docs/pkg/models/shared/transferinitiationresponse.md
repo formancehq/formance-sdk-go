@@ -1,5 +1,7 @@
 # TransferInitiationResponse
 
+OK
+
 
 ## Fields
 
