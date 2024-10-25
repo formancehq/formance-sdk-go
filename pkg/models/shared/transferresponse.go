@@ -2,6 +2,7 @@
 
 package shared
 
+// TransferResponse - OK
 type TransferResponse struct {
 	ID *string `json:"id,omitempty"`
 }

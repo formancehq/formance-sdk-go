@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -113,7 +112,7 @@ type ListAccountsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Not found
-	ErrorResponse *sdkerrors.ErrorResponse
+	ErrorResponse *shared.ErrorResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -134,7 +133,7 @@ func (o *ListAccountsResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *ListAccountsResponse) GetErrorResponse() *sdkerrors.ErrorResponse {
+func (o *ListAccountsResponse) GetErrorResponse() *shared.ErrorResponse {
 	if o == nil {
 		return nil
 	}

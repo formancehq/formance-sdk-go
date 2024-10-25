@@ -1,5 +1,7 @@
 # BankAccountResponse
 
+OK
+
 
 ## Fields
 

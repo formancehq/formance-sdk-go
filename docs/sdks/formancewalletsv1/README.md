@@ -79,11 +79,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## CreateBalance
 
@@ -137,11 +136,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## CreateWallet
 
@@ -193,11 +191,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## CreditWallet
 
@@ -269,11 +266,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## DebitWallet
 
@@ -338,11 +334,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## GetBalance
 
@@ -397,11 +392,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## GetHold
 
@@ -455,11 +449,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## GetHolds
 
@@ -518,11 +511,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## GetTransactions
 
@@ -576,11 +568,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## GetWallet
 
@@ -634,11 +625,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## GetWalletSummary
 
@@ -692,11 +682,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## ListBalances
 
@@ -750,10 +739,9 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListWallets
 
@@ -813,11 +801,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## UpdateWallet
 
@@ -871,11 +858,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## VoidHold
 
@@ -929,11 +915,10 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
-
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
 
 ## WalletsgetServerInfo
 
@@ -983,7 +968,7 @@ func main() {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4xx-5xx                        | */*                            |
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |

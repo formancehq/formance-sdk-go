@@ -2,6 +2,7 @@
 
 package shared
 
+// BankAccountResponse - OK
 type BankAccountResponse struct {
 	Data BankAccount `json:"data"`
 }

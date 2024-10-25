@@ -3,10 +3,10 @@ id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
   docChecksum: d5d12540f5ed5f4996d23aae4cd97c31
   docVersion: v2.1.0-beta.3
-  speakeasyVersion: 1.402.14
-  generationVersion: 2.422.22
-  releaseVersion: 3.0.0
-  configChecksum: 193868b3b977f4d31694f2f8d41e6c7b
+  speakeasyVersion: 1.421.2
+  generationVersion: 2.438.15
+  releaseVersion: 3.1.0
+  configChecksum: 03ce477cf73e43e256e6c3763d373210
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -14,13 +14,14 @@ management:
 features:
   go:
     additionalDependencies: 0.1.0
+    bigint: 0.0.2
     constsAndDefaults: 0.1.6
-    core: 3.5.10
+    core: 3.5.13
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     downloadStreams: 0.1.2
     envVarSecurityUsage: 0.3.1
-    errors: 2.81.9
+    errors: 2.81.10
     getRequestBodies: 2.81.1
     globalSecurity: 2.82.10
     globalSecurityCallbacks: 0.1.0
@@ -29,7 +30,7 @@ features:
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
     nullables: 0.1.0
-    oauth2ClientCredentials: 0.2.1
+    oauth2ClientCredentials: 0.2.2
     responseFormat: 0.1.2
     retries: 2.83.0
     sdkHooks: 0.1.0
@@ -289,6 +290,7 @@ generatedFiles:
   - /pkg/models/shared/debitwalletrequest.go
   - /pkg/models/shared/debitwalletresponse.go
   - /pkg/models/shared/dummypayconfig.go
+  - /pkg/models/shared/errorresponse.go
   - /pkg/models/shared/errorsenum.go
   - /pkg/models/shared/expandeddebithold.go
   - /pkg/models/shared/forwardbankaccountrequest.go
@@ -467,6 +469,7 @@ generatedFiles:
   - /pkg/models/shared/v2createworkflowresponse.go
   - /pkg/models/shared/v2creditwalletrequest.go
   - /pkg/models/shared/v2debitwalletrequest.go
+  - /pkg/models/shared/v2errorresponse.go
   - /pkg/models/shared/v2errorsenum.go
   - /pkg/models/shared/v2expandedtransaction.go
   - /pkg/models/shared/v2getledgerresponse.go
@@ -974,6 +977,7 @@ generatedFiles:
   - docs/pkg/models/shared/debitwalletresponse.md
   - docs/pkg/models/shared/descriptor.md
   - docs/pkg/models/shared/dummypayconfig.md
+  - docs/pkg/models/shared/errorresponse.md
   - docs/pkg/models/shared/errorsenum.md
   - docs/pkg/models/shared/expandeddebithold.md
   - docs/pkg/models/shared/expr.md
@@ -1215,6 +1219,7 @@ generatedFiles:
   - docs/pkg/models/shared/v2createworkflowresponse.md
   - docs/pkg/models/shared/v2creditwalletrequest.md
   - docs/pkg/models/shared/v2debitwalletrequest.md
+  - docs/pkg/models/shared/v2errorresponse.md
   - docs/pkg/models/shared/v2errorsenum.md
   - docs/pkg/models/shared/v2expandedtransaction.md
   - docs/pkg/models/shared/v2getledgerresponse.md
@@ -1733,7 +1738,7 @@ examples:
         application/json: []
       responses:
         "200":
-          application/json: {"data": [{"data": {"id": 53724, "metadata": {"admin": "true"}, "postings": [{"amount": 100, "asset": "COIN", "destination": "users:002", "source": "users:001"}, {"amount": 100, "asset": "COIN", "destination": "users:002", "source": "users:001"}], "reference": "ref:001", "reverted": true, "timestamp": "2024-02-23T19:00:39.584Z"}, "responseType": "<value>"}, {"data": {"id": 446171, "metadata": {"admin": "true"}, "postings": [], "reference": "ref:001", "reverted": true, "timestamp": "2022-09-20T21:29:43.759Z"}, "responseType": "<value>"}]}
+          application/json: {"data": [{"data": {"id": 675402, "metadata": {"admin": "true"}, "postings": [{"amount": 100, "asset": "COIN", "destination": "users:002", "source": "users:001"}], "reference": "ref:001", "reverted": true, "timestamp": "2023-12-06T13:18:01.588Z"}, "responseType": "<value>"}, {"responseType": "<value>"}]}
         default:
           application/json: {"details": "https://play.numscript.org/?payload=eyJlcnJvciI6ImFjY291bnQgaGFkIGluc3VmZmljaWVudCBmdW5kcyJ9", "errorCode": "VALIDATION", "errorMessage": "[VALIDATION] invalid 'cursor' query param"}
   v2CreateLedger:
@@ -2170,7 +2175,7 @@ examples:
           instanceID: "xxx"
       responses:
         "200":
-          application/json: {"data": [{"name": "<value>", "startedAt": "2023-12-22T06:06:34.439Z", "terminated": true}, {"name": "<value>", "startedAt": "2022-03-31T15:11:10.794Z", "terminated": true}]}
+          application/json: {"data": [{"input": {"event": "<value>"}, "name": "<value>", "startedAt": "2023-12-22T06:06:34.439Z", "terminated": true}, {"name": "<value>", "startedAt": "2022-03-31T15:11:10.794Z", "terminated": true}]}
         default:
           application/json: {"errorCode": "INTERNAL", "errorMessage": "<value>"}
   v2GetInstanceStageHistory:
@@ -2308,6 +2313,7 @@ examples:
       responses:
         default:
           application/json: {"errorCode": "VALIDATION", "errorMessage": "[VALIDATION] missing reference"}
+        "200": {}
   createAccount:
     speakeasy-default-create-account:
       requestBody:
@@ -2413,7 +2419,7 @@ examples:
           taskId: "task1"
       responses:
         "200":
-          application/json: {"data": {"connectorID": "<value>", "createdAt": "2024-02-09T17:39:38.418Z", "id": "8d4a71ba-4575-442a-9fdb-17eed3b13ec7", "status": "CANCELLED", "updatedAt": "2024-04-25T00:27:47.982Z"}}
+          application/json: {"data": {"connectorID": "<id>", "createdAt": "2022-09-14T18:08:36.551Z", "id": "b8d4a71b-a457-4542-9afd-b17eed3b13ec", "status": "EXPIRED", "updatedAt": "2022-08-01T16:40:57.832Z"}}
         default:
           application/json: {"errorCode": "VALIDATION", "errorMessage": "[VALIDATION] missing reference"}
   getConnectorTaskV1:
@@ -2425,7 +2431,7 @@ examples:
           taskId: "task1"
       responses:
         "200":
-          application/json: {"data": {"connectorID": "<value>", "createdAt": "2022-06-20T11:48:17.213Z", "id": "592c3a8b-a286-4c92-93fe-1c798f795cd7", "status": "SUCCEEDED", "updatedAt": "2024-11-10T01:58:07.691Z"}}
+          application/json: {"data": {"connectorID": "<id>", "createdAt": "2023-05-15T09:04:44.604Z", "id": "2592c3a8-ba28-46c9-923f-e1c798f795cd", "status": "CANCELLED", "updatedAt": "2022-05-07T01:38:27.888Z"}}
         default:
           application/json: {"errorCode": "VALIDATION", "errorMessage": "[VALIDATION] missing reference"}
   getPayment:
@@ -2476,7 +2482,7 @@ examples:
         path:
           connector: "ATLAR"
       requestBody:
-        application/json: {"apiKey": "XXX", "name": "My Wise Account", "pollingPeriod": "60s"}
+        application/json: {"apiKey": "XXX", "name": "My Stripe Account", "pageSize": 50, "pollingPeriod": "60s"}
       responses:
         "201":
           application/json: {"data": {"connectorID": "<value>"}}
@@ -2518,7 +2524,7 @@ examples:
           cursor: "aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="
       responses:
         "200":
-          application/json: {"cursor": {"data": [{"connectorID": "<value>", "createdAt": "2023-03-31T15:06:52.730Z", "id": "943abad6-1f7a-4a0d-b991-cf9266dd4814", "status": "REFUNDED_FAILURE", "updatedAt": "2023-10-16T18:08:06.313Z"}, {"connectorID": "<value>", "createdAt": "2022-09-08T19:27:52.424Z", "id": "f678351b-c600-4cf3-beff-e2c5cad006d4", "status": "DISPUTE_LOST", "updatedAt": "2023-02-03T08:52:20.456Z"}], "hasMore": false, "next": "", "pageSize": 15, "previous": "YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="}}
+          application/json: {"cursor": {"data": [{"connectorID": "<id>", "createdAt": "2023-08-25T00:07:31.663Z", "id": "86943aba-d61f-47aa-80d9-91cf9266dd48", "status": "FAILED", "updatedAt": "2024-07-04T01:56:37.650Z"}, {"connectorID": "<id>", "createdAt": "2023-10-16T18:08:06.313Z", "id": "c3f67835-1bc6-400c-bf3e-ffe2c5cad006", "status": "FAILED", "updatedAt": "2024-12-26T02:29:47.666Z"}], "hasMore": false, "next": "", "pageSize": 15, "previous": "YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="}}
         default:
           application/json: {"errorCode": "VALIDATION", "errorMessage": "[VALIDATION] missing reference"}
   listConnectorTasksV1:
@@ -2532,7 +2538,7 @@ examples:
           cursor: "aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="
       responses:
         "200":
-          application/json: {"cursor": {"data": [{"connectorID": "<value>", "createdAt": "2023-08-31T08:25:15.703Z", "id": "119bf1d7-7f0d-47a9-85f6-d1de55906fa5", "status": "EXPIRED", "updatedAt": "2022-03-08T11:32:23.574Z"}, {"connectorID": "<value>", "createdAt": "2023-12-27T08:45:38.166Z", "id": "636e772b-1d53-4e6e-b1a0-f8d94fbd4d08", "status": "CANCELLED", "updatedAt": "2024-04-25T04:53:52.895Z"}, {"connectorID": "<value>", "createdAt": "2024-04-15T21:11:42.740Z", "id": "3d5edc7f-3fcd-42b1-a430-91094b0590aa", "status": "REFUNDED", "updatedAt": "2022-02-23T06:58:36.788Z"}], "hasMore": false, "next": "", "pageSize": 15, "previous": "YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="}}
+          application/json: {"cursor": {"data": [{"connectorID": "<id>", "createdAt": "2024-06-21T02:32:58.781Z", "id": "98119bf1-d77f-40d7-aa95-f6d1de55906f", "status": "EXPIRED", "updatedAt": "2022-05-12T10:18:09.979Z"}, {"connectorID": "<id>", "createdAt": "2022-03-08T11:32:23.574Z", "id": "6a636e77-2b1d-453e-86e1-a0f8d94fbd4d", "status": "REFUNDED", "updatedAt": "2024-05-01T19:24:21.069Z"}, {"connectorID": "<id>", "createdAt": "2024-04-25T04:53:52.895Z", "id": "dc3d5edc-7f3f-4cd2-ab14-3091094b0590", "status": "DISPUTE", "updatedAt": "2024-01-15T12:09:57.416Z"}], "hasMore": false, "next": "", "pageSize": 15, "previous": "YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="}}
         default:
           application/json: {"errorCode": "VALIDATION", "errorMessage": "[VALIDATION] missing reference"}
   listPayments:

@@ -90,11 +90,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## AddMetadataToAccount
 
@@ -153,11 +152,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CountAccounts
 
@@ -211,11 +209,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CountTransactions
 
@@ -269,11 +266,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CreateBulk
 
@@ -334,11 +330,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CreateLedger
 
@@ -397,11 +392,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CreateTransaction
 
@@ -484,11 +478,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## DeleteAccountMetadata
 
@@ -544,11 +537,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## DeleteLedgerMetadata
 
@@ -603,11 +595,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## DeleteTransactionMetadata
 
@@ -664,11 +655,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ExportLogs
 
@@ -722,10 +712,9 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetAccount
 
@@ -780,11 +769,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetBalancesAggregated
 
@@ -838,11 +826,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetInfo
 
@@ -892,11 +879,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetLedger
 
@@ -950,11 +936,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetLedgerInfo
 
@@ -1008,11 +993,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetTransaction
 
@@ -1068,11 +1052,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetVolumesWithBalances
 
@@ -1129,11 +1112,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ImportLogs
 
@@ -1185,11 +1167,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ListAccounts
 
@@ -1245,11 +1226,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ListLedgers
 
@@ -1304,11 +1284,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ListLogs
 
@@ -1364,11 +1343,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ListTransactions
 
@@ -1424,11 +1402,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ReadStats
 
@@ -1483,11 +1460,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## RevertTransaction
 
@@ -1543,11 +1519,10 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
-
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## UpdateLedgerMetadata
 
@@ -1604,7 +1579,7 @@ func main() {
 
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
+| Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4xx-5xx                   | */*                       |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |

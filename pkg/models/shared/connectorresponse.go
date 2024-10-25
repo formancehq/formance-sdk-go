@@ -13,6 +13,7 @@ func (o *Data) GetConnectorID() string {
 	return o.ConnectorID
 }
 
+// ConnectorResponse - OK
 type ConnectorResponse struct {
 	Data Data `json:"data"`
 }

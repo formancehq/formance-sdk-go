@@ -2,6 +2,7 @@
 
 package shared
 
+// ConnectorConfigResponse - OK
 type ConnectorConfigResponse struct {
 	Data ConnectorConfig `json:"data"`
 }

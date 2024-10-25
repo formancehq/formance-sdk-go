@@ -1,7 +1,5 @@
 # WalletsErrorResponse
 
-Error
-
 
 ## Fields
 

@@ -2,6 +2,7 @@
 
 package shared
 
+// PolicyResponse - OK
 type PolicyResponse struct {
 	Data Policy `json:"data"`
 }

@@ -65,11 +65,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## ChangeConfigSecret
 
@@ -130,11 +129,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## DeactivateConfig
 
@@ -188,11 +186,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## DeleteConfig
 
@@ -246,11 +243,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## GetManyConfigs
 
@@ -305,11 +301,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## InsertConfig
 
@@ -376,11 +371,10 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
-
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
 
 ## TestConfig
 
@@ -434,7 +428,7 @@ func main() {
 
 ### Errors
 
-| Error Object                    | Status Code                     | Content Type                    |
+| Error Type                      | Status Code                     | Content Type                    |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4xx-5xx                         | */*                             |
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |

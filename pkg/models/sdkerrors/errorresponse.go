@@ -7,7 +7,6 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 )
 
-// ErrorResponse - Error
 type ErrorResponse struct {
 	Details      *string           `json:"details,omitempty"`
 	ErrorCode    shared.ErrorsEnum `json:"errorCode"`

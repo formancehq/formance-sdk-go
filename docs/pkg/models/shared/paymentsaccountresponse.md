@@ -1,5 +1,7 @@
 # PaymentsAccountResponse
 
+OK
+
 
 ## Fields
 
