@@ -9,13 +9,15 @@ generation:
     requestResponseComponentNamesFeb2024: false
   auth:
     oAuth2ClientCredentialsEnabled: true
+    oAuth2PasswordEnabled: false
   telemetryEnabled: false
 go:
-  version: 3.1.0
+  version: 3.2.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
   author: Formance
   clientServerStatusCodesAsErrors: true
+  defaultErrorName: SDKError
   flattenGlobalSecurity: false
   imports:
     option: openapi

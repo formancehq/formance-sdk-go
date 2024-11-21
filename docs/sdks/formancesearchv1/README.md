@@ -5,12 +5,14 @@
 
 ### Available Operations
 
-* [Search](#search) - search.v1
-* [SearchgetServerInfo](#searchgetserverinfo) - Get server info
+* [~~Search~~](#search) - search.v1 :warning: **Deprecated**
+* [~~SearchgetServerInfo~~](#searchgetserverinfo) - Get server info :warning: **Deprecated**
 
-## Search
+## ~~Search~~
 
 Elasticsearch.v1 query engine
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -75,9 +77,11 @@ func main() {
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## SearchgetServerInfo
+## ~~SearchgetServerInfo~~
 
 Get server info
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
