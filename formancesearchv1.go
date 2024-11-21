@@ -6,11 +6,11 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/cenkalti/backoff/v4"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"net/url"
@@ -28,6 +28,8 @@ func newFormanceSearchV1(sdkConfig sdkConfiguration) *FormanceSearchV1 {
 
 // Search - search.v1
 // Elasticsearch.v1 query engine
+//
+// Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opts ...operations.Option) (*operations.SearchResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -112,7 +114,11 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 
 			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 			if err != nil {
-				return nil, backoff.Permanent(err)
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
 			}
 
 			httpRes, err := s.sdkConfiguration.Client.Do(req)
@@ -208,6 +214,8 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 }
 
 // SearchgetServerInfo - Get server info
+//
+// Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.SearchgetServerInfoResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -286,7 +294,11 @@ func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...oper
 
 			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 			if err != nil {
-				return nil, backoff.Permanent(err)
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
 			}
 
 			httpRes, err := s.sdkConfiguration.Client.Do(req)

@@ -10,3 +10,7 @@ targets:
     formance-sdk-go:
         target: go
         source: my-source
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/formance/formance/my-source-code-samples
+            blocking: false

@@ -7,7 +7,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/cenkalti/backoff/v4"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
@@ -230,10 +229,10 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v2.1.0-beta.3",
-			SDKVersion:        "3.1.0",
-			GenVersion:        "2.438.15",
-			UserAgent:         "speakeasy-sdk/go 3.1.0 2.438.15 v2.1.0-beta.3 github.com/formancehq/formance-sdk-go",
+			OpenAPIDocVersion: "v2.1.1",
+			SDKVersion:        "3.2.0",
+			GenVersion:        "2.461.2",
+			UserAgent:         "speakeasy-sdk/go 3.2.0 2.461.2 v2.1.1 github.com/formancehq/formance-sdk-go",
 			ServerDefaults: []map[string]string{
 				{},
 				{
@@ -358,7 +357,11 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 
 			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 			if err != nil {
-				return nil, backoff.Permanent(err)
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
 			}
 
 			httpRes, err := s.sdkConfiguration.Client.Do(req)

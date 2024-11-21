@@ -43,7 +43,6 @@ and standard method from web, mobile and desktop applications.
 * [Server Selection](#server-selection)
 * [Custom HTTP Client](#custom-http-client)
 * [Authentication](#authentication)
-* [Special Types](#special-types)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -280,13 +279,13 @@ func main() {
 * [Reconcile](docs/sdks/formancereconciliationv1/README.md#reconcile) - Reconcile using a policy
 * [ReconciliationgetServerInfo](docs/sdks/formancereconciliationv1/README.md#reconciliationgetserverinfo) - Get server info
 
-### [Search](docs/sdks/search/README.md)
+### [~~Search~~](docs/sdks/search/README.md)
 
 
-#### [Search.V1](docs/sdks/formancesearchv1/README.md)
+#### [~~Search.V1~~](docs/sdks/formancesearchv1/README.md)
 
-* [Search](docs/sdks/formancesearchv1/README.md#search) - search.v1
-* [SearchgetServerInfo](docs/sdks/formancesearchv1/README.md#searchgetserverinfo) - Get server info
+* [~~Search~~](docs/sdks/formancesearchv1/README.md#search) - search.v1 :warning: **Deprecated**
+* [~~SearchgetServerInfo~~](docs/sdks/formancesearchv1/README.md#searchgetserverinfo) - Get server info :warning: **Deprecated**
 
 ### [Wallets](docs/sdks/wallets/README.md)
 
@@ -335,10 +334,10 @@ By Default, an API error will return `sdkerrors.SDKError`. When custom error res
 
 For example, the `CreateTransactions` function may return the following errors:
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type              | Status Code | Content Type     |
+| ----------------------- | ----------- | ---------------- |
+| sdkerrors.ErrorResponse | default     | application/json |
+| sdkerrors.SDKError      | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -419,12 +418,16 @@ func main() {
 
 ### Select Server by Index
 
-You can override the default server globally using the `WithServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+You can override the default server globally using the `WithServerIndex(serverIndex int)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `http://localhost` | None |
-| 1 | `https://{organization}.{environment}.formance.cloud` | `environment` (default is `sandbox`), `organization` (default is `orgID-stackID`) |
+| #   | Server                                                | Variables                                                 | Default values                    |
+| --- | ----------------------------------------------------- | --------------------------------------------------------- | --------------------------------- |
+| 0   | `http://localhost`                                    |                                                           |                                   |
+| 1   | `https://{organization}.{environment}.formance.cloud` | `environment ServerEnvironment`<br/>`organization string` | `"sandbox"`<br/>`"orgID-stackID"` |
+
+If the selected server has variables, you may override their default values using their associated option(s):
+ * `WithEnvironment(environment ServerEnvironment)`
+ * `WithOrganization(organization string)`
 
 #### Example
 
@@ -459,15 +462,9 @@ func main() {
 
 ```
 
-#### Variables
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
- * `WithEnvironment formancesdkgo.ServerEnvironment`
- * `WithOrganization string`
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
 ```go
 package main
 
@@ -536,9 +533,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 This SDK supports the following security scheme globally:
 
-| Name                           | Type                           | Scheme                         |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| `ClientID` `ClientSecret`      | oauth2                         | OAuth2 Client Credentials Flow |
+| Name                          | Type   | Scheme                         |
+| ----------------------------- | ------ | ------------------------------ |
+| `ClientID`<br/>`ClientSecret` | oauth2 | OAuth2 Client Credentials Flow |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go
@@ -571,12 +568,6 @@ func main() {
 
 ```
 <!-- End Authentication [security] -->
-
-<!-- Start Special Types [types] -->
-## Special Types
-
-
-<!-- End Special Types [types] -->
 
 <!-- Start Retries [retries] -->
 ## Retries

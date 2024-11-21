@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
-  docChecksum: d5d12540f5ed5f4996d23aae4cd97c31
-  docVersion: v2.1.0-beta.3
-  speakeasyVersion: 1.421.2
-  generationVersion: 2.438.15
-  releaseVersion: 3.1.0
-  configChecksum: 03ce477cf73e43e256e6c3763d373210
+  docChecksum: 26dc51843f72f8922c6265f03b5e50f2
+  docVersion: v2.1.1
+  speakeasyVersion: 1.441.1
+  generationVersion: 2.461.2
+  releaseVersion: 3.2.0
+  configChecksum: b812fde5f0bec9753664edd8d3b48ce8
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -16,12 +16,12 @@ features:
     additionalDependencies: 0.1.0
     bigint: 0.0.2
     constsAndDefaults: 0.1.6
-    core: 3.5.13
+    core: 3.5.16
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     downloadStreams: 0.1.2
-    envVarSecurityUsage: 0.3.1
-    errors: 2.81.10
+    envVarSecurityUsage: 0.3.2
+    errors: 2.83.0
     getRequestBodies: 2.81.1
     globalSecurity: 2.82.10
     globalSecurityCallbacks: 0.1.0
@@ -32,9 +32,10 @@ features:
     nullables: 0.1.0
     oauth2ClientCredentials: 0.2.2
     responseFormat: 0.1.2
-    retries: 2.83.0
+    retries: 2.83.1
     sdkHooks: 0.1.0
-    unions: 2.85.9
+    tests: 0.6.0
+    unions: 2.85.10
 generatedFiles:
   - .gitattributes
   - /pkg/models/operations/activateconfig.go
@@ -2175,7 +2176,7 @@ examples:
           instanceID: "xxx"
       responses:
         "200":
-          application/json: {"data": [{"input": {"event": "<value>"}, "name": "<value>", "startedAt": "2023-12-22T06:06:34.439Z", "terminated": true}, {"name": "<value>", "startedAt": "2022-03-31T15:11:10.794Z", "terminated": true}]}
+          application/json: {"data": [{"input": {"event": "<value>"}, "name": "<value>", "startedAt": "2023-12-22T06:06:34.439Z", "terminated": true}, {"input": {"event": "<value>"}, "name": "<value>", "startedAt": "2022-03-31T15:11:10.794Z", "terminated": true}]}
         default:
           application/json: {"errorCode": "INTERNAL", "errorMessage": "<value>"}
   v2GetInstanceStageHistory:
