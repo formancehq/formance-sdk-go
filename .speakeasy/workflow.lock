@@ -19,7 +19,7 @@ workflow:
     sources:
         my-source:
             inputs:
-                - location: https://github.com/formancehq/stack/releases/download/v2.1.0-beta.3/generate.json
+                - location: https://github.com/formancehq/stack/releases/download/v2.1.1/generate.json
             registry:
                 location: registry.speakeasyapi.dev/formance/formance/my-source
     targets:
