@@ -1,7 +1,7 @@
 speakeasyVersion: 1.441.1
 sources:
-    my-source:
-        sourceNamespace: my-source
+    stacks-source:
+        sourceNamespace: stacks-source
         sourceRevisionDigest: sha256:6c079401c838cca6a0f30f0fa3503effd8101563b076eda0d3e8410921627122
         sourceBlobDigest: sha256:32629e12788197e47087a513dddd7268e312e34ebcdf92b037a278687f751892
         tags:
@@ -9,26 +9,26 @@ sources:
             - speakeasy-sdk-regen-1732202887
 targets:
     formance-sdk-go:
-        source: my-source
-        sourceNamespace: my-source
+        source: stacks-source
+        sourceNamespace: stacks-source
         sourceRevisionDigest: sha256:6c079401c838cca6a0f30f0fa3503effd8101563b076eda0d3e8410921627122
         sourceBlobDigest: sha256:32629e12788197e47087a513dddd7268e312e34ebcdf92b037a278687f751892
-        codeSamplesNamespace: my-source-code-samples
+        codeSamplesNamespace: stacks-source-code-samples
         codeSamplesRevisionDigest: sha256:674bfe2b1efd8f6a3b877d7a6fd19a0ac18bdcd435fe5df6401e2789be4c1d7a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
-        my-source:
+        stacks-source:
             inputs:
-                - location: https://github.com/formancehq/stack/releases/download/v2.1.2/generate.json
+                - location: https://github.com/formancehq/stack/releases/download/v3.0.0-rc.1/generate.json
             registry:
-                location: registry.speakeasyapi.dev/formance/formance/my-source
+                location: registry.speakeasyapi.dev/formance/formance/stacks-source
     targets:
         formance-sdk-go:
             target: go
-            source: my-source
+            source: stacks-source
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/formance/formance/my-source-code-samples
+                    location: registry.speakeasyapi.dev/formance/formance/stacks-source-code-samples
                 blocking: false
