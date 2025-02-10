@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
 
@@ -27,7 +26,7 @@ type ListAccountsRequest struct {
 	Metadata map[string]any `queryParam:"style=deepObject,explode=true,name=metadata"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// Parameter used in pagination requests. Maximum page size is set to 1000.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -35,19 +34,8 @@ type ListAccountsRequest struct {
 	// Deprecated, please use `cursor` instead.
 	//
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	PaginationToken *string `queryParam:"style=form,explode=true,name=pagination_token"`
-}
-
-func (l ListAccountsRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(l, "", false)
-}
-
-func (l *ListAccountsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *ListAccountsRequest) GetAddress() *string {

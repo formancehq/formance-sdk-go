@@ -3,8 +3,8 @@
 package formancesdkgo
 
 type Ledger struct {
-	V1 *FormanceV1
 	V2 *V2
+	V1 *FormanceV1
 
 	sdkConfiguration sdkConfiguration
 }
@@ -12,7 +12,7 @@ type Ledger struct {
 func newLedger(sdkConfig sdkConfiguration) *Ledger {
 	return &Ledger{
 		sdkConfiguration: sdkConfig,
-		V1:               newFormanceV1(sdkConfig),
 		V2:               newV2(sdkConfig),
+		V1:               newFormanceV1(sdkConfig),
 	}
 }

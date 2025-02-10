@@ -34,15 +34,23 @@ and standard method from web, mobile and desktop applications.
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
-
-* [SDK Installation](#sdk-installation)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
+<!-- $toc-max-depth=2 -->
+* [github.com/formancehq/formance-sdk-go/v2](#githubcomformancehqformance-sdk-gov2)
+  * [🏗 **Welcome to your new SDK!** 🏗](#welcome-to-your-new-sdk)
+* [Introduction](#introduction)
 * [Authentication](#authentication)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication-1)
+  * [Retries](#retries)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
+
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -70,6 +78,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
 			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -77,7 +87,6 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
 	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -161,6 +170,7 @@ func main() {
 * [GetInfo](docs/sdks/v2/README.md#getinfo) - Show server information
 * [GetLedger](docs/sdks/v2/README.md#getledger) - Get a ledger
 * [GetLedgerInfo](docs/sdks/v2/README.md#getledgerinfo) - Get information about a ledger
+* [GetMetrics](docs/sdks/v2/README.md#getmetrics) - Read in memory metrics
 * [GetTransaction](docs/sdks/v2/README.md#gettransaction) - Get transaction from a ledger by its ID
 * [GetVolumesWithBalances](docs/sdks/v2/README.md#getvolumeswithbalances) - Get list of volumes with balances for (account/asset)
 * [ImportLogs](docs/sdks/v2/README.md#importlogs)
@@ -265,6 +275,53 @@ func main() {
 * [UpdateConnectorConfigV1](docs/sdks/formancepaymentsv1/README.md#updateconnectorconfigv1) - Update the config of a connector
 * [UpdateMetadata](docs/sdks/formancepaymentsv1/README.md#updatemetadata) - Update metadata
 
+#### [Payments.V3](docs/sdks/v3/README.md)
+
+* [AddAccountToPool](docs/sdks/v3/README.md#addaccounttopool) - Add an account to a pool
+* [ApprovePaymentInitiation](docs/sdks/v3/README.md#approvepaymentinitiation) - Approve a payment initiation
+* [CreateAccount](docs/sdks/v3/README.md#createaccount) - Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
+
+* [CreateBankAccount](docs/sdks/v3/README.md#createbankaccount) - Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
+
+* [CreatePayment](docs/sdks/v3/README.md#createpayment) - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
+
+* [CreatePool](docs/sdks/v3/README.md#createpool) - Create a formance pool object
+* [DeletePaymentInitiation](docs/sdks/v3/README.md#deletepaymentinitiation) - Delete a payment initiation by ID
+* [DeletePool](docs/sdks/v3/README.md#deletepool) - Delete a pool by ID
+* [ForwardBankAccount](docs/sdks/v3/README.md#forwardbankaccount) - Forward a Bank Account to a PSP for creation
+* [GetAccount](docs/sdks/v3/README.md#getaccount) - Get an account by ID
+* [GetAccountBalances](docs/sdks/v3/README.md#getaccountbalances) - Get account balances
+* [GetBankAccount](docs/sdks/v3/README.md#getbankaccount) - Get a Bank Account by ID
+* [GetConnectorConfig](docs/sdks/v3/README.md#getconnectorconfig) - Get a connector configuration by ID
+* [GetConnectorSchedule](docs/sdks/v3/README.md#getconnectorschedule) - Get a connector schedule by ID
+* [GetInfo](docs/sdks/v3/README.md#getinfo) - Show server information
+* [GetPayment](docs/sdks/v3/README.md#getpayment) - Get a payment by ID
+* [GetPaymentInitiation](docs/sdks/v3/README.md#getpaymentinitiation) - Get a payment initiation by ID
+* [GetPool](docs/sdks/v3/README.md#getpool) - Get a pool by ID
+* [GetPoolBalances](docs/sdks/v3/README.md#getpoolbalances) - Get pool balances
+* [GetTask](docs/sdks/v3/README.md#gettask) - Get a task and its result by ID
+* [InitiatePayment](docs/sdks/v3/README.md#initiatepayment) - Initiate a payment
+* [InstallConnector](docs/sdks/v3/README.md#installconnector) - Install a connector
+* [ListAccounts](docs/sdks/v3/README.md#listaccounts) - List all accounts
+* [ListBankAccounts](docs/sdks/v3/README.md#listbankaccounts) - List all bank accounts
+* [ListConnectorConfigs](docs/sdks/v3/README.md#listconnectorconfigs) - List all connector configurations
+* [ListConnectorScheduleInstances](docs/sdks/v3/README.md#listconnectorscheduleinstances) - List all connector schedule instances
+* [ListConnectorSchedules](docs/sdks/v3/README.md#listconnectorschedules) - List all connector schedules
+* [ListConnectors](docs/sdks/v3/README.md#listconnectors) - List all connectors
+* [ListPaymentInitiationAdjustments](docs/sdks/v3/README.md#listpaymentinitiationadjustments) - List all payment initiation adjustments
+* [ListPaymentInitiationRelatedPayments](docs/sdks/v3/README.md#listpaymentinitiationrelatedpayments) - List all payments related to a payment initiation
+* [ListPaymentInitiations](docs/sdks/v3/README.md#listpaymentinitiations) - List all payment initiations
+* [ListPayments](docs/sdks/v3/README.md#listpayments) - List all payments
+* [ListPools](docs/sdks/v3/README.md#listpools) - List all pools
+* [RejectPaymentInitiation](docs/sdks/v3/README.md#rejectpaymentinitiation) - Reject a payment initiation
+* [RemoveAccountFromPool](docs/sdks/v3/README.md#removeaccountfrompool) - Remove an account from a pool
+* [ResetConnector](docs/sdks/v3/README.md#resetconnector) - Reset a connector. Be aware that this will delete all data and stop all existing tasks like payment initiations and bank account creations.
+* [RetryPaymentInitiation](docs/sdks/v3/README.md#retrypaymentinitiation) - Retry a payment initiation
+* [ReversePaymentInitiation](docs/sdks/v3/README.md#reversepaymentinitiation) - Reverse a payment initiation
+* [UninstallConnector](docs/sdks/v3/README.md#uninstallconnector) - Uninstall a connector
+* [UpdateBankAccountMetadata](docs/sdks/v3/README.md#updatebankaccountmetadata) - Update a bank account's metadata
+* [UpdatePaymentMetadata](docs/sdks/v3/README.md#updatepaymentmetadata) - Update a payment's metadata
+
 ### [Reconciliation](docs/sdks/reconciliation/README.md)
 
 
@@ -321,6 +378,7 @@ func main() {
 * [GetManyConfigs](docs/sdks/formancewebhooksv1/README.md#getmanyconfigs) - Get many configs
 * [InsertConfig](docs/sdks/formancewebhooksv1/README.md#insertconfig) - Insert a new config
 * [TestConfig](docs/sdks/formancewebhooksv1/README.md#testconfig) - Test one config
+* [UpdateConfig](docs/sdks/formancewebhooksv1/README.md#updateconfig) - Update one config
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -332,12 +390,12 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `sdkerrors.SDKError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `CreateTransactions` function may return the following errors:
+For example, the `AddMetadataOnTransaction` function may return the following errors:
 
-| Error Type              | Status Code | Content Type     |
-| ----------------------- | ----------- | ---------------- |
-| sdkerrors.ErrorResponse | default     | application/json |
-| sdkerrors.SDKError      | 4XX, 5XX    | \*/\*            |
+| Error Type                | Status Code | Content Type     |
+| ------------------------- | ----------- | ---------------- |
+| sdkerrors.V2ErrorResponse | default     | application/json |
+| sdkerrors.SDKError        | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -356,6 +414,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
 			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -363,40 +423,17 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
-	res, err := s.Ledger.V1.CreateTransactions(ctx, operations.CreateTransactionsRequest{
-		Transactions: shared.Transactions{
-			Transactions: []shared.TransactionData{
-				shared.TransactionData{
-					Postings: []shared.Posting{
-						shared.Posting{
-							Amount:      big.NewInt(100),
-							Asset:       "COIN",
-							Destination: "users:002",
-							Source:      "users:001",
-						},
-						shared.Posting{
-							Amount:      big.NewInt(100),
-							Asset:       "COIN",
-							Destination: "users:002",
-							Source:      "users:001",
-						},
-						shared.Posting{
-							Amount:      big.NewInt(100),
-							Asset:       "COIN",
-							Destination: "users:002",
-							Source:      "users:001",
-						},
-					},
-					Reference: formancesdkgo.String("ref:001"),
-				},
-			},
+	res, err := s.Ledger.V2.AddMetadataOnTransaction(ctx, operations.V2AddMetadataOnTransactionRequest{
+		RequestBody: map[string]string{
+			"admin": "true",
 		},
+		DryRun: formancesdkgo.Bool(true),
+		ID:     big.NewInt(1234),
 		Ledger: "ledger001",
 	})
 	if err != nil {
 
-		var e *sdkerrors.ErrorResponse
+		var e *sdkerrors.V2ErrorResponse
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -420,10 +457,10 @@ func main() {
 
 You can override the default server globally using the `WithServerIndex(serverIndex int)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                                                | Variables                                                 | Default values                    |
-| --- | ----------------------------------------------------- | --------------------------------------------------------- | --------------------------------- |
-| 0   | `http://localhost`                                    |                                                           |                                   |
-| 1   | `https://{organization}.{environment}.formance.cloud` | `environment ServerEnvironment`<br/>`organization string` | `"sandbox"`<br/>`"orgID-stackID"` |
+| #   | Server                                                | Variables                                                 | Default values                       |
+| --- | ----------------------------------------------------- | --------------------------------------------------------- | ------------------------------------ |
+| 0   | `http://localhost`                                    |                                                           |                                      |
+| 1   | `https://{organization}.{environment}.formance.cloud` | `environment ServerEnvironment`<br/>`organization string` | `"eu.sandbox"`<br/>`"orgID-stackID"` |
 
 If the selected server has variables, you may override their default values using their associated option(s):
  * `WithEnvironment(environment ServerEnvironment)`
@@ -442,6 +479,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerIndex(1),
 		formancesdkgo.WithSecurity(shared.Security{
@@ -450,7 +489,6 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
 	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -476,6 +514,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerURL("http://localhost"),
 		formancesdkgo.WithSecurity(shared.Security{
@@ -484,7 +524,6 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
 	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -549,6 +588,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
 			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -556,7 +597,6 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
 	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -588,6 +628,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
 			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -595,7 +637,6 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
 	res, err := s.GetVersions(ctx, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
@@ -630,6 +671,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithRetryConfig(
 			retry.Config{
@@ -648,7 +691,6 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
 	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)

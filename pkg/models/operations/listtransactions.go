@@ -32,7 +32,7 @@ type ListTransactionsRequest struct {
 	Metadata map[string]any `queryParam:"style=deepObject,explode=true,name=metadata"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// Find transactions by reference field.
 	Reference *string `queryParam:"style=form,explode=true,name=reference"`
 	// Filter transactions with postings involving given account at source (regular expression placed between ^ and $).

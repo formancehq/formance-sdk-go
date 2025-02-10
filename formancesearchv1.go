@@ -29,7 +29,7 @@ func newFormanceSearchV1(sdkConfig sdkConfiguration) *FormanceSearchV1 {
 // Search - search.v1
 // Elasticsearch.v1 query engine
 //
-// Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opts ...operations.Option) (*operations.SearchResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -50,7 +50,12 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
 	opURL, err := url.JoinPath(baseURL, "/api/search/")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -78,10 +83,16 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-	req.Header.Set("Content-Type", reqContentType)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -215,7 +226,7 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 
 // SearchgetServerInfo - Get server info
 //
-// Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.SearchgetServerInfoResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -236,7 +247,12 @@ func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...oper
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
 	opURL, err := url.JoinPath(baseURL, "/api/search/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -262,6 +278,10 @@ func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...oper
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

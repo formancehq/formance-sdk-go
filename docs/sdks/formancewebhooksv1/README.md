@@ -12,6 +12,7 @@
 * [GetManyConfigs](#getmanyconfigs) - Get many configs
 * [InsertConfig](#insertconfig) - Insert a new config
 * [TestConfig](#testconfig) - Test one config
+* [UpdateConfig](#updateconfig) - Update one config
 
 ## ActivateConfig
 
@@ -23,14 +24,16 @@ Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -38,7 +41,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Webhooks.V1.ActivateConfig(ctx, operations.ActivateConfigRequest{
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
     })
@@ -84,14 +86,16 @@ The format is a random string of bytes of size 24, base64 encoded. (larger size 
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -99,7 +103,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Webhooks.V1.ChangeConfigSecret(ctx, operations.ChangeConfigSecretRequest{
         ConfigChangeSecret: &shared.ConfigChangeSecret{
             Secret: "V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3",
@@ -144,14 +147,16 @@ Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -159,7 +164,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Webhooks.V1.DeactivateConfig(ctx, operations.DeactivateConfigRequest{
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
     })
@@ -201,14 +205,16 @@ Delete a webhooks config by ID.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -216,7 +222,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Webhooks.V1.DeleteConfig(ctx, operations.DeleteConfigRequest{
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
     })
@@ -258,14 +263,16 @@ Sorted by updated date descending
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -273,7 +280,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Webhooks.V1.GetManyConfigs(ctx, operations.GetManyConfigsRequest{
         Endpoint: formancesdkgo.String("https://example.com"),
         ID: formancesdkgo.String("4997257d-dfb6-445b-929c-cbe2ab182818"),
@@ -325,13 +331,15 @@ All eventTypes are converted to lower-case when inserted.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -339,7 +347,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Webhooks.V1.InsertConfig(ctx, shared.ConfigUser{
         Endpoint: "https://example.com",
         EventTypes: []string{
@@ -386,14 +393,16 @@ Test a config by sending a webhook to its endpoint.
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -401,7 +410,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Webhooks.V1.TestConfig(ctx, operations.TestConfigRequest{
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
     })
@@ -425,6 +433,72 @@ func main() {
 ### Response
 
 **[*operations.TestConfigResponse](../../pkg/models/operations/testconfigresponse.md), error**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+
+## UpdateConfig
+
+Update a webhooks config by ID.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+    
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Webhooks.V1.UpdateConfig(ctx, operations.UpdateConfigRequest{
+        ConfigUser: shared.ConfigUser{
+            Endpoint: "https://example.com",
+            EventTypes: []string{
+                "TYPE1",
+            },
+            Name: formancesdkgo.String("customer_payment"),
+            Secret: formancesdkgo.String("V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3"),
+        },
+        ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.UpdateConfigRequest](../../pkg/models/operations/updateconfigrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
+
+### Response
+
+**[*operations.UpdateConfigResponse](../../pkg/models/operations/updateconfigresponse.md), error**
 
 ### Errors
 

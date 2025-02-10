@@ -10,3 +10,9 @@ targets:
     formance-sdk-go:
         target: go
         source: stacks-source
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/formance/formance/stacks-source-go-code-samples
+            labelOverride:
+                fixedValue: Go (SDK)
+            blocking: false

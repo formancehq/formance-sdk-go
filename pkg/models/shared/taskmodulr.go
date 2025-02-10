@@ -43,8 +43,8 @@ type TaskModulr struct {
 	Descriptor  TaskModulrDescriptor `json:"descriptor"`
 	Error       *string              `json:"error,omitempty"`
 	ID          string               `json:"id"`
-	State       TaskModulrState      `json:"state"`
-	Status      PaymentStatus        `json:"status"`
+	State       *TaskModulrState     `json:"state,omitempty"`
+	Status      TaskStatus           `json:"status"`
 	UpdatedAt   time.Time            `json:"updatedAt"`
 }
 
@@ -94,16 +94,16 @@ func (o *TaskModulr) GetID() string {
 	return o.ID
 }
 
-func (o *TaskModulr) GetState() TaskModulrState {
+func (o *TaskModulr) GetState() *TaskModulrState {
 	if o == nil {
-		return TaskModulrState{}
+		return nil
 	}
 	return o.State
 }
 
-func (o *TaskModulr) GetStatus() PaymentStatus {
+func (o *TaskModulr) GetStatus() TaskStatus {
 	if o == nil {
-		return PaymentStatus("")
+		return TaskStatus("")
 	}
 	return o.Status
 }

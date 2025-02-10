@@ -29,13 +29,15 @@ Show stack version information
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -43,7 +45,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.GetVersions(ctx)
     if err != nil {
         log.Fatal(err)

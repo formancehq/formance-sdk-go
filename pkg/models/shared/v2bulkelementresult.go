@@ -13,6 +13,7 @@ type V2BulkElementResultErrorSchemas struct {
 	ErrorCode        string  `json:"errorCode"`
 	ErrorDescription string  `json:"errorDescription"`
 	ErrorDetails     *string `json:"errorDetails,omitempty"`
+	LogID            int64   `json:"logID"`
 	ResponseType     string  `json:"responseType"`
 }
 
@@ -37,6 +38,13 @@ func (o *V2BulkElementResultErrorSchemas) GetErrorDetails() *string {
 	return o.ErrorDetails
 }
 
+func (o *V2BulkElementResultErrorSchemas) GetLogID() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.LogID
+}
+
 func (o *V2BulkElementResultErrorSchemas) GetResponseType() string {
 	if o == nil {
 		return ""
@@ -45,7 +53,15 @@ func (o *V2BulkElementResultErrorSchemas) GetResponseType() string {
 }
 
 type V2BulkElementResultDeleteMetadataSchemas struct {
+	LogID        int64  `json:"logID"`
 	ResponseType string `json:"responseType"`
+}
+
+func (o *V2BulkElementResultDeleteMetadataSchemas) GetLogID() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.LogID
 }
 
 func (o *V2BulkElementResultDeleteMetadataSchemas) GetResponseType() string {
@@ -57,6 +73,7 @@ func (o *V2BulkElementResultDeleteMetadataSchemas) GetResponseType() string {
 
 type V2BulkElementResultRevertTransactionSchemas struct {
 	Data         V2Transaction `json:"data"`
+	LogID        int64         `json:"logID"`
 	ResponseType string        `json:"responseType"`
 }
 
@@ -67,6 +84,13 @@ func (o *V2BulkElementResultRevertTransactionSchemas) GetData() V2Transaction {
 	return o.Data
 }
 
+func (o *V2BulkElementResultRevertTransactionSchemas) GetLogID() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.LogID
+}
+
 func (o *V2BulkElementResultRevertTransactionSchemas) GetResponseType() string {
 	if o == nil {
 		return ""
@@ -75,7 +99,15 @@ func (o *V2BulkElementResultRevertTransactionSchemas) GetResponseType() string {
 }
 
 type Schemas struct {
+	LogID        int64  `json:"logID"`
 	ResponseType string `json:"responseType"`
+}
+
+func (o *Schemas) GetLogID() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.LogID
 }
 
 func (o *Schemas) GetResponseType() string {
@@ -87,6 +119,7 @@ func (o *Schemas) GetResponseType() string {
 
 type V2BulkElementResultCreateTransactionSchemas struct {
 	Data         V2Transaction `json:"data"`
+	LogID        int64         `json:"logID"`
 	ResponseType string        `json:"responseType"`
 }
 
@@ -95,6 +128,13 @@ func (o *V2BulkElementResultCreateTransactionSchemas) GetData() V2Transaction {
 		return V2Transaction{}
 	}
 	return o.Data
+}
+
+func (o *V2BulkElementResultCreateTransactionSchemas) GetLogID() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.LogID
 }
 
 func (o *V2BulkElementResultCreateTransactionSchemas) GetResponseType() string {
@@ -115,11 +155,11 @@ const (
 )
 
 type V2BulkElementResult struct {
-	V2BulkElementResultCreateTransactionSchemas *V2BulkElementResultCreateTransactionSchemas
-	Schemas                                     *Schemas
-	V2BulkElementResultRevertTransactionSchemas *V2BulkElementResultRevertTransactionSchemas
-	V2BulkElementResultDeleteMetadataSchemas    *V2BulkElementResultDeleteMetadataSchemas
-	V2BulkElementResultErrorSchemas             *V2BulkElementResultErrorSchemas
+	V2BulkElementResultCreateTransactionSchemas *V2BulkElementResultCreateTransactionSchemas `queryParam:"inline"`
+	Schemas                                     *Schemas                                     `queryParam:"inline"`
+	V2BulkElementResultRevertTransactionSchemas *V2BulkElementResultRevertTransactionSchemas `queryParam:"inline"`
+	V2BulkElementResultDeleteMetadataSchemas    *V2BulkElementResultDeleteMetadataSchemas    `queryParam:"inline"`
+	V2BulkElementResultErrorSchemas             *V2BulkElementResultErrorSchemas             `queryParam:"inline"`
 
 	Type V2BulkElementResultType
 }

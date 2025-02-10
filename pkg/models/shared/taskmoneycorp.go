@@ -43,8 +43,8 @@ type TaskMoneycorp struct {
 	Descriptor  TaskMoneycorpDescriptor `json:"descriptor"`
 	Error       *string                 `json:"error,omitempty"`
 	ID          string                  `json:"id"`
-	State       TaskMoneycorpState      `json:"state"`
-	Status      PaymentStatus           `json:"status"`
+	State       *TaskMoneycorpState     `json:"state,omitempty"`
+	Status      TaskStatus              `json:"status"`
 	UpdatedAt   time.Time               `json:"updatedAt"`
 }
 
@@ -94,16 +94,16 @@ func (o *TaskMoneycorp) GetID() string {
 	return o.ID
 }
 
-func (o *TaskMoneycorp) GetState() TaskMoneycorpState {
+func (o *TaskMoneycorp) GetState() *TaskMoneycorpState {
 	if o == nil {
-		return TaskMoneycorpState{}
+		return nil
 	}
 	return o.State
 }
 
-func (o *TaskMoneycorp) GetStatus() PaymentStatus {
+func (o *TaskMoneycorp) GetStatus() TaskStatus {
 	if o == nil {
-		return PaymentStatus("")
+		return TaskStatus("")
 	}
 	return o.Status
 }

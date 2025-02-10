@@ -136,9 +136,10 @@ func WithServerIndex(serverIndex int) SDKOption {
 type ServerEnvironment string
 
 const (
-	ServerEnvironmentSandbox ServerEnvironment = "sandbox"
-	ServerEnvironmentEuWest1 ServerEnvironment = "eu-west-1"
-	ServerEnvironmentUsEast1 ServerEnvironment = "us-east-1"
+	ServerEnvironmentEuSandbox ServerEnvironment = "eu.sandbox"
+	ServerEnvironmentSandbox   ServerEnvironment = "sandbox"
+	ServerEnvironmentEuWest1   ServerEnvironment = "eu-west-1"
+	ServerEnvironmentUsEast1   ServerEnvironment = "us-east-1"
 )
 
 func (e ServerEnvironment) ToPointer() *ServerEnvironment {
@@ -150,6 +151,8 @@ func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "eu.sandbox":
+		fallthrough
 	case "sandbox":
 		fallthrough
 	case "eu-west-1":
@@ -229,14 +232,14 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v2.1.1",
-			SDKVersion:        "3.2.0",
-			GenVersion:        "2.461.2",
-			UserAgent:         "speakeasy-sdk/go 3.2.0 2.461.2 v2.1.1 github.com/formancehq/formance-sdk-go",
+			OpenAPIDocVersion: "v3.0.0",
+			SDKVersion:        "3.3.0",
+			GenVersion:        "2.506.0",
+			UserAgent:         "speakeasy-sdk/go 3.3.0 2.506.0 v3.0.0 github.com/formancehq/formance-sdk-go",
 			ServerDefaults: []map[string]string{
 				{},
 				{
-					"environment":  "sandbox",
+					"environment":  "eu.sandbox",
 					"organization": "orgID-stackID",
 				},
 			},
@@ -299,7 +302,12 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
 	opURL, err := url.JoinPath(baseURL, "/versions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -325,6 +333,10 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

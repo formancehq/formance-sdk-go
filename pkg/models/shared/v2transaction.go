@@ -9,12 +9,18 @@ import (
 )
 
 type V2Transaction struct {
-	ID        *big.Int          `json:"id"`
-	Metadata  map[string]string `json:"metadata"`
-	Postings  []V2Posting       `json:"postings"`
-	Reference *string           `json:"reference,omitempty"`
-	Reverted  bool              `json:"reverted"`
-	Timestamp time.Time         `json:"timestamp"`
+	ID                         *big.Int                       `json:"id"`
+	InsertedAt                 *time.Time                     `json:"insertedAt,omitempty"`
+	Metadata                   map[string]string              `json:"metadata"`
+	PostCommitEffectiveVolumes map[string]map[string]V2Volume `json:"postCommitEffectiveVolumes,omitempty"`
+	PostCommitVolumes          map[string]map[string]V2Volume `json:"postCommitVolumes,omitempty"`
+	Postings                   []V2Posting                    `json:"postings"`
+	PreCommitEffectiveVolumes  map[string]map[string]V2Volume `json:"preCommitEffectiveVolumes,omitempty"`
+	PreCommitVolumes           map[string]map[string]V2Volume `json:"preCommitVolumes,omitempty"`
+	Reference                  *string                        `json:"reference,omitempty"`
+	Reverted                   bool                           `json:"reverted"`
+	RevertedAt                 *time.Time                     `json:"revertedAt,omitempty"`
+	Timestamp                  time.Time                      `json:"timestamp"`
 }
 
 func (v V2Transaction) MarshalJSON() ([]byte, error) {
@@ -35,6 +41,13 @@ func (o *V2Transaction) GetID() *big.Int {
 	return o.ID
 }
 
+func (o *V2Transaction) GetInsertedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.InsertedAt
+}
+
 func (o *V2Transaction) GetMetadata() map[string]string {
 	if o == nil {
 		return map[string]string{}
@@ -42,11 +55,39 @@ func (o *V2Transaction) GetMetadata() map[string]string {
 	return o.Metadata
 }
 
+func (o *V2Transaction) GetPostCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if o == nil {
+		return nil
+	}
+	return o.PostCommitEffectiveVolumes
+}
+
+func (o *V2Transaction) GetPostCommitVolumes() map[string]map[string]V2Volume {
+	if o == nil {
+		return nil
+	}
+	return o.PostCommitVolumes
+}
+
 func (o *V2Transaction) GetPostings() []V2Posting {
 	if o == nil {
 		return []V2Posting{}
 	}
 	return o.Postings
+}
+
+func (o *V2Transaction) GetPreCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if o == nil {
+		return nil
+	}
+	return o.PreCommitEffectiveVolumes
+}
+
+func (o *V2Transaction) GetPreCommitVolumes() map[string]map[string]V2Volume {
+	if o == nil {
+		return nil
+	}
+	return o.PreCommitVolumes
 }
 
 func (o *V2Transaction) GetReference() *string {
@@ -61,6 +102,13 @@ func (o *V2Transaction) GetReverted() bool {
 		return false
 	}
 	return o.Reverted
+}
+
+func (o *V2Transaction) GetRevertedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RevertedAt
 }
 
 func (o *V2Transaction) GetTimestamp() time.Time {

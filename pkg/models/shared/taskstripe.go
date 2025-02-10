@@ -43,8 +43,8 @@ type TaskStripe struct {
 	Descriptor  TaskStripeDescriptor `json:"descriptor"`
 	Error       *string              `json:"error,omitempty"`
 	ID          string               `json:"id"`
-	State       TaskStripeState      `json:"state"`
-	Status      PaymentStatus        `json:"status"`
+	State       *TaskStripeState     `json:"state,omitempty"`
+	Status      TaskStatus           `json:"status"`
 	UpdatedAt   time.Time            `json:"updatedAt"`
 }
 
@@ -94,16 +94,16 @@ func (o *TaskStripe) GetID() string {
 	return o.ID
 }
 
-func (o *TaskStripe) GetState() TaskStripeState {
+func (o *TaskStripe) GetState() *TaskStripeState {
 	if o == nil {
-		return TaskStripeState{}
+		return nil
 	}
 	return o.State
 }
 
-func (o *TaskStripe) GetStatus() PaymentStatus {
+func (o *TaskStripe) GetStatus() TaskStatus {
 	if o == nil {
-		return PaymentStatus("")
+		return TaskStatus("")
 	}
 	return o.Status
 }

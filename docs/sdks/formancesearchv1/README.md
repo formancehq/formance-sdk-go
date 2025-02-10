@@ -20,13 +20,15 @@ Elasticsearch.v1 query engine
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -34,7 +36,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Search.V1.Search(ctx, shared.Query{
         After: []string{
             "users:002",
@@ -44,7 +45,6 @@ func main() {
             "quickstart",
         },
         Policy: formancesdkgo.String("OR"),
-        Raw: &shared.QueryRaw{},
         Sort: formancesdkgo.String("id:asc"),
         Terms: []string{
             "destination=central_bank1",
@@ -89,13 +89,15 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -103,7 +105,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Search.V1.SearchgetServerInfo(ctx)
     if err != nil {
         log.Fatal(err)
