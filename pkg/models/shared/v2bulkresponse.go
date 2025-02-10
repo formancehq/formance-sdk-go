@@ -3,7 +3,10 @@
 package shared
 
 type V2BulkResponse struct {
-	Data []V2BulkElementResult `json:"data"`
+	Data         []V2BulkElementResult `json:"data"`
+	Details      *string               `json:"details,omitempty"`
+	ErrorCode    V2ErrorsEnum          `json:"errorCode"`
+	ErrorMessage string                `json:"errorMessage"`
 }
 
 func (o *V2BulkResponse) GetData() []V2BulkElementResult {
@@ -11,4 +14,25 @@ func (o *V2BulkResponse) GetData() []V2BulkElementResult {
 		return []V2BulkElementResult{}
 	}
 	return o.Data
+}
+
+func (o *V2BulkResponse) GetDetails() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Details
+}
+
+func (o *V2BulkResponse) GetErrorCode() V2ErrorsEnum {
+	if o == nil {
+		return V2ErrorsEnum("")
+	}
+	return o.ErrorCode
+}
+
+func (o *V2BulkResponse) GetErrorMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.ErrorMessage
 }

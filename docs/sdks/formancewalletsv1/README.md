@@ -32,15 +32,17 @@ Confirm a hold
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -48,13 +50,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.ConfirmHold(ctx, operations.ConfirmHoldRequest{
         ConfirmHoldRequest: &shared.ConfirmHoldRequest{
             Amount: big.NewInt(100),
             Final: formancesdkgo.Bool(true),
         },
-        HoldID: "<value>",
+        HoldID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -94,14 +95,16 @@ Create a balance
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -109,7 +112,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.CreateBalance(ctx, operations.CreateBalanceRequest{
         ID: "<id>",
     })
@@ -151,14 +153,16 @@ Create a new wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -166,7 +170,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.CreateWallet(ctx, operations.CreateWalletRequest{})
     if err != nil {
         log.Fatal(err)
@@ -206,15 +209,17 @@ Credit a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -222,7 +227,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.CreditWallet(ctx, operations.CreditWalletRequest{
         CreditWalletRequest: &shared.CreditWalletRequest{
             Amount: shared.Monetary{
@@ -233,12 +237,7 @@ func main() {
                 "key": "",
             },
             Sources: []shared.Subject{
-                shared.CreateSubjectLedgerAccountSubject(
-                    shared.LedgerAccountSubject{
-                        Identifier: "<value>",
-                        Type: "<value>",
-                    },
-                ),
+
             },
         },
         ID: "<id>",
@@ -281,15 +280,17 @@ Debit a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -297,7 +298,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.DebitWallet(ctx, operations.DebitWalletRequest{
         DebitWalletRequest: &shared.DebitWalletRequest{
             Amount: shared.Monetary{
@@ -349,14 +349,16 @@ Get detailed balance
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -364,7 +366,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.GetBalance(ctx, operations.GetBalanceRequest{
         BalanceName: "<value>",
         ID: "<id>",
@@ -407,14 +408,16 @@ Get a hold
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -422,9 +425,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.GetHold(ctx, operations.GetHoldRequest{
-        HoldID: "<value>",
+        HoldID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -464,14 +466,16 @@ Get all holds for a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -479,13 +483,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.GetHolds(ctx, operations.GetHoldsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Metadata: map[string]string{
             "admin": "true",
         },
-        PageSize: formancesdkgo.Int64(100),
         WalletID: formancesdkgo.String("wallet1"),
     })
     if err != nil {
@@ -524,14 +526,16 @@ func main() {
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -539,10 +543,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.GetTransactions(ctx, operations.GetTransactionsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
         WalletID: formancesdkgo.String("wallet1"),
     })
     if err != nil {
@@ -583,14 +585,16 @@ Get a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -598,7 +602,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.GetWallet(ctx, operations.GetWalletRequest{
         ID: "<id>",
     })
@@ -640,14 +643,16 @@ Get wallet summary
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -655,7 +660,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.GetWalletSummary(ctx, operations.GetWalletSummaryRequest{
         ID: "<id>",
     })
@@ -697,14 +701,16 @@ List balances of a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -712,7 +718,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.ListBalances(ctx, operations.ListBalancesRequest{
         ID: "<id>",
     })
@@ -753,14 +758,16 @@ List all wallets
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -768,7 +775,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.ListWallets(ctx, operations.ListWalletsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Expand: formancesdkgo.String("balances"),
@@ -776,7 +782,6 @@ func main() {
             "admin": "true",
         },
         Name: formancesdkgo.String("wallet1"),
-        PageSize: formancesdkgo.Int64(100),
     })
     if err != nil {
         log.Fatal(err)
@@ -816,14 +821,16 @@ Update a wallet
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -831,7 +838,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.UpdateWallet(ctx, operations.UpdateWalletRequest{
         ID: "<id>",
     })
@@ -873,14 +879,16 @@ Cancel a hold
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -888,9 +896,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.VoidHold(ctx, operations.VoidHoldRequest{
-        HoldID: "<value>",
+        HoldID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -930,13 +937,15 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -944,7 +953,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Wallets.V1.WalletsgetServerInfo(ctx)
     if err != nil {
         log.Fatal(err)

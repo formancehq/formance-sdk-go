@@ -13,7 +13,7 @@ type AccountBalance struct {
 	Asset     string    `json:"asset"`
 	Balance   *big.Int  `json:"balance"`
 	CreatedAt time.Time `json:"createdAt"`
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Currency      string    `json:"currency"`
 	LastUpdatedAt time.Time `json:"lastUpdatedAt"`
 }

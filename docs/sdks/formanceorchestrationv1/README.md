@@ -33,14 +33,16 @@ Cancel a running workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -48,7 +50,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.CancelEvent(ctx, operations.CancelEventRequest{
         InstanceID: "xxx",
     })
@@ -90,13 +91,15 @@ Create trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -104,7 +107,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.CreateTrigger(ctx, nil)
     if err != nil {
         log.Fatal(err)
@@ -144,13 +146,15 @@ Create a workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -158,7 +162,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.CreateWorkflow(ctx, nil)
     if err != nil {
         log.Fatal(err)
@@ -198,14 +201,16 @@ Read trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -213,9 +218,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.DeleteTrigger(ctx, operations.DeleteTriggerRequest{
-        TriggerID: "<value>",
+        TriggerID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -255,14 +259,16 @@ Delete a flow by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -270,7 +276,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.DeleteWorkflow(ctx, operations.DeleteWorkflowRequest{
         FlowID: "xxx",
     })
@@ -312,14 +317,16 @@ Get a workflow instance by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -327,7 +334,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.GetInstance(ctx, operations.GetInstanceRequest{
         InstanceID: "xxx",
     })
@@ -369,14 +375,16 @@ Get a workflow instance history by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -384,7 +392,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.GetInstanceHistory(ctx, operations.GetInstanceHistoryRequest{
         InstanceID: "xxx",
     })
@@ -426,14 +433,16 @@ Get a workflow instance stage history
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -441,7 +450,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.GetInstanceStageHistory(ctx, operations.GetInstanceStageHistoryRequest{
         InstanceID: "xxx",
         Number: 0,
@@ -484,14 +492,16 @@ Get a flow by id
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -499,7 +509,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.GetWorkflow(ctx, operations.GetWorkflowRequest{
         FlowID: "xxx",
     })
@@ -541,14 +550,16 @@ List instances of a workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -556,7 +567,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.ListInstances(ctx, operations.ListInstancesRequest{
         Running: formancesdkgo.Bool(true),
         WorkflowID: formancesdkgo.String("xxx"),
@@ -599,14 +609,16 @@ List triggers
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -614,7 +626,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.ListTriggers(ctx, operations.ListTriggersRequest{})
     if err != nil {
         log.Fatal(err)
@@ -654,14 +665,16 @@ List triggers occurrences
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -669,9 +682,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.ListTriggersOccurrences(ctx, operations.ListTriggersOccurrencesRequest{
-        TriggerID: "<value>",
+        TriggerID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -711,13 +723,15 @@ List registered workflows
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -725,7 +739,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.ListWorkflows(ctx)
     if err != nil {
         log.Fatal(err)
@@ -764,13 +777,15 @@ Get server info
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -778,7 +793,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.OrchestrationgetServerInfo(ctx)
     if err != nil {
         log.Fatal(err)
@@ -817,14 +831,16 @@ Read trigger
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -832,9 +848,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.ReadTrigger(ctx, operations.ReadTriggerRequest{
-        TriggerID: "<value>",
+        TriggerID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -874,14 +889,16 @@ Run workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -889,7 +906,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.RunWorkflow(ctx, operations.RunWorkflowRequest{
         WorkflowID: "xxx",
     })
@@ -931,14 +947,16 @@ Send an event to a running workflow
 package main
 
 import(
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+    
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -946,7 +964,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Orchestration.V1.SendEvent(ctx, operations.SendEventRequest{
         InstanceID: "xxx",
     })

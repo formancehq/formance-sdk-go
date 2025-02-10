@@ -9,8 +9,14 @@ import (
 
 type V2CreateBulkRequest struct {
 	RequestBody []shared.V2BulkElement `request:"mediaType=application/json"`
+	// Make bulk atomic
+	Atomic *bool `queryParam:"style=form,explode=true,name=atomic"`
+	// Continue on failure
+	ContinueOnFailure *bool `queryParam:"style=form,explode=true,name=continueOnFailure"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
+	// Process bulk elements in parallel
+	Parallel *bool `queryParam:"style=form,explode=true,name=parallel"`
 }
 
 func (o *V2CreateBulkRequest) GetRequestBody() []shared.V2BulkElement {
@@ -20,11 +26,32 @@ func (o *V2CreateBulkRequest) GetRequestBody() []shared.V2BulkElement {
 	return o.RequestBody
 }
 
+func (o *V2CreateBulkRequest) GetAtomic() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Atomic
+}
+
+func (o *V2CreateBulkRequest) GetContinueOnFailure() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ContinueOnFailure
+}
+
 func (o *V2CreateBulkRequest) GetLedger() string {
 	if o == nil {
 		return ""
 	}
 	return o.Ledger
+}
+
+func (o *V2CreateBulkRequest) GetParallel() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Parallel
 }
 
 type V2CreateBulkResponse struct {

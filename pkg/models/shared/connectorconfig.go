@@ -25,17 +25,17 @@ const (
 )
 
 type ConnectorConfig struct {
-	StripeConfig        *StripeConfig
-	DummyPayConfig      *DummyPayConfig
-	WiseConfig          *WiseConfig
-	ModulrConfig        *ModulrConfig
-	CurrencyCloudConfig *CurrencyCloudConfig
-	BankingCircleConfig *BankingCircleConfig
-	MangoPayConfig      *MangoPayConfig
-	MoneycorpConfig     *MoneycorpConfig
-	AtlarConfig         *AtlarConfig
-	AdyenConfig         *AdyenConfig
-	GenericConfig       *GenericConfig
+	StripeConfig        *StripeConfig        `queryParam:"inline"`
+	DummyPayConfig      *DummyPayConfig      `queryParam:"inline"`
+	WiseConfig          *WiseConfig          `queryParam:"inline"`
+	ModulrConfig        *ModulrConfig        `queryParam:"inline"`
+	CurrencyCloudConfig *CurrencyCloudConfig `queryParam:"inline"`
+	BankingCircleConfig *BankingCircleConfig `queryParam:"inline"`
+	MangoPayConfig      *MangoPayConfig      `queryParam:"inline"`
+	MoneycorpConfig     *MoneycorpConfig     `queryParam:"inline"`
+	AtlarConfig         *AtlarConfig         `queryParam:"inline"`
+	AdyenConfig         *AdyenConfig         `queryParam:"inline"`
+	GenericConfig       *GenericConfig       `queryParam:"inline"`
 
 	Type ConnectorConfigType
 }

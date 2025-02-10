@@ -43,8 +43,8 @@ type TaskDummyPay struct {
 	Descriptor  TaskDummyPayDescriptor `json:"descriptor"`
 	Error       *string                `json:"error,omitempty"`
 	ID          string                 `json:"id"`
-	State       TaskDummyPayState      `json:"state"`
-	Status      PaymentStatus          `json:"status"`
+	State       *TaskDummyPayState     `json:"state,omitempty"`
+	Status      TaskStatus             `json:"status"`
 	UpdatedAt   time.Time              `json:"updatedAt"`
 }
 
@@ -94,16 +94,16 @@ func (o *TaskDummyPay) GetID() string {
 	return o.ID
 }
 
-func (o *TaskDummyPay) GetState() TaskDummyPayState {
+func (o *TaskDummyPay) GetState() *TaskDummyPayState {
 	if o == nil {
-		return TaskDummyPayState{}
+		return nil
 	}
 	return o.State
 }
 
-func (o *TaskDummyPay) GetStatus() PaymentStatus {
+func (o *TaskDummyPay) GetStatus() TaskStatus {
 	if o == nil {
-		return PaymentStatus("")
+		return TaskStatus("")
 	}
 	return o.Status
 }

@@ -18,10 +18,10 @@ const (
 )
 
 type V2Stage struct {
-	V2StageSend      *V2StageSend
-	V2StageDelay     *V2StageDelay
-	V2StageWaitEvent *V2StageWaitEvent
-	V2Update         *V2Update
+	V2StageSend      *V2StageSend      `queryParam:"inline"`
+	V2StageDelay     *V2StageDelay     `queryParam:"inline"`
+	V2StageWaitEvent *V2StageWaitEvent `queryParam:"inline"`
+	V2Update         *V2Update         `queryParam:"inline"`
 
 	Type V2StageType
 }

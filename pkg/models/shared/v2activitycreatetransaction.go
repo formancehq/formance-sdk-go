@@ -3,11 +3,11 @@
 package shared
 
 type V2ActivityCreateTransaction struct {
-	Data   *V2PostTransaction `json:"data,omitempty"`
-	Ledger *string            `json:"ledger,omitempty"`
+	Data   *OrchestrationV2PostTransaction `json:"data,omitempty"`
+	Ledger *string                         `json:"ledger,omitempty"`
 }
 
-func (o *V2ActivityCreateTransaction) GetData() *V2PostTransaction {
+func (o *V2ActivityCreateTransaction) GetData() *OrchestrationV2PostTransaction {
 	if o == nil {
 		return nil
 	}

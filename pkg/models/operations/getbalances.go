@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
 
@@ -23,18 +22,7 @@ type GetBalancesRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64 `default:"15" queryParam:"style=form,explode=true,name=pageSize"`
-}
-
-func (g GetBalancesRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GetBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
-		return err
-	}
-	return nil
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
 func (o *GetBalancesRequest) GetAddress() *string {

@@ -43,8 +43,8 @@ type TaskWise struct {
 	Descriptor  TaskWiseDescriptor `json:"descriptor"`
 	Error       *string            `json:"error,omitempty"`
 	ID          string             `json:"id"`
-	State       TaskWiseState      `json:"state"`
-	Status      PaymentStatus      `json:"status"`
+	State       *TaskWiseState     `json:"state,omitempty"`
+	Status      TaskStatus         `json:"status"`
 	UpdatedAt   time.Time          `json:"updatedAt"`
 }
 
@@ -94,16 +94,16 @@ func (o *TaskWise) GetID() string {
 	return o.ID
 }
 
-func (o *TaskWise) GetState() TaskWiseState {
+func (o *TaskWise) GetState() *TaskWiseState {
 	if o == nil {
-		return TaskWiseState{}
+		return nil
 	}
 	return o.State
 }
 
-func (o *TaskWise) GetStatus() PaymentStatus {
+func (o *TaskWise) GetStatus() TaskStatus {
 	if o == nil {
-		return PaymentStatus("")
+		return TaskStatus("")
 	}
 	return o.Status
 }

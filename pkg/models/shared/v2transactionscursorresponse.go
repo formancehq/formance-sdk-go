@@ -3,16 +3,16 @@
 package shared
 
 type V2TransactionsCursorResponseCursor struct {
-	Data     []V2ExpandedTransaction `json:"data"`
-	HasMore  bool                    `json:"hasMore"`
-	Next     *string                 `json:"next,omitempty"`
-	PageSize int64                   `json:"pageSize"`
-	Previous *string                 `json:"previous,omitempty"`
+	Data     []V2Transaction `json:"data"`
+	HasMore  bool            `json:"hasMore"`
+	Next     *string         `json:"next,omitempty"`
+	PageSize int64           `json:"pageSize"`
+	Previous *string         `json:"previous,omitempty"`
 }
 
-func (o *V2TransactionsCursorResponseCursor) GetData() []V2ExpandedTransaction {
+func (o *V2TransactionsCursorResponseCursor) GetData() []V2Transaction {
 	if o == nil {
-		return []V2ExpandedTransaction{}
+		return []V2Transaction{}
 	}
 	return o.Data
 }

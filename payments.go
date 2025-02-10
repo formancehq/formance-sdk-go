@@ -4,6 +4,7 @@ package formancesdkgo
 
 type Payments struct {
 	V1 *FormancePaymentsV1
+	V3 *V3
 
 	sdkConfiguration sdkConfiguration
 }
@@ -12,5 +13,6 @@ func newPayments(sdkConfig sdkConfiguration) *Payments {
 	return &Payments{
 		sdkConfiguration: sdkConfig,
 		V1:               newFormancePaymentsV1(sdkConfig),
+		V3:               newV3(sdkConfig),
 	}
 }

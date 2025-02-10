@@ -10,7 +10,7 @@ import (
 type BankAccount struct {
 	AccountID       *string                      `json:"accountID,omitempty"`
 	AccountNumber   *string                      `json:"accountNumber,omitempty"`
-	ConnectorID     string                       `json:"connectorID"`
+	ConnectorID     *string                      `json:"connectorID,omitempty"`
 	Country         string                       `json:"country"`
 	CreatedAt       time.Time                    `json:"createdAt"`
 	Iban            *string                      `json:"iban,omitempty"`
@@ -47,9 +47,9 @@ func (o *BankAccount) GetAccountNumber() *string {
 	return o.AccountNumber
 }
 
-func (o *BankAccount) GetConnectorID() string {
+func (o *BankAccount) GetConnectorID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ConnectorID
 }

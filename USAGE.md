@@ -10,6 +10,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := formancesdkgo.New(
 		formancesdkgo.WithSecurity(shared.Security{
 			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -17,7 +19,6 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
 	res, err := s.GetVersions(ctx)
 	if err != nil {
 		log.Fatal(err)

@@ -1,0 +1,9 @@
+# V3UpdateBankAccountMetadataRequest
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `V3UpdateBankAccountMetadataRequest`                                                                           | [*shared.V3UpdateBankAccountMetadataRequest](../../../pkg/models/shared/v3updatebankaccountmetadatarequest.md) | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `BankAccountID`                                                                                                | *string*                                                                                                       | :heavy_check_mark:                                                                                             | The bank account ID                                                                                            |

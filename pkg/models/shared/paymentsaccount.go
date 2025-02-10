@@ -15,7 +15,7 @@ type PaymentsAccount struct {
 	ConnectorID  string    `json:"connectorID"`
 	CreatedAt    time.Time `json:"createdAt"`
 	DefaultAsset string    `json:"defaultAsset"`
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DefaultCurrency string              `json:"defaultCurrency"`
 	ID              string              `json:"id"`
 	Metadata        map[string]string   `json:"metadata"`

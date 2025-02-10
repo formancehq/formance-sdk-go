@@ -39,7 +39,7 @@ type MigrationInfo struct {
 	Date    *time.Time `json:"date,omitempty"`
 	Name    *string    `json:"name,omitempty"`
 	State   *State     `json:"state,omitempty"`
-	Version *int64     `json:"version,omitempty"`
+	Version *string    `json:"version,omitempty"`
 }
 
 func (m MigrationInfo) MarshalJSON() ([]byte, error) {
@@ -74,7 +74,7 @@ func (o *MigrationInfo) GetState() *State {
 	return o.State
 }
 
-func (o *MigrationInfo) GetVersion() *int64 {
+func (o *MigrationInfo) GetVersion() *string {
 	if o == nil {
 		return nil
 	}

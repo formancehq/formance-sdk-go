@@ -39,7 +39,7 @@ type V2MigrationInfo struct {
 	Date    *time.Time            `json:"date,omitempty"`
 	Name    *string               `json:"name,omitempty"`
 	State   *V2MigrationInfoState `json:"state,omitempty"`
-	Version *int64                `json:"version,omitempty"`
+	Version *string               `json:"version,omitempty"`
 }
 
 func (v V2MigrationInfo) MarshalJSON() ([]byte, error) {
@@ -74,7 +74,7 @@ func (o *V2MigrationInfo) GetState() *V2MigrationInfoState {
 	return o.State
 }
 
-func (o *V2MigrationInfo) GetVersion() *int64 {
+func (o *V2MigrationInfo) GetVersion() *string {
 	if o == nil {
 		return nil
 	}

@@ -30,14 +30,14 @@ type TaskBankingCircleState struct {
 }
 
 type TaskBankingCircle struct {
-	ConnectorID string                 `json:"connectorID"`
-	CreatedAt   time.Time              `json:"createdAt"`
-	Descriptor  Descriptor             `json:"descriptor"`
-	Error       *string                `json:"error,omitempty"`
-	ID          string                 `json:"id"`
-	State       TaskBankingCircleState `json:"state"`
-	Status      PaymentStatus          `json:"status"`
-	UpdatedAt   time.Time              `json:"updatedAt"`
+	ConnectorID string                  `json:"connectorID"`
+	CreatedAt   time.Time               `json:"createdAt"`
+	Descriptor  Descriptor              `json:"descriptor"`
+	Error       *string                 `json:"error,omitempty"`
+	ID          string                  `json:"id"`
+	State       *TaskBankingCircleState `json:"state,omitempty"`
+	Status      TaskStatus              `json:"status"`
+	UpdatedAt   time.Time               `json:"updatedAt"`
 }
 
 func (t TaskBankingCircle) MarshalJSON() ([]byte, error) {
@@ -86,16 +86,16 @@ func (o *TaskBankingCircle) GetID() string {
 	return o.ID
 }
 
-func (o *TaskBankingCircle) GetState() TaskBankingCircleState {
+func (o *TaskBankingCircle) GetState() *TaskBankingCircleState {
 	if o == nil {
-		return TaskBankingCircleState{}
+		return nil
 	}
 	return o.State
 }
 
-func (o *TaskBankingCircle) GetStatus() PaymentStatus {
+func (o *TaskBankingCircle) GetStatus() TaskStatus {
 	if o == nil {
-		return PaymentStatus("")
+		return TaskStatus("")
 	}
 	return o.Status
 }

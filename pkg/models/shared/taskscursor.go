@@ -22,14 +22,14 @@ const (
 )
 
 type TasksCursorData struct {
-	TaskStripe        *TaskStripe
-	TaskWise          *TaskWise
-	TaskCurrencyCloud *TaskCurrencyCloud
-	TaskDummyPay      *TaskDummyPay
-	TaskModulr        *TaskModulr
-	TaskBankingCircle *TaskBankingCircle
-	TaskMangoPay      *TaskMangoPay
-	TaskMoneycorp     *TaskMoneycorp
+	TaskStripe        *TaskStripe        `queryParam:"inline"`
+	TaskWise          *TaskWise          `queryParam:"inline"`
+	TaskCurrencyCloud *TaskCurrencyCloud `queryParam:"inline"`
+	TaskDummyPay      *TaskDummyPay      `queryParam:"inline"`
+	TaskModulr        *TaskModulr        `queryParam:"inline"`
+	TaskBankingCircle *TaskBankingCircle `queryParam:"inline"`
+	TaskMangoPay      *TaskMangoPay      `queryParam:"inline"`
+	TaskMoneycorp     *TaskMoneycorp     `queryParam:"inline"`
 
 	Type TasksCursorDataType
 }
