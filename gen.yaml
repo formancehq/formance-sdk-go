@@ -4,15 +4,16 @@ generation:
   usageSnippets:
     optionalPropertyRendering: withExample
   fixes:
-    nameResolutionDec2023: false
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
+    securityFeb2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
   telemetryEnabled: false
 go:
-  version: 3.3.0
+  version: 3.3.1
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
   author: Formance

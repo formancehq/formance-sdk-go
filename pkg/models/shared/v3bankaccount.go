@@ -9,6 +9,7 @@ import (
 
 type V3BankAccount struct {
 	AccountNumber   *string                       `json:"accountNumber,omitempty"`
+	Country         *string                       `json:"country,omitempty"`
 	CreatedAt       time.Time                     `json:"createdAt"`
 	Iban            *string                       `json:"iban,omitempty"`
 	ID              string                        `json:"id"`
@@ -34,6 +35,13 @@ func (o *V3BankAccount) GetAccountNumber() *string {
 		return nil
 	}
 	return o.AccountNumber
+}
+
+func (o *V3BankAccount) GetCountry() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Country
 }
 
 func (o *V3BankAccount) GetCreatedAt() time.Time {

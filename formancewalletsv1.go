@@ -28,13 +28,6 @@ func newFormanceWalletsV1(sdkConfig sdkConfiguration) *FormanceWalletsV1 {
 
 // ConfirmHold - Confirm a hold
 func (s *FormanceWalletsV1) ConfirmHold(ctx context.Context, request operations.ConfirmHoldRequest, opts ...operations.Option) (*operations.ConfirmHoldResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "confirmHold",
-		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -58,6 +51,13 @@ func (s *FormanceWalletsV1) ConfirmHold(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "confirmHold",
+		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "ConfirmHoldRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -220,13 +220,6 @@ func (s *FormanceWalletsV1) ConfirmHold(ctx context.Context, request operations.
 
 // CreateBalance - Create a balance
 func (s *FormanceWalletsV1) CreateBalance(ctx context.Context, request operations.CreateBalanceRequest, opts ...operations.Option) (*operations.CreateBalanceResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createBalance",
-		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -250,6 +243,13 @@ func (s *FormanceWalletsV1) CreateBalance(ctx context.Context, request operation
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createBalance",
+		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateBalanceRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -432,13 +432,6 @@ func (s *FormanceWalletsV1) CreateBalance(ctx context.Context, request operation
 
 // CreateWallet - Create a new wallet
 func (s *FormanceWalletsV1) CreateWallet(ctx context.Context, request operations.CreateWalletRequest, opts ...operations.Option) (*operations.CreateWalletResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createWallet",
-		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -462,6 +455,13 @@ func (s *FormanceWalletsV1) CreateWallet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createWallet",
+		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateWalletRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -644,13 +644,6 @@ func (s *FormanceWalletsV1) CreateWallet(ctx context.Context, request operations
 
 // CreditWallet - Credit a wallet
 func (s *FormanceWalletsV1) CreditWallet(ctx context.Context, request operations.CreditWalletRequest, opts ...operations.Option) (*operations.CreditWalletResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "creditWallet",
-		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -674,6 +667,13 @@ func (s *FormanceWalletsV1) CreditWallet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "creditWallet",
+		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreditWalletRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -836,13 +836,6 @@ func (s *FormanceWalletsV1) CreditWallet(ctx context.Context, request operations
 
 // DebitWallet - Debit a wallet
 func (s *FormanceWalletsV1) DebitWallet(ctx context.Context, request operations.DebitWalletRequest, opts ...operations.Option) (*operations.DebitWalletResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "debitWallet",
-		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -866,6 +859,13 @@ func (s *FormanceWalletsV1) DebitWallet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "debitWallet",
+		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "DebitWalletRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1049,13 +1049,6 @@ func (s *FormanceWalletsV1) DebitWallet(ctx context.Context, request operations.
 
 // GetBalance - Get detailed balance
 func (s *FormanceWalletsV1) GetBalance(ctx context.Context, request operations.GetBalanceRequest, opts ...operations.Option) (*operations.GetBalanceResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getBalance",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1077,6 +1070,14 @@ func (s *FormanceWalletsV1) GetBalance(ctx context.Context, request operations.G
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances/{balanceName}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getBalance",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1251,13 +1252,6 @@ func (s *FormanceWalletsV1) GetBalance(ctx context.Context, request operations.G
 
 // GetHold - Get a hold
 func (s *FormanceWalletsV1) GetHold(ctx context.Context, request operations.GetHoldRequest, opts ...operations.Option) (*operations.GetHoldResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getHold",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1279,6 +1273,14 @@ func (s *FormanceWalletsV1) GetHold(ctx context.Context, request operations.GetH
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{holdID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getHold",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1453,13 +1455,6 @@ func (s *FormanceWalletsV1) GetHold(ctx context.Context, request operations.GetH
 
 // GetHolds - Get all holds for a wallet
 func (s *FormanceWalletsV1) GetHolds(ctx context.Context, request operations.GetHoldsRequest, opts ...operations.Option) (*operations.GetHoldsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getHolds",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1481,6 +1476,14 @@ func (s *FormanceWalletsV1) GetHolds(ctx context.Context, request operations.Get
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/holds")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getHolds",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1658,13 +1661,6 @@ func (s *FormanceWalletsV1) GetHolds(ctx context.Context, request operations.Get
 }
 
 func (s *FormanceWalletsV1) GetTransactions(ctx context.Context, request operations.GetTransactionsRequest, opts ...operations.Option) (*operations.GetTransactionsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getTransactions",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1686,6 +1682,14 @@ func (s *FormanceWalletsV1) GetTransactions(ctx context.Context, request operati
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/transactions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getTransactions",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1864,13 +1868,6 @@ func (s *FormanceWalletsV1) GetTransactions(ctx context.Context, request operati
 
 // GetWallet - Get a wallet
 func (s *FormanceWalletsV1) GetWallet(ctx context.Context, request operations.GetWalletRequest, opts ...operations.Option) (*operations.GetWalletResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getWallet",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1892,6 +1889,14 @@ func (s *FormanceWalletsV1) GetWallet(ctx context.Context, request operations.Ge
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getWallet",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2067,13 +2072,6 @@ func (s *FormanceWalletsV1) GetWallet(ctx context.Context, request operations.Ge
 
 // GetWalletSummary - Get wallet summary
 func (s *FormanceWalletsV1) GetWalletSummary(ctx context.Context, request operations.GetWalletSummaryRequest, opts ...operations.Option) (*operations.GetWalletSummaryResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getWalletSummary",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2095,6 +2093,14 @@ func (s *FormanceWalletsV1) GetWalletSummary(ctx context.Context, request operat
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/summary", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getWalletSummary",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2270,13 +2276,6 @@ func (s *FormanceWalletsV1) GetWalletSummary(ctx context.Context, request operat
 
 // ListBalances - List balances of a wallet
 func (s *FormanceWalletsV1) ListBalances(ctx context.Context, request operations.ListBalancesRequest, opts ...operations.Option) (*operations.ListBalancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listBalances",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2298,6 +2297,14 @@ func (s *FormanceWalletsV1) ListBalances(ctx context.Context, request operations
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listBalances",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2457,13 +2464,6 @@ func (s *FormanceWalletsV1) ListBalances(ctx context.Context, request operations
 
 // ListWallets - List all wallets
 func (s *FormanceWalletsV1) ListWallets(ctx context.Context, request operations.ListWalletsRequest, opts ...operations.Option) (*operations.ListWalletsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listWallets",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2485,6 +2485,14 @@ func (s *FormanceWalletsV1) ListWallets(ctx context.Context, request operations.
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/wallets")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listWallets",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2663,13 +2671,6 @@ func (s *FormanceWalletsV1) ListWallets(ctx context.Context, request operations.
 
 // UpdateWallet - Update a wallet
 func (s *FormanceWalletsV1) UpdateWallet(ctx context.Context, request operations.UpdateWalletRequest, opts ...operations.Option) (*operations.UpdateWalletResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "updateWallet",
-		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2693,6 +2694,13 @@ func (s *FormanceWalletsV1) UpdateWallet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "updateWallet",
+		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -2855,13 +2863,6 @@ func (s *FormanceWalletsV1) UpdateWallet(ctx context.Context, request operations
 
 // VoidHold - Cancel a hold
 func (s *FormanceWalletsV1) VoidHold(ctx context.Context, request operations.VoidHoldRequest, opts ...operations.Option) (*operations.VoidHoldResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "voidHold",
-		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2883,6 +2884,14 @@ func (s *FormanceWalletsV1) VoidHold(ctx context.Context, request operations.Voi
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{hold_id}/void", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "voidHold",
+		OAuth2Scopes:   []string{"auth:read", "wallets:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3039,13 +3048,6 @@ func (s *FormanceWalletsV1) VoidHold(ctx context.Context, request operations.Voi
 
 // WalletsgetServerInfo - Get server info
 func (s *FormanceWalletsV1) WalletsgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.WalletsgetServerInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "walletsgetServerInfo",
-		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3067,6 +3069,14 @@ func (s *FormanceWalletsV1) WalletsgetServerInfo(ctx context.Context, opts ...op
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "walletsgetServerInfo",
+		OAuth2Scopes:   []string{"auth:read", "wallets:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

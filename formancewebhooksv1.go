@@ -29,13 +29,6 @@ func newFormanceWebhooksV1(sdkConfig sdkConfiguration) *FormanceWebhooksV1 {
 // ActivateConfig - Activate one config
 // Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
 func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operations.ActivateConfigRequest, opts ...operations.Option) (*operations.ActivateConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "activateConfig",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -57,6 +50,14 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/activate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "activateConfig",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -235,13 +236,6 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 // If not passed or empty, a secret is automatically generated.
 // The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request operations.ChangeConfigSecretRequest, opts ...operations.Option) (*operations.ChangeConfigSecretResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "changeConfigSecret",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -265,6 +259,13 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "changeConfigSecret",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "ConfigChangeSecret", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -446,13 +447,6 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 // DeactivateConfig - Deactivate one config
 // Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
 func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request operations.DeactivateConfigRequest, opts ...operations.Option) (*operations.DeactivateConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deactivateConfig",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -474,6 +468,14 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/deactivate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deactivateConfig",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -649,13 +651,6 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 // DeleteConfig - Delete one config
 // Delete a webhooks config by ID.
 func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operations.DeleteConfigRequest, opts ...operations.Option) (*operations.DeleteConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deleteConfig",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -677,6 +672,14 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deleteConfig",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -832,13 +835,6 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 // GetManyConfigs - Get many configs
 // Sorted by updated date descending
 func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operations.GetManyConfigsRequest, opts ...operations.Option) (*operations.GetManyConfigsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getManyConfigs",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -860,6 +856,14 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 	opURL, err := url.JoinPath(baseURL, "/api/webhooks/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getManyConfigs",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1047,13 +1051,6 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 //
 // All eventTypes are converted to lower-case when inserted.
 func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.ConfigUser, opts ...operations.Option) (*operations.InsertConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "insertConfig",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1077,6 +1074,13 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "insertConfig",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1258,13 +1262,6 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 // TestConfig - Test one config
 // Test a config by sending a webhook to its endpoint.
 func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.TestConfigRequest, opts ...operations.Option) (*operations.TestConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "testConfig",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1286,6 +1283,14 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/test", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "testConfig",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1461,13 +1466,6 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 // UpdateConfig - Update one config
 // Update a webhooks config by ID.
 func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operations.UpdateConfigRequest, opts ...operations.Option) (*operations.UpdateConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "updateConfig",
-		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1491,6 +1489,13 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "updateConfig",
+		OAuth2Scopes:   []string{"auth:read", "webhooks:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ConfigUser", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err

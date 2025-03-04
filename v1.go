@@ -28,13 +28,6 @@ func newV1(sdkConfig sdkConfiguration) *V1 {
 
 // CreateClient - Create client
 func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientRequest, opts ...operations.Option) (*operations.CreateClientResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createClient",
-		OAuth2Scopes:   []string{"auth:read", "auth:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -58,6 +51,13 @@ func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientReque
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createClient",
+		OAuth2Scopes:   []string{"auth:read", "auth:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -223,13 +223,6 @@ func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientReque
 
 // CreateSecret - Add a secret to a client
 func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRequest, opts ...operations.Option) (*operations.CreateSecretResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createSecret",
-		OAuth2Scopes:   []string{"auth:read", "auth:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -253,6 +246,13 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createSecret",
+		OAuth2Scopes:   []string{"auth:read", "auth:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateSecretRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -418,13 +418,6 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 
 // DeleteClient - Delete client
 func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRequest, opts ...operations.Option) (*operations.DeleteClientResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deleteClient",
-		OAuth2Scopes:   []string{"auth:read", "auth:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -446,6 +439,14 @@ func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRe
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deleteClient",
+		OAuth2Scopes:   []string{"auth:read", "auth:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -585,13 +586,6 @@ func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRe
 
 // DeleteSecret - Delete a secret from a client
 func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRequest, opts ...operations.Option) (*operations.DeleteSecretResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deleteSecret",
-		OAuth2Scopes:   []string{"auth:read", "auth:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -613,6 +607,14 @@ func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRe
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}/secrets/{secretId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deleteSecret",
+		OAuth2Scopes:   []string{"auth:read", "auth:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -752,13 +754,6 @@ func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRe
 
 // GetOIDCWellKnowns - Retrieve OpenID connect well-knowns.
 func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (*operations.GetOIDCWellKnownsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getOIDCWellKnowns",
-		OAuth2Scopes:   []string{"auth:read", "auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -780,6 +775,14 @@ func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (
 	opURL, err := url.JoinPath(baseURL, "/api/auth/.well-known/openid-configuration")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getOIDCWellKnowns",
+		OAuth2Scopes:   []string{"auth:read", "auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -919,13 +922,6 @@ func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (
 
 // GetServerInfo - Get server info
 func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.GetServerInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getServerInfo",
-		OAuth2Scopes:   []string{"auth:read", "auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -947,6 +943,14 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 	opURL, err := url.JoinPath(baseURL, "/api/auth/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getServerInfo",
+		OAuth2Scopes:   []string{"auth:read", "auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1106,13 +1110,6 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 
 // ListClients - List clients
 func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*operations.ListClientsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listClients",
-		OAuth2Scopes:   []string{"auth:read", "auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1134,6 +1131,14 @@ func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*opera
 	opURL, err := url.JoinPath(baseURL, "/api/auth/clients")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listClients",
+		OAuth2Scopes:   []string{"auth:read", "auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1294,13 +1299,6 @@ func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*opera
 // ListUsers - List users
 // List users
 func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operations.ListUsersResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listUsers",
-		OAuth2Scopes:   []string{"auth:read", "auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1322,6 +1320,14 @@ func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operati
 	opURL, err := url.JoinPath(baseURL, "/api/auth/users")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listUsers",
+		OAuth2Scopes:   []string{"auth:read", "auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1481,13 +1487,6 @@ func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operati
 
 // ReadClient - Read client
 func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientRequest, opts ...operations.Option) (*operations.ReadClientResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "readClient",
-		OAuth2Scopes:   []string{"auth:read", "auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1509,6 +1508,14 @@ func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientReques
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "readClient",
+		OAuth2Scopes:   []string{"auth:read", "auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1669,13 +1676,6 @@ func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientReques
 // ReadUser - Read user
 // Read user
 func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, opts ...operations.Option) (*operations.ReadUserResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "readUser",
-		OAuth2Scopes:   []string{"auth:read", "auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1697,6 +1697,14 @@ func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, o
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/users/{userId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "readUser",
+		OAuth2Scopes:   []string{"auth:read", "auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1856,13 +1864,6 @@ func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, o
 
 // UpdateClient - Update client
 func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRequest, opts ...operations.Option) (*operations.UpdateClientResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "updateClient",
-		OAuth2Scopes:   []string{"auth:read", "auth:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1886,6 +1887,13 @@ func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRe
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "updateClient",
+		OAuth2Scopes:   []string{"auth:read", "auth:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "UpdateClientRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err

@@ -42,7 +42,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -104,7 +104,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -162,7 +162,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -219,7 +219,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -290,7 +290,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -358,7 +358,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -417,7 +417,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -475,7 +475,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -535,7 +535,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -594,7 +594,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -652,7 +652,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -710,7 +710,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -767,7 +767,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -830,7 +830,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -888,7 +888,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -945,7 +945,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),

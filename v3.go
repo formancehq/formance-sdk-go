@@ -28,13 +28,6 @@ func newV3(sdkConfig sdkConfiguration) *V3 {
 
 // AddAccountToPool - Add an account to a pool
 func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccountToPoolRequest, opts ...operations.Option) (*operations.V3AddAccountToPoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3AddAccountToPool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -56,6 +49,14 @@ func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccou
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/accounts/{accountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3AddAccountToPool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -210,13 +211,6 @@ func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccou
 
 // ApprovePaymentInitiation - Approve a payment initiation
 func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3ApprovePaymentInitiationRequest, opts ...operations.Option) (*operations.V3ApprovePaymentInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ApprovePaymentInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -238,6 +232,14 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/approve", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ApprovePaymentInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -412,13 +414,6 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 
 // CreateAccount - Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
 func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountRequest, opts ...operations.Option) (*operations.V3CreateAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3CreateAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -442,6 +437,13 @@ func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountR
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3CreateAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -622,13 +624,6 @@ func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountR
 
 // CreateBankAccount - Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
 func (s *V3) CreateBankAccount(ctx context.Context, request *shared.V3CreateBankAccountRequest, opts ...operations.Option) (*operations.V3CreateBankAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3CreateBankAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -652,6 +647,13 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *shared.V3CreateBank
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3CreateBankAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -832,13 +834,6 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *shared.V3CreateBank
 
 // CreatePayment - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
 func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentRequest, opts ...operations.Option) (*operations.V3CreatePaymentResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3CreatePayment",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -862,6 +857,13 @@ func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentR
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3CreatePayment",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1042,13 +1044,6 @@ func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentR
 
 // CreatePool - Create a formance pool object
 func (s *V3) CreatePool(ctx context.Context, request *shared.V3CreatePoolRequest, opts ...operations.Option) (*operations.V3CreatePoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3CreatePool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1072,6 +1067,13 @@ func (s *V3) CreatePool(ctx context.Context, request *shared.V3CreatePoolRequest
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3CreatePool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1252,13 +1254,6 @@ func (s *V3) CreatePool(ctx context.Context, request *shared.V3CreatePoolRequest
 
 // DeletePaymentInitiation - Delete a payment initiation by ID
 func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3DeletePaymentInitiationRequest, opts ...operations.Option) (*operations.V3DeletePaymentInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3DeletePaymentInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1280,6 +1275,14 @@ func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3D
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3DeletePaymentInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1434,13 +1437,6 @@ func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3D
 
 // DeletePool - Delete a pool by ID
 func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequest, opts ...operations.Option) (*operations.V3DeletePoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3DeletePool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1462,6 +1458,14 @@ func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequ
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3DeletePool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1616,13 +1620,6 @@ func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequ
 
 // ForwardBankAccount - Forward a Bank Account to a PSP for creation
 func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3ForwardBankAccountRequest, opts ...operations.Option) (*operations.V3ForwardBankAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ForwardBankAccount",
-		OAuth2Scopes:   []string{"auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1646,6 +1643,13 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ForwardBankAccount",
+		OAuth2Scopes:   []string{"auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3ForwardBankAccountRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1826,13 +1830,6 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 
 // GetAccount - Get an account by ID
 func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequest, opts ...operations.Option) (*operations.V3GetAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1854,6 +1851,14 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/accounts/{accountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2028,13 +2033,6 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 
 // GetAccountBalances - Get account balances
 func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAccountBalancesRequest, opts ...operations.Option) (*operations.V3GetAccountBalancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetAccountBalances",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2056,6 +2054,14 @@ func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAcc
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/accounts/{accountID}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetAccountBalances",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2234,13 +2240,6 @@ func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAcc
 
 // GetBankAccount - Get a Bank Account by ID
 func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAccountRequest, opts ...operations.Option) (*operations.V3GetBankAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetBankAccount",
-		OAuth2Scopes:   []string{"auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2262,6 +2261,14 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/bank-accounts/{bankAccountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetBankAccount",
+		OAuth2Scopes:   []string{"auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2436,13 +2443,6 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 
 // GetConnectorConfig - Get a connector configuration by ID
 func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetConnectorConfigRequest, opts ...operations.Option) (*operations.V3GetConnectorConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetConnectorConfig",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2464,6 +2464,14 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetConnectorConfig",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2638,13 +2646,6 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 
 // GetConnectorSchedule - Get a connector schedule by ID
 func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetConnectorScheduleRequest, opts ...operations.Option) (*operations.V3GetConnectorScheduleResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetConnectorSchedule",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2666,6 +2667,14 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetConnectorSchedule",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2838,217 +2847,8 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 
 }
 
-// GetInfo - Show server information
-func (s *V3) GetInfo(ctx context.Context, opts ...operations.Option) (*operations.V3GetInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetInfo",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionRetries,
-		operations.SupportedOptionTimeout,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/_info")
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	globalRetryConfig := s.sdkConfiguration.RetryConfig
-	retryConfig := o.Retries
-	if retryConfig == nil {
-		if globalRetryConfig != nil {
-			retryConfig = globalRetryConfig
-		}
-	}
-
-	var httpRes *http.Response
-	if retryConfig != nil {
-		httpRes, err = utils.Retry(ctx, utils.Retries{
-			Config: retryConfig,
-			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
-			},
-		}, func() (*http.Response, error) {
-			if req.Body != nil {
-				copyBody, err := req.GetBody()
-				if err != nil {
-					return nil, err
-				}
-				req.Body = copyBody
-			}
-
-			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-			if err != nil {
-				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
-					return nil, err
-				}
-
-				return nil, retry.Permanent(err)
-			}
-
-			httpRes, err := s.sdkConfiguration.Client.Do(req)
-			if err != nil || httpRes == nil {
-				if err != nil {
-					err = fmt.Errorf("error sending request: %w", err)
-				} else {
-					err = fmt.Errorf("error sending request: no response")
-				}
-
-				_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			}
-			return httpRes, err
-		})
-
-		if err != nil {
-			return nil, err
-		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	} else {
-		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-		if err != nil {
-			return nil, err
-		}
-
-		httpRes, err = s.sdkConfiguration.Client.Do(req)
-		if err != nil || httpRes == nil {
-			if err != nil {
-				err = fmt.Errorf("error sending request: %w", err)
-			} else {
-				err = fmt.Errorf("error sending request: no response")
-			}
-
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
-			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-			if err != nil {
-				return nil, err
-			} else if _httpRes != nil {
-				httpRes = _httpRes
-			}
-		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	res := &operations.V3GetInfoResponse{
-		StatusCode:  httpRes.StatusCode,
-		ContentType: httpRes.Header.Get("Content-Type"),
-		RawResponse: httpRes,
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out shared.V3ConfigInfoResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.V3ConfigInfoResponse = &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	default:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.V3ErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	}
-
-	return res, nil
-
-}
-
 // GetPayment - Get a payment by ID
 func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequest, opts ...operations.Option) (*operations.V3GetPaymentResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetPayment",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3070,6 +2870,14 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payments/{paymentID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetPayment",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3244,13 +3052,6 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 
 // GetPaymentInitiation - Get a payment initiation by ID
 func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetPaymentInitiationRequest, opts ...operations.Option) (*operations.V3GetPaymentInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetPaymentInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3272,6 +3073,14 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetPaymentInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3446,13 +3255,6 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 
 // GetPool - Get a pool by ID
 func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, opts ...operations.Option) (*operations.V3GetPoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetPool",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3474,6 +3276,14 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetPool",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3648,13 +3458,6 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 
 // GetPoolBalances - Get pool balances
 func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBalancesRequest, opts ...operations.Option) (*operations.V3GetPoolBalancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetPoolBalances",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3676,6 +3479,14 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetPoolBalances",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3854,13 +3665,6 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 
 // GetTask - Get a task and its result by ID
 func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, opts ...operations.Option) (*operations.V3GetTaskResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3GetTask",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3882,6 +3686,14 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/tasks/{taskID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3GetTask",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4056,13 +3868,6 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 
 // InitiatePayment - Initiate a payment
 func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiatePaymentRequest, opts ...operations.Option) (*operations.V3InitiatePaymentResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3InitiatePayment",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4086,6 +3891,13 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3InitiatePayment",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3InitiatePaymentRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -4270,13 +4082,6 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 
 // InstallConnector - Install a connector
 func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallConnectorRequest, opts ...operations.Option) (*operations.V3InstallConnectorResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3InstallConnector",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4300,6 +4105,13 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3InstallConnector",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3InstallConnectorRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -4480,13 +4292,6 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 
 // ListAccounts - List all accounts
 func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccountsRequest, opts ...operations.Option) (*operations.V3ListAccountsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListAccounts",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4510,6 +4315,13 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListAccounts",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -4694,13 +4506,6 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 
 // ListBankAccounts - List all bank accounts
 func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBankAccountsRequest, opts ...operations.Option) (*operations.V3ListBankAccountsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListBankAccounts",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4724,6 +4529,13 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListBankAccounts",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -4908,13 +4720,6 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 
 // ListConnectorConfigs - List all connector configurations
 func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option) (*operations.V3ListConnectorConfigsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListConnectorConfigs",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4936,6 +4741,14 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/connectors/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListConnectorConfigs",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5110,13 +4923,6 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 
 // ListConnectorScheduleInstances - List all connector schedule instances
 func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operations.V3ListConnectorScheduleInstancesRequest, opts ...operations.Option) (*operations.V3ListConnectorScheduleInstancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListConnectorScheduleInstances",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5138,6 +4944,14 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}/instances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListConnectorScheduleInstances",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5316,13 +5130,6 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 
 // ListConnectorSchedules - List all connector schedules
 func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3ListConnectorSchedulesRequest, opts ...operations.Option) (*operations.V3ListConnectorSchedulesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListConnectorSchedules",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5346,6 +5153,13 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListConnectorSchedules",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -5530,13 +5344,6 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 
 // ListConnectors - List all connectors
 func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnectorsRequest, opts ...operations.Option) (*operations.V3ListConnectorsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListConnectors",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5560,6 +5367,13 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListConnectors",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -5744,13 +5558,6 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 
 // ListPaymentInitiationAdjustments - List all payment initiation adjustments
 func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request operations.V3ListPaymentInitiationAdjustmentsRequest, opts ...operations.Option) (*operations.V3ListPaymentInitiationAdjustmentsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListPaymentInitiationAdjustments",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5774,6 +5581,13 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListPaymentInitiationAdjustments",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -5958,13 +5772,6 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 
 // ListPaymentInitiationRelatedPayments - List all payments related to a payment initiation
 func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request operations.V3ListPaymentInitiationRelatedPaymentsRequest, opts ...operations.Option) (*operations.V3ListPaymentInitiationRelatedPaymentsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListPaymentInitiationRelatedPayments",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5988,6 +5795,13 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListPaymentInitiationRelatedPayments",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -6172,13 +5986,6 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 
 // ListPaymentInitiations - List all payment initiations
 func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3ListPaymentInitiationsRequest, opts ...operations.Option) (*operations.V3ListPaymentInitiationsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListPaymentInitiations",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6202,6 +6009,13 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListPaymentInitiations",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -6386,13 +6200,6 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 
 // ListPayments - List all payments
 func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPaymentsRequest, opts ...operations.Option) (*operations.V3ListPaymentsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListPayments",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6416,6 +6223,13 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListPayments",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -6600,13 +6414,6 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 
 // ListPools - List all pools
 func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsRequest, opts ...operations.Option) (*operations.V3ListPoolsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ListPools",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6630,6 +6437,13 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ListPools",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -6814,13 +6628,6 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 
 // RejectPaymentInitiation - Reject a payment initiation
 func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3RejectPaymentInitiationRequest, opts ...operations.Option) (*operations.V3RejectPaymentInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3RejectPaymentInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6842,6 +6649,14 @@ func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3R
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/reject", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3RejectPaymentInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6996,13 +6811,6 @@ func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3R
 
 // RemoveAccountFromPool - Remove an account from a pool
 func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3RemoveAccountFromPoolRequest, opts ...operations.Option) (*operations.V3RemoveAccountFromPoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3RemoveAccountFromPool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7024,6 +6832,14 @@ func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3Rem
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/accounts/{accountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3RemoveAccountFromPool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7178,13 +6994,6 @@ func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3Rem
 
 // ResetConnector - Reset a connector. Be aware that this will delete all data and stop all existing tasks like payment initiations and bank account creations.
 func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConnectorRequest, opts ...operations.Option) (*operations.V3ResetConnectorResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ResetConnector",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7206,6 +7015,14 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ResetConnector",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7380,13 +7197,6 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 
 // RetryPaymentInitiation - Retry a payment initiation
 func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3RetryPaymentInitiationRequest, opts ...operations.Option) (*operations.V3RetryPaymentInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3RetryPaymentInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7408,6 +7218,14 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/retry", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3RetryPaymentInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7582,13 +7400,6 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 
 // ReversePaymentInitiation - Reverse a payment initiation
 func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3ReversePaymentInitiationRequest, opts ...operations.Option) (*operations.V3ReversePaymentInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3ReversePaymentInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7612,6 +7423,13 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3ReversePaymentInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3ReversePaymentInitiationRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -7792,13 +7610,6 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 
 // UninstallConnector - Uninstall a connector
 func (s *V3) UninstallConnector(ctx context.Context, request operations.V3UninstallConnectorRequest, opts ...operations.Option) (*operations.V3UninstallConnectorResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3UninstallConnector",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7820,6 +7631,14 @@ func (s *V3) UninstallConnector(ctx context.Context, request operations.V3Uninst
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3UninstallConnector",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7994,13 +7813,6 @@ func (s *V3) UninstallConnector(ctx context.Context, request operations.V3Uninst
 
 // UpdateBankAccountMetadata - Update a bank account's metadata
 func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V3UpdateBankAccountMetadataRequest, opts ...operations.Option) (*operations.V3UpdateBankAccountMetadataResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3UpdateBankAccountMetadata",
-		OAuth2Scopes:   []string{"auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -8024,6 +7836,13 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3UpdateBankAccountMetadata",
+		OAuth2Scopes:   []string{"auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3UpdateBankAccountMetadataRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -8184,13 +8003,6 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 
 // UpdatePaymentMetadata - Update a payment's metadata
 func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3UpdatePaymentMetadataRequest, opts ...operations.Option) (*operations.V3UpdatePaymentMetadataResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "v3UpdatePaymentMetadata",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -8214,6 +8026,13 @@ func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3Upd
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "v3UpdatePaymentMetadata",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3UpdatePaymentMetadataRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
