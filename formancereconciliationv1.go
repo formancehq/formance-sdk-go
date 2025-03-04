@@ -29,13 +29,6 @@ func newFormanceReconciliationV1(sdkConfig sdkConfiguration) *FormanceReconcilia
 // CreatePolicy - Create a policy
 // Create a policy
 func (s *FormanceReconciliationV1) CreatePolicy(ctx context.Context, request shared.PolicyRequest, opts ...operations.Option) (*operations.CreatePolicyResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createPolicy",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -59,6 +52,13 @@ func (s *FormanceReconciliationV1) CreatePolicy(ctx context.Context, request sha
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createPolicy",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -240,13 +240,6 @@ func (s *FormanceReconciliationV1) CreatePolicy(ctx context.Context, request sha
 // DeletePolicy - Delete a policy
 // Delete a policy by its id.
 func (s *FormanceReconciliationV1) DeletePolicy(ctx context.Context, request operations.DeletePolicyRequest, opts ...operations.Option) (*operations.DeletePolicyResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deletePolicy",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -268,6 +261,14 @@ func (s *FormanceReconciliationV1) DeletePolicy(ctx context.Context, request ope
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/reconciliation/policies/{policyID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deletePolicy",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -422,13 +423,6 @@ func (s *FormanceReconciliationV1) DeletePolicy(ctx context.Context, request ope
 
 // GetPolicy - Get a policy
 func (s *FormanceReconciliationV1) GetPolicy(ctx context.Context, request operations.GetPolicyRequest, opts ...operations.Option) (*operations.GetPolicyResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getPolicy",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -450,6 +444,14 @@ func (s *FormanceReconciliationV1) GetPolicy(ctx context.Context, request operat
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/reconciliation/policies/{policyID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getPolicy",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -624,13 +626,6 @@ func (s *FormanceReconciliationV1) GetPolicy(ctx context.Context, request operat
 
 // GetReconciliation - Get a reconciliation
 func (s *FormanceReconciliationV1) GetReconciliation(ctx context.Context, request operations.GetReconciliationRequest, opts ...operations.Option) (*operations.GetReconciliationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getReconciliation",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -652,6 +647,14 @@ func (s *FormanceReconciliationV1) GetReconciliation(ctx context.Context, reques
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/reconciliation/reconciliations/{reconciliationID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getReconciliation",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -826,13 +829,6 @@ func (s *FormanceReconciliationV1) GetReconciliation(ctx context.Context, reques
 
 // ListPolicies - List policies
 func (s *FormanceReconciliationV1) ListPolicies(ctx context.Context, request operations.ListPoliciesRequest, opts ...operations.Option) (*operations.ListPoliciesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listPolicies",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -854,6 +850,14 @@ func (s *FormanceReconciliationV1) ListPolicies(ctx context.Context, request ope
 	opURL, err := url.JoinPath(baseURL, "/api/reconciliation/policies")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listPolicies",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1032,13 +1036,6 @@ func (s *FormanceReconciliationV1) ListPolicies(ctx context.Context, request ope
 
 // ListReconciliations - List reconciliations
 func (s *FormanceReconciliationV1) ListReconciliations(ctx context.Context, request operations.ListReconciliationsRequest, opts ...operations.Option) (*operations.ListReconciliationsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listReconciliations",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1060,6 +1057,14 @@ func (s *FormanceReconciliationV1) ListReconciliations(ctx context.Context, requ
 	opURL, err := url.JoinPath(baseURL, "/api/reconciliation/reconciliations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listReconciliations",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1239,13 +1244,6 @@ func (s *FormanceReconciliationV1) ListReconciliations(ctx context.Context, requ
 // Reconcile using a policy
 // Reconcile using a policy
 func (s *FormanceReconciliationV1) Reconcile(ctx context.Context, request operations.ReconcileRequest, opts ...operations.Option) (*operations.ReconcileResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "reconcile",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1269,6 +1267,13 @@ func (s *FormanceReconciliationV1) Reconcile(ctx context.Context, request operat
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "reconcile",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ReconciliationRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1449,13 +1454,6 @@ func (s *FormanceReconciliationV1) Reconcile(ctx context.Context, request operat
 
 // ReconciliationgetServerInfo - Get server info
 func (s *FormanceReconciliationV1) ReconciliationgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.ReconciliationgetServerInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "reconciliationgetServerInfo",
-		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1477,6 +1475,14 @@ func (s *FormanceReconciliationV1) ReconciliationgetServerInfo(ctx context.Conte
 	opURL, err := url.JoinPath(baseURL, "/api/reconciliation/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "reconciliationgetServerInfo",
+		OAuth2Scopes:   []string{"auth:read", "reconciliation:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

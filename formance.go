@@ -232,10 +232,10 @@ func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v3.0.0",
-			SDKVersion:        "3.3.0",
-			GenVersion:        "2.506.0",
-			UserAgent:         "speakeasy-sdk/go 3.3.0 2.506.0 v3.0.0 github.com/formancehq/formance-sdk-go",
+			OpenAPIDocVersion: "v3.0.1",
+			SDKVersion:        "3.3.1",
+			GenVersion:        "2.539.0",
+			UserAgent:         "speakeasy-sdk/go 3.3.1 2.539.0 v3.0.1 github.com/formancehq/formance-sdk-go",
 			ServerDefaults: []map[string]string{
 				{},
 				{
@@ -283,13 +283,6 @@ func New(opts ...SDKOption) *Formance {
 
 // GetVersions - Show stack version information
 func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (*operations.GetVersionsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getVersions",
-		OAuth2Scopes:   []string{"auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -311,6 +304,14 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 	opURL, err := url.JoinPath(baseURL, "/versions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getVersions",
+		OAuth2Scopes:   []string{"auth:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

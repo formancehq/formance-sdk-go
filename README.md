@@ -294,7 +294,6 @@ func main() {
 * [GetBankAccount](docs/sdks/v3/README.md#getbankaccount) - Get a Bank Account by ID
 * [GetConnectorConfig](docs/sdks/v3/README.md#getconnectorconfig) - Get a connector configuration by ID
 * [GetConnectorSchedule](docs/sdks/v3/README.md#getconnectorschedule) - Get a connector schedule by ID
-* [GetInfo](docs/sdks/v3/README.md#getinfo) - Show server information
 * [GetPayment](docs/sdks/v3/README.md#getpayment) - Get a payment by ID
 * [GetPaymentInitiation](docs/sdks/v3/README.md#getpaymentinitiation) - Get a payment initiation by ID
 * [GetPool](docs/sdks/v3/README.md#getpool) - Get a pool by ID
@@ -457,14 +456,17 @@ func main() {
 
 You can override the default server globally using the `WithServerIndex(serverIndex int)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                                                | Variables                                                 | Default values                       |
-| --- | ----------------------------------------------------- | --------------------------------------------------------- | ------------------------------------ |
-| 0   | `http://localhost`                                    |                                                           |                                      |
-| 1   | `https://{organization}.{environment}.formance.cloud` | `environment ServerEnvironment`<br/>`organization string` | `"eu.sandbox"`<br/>`"orgID-stackID"` |
+| #   | Server                                                | Variables                        | Description                                |
+| --- | ----------------------------------------------------- | -------------------------------- | ------------------------------------------ |
+| 0   | `http://localhost`                                    |                                  | local server                               |
+| 1   | `https://{organization}.{environment}.formance.cloud` | `environment`<br/>`organization` | A per-organization and per-environment API |
 
-If the selected server has variables, you may override their default values using their associated option(s):
- * `WithEnvironment(environment ServerEnvironment)`
- * `WithOrganization(organization string)`
+If the selected server has variables, you may override its default values using the associated option(s):
+
+| Variable       | Option                                           | Supported Values                                                           | Default           | Description                                                   |
+| -------------- | ------------------------------------------------ | -------------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
+| `environment`  | `WithEnvironment(environment ServerEnvironment)` | - `"eu.sandbox"`<br/>- `"sandbox"`<br/>- `"eu-west-1"`<br/>- `"us-east-1"` | `"eu.sandbox"`    | The environment name. Defaults to the production environment. |
+| `organization` | `WithOrganization(organization string)`          | string                                                                     | `"orgID-stackID"` | The organization name. Defaults to a generic organization.    |
 
 #### Example
 
@@ -483,6 +485,8 @@ func main() {
 
 	s := formancesdkgo.New(
 		formancesdkgo.WithServerIndex(1),
+		formancesdkgo.WithEnvironment("us-east-1"),
+		formancesdkgo.WithOrganization("<value>"),
 		formancesdkgo.WithSecurity(shared.Security{
 			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
 			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),

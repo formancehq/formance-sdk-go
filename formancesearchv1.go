@@ -31,13 +31,6 @@ func newFormanceSearchV1(sdkConfig sdkConfiguration) *FormanceSearchV1 {
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opts ...operations.Option) (*operations.SearchResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "search",
-		OAuth2Scopes:   []string{"auth:read", "search:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -61,6 +54,13 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "search",
+		OAuth2Scopes:   []string{"auth:read", "search:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -228,13 +228,6 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.SearchgetServerInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "searchgetServerInfo",
-		OAuth2Scopes:   []string{"auth:read", "search:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -256,6 +249,14 @@ func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...oper
 	opURL, err := url.JoinPath(baseURL, "/api/search/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "searchgetServerInfo",
+		OAuth2Scopes:   []string{"auth:read", "search:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

@@ -22,7 +22,6 @@
 * [GetBankAccount](#getbankaccount) - Get a Bank Account by ID
 * [GetConnectorConfig](#getconnectorconfig) - Get a connector configuration by ID
 * [GetConnectorSchedule](#getconnectorschedule) - Get a connector schedule by ID
-* [GetInfo](#getinfo) - Show server information
 * [GetPayment](#getpayment) - Get a payment by ID
 * [GetPaymentInitiation](#getpaymentinitiation) - Get a payment initiation by ID
 * [GetPool](#getpool) - Get a pool by ID
@@ -69,7 +68,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -128,7 +127,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -186,7 +185,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -242,7 +241,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -298,7 +297,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -353,7 +352,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -409,7 +408,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -467,7 +466,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -525,7 +524,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -583,7 +582,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -641,7 +640,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -701,7 +700,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -759,7 +758,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -817,7 +816,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -857,60 +856,6 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
-## GetInfo
-
-Show server information
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetInfo(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConfigInfoResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
-
-### Response
-
-**[*operations.V3GetInfoResponse](../../pkg/models/operations/v3getinforesponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
 ## GetPayment
 
 Get a payment by ID
@@ -930,7 +875,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -988,7 +933,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1046,7 +991,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1104,7 +1049,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1162,7 +1107,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1220,7 +1165,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1276,7 +1221,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1334,7 +1279,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1393,7 +1338,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1451,7 +1396,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1506,7 +1451,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1567,7 +1512,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1627,7 +1572,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1686,7 +1631,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1746,7 +1691,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1806,7 +1751,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1865,7 +1810,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1924,7 +1869,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -1983,7 +1928,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -2041,7 +1986,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -2100,7 +2045,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -2158,7 +2103,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -2216,7 +2161,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -2274,7 +2219,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -2332,7 +2277,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
@@ -2390,7 +2335,7 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := formancesdkgo.New(
         formancesdkgo.WithSecurity(shared.Security{
             ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),

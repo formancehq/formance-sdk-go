@@ -29,13 +29,6 @@ func newFormancePaymentsV1(sdkConfig sdkConfiguration) *FormancePaymentsV1 {
 // AddAccountToPool - Add an account to a pool
 // Add an account to a pool
 func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request operations.AddAccountToPoolRequest, opts ...operations.Option) (*operations.AddAccountToPoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "addAccountToPool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -59,6 +52,13 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "addAccountToPool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "AddAccountToPoolRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -220,13 +220,6 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 // ConnectorsTransfer - Transfer funds between Connector accounts
 // Execute a transfer between two accounts.
 func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request operations.ConnectorsTransferRequest, opts ...operations.Option) (*operations.ConnectorsTransferResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "connectorsTransfer",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -250,6 +243,13 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "connectorsTransfer",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TransferRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -431,13 +431,6 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 // CreateAccount - Create an account
 // Create an account
 func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.AccountRequest, opts ...operations.Option) (*operations.CreateAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -461,6 +454,13 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -642,13 +642,6 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 // CreateBankAccount - Create a BankAccount in Payments and on the PSP
 // Create a bank account in Payments and on the PSP.
 func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shared.BankAccountRequest, opts ...operations.Option) (*operations.CreateBankAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createBankAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -672,6 +665,13 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createBankAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -853,13 +853,6 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 // CreatePayment - Create a payment
 // Create a payment
 func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.PaymentRequest, opts ...operations.Option) (*operations.CreatePaymentResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createPayment",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -883,6 +876,13 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createPayment",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1064,13 +1064,6 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 // CreatePool - Create a Pool
 // Create a Pool
 func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.PoolRequest, opts ...operations.Option) (*operations.CreatePoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createPool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1094,6 +1087,13 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createPool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1275,13 +1275,6 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 // CreateTransferInitiation - Create a TransferInitiation
 // Create a transfer initiation
 func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, request shared.TransferInitiationRequest, opts ...operations.Option) (*operations.CreateTransferInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createTransferInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1305,6 +1298,13 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createTransferInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1486,13 +1486,6 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 // DeletePool - Delete a Pool
 // Delete a pool by its id.
 func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.DeletePoolRequest, opts ...operations.Option) (*operations.DeletePoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deletePool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1514,6 +1507,14 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deletePool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1669,13 +1670,6 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 // DeleteTransferInitiation - Delete a transfer initiation
 // Delete a transfer initiation by its id.
 func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, request operations.DeleteTransferInitiationRequest, opts ...operations.Option) (*operations.DeleteTransferInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deleteTransferInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1697,6 +1691,14 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deleteTransferInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1851,13 +1853,6 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 
 // ForwardBankAccount - Forward a bank account to a connector
 func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request operations.ForwardBankAccountRequest, opts ...operations.Option) (*operations.ForwardBankAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "forwardBankAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1881,6 +1876,13 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "forwardBankAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ForwardBankAccountRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -2061,13 +2063,6 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 
 // GetAccountBalances - Get account balances
 func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request operations.GetAccountBalancesRequest, opts ...operations.Option) (*operations.GetAccountBalancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getAccountBalances",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2089,6 +2084,14 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/accounts/{accountId}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getAccountBalances",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2267,13 +2270,6 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 
 // GetBankAccount - Get a bank account created by user on Formance
 func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operations.GetBankAccountRequest, opts ...operations.Option) (*operations.GetBankAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getBankAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2295,6 +2291,14 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/bank-accounts/{bankAccountId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getBankAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2472,13 +2476,6 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request operations.GetConnectorTaskRequest, opts ...operations.Option) (*operations.GetConnectorTaskResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getConnectorTask",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2500,6 +2497,14 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/tasks/{taskId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getConnectorTask",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2675,13 +2680,6 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 // GetConnectorTaskV1 - Read a specific task of the connector
 // Get a specific task associated to the connector.
 func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request operations.GetConnectorTaskV1Request, opts ...operations.Option) (*operations.GetConnectorTaskV1Response, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getConnectorTaskV1",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2703,6 +2701,14 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/tasks/{taskId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getConnectorTaskV1",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2877,13 +2883,6 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 
 // GetPayment - Get a payment
 func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.GetPaymentRequest, opts ...operations.Option) (*operations.GetPaymentResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getPayment",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2905,6 +2904,14 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/payments/{paymentId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getPayment",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3079,13 +3086,6 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 
 // GetPool - Get a Pool
 func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.GetPoolRequest, opts ...operations.Option) (*operations.GetPoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getPool",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3107,6 +3107,14 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getPool",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3281,13 +3289,6 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 
 // GetPoolBalances - Get pool balances
 func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operations.GetPoolBalancesRequest, opts ...operations.Option) (*operations.GetPoolBalancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getPoolBalances",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3309,6 +3310,14 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getPoolBalances",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3487,13 +3496,6 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 
 // GetTransferInitiation - Get a transfer initiation
 func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request operations.GetTransferInitiationRequest, opts ...operations.Option) (*operations.GetTransferInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getTransferInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3515,6 +3517,14 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getTransferInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3690,13 +3700,6 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 // InstallConnector - Install a connector
 // Install a connector by its name and config.
 func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request operations.InstallConnectorRequest, opts ...operations.Option) (*operations.InstallConnectorResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "installConnector",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3720,6 +3723,13 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "installConnector",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ConnectorConfig", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -3901,13 +3911,6 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 // ListAllConnectors - List all installed connectors
 // List all installed connectors.
 func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...operations.Option) (*operations.ListAllConnectorsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listAllConnectors",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3929,6 +3932,14 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 	opURL, err := url.JoinPath(baseURL, "/api/payments/connectors")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listAllConnectors",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4104,13 +4115,6 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 // ListBankAccounts - List bank accounts created by user on Formance
 // List all bank accounts created by user on Formance.
 func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request operations.ListBankAccountsRequest, opts ...operations.Option) (*operations.ListBankAccountsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listBankAccounts",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4132,6 +4136,14 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 	opURL, err := url.JoinPath(baseURL, "/api/payments/bank-accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listBankAccounts",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4311,13 +4323,6 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 // ListConfigsAvailableConnectors - List the configs of each available connector
 // List the configs of each available connector.
 func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context, opts ...operations.Option) (*operations.ListConfigsAvailableConnectorsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listConfigsAvailableConnectors",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4339,6 +4344,14 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 	opURL, err := url.JoinPath(baseURL, "/api/payments/connectors/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listConfigsAvailableConnectors",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4516,13 +4529,6 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request operations.ListConnectorTasksRequest, opts ...operations.Option) (*operations.ListConnectorTasksResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listConnectorTasks",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4544,6 +4550,14 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/tasks", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listConnectorTasks",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4723,13 +4737,6 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 // ListConnectorTasksV1 - List tasks from a connector
 // List all tasks associated with this connector.
 func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request operations.ListConnectorTasksV1Request, opts ...operations.Option) (*operations.ListConnectorTasksV1Response, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listConnectorTasksV1",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4751,6 +4758,14 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/tasks", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listConnectorTasksV1",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4929,13 +4944,6 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 
 // ListPayments - List payments
 func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operations.ListPaymentsRequest, opts ...operations.Option) (*operations.ListPaymentsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listPayments",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4957,6 +4965,14 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 	opURL, err := url.JoinPath(baseURL, "/api/payments/payments")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listPayments",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5135,13 +5151,6 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 
 // ListPools - List Pools
 func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.ListPoolsRequest, opts ...operations.Option) (*operations.ListPoolsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listPools",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5163,6 +5172,14 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 	opURL, err := url.JoinPath(baseURL, "/api/payments/pools")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listPools",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5341,13 +5358,6 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 
 // ListTransferInitiations - List Transfer Initiations
 func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, request operations.ListTransferInitiationsRequest, opts ...operations.Option) (*operations.ListTransferInitiationsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listTransferInitiations",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5369,6 +5379,14 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 	opURL, err := url.JoinPath(baseURL, "/api/payments/transfer-initiations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listTransferInitiations",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5547,13 +5565,6 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 
 // PaymentsgetAccount - Get an account
 func (s *FormancePaymentsV1) PaymentsgetAccount(ctx context.Context, request operations.PaymentsgetAccountRequest, opts ...operations.Option) (*operations.PaymentsgetAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "paymentsgetAccount",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5575,6 +5586,14 @@ func (s *FormancePaymentsV1) PaymentsgetAccount(ctx context.Context, request ope
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/accounts/{accountId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "paymentsgetAccount",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5749,13 +5768,6 @@ func (s *FormancePaymentsV1) PaymentsgetAccount(ctx context.Context, request ope
 
 // PaymentsgetServerInfo - Get server info
 func (s *FormancePaymentsV1) PaymentsgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.PaymentsgetServerInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "paymentsgetServerInfo",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5777,6 +5789,14 @@ func (s *FormancePaymentsV1) PaymentsgetServerInfo(ctx context.Context, opts ...
 	opURL, err := url.JoinPath(baseURL, "/api/payments/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "paymentsgetServerInfo",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5951,13 +5971,6 @@ func (s *FormancePaymentsV1) PaymentsgetServerInfo(ctx context.Context, opts ...
 
 // PaymentslistAccounts - List accounts
 func (s *FormancePaymentsV1) PaymentslistAccounts(ctx context.Context, request operations.PaymentslistAccountsRequest, opts ...operations.Option) (*operations.PaymentslistAccountsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "paymentslistAccounts",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5981,6 +5994,13 @@ func (s *FormancePaymentsV1) PaymentslistAccounts(ctx context.Context, request o
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "paymentslistAccounts",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -6168,13 +6188,6 @@ func (s *FormancePaymentsV1) PaymentslistAccounts(ctx context.Context, request o
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request operations.ReadConnectorConfigRequest, opts ...operations.Option) (*operations.ReadConnectorConfigResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "readConnectorConfig",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6196,6 +6209,14 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "readConnectorConfig",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6371,13 +6392,6 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 // ReadConnectorConfigV1 - Read the config of a connector
 // Read connector config
 func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request operations.ReadConnectorConfigV1Request, opts ...operations.Option) (*operations.ReadConnectorConfigV1Response, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "readConnectorConfigV1",
-		OAuth2Scopes:   []string{"auth:read", "payments:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6399,6 +6413,14 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "readConnectorConfigV1",
+		OAuth2Scopes:   []string{"auth:read", "payments:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6574,13 +6596,6 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 // RemoveAccountFromPool - Remove an account from a pool
 // Remove an account from a pool by its id.
 func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request operations.RemoveAccountFromPoolRequest, opts ...operations.Option) (*operations.RemoveAccountFromPoolResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "removeAccountFromPool",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6602,6 +6617,14 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/accounts/{accountId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "removeAccountFromPool",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6760,13 +6783,6 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operations.ResetConnectorRequest, opts ...operations.Option) (*operations.ResetConnectorResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "resetConnector",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6788,6 +6804,14 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "resetConnector",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6944,13 +6968,6 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 // Reset a connector by its name.
 // It will remove the connector and ALL PAYMENTS generated with it.
 func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request operations.ResetConnectorV1Request, opts ...operations.Option) (*operations.ResetConnectorV1Response, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "resetConnectorV1",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6972,6 +6989,14 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "resetConnectorV1",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7127,13 +7152,6 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 // RetryTransferInitiation - Retry a failed transfer initiation
 // Retry a failed transfer initiation
 func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, request operations.RetryTransferInitiationRequest, opts ...operations.Option) (*operations.RetryTransferInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "retryTransferInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7155,6 +7173,14 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}/retry", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "retryTransferInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7310,13 +7336,6 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 // ReverseTransferInitiation - Reverse a transfer initiation
 // Reverse transfer initiation
 func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, request operations.ReverseTransferInitiationRequest, opts ...operations.Option) (*operations.ReverseTransferInitiationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "reverseTransferInitiation",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7340,6 +7359,13 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "reverseTransferInitiation",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ReverseTransferInitiationRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -7501,13 +7527,6 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 // UdpateTransferInitiationStatus - Update the status of a transfer initiation
 // Update a transfer initiation status
 func (s *FormancePaymentsV1) UdpateTransferInitiationStatus(ctx context.Context, request operations.UdpateTransferInitiationStatusRequest, opts ...operations.Option) (*operations.UdpateTransferInitiationStatusResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "udpateTransferInitiationStatus",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7531,6 +7550,13 @@ func (s *FormancePaymentsV1) UdpateTransferInitiationStatus(ctx context.Context,
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "udpateTransferInitiationStatus",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateTransferInitiationStatusRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -7694,13 +7720,6 @@ func (s *FormancePaymentsV1) UdpateTransferInitiationStatus(ctx context.Context,
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request operations.UninstallConnectorRequest, opts ...operations.Option) (*operations.UninstallConnectorResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "uninstallConnector",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7722,6 +7741,14 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "uninstallConnector",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7877,13 +7904,6 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 // UninstallConnectorV1 - Uninstall a connector
 // Uninstall a connector by its name.
 func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request operations.UninstallConnectorV1Request, opts ...operations.Option) (*operations.UninstallConnectorV1Response, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "uninstallConnectorV1",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7905,6 +7925,14 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "uninstallConnectorV1",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -8059,13 +8087,6 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 
 // UpdateBankAccountMetadata - Update metadata of a bank account
 func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, request operations.UpdateBankAccountMetadataRequest, opts ...operations.Option) (*operations.UpdateBankAccountMetadataResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "updateBankAccountMetadata",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -8089,6 +8110,13 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "updateBankAccountMetadata",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateBankAccountMetadataRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -8250,13 +8278,6 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 // UpdateConnectorConfigV1 - Update the config of a connector
 // Update connector config
 func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, request operations.UpdateConnectorConfigV1Request, opts ...operations.Option) (*operations.UpdateConnectorConfigV1Response, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "updateConnectorConfigV1",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -8280,6 +8301,13 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "updateConnectorConfigV1",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ConnectorConfig", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -8440,13 +8468,6 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 
 // UpdateMetadata - Update metadata
 func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operations.UpdateMetadataRequest, opts ...operations.Option) (*operations.UpdateMetadataResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "updateMetadata",
-		OAuth2Scopes:   []string{"auth:read", "payments:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -8470,6 +8491,13 @@ func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operati
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "updateMetadata",
+		OAuth2Scopes:   []string{"auth:read", "payments:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err

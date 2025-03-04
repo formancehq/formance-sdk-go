@@ -29,13 +29,6 @@ func newFormanceOrchestrationV1(sdkConfig sdkConfiguration) *FormanceOrchestrati
 // CancelEvent - Cancel a running workflow
 // Cancel a running workflow
 func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request operations.CancelEventRequest, opts ...operations.Option) (*operations.CancelEventResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "cancelEvent",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -57,6 +50,14 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/abort", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "cancelEvent",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -212,13 +213,6 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 // CreateTrigger - Create trigger
 // Create trigger
 func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *shared.TriggerData, opts ...operations.Option) (*operations.CreateTriggerResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createTrigger",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -242,6 +236,13 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createTrigger",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -423,13 +424,6 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 // CreateWorkflow - Create workflow
 // Create a workflow
 func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *shared.CreateWorkflowRequest, opts ...operations.Option) (*operations.CreateWorkflowResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createWorkflow",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -453,6 +447,13 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createWorkflow",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -634,13 +635,6 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 // DeleteTrigger - Delete trigger
 // Read trigger
 func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request operations.DeleteTriggerRequest, opts ...operations.Option) (*operations.DeleteTriggerResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deleteTrigger",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -662,6 +656,14 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/triggers/{triggerID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deleteTrigger",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -817,13 +819,6 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 // DeleteWorkflow - Delete a flow by id
 // Delete a flow by id
 func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request operations.DeleteWorkflowRequest, opts ...operations.Option) (*operations.DeleteWorkflowResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "deleteWorkflow",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -845,6 +840,14 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "deleteWorkflow",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1000,13 +1003,6 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 // GetInstance - Get a workflow instance by id
 // Get a workflow instance by id
 func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request operations.GetInstanceRequest, opts ...operations.Option) (*operations.GetInstanceResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getInstance",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1028,6 +1024,14 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getInstance",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1203,13 +1207,6 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 // GetInstanceHistory - Get a workflow instance history by id
 // Get a workflow instance history by id
 func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, request operations.GetInstanceHistoryRequest, opts ...operations.Option) (*operations.GetInstanceHistoryResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getInstanceHistory",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1231,6 +1228,14 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getInstanceHistory",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1406,13 +1411,6 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 // GetInstanceStageHistory - Get a workflow instance stage history
 // Get a workflow instance stage history
 func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, request operations.GetInstanceStageHistoryRequest, opts ...operations.Option) (*operations.GetInstanceStageHistoryResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getInstanceStageHistory",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1434,6 +1432,14 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/stages/{number}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getInstanceStageHistory",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1609,13 +1615,6 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 // GetWorkflow - Get a flow by id
 // Get a flow by id
 func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request operations.GetWorkflowRequest, opts ...operations.Option) (*operations.GetWorkflowResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getWorkflow",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1637,6 +1636,14 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getWorkflow",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1812,13 +1819,6 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 // ListInstances - List instances of a workflow
 // List instances of a workflow
 func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request operations.ListInstancesRequest, opts ...operations.Option) (*operations.ListInstancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listInstances",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1840,6 +1840,14 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/instances")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listInstances",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2019,13 +2027,6 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 // ListTriggers - List triggers
 // List triggers
 func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request operations.ListTriggersRequest, opts ...operations.Option) (*operations.ListTriggersResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listTriggers",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2047,6 +2048,14 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/triggers")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listTriggers",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2226,13 +2235,6 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 // ListTriggersOccurrences - List triggers occurrences
 // List triggers occurrences
 func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, request operations.ListTriggersOccurrencesRequest, opts ...operations.Option) (*operations.ListTriggersOccurrencesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listTriggersOccurrences",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2254,6 +2256,14 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/triggers/{triggerID}/occurrences", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listTriggersOccurrences",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2429,13 +2439,6 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 // ListWorkflows - List registered workflows
 // List registered workflows
 func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...operations.Option) (*operations.ListWorkflowsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listWorkflows",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2457,6 +2460,14 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/workflows")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listWorkflows",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2631,13 +2642,6 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 
 // OrchestrationgetServerInfo - Get server info
 func (s *FormanceOrchestrationV1) OrchestrationgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.OrchestrationgetServerInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "orchestrationgetServerInfo",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2659,6 +2663,14 @@ func (s *FormanceOrchestrationV1) OrchestrationgetServerInfo(ctx context.Context
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "orchestrationgetServerInfo",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2834,13 +2846,6 @@ func (s *FormanceOrchestrationV1) OrchestrationgetServerInfo(ctx context.Context
 // ReadTrigger - Read trigger
 // Read trigger
 func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request operations.ReadTriggerRequest, opts ...operations.Option) (*operations.ReadTriggerResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "readTrigger",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2862,6 +2867,14 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/triggers/{triggerID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "readTrigger",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3037,13 +3050,6 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 // RunWorkflow - Run workflow
 // Run workflow
 func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request operations.RunWorkflowRequest, opts ...operations.Option) (*operations.RunWorkflowResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "runWorkflow",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3067,6 +3073,13 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "runWorkflow",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -3252,13 +3265,6 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 // SendEvent - Send an event to a running workflow
 // Send an event to a running workflow
 func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operations.SendEventRequest, opts ...operations.Option) (*operations.SendEventResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "sendEvent",
-		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3282,6 +3288,13 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "sendEvent",
+		OAuth2Scopes:   []string{"auth:read", "orchestration:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err

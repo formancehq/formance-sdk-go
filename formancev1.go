@@ -28,13 +28,6 @@ func newFormanceV1(sdkConfig sdkConfiguration) *FormanceV1 {
 
 // CreateTransactions - Create a new batch of transactions to a ledger
 func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.CreateTransactionsRequest, opts ...operations.Option) (*operations.CreateTransactionsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "CreateTransactions",
-		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -58,6 +51,13 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "CreateTransactions",
+		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Transactions", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -238,13 +238,6 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 
 // AddMetadataOnTransaction - Set the metadata of a transaction by its ID
 func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request operations.AddMetadataOnTransactionRequest, opts ...operations.Option) (*operations.AddMetadataOnTransactionResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "addMetadataOnTransaction",
-		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -268,6 +261,13 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "addMetadataOnTransaction",
+		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, true, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -428,13 +428,6 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 
 // AddMetadataToAccount - Add metadata to an account
 func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operations.AddMetadataToAccountRequest, opts ...operations.Option) (*operations.AddMetadataToAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "addMetadataToAccount",
-		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -458,6 +451,13 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "addMetadataToAccount",
+		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -618,13 +618,6 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 
 // CountAccounts - Count the accounts from a ledger
 func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.CountAccountsRequest, opts ...operations.Option) (*operations.CountAccountsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "countAccounts",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -646,6 +639,14 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "countAccounts",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -806,13 +807,6 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 
 // CountTransactions - Count the transactions from a ledger
 func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.CountTransactionsRequest, opts ...operations.Option) (*operations.CountTransactionsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "countTransactions",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -834,6 +828,14 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "countTransactions",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -994,13 +996,6 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 
 // CreateTransaction - Create a new transaction to a ledger
 func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.CreateTransactionRequest, opts ...operations.Option) (*operations.CreateTransactionResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "createTransaction",
-		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1024,6 +1019,13 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "createTransaction",
+		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "PostTransaction", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1208,13 +1210,6 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 
 // GetAccount - Get account by its address
 func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccountRequest, opts ...operations.Option) (*operations.GetAccountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getAccount",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1236,6 +1231,14 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts/{address}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getAccount",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1410,13 +1413,6 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 
 // GetBalances - Get the balances from a ledger's account
 func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBalancesRequest, opts ...operations.Option) (*operations.GetBalancesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getBalances",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1438,6 +1434,14 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getBalances",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1616,13 +1620,6 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 
 // GetBalancesAggregated - Get the aggregated balances from selected accounts
 func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operations.GetBalancesAggregatedRequest, opts ...operations.Option) (*operations.GetBalancesAggregatedResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getBalancesAggregated",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1644,6 +1641,14 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/aggregate/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getBalancesAggregated",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1822,13 +1827,6 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 
 // GetInfo - Show server information
 func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*operations.GetInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getInfo",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1850,6 +1848,14 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getInfo",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2024,13 +2030,6 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 
 // GetLedgerInfo - Get information about a ledger
 func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLedgerInfoRequest, opts ...operations.Option) (*operations.GetLedgerInfoResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getLedgerInfo",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2052,6 +2051,14 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/_info", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getLedgerInfo",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2226,13 +2233,6 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 
 // GetMapping - Get the mapping of a ledger
 func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappingRequest, opts ...operations.Option) (*operations.GetMappingResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getMapping",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2254,6 +2254,14 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/mapping", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getMapping",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2428,13 +2436,6 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 
 // GetTransaction - Get transaction from a ledger by its ID
 func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetTransactionRequest, opts ...operations.Option) (*operations.GetTransactionResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "getTransaction",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2456,6 +2457,14 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "getTransaction",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2631,13 +2640,6 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 // ListAccounts - List accounts from a ledger
 // List accounts from a ledger, sorted by address in descending order.
 func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAccountsRequest, opts ...operations.Option) (*operations.ListAccountsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listAccounts",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2659,6 +2661,14 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listAccounts",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2859,13 +2869,6 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 // ListLogs - List the logs from a ledger
 // List the logs from a ledger, sorted by ID in descending order.
 func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRequest, opts ...operations.Option) (*operations.ListLogsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listLogs",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2887,6 +2890,14 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/logs", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listLogs",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3066,13 +3077,6 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 // ListTransactions - List transactions from a ledger
 // List transactions from a ledger, sorted by txid in descending order.
 func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.ListTransactionsRequest, opts ...operations.Option) (*operations.ListTransactionsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "listTransactions",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3094,6 +3098,14 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "listTransactions",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3273,13 +3285,6 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 // ReadStats - Get statistics from a ledger
 // Get statistics from a ledger. (aggregate metrics on accounts and transactions)
 func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStatsRequest, opts ...operations.Option) (*operations.ReadStatsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "readStats",
-		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3301,6 +3306,14 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/stats", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "readStats",
+		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3475,13 +3488,6 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 
 // RevertTransaction - Revert a ledger transaction by its ID
 func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.RevertTransactionRequest, opts ...operations.Option) (*operations.RevertTransactionResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "revertTransaction",
-		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3503,6 +3509,14 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}/revert", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "revertTransaction",
+		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3684,13 +3698,6 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScriptRequest, opts ...operations.Option) (*operations.RunScriptResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "runScript",
-		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3714,6 +3721,13 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "runScript",
+		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Script", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -3883,13 +3897,6 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 
 // UpdateMapping - Update the mapping of a ledger
 func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.UpdateMappingRequest, opts ...operations.Option) (*operations.UpdateMappingResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "updateMapping",
-		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3913,6 +3920,13 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "updateMapping",
+		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "Mapping", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
