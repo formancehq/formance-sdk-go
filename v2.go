@@ -58,7 +58,7 @@ func (s *V2) AddMetadataOnTransaction(ctx context.Context, request operations.V2
 		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -450,7 +450,7 @@ func (s *V2) CountAccounts(ctx context.Context, request operations.V2CountAccoun
 		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -646,7 +646,7 @@ func (s *V2) CountTransactions(ctx context.Context, request operations.V2CountTr
 		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -842,7 +842,7 @@ func (s *V2) CreateBulk(ctx context.Context, request operations.V2CreateBulkRequ
 		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1077,7 +1077,7 @@ func (s *V2) CreateLedger(ctx context.Context, request operations.V2CreateLedger
 		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V2CreateLedgerRequest", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "V2CreateLedgerRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -2409,7 +2409,7 @@ func (s *V2) GetBalancesAggregated(ctx context.Context, request operations.V2Get
 		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -3663,7 +3663,7 @@ func (s *V2) GetVolumesWithBalances(ctx context.Context, request operations.V2Ge
 		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -3876,7 +3876,7 @@ func (s *V2) ImportLogs(ctx context.Context, request operations.V2ImportLogsRequ
 		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "string", `request:"mediaType=application/octet-stream"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "V2ImportLogsRequest", "raw", `request:"mediaType=application/octet-stream"`)
 	if err != nil {
 		return nil, err
 	}
@@ -4067,7 +4067,7 @@ func (s *V2) ListAccounts(ctx context.Context, request operations.V2ListAccounts
 		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -4489,7 +4489,7 @@ func (s *V2) ListLogs(ctx context.Context, request operations.V2ListLogsRequest,
 		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -4704,7 +4704,7 @@ func (s *V2) ListTransactions(ctx context.Context, request operations.V2ListTran
 		OAuth2Scopes:   []string{"auth:read", "ledger:read"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -5329,7 +5329,7 @@ func (s *V2) UpdateLedgerMetadata(ctx context.Context, request operations.V2Upda
 		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}

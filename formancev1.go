@@ -268,7 +268,7 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 		OAuth2Scopes:   []string{"auth:read", "ledger:write"},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "RequestBody", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}

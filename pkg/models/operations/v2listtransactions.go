@@ -66,7 +66,7 @@ func (v *V2ListTransactionsRequest) UnmarshalJSON(data []byte) error {
 
 func (o *V2ListTransactionsRequest) GetRequestBody() map[string]any {
 	if o == nil {
-		return nil
+		return map[string]any{}
 	}
 	return o.RequestBody
 }

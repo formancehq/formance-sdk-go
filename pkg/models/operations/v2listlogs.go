@@ -38,7 +38,7 @@ func (v *V2ListLogsRequest) UnmarshalJSON(data []byte) error {
 
 func (o *V2ListLogsRequest) GetRequestBody() map[string]any {
 	if o == nil {
-		return nil
+		return map[string]any{}
 	}
 	return o.RequestBody
 }

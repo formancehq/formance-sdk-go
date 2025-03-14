@@ -21,7 +21,7 @@ type V2CreateBulkRequest struct {
 
 func (o *V2CreateBulkRequest) GetRequestBody() []shared.V2BulkElement {
 	if o == nil {
-		return nil
+		return []shared.V2BulkElement{}
 	}
 	return o.RequestBody
 }
