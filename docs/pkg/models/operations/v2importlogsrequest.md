@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field               | Type                | Required            | Description         | Example             |
-| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `RequestBody`       | **string*           | :heavy_minus_sign:  | N/A                 |                     |
-| `Ledger`            | *string*            | :heavy_check_mark:  | Name of the ledger. | ledger001           |
+| Field                 | Type                  | Required              | Description           | Example               |
+| --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
+| `V2ImportLogsRequest` | *any*                 | :heavy_check_mark:    | N/A                   |                       |
+| `Ledger`              | *string*              | :heavy_check_mark:    | Name of the ledger.   | ledger001             |

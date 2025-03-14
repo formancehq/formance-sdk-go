@@ -31,7 +31,7 @@ func (v *V2GetBalancesAggregatedRequest) UnmarshalJSON(data []byte) error {
 
 func (o *V2GetBalancesAggregatedRequest) GetRequestBody() map[string]any {
 	if o == nil {
-		return nil
+		return map[string]any{}
 	}
 	return o.RequestBody
 }

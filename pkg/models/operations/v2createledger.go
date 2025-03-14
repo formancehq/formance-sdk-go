@@ -8,14 +8,14 @@ import (
 )
 
 type V2CreateLedgerRequest struct {
-	V2CreateLedgerRequest *shared.V2CreateLedgerRequest `request:"mediaType=application/json"`
+	V2CreateLedgerRequest shared.V2CreateLedgerRequest `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2CreateLedgerRequest) GetV2CreateLedgerRequest() *shared.V2CreateLedgerRequest {
+func (o *V2CreateLedgerRequest) GetV2CreateLedgerRequest() shared.V2CreateLedgerRequest {
 	if o == nil {
-		return nil
+		return shared.V2CreateLedgerRequest{}
 	}
 	return o.V2CreateLedgerRequest
 }

@@ -7,16 +7,17 @@ import (
 )
 
 type V2ImportLogsRequest struct {
-	RequestBody *string `request:"mediaType=application/octet-stream"`
+	// This field accepts []byte data or io.Reader implementations, such as *os.File.
+	V2ImportLogsRequest any `request:"mediaType=application/octet-stream"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2ImportLogsRequest) GetRequestBody() *string {
+func (o *V2ImportLogsRequest) GetV2ImportLogsRequest() any {
 	if o == nil {
 		return nil
 	}
-	return o.RequestBody
+	return o.V2ImportLogsRequest
 }
 
 func (o *V2ImportLogsRequest) GetLedger() string {

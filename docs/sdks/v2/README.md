@@ -188,6 +188,9 @@ func main() {
     )
 
     res, err := s.Ledger.V2.CountAccounts(ctx, operations.V2CountAccountsRequest{
+        RequestBody: map[string]any{
+            "key": "<value>",
+        },
         Ledger: "ledger001",
     })
     if err != nil {
@@ -246,6 +249,10 @@ func main() {
     )
 
     res, err := s.Ledger.V2.CountTransactions(ctx, operations.V2CountTransactionsRequest{
+        RequestBody: map[string]any{
+            "key": "<value>",
+            "key1": "<value>",
+        },
         Ledger: "ledger001",
     })
     if err != nil {
@@ -372,7 +379,7 @@ func main() {
     )
 
     res, err := s.Ledger.V2.CreateLedger(ctx, operations.V2CreateLedgerRequest{
-        V2CreateLedgerRequest: &shared.V2CreateLedgerRequest{
+        V2CreateLedgerRequest: shared.V2CreateLedgerRequest{
             Metadata: map[string]string{
                 "admin": "true",
             },
@@ -825,6 +832,9 @@ func main() {
     )
 
     res, err := s.Ledger.V2.GetBalancesAggregated(ctx, operations.V2GetBalancesAggregatedRequest{
+        RequestBody: map[string]any{
+            "key": "<value>",
+        },
         Ledger: "ledger001",
     })
     if err != nil {
@@ -1167,6 +1177,9 @@ func main() {
     )
 
     res, err := s.Ledger.V2.GetVolumesWithBalances(ctx, operations.V2GetVolumesWithBalancesRequest{
+        RequestBody: map[string]any{
+            "key": "<value>",
+        },
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         GroupBy: formancesdkgo.Int64(3),
         Ledger: "ledger001",
@@ -1211,6 +1224,7 @@ import(
 	"context"
 	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"os"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -1225,7 +1239,14 @@ func main() {
         }),
     )
 
+    v2ImportLogsRequest, fileErr := os.Open("example.file")
+    if fileErr != nil {
+        panic(fileErr)
+    }
+
+
     res, err := s.Ledger.V2.ImportLogs(ctx, operations.V2ImportLogsRequest{
+        V2ImportLogsRequest: v2ImportLogsRequest,
         Ledger: "ledger001",
     })
     if err != nil {
@@ -1284,6 +1305,9 @@ func main() {
     )
 
     res, err := s.Ledger.V2.ListAccounts(ctx, operations.V2ListAccountsRequest{
+        RequestBody: map[string]any{
+
+        },
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
         PageSize: formancesdkgo.Int64(100),
@@ -1403,6 +1427,9 @@ func main() {
     )
 
     res, err := s.Ledger.V2.ListLogs(ctx, operations.V2ListLogsRequest{
+        RequestBody: map[string]any{
+            "key": "<value>",
+        },
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
         PageSize: formancesdkgo.Int64(100),
@@ -1463,6 +1490,9 @@ func main() {
     )
 
     res, err := s.Ledger.V2.ListTransactions(ctx, operations.V2ListTransactionsRequest{
+        RequestBody: map[string]any{
+
+        },
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
         PageSize: formancesdkgo.Int64(100),

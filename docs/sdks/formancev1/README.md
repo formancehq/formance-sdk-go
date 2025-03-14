@@ -141,6 +141,9 @@ func main() {
     )
 
     res, err := s.Ledger.V1.AddMetadataOnTransaction(ctx, operations.AddMetadataOnTransactionRequest{
+        RequestBody: map[string]any{
+            "key": "<value>",
+        },
         Ledger: "ledger001",
         Txid: big.NewInt(1234),
     })

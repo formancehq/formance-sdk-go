@@ -39,7 +39,7 @@ func (v *V2ListAccountsRequest) UnmarshalJSON(data []byte) error {
 
 func (o *V2ListAccountsRequest) GetRequestBody() map[string]any {
 	if o == nil {
-		return nil
+		return map[string]any{}
 	}
 	return o.RequestBody
 }
