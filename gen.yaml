@@ -13,7 +13,7 @@ generation:
     oAuth2PasswordEnabled: false
   telemetryEnabled: false
 go:
-  version: 3.4.0
+  version: 3.4.1
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
   author: Formance

@@ -1,21 +1,21 @@
-speakeasyVersion: 1.517.3
+speakeasyVersion: 1.521.1
 sources:
     stacks-source:
         sourceNamespace: stacks-source
-        sourceRevisionDigest: sha256:4d41f08f192826e48fbf4d0aab3071900dde422712e06938dacfc852f189a2e7
-        sourceBlobDigest: sha256:1e47a07e206e4bf2107ed8e4579e5b29ff089879b726be270aade9e8dbce9f52
+        sourceRevisionDigest: sha256:0298acca401cbd35ecf93379fd49e0a2b237d88ca39b3e91940fe9ae61eba53c
+        sourceBlobDigest: sha256:f425dd02ba31efb8d82cd4e74907e8d515b79a0a74f5e6aac33d5fe02c2d5770
         tags:
             - latest
-            - speakeasy-sdk-regen-1741944844
-            - v3.0.2
+            - speakeasy-sdk-regen-1742563382
+            - v3.0.3
 targets:
     formance-sdk-go:
         source: stacks-source
         sourceNamespace: stacks-source
-        sourceRevisionDigest: sha256:4d41f08f192826e48fbf4d0aab3071900dde422712e06938dacfc852f189a2e7
-        sourceBlobDigest: sha256:1e47a07e206e4bf2107ed8e4579e5b29ff089879b726be270aade9e8dbce9f52
+        sourceRevisionDigest: sha256:0298acca401cbd35ecf93379fd49e0a2b237d88ca39b3e91940fe9ae61eba53c
+        sourceBlobDigest: sha256:f425dd02ba31efb8d82cd4e74907e8d515b79a0a74f5e6aac33d5fe02c2d5770
         codeSamplesNamespace: stacks-source-go-code-samples
-        codeSamplesRevisionDigest: sha256:ba866208d1f5bfabab8e8b37bbe5214dfc04a7002ea9c34e39377481e52ed0e4
+        codeSamplesRevisionDigest: sha256:a0af00fdeba261e4a7aa3fe21957fae4dfbe985428ac5cebb0742ebabf7b2e68
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

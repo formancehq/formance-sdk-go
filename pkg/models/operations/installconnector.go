@@ -20,6 +20,50 @@ func (o *InstallConnectorRequest) GetConnectorConfig() shared.ConnectorConfig {
 	return o.ConnectorConfig
 }
 
+func (o *InstallConnectorRequest) GetConnectorConfigAdyen() *shared.AdyenConfig {
+	return o.GetConnectorConfig().AdyenConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigAtlar() *shared.AtlarConfig {
+	return o.GetConnectorConfig().AtlarConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigBankingcircle() *shared.BankingCircleConfig {
+	return o.GetConnectorConfig().BankingCircleConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigCurrencycloud() *shared.CurrencyCloudConfig {
+	return o.GetConnectorConfig().CurrencyCloudConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigDummypay() *shared.DummyPayConfig {
+	return o.GetConnectorConfig().DummyPayConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigGeneric() *shared.GenericConfig {
+	return o.GetConnectorConfig().GenericConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigMangopay() *shared.MangoPayConfig {
+	return o.GetConnectorConfig().MangoPayConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigModulr() *shared.ModulrConfig {
+	return o.GetConnectorConfig().ModulrConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigMoneycorp() *shared.MoneycorpConfig {
+	return o.GetConnectorConfig().MoneycorpConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigStripe() *shared.StripeConfig {
+	return o.GetConnectorConfig().StripeConfig
+}
+
+func (o *InstallConnectorRequest) GetConnectorConfigWise() *shared.WiseConfig {
+	return o.GetConnectorConfig().WiseConfig
+}
+
 func (o *InstallConnectorRequest) GetConnector() shared.Connector {
 	if o == nil {
 		return shared.Connector("")
