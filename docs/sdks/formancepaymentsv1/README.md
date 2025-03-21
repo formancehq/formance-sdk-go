@@ -1171,10 +1171,15 @@ func main() {
     )
 
     res, err := s.Payments.V1.InstallConnector(ctx, operations.InstallConnectorRequest{
-        ConnectorConfig: shared.CreateConnectorConfigStripeConfig(
-            shared.StripeConfig{
-                APIKey: "XXX",
-                Name: "My Stripe Account",
+        ConnectorConfig: shared.CreateConnectorConfigBankingcircle(
+            shared.BankingCircleConfig{
+                AuthorizationEndpoint: "XXX",
+                Endpoint: "XXX",
+                Name: "My Banking Circle Account",
+                Password: "XXX",
+                UserCertificate: "XXX",
+                UserCertificateKey: "XXX",
+                Username: "XXX",
             },
         ),
         Connector: shared.ConnectorAtlar,
@@ -2556,10 +2561,12 @@ func main() {
     )
 
     res, err := s.Payments.V1.UpdateConnectorConfigV1(ctx, operations.UpdateConnectorConfigV1Request{
-        ConnectorConfig: shared.CreateConnectorConfigStripeConfig(
-            shared.StripeConfig{
+        ConnectorConfig: shared.CreateConnectorConfigAdyen(
+            shared.AdyenConfig{
                 APIKey: "XXX",
-                Name: "My Stripe Account",
+                HmacKey: "XXX",
+                LiveEndpointPrefix: formancesdkgo.String("XXX"),
+                Name: "My Adyen Account",
             },
         ),
         Connector: shared.ConnectorAdyen,

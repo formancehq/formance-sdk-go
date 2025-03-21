@@ -3,69 +3,69 @@
 
 ## Supported Types
 
-### StripeConfig
+### AdyenConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigStripeConfig(shared.StripeConfig{/* values here */})
-```
-
-### DummyPayConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigDummyPayConfig(shared.DummyPayConfig{/* values here */})
-```
-
-### WiseConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigWiseConfig(shared.WiseConfig{/* values here */})
-```
-
-### ModulrConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigModulrConfig(shared.ModulrConfig{/* values here */})
-```
-
-### CurrencyCloudConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigCurrencyCloudConfig(shared.CurrencyCloudConfig{/* values here */})
-```
-
-### BankingCircleConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigBankingCircleConfig(shared.BankingCircleConfig{/* values here */})
-```
-
-### MangoPayConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigMangoPayConfig(shared.MangoPayConfig{/* values here */})
-```
-
-### MoneycorpConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigMoneycorpConfig(shared.MoneycorpConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigAdyen(shared.AdyenConfig{/* values here */})
 ```
 
 ### AtlarConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigAtlarConfig(shared.AtlarConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigAtlar(shared.AtlarConfig{/* values here */})
 ```
 
-### AdyenConfig
+### BankingCircleConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigAdyenConfig(shared.AdyenConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigBankingcircle(shared.BankingCircleConfig{/* values here */})
+```
+
+### CurrencyCloudConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigCurrencycloud(shared.CurrencyCloudConfig{/* values here */})
+```
+
+### DummyPayConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigDummypay(shared.DummyPayConfig{/* values here */})
 ```
 
 ### GenericConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigGenericConfig(shared.GenericConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigGeneric(shared.GenericConfig{/* values here */})
+```
+
+### MangoPayConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigMangopay(shared.MangoPayConfig{/* values here */})
+```
+
+### ModulrConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigModulr(shared.ModulrConfig{/* values here */})
+```
+
+### MoneycorpConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigMoneycorp(shared.MoneycorpConfig{/* values here */})
+```
+
+### StripeConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigStripe(shared.StripeConfig{/* values here */})
+```
+
+### WiseConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigWise(shared.WiseConfig{/* values here */})
 ```
 
