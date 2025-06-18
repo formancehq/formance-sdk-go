@@ -3,12 +3,12 @@
 package shared
 
 type CreateBalanceResponse struct {
-	Data Balance `json:"data"`
+	Data CreateBalanceRequest `json:"data"`
 }
 
-func (o *CreateBalanceResponse) GetData() Balance {
+func (o *CreateBalanceResponse) GetData() CreateBalanceRequest {
 	if o == nil {
-		return Balance{}
+		return CreateBalanceRequest{}
 	}
 	return o.Data
 }

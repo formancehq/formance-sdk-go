@@ -2,17 +2,26 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Payments struct {
 	V1 *FormancePaymentsV1
 	V3 *V3
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newPayments(sdkConfig sdkConfiguration) *Payments {
+func newPayments(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Payments {
 	return &Payments{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V1:               newFormancePaymentsV1(sdkConfig),
-		V3:               newV3(sdkConfig),
+		hooks:            hooks,
+		V1:               newFormancePaymentsV1(rootSDK, sdkConfig, hooks),
+		V3:               newV3(rootSDK, sdkConfig, hooks),
 	}
 }

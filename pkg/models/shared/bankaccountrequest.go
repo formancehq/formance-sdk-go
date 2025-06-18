@@ -4,7 +4,7 @@ package shared
 
 type BankAccountRequest struct {
 	AccountNumber *string           `json:"accountNumber,omitempty"`
-	ConnectorID   string            `json:"connectorID"`
+	ConnectorID   *string           `json:"connectorID,omitempty"`
 	Country       string            `json:"country"`
 	Iban          *string           `json:"iban,omitempty"`
 	Metadata      map[string]string `json:"metadata,omitempty"`
@@ -19,9 +19,9 @@ func (o *BankAccountRequest) GetAccountNumber() *string {
 	return o.AccountNumber
 }
 
-func (o *BankAccountRequest) GetConnectorID() string {
+func (o *BankAccountRequest) GetConnectorID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ConnectorID
 }

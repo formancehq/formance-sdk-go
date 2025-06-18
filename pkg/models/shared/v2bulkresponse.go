@@ -3,36 +3,28 @@
 package shared
 
 type V2BulkResponse struct {
-	Data         []V2BulkElementResult `json:"data"`
-	Details      *string               `json:"details,omitempty"`
-	ErrorCode    V2ErrorsEnum          `json:"errorCode"`
-	ErrorMessage string                `json:"errorMessage"`
+	Data         []V2BulkElementResult `json:"data,omitempty"`
+	ErrorCode    *V2ErrorsEnum         `json:"errorCode,omitempty"`
+	ErrorMessage *string               `json:"errorMessage,omitempty"`
 }
 
 func (o *V2BulkResponse) GetData() []V2BulkElementResult {
 	if o == nil {
-		return []V2BulkElementResult{}
+		return nil
 	}
 	return o.Data
 }
 
-func (o *V2BulkResponse) GetDetails() *string {
+func (o *V2BulkResponse) GetErrorCode() *V2ErrorsEnum {
 	if o == nil {
 		return nil
-	}
-	return o.Details
-}
-
-func (o *V2BulkResponse) GetErrorCode() V2ErrorsEnum {
-	if o == nil {
-		return V2ErrorsEnum("")
 	}
 	return o.ErrorCode
 }
 
-func (o *V2BulkResponse) GetErrorMessage() string {
+func (o *V2BulkResponse) GetErrorMessage() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ErrorMessage
 }

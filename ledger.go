@@ -2,17 +2,26 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Ledger struct {
 	V2 *V2
 	V1 *FormanceV1
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newLedger(sdkConfig sdkConfiguration) *Ledger {
+func newLedger(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Ledger {
 	return &Ledger{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V2:               newV2(sdkConfig),
-		V1:               newFormanceV1(sdkConfig),
+		hooks:            hooks,
+		V2:               newV2(rootSDK, sdkConfig, hooks),
+		V1:               newFormanceV1(rootSDK, sdkConfig, hooks),
 	}
 }

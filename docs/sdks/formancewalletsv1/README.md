@@ -236,9 +236,7 @@ func main() {
             Metadata: map[string]string{
                 "key": "",
             },
-            Sources: []shared.Subject{
-
-            },
+            Sources: []shared.Subject{},
         },
         ID: "<id>",
     })
@@ -488,6 +486,7 @@ func main() {
         Metadata: map[string]string{
             "admin": "true",
         },
+        PageSize: formancesdkgo.Int64(100),
         WalletID: formancesdkgo.String("wallet1"),
     })
     if err != nil {
@@ -545,6 +544,7 @@ func main() {
 
     res, err := s.Wallets.V1.GetTransactions(ctx, operations.GetTransactionsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
         WalletID: formancesdkgo.String("wallet1"),
     })
     if err != nil {
@@ -608,7 +608,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.GetWalletResponse != nil {
+    if res.ActivityGetWalletOutput != nil {
         // handle response
     }
 }
@@ -782,6 +782,7 @@ func main() {
             "admin": "true",
         },
         Name: formancesdkgo.String("wallet1"),
+        PageSize: formancesdkgo.Int64(100),
     })
     if err != nil {
         log.Fatal(err)

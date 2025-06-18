@@ -19,14 +19,21 @@ func (o *GetWalletRequest) GetID() string {
 }
 
 type GetWalletResponse struct {
+	// Wallet
+	ActivityGetWalletOutput *shared.ActivityGetWalletOutput
 	// HTTP response content type for this operation
 	ContentType string
-	// Wallet
-	GetWalletResponse *shared.GetWalletResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+}
+
+func (o *GetWalletResponse) GetActivityGetWalletOutput() *shared.ActivityGetWalletOutput {
+	if o == nil {
+		return nil
+	}
+	return o.ActivityGetWalletOutput
 }
 
 func (o *GetWalletResponse) GetContentType() string {
@@ -34,13 +41,6 @@ func (o *GetWalletResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *GetWalletResponse) GetGetWalletResponse() *shared.GetWalletResponse {
-	if o == nil {
-		return nil
-	}
-	return o.GetWalletResponse
 }
 
 func (o *GetWalletResponse) GetStatusCode() int {

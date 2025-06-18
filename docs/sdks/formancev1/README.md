@@ -65,18 +65,6 @@ func main() {
                             Destination: "users:002",
                             Source: "users:001",
                         },
-                        shared.Posting{
-                            Amount: big.NewInt(100),
-                            Asset: "COIN",
-                            Destination: "users:002",
-                            Source: "users:001",
-                        },
-                        shared.Posting{
-                            Amount: big.NewInt(100),
-                            Asset: "COIN",
-                            Destination: "users:002",
-                            Source: "users:001",
-                        },
                     },
                     Reference: formancesdkgo.String("ref:001"),
                 },
@@ -142,7 +130,7 @@ func main() {
 
     res, err := s.Ledger.V1.AddMetadataOnTransaction(ctx, operations.AddMetadataOnTransactionRequest{
         RequestBody: map[string]any{
-            "key": "<value>",
+
         },
         Ledger: "ledger001",
         Txid: big.NewInt(1234),
@@ -205,6 +193,8 @@ func main() {
     res, err := s.Ledger.V1.AddMetadataToAccount(ctx, operations.AddMetadataToAccountRequest{
         RequestBody: map[string]any{
             "key": "<value>",
+            "key1": "<value>",
+            "key2": "<value>",
         },
         Address: "users:001",
         Ledger: "ledger001",
@@ -442,18 +432,6 @@ func main() {
     res, err := s.Ledger.V1.CreateTransaction(ctx, operations.CreateTransactionRequest{
         PostTransaction: shared.PostTransaction{
             Postings: []shared.Posting{
-                shared.Posting{
-                    Amount: big.NewInt(100),
-                    Asset: "COIN",
-                    Destination: "users:002",
-                    Source: "users:001",
-                },
-                shared.Posting{
-                    Amount: big.NewInt(100),
-                    Asset: "COIN",
-                    Destination: "users:002",
-                    Source: "users:001",
-                },
                 shared.Posting{
                     Amount: big.NewInt(100),
                     Asset: "COIN",
@@ -1002,7 +980,6 @@ func main() {
             "49": "2",
         },
         PageSize: formancesdkgo.Int64(100),
-        PaginationToken: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
     })
     if err != nil {
         log.Fatal(err)
@@ -1380,18 +1357,7 @@ func main() {
     )
 
     res, err := s.Ledger.V1.UpdateMapping(ctx, operations.UpdateMappingRequest{
-        Mapping: &shared.Mapping{
-            Contracts: []shared.Contract{
-                shared.Contract{
-                    Account: formancesdkgo.String("users:001"),
-                    Expr: shared.Expr{},
-                },
-                shared.Contract{
-                    Account: formancesdkgo.String("users:001"),
-                    Expr: shared.Expr{},
-                },
-            },
-        },
+        Mapping: nil,
         Ledger: "ledger001",
     })
     if err != nil {

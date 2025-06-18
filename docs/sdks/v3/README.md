@@ -6,6 +6,7 @@
 ### Available Operations
 
 * [AddAccountToPool](#addaccounttopool) - Add an account to a pool
+* [AddBankAccountToPaymentServiceUser](#addbankaccounttopaymentserviceuser) - Add a bank account to a payment service user
 * [ApprovePaymentInitiation](#approvepaymentinitiation) - Approve a payment initiation
 * [CreateAccount](#createaccount) - Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
 
@@ -13,10 +14,12 @@
 
 * [CreatePayment](#createpayment) - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
 
+* [CreatePaymentServiceUser](#createpaymentserviceuser) - Create a formance payment service user object
 * [CreatePool](#createpool) - Create a formance pool object
 * [DeletePaymentInitiation](#deletepaymentinitiation) - Delete a payment initiation by ID
 * [DeletePool](#deletepool) - Delete a pool by ID
 * [ForwardBankAccount](#forwardbankaccount) - Forward a Bank Account to a PSP for creation
+* [ForwardPaymentServiceUserBankAccount](#forwardpaymentserviceuserbankaccount) - Forward a payment service user's bank account to a connector
 * [GetAccount](#getaccount) - Get an account by ID
 * [GetAccountBalances](#getaccountbalances) - Get account balances
 * [GetBankAccount](#getbankaccount) - Get a Bank Account by ID
@@ -24,8 +27,10 @@
 * [GetConnectorSchedule](#getconnectorschedule) - Get a connector schedule by ID
 * [GetPayment](#getpayment) - Get a payment by ID
 * [GetPaymentInitiation](#getpaymentinitiation) - Get a payment initiation by ID
+* [GetPaymentServiceUser](#getpaymentserviceuser) - Get a payment service user by ID
 * [GetPool](#getpool) - Get a pool by ID
-* [GetPoolBalances](#getpoolbalances) - Get pool balances
+* [GetPoolBalances](#getpoolbalances) - Get historical pool balances from a particular point in time
+* [GetPoolBalancesLatest](#getpoolbalanceslatest) - Get latest pool balances
 * [GetTask](#gettask) - Get a task and its result by ID
 * [InitiatePayment](#initiatepayment) - Initiate a payment
 * [InstallConnector](#installconnector) - Install a connector
@@ -38,6 +43,7 @@
 * [ListPaymentInitiationAdjustments](#listpaymentinitiationadjustments) - List all payment initiation adjustments
 * [ListPaymentInitiationRelatedPayments](#listpaymentinitiationrelatedpayments) - List all payments related to a payment initiation
 * [ListPaymentInitiations](#listpaymentinitiations) - List all payment initiations
+* [ListPaymentServiceUsers](#listpaymentserviceusers) - List all payment service users
 * [ListPayments](#listpayments) - List all payments
 * [ListPools](#listpools) - List all pools
 * [RejectPaymentInitiation](#rejectpaymentinitiation) - Reject a payment initiation
@@ -48,6 +54,7 @@
 * [UninstallConnector](#uninstallconnector) - Uninstall a connector
 * [UpdateBankAccountMetadata](#updatebankaccountmetadata) - Update a bank account's metadata
 * [UpdatePaymentMetadata](#updatepaymentmetadata) - Update a payment's metadata
+* [V3UpdateConnectorConfig](#v3updateconnectorconfig) - Update the config of a connector
 
 ## AddAccountToPool
 
@@ -100,6 +107,65 @@ func main() {
 ### Response
 
 **[*operations.V3AddAccountToPoolResponse](../../pkg/models/operations/v3addaccounttopoolresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## AddBankAccountToPaymentServiceUser
+
+Add a bank account to a payment service user
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.AddBankAccountToPaymentServiceUser(ctx, operations.V3AddBankAccountToPaymentServiceUserRequest{
+        BankAccountID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                            | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                | :heavy_check_mark:                                                                                                                   | The context to use for the request.                                                                                                  |
+| `request`                                                                                                                            | [operations.V3AddBankAccountToPaymentServiceUserRequest](../../pkg/models/operations/v3addbankaccounttopaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                                                   | The request object to use for the request.                                                                                           |
+| `opts`                                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                                         | :heavy_minus_sign:                                                                                                                   | The options for this request.                                                                                                        |
+
+### Response
+
+**[*operations.V3AddBankAccountToPaymentServiceUserResponse](../../pkg/models/operations/v3addbankaccounttopaymentserviceuserresponse.md), error**
 
 ### Errors
 
@@ -334,6 +400,61 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## CreatePaymentServiceUser
+
+Create a formance payment service user object
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.CreatePaymentServiceUser(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3CreatePaymentServiceUserResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [shared.V3CreatePaymentServiceUserRequest](../../pkg/models/shared/v3createpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.V3CreatePaymentServiceUserResponse](../../pkg/models/operations/v3createpaymentserviceuserresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## CreatePool
 
 Create a formance pool object
@@ -555,6 +676,65 @@ func main() {
 ### Response
 
 **[*operations.V3ForwardBankAccountResponse](../../pkg/models/operations/v3forwardbankaccountresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## ForwardPaymentServiceUserBankAccount
+
+Forward a payment service user's bank account to a connector
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ForwardPaymentServiceUserBankAccount(ctx, operations.V3ForwardPaymentServiceUserBankAccountRequest{
+        BankAccountID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3ForwardPaymentServiceUserBankAccountResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                    | :heavy_check_mark:                                                                                                                       | The context to use for the request.                                                                                                      |
+| `request`                                                                                                                                | [operations.V3ForwardPaymentServiceUserBankAccountRequest](../../pkg/models/operations/v3forwardpaymentserviceuserbankaccountrequest.md) | :heavy_check_mark:                                                                                                                       | The request object to use for the request.                                                                                               |
+| `opts`                                                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                                                             | :heavy_minus_sign:                                                                                                                       | The options for this request.                                                                                                            |
+
+### Response
+
+**[*operations.V3ForwardPaymentServiceUserBankAccountResponse](../../pkg/models/operations/v3forwardpaymentserviceuserbankaccountresponse.md), error**
 
 ### Errors
 
@@ -972,6 +1152,64 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## GetPaymentServiceUser
+
+Get a payment service user by ID
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.GetPaymentServiceUser(ctx, operations.V3GetPaymentServiceUserRequest{
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3GetPaymentServiceUserResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [operations.V3GetPaymentServiceUserRequest](../../pkg/models/operations/v3getpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.V3GetPaymentServiceUserResponse](../../pkg/models/operations/v3getpaymentserviceuserresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## GetPool
 
 Get a pool by ID
@@ -1032,7 +1270,7 @@ func main() {
 
 ## GetPoolBalances
 
-Get pool balances
+Get historical pool balances from a particular point in time
 
 ### Example Usage
 
@@ -1080,6 +1318,64 @@ func main() {
 ### Response
 
 **[*operations.V3GetPoolBalancesResponse](../../pkg/models/operations/v3getpoolbalancesresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## GetPoolBalancesLatest
+
+Get latest pool balances
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.GetPoolBalancesLatest(ctx, operations.V3GetPoolBalancesLatestRequest{
+        PoolID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PoolBalancesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [operations.V3GetPoolBalancesLatestRequest](../../pkg/models/operations/v3getpoolbalanceslatestrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.V3GetPoolBalancesLatestResponse](../../pkg/models/operations/v3getpoolbalanceslatestresponse.md), error**
 
 ### Errors
 
@@ -1791,6 +2087,65 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## ListPaymentServiceUsers
+
+List all payment service users
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ListPaymentServiceUsers(ctx, operations.V3ListPaymentServiceUsersRequest{
+        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUsersCursorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
+| `request`                                                                                                      | [operations.V3ListPaymentServiceUsersRequest](../../pkg/models/operations/v3listpaymentserviceusersrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
+| `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
+
+### Response
+
+**[*operations.V3ListPaymentServiceUsersResponse](../../pkg/models/operations/v3listpaymentserviceusersresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## ListPayments
 
 List all payments
@@ -2373,3 +2728,61 @@ func main() {
 | ------------------------- | ------------------------- | ------------------------- |
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## V3UpdateConnectorConfig
+
+Update connector config
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.V3UpdateConnectorConfig(ctx, operations.V3UpdateConnectorConfigRequest{
+        ConnectorID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [operations.V3UpdateConnectorConfigRequest](../../pkg/models/operations/v3updateconnectorconfigrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.V3UpdateConnectorConfigResponse](../../pkg/models/operations/v3updateconnectorconfigresponse.md), error**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |

@@ -3,6 +3,7 @@
 package shared
 
 type Hold struct {
+	Asset       string   `json:"asset"`
 	Description string   `json:"description"`
 	Destination *Subject `json:"destination,omitempty"`
 	// The unique ID of the hold.
@@ -11,6 +12,13 @@ type Hold struct {
 	Metadata map[string]string `json:"metadata"`
 	// The ID of the wallet the hold is associated with.
 	WalletID string `json:"walletID"`
+}
+
+func (o *Hold) GetAsset() string {
+	if o == nil {
+		return ""
+	}
+	return o.Asset
 }
 
 func (o *Hold) GetDescription() string {

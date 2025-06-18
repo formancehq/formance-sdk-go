@@ -10,15 +10,16 @@ import (
 type V3PaymentInitiationStatusEnum string
 
 const (
-	V3PaymentInitiationStatusEnumUnknown              V3PaymentInitiationStatusEnum = "UNKNOWN"
-	V3PaymentInitiationStatusEnumWaitingForValidation V3PaymentInitiationStatusEnum = "WAITING_FOR_VALIDATION"
-	V3PaymentInitiationStatusEnumProcessing           V3PaymentInitiationStatusEnum = "PROCESSING"
-	V3PaymentInitiationStatusEnumProcessed            V3PaymentInitiationStatusEnum = "PROCESSED"
-	V3PaymentInitiationStatusEnumFailed               V3PaymentInitiationStatusEnum = "FAILED"
-	V3PaymentInitiationStatusEnumRejected             V3PaymentInitiationStatusEnum = "REJECTED"
-	V3PaymentInitiationStatusEnumReverseProcessing    V3PaymentInitiationStatusEnum = "REVERSE_PROCESSING"
-	V3PaymentInitiationStatusEnumReverseFailed        V3PaymentInitiationStatusEnum = "REVERSE_FAILED"
-	V3PaymentInitiationStatusEnumReversed             V3PaymentInitiationStatusEnum = "REVERSED"
+	V3PaymentInitiationStatusEnumUnknown                V3PaymentInitiationStatusEnum = "UNKNOWN"
+	V3PaymentInitiationStatusEnumWaitingForValidation   V3PaymentInitiationStatusEnum = "WAITING_FOR_VALIDATION"
+	V3PaymentInitiationStatusEnumScheduledForProcessing V3PaymentInitiationStatusEnum = "SCHEDULED_FOR_PROCESSING"
+	V3PaymentInitiationStatusEnumProcessing             V3PaymentInitiationStatusEnum = "PROCESSING"
+	V3PaymentInitiationStatusEnumProcessed              V3PaymentInitiationStatusEnum = "PROCESSED"
+	V3PaymentInitiationStatusEnumFailed                 V3PaymentInitiationStatusEnum = "FAILED"
+	V3PaymentInitiationStatusEnumRejected               V3PaymentInitiationStatusEnum = "REJECTED"
+	V3PaymentInitiationStatusEnumReverseProcessing      V3PaymentInitiationStatusEnum = "REVERSE_PROCESSING"
+	V3PaymentInitiationStatusEnumReverseFailed          V3PaymentInitiationStatusEnum = "REVERSE_FAILED"
+	V3PaymentInitiationStatusEnumReversed               V3PaymentInitiationStatusEnum = "REVERSED"
 )
 
 func (e V3PaymentInitiationStatusEnum) ToPointer() *V3PaymentInitiationStatusEnum {
@@ -33,6 +34,8 @@ func (e *V3PaymentInitiationStatusEnum) UnmarshalJSON(data []byte) error {
 	case "UNKNOWN":
 		fallthrough
 	case "WAITING_FOR_VALIDATION":
+		fallthrough
+	case "SCHEDULED_FOR_PROCESSING":
 		fallthrough
 	case "PROCESSING":
 		fallthrough

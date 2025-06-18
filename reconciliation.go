@@ -2,15 +2,24 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Reconciliation struct {
 	V1 *FormanceReconciliationV1
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newReconciliation(sdkConfig sdkConfiguration) *Reconciliation {
+func newReconciliation(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Reconciliation {
 	return &Reconciliation{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V1:               newFormanceReconciliationV1(sdkConfig),
+		hooks:            hooks,
+		V1:               newFormanceReconciliationV1(rootSDK, sdkConfig, hooks),
 	}
 }

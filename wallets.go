@@ -2,15 +2,24 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Wallets struct {
 	V1 *FormanceWalletsV1
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newWallets(sdkConfig sdkConfiguration) *Wallets {
+func newWallets(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Wallets {
 	return &Wallets{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V1:               newFormanceWalletsV1(sdkConfig),
+		hooks:            hooks,
+		V1:               newFormanceWalletsV1(rootSDK, sdkConfig, hooks),
 	}
 }

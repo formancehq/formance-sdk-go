@@ -9,7 +9,7 @@ type WorkflowInstanceHistoryStageOutput struct {
 	GetPayment        *ActivityGetPaymentOutput         `json:"GetPayment,omitempty"`
 	GetWallet         *ActivityGetWalletOutput          `json:"GetWallet,omitempty"`
 	ListWallets       *OrchestrationListWalletsResponse `json:"ListWallets,omitempty"`
-	RevertTransaction *ActivityRevertTransactionOutput  `json:"RevertTransaction,omitempty"`
+	RevertTransaction *ActivityCreateTransactionOutput  `json:"RevertTransaction,omitempty"`
 }
 
 func (o *WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *ActivityCreateTransactionOutput {
@@ -54,7 +54,7 @@ func (o *WorkflowInstanceHistoryStageOutput) GetListWallets() *OrchestrationList
 	return o.ListWallets
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *ActivityRevertTransactionOutput {
+func (o *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *ActivityCreateTransactionOutput {
 	if o == nil {
 		return nil
 	}

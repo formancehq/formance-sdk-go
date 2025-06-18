@@ -247,7 +247,8 @@ func main() {
 * [GetConnectorTaskV1](docs/sdks/formancepaymentsv1/README.md#getconnectortaskv1) - Read a specific task of the connector
 * [GetPayment](docs/sdks/formancepaymentsv1/README.md#getpayment) - Get a payment
 * [GetPool](docs/sdks/formancepaymentsv1/README.md#getpool) - Get a Pool
-* [GetPoolBalances](docs/sdks/formancepaymentsv1/README.md#getpoolbalances) - Get pool balances
+* [GetPoolBalances](docs/sdks/formancepaymentsv1/README.md#getpoolbalances) - Get historical pool balances at a particular point in time
+* [GetPoolBalancesLatest](docs/sdks/formancepaymentsv1/README.md#getpoolbalanceslatest) - Get latest pool balances
 * [GetTransferInitiation](docs/sdks/formancepaymentsv1/README.md#gettransferinitiation) - Get a transfer initiation
 * [InstallConnector](docs/sdks/formancepaymentsv1/README.md#installconnector) - Install a connector
 * [ListAllConnectors](docs/sdks/formancepaymentsv1/README.md#listallconnectors) - List all installed connectors
@@ -268,16 +269,17 @@ func main() {
 * [ResetConnectorV1](docs/sdks/formancepaymentsv1/README.md#resetconnectorv1) - Reset a connector
 * [RetryTransferInitiation](docs/sdks/formancepaymentsv1/README.md#retrytransferinitiation) - Retry a failed transfer initiation
 * [ReverseTransferInitiation](docs/sdks/formancepaymentsv1/README.md#reversetransferinitiation) - Reverse a transfer initiation
-* [UdpateTransferInitiationStatus](docs/sdks/formancepaymentsv1/README.md#udpatetransferinitiationstatus) - Update the status of a transfer initiation
 * [~~UninstallConnector~~](docs/sdks/formancepaymentsv1/README.md#uninstallconnector) - Uninstall a connector :warning: **Deprecated**
 * [UninstallConnectorV1](docs/sdks/formancepaymentsv1/README.md#uninstallconnectorv1) - Uninstall a connector
 * [UpdateBankAccountMetadata](docs/sdks/formancepaymentsv1/README.md#updatebankaccountmetadata) - Update metadata of a bank account
 * [UpdateConnectorConfigV1](docs/sdks/formancepaymentsv1/README.md#updateconnectorconfigv1) - Update the config of a connector
 * [UpdateMetadata](docs/sdks/formancepaymentsv1/README.md#updatemetadata) - Update metadata
+* [UpdateTransferInitiationStatus](docs/sdks/formancepaymentsv1/README.md#updatetransferinitiationstatus) - Update the status of a transfer initiation
 
 #### [Payments.V3](docs/sdks/v3/README.md)
 
 * [AddAccountToPool](docs/sdks/v3/README.md#addaccounttopool) - Add an account to a pool
+* [AddBankAccountToPaymentServiceUser](docs/sdks/v3/README.md#addbankaccounttopaymentserviceuser) - Add a bank account to a payment service user
 * [ApprovePaymentInitiation](docs/sdks/v3/README.md#approvepaymentinitiation) - Approve a payment initiation
 * [CreateAccount](docs/sdks/v3/README.md#createaccount) - Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
 
@@ -285,10 +287,12 @@ func main() {
 
 * [CreatePayment](docs/sdks/v3/README.md#createpayment) - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
 
+* [CreatePaymentServiceUser](docs/sdks/v3/README.md#createpaymentserviceuser) - Create a formance payment service user object
 * [CreatePool](docs/sdks/v3/README.md#createpool) - Create a formance pool object
 * [DeletePaymentInitiation](docs/sdks/v3/README.md#deletepaymentinitiation) - Delete a payment initiation by ID
 * [DeletePool](docs/sdks/v3/README.md#deletepool) - Delete a pool by ID
 * [ForwardBankAccount](docs/sdks/v3/README.md#forwardbankaccount) - Forward a Bank Account to a PSP for creation
+* [ForwardPaymentServiceUserBankAccount](docs/sdks/v3/README.md#forwardpaymentserviceuserbankaccount) - Forward a payment service user's bank account to a connector
 * [GetAccount](docs/sdks/v3/README.md#getaccount) - Get an account by ID
 * [GetAccountBalances](docs/sdks/v3/README.md#getaccountbalances) - Get account balances
 * [GetBankAccount](docs/sdks/v3/README.md#getbankaccount) - Get a Bank Account by ID
@@ -296,8 +300,10 @@ func main() {
 * [GetConnectorSchedule](docs/sdks/v3/README.md#getconnectorschedule) - Get a connector schedule by ID
 * [GetPayment](docs/sdks/v3/README.md#getpayment) - Get a payment by ID
 * [GetPaymentInitiation](docs/sdks/v3/README.md#getpaymentinitiation) - Get a payment initiation by ID
+* [GetPaymentServiceUser](docs/sdks/v3/README.md#getpaymentserviceuser) - Get a payment service user by ID
 * [GetPool](docs/sdks/v3/README.md#getpool) - Get a pool by ID
-* [GetPoolBalances](docs/sdks/v3/README.md#getpoolbalances) - Get pool balances
+* [GetPoolBalances](docs/sdks/v3/README.md#getpoolbalances) - Get historical pool balances from a particular point in time
+* [GetPoolBalancesLatest](docs/sdks/v3/README.md#getpoolbalanceslatest) - Get latest pool balances
 * [GetTask](docs/sdks/v3/README.md#gettask) - Get a task and its result by ID
 * [InitiatePayment](docs/sdks/v3/README.md#initiatepayment) - Initiate a payment
 * [InstallConnector](docs/sdks/v3/README.md#installconnector) - Install a connector
@@ -310,6 +316,7 @@ func main() {
 * [ListPaymentInitiationAdjustments](docs/sdks/v3/README.md#listpaymentinitiationadjustments) - List all payment initiation adjustments
 * [ListPaymentInitiationRelatedPayments](docs/sdks/v3/README.md#listpaymentinitiationrelatedpayments) - List all payments related to a payment initiation
 * [ListPaymentInitiations](docs/sdks/v3/README.md#listpaymentinitiations) - List all payment initiations
+* [ListPaymentServiceUsers](docs/sdks/v3/README.md#listpaymentserviceusers) - List all payment service users
 * [ListPayments](docs/sdks/v3/README.md#listpayments) - List all payments
 * [ListPools](docs/sdks/v3/README.md#listpools) - List all pools
 * [RejectPaymentInitiation](docs/sdks/v3/README.md#rejectpaymentinitiation) - Reject a payment initiation
@@ -320,6 +327,7 @@ func main() {
 * [UninstallConnector](docs/sdks/v3/README.md#uninstallconnector) - Uninstall a connector
 * [UpdateBankAccountMetadata](docs/sdks/v3/README.md#updatebankaccountmetadata) - Update a bank account's metadata
 * [UpdatePaymentMetadata](docs/sdks/v3/README.md#updatepaymentmetadata) - Update a payment's metadata
+* [V3UpdateConnectorConfig](docs/sdks/v3/README.md#v3updateconnectorconfig) - Update the config of a connector
 
 ### [Reconciliation](docs/sdks/reconciliation/README.md)
 
@@ -521,7 +529,7 @@ func main() {
 	ctx := context.Background()
 
 	s := formancesdkgo.New(
-		formancesdkgo.WithServerURL("http://localhost"),
+		formancesdkgo.WithServerURL("https://orgID-stackID.eu.sandbox.formance.cloud"),
 		formancesdkgo.WithSecurity(shared.Security{
 			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
 			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),

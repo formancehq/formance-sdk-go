@@ -8,16 +8,16 @@ import (
 )
 
 type UpdateClientRequest struct {
-	UpdateClientRequest *shared.UpdateClientRequest `request:"mediaType=application/json"`
+	ClientOptions *shared.ClientOptions `request:"mediaType=application/json"`
 	// Client ID
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-func (o *UpdateClientRequest) GetUpdateClientRequest() *shared.UpdateClientRequest {
+func (o *UpdateClientRequest) GetClientOptions() *shared.ClientOptions {
 	if o == nil {
 		return nil
 	}
-	return o.UpdateClientRequest
+	return o.ClientOptions
 }
 
 func (o *UpdateClientRequest) GetClientID() string {
@@ -30,12 +30,12 @@ func (o *UpdateClientRequest) GetClientID() string {
 type UpdateClientResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Updated client
+	CreateClientResponse *shared.CreateClientResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Updated client
-	UpdateClientResponse *shared.UpdateClientResponse
 }
 
 func (o *UpdateClientResponse) GetContentType() string {
@@ -43,6 +43,13 @@ func (o *UpdateClientResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
+}
+
+func (o *UpdateClientResponse) GetCreateClientResponse() *shared.CreateClientResponse {
+	if o == nil {
+		return nil
+	}
+	return o.CreateClientResponse
 }
 
 func (o *UpdateClientResponse) GetStatusCode() int {
@@ -57,11 +64,4 @@ func (o *UpdateClientResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *UpdateClientResponse) GetUpdateClientResponse() *shared.UpdateClientResponse {
-	if o == nil {
-		return nil
-	}
-	return o.UpdateClientResponse
 }

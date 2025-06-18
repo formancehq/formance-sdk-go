@@ -2,15 +2,24 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Auth struct {
 	V1 *V1
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newAuth(sdkConfig sdkConfiguration) *Auth {
+func newAuth(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Auth {
 	return &Auth{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V1:               newV1(sdkConfig),
+		hooks:            hooks,
+		V1:               newV1(rootSDK, sdkConfig, hooks),
 	}
 }

@@ -76,7 +76,7 @@ type V2RevertTransactionResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2RevertTransactionResponse *shared.V2RevertTransactionResponse
+	V2CreateTransactionResponse *shared.V2CreateTransactionResponse
 }
 
 func (o *V2RevertTransactionResponse) GetContentType() string {
@@ -100,9 +100,9 @@ func (o *V2RevertTransactionResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *V2RevertTransactionResponse) GetV2RevertTransactionResponse() *shared.V2RevertTransactionResponse {
+func (o *V2RevertTransactionResponse) GetV2CreateTransactionResponse() *shared.V2CreateTransactionResponse {
 	if o == nil {
 		return nil
 	}
-	return o.V2RevertTransactionResponse
+	return o.V2CreateTransactionResponse
 }

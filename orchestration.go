@@ -2,17 +2,26 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Orchestration struct {
 	V1 *FormanceOrchestrationV1
 	V2 *FormanceV2
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newOrchestration(sdkConfig sdkConfiguration) *Orchestration {
+func newOrchestration(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Orchestration {
 	return &Orchestration{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V1:               newFormanceOrchestrationV1(sdkConfig),
-		V2:               newFormanceV2(sdkConfig),
+		hooks:            hooks,
+		V1:               newFormanceOrchestrationV1(rootSDK, sdkConfig, hooks),
+		V2:               newFormanceV2(rootSDK, sdkConfig, hooks),
 	}
 }

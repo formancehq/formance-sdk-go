@@ -3,12 +3,12 @@
 package shared
 
 type V3GetConnectorConfigResponse struct {
-	Data V3ConnectorConfig `json:"data"`
+	Data V3InstallConnectorRequest `json:"data"`
 }
 
-func (o *V3GetConnectorConfigResponse) GetData() V3ConnectorConfig {
+func (o *V3GetConnectorConfigResponse) GetData() V3InstallConnectorRequest {
 	if o == nil {
-		return V3ConnectorConfig{}
+		return V3InstallConnectorRequest{}
 	}
 	return o.Data
 }
@@ -23,6 +23,10 @@ func (o *V3GetConnectorConfigResponse) GetDataAtlar() *V3AtlarConfig {
 
 func (o *V3GetConnectorConfigResponse) GetDataBankingcircle() *V3BankingcircleConfig {
 	return o.GetData().V3BankingcircleConfig
+}
+
+func (o *V3GetConnectorConfigResponse) GetDataColumn() *V3ColumnConfig {
+	return o.GetData().V3ColumnConfig
 }
 
 func (o *V3GetConnectorConfigResponse) GetDataCurrencycloud() *V3CurrencycloudConfig {
@@ -47,6 +51,10 @@ func (o *V3GetConnectorConfigResponse) GetDataModulr() *V3ModulrConfig {
 
 func (o *V3GetConnectorConfigResponse) GetDataMoneycorp() *V3MoneycorpConfig {
 	return o.GetData().V3MoneycorpConfig
+}
+
+func (o *V3GetConnectorConfigResponse) GetDataQonto() *V3QontoConfig {
+	return o.GetData().V3QontoConfig
 }
 
 func (o *V3GetConnectorConfigResponse) GetDataStripe() *V3StripeConfig {

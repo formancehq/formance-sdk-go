@@ -45,6 +45,7 @@ func main() {
             "quickstart",
         },
         Policy: formancesdkgo.String("OR"),
+        Raw: &shared.QueryRaw{},
         Sort: formancesdkgo.String("id:asc"),
         Terms: []string{
             "destination=central_bank1",

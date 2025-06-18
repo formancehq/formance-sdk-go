@@ -8,6 +8,7 @@ import (
 )
 
 type ExpandedDebitHold struct {
+	Asset       string   `json:"asset"`
 	Description string   `json:"description"`
 	Destination *Subject `json:"destination,omitempty"`
 	// The unique ID of the hold.
@@ -31,6 +32,13 @@ func (e *ExpandedDebitHold) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (o *ExpandedDebitHold) GetAsset() string {
+	if o == nil {
+		return ""
+	}
+	return o.Asset
 }
 
 func (o *ExpandedDebitHold) GetDescription() string {

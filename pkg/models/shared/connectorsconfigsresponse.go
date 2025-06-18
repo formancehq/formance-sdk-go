@@ -2,55 +2,41 @@
 
 package shared
 
-type Key struct {
-	DataType string `json:"dataType"`
-	Required bool   `json:"required"`
+type ConnectorsConfigsResponseData struct {
+	DataType     string  `json:"dataType"`
+	DefaultValue *string `json:"defaultValue,omitempty"`
+	Required     bool    `json:"required"`
 }
 
-func (o *Key) GetDataType() string {
+func (o *ConnectorsConfigsResponseData) GetDataType() string {
 	if o == nil {
 		return ""
 	}
 	return o.DataType
 }
 
-func (o *Key) GetRequired() bool {
+func (o *ConnectorsConfigsResponseData) GetDefaultValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultValue
+}
+
+func (o *ConnectorsConfigsResponseData) GetRequired() bool {
 	if o == nil {
 		return false
 	}
 	return o.Required
 }
 
-type ConnectorsConfigsResponseConnector struct {
-	Key Key `json:"key"`
-}
-
-func (o *ConnectorsConfigsResponseConnector) GetKey() Key {
-	if o == nil {
-		return Key{}
-	}
-	return o.Key
-}
-
-type ConnectorsConfigsResponseData struct {
-	Connector ConnectorsConfigsResponseConnector `json:"connector"`
-}
-
-func (o *ConnectorsConfigsResponseData) GetConnector() ConnectorsConfigsResponseConnector {
-	if o == nil {
-		return ConnectorsConfigsResponseConnector{}
-	}
-	return o.Connector
-}
-
 // ConnectorsConfigsResponse - OK
 type ConnectorsConfigsResponse struct {
-	Data ConnectorsConfigsResponseData `json:"data"`
+	Data map[string]map[string]ConnectorsConfigsResponseData `json:"data"`
 }
 
-func (o *ConnectorsConfigsResponse) GetData() ConnectorsConfigsResponseData {
+func (o *ConnectorsConfigsResponse) GetData() map[string]map[string]ConnectorsConfigsResponseData {
 	if o == nil {
-		return ConnectorsConfigsResponseData{}
+		return map[string]map[string]ConnectorsConfigsResponseData{}
 	}
 	return o.Data
 }

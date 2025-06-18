@@ -2,11 +2,14 @@
 
 package formancesdkgo
 
+// Generated from OpenAPI doc version v3.0.5 and generator version 2.630.9
+
 import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
@@ -26,7 +29,7 @@ var ServerList = []string{
 	"https://{organization}.{environment}.formance.cloud",
 }
 
-// HTTPClient provides an interface for suplying the SDK with a custom HTTP client
+// HTTPClient provides an interface for supplying the SDK with a custom HTTP client
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
@@ -52,30 +55,6 @@ func Float64(f float64) *float64 { return &f }
 // Pointer provides a helper function to return a pointer to a type
 func Pointer[T any](v T) *T { return &v }
 
-type sdkConfiguration struct {
-	Client            HTTPClient
-	Security          func(context.Context) (interface{}, error)
-	ServerURL         string
-	ServerIndex       int
-	ServerDefaults    []map[string]string
-	Language          string
-	OpenAPIDocVersion string
-	SDKVersion        string
-	GenVersion        string
-	UserAgent         string
-	RetryConfig       *retry.Config
-	Hooks             *hooks.Hooks
-	Timeout           *time.Duration
-}
-
-func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
-	if c.ServerURL != "" {
-		return c.ServerURL, nil
-	}
-
-	return ServerList[c.ServerIndex], c.ServerDefaults[c.ServerIndex]
-}
-
 // Formance Stack API: Open, modular foundation for unique payments flows
 //
 // # Introduction
@@ -89,16 +68,20 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // and standard method from web, mobile and desktop applications.
 // <SecurityDefinitions />
 type Formance struct {
+	SDKVersion     string
 	Auth           *Auth
 	Ledger         *Ledger
 	Orchestration  *Orchestration
 	Payments       *Payments
 	Reconciliation *Reconciliation
-	Search         *Search
-	Wallets        *Wallets
-	Webhooks       *Webhooks
+	// search.v1
+	// Elasticsearch.v1 query engine
+	Search   *Search
+	Wallets  *Wallets
+	Webhooks *Webhooks
 
-	sdkConfiguration sdkConfiguration
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
 type SDKOption func(*Formance)
@@ -168,12 +151,12 @@ func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
 // WithEnvironment allows setting the environment variable for url substitution
 func WithEnvironment(environment ServerEnvironment) SDKOption {
 	return func(sdk *Formance) {
-		for idx := range sdk.sdkConfiguration.ServerDefaults {
-			if _, ok := sdk.sdkConfiguration.ServerDefaults[idx]["environment"]; !ok {
+		for idx := range sdk.sdkConfiguration.ServerVariables {
+			if _, ok := sdk.sdkConfiguration.ServerVariables[idx]["environment"]; !ok {
 				continue
 			}
 
-			sdk.sdkConfiguration.ServerDefaults[idx]["environment"] = fmt.Sprintf("%v", environment)
+			sdk.sdkConfiguration.ServerVariables[idx]["environment"] = fmt.Sprintf("%v", environment)
 		}
 	}
 }
@@ -181,12 +164,12 @@ func WithEnvironment(environment ServerEnvironment) SDKOption {
 // WithOrganization allows setting the organization variable for url substitution
 func WithOrganization(organization string) SDKOption {
 	return func(sdk *Formance) {
-		for idx := range sdk.sdkConfiguration.ServerDefaults {
-			if _, ok := sdk.sdkConfiguration.ServerDefaults[idx]["organization"]; !ok {
+		for idx := range sdk.sdkConfiguration.ServerVariables {
+			if _, ok := sdk.sdkConfiguration.ServerVariables[idx]["organization"]; !ok {
 				continue
 			}
 
-			sdk.sdkConfiguration.ServerDefaults[idx]["organization"] = fmt.Sprintf("%v", organization)
+			sdk.sdkConfiguration.ServerVariables[idx]["organization"] = fmt.Sprintf("%v", organization)
 		}
 	}
 }
@@ -230,21 +213,19 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		sdkConfiguration: sdkConfiguration{
-			Language:          "go",
-			OpenAPIDocVersion: "v3.0.3",
-			SDKVersion:        "3.4.1",
-			GenVersion:        "2.558.5",
-			UserAgent:         "speakeasy-sdk/go 3.4.1 2.558.5 v3.0.3 github.com/formancehq/formance-sdk-go",
-			ServerDefaults: []map[string]string{
+		SDKVersion: "3.5.0",
+		sdkConfiguration: config.SDKConfiguration{
+			UserAgent:  "speakeasy-sdk/go 3.5.0 2.630.9 v3.0.5 github.com/formancehq/formance-sdk-go",
+			ServerList: ServerList,
+			ServerVariables: []map[string]string{
 				{},
 				{
 					"environment":  "eu.sandbox",
 					"organization": "orgID-stackID",
 				},
 			},
-			Hooks: hooks.New(),
 		},
+		hooks: hooks.New(),
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -257,26 +238,19 @@ func New(opts ...SDKOption) *Formance {
 
 	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
 	serverURL := currentServerURL
-	serverURL, sdk.sdkConfiguration.Client = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
-	if serverURL != currentServerURL {
+	serverURL, sdk.sdkConfiguration.Client = sdk.hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
+	if currentServerURL != serverURL {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 
-	sdk.Auth = newAuth(sdk.sdkConfiguration)
-
-	sdk.Ledger = newLedger(sdk.sdkConfiguration)
-
-	sdk.Orchestration = newOrchestration(sdk.sdkConfiguration)
-
-	sdk.Payments = newPayments(sdk.sdkConfiguration)
-
-	sdk.Reconciliation = newReconciliation(sdk.sdkConfiguration)
-
-	sdk.Search = newSearch(sdk.sdkConfiguration)
-
-	sdk.Wallets = newWallets(sdk.sdkConfiguration)
-
-	sdk.Webhooks = newWebhooks(sdk.sdkConfiguration)
+	sdk.Auth = newAuth(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Ledger = newLedger(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Orchestration = newOrchestration(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Payments = newPayments(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Reconciliation = newReconciliation(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Search = newSearch(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Wallets = newWallets(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Webhooks = newWebhooks(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }
@@ -307,11 +281,13 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 	}
 
 	hookCtx := hooks.HookContext{
-		BaseURL:        baseURL,
-		Context:        ctx,
-		OperationID:    "getVersions",
-		OAuth2Scopes:   []string{"auth:read"},
-		SecuritySource: s.sdkConfiguration.Security,
+		SDK:              s,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "getVersions",
+		OAuth2Scopes:     []string{"auth:read"},
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -360,15 +336,17 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 				"504",
 			},
 		}, func() (*http.Response, error) {
-			if req.Body != nil {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
 				copyBody, err := req.GetBody()
+
 				if err != nil {
 					return nil, err
 				}
+
 				req.Body = copyBody
 			}
 
-			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 			if err != nil {
 				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
 					return nil, err
@@ -385,7 +363,7 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 					err = fmt.Errorf("error sending request: no response")
 				}
 
-				_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			}
 			return httpRes, err
 		})
@@ -393,13 +371,13 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 		if err != nil {
 			return nil, err
 		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 			if err != nil {
 				return nil, err
 			}
 		}
 	} else {
-		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 		if err != nil {
 			return nil, err
 		}
@@ -412,17 +390,17 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
 		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
-			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
 			} else if _httpRes != nil {
 				httpRes = _httpRes
 			}
 		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 			if err != nil {
 				return nil, err
 			}
