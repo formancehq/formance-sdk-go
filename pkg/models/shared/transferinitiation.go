@@ -43,7 +43,7 @@ type TransferInitiation struct {
 	CreatedAt            time.Time                      `json:"createdAt"`
 	Description          string                         `json:"description"`
 	DestinationAccountID string                         `json:"destinationAccountID"`
-	Error                string                         `json:"error"`
+	Error                *string                        `json:"error,omitempty"`
 	ID                   string                         `json:"id"`
 	InitialAmount        *big.Int                       `json:"initialAmount"`
 	Metadata             map[string]string              `json:"metadata,omitempty"`
@@ -110,9 +110,9 @@ func (o *TransferInitiation) GetDestinationAccountID() string {
 	return o.DestinationAccountID
 }
 
-func (o *TransferInitiation) GetError() string {
+func (o *TransferInitiation) GetError() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Error
 }

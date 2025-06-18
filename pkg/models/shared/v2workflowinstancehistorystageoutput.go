@@ -5,7 +5,7 @@ package shared
 type V2WorkflowInstanceHistoryStageOutput struct {
 	CreateTransaction *V2ActivityCreateTransactionOutput `json:"CreateTransaction,omitempty"`
 	DebitWallet       *V2ActivityDebitWalletOutput       `json:"DebitWallet,omitempty"`
-	GetAccount        *V2ActivityGetAccountOutput        `json:"GetAccount,omitempty"`
+	GetAccount        *V2AccountResponse                 `json:"GetAccount,omitempty"`
 	GetPayment        *V2ActivityGetPaymentOutput        `json:"GetPayment,omitempty"`
 	GetWallet         *V2ActivityGetWalletOutput         `json:"GetWallet,omitempty"`
 	ListWallets       *V2ListWalletsResponse             `json:"ListWallets,omitempty"`
@@ -25,7 +25,7 @@ func (o *V2WorkflowInstanceHistoryStageOutput) GetDebitWallet() *V2ActivityDebit
 	return o.DebitWallet
 }
 
-func (o *V2WorkflowInstanceHistoryStageOutput) GetGetAccount() *V2ActivityGetAccountOutput {
+func (o *V2WorkflowInstanceHistoryStageOutput) GetGetAccount() *V2AccountResponse {
 	if o == nil {
 		return nil
 	}

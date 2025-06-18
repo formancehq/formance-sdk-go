@@ -21,6 +21,12 @@ v3InstallConnectorRequest := shared.CreateV3InstallConnectorRequestAtlar(shared.
 v3InstallConnectorRequest := shared.CreateV3InstallConnectorRequestBankingcircle(shared.V3BankingcircleConfig{/* values here */})
 ```
 
+### V3ColumnConfig
+
+```go
+v3InstallConnectorRequest := shared.CreateV3InstallConnectorRequestColumn(shared.V3ColumnConfig{/* values here */})
+```
+
 ### V3CurrencycloudConfig
 
 ```go
@@ -55,6 +61,12 @@ v3InstallConnectorRequest := shared.CreateV3InstallConnectorRequestModulr(shared
 
 ```go
 v3InstallConnectorRequest := shared.CreateV3InstallConnectorRequestMoneycorp(shared.V3MoneycorpConfig{/* values here */})
+```
+
+### V3QontoConfig
+
+```go
+v3InstallConnectorRequest := shared.CreateV3InstallConnectorRequestQonto(shared.V3QontoConfig{/* values here */})
 ```
 
 ### V3StripeConfig

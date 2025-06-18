@@ -7,12 +7,21 @@ import (
 )
 
 type V2DeleteAccountMetadataRequest struct {
+	// Use an idempotency key
+	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 	// Account address
 	Address string `pathParam:"style=simple,explode=false,name=address"`
 	// The key to remove.
 	Key string `pathParam:"style=simple,explode=false,name=key"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
+}
+
+func (o *V2DeleteAccountMetadataRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 func (o *V2DeleteAccountMetadataRequest) GetAddress() string {

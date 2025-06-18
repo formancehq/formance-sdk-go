@@ -9,6 +9,8 @@ import (
 )
 
 type V2DeleteTransactionMetadataRequest struct {
+	// Use an idempotency key
+	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 	// Transaction ID.
 	ID *big.Int `pathParam:"style=simple,explode=false,name=id"`
 	// The key to remove.
@@ -26,6 +28,13 @@ func (v *V2DeleteTransactionMetadataRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (o *V2DeleteTransactionMetadataRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 func (o *V2DeleteTransactionMetadataRequest) GetID() *big.Int {

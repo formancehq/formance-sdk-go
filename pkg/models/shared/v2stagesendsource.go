@@ -3,12 +3,12 @@
 package shared
 
 type V2StageSendSource struct {
-	Account *V2StageSendSourceAccount `json:"account,omitempty"`
-	Payment *V2StageSendSourcePayment `json:"payment,omitempty"`
-	Wallet  *V2StageSendSourceWallet  `json:"wallet,omitempty"`
+	Account *V2StageSendDestinationAccount `json:"account,omitempty"`
+	Payment *V2StageSendSourcePayment      `json:"payment,omitempty"`
+	Wallet  *V2StageSendDestinationWallet  `json:"wallet,omitempty"`
 }
 
-func (o *V2StageSendSource) GetAccount() *V2StageSendSourceAccount {
+func (o *V2StageSendSource) GetAccount() *V2StageSendDestinationAccount {
 	if o == nil {
 		return nil
 	}
@@ -22,7 +22,7 @@ func (o *V2StageSendSource) GetPayment() *V2StageSendSourcePayment {
 	return o.Payment
 }
 
-func (o *V2StageSendSource) GetWallet() *V2StageSendSourceWallet {
+func (o *V2StageSendSource) GetWallet() *V2StageSendDestinationWallet {
 	if o == nil {
 		return nil
 	}

@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-type V3ConnectorSchemasConfig struct {
+type V3ConnectorConfig struct {
 }
 
 type V3Connector struct {
-	Config               V3ConnectorSchemasConfig `json:"config"`
-	CreatedAt            time.Time                `json:"createdAt"`
-	ID                   string                   `json:"id"`
-	Name                 string                   `json:"name"`
-	Provider             string                   `json:"provider"`
-	Reference            string                   `json:"reference"`
-	ScheduledForDeletion bool                     `json:"scheduledForDeletion"`
+	Config               V3ConnectorConfig `json:"config"`
+	CreatedAt            time.Time         `json:"createdAt"`
+	ID                   string            `json:"id"`
+	Name                 string            `json:"name"`
+	Provider             string            `json:"provider"`
+	Reference            string            `json:"reference"`
+	ScheduledForDeletion bool              `json:"scheduledForDeletion"`
 }
 
 func (v V3Connector) MarshalJSON() ([]byte, error) {
@@ -31,9 +31,9 @@ func (v *V3Connector) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *V3Connector) GetConfig() V3ConnectorSchemasConfig {
+func (o *V3Connector) GetConfig() V3ConnectorConfig {
 	if o == nil {
-		return V3ConnectorSchemasConfig{}
+		return V3ConnectorConfig{}
 	}
 	return o.Config
 }

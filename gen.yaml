@@ -3,20 +3,23 @@ generation:
   sdkClassName: Formance
   usageSnippets:
     optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
   fixes:
     nameResolutionFeb2025: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
     securityFeb2025: false
+    sharedErrorComponentsApr2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
   telemetryEnabled: false
 go:
-  version: 3.4.1
+  version: 3.5.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
   author: Formance
+  baseErrorName: FormanceError
   clientServerStatusCodesAsErrors: true
   defaultErrorName: SDKError
   flattenGlobalSecurity: false

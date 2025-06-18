@@ -10,7 +10,7 @@ import (
 type TransferInitiationAdjusments struct {
 	AdjustmentID string                   `json:"adjustmentID"`
 	CreatedAt    time.Time                `json:"createdAt"`
-	Error        string                   `json:"error"`
+	Error        *string                  `json:"error,omitempty"`
 	Metadata     map[string]string        `json:"metadata,omitempty"`
 	Status       TransferInitiationStatus `json:"status"`
 }
@@ -40,9 +40,9 @@ func (o *TransferInitiationAdjusments) GetCreatedAt() time.Time {
 	return o.CreatedAt
 }
 
-func (o *TransferInitiationAdjusments) GetError() string {
+func (o *TransferInitiationAdjusments) GetError() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Error
 }

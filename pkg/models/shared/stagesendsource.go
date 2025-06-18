@@ -3,12 +3,12 @@
 package shared
 
 type StageSendSource struct {
-	Account *StageSendSourceAccount `json:"account,omitempty"`
-	Payment *StageSendSourcePayment `json:"payment,omitempty"`
-	Wallet  *StageSendSourceWallet  `json:"wallet,omitempty"`
+	Account *StageSendDestinationAccount `json:"account,omitempty"`
+	Payment *StageSendSourcePayment      `json:"payment,omitempty"`
+	Wallet  *StageSendDestinationWallet  `json:"wallet,omitempty"`
 }
 
-func (o *StageSendSource) GetAccount() *StageSendSourceAccount {
+func (o *StageSendSource) GetAccount() *StageSendDestinationAccount {
 	if o == nil {
 		return nil
 	}
@@ -22,7 +22,7 @@ func (o *StageSendSource) GetPayment() *StageSendSourcePayment {
 	return o.Payment
 }
 
-func (o *StageSendSource) GetWallet() *StageSendSourceWallet {
+func (o *StageSendSource) GetWallet() *StageSendDestinationWallet {
 	if o == nil {
 		return nil
 	}

@@ -190,6 +190,7 @@ func main() {
     res, err := s.Ledger.V2.CountAccounts(ctx, operations.V2CountAccountsRequest{
         RequestBody: map[string]any{
             "key": "<value>",
+            "key1": "<value>",
         },
         Ledger: "ledger001",
     })
@@ -251,7 +252,6 @@ func main() {
     res, err := s.Ledger.V2.CountTransactions(ctx, operations.V2CountTransactionsRequest{
         RequestBody: map[string]any{
             "key": "<value>",
-            "key1": "<value>",
         },
         Ledger: "ledger001",
     })
@@ -312,9 +312,9 @@ func main() {
 
     res, err := s.Ledger.V2.CreateBulk(ctx, operations.V2CreateBulkRequest{
         RequestBody: []shared.V2BulkElement{
-            shared.CreateV2BulkElementDeleteMetadata(
-                shared.V2BulkElementDeleteMetadata{
-                    Action: "<value>",
+            shared.CreateV2BulkElementRevertTransaction(
+                shared.V2BulkElementRevertTransaction{
+                    Action: "REVERT_TRANSACTION",
                 },
             ),
         },
@@ -454,12 +454,6 @@ func main() {
                     Destination: "users:002",
                     Source: "users:001",
                 },
-                shared.V2Posting{
-                    Amount: big.NewInt(100),
-                    Asset: "COIN",
-                    Destination: "users:002",
-                    Source: "users:001",
-                },
             },
             Reference: formancesdkgo.String("ref:001"),
             Script: &shared.V2PostTransactionScript{
@@ -536,7 +530,7 @@ func main() {
     )
 
     res, err := s.Ledger.V2.DeleteAccountMetadata(ctx, operations.V2DeleteAccountMetadataRequest{
-        Address: "96609 Cummings Canyon",
+        Address: "6753 S Washington Street",
         Key: "foo",
         Ledger: "ledger001",
     })
@@ -834,6 +828,8 @@ func main() {
     res, err := s.Ledger.V2.GetBalancesAggregated(ctx, operations.V2GetBalancesAggregatedRequest{
         RequestBody: map[string]any{
             "key": "<value>",
+            "key1": "<value>",
+            "key2": "<value>",
         },
         Ledger: "ledger001",
     })
@@ -1239,14 +1235,13 @@ func main() {
         }),
     )
 
-    v2ImportLogsRequest, fileErr := os.Open("example.file")
+    example, fileErr := os.Open("example.file")
     if fileErr != nil {
         panic(fileErr)
     }
 
-
     res, err := s.Ledger.V2.ImportLogs(ctx, operations.V2ImportLogsRequest{
-        V2ImportLogsRequest: v2ImportLogsRequest,
+        V2ImportLogsRequest: example,
         Ledger: "ledger001",
     })
     if err != nil {
@@ -1428,7 +1423,7 @@ func main() {
 
     res, err := s.Ledger.V2.ListLogs(ctx, operations.V2ListLogsRequest{
         RequestBody: map[string]any{
-            "key": "<value>",
+
         },
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
@@ -1620,7 +1615,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.V2RevertTransactionResponse != nil {
+    if res.V2CreateTransactionResponse != nil {
         // handle response
     }
 }

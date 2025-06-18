@@ -21,7 +21,8 @@
 * [GetConnectorTaskV1](#getconnectortaskv1) - Read a specific task of the connector
 * [GetPayment](#getpayment) - Get a payment
 * [GetPool](#getpool) - Get a Pool
-* [GetPoolBalances](#getpoolbalances) - Get pool balances
+* [GetPoolBalances](#getpoolbalances) - Get historical pool balances at a particular point in time
+* [GetPoolBalancesLatest](#getpoolbalanceslatest) - Get latest pool balances
 * [GetTransferInitiation](#gettransferinitiation) - Get a transfer initiation
 * [InstallConnector](#installconnector) - Install a connector
 * [ListAllConnectors](#listallconnectors) - List all installed connectors
@@ -42,12 +43,12 @@
 * [ResetConnectorV1](#resetconnectorv1) - Reset a connector
 * [RetryTransferInitiation](#retrytransferinitiation) - Retry a failed transfer initiation
 * [ReverseTransferInitiation](#reversetransferinitiation) - Reverse a transfer initiation
-* [UdpateTransferInitiationStatus](#udpatetransferinitiationstatus) - Update the status of a transfer initiation
 * [~~UninstallConnector~~](#uninstallconnector) - Uninstall a connector :warning: **Deprecated**
 * [UninstallConnectorV1](#uninstallconnectorv1) - Uninstall a connector
 * [UpdateBankAccountMetadata](#updatebankaccountmetadata) - Update metadata of a bank account
 * [UpdateConnectorConfigV1](#updateconnectorconfigv1) - Update the config of a connector
 * [UpdateMetadata](#updatemetadata) - Update metadata
+* [UpdateTransferInitiationStatus](#updatetransferinitiationstatus) - Update the status of a transfer initiation
 
 ## AddAccountToPool
 
@@ -145,7 +146,7 @@ func main() {
             Destination: "acct_1Gqj58KZcSIg2N2q",
             Source: formancesdkgo.String("acct_1Gqj58KZcSIg2N2q"),
         },
-        Connector: shared.ConnectorBankingCircle,
+        Connector: shared.ConnectorGeneric,
     })
     if err != nil {
         log.Fatal(err)
@@ -204,9 +205,9 @@ func main() {
 
     res, err := s.Payments.V1.CreateAccount(ctx, shared.AccountRequest{
         ConnectorID: "<id>",
-        CreatedAt: types.MustTimeFromString("2025-08-19T02:15:08.152Z"),
+        CreatedAt: types.MustTimeFromString("2025-07-27T08:57:17.388Z"),
         Reference: "<value>",
-        Type: shared.AccountTypeInternal,
+        Type: shared.AccountTypeUnknown,
     })
     if err != nil {
         log.Fatal(err)
@@ -263,7 +264,6 @@ func main() {
     )
 
     res, err := s.Payments.V1.CreateBankAccount(ctx, shared.BankAccountRequest{
-        ConnectorID: "<id>",
         Country: "GB",
         Name: "My account",
     })
@@ -327,9 +327,9 @@ func main() {
         Amount: big.NewInt(100),
         Asset: "USD",
         ConnectorID: "<id>",
-        CreatedAt: types.MustTimeFromString("2025-11-09T01:03:21.011Z"),
+        CreatedAt: types.MustTimeFromString("2025-08-26T06:29:11.777Z"),
         Reference: "<value>",
-        Scheme: shared.PaymentSchemeMolpay,
+        Scheme: shared.PaymentSchemeRtp,
         Status: shared.PaymentStatusRefundedFailure,
         Type: shared.PaymentTypePayout,
     })
@@ -389,9 +389,8 @@ func main() {
 
     res, err := s.Payments.V1.CreatePool(ctx, shared.PoolRequest{
         AccountIDs: []string{
-            "<value>",
-            "<value>",
-            "<value>",
+            "<value 1>",
+            "<value 2>",
         },
         Name: "<value>",
     })
@@ -452,15 +451,15 @@ func main() {
     )
 
     res, err := s.Payments.V1.CreateTransferInitiation(ctx, shared.TransferInitiationRequest{
-        Amount: big.NewInt(256698),
+        Amount: big.NewInt(83093),
         Asset: "USD",
-        Description: "worthy pace vague ick liberalize between um",
+        Description: "flowery yum keenly operating knavishly commemorate recent apropos",
         DestinationAccountID: "<id>",
         Reference: "XXX",
-        ScheduledAt: types.MustTimeFromString("2025-05-02T09:50:03.622Z"),
+        ScheduledAt: types.MustTimeFromString("2025-07-09T05:18:01.065Z"),
         SourceAccountID: "<id>",
-        Type: shared.TransferInitiationRequestTypePayout,
-        Validated: true,
+        Type: shared.TransferInitiationRequestTypeTransfer,
+        Validated: false,
     })
     if err != nil {
         log.Fatal(err)
@@ -697,6 +696,7 @@ func main() {
     res, err := s.Payments.V1.GetAccountBalances(ctx, operations.GetAccountBalancesRequest{
         AccountID: "XXX",
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
         Sort: []string{
             "date:asc",
             "status:desc",
@@ -818,7 +818,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.GetConnectorTask(ctx, operations.GetConnectorTaskRequest{
-        Connector: shared.ConnectorAdyen,
+        Connector: shared.ConnectorMoneycorp,
         TaskID: "task1",
     })
     if err != nil {
@@ -877,7 +877,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.GetConnectorTaskV1(ctx, operations.GetConnectorTaskV1Request{
-        Connector: shared.ConnectorBankingCircle,
+        Connector: shared.ConnectorModulr,
         ConnectorID: "XXX",
         TaskID: "task1",
     })
@@ -1027,7 +1027,7 @@ func main() {
 
 ## GetPoolBalances
 
-Get pool balances
+Get historical pool balances at a particular point in time
 
 ### Example Usage
 
@@ -1054,7 +1054,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.GetPoolBalances(ctx, operations.GetPoolBalancesRequest{
-        At: types.MustTimeFromString("2024-05-04T06:40:23.119Z"),
+        At: types.MustTimeFromString("2024-11-27T10:59:51.663Z"),
         PoolID: "XXX",
     })
     if err != nil {
@@ -1077,6 +1077,64 @@ func main() {
 ### Response
 
 **[*operations.GetPoolBalancesResponse](../../pkg/models/operations/getpoolbalancesresponse.md), error**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+
+## GetPoolBalancesLatest
+
+Get latest pool balances
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V1.GetPoolBalancesLatest(ctx, operations.GetPoolBalancesLatestRequest{
+        PoolID: "XXX",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.PoolBalancesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
+| `request`                                                                                              | [operations.GetPoolBalancesLatestRequest](../../pkg/models/operations/getpoolbalanceslatestrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
+
+### Response
+
+**[*operations.GetPoolBalancesLatestResponse](../../pkg/models/operations/getpoolbalanceslatestresponse.md), error**
 
 ### Errors
 
@@ -1171,18 +1229,15 @@ func main() {
     )
 
     res, err := s.Payments.V1.InstallConnector(ctx, operations.InstallConnectorRequest{
-        ConnectorConfig: shared.CreateConnectorConfigBankingcircle(
-            shared.BankingCircleConfig{
-                AuthorizationEndpoint: "XXX",
-                Endpoint: "XXX",
-                Name: "My Banking Circle Account",
-                Password: "XXX",
-                UserCertificate: "XXX",
-                UserCertificateKey: "XXX",
-                Username: "XXX",
+        ConnectorConfig: shared.CreateConnectorConfigCurrencycloud(
+            shared.CurrencyCloudConfig{
+                APIKey: "XXX",
+                LoginID: "XXX",
+                Name: "My CurrencyCloud Account",
+                PollingPeriod: formancesdkgo.String("60s"),
             },
         ),
-        Connector: shared.ConnectorAtlar,
+        Connector: shared.ConnectorMangopay,
     })
     if err != nil {
         log.Fatal(err)
@@ -1295,6 +1350,7 @@ func main() {
 
     res, err := s.Payments.V1.ListBankAccounts(ctx, operations.ListBankAccountsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
         Sort: []string{
             "date:asc",
             "status:desc",
@@ -1414,6 +1470,7 @@ func main() {
     res, err := s.Payments.V1.ListConnectorTasks(ctx, operations.ListConnectorTasksRequest{
         Connector: shared.ConnectorModulr,
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1471,9 +1528,10 @@ func main() {
     )
 
     res, err := s.Payments.V1.ListConnectorTasksV1(ctx, operations.ListConnectorTasksV1Request{
-        Connector: shared.ConnectorBankingCircle,
+        Connector: shared.ConnectorWise,
         ConnectorID: "XXX",
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1532,6 +1590,7 @@ func main() {
 
     res, err := s.Payments.V1.ListPayments(ctx, operations.ListPaymentsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
         Sort: []string{
             "date:asc",
             "status:desc",
@@ -1594,6 +1653,7 @@ func main() {
 
     res, err := s.Payments.V1.ListPools(ctx, operations.ListPoolsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
         Sort: []string{
             "date:asc",
             "status:desc",
@@ -1656,6 +1716,7 @@ func main() {
 
     res, err := s.Payments.V1.ListTransferInitiations(ctx, operations.ListTransferInitiationsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
         Sort: []string{
             "date:asc",
             "status:desc",
@@ -1777,7 +1838,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ServerInfo != nil {
+    if res.PaymentsServerInfo != nil {
         // handle response
     }
 }
@@ -1830,6 +1891,7 @@ func main() {
 
     res, err := s.Payments.V1.PaymentslistAccounts(ctx, operations.PaymentslistAccountsRequest{
         Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: formancesdkgo.Int64(100),
         Sort: []string{
             "date:asc",
             "status:desc",
@@ -1893,7 +1955,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.ReadConnectorConfig(ctx, operations.ReadConnectorConfigRequest{
-        Connector: shared.ConnectorGeneric,
+        Connector: shared.ConnectorModulr,
     })
     if err != nil {
         log.Fatal(err)
@@ -1951,7 +2013,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.ReadConnectorConfigV1(ctx, operations.ReadConnectorConfigV1Request{
-        Connector: shared.ConnectorCurrencyCloud,
+        Connector: shared.ConnectorMangopay,
         ConnectorID: "XXX",
     })
     if err != nil {
@@ -2073,7 +2135,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.ResetConnector(ctx, operations.ResetConnectorRequest{
-        Connector: shared.ConnectorAtlar,
+        Connector: shared.ConnectorWise,
     })
     if err != nil {
         log.Fatal(err)
@@ -2133,7 +2195,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.ResetConnectorV1(ctx, operations.ResetConnectorV1Request{
-        Connector: shared.ConnectorGeneric,
+        Connector: shared.ConnectorWise,
         ConnectorID: "XXX",
     })
     if err != nil {
@@ -2252,9 +2314,9 @@ func main() {
 
     res, err := s.Payments.V1.ReverseTransferInitiation(ctx, operations.ReverseTransferInitiationRequest{
         ReverseTransferInitiationRequest: shared.ReverseTransferInitiationRequest{
-            Amount: big.NewInt(327549),
+            Amount: big.NewInt(978875),
             Asset: "USD",
-            Description: "till gosh how proselytise worriedly whoa",
+            Description: "whenever phooey a unlike tremendously whoever after when tight",
             Metadata: map[string]string{
                 "key": "<value>",
             },
@@ -2282,67 +2344,6 @@ func main() {
 ### Response
 
 **[*operations.ReverseTransferInitiationResponse](../../pkg/models/operations/reversetransferinitiationresponse.md), error**
-
-### Errors
-
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
-
-## UdpateTransferInitiationStatus
-
-Update a transfer initiation status
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V1.UdpateTransferInitiationStatus(ctx, operations.UdpateTransferInitiationStatusRequest{
-        UpdateTransferInitiationStatusRequest: shared.UpdateTransferInitiationStatusRequest{
-            Status: shared.StatusValidated,
-        },
-        TransferID: "XXX",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |
-| `request`                                                                                                                | [operations.UdpateTransferInitiationStatusRequest](../../pkg/models/operations/udpatetransferinitiationstatusrequest.md) | :heavy_check_mark:                                                                                                       | The request object to use for the request.                                                                               |
-| `opts`                                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |
-
-### Response
-
-**[*operations.UdpateTransferInitiationStatusResponse](../../pkg/models/operations/udpatetransferinitiationstatusresponse.md), error**
 
 ### Errors
 
@@ -2381,7 +2382,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.UninstallConnector(ctx, operations.UninstallConnectorRequest{
-        Connector: shared.ConnectorModulr,
+        Connector: shared.ConnectorGeneric,
     })
     if err != nil {
         log.Fatal(err)
@@ -2439,7 +2440,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.UninstallConnectorV1(ctx, operations.UninstallConnectorV1Request{
-        Connector: shared.ConnectorGeneric,
+        Connector: shared.ConnectorBankingCircle,
         ConnectorID: "XXX",
     })
     if err != nil {
@@ -2501,6 +2502,8 @@ func main() {
         UpdateBankAccountMetadataRequest: shared.UpdateBankAccountMetadataRequest{
             Metadata: map[string]string{
                 "key": "<value>",
+                "key1": "<value>",
+                "key2": "<value>",
             },
         },
         BankAccountID: "XXX",
@@ -2561,15 +2564,15 @@ func main() {
     )
 
     res, err := s.Payments.V1.UpdateConnectorConfigV1(ctx, operations.UpdateConnectorConfigV1Request{
-        ConnectorConfig: shared.CreateConnectorConfigAdyen(
-            shared.AdyenConfig{
+        ConnectorConfig: shared.CreateConnectorConfigModulr(
+            shared.ModulrConfig{
                 APIKey: "XXX",
-                HmacKey: "XXX",
-                LiveEndpointPrefix: formancesdkgo.String("XXX"),
-                Name: "My Adyen Account",
+                APISecret: "XXX",
+                Name: "My Modulr Account",
+                PollingPeriod: formancesdkgo.String("60s"),
             },
         ),
-        Connector: shared.ConnectorAdyen,
+        Connector: shared.ConnectorMangopay,
         ConnectorID: "XXX",
     })
     if err != nil {
@@ -2630,7 +2633,6 @@ func main() {
     res, err := s.Payments.V1.UpdateMetadata(ctx, operations.UpdateMetadataRequest{
         RequestBody: map[string]string{
             "key": "<value>",
-            "key1": "<value>",
         },
         PaymentID: "XXX",
     })
@@ -2654,6 +2656,67 @@ func main() {
 ### Response
 
 **[*operations.UpdateMetadataResponse](../../pkg/models/operations/updatemetadataresponse.md), error**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+
+## UpdateTransferInitiationStatus
+
+Update a transfer initiation status
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := formancesdkgo.New(
+        formancesdkgo.WithSecurity(shared.Security{
+            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V1.UpdateTransferInitiationStatus(ctx, operations.UpdateTransferInitiationStatusRequest{
+        UpdateTransferInitiationStatusRequest: shared.UpdateTransferInitiationStatusRequest{
+            Status: shared.StatusValidated,
+        },
+        TransferID: "XXX",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |
+| `request`                                                                                                                | [operations.UpdateTransferInitiationStatusRequest](../../pkg/models/operations/updatetransferinitiationstatusrequest.md) | :heavy_check_mark:                                                                                                       | The request object to use for the request.                                                                               |
+| `opts`                                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |
+
+### Response
+
+**[*operations.UpdateTransferInitiationStatusResponse](../../pkg/models/operations/updatetransferinitiationstatusresponse.md), error**
 
 ### Errors
 

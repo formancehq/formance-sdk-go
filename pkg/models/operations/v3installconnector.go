@@ -41,6 +41,13 @@ func (o *V3InstallConnectorRequest) GetV3InstallConnectorRequestBankingcircle() 
 	return nil
 }
 
+func (o *V3InstallConnectorRequest) GetV3InstallConnectorRequestColumn() *shared.V3ColumnConfig {
+	if v := o.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3ColumnConfig
+	}
+	return nil
+}
+
 func (o *V3InstallConnectorRequest) GetV3InstallConnectorRequestCurrencycloud() *shared.V3CurrencycloudConfig {
 	if v := o.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3CurrencycloudConfig
@@ -79,6 +86,13 @@ func (o *V3InstallConnectorRequest) GetV3InstallConnectorRequestModulr() *shared
 func (o *V3InstallConnectorRequest) GetV3InstallConnectorRequestMoneycorp() *shared.V3MoneycorpConfig {
 	if v := o.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3MoneycorpConfig
+	}
+	return nil
+}
+
+func (o *V3InstallConnectorRequest) GetV3InstallConnectorRequestQonto() *shared.V3QontoConfig {
+	if v := o.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3QontoConfig
 	}
 	return nil
 }

@@ -2,15 +2,24 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Search struct {
 	V1 *FormanceSearchV1
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newSearch(sdkConfig sdkConfiguration) *Search {
+func newSearch(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Search {
 	return &Search{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V1:               newFormanceSearchV1(sdkConfig),
+		hooks:            hooks,
+		V1:               newFormanceSearchV1(rootSDK, sdkConfig, hooks),
 	}
 }

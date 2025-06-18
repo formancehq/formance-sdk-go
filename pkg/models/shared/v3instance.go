@@ -15,7 +15,7 @@ type V3Instance struct {
 	ScheduleID   string     `json:"scheduleID"`
 	Terminated   bool       `json:"terminated"`
 	TerminatedAt *time.Time `json:"terminatedAt,omitempty"`
-	UpdatedAt    *time.Time `json:"updatedAt,omitempty"`
+	UpdatedAt    time.Time  `json:"updatedAt"`
 }
 
 func (v V3Instance) MarshalJSON() ([]byte, error) {
@@ -78,9 +78,9 @@ func (o *V3Instance) GetTerminatedAt() *time.Time {
 	return o.TerminatedAt
 }
 
-func (o *V3Instance) GetUpdatedAt() *time.Time {
+func (o *V3Instance) GetUpdatedAt() time.Time {
 	if o == nil {
-		return nil
+		return time.Time{}
 	}
 	return o.UpdatedAt
 }

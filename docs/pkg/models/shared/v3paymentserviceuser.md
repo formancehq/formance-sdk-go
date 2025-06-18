@@ -1,0 +1,14 @@
+# V3PaymentServiceUser
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `Address`                                                                  | [*shared.V3Address](../../../pkg/models/shared/v3address.md)               | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `BankAccountIDs`                                                           | []*string*                                                                 | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `ContactDetails`                                                           | [*shared.V3ContactDetails](../../../pkg/models/shared/v3contactdetails.md) | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `CreatedAt`                                                                | [time.Time](https://pkg.go.dev/time#Time)                                  | :heavy_check_mark:                                                         | N/A                                                                        |
+| `ID`                                                                       | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| `Metadata`                                                                 | map[string]*string*                                                        | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `Name`                                                                     | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |

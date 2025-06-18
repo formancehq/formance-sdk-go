@@ -3,12 +3,12 @@
 package shared
 
 type ActivityDebitWalletOutput struct {
-	Data Hold `json:"data"`
+	Data OrchestrationHold `json:"data"`
 }
 
-func (o *ActivityDebitWalletOutput) GetData() Hold {
+func (o *ActivityDebitWalletOutput) GetData() OrchestrationHold {
 	if o == nil {
-		return Hold{}
+		return OrchestrationHold{}
 	}
 	return o.Data
 }

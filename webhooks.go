@@ -2,15 +2,24 @@
 
 package formancesdkgo
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/internal/config"
+	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+)
+
 type Webhooks struct {
 	V1 *FormanceWebhooksV1
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Formance
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newWebhooks(sdkConfig sdkConfiguration) *Webhooks {
+func newWebhooks(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Webhooks {
 	return &Webhooks{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		V1:               newFormanceWebhooksV1(sdkConfig),
+		hooks:            hooks,
+		V1:               newFormanceWebhooksV1(rootSDK, sdkConfig, hooks),
 	}
 }

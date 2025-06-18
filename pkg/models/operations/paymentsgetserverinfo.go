@@ -10,12 +10,12 @@ import (
 type PaymentsgetServerInfoResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// Server information
-	ServerInfo *shared.ServerInfo
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// Server information
+	PaymentsServerInfo *shared.PaymentsServerInfo
 }
 
 func (o *PaymentsgetServerInfoResponse) GetContentType() string {
@@ -23,13 +23,6 @@ func (o *PaymentsgetServerInfoResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *PaymentsgetServerInfoResponse) GetServerInfo() *shared.ServerInfo {
-	if o == nil {
-		return nil
-	}
-	return o.ServerInfo
 }
 
 func (o *PaymentsgetServerInfoResponse) GetStatusCode() int {
@@ -44,4 +37,11 @@ func (o *PaymentsgetServerInfoResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *PaymentsgetServerInfoResponse) GetPaymentsServerInfo() *shared.PaymentsServerInfo {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentsServerInfo
 }
