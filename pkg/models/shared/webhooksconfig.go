@@ -22,57 +22,57 @@ func (w WebhooksConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WebhooksConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"active", "createdAt", "endpoint", "eventTypes", "id", "secret", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WebhooksConfig) GetActive() bool {
-	if o == nil {
+func (w *WebhooksConfig) GetActive() bool {
+	if w == nil {
 		return false
 	}
-	return o.Active
+	return w.Active
 }
 
-func (o *WebhooksConfig) GetCreatedAt() time.Time {
-	if o == nil {
+func (w *WebhooksConfig) GetCreatedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return w.CreatedAt
 }
 
-func (o *WebhooksConfig) GetEndpoint() string {
-	if o == nil {
+func (w *WebhooksConfig) GetEndpoint() string {
+	if w == nil {
 		return ""
 	}
-	return o.Endpoint
+	return w.Endpoint
 }
 
-func (o *WebhooksConfig) GetEventTypes() []string {
-	if o == nil {
+func (w *WebhooksConfig) GetEventTypes() []string {
+	if w == nil {
 		return []string{}
 	}
-	return o.EventTypes
+	return w.EventTypes
 }
 
-func (o *WebhooksConfig) GetID() string {
-	if o == nil {
+func (w *WebhooksConfig) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *WebhooksConfig) GetSecret() string {
-	if o == nil {
+func (w *WebhooksConfig) GetSecret() string {
+	if w == nil {
 		return ""
 	}
-	return o.Secret
+	return w.Secret
 }
 
-func (o *WebhooksConfig) GetUpdatedAt() time.Time {
-	if o == nil {
+func (w *WebhooksConfig) GetUpdatedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return w.UpdatedAt
 }

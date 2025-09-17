@@ -10,48 +10,48 @@ type V2VolumesWithBalanceCursorResponseCursor struct {
 	Previous *string                `json:"previous,omitempty"`
 }
 
-func (o *V2VolumesWithBalanceCursorResponseCursor) GetData() []V2VolumesWithBalance {
-	if o == nil {
+func (v *V2VolumesWithBalanceCursorResponseCursor) GetData() []V2VolumesWithBalance {
+	if v == nil {
 		return []V2VolumesWithBalance{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2VolumesWithBalanceCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V2VolumesWithBalanceCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V2VolumesWithBalanceCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V2VolumesWithBalanceCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V2VolumesWithBalanceCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V2VolumesWithBalanceCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2VolumesWithBalanceCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V2VolumesWithBalanceCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V2VolumesWithBalanceCursorResponse struct {
 	Cursor V2VolumesWithBalanceCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V2VolumesWithBalanceCursorResponse) GetCursor() V2VolumesWithBalanceCursorResponseCursor {
-	if o == nil {
+func (v *V2VolumesWithBalanceCursorResponse) GetCursor() V2VolumesWithBalanceCursorResponseCursor {
+	if v == nil {
 		return V2VolumesWithBalanceCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

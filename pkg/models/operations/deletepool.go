@@ -11,11 +11,11 @@ type DeletePoolRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
-func (o *DeletePoolRequest) GetPoolID() string {
-	if o == nil {
+func (d *DeletePoolRequest) GetPoolID() string {
+	if d == nil {
 		return ""
 	}
-	return o.PoolID
+	return d.PoolID
 }
 
 type DeletePoolResponse struct {
@@ -27,23 +27,23 @@ type DeletePoolResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *DeletePoolResponse) GetContentType() string {
-	if o == nil {
+func (d *DeletePoolResponse) GetContentType() string {
+	if d == nil {
 		return ""
 	}
-	return o.ContentType
+	return d.ContentType
 }
 
-func (o *DeletePoolResponse) GetStatusCode() int {
-	if o == nil {
+func (d *DeletePoolResponse) GetStatusCode() int {
+	if d == nil {
 		return 0
 	}
-	return o.StatusCode
+	return d.StatusCode
 }
 
-func (o *DeletePoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (d *DeletePoolResponse) GetRawResponse() *http.Response {
+	if d == nil {
 		return nil
 	}
-	return o.RawResponse
+	return d.RawResponse
 }

@@ -12,11 +12,11 @@ type V2ReadStatsRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2ReadStatsRequest) GetLedger() string {
-	if o == nil {
+func (v *V2ReadStatsRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2ReadStatsResponse struct {
@@ -30,30 +30,30 @@ type V2ReadStatsResponse struct {
 	V2StatsResponse *shared.V2StatsResponse
 }
 
-func (o *V2ReadStatsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ReadStatsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ReadStatsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ReadStatsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ReadStatsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ReadStatsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ReadStatsResponse) GetV2StatsResponse() *shared.V2StatsResponse {
-	if o == nil {
+func (v *V2ReadStatsResponse) GetV2StatsResponse() *shared.V2StatsResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2StatsResponse
+	return v.V2StatsResponse
 }

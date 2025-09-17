@@ -58,66 +58,66 @@ func (v V2ListTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2ListTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2ListTransactionsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2ListTransactionsRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ListTransactionsRequest) GetExpand() *string {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetExpand() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Expand
+	return v.Expand
 }
 
-func (o *V2ListTransactionsRequest) GetLedger() string {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2ListTransactionsRequest) GetOrder() *Order {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetOrder() *Order {
+	if v == nil {
 		return nil
 	}
-	return o.Order
+	return v.Order
 }
 
-func (o *V2ListTransactionsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2ListTransactionsRequest) GetPit() *time.Time {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetPit() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Pit
+	return v.Pit
 }
 
-func (o *V2ListTransactionsRequest) GetReverse() *bool {
-	if o == nil {
+func (v *V2ListTransactionsRequest) GetReverse() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Reverse
+	return v.Reverse
 }
 
 type V2ListTransactionsResponse struct {
@@ -131,30 +131,30 @@ type V2ListTransactionsResponse struct {
 	V2TransactionsCursorResponse *shared.V2TransactionsCursorResponse
 }
 
-func (o *V2ListTransactionsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ListTransactionsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ListTransactionsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ListTransactionsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ListTransactionsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ListTransactionsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ListTransactionsResponse) GetV2TransactionsCursorResponse() *shared.V2TransactionsCursorResponse {
-	if o == nil {
+func (v *V2ListTransactionsResponse) GetV2TransactionsCursorResponse() *shared.V2TransactionsCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2TransactionsCursorResponse
+	return v.V2TransactionsCursorResponse
 }

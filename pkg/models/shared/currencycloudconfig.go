@@ -23,50 +23,50 @@ func (c CurrencyCloudConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CurrencyCloudConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"apiKey", "loginID", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CurrencyCloudConfig) GetAPIKey() string {
-	if o == nil {
+func (c *CurrencyCloudConfig) GetAPIKey() string {
+	if c == nil {
 		return ""
 	}
-	return o.APIKey
+	return c.APIKey
 }
 
-func (o *CurrencyCloudConfig) GetEndpoint() *string {
-	if o == nil {
+func (c *CurrencyCloudConfig) GetEndpoint() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Endpoint
+	return c.Endpoint
 }
 
-func (o *CurrencyCloudConfig) GetLoginID() string {
-	if o == nil {
+func (c *CurrencyCloudConfig) GetLoginID() string {
+	if c == nil {
 		return ""
 	}
-	return o.LoginID
+	return c.LoginID
 }
 
-func (o *CurrencyCloudConfig) GetName() string {
-	if o == nil {
+func (c *CurrencyCloudConfig) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *CurrencyCloudConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (c *CurrencyCloudConfig) GetPollingPeriod() *string {
+	if c == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return c.PollingPeriod
 }
 
-func (o *CurrencyCloudConfig) GetProvider() *string {
-	if o == nil {
+func (c *CurrencyCloudConfig) GetProvider() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Provider
+	return c.Provider
 }

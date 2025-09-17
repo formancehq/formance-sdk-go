@@ -55,43 +55,43 @@ func (v V2Log) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Log) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"data", "date", "hash", "id", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2Log) GetData() map[string]any {
-	if o == nil {
+func (v *V2Log) GetData() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2Log) GetDate() time.Time {
-	if o == nil {
+func (v *V2Log) GetDate() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.Date
+	return v.Date
 }
 
-func (o *V2Log) GetHash() string {
-	if o == nil {
+func (v *V2Log) GetHash() string {
+	if v == nil {
 		return ""
 	}
-	return o.Hash
+	return v.Hash
 }
 
-func (o *V2Log) GetID() *big.Int {
-	if o == nil {
+func (v *V2Log) GetID() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2Log) GetType() V2LogType {
-	if o == nil {
+func (v *V2Log) GetType() V2LogType {
+	if v == nil {
 		return V2LogType("")
 	}
-	return o.Type
+	return v.Type
 }

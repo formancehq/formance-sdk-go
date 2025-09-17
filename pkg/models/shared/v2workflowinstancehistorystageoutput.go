@@ -11,44 +11,44 @@ type V2WorkflowInstanceHistoryStageOutput struct {
 	ListWallets       *V2ListWalletsResponse             `json:"ListWallets,omitempty"`
 }
 
-func (o *V2WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *V2ActivityCreateTransactionOutput {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *V2ActivityCreateTransactionOutput {
+	if v == nil {
 		return nil
 	}
-	return o.CreateTransaction
+	return v.CreateTransaction
 }
 
-func (o *V2WorkflowInstanceHistoryStageOutput) GetDebitWallet() *V2ActivityDebitWalletOutput {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageOutput) GetDebitWallet() *V2ActivityDebitWalletOutput {
+	if v == nil {
 		return nil
 	}
-	return o.DebitWallet
+	return v.DebitWallet
 }
 
-func (o *V2WorkflowInstanceHistoryStageOutput) GetGetAccount() *V2AccountResponse {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageOutput) GetGetAccount() *V2AccountResponse {
+	if v == nil {
 		return nil
 	}
-	return o.GetAccount
+	return v.GetAccount
 }
 
-func (o *V2WorkflowInstanceHistoryStageOutput) GetGetPayment() *V2ActivityGetPaymentOutput {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageOutput) GetGetPayment() *V2ActivityGetPaymentOutput {
+	if v == nil {
 		return nil
 	}
-	return o.GetPayment
+	return v.GetPayment
 }
 
-func (o *V2WorkflowInstanceHistoryStageOutput) GetGetWallet() *V2ActivityGetWalletOutput {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageOutput) GetGetWallet() *V2ActivityGetWalletOutput {
+	if v == nil {
 		return nil
 	}
-	return o.GetWallet
+	return v.GetWallet
 }
 
-func (o *V2WorkflowInstanceHistoryStageOutput) GetListWallets() *V2ListWalletsResponse {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageOutput) GetListWallets() *V2ListWalletsResponse {
+	if v == nil {
 		return nil
 	}
-	return o.ListWallets
+	return v.ListWallets
 }

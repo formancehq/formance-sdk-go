@@ -18,30 +18,30 @@ type V3ListConnectorConfigsResponse struct {
 	V3ConnectorConfigsResponse *shared.V3ConnectorConfigsResponse
 }
 
-func (o *V3ListConnectorConfigsResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ListConnectorConfigsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ListConnectorConfigsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ListConnectorConfigsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ListConnectorConfigsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ListConnectorConfigsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ListConnectorConfigsResponse) GetV3ConnectorConfigsResponse() *shared.V3ConnectorConfigsResponse {
-	if o == nil {
+func (v *V3ListConnectorConfigsResponse) GetV3ConnectorConfigsResponse() *shared.V3ConnectorConfigsResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3ConnectorConfigsResponse
+	return v.V3ConnectorConfigsResponse
 }

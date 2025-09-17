@@ -23,50 +23,50 @@ func (c CreditWalletRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreditWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"amount"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreditWalletRequest) GetAmount() Monetary {
-	if o == nil {
+func (c *CreditWalletRequest) GetAmount() Monetary {
+	if c == nil {
 		return Monetary{}
 	}
-	return o.Amount
+	return c.Amount
 }
 
-func (o *CreditWalletRequest) GetBalance() *string {
-	if o == nil {
+func (c *CreditWalletRequest) GetBalance() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Balance
+	return c.Balance
 }
 
-func (o *CreditWalletRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (c *CreditWalletRequest) GetMetadata() map[string]string {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *CreditWalletRequest) GetReference() *string {
-	if o == nil {
+func (c *CreditWalletRequest) GetReference() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Reference
+	return c.Reference
 }
 
-func (o *CreditWalletRequest) GetSources() []Subject {
-	if o == nil {
+func (c *CreditWalletRequest) GetSources() []Subject {
+	if c == nil {
 		return nil
 	}
-	return o.Sources
+	return c.Sources
 }
 
-func (o *CreditWalletRequest) GetTimestamp() *time.Time {
-	if o == nil {
+func (c *CreditWalletRequest) GetTimestamp() *time.Time {
+	if c == nil {
 		return nil
 	}
-	return o.Timestamp
+	return c.Timestamp
 }

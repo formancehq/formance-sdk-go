@@ -19,18 +19,18 @@ type ListPoliciesRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *ListPoliciesRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPoliciesRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPoliciesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListPoliciesRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
 type ListPoliciesResponse struct {
@@ -44,30 +44,30 @@ type ListPoliciesResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListPoliciesResponse) GetContentType() string {
-	if o == nil {
+func (l *ListPoliciesResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListPoliciesResponse) GetPoliciesCursorResponse() *shared.PoliciesCursorResponse {
-	if o == nil {
+func (l *ListPoliciesResponse) GetPoliciesCursorResponse() *shared.PoliciesCursorResponse {
+	if l == nil {
 		return nil
 	}
-	return o.PoliciesCursorResponse
+	return l.PoliciesCursorResponse
 }
 
-func (o *ListPoliciesResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListPoliciesResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListPoliciesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListPoliciesResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

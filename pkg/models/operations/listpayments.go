@@ -30,38 +30,38 @@ func (l ListPaymentsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListPaymentsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListPaymentsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPaymentsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPaymentsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListPaymentsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListPaymentsRequest) GetQuery() *string {
-	if o == nil {
+func (l *ListPaymentsRequest) GetQuery() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Query
+	return l.Query
 }
 
-func (o *ListPaymentsRequest) GetSort() []string {
-	if o == nil {
+func (l *ListPaymentsRequest) GetSort() []string {
+	if l == nil {
 		return nil
 	}
-	return o.Sort
+	return l.Sort
 }
 
 type ListPaymentsResponse struct {
@@ -75,30 +75,30 @@ type ListPaymentsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListPaymentsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListPaymentsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListPaymentsResponse) GetPaymentsCursor() *shared.PaymentsCursor {
-	if o == nil {
+func (l *ListPaymentsResponse) GetPaymentsCursor() *shared.PaymentsCursor {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentsCursor
+	return l.PaymentsCursor
 }
 
-func (o *ListPaymentsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListPaymentsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListPaymentsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListPaymentsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

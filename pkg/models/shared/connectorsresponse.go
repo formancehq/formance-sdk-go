@@ -9,32 +9,32 @@ type ConnectorsResponseData struct {
 	Provider    Connector `json:"provider"`
 }
 
-func (o *ConnectorsResponseData) GetConnectorID() string {
-	if o == nil {
+func (c *ConnectorsResponseData) GetConnectorID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return c.ConnectorID
 }
 
-func (o *ConnectorsResponseData) GetEnabled() *bool {
-	if o == nil {
+func (c *ConnectorsResponseData) GetEnabled() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Enabled
+	return c.Enabled
 }
 
-func (o *ConnectorsResponseData) GetName() string {
-	if o == nil {
+func (c *ConnectorsResponseData) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *ConnectorsResponseData) GetProvider() Connector {
-	if o == nil {
+func (c *ConnectorsResponseData) GetProvider() Connector {
+	if c == nil {
 		return Connector("")
 	}
-	return o.Provider
+	return c.Provider
 }
 
 // ConnectorsResponse - OK
@@ -42,9 +42,9 @@ type ConnectorsResponse struct {
 	Data []ConnectorsResponseData `json:"data"`
 }
 
-func (o *ConnectorsResponse) GetData() []ConnectorsResponseData {
-	if o == nil {
+func (c *ConnectorsResponse) GetData() []ConnectorsResponseData {
+	if c == nil {
 		return []ConnectorsResponseData{}
 	}
-	return o.Data
+	return c.Data
 }

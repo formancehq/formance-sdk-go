@@ -18,29 +18,29 @@ func (w WalletsVolume) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WalletsVolume) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"balance", "input", "output"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WalletsVolume) GetBalance() *big.Int {
-	if o == nil {
+func (w *WalletsVolume) GetBalance() *big.Int {
+	if w == nil {
 		return big.NewInt(0)
 	}
-	return o.Balance
+	return w.Balance
 }
 
-func (o *WalletsVolume) GetInput() *big.Int {
-	if o == nil {
+func (w *WalletsVolume) GetInput() *big.Int {
+	if w == nil {
 		return big.NewInt(0)
 	}
-	return o.Input
+	return w.Input
 }
 
-func (o *WalletsVolume) GetOutput() *big.Int {
-	if o == nil {
+func (w *WalletsVolume) GetOutput() *big.Int {
+	if w == nil {
 		return big.NewInt(0)
 	}
-	return o.Output
+	return w.Output
 }

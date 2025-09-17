@@ -22,57 +22,57 @@ func (v V3PaymentServiceUser) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3PaymentServiceUser) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3PaymentServiceUser) GetAddress() *V3Address {
-	if o == nil {
+func (v *V3PaymentServiceUser) GetAddress() *V3Address {
+	if v == nil {
 		return nil
 	}
-	return o.Address
+	return v.Address
 }
 
-func (o *V3PaymentServiceUser) GetBankAccountIDs() []string {
-	if o == nil {
+func (v *V3PaymentServiceUser) GetBankAccountIDs() []string {
+	if v == nil {
 		return nil
 	}
-	return o.BankAccountIDs
+	return v.BankAccountIDs
 }
 
-func (o *V3PaymentServiceUser) GetContactDetails() *V3ContactDetails {
-	if o == nil {
+func (v *V3PaymentServiceUser) GetContactDetails() *V3ContactDetails {
+	if v == nil {
 		return nil
 	}
-	return o.ContactDetails
+	return v.ContactDetails
 }
 
-func (o *V3PaymentServiceUser) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3PaymentServiceUser) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3PaymentServiceUser) GetID() string {
-	if o == nil {
+func (v *V3PaymentServiceUser) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3PaymentServiceUser) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3PaymentServiceUser) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3PaymentServiceUser) GetName() string {
-	if o == nil {
+func (v *V3PaymentServiceUser) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }

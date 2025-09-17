@@ -6,9 +6,9 @@ type ActivityCreateTransactionOutput struct {
 	Data OrchestrationTransaction `json:"data"`
 }
 
-func (o *ActivityCreateTransactionOutput) GetData() OrchestrationTransaction {
-	if o == nil {
+func (a *ActivityCreateTransactionOutput) GetData() OrchestrationTransaction {
+	if a == nil {
 		return OrchestrationTransaction{}
 	}
-	return o.Data
+	return a.Data
 }

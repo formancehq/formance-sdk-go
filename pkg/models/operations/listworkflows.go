@@ -18,30 +18,30 @@ type ListWorkflowsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListWorkflowsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListWorkflowsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListWorkflowsResponse) GetListWorkflowsResponse() *shared.ListWorkflowsResponse {
-	if o == nil {
+func (l *ListWorkflowsResponse) GetListWorkflowsResponse() *shared.ListWorkflowsResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ListWorkflowsResponse
+	return l.ListWorkflowsResponse
 }
 
-func (o *ListWorkflowsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListWorkflowsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListWorkflowsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListWorkflowsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

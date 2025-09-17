@@ -13,28 +13,50 @@ type TaskDummyPayDescriptor struct {
 	Name     *string `json:"name,omitempty"`
 }
 
-func (o *TaskDummyPayDescriptor) GetFileName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.FileName
+func (t TaskDummyPayDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TaskDummyPayDescriptor) GetKey() *string {
-	if o == nil {
-		return nil
+func (t *TaskDummyPayDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
 	}
-	return o.Key
+	return nil
 }
 
-func (o *TaskDummyPayDescriptor) GetName() *string {
-	if o == nil {
+func (t *TaskDummyPayDescriptor) GetFileName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.FileName
+}
+
+func (t *TaskDummyPayDescriptor) GetKey() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Key
+}
+
+func (t *TaskDummyPayDescriptor) GetName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Name
 }
 
 type TaskDummyPayState struct {
+}
+
+func (t TaskDummyPayState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskDummyPayState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskDummyPay struct {
@@ -53,64 +75,64 @@ func (t TaskDummyPay) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskDummyPay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskDummyPay) GetConnectorID() string {
-	if o == nil {
+func (t *TaskDummyPay) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskDummyPay) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskDummyPay) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskDummyPay) GetDescriptor() TaskDummyPayDescriptor {
-	if o == nil {
+func (t *TaskDummyPay) GetDescriptor() TaskDummyPayDescriptor {
+	if t == nil {
 		return TaskDummyPayDescriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskDummyPay) GetError() *string {
-	if o == nil {
+func (t *TaskDummyPay) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskDummyPay) GetID() string {
-	if o == nil {
+func (t *TaskDummyPay) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskDummyPay) GetState() *TaskDummyPayState {
-	if o == nil {
+func (t *TaskDummyPay) GetState() *TaskDummyPayState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskDummyPay) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskDummyPay) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskDummyPay) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskDummyPay) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

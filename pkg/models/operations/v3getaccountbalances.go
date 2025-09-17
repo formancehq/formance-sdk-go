@@ -30,52 +30,52 @@ func (v V3GetAccountBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3GetAccountBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3GetAccountBalancesRequest) GetAccountID() string {
-	if o == nil {
+func (v *V3GetAccountBalancesRequest) GetAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccountID
+	return v.AccountID
 }
 
-func (o *V3GetAccountBalancesRequest) GetAsset() *string {
-	if o == nil {
+func (v *V3GetAccountBalancesRequest) GetAsset() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Asset
+	return v.Asset
 }
 
-func (o *V3GetAccountBalancesRequest) GetCursor() *string {
-	if o == nil {
+func (v *V3GetAccountBalancesRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V3GetAccountBalancesRequest) GetFromTimestamp() *time.Time {
-	if o == nil {
+func (v *V3GetAccountBalancesRequest) GetFromTimestamp() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.FromTimestamp
+	return v.FromTimestamp
 }
 
-func (o *V3GetAccountBalancesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3GetAccountBalancesRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3GetAccountBalancesRequest) GetToTimestamp() *time.Time {
-	if o == nil {
+func (v *V3GetAccountBalancesRequest) GetToTimestamp() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.ToTimestamp
+	return v.ToTimestamp
 }
 
 type V3GetAccountBalancesResponse struct {
@@ -89,30 +89,30 @@ type V3GetAccountBalancesResponse struct {
 	V3BalancesCursorResponse *shared.V3BalancesCursorResponse
 }
 
-func (o *V3GetAccountBalancesResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetAccountBalancesResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetAccountBalancesResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetAccountBalancesResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetAccountBalancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetAccountBalancesResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetAccountBalancesResponse) GetV3BalancesCursorResponse() *shared.V3BalancesCursorResponse {
-	if o == nil {
+func (v *V3GetAccountBalancesResponse) GetV3BalancesCursorResponse() *shared.V3BalancesCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3BalancesCursorResponse
+	return v.V3BalancesCursorResponse
 }

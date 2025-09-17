@@ -13,18 +13,18 @@ type V3UpdateBankAccountMetadataRequest struct {
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountID"`
 }
 
-func (o *V3UpdateBankAccountMetadataRequest) GetV3UpdateBankAccountMetadataRequest() *shared.V3UpdateBankAccountMetadataRequest {
-	if o == nil {
+func (v *V3UpdateBankAccountMetadataRequest) GetV3UpdateBankAccountMetadataRequest() *shared.V3UpdateBankAccountMetadataRequest {
+	if v == nil {
 		return nil
 	}
-	return o.V3UpdateBankAccountMetadataRequest
+	return v.V3UpdateBankAccountMetadataRequest
 }
 
-func (o *V3UpdateBankAccountMetadataRequest) GetBankAccountID() string {
-	if o == nil {
+func (v *V3UpdateBankAccountMetadataRequest) GetBankAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return v.BankAccountID
 }
 
 type V3UpdateBankAccountMetadataResponse struct {
@@ -36,23 +36,23 @@ type V3UpdateBankAccountMetadataResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V3UpdateBankAccountMetadataResponse) GetContentType() string {
-	if o == nil {
+func (v *V3UpdateBankAccountMetadataResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3UpdateBankAccountMetadataResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3UpdateBankAccountMetadataResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3UpdateBankAccountMetadataResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3UpdateBankAccountMetadataResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

@@ -18,30 +18,30 @@ type V2GetServerInfoResponse struct {
 	V2ServerInfo *shared.V2ServerInfo
 }
 
-func (o *V2GetServerInfoResponse) GetContentType() string {
-	if o == nil {
+func (v *V2GetServerInfoResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2GetServerInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2GetServerInfoResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2GetServerInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2GetServerInfoResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2GetServerInfoResponse) GetV2ServerInfo() *shared.V2ServerInfo {
-	if o == nil {
+func (v *V2GetServerInfoResponse) GetV2ServerInfo() *shared.V2ServerInfo {
+	if v == nil {
 		return nil
 	}
-	return o.V2ServerInfo
+	return v.V2ServerInfo
 }

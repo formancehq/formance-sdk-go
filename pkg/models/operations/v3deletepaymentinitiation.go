@@ -11,11 +11,11 @@ type V3DeletePaymentInitiationRequest struct {
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
 }
 
-func (o *V3DeletePaymentInitiationRequest) GetPaymentInitiationID() string {
-	if o == nil {
+func (v *V3DeletePaymentInitiationRequest) GetPaymentInitiationID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentInitiationID
+	return v.PaymentInitiationID
 }
 
 type V3DeletePaymentInitiationResponse struct {
@@ -27,23 +27,23 @@ type V3DeletePaymentInitiationResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V3DeletePaymentInitiationResponse) GetContentType() string {
-	if o == nil {
+func (v *V3DeletePaymentInitiationResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3DeletePaymentInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3DeletePaymentInitiationResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3DeletePaymentInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3DeletePaymentInitiationResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

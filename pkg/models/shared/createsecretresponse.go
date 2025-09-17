@@ -6,9 +6,9 @@ type CreateSecretResponse struct {
 	Data *Secret `json:"data,omitempty"`
 }
 
-func (o *CreateSecretResponse) GetData() *Secret {
-	if o == nil {
+func (c *CreateSecretResponse) GetData() *Secret {
+	if c == nil {
 		return nil
 	}
-	return o.Data
+	return c.Data
 }

@@ -29,45 +29,45 @@ func (l ListWalletsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListWalletsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListWalletsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListWalletsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListWalletsRequest) GetExpand() *string {
-	if o == nil {
+func (l *ListWalletsRequest) GetExpand() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Expand
+	return l.Expand
 }
 
-func (o *ListWalletsRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (l *ListWalletsRequest) GetMetadata() map[string]string {
+	if l == nil {
 		return nil
 	}
-	return o.Metadata
+	return l.Metadata
 }
 
-func (o *ListWalletsRequest) GetName() *string {
-	if o == nil {
+func (l *ListWalletsRequest) GetName() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Name
+	return l.Name
 }
 
-func (o *ListWalletsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListWalletsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
 type ListWalletsResponse struct {
@@ -81,30 +81,30 @@ type ListWalletsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListWalletsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListWalletsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListWalletsResponse) GetListWalletsResponse() *shared.ListWalletsResponse {
-	if o == nil {
+func (l *ListWalletsResponse) GetListWalletsResponse() *shared.ListWalletsResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ListWalletsResponse
+	return l.ListWalletsResponse
 }
 
-func (o *ListWalletsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListWalletsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListWalletsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListWalletsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

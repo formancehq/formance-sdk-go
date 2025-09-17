@@ -15,72 +15,72 @@ type Client struct {
 	Trusted                *bool          `json:"trusted,omitempty"`
 }
 
-func (o *Client) GetDescription() *string {
-	if o == nil {
+func (c *Client) GetDescription() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Description
+	return c.Description
 }
 
-func (o *Client) GetID() string {
-	if o == nil {
+func (c *Client) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *Client) GetMetadata() map[string]any {
-	if o == nil {
+func (c *Client) GetMetadata() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *Client) GetName() string {
-	if o == nil {
+func (c *Client) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *Client) GetPostLogoutRedirectUris() []string {
-	if o == nil {
+func (c *Client) GetPostLogoutRedirectUris() []string {
+	if c == nil {
 		return nil
 	}
-	return o.PostLogoutRedirectUris
+	return c.PostLogoutRedirectUris
 }
 
-func (o *Client) GetPublic() *bool {
-	if o == nil {
+func (c *Client) GetPublic() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Public
+	return c.Public
 }
 
-func (o *Client) GetRedirectUris() []string {
-	if o == nil {
+func (c *Client) GetRedirectUris() []string {
+	if c == nil {
 		return nil
 	}
-	return o.RedirectUris
+	return c.RedirectUris
 }
 
-func (o *Client) GetScopes() []string {
-	if o == nil {
+func (c *Client) GetScopes() []string {
+	if c == nil {
 		return nil
 	}
-	return o.Scopes
+	return c.Scopes
 }
 
-func (o *Client) GetSecrets() []ClientSecret {
-	if o == nil {
+func (c *Client) GetSecrets() []ClientSecret {
+	if c == nil {
 		return nil
 	}
-	return o.Secrets
+	return c.Secrets
 }
 
-func (o *Client) GetTrusted() *bool {
-	if o == nil {
+func (c *Client) GetTrusted() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Trusted
+	return c.Trusted
 }

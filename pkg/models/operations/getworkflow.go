@@ -12,11 +12,11 @@ type GetWorkflowRequest struct {
 	FlowID string `pathParam:"style=simple,explode=false,name=flowId"`
 }
 
-func (o *GetWorkflowRequest) GetFlowID() string {
-	if o == nil {
+func (g *GetWorkflowRequest) GetFlowID() string {
+	if g == nil {
 		return ""
 	}
-	return o.FlowID
+	return g.FlowID
 }
 
 type GetWorkflowResponse struct {
@@ -30,30 +30,30 @@ type GetWorkflowResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetWorkflowResponse) GetContentType() string {
-	if o == nil {
+func (g *GetWorkflowResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetWorkflowResponse) GetGetWorkflowResponse() *shared.GetWorkflowResponse {
-	if o == nil {
+func (g *GetWorkflowResponse) GetGetWorkflowResponse() *shared.GetWorkflowResponse {
+	if g == nil {
 		return nil
 	}
-	return o.GetWorkflowResponse
+	return g.GetWorkflowResponse
 }
 
-func (o *GetWorkflowResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetWorkflowResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetWorkflowResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetWorkflowResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

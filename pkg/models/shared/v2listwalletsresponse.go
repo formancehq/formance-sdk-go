@@ -10,48 +10,48 @@ type V2ListWalletsResponseCursor struct {
 	Previous *string    `json:"previous,omitempty"`
 }
 
-func (o *V2ListWalletsResponseCursor) GetData() []V2Wallet {
-	if o == nil {
+func (v *V2ListWalletsResponseCursor) GetData() []V2Wallet {
+	if v == nil {
 		return []V2Wallet{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2ListWalletsResponseCursor) GetHasMore() *bool {
-	if o == nil {
+func (v *V2ListWalletsResponseCursor) GetHasMore() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V2ListWalletsResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V2ListWalletsResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V2ListWalletsResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V2ListWalletsResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2ListWalletsResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V2ListWalletsResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V2ListWalletsResponse struct {
 	Cursor V2ListWalletsResponseCursor `json:"cursor"`
 }
 
-func (o *V2ListWalletsResponse) GetCursor() V2ListWalletsResponseCursor {
-	if o == nil {
+func (v *V2ListWalletsResponse) GetCursor() V2ListWalletsResponseCursor {
+	if v == nil {
 		return V2ListWalletsResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

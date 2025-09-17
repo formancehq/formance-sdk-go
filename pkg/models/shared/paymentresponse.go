@@ -7,9 +7,9 @@ type PaymentResponse struct {
 	Data Payment `json:"data"`
 }
 
-func (o *PaymentResponse) GetData() Payment {
-	if o == nil {
+func (p *PaymentResponse) GetData() Payment {
+	if p == nil {
 		return Payment{}
 	}
-	return o.Data
+	return p.Data
 }

@@ -29,12 +29,13 @@ Cancel a running workflow
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="cancelEvent" method="put" path="/api/orchestration/instances/{instanceID}/abort" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -43,10 +44,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -87,12 +88,13 @@ Create trigger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="createTrigger" method="post" path="/api/orchestration/triggers" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -100,10 +102,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -142,12 +144,13 @@ Create a workflow
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="createWorkflow" method="post" path="/api/orchestration/workflows" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -155,10 +158,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -197,12 +200,13 @@ Read trigger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="deleteTrigger" method="delete" path="/api/orchestration/triggers/{triggerID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -211,10 +215,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -255,12 +259,13 @@ Delete a flow by id
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="deleteWorkflow" method="delete" path="/api/orchestration/workflows/{flowId}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -269,10 +274,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -313,12 +318,13 @@ Get a workflow instance by id
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getInstance" method="get" path="/api/orchestration/instances/{instanceID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -327,10 +333,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -371,12 +377,13 @@ Get a workflow instance history by id
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getInstanceHistory" method="get" path="/api/orchestration/instances/{instanceID}/history" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -385,10 +392,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -429,12 +436,13 @@ Get a workflow instance stage history
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getInstanceStageHistory" method="get" path="/api/orchestration/instances/{instanceID}/stages/{number}/history" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -443,10 +451,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -488,12 +496,13 @@ Get a flow by id
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getWorkflow" method="get" path="/api/orchestration/workflows/{flowId}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -502,10 +511,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -546,12 +555,13 @@ List instances of a workflow
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listInstances" method="get" path="/api/orchestration/instances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -560,16 +570,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Orchestration.V1.ListInstances(ctx, operations.ListInstancesRequest{
-        Running: formancesdkgo.Bool(true),
-        WorkflowID: formancesdkgo.String("xxx"),
+        Running: v3.Pointer(true),
+        WorkflowID: v3.Pointer("xxx"),
     })
     if err != nil {
         log.Fatal(err)
@@ -605,12 +615,13 @@ List triggers
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listTriggers" method="get" path="/api/orchestration/triggers" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -619,10 +630,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -661,12 +672,13 @@ List triggers occurrences
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listTriggersOccurrences" method="get" path="/api/orchestration/triggers/{triggerID}/occurrences" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -675,10 +687,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -719,12 +731,13 @@ List registered workflows
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listWorkflows" method="get" path="/api/orchestration/workflows" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -732,10 +745,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -773,12 +786,13 @@ Get server info
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="orchestrationgetServerInfo" method="get" path="/api/orchestration/_info" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -786,10 +800,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -827,12 +841,13 @@ Read trigger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="readTrigger" method="get" path="/api/orchestration/triggers/{triggerID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -841,10 +856,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -885,12 +900,13 @@ Run workflow
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="runWorkflow" method="post" path="/api/orchestration/workflows/{workflowID}/instances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -899,10 +915,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -943,12 +959,13 @@ Send an event to a running workflow
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="sendEvent" method="post" path="/api/orchestration/instances/{instanceID}/events" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -957,10 +974,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 

@@ -31,92 +31,92 @@ func (p PaymentsAccount) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentsAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"accountName", "connectorID", "createdAt", "defaultAsset", "defaultCurrency", "id", "metadata", "raw", "reference", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *PaymentsAccount) GetAccountName() string {
-	if o == nil {
+func (p *PaymentsAccount) GetAccountName() string {
+	if p == nil {
 		return ""
 	}
-	return o.AccountName
+	return p.AccountName
 }
 
-func (o *PaymentsAccount) GetConnectorID() string {
-	if o == nil {
+func (p *PaymentsAccount) GetConnectorID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return p.ConnectorID
 }
 
-func (o *PaymentsAccount) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PaymentsAccount) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PaymentsAccount) GetDefaultAsset() string {
-	if o == nil {
+func (p *PaymentsAccount) GetDefaultAsset() string {
+	if p == nil {
 		return ""
 	}
-	return o.DefaultAsset
+	return p.DefaultAsset
 }
 
-func (o *PaymentsAccount) GetDefaultCurrency() string {
-	if o == nil {
+func (p *PaymentsAccount) GetDefaultCurrency() string {
+	if p == nil {
 		return ""
 	}
-	return o.DefaultCurrency
+	return p.DefaultCurrency
 }
 
-func (o *PaymentsAccount) GetID() string {
-	if o == nil {
+func (p *PaymentsAccount) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PaymentsAccount) GetMetadata() map[string]string {
-	if o == nil {
+func (p *PaymentsAccount) GetMetadata() map[string]string {
+	if p == nil {
 		return nil
 	}
-	return o.Metadata
+	return p.Metadata
 }
 
-func (o *PaymentsAccount) GetPools() []string {
-	if o == nil {
+func (p *PaymentsAccount) GetPools() []string {
+	if p == nil {
 		return nil
 	}
-	return o.Pools
+	return p.Pools
 }
 
-func (o *PaymentsAccount) GetProvider() *string {
-	if o == nil {
+func (p *PaymentsAccount) GetProvider() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Provider
+	return p.Provider
 }
 
-func (o *PaymentsAccount) GetRaw() *PaymentsAccountRaw {
-	if o == nil {
+func (p *PaymentsAccount) GetRaw() *PaymentsAccountRaw {
+	if p == nil {
 		return nil
 	}
-	return o.Raw
+	return p.Raw
 }
 
-func (o *PaymentsAccount) GetReference() string {
-	if o == nil {
+func (p *PaymentsAccount) GetReference() string {
+	if p == nil {
 		return ""
 	}
-	return o.Reference
+	return p.Reference
 }
 
-func (o *PaymentsAccount) GetType() AccountType {
-	if o == nil {
+func (p *PaymentsAccount) GetType() AccountType {
+	if p == nil {
 		return AccountType("")
 	}
-	return o.Type
+	return p.Type
 }

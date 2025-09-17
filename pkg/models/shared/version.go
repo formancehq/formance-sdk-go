@@ -8,23 +8,23 @@ type Version struct {
 	Version string `json:"version"`
 }
 
-func (o *Version) GetHealth() bool {
-	if o == nil {
+func (v *Version) GetHealth() bool {
+	if v == nil {
 		return false
 	}
-	return o.Health
+	return v.Health
 }
 
-func (o *Version) GetName() string {
-	if o == nil {
+func (v *Version) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *Version) GetVersion() string {
-	if o == nil {
+func (v *Version) GetVersion() string {
+	if v == nil {
 		return ""
 	}
-	return o.Version
+	return v.Version
 }

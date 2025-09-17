@@ -11,44 +11,44 @@ type V3AddressRequest struct {
 	StreetNumber *string `json:"streetNumber,omitempty"`
 }
 
-func (o *V3AddressRequest) GetCity() *string {
-	if o == nil {
+func (v *V3AddressRequest) GetCity() *string {
+	if v == nil {
 		return nil
 	}
-	return o.City
+	return v.City
 }
 
-func (o *V3AddressRequest) GetCountry() *string {
-	if o == nil {
+func (v *V3AddressRequest) GetCountry() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Country
+	return v.Country
 }
 
-func (o *V3AddressRequest) GetPostalCode() *string {
-	if o == nil {
+func (v *V3AddressRequest) GetPostalCode() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PostalCode
+	return v.PostalCode
 }
 
-func (o *V3AddressRequest) GetRegion() *string {
-	if o == nil {
+func (v *V3AddressRequest) GetRegion() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Region
+	return v.Region
 }
 
-func (o *V3AddressRequest) GetStreetName() *string {
-	if o == nil {
+func (v *V3AddressRequest) GetStreetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.StreetName
+	return v.StreetName
 }
 
-func (o *V3AddressRequest) GetStreetNumber() *string {
-	if o == nil {
+func (v *V3AddressRequest) GetStreetNumber() *string {
+	if v == nil {
 		return nil
 	}
-	return o.StreetNumber
+	return v.StreetNumber
 }

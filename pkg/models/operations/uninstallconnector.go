@@ -12,11 +12,11 @@ type UninstallConnectorRequest struct {
 	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
 }
 
-func (o *UninstallConnectorRequest) GetConnector() shared.Connector {
-	if o == nil {
+func (u *UninstallConnectorRequest) GetConnector() shared.Connector {
+	if u == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return u.Connector
 }
 
 type UninstallConnectorResponse struct {
@@ -28,23 +28,23 @@ type UninstallConnectorResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *UninstallConnectorResponse) GetContentType() string {
-	if o == nil {
+func (u *UninstallConnectorResponse) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UninstallConnectorResponse) GetStatusCode() int {
-	if o == nil {
+func (u *UninstallConnectorResponse) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UninstallConnectorResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UninstallConnectorResponse) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

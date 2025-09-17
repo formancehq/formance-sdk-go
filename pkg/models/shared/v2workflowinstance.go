@@ -23,64 +23,64 @@ func (v V2WorkflowInstance) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2WorkflowInstance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "terminated", "updatedAt", "workflowID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2WorkflowInstance) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V2WorkflowInstance) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V2WorkflowInstance) GetError() *string {
-	if o == nil {
+func (v *V2WorkflowInstance) GetError() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Error
+	return v.Error
 }
 
-func (o *V2WorkflowInstance) GetID() string {
-	if o == nil {
+func (v *V2WorkflowInstance) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2WorkflowInstance) GetStatus() []V2StageStatus {
-	if o == nil {
+func (v *V2WorkflowInstance) GetStatus() []V2StageStatus {
+	if v == nil {
 		return nil
 	}
-	return o.Status
+	return v.Status
 }
 
-func (o *V2WorkflowInstance) GetTerminated() bool {
-	if o == nil {
+func (v *V2WorkflowInstance) GetTerminated() bool {
+	if v == nil {
 		return false
 	}
-	return o.Terminated
+	return v.Terminated
 }
 
-func (o *V2WorkflowInstance) GetTerminatedAt() *time.Time {
-	if o == nil {
+func (v *V2WorkflowInstance) GetTerminatedAt() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.TerminatedAt
+	return v.TerminatedAt
 }
 
-func (o *V2WorkflowInstance) GetUpdatedAt() time.Time {
-	if o == nil {
+func (v *V2WorkflowInstance) GetUpdatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return v.UpdatedAt
 }
 
-func (o *V2WorkflowInstance) GetWorkflowID() string {
-	if o == nil {
+func (v *V2WorkflowInstance) GetWorkflowID() string {
+	if v == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return v.WorkflowID
 }

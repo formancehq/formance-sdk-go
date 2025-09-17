@@ -22,57 +22,57 @@ func (v V3Task) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Task) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3Task) GetConnectorID() *string {
-	if o == nil {
+func (v *V3Task) GetConnectorID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3Task) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3Task) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3Task) GetCreatedObjectID() *string {
-	if o == nil {
+func (v *V3Task) GetCreatedObjectID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.CreatedObjectID
+	return v.CreatedObjectID
 }
 
-func (o *V3Task) GetError() *string {
-	if o == nil {
+func (v *V3Task) GetError() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Error
+	return v.Error
 }
 
-func (o *V3Task) GetID() string {
-	if o == nil {
+func (v *V3Task) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3Task) GetStatus() V3TaskStatusEnum {
-	if o == nil {
+func (v *V3Task) GetStatus() V3TaskStatusEnum {
+	if v == nil {
 		return V3TaskStatusEnum("")
 	}
-	return o.Status
+	return v.Status
 }
 
-func (o *V3Task) GetUpdatedAt() time.Time {
-	if o == nil {
+func (v *V3Task) GetUpdatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return v.UpdatedAt
 }

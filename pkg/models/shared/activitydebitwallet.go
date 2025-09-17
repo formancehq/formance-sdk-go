@@ -7,16 +7,16 @@ type ActivityDebitWallet struct {
 	ID   *string             `json:"id,omitempty"`
 }
 
-func (o *ActivityDebitWallet) GetData() *DebitWalletRequest {
-	if o == nil {
+func (a *ActivityDebitWallet) GetData() *DebitWalletRequest {
+	if a == nil {
 		return nil
 	}
-	return o.Data
+	return a.Data
 }
 
-func (o *ActivityDebitWallet) GetID() *string {
-	if o == nil {
+func (a *ActivityDebitWallet) GetID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ID
+	return a.ID
 }

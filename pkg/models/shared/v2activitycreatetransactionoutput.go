@@ -6,9 +6,9 @@ type V2ActivityCreateTransactionOutput struct {
 	Data []OrchestrationV2Transaction `json:"data"`
 }
 
-func (o *V2ActivityCreateTransactionOutput) GetData() []OrchestrationV2Transaction {
-	if o == nil {
+func (v *V2ActivityCreateTransactionOutput) GetData() []OrchestrationV2Transaction {
+	if v == nil {
 		return []OrchestrationV2Transaction{}
 	}
-	return o.Data
+	return v.Data
 }

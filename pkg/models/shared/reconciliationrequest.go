@@ -17,22 +17,22 @@ func (r ReconciliationRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReconciliationRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"reconciledAtLedger", "reconciledAtPayments"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ReconciliationRequest) GetReconciledAtLedger() time.Time {
-	if o == nil {
+func (r *ReconciliationRequest) GetReconciledAtLedger() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.ReconciledAtLedger
+	return r.ReconciledAtLedger
 }
 
-func (o *ReconciliationRequest) GetReconciledAtPayments() time.Time {
-	if o == nil {
+func (r *ReconciliationRequest) GetReconciledAtPayments() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.ReconciledAtPayments
+	return r.ReconciledAtPayments
 }

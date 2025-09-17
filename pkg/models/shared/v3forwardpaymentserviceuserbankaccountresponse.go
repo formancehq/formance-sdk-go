@@ -8,20 +8,20 @@ type V3ForwardPaymentServiceUserBankAccountResponseData struct {
 	TaskID string `json:"taskID"`
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountResponseData) GetTaskID() string {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountResponseData) GetTaskID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TaskID
+	return v.TaskID
 }
 
 type V3ForwardPaymentServiceUserBankAccountResponse struct {
 	Data V3ForwardPaymentServiceUserBankAccountResponseData `json:"data"`
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountResponse) GetData() V3ForwardPaymentServiceUserBankAccountResponseData {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetData() V3ForwardPaymentServiceUserBankAccountResponseData {
+	if v == nil {
 		return V3ForwardPaymentServiceUserBankAccountResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

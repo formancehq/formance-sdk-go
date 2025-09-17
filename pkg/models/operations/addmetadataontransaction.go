@@ -22,31 +22,31 @@ func (a AddMetadataOnTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AddMetadataOnTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"RequestBody", "ledger", "txid"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *AddMetadataOnTransactionRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (a *AddMetadataOnTransactionRequest) GetRequestBody() map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.RequestBody
+	return a.RequestBody
 }
 
-func (o *AddMetadataOnTransactionRequest) GetLedger() string {
-	if o == nil {
+func (a *AddMetadataOnTransactionRequest) GetLedger() string {
+	if a == nil {
 		return ""
 	}
-	return o.Ledger
+	return a.Ledger
 }
 
-func (o *AddMetadataOnTransactionRequest) GetTxid() *big.Int {
-	if o == nil {
+func (a *AddMetadataOnTransactionRequest) GetTxid() *big.Int {
+	if a == nil {
 		return big.NewInt(0)
 	}
-	return o.Txid
+	return a.Txid
 }
 
 type AddMetadataOnTransactionResponse struct {
@@ -58,23 +58,23 @@ type AddMetadataOnTransactionResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *AddMetadataOnTransactionResponse) GetContentType() string {
-	if o == nil {
+func (a *AddMetadataOnTransactionResponse) GetContentType() string {
+	if a == nil {
 		return ""
 	}
-	return o.ContentType
+	return a.ContentType
 }
 
-func (o *AddMetadataOnTransactionResponse) GetStatusCode() int {
-	if o == nil {
+func (a *AddMetadataOnTransactionResponse) GetStatusCode() int {
+	if a == nil {
 		return 0
 	}
-	return o.StatusCode
+	return a.StatusCode
 }
 
-func (o *AddMetadataOnTransactionResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (a *AddMetadataOnTransactionResponse) GetRawResponse() *http.Response {
+	if a == nil {
 		return nil
 	}
-	return o.RawResponse
+	return a.RawResponse
 }

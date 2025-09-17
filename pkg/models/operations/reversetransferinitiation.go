@@ -13,18 +13,18 @@ type ReverseTransferInitiationRequest struct {
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`
 }
 
-func (o *ReverseTransferInitiationRequest) GetReverseTransferInitiationRequest() shared.ReverseTransferInitiationRequest {
-	if o == nil {
+func (r *ReverseTransferInitiationRequest) GetReverseTransferInitiationRequest() shared.ReverseTransferInitiationRequest {
+	if r == nil {
 		return shared.ReverseTransferInitiationRequest{}
 	}
-	return o.ReverseTransferInitiationRequest
+	return r.ReverseTransferInitiationRequest
 }
 
-func (o *ReverseTransferInitiationRequest) GetTransferID() string {
-	if o == nil {
+func (r *ReverseTransferInitiationRequest) GetTransferID() string {
+	if r == nil {
 		return ""
 	}
-	return o.TransferID
+	return r.TransferID
 }
 
 type ReverseTransferInitiationResponse struct {
@@ -36,23 +36,23 @@ type ReverseTransferInitiationResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReverseTransferInitiationResponse) GetContentType() string {
-	if o == nil {
+func (r *ReverseTransferInitiationResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReverseTransferInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReverseTransferInitiationResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReverseTransferInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReverseTransferInitiationResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

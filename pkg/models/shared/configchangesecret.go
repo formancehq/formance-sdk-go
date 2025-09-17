@@ -6,9 +6,9 @@ type ConfigChangeSecret struct {
 	Secret string `json:"secret"`
 }
 
-func (o *ConfigChangeSecret) GetSecret() string {
-	if o == nil {
+func (c *ConfigChangeSecret) GetSecret() string {
+	if c == nil {
 		return ""
 	}
-	return o.Secret
+	return c.Secret
 }

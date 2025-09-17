@@ -15,25 +15,25 @@ type V3ForwardPaymentServiceUserBankAccountRequest struct {
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountRequest) GetV3ForwardPaymentServiceUserBankAccountRequest() *shared.V3ForwardPaymentServiceUserBankAccountRequest {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountRequest) GetV3ForwardPaymentServiceUserBankAccountRequest() *shared.V3ForwardPaymentServiceUserBankAccountRequest {
+	if v == nil {
 		return nil
 	}
-	return o.V3ForwardPaymentServiceUserBankAccountRequest
+	return v.V3ForwardPaymentServiceUserBankAccountRequest
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountRequest) GetBankAccountID() string {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountRequest) GetBankAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return v.BankAccountID
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountRequest) GetPaymentServiceUserID() string {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountRequest) GetPaymentServiceUserID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentServiceUserID
+	return v.PaymentServiceUserID
 }
 
 type V3ForwardPaymentServiceUserBankAccountResponse struct {
@@ -47,30 +47,30 @@ type V3ForwardPaymentServiceUserBankAccountResponse struct {
 	V3ForwardPaymentServiceUserBankAccountResponse *shared.V3ForwardPaymentServiceUserBankAccountResponse
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountResponse) GetV3ForwardPaymentServiceUserBankAccountResponse() *shared.V3ForwardPaymentServiceUserBankAccountResponse {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetV3ForwardPaymentServiceUserBankAccountResponse() *shared.V3ForwardPaymentServiceUserBankAccountResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3ForwardPaymentServiceUserBankAccountResponse
+	return v.V3ForwardPaymentServiceUserBankAccountResponse
 }

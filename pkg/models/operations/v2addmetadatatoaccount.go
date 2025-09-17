@@ -23,39 +23,39 @@ type V2AddMetadataToAccountRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2AddMetadataToAccountRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (v *V2AddMetadataToAccountRequest) GetIdempotencyKey() *string {
+	if v == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return v.IdempotencyKey
 }
 
-func (o *V2AddMetadataToAccountRequest) GetRequestBody() map[string]string {
-	if o == nil {
+func (v *V2AddMetadataToAccountRequest) GetRequestBody() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2AddMetadataToAccountRequest) GetAddress() string {
-	if o == nil {
+func (v *V2AddMetadataToAccountRequest) GetAddress() string {
+	if v == nil {
 		return ""
 	}
-	return o.Address
+	return v.Address
 }
 
-func (o *V2AddMetadataToAccountRequest) GetDryRun() *bool {
-	if o == nil {
+func (v *V2AddMetadataToAccountRequest) GetDryRun() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.DryRun
+	return v.DryRun
 }
 
-func (o *V2AddMetadataToAccountRequest) GetLedger() string {
-	if o == nil {
+func (v *V2AddMetadataToAccountRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2AddMetadataToAccountResponse struct {
@@ -67,23 +67,23 @@ type V2AddMetadataToAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2AddMetadataToAccountResponse) GetContentType() string {
-	if o == nil {
+func (v *V2AddMetadataToAccountResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2AddMetadataToAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2AddMetadataToAccountResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2AddMetadataToAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2AddMetadataToAccountResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

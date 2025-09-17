@@ -17,8 +17,8 @@ const (
 )
 
 type Subject struct {
-	LedgerAccountSubject *LedgerAccountSubject `queryParam:"inline"`
-	WalletSubject        *WalletSubject        `queryParam:"inline"`
+	LedgerAccountSubject *LedgerAccountSubject `queryParam:"inline" name:"Subject"`
+	WalletSubject        *WalletSubject        `queryParam:"inline" name:"Subject"`
 
 	Type SubjectType
 }
@@ -61,7 +61,7 @@ func (u *Subject) UnmarshalJSON(data []byte) error {
 	switch dis.Type {
 	case "ACCOUNT":
 		ledgerAccountSubject := new(LedgerAccountSubject)
-		if err := utils.UnmarshalJSON(data, &ledgerAccountSubject, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &ledgerAccountSubject, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == ACCOUNT) type LedgerAccountSubject within Subject: %w", string(data), err)
 		}
 
@@ -70,7 +70,7 @@ func (u *Subject) UnmarshalJSON(data []byte) error {
 		return nil
 	case "WALLET":
 		walletSubject := new(WalletSubject)
-		if err := utils.UnmarshalJSON(data, &walletSubject, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &walletSubject, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == WALLET) type WalletSubject within Subject: %w", string(data), err)
 		}
 

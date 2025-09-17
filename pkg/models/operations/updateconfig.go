@@ -13,18 +13,18 @@ type UpdateConfigRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *UpdateConfigRequest) GetConfigUser() shared.ConfigUser {
-	if o == nil {
+func (u *UpdateConfigRequest) GetConfigUser() shared.ConfigUser {
+	if u == nil {
 		return shared.ConfigUser{}
 	}
-	return o.ConfigUser
+	return u.ConfigUser
 }
 
-func (o *UpdateConfigRequest) GetID() string {
-	if o == nil {
+func (u *UpdateConfigRequest) GetID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ID
+	return u.ID
 }
 
 type UpdateConfigResponse struct {
@@ -36,23 +36,23 @@ type UpdateConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *UpdateConfigResponse) GetContentType() string {
-	if o == nil {
+func (u *UpdateConfigResponse) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UpdateConfigResponse) GetStatusCode() int {
-	if o == nil {
+func (u *UpdateConfigResponse) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UpdateConfigResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UpdateConfigResponse) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

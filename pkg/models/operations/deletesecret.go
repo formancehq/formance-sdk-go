@@ -13,18 +13,18 @@ type DeleteSecretRequest struct {
 	SecretID string `pathParam:"style=simple,explode=false,name=secretId"`
 }
 
-func (o *DeleteSecretRequest) GetClientID() string {
-	if o == nil {
+func (d *DeleteSecretRequest) GetClientID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ClientID
+	return d.ClientID
 }
 
-func (o *DeleteSecretRequest) GetSecretID() string {
-	if o == nil {
+func (d *DeleteSecretRequest) GetSecretID() string {
+	if d == nil {
 		return ""
 	}
-	return o.SecretID
+	return d.SecretID
 }
 
 type DeleteSecretResponse struct {
@@ -36,23 +36,23 @@ type DeleteSecretResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *DeleteSecretResponse) GetContentType() string {
-	if o == nil {
+func (d *DeleteSecretResponse) GetContentType() string {
+	if d == nil {
 		return ""
 	}
-	return o.ContentType
+	return d.ContentType
 }
 
-func (o *DeleteSecretResponse) GetStatusCode() int {
-	if o == nil {
+func (d *DeleteSecretResponse) GetStatusCode() int {
+	if d == nil {
 		return 0
 	}
-	return o.StatusCode
+	return d.StatusCode
 }
 
-func (o *DeleteSecretResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (d *DeleteSecretResponse) GetRawResponse() *http.Response {
+	if d == nil {
 		return nil
 	}
-	return o.RawResponse
+	return d.RawResponse
 }

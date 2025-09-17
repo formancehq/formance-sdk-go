@@ -22,50 +22,50 @@ func (m MoneycorpConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MoneycorpConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"apiKey", "clientID", "endpoint", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *MoneycorpConfig) GetAPIKey() string {
-	if o == nil {
+func (m *MoneycorpConfig) GetAPIKey() string {
+	if m == nil {
 		return ""
 	}
-	return o.APIKey
+	return m.APIKey
 }
 
-func (o *MoneycorpConfig) GetClientID() string {
-	if o == nil {
+func (m *MoneycorpConfig) GetClientID() string {
+	if m == nil {
 		return ""
 	}
-	return o.ClientID
+	return m.ClientID
 }
 
-func (o *MoneycorpConfig) GetEndpoint() string {
-	if o == nil {
+func (m *MoneycorpConfig) GetEndpoint() string {
+	if m == nil {
 		return ""
 	}
-	return o.Endpoint
+	return m.Endpoint
 }
 
-func (o *MoneycorpConfig) GetName() string {
-	if o == nil {
+func (m *MoneycorpConfig) GetName() string {
+	if m == nil {
 		return ""
 	}
-	return o.Name
+	return m.Name
 }
 
-func (o *MoneycorpConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (m *MoneycorpConfig) GetPollingPeriod() *string {
+	if m == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return m.PollingPeriod
 }
 
-func (o *MoneycorpConfig) GetProvider() *string {
-	if o == nil {
+func (m *MoneycorpConfig) GetProvider() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Provider
+	return m.Provider
 }

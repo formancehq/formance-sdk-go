@@ -6,9 +6,9 @@ type PoolBalances struct {
 	Balances []PoolBalance `json:"balances"`
 }
 
-func (o *PoolBalances) GetBalances() []PoolBalance {
-	if o == nil {
+func (p *PoolBalances) GetBalances() []PoolBalance {
+	if p == nil {
 		return []PoolBalance{}
 	}
-	return o.Balances
+	return p.Balances
 }

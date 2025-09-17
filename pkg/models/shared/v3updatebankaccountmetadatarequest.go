@@ -6,9 +6,9 @@ type V3UpdateBankAccountMetadataRequest struct {
 	Metadata map[string]string `json:"metadata"`
 }
 
-func (o *V3UpdateBankAccountMetadataRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3UpdateBankAccountMetadataRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }

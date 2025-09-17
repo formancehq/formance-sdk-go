@@ -7,9 +7,9 @@ type TransferInitiationResponse struct {
 	Data TransferInitiation `json:"data"`
 }
 
-func (o *TransferInitiationResponse) GetData() TransferInitiation {
-	if o == nil {
+func (t *TransferInitiationResponse) GetData() TransferInitiation {
+	if t == nil {
 		return TransferInitiation{}
 	}
-	return o.Data
+	return t.Data
 }

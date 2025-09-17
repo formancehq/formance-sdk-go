@@ -13,28 +13,50 @@ type TaskMoneycorpDescriptor struct {
 	Name      *string `json:"name,omitempty"`
 }
 
-func (o *TaskMoneycorpDescriptor) GetAccountID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AccountID
+func (t TaskMoneycorpDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TaskMoneycorpDescriptor) GetKey() *string {
-	if o == nil {
-		return nil
+func (t *TaskMoneycorpDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
 	}
-	return o.Key
+	return nil
 }
 
-func (o *TaskMoneycorpDescriptor) GetName() *string {
-	if o == nil {
+func (t *TaskMoneycorpDescriptor) GetAccountID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.AccountID
+}
+
+func (t *TaskMoneycorpDescriptor) GetKey() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Key
+}
+
+func (t *TaskMoneycorpDescriptor) GetName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Name
 }
 
 type TaskMoneycorpState struct {
+}
+
+func (t TaskMoneycorpState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskMoneycorpState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskMoneycorp struct {
@@ -53,64 +75,64 @@ func (t TaskMoneycorp) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskMoneycorp) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskMoneycorp) GetConnectorID() string {
-	if o == nil {
+func (t *TaskMoneycorp) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskMoneycorp) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskMoneycorp) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskMoneycorp) GetDescriptor() TaskMoneycorpDescriptor {
-	if o == nil {
+func (t *TaskMoneycorp) GetDescriptor() TaskMoneycorpDescriptor {
+	if t == nil {
 		return TaskMoneycorpDescriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskMoneycorp) GetError() *string {
-	if o == nil {
+func (t *TaskMoneycorp) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskMoneycorp) GetID() string {
-	if o == nil {
+func (t *TaskMoneycorp) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskMoneycorp) GetState() *TaskMoneycorpState {
-	if o == nil {
+func (t *TaskMoneycorp) GetState() *TaskMoneycorpState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskMoneycorp) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskMoneycorp) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskMoneycorp) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskMoneycorp) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

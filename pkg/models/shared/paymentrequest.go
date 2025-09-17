@@ -26,78 +26,78 @@ func (p PaymentRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"amount", "asset", "connectorID", "createdAt", "reference", "scheme", "status", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *PaymentRequest) GetAmount() *big.Int {
-	if o == nil {
+func (p *PaymentRequest) GetAmount() *big.Int {
+	if p == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PaymentRequest) GetAsset() string {
-	if o == nil {
+func (p *PaymentRequest) GetAsset() string {
+	if p == nil {
 		return ""
 	}
-	return o.Asset
+	return p.Asset
 }
 
-func (o *PaymentRequest) GetConnectorID() string {
-	if o == nil {
+func (p *PaymentRequest) GetConnectorID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return p.ConnectorID
 }
 
-func (o *PaymentRequest) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PaymentRequest) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PaymentRequest) GetDestinationAccountID() *string {
-	if o == nil {
+func (p *PaymentRequest) GetDestinationAccountID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.DestinationAccountID
+	return p.DestinationAccountID
 }
 
-func (o *PaymentRequest) GetReference() string {
-	if o == nil {
+func (p *PaymentRequest) GetReference() string {
+	if p == nil {
 		return ""
 	}
-	return o.Reference
+	return p.Reference
 }
 
-func (o *PaymentRequest) GetScheme() PaymentScheme {
-	if o == nil {
+func (p *PaymentRequest) GetScheme() PaymentScheme {
+	if p == nil {
 		return PaymentScheme("")
 	}
-	return o.Scheme
+	return p.Scheme
 }
 
-func (o *PaymentRequest) GetSourceAccountID() *string {
-	if o == nil {
+func (p *PaymentRequest) GetSourceAccountID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.SourceAccountID
+	return p.SourceAccountID
 }
 
-func (o *PaymentRequest) GetStatus() PaymentStatus {
-	if o == nil {
+func (p *PaymentRequest) GetStatus() PaymentStatus {
+	if p == nil {
 		return PaymentStatus("")
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *PaymentRequest) GetType() PaymentType {
-	if o == nil {
+func (p *PaymentRequest) GetType() PaymentType {
+	if p == nil {
 		return PaymentType("")
 	}
-	return o.Type
+	return p.Type
 }

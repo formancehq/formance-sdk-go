@@ -10,37 +10,37 @@ type TriggerData struct {
 	WorkflowID string         `json:"workflowID"`
 }
 
-func (o *TriggerData) GetEvent() string {
-	if o == nil {
+func (t *TriggerData) GetEvent() string {
+	if t == nil {
 		return ""
 	}
-	return o.Event
+	return t.Event
 }
 
-func (o *TriggerData) GetFilter() *string {
-	if o == nil {
+func (t *TriggerData) GetFilter() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Filter
+	return t.Filter
 }
 
-func (o *TriggerData) GetName() *string {
-	if o == nil {
+func (t *TriggerData) GetName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.Name
 }
 
-func (o *TriggerData) GetVars() map[string]any {
-	if o == nil {
+func (t *TriggerData) GetVars() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.Vars
+	return t.Vars
 }
 
-func (o *TriggerData) GetWorkflowID() string {
-	if o == nil {
+func (t *TriggerData) GetWorkflowID() string {
+	if t == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return t.WorkflowID
 }

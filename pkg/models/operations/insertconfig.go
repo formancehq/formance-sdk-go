@@ -18,30 +18,30 @@ type InsertConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *InsertConfigResponse) GetConfigResponse() *shared.ConfigResponse {
-	if o == nil {
+func (i *InsertConfigResponse) GetConfigResponse() *shared.ConfigResponse {
+	if i == nil {
 		return nil
 	}
-	return o.ConfigResponse
+	return i.ConfigResponse
 }
 
-func (o *InsertConfigResponse) GetContentType() string {
-	if o == nil {
+func (i *InsertConfigResponse) GetContentType() string {
+	if i == nil {
 		return ""
 	}
-	return o.ContentType
+	return i.ContentType
 }
 
-func (o *InsertConfigResponse) GetStatusCode() int {
-	if o == nil {
+func (i *InsertConfigResponse) GetStatusCode() int {
+	if i == nil {
 		return 0
 	}
-	return o.StatusCode
+	return i.StatusCode
 }
 
-func (o *InsertConfigResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (i *InsertConfigResponse) GetRawResponse() *http.Response {
+	if i == nil {
 		return nil
 	}
-	return o.RawResponse
+	return i.RawResponse
 }

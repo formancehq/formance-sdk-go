@@ -6,9 +6,9 @@ type ListWorkflowsResponse struct {
 	Data []Workflow `json:"data"`
 }
 
-func (o *ListWorkflowsResponse) GetData() []Workflow {
-	if o == nil {
+func (l *ListWorkflowsResponse) GetData() []Workflow {
+	if l == nil {
 		return []Workflow{}
 	}
-	return o.Data
+	return l.Data
 }

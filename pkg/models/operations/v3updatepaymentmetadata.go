@@ -13,18 +13,18 @@ type V3UpdatePaymentMetadataRequest struct {
 	PaymentID string `pathParam:"style=simple,explode=false,name=paymentID"`
 }
 
-func (o *V3UpdatePaymentMetadataRequest) GetV3UpdatePaymentMetadataRequest() *shared.V3UpdatePaymentMetadataRequest {
-	if o == nil {
+func (v *V3UpdatePaymentMetadataRequest) GetV3UpdatePaymentMetadataRequest() *shared.V3UpdatePaymentMetadataRequest {
+	if v == nil {
 		return nil
 	}
-	return o.V3UpdatePaymentMetadataRequest
+	return v.V3UpdatePaymentMetadataRequest
 }
 
-func (o *V3UpdatePaymentMetadataRequest) GetPaymentID() string {
-	if o == nil {
+func (v *V3UpdatePaymentMetadataRequest) GetPaymentID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentID
+	return v.PaymentID
 }
 
 type V3UpdatePaymentMetadataResponse struct {
@@ -36,23 +36,23 @@ type V3UpdatePaymentMetadataResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V3UpdatePaymentMetadataResponse) GetContentType() string {
-	if o == nil {
+func (v *V3UpdatePaymentMetadataResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3UpdatePaymentMetadataResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3UpdatePaymentMetadataResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3UpdatePaymentMetadataResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3UpdatePaymentMetadataResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

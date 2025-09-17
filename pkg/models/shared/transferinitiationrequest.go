@@ -55,85 +55,85 @@ func (t TransferInitiationRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferInitiationRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"amount", "asset", "description", "destinationAccountID", "reference", "scheduledAt", "sourceAccountID", "type", "validated"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TransferInitiationRequest) GetAmount() *big.Int {
-	if o == nil {
+func (t *TransferInitiationRequest) GetAmount() *big.Int {
+	if t == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return t.Amount
 }
 
-func (o *TransferInitiationRequest) GetAsset() string {
-	if o == nil {
+func (t *TransferInitiationRequest) GetAsset() string {
+	if t == nil {
 		return ""
 	}
-	return o.Asset
+	return t.Asset
 }
 
-func (o *TransferInitiationRequest) GetConnectorID() *string {
-	if o == nil {
+func (t *TransferInitiationRequest) GetConnectorID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TransferInitiationRequest) GetDescription() string {
-	if o == nil {
+func (t *TransferInitiationRequest) GetDescription() string {
+	if t == nil {
 		return ""
 	}
-	return o.Description
+	return t.Description
 }
 
-func (o *TransferInitiationRequest) GetDestinationAccountID() string {
-	if o == nil {
+func (t *TransferInitiationRequest) GetDestinationAccountID() string {
+	if t == nil {
 		return ""
 	}
-	return o.DestinationAccountID
+	return t.DestinationAccountID
 }
 
-func (o *TransferInitiationRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (t *TransferInitiationRequest) GetMetadata() map[string]string {
+	if t == nil {
 		return nil
 	}
-	return o.Metadata
+	return t.Metadata
 }
 
-func (o *TransferInitiationRequest) GetReference() string {
-	if o == nil {
+func (t *TransferInitiationRequest) GetReference() string {
+	if t == nil {
 		return ""
 	}
-	return o.Reference
+	return t.Reference
 }
 
-func (o *TransferInitiationRequest) GetScheduledAt() time.Time {
-	if o == nil {
+func (t *TransferInitiationRequest) GetScheduledAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.ScheduledAt
+	return t.ScheduledAt
 }
 
-func (o *TransferInitiationRequest) GetSourceAccountID() string {
-	if o == nil {
+func (t *TransferInitiationRequest) GetSourceAccountID() string {
+	if t == nil {
 		return ""
 	}
-	return o.SourceAccountID
+	return t.SourceAccountID
 }
 
-func (o *TransferInitiationRequest) GetType() TransferInitiationRequestType {
-	if o == nil {
+func (t *TransferInitiationRequest) GetType() TransferInitiationRequestType {
+	if t == nil {
 		return TransferInitiationRequestType("")
 	}
-	return o.Type
+	return t.Type
 }
 
-func (o *TransferInitiationRequest) GetValidated() bool {
-	if o == nil {
+func (t *TransferInitiationRequest) GetValidated() bool {
+	if t == nil {
 		return false
 	}
-	return o.Validated
+	return t.Validated
 }

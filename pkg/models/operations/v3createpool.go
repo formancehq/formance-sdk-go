@@ -18,30 +18,30 @@ type V3CreatePoolResponse struct {
 	V3CreatePoolResponse *shared.V3CreatePoolResponse
 }
 
-func (o *V3CreatePoolResponse) GetContentType() string {
-	if o == nil {
+func (v *V3CreatePoolResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3CreatePoolResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3CreatePoolResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3CreatePoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3CreatePoolResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3CreatePoolResponse) GetV3CreatePoolResponse() *shared.V3CreatePoolResponse {
-	if o == nil {
+func (v *V3CreatePoolResponse) GetV3CreatePoolResponse() *shared.V3CreatePoolResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3CreatePoolResponse
+	return v.V3CreatePoolResponse
 }

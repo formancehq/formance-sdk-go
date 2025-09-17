@@ -20,43 +20,43 @@ func (s StageSend) MarshalJSON() ([]byte, error) {
 }
 
 func (s *StageSend) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *StageSend) GetAmount() *Monetary {
-	if o == nil {
+func (s *StageSend) GetAmount() *Monetary {
+	if s == nil {
 		return nil
 	}
-	return o.Amount
+	return s.Amount
 }
 
-func (o *StageSend) GetDestination() *StageSendDestination {
-	if o == nil {
+func (s *StageSend) GetDestination() *StageSendDestination {
+	if s == nil {
 		return nil
 	}
-	return o.Destination
+	return s.Destination
 }
 
-func (o *StageSend) GetMetadata() map[string]string {
-	if o == nil {
+func (s *StageSend) GetMetadata() map[string]string {
+	if s == nil {
 		return nil
 	}
-	return o.Metadata
+	return s.Metadata
 }
 
-func (o *StageSend) GetSource() *StageSendSource {
-	if o == nil {
+func (s *StageSend) GetSource() *StageSendSource {
+	if s == nil {
 		return nil
 	}
-	return o.Source
+	return s.Source
 }
 
-func (o *StageSend) GetTimestamp() *time.Time {
-	if o == nil {
+func (s *StageSend) GetTimestamp() *time.Time {
+	if s == nil {
 		return nil
 	}
-	return o.Timestamp
+	return s.Timestamp
 }

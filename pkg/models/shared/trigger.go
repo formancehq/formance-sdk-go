@@ -22,57 +22,57 @@ func (t Trigger) MarshalJSON() ([]byte, error) {
 }
 
 func (t *Trigger) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"createdAt", "event", "id", "workflowID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Trigger) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *Trigger) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *Trigger) GetEvent() string {
-	if o == nil {
+func (t *Trigger) GetEvent() string {
+	if t == nil {
 		return ""
 	}
-	return o.Event
+	return t.Event
 }
 
-func (o *Trigger) GetFilter() *string {
-	if o == nil {
+func (t *Trigger) GetFilter() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Filter
+	return t.Filter
 }
 
-func (o *Trigger) GetID() string {
-	if o == nil {
+func (t *Trigger) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *Trigger) GetName() *string {
-	if o == nil {
+func (t *Trigger) GetName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.Name
 }
 
-func (o *Trigger) GetVars() map[string]any {
-	if o == nil {
+func (t *Trigger) GetVars() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.Vars
+	return t.Vars
 }
 
-func (o *Trigger) GetWorkflowID() string {
-	if o == nil {
+func (t *Trigger) GetWorkflowID() string {
+	if t == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return t.WorkflowID
 }

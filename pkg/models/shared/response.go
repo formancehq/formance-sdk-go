@@ -7,18 +7,18 @@ type Total struct {
 	Value    *int64  `json:"value,omitempty"`
 }
 
-func (o *Total) GetRelation() *string {
-	if o == nil {
+func (t *Total) GetRelation() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Relation
+	return t.Relation
 }
 
-func (o *Total) GetValue() *int64 {
-	if o == nil {
+func (t *Total) GetValue() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.Value
+	return t.Value
 }
 
 type ResponseCursor struct {
@@ -30,46 +30,46 @@ type ResponseCursor struct {
 	Total    *Total           `json:"total,omitempty"`
 }
 
-func (o *ResponseCursor) GetData() []map[string]any {
-	if o == nil {
+func (r *ResponseCursor) GetData() []map[string]any {
+	if r == nil {
 		return nil
 	}
-	return o.Data
+	return r.Data
 }
 
-func (o *ResponseCursor) GetHasMore() *bool {
-	if o == nil {
+func (r *ResponseCursor) GetHasMore() *bool {
+	if r == nil {
 		return nil
 	}
-	return o.HasMore
+	return r.HasMore
 }
 
-func (o *ResponseCursor) GetNext() *string {
-	if o == nil {
+func (r *ResponseCursor) GetNext() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Next
+	return r.Next
 }
 
-func (o *ResponseCursor) GetPageSize() *int64 {
-	if o == nil {
+func (r *ResponseCursor) GetPageSize() *int64 {
+	if r == nil {
 		return nil
 	}
-	return o.PageSize
+	return r.PageSize
 }
 
-func (o *ResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (r *ResponseCursor) GetPrevious() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Previous
+	return r.Previous
 }
 
-func (o *ResponseCursor) GetTotal() *Total {
-	if o == nil {
+func (r *ResponseCursor) GetTotal() *Total {
+	if r == nil {
 		return nil
 	}
-	return o.Total
+	return r.Total
 }
 
 type Response struct {
@@ -78,16 +78,16 @@ type Response struct {
 	Data map[string]any `json:"data,omitempty"`
 }
 
-func (o *Response) GetCursor() *ResponseCursor {
-	if o == nil {
+func (r *Response) GetCursor() *ResponseCursor {
+	if r == nil {
 		return nil
 	}
-	return o.Cursor
+	return r.Cursor
 }
 
-func (o *Response) GetData() map[string]any {
-	if o == nil {
+func (r *Response) GetData() map[string]any {
+	if r == nil {
 		return nil
 	}
-	return o.Data
+	return r.Data
 }

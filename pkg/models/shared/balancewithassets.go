@@ -20,36 +20,36 @@ func (b BalanceWithAssets) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BalanceWithAssets) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"assets", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *BalanceWithAssets) GetAssets() map[string]*big.Int {
-	if o == nil {
+func (b *BalanceWithAssets) GetAssets() map[string]*big.Int {
+	if b == nil {
 		return map[string]*big.Int{}
 	}
-	return o.Assets
+	return b.Assets
 }
 
-func (o *BalanceWithAssets) GetExpiresAt() *time.Time {
-	if o == nil {
+func (b *BalanceWithAssets) GetExpiresAt() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return o.ExpiresAt
+	return b.ExpiresAt
 }
 
-func (o *BalanceWithAssets) GetName() string {
-	if o == nil {
+func (b *BalanceWithAssets) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return o.Name
+	return b.Name
 }
 
-func (o *BalanceWithAssets) GetPriority() *big.Int {
-	if o == nil {
+func (b *BalanceWithAssets) GetPriority() *big.Int {
+	if b == nil {
 		return nil
 	}
-	return o.Priority
+	return b.Priority
 }

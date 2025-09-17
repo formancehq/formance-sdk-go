@@ -15,25 +15,25 @@ type RunWorkflowRequest struct {
 	WorkflowID string `pathParam:"style=simple,explode=false,name=workflowID"`
 }
 
-func (o *RunWorkflowRequest) GetRequestBody() map[string]string {
-	if o == nil {
+func (r *RunWorkflowRequest) GetRequestBody() map[string]string {
+	if r == nil {
 		return nil
 	}
-	return o.RequestBody
+	return r.RequestBody
 }
 
-func (o *RunWorkflowRequest) GetWait() *bool {
-	if o == nil {
+func (r *RunWorkflowRequest) GetWait() *bool {
+	if r == nil {
 		return nil
 	}
-	return o.Wait
+	return r.Wait
 }
 
-func (o *RunWorkflowRequest) GetWorkflowID() string {
-	if o == nil {
+func (r *RunWorkflowRequest) GetWorkflowID() string {
+	if r == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return r.WorkflowID
 }
 
 type RunWorkflowResponse struct {
@@ -47,30 +47,30 @@ type RunWorkflowResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *RunWorkflowResponse) GetContentType() string {
-	if o == nil {
+func (r *RunWorkflowResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *RunWorkflowResponse) GetRunWorkflowResponse() *shared.RunWorkflowResponse {
-	if o == nil {
+func (r *RunWorkflowResponse) GetRunWorkflowResponse() *shared.RunWorkflowResponse {
+	if r == nil {
 		return nil
 	}
-	return o.RunWorkflowResponse
+	return r.RunWorkflowResponse
 }
 
-func (o *RunWorkflowResponse) GetStatusCode() int {
-	if o == nil {
+func (r *RunWorkflowResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *RunWorkflowResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *RunWorkflowResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

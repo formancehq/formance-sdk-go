@@ -30,38 +30,38 @@ func (l ListTransferInitiationsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListTransferInitiationsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListTransferInitiationsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListTransferInitiationsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListTransferInitiationsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListTransferInitiationsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListTransferInitiationsRequest) GetQuery() *string {
-	if o == nil {
+func (l *ListTransferInitiationsRequest) GetQuery() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Query
+	return l.Query
 }
 
-func (o *ListTransferInitiationsRequest) GetSort() []string {
-	if o == nil {
+func (l *ListTransferInitiationsRequest) GetSort() []string {
+	if l == nil {
 		return nil
 	}
-	return o.Sort
+	return l.Sort
 }
 
 type ListTransferInitiationsResponse struct {
@@ -75,30 +75,30 @@ type ListTransferInitiationsResponse struct {
 	TransferInitiationsCursor *shared.TransferInitiationsCursor
 }
 
-func (o *ListTransferInitiationsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListTransferInitiationsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListTransferInitiationsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListTransferInitiationsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListTransferInitiationsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListTransferInitiationsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }
 
-func (o *ListTransferInitiationsResponse) GetTransferInitiationsCursor() *shared.TransferInitiationsCursor {
-	if o == nil {
+func (l *ListTransferInitiationsResponse) GetTransferInitiationsCursor() *shared.TransferInitiationsCursor {
+	if l == nil {
 		return nil
 	}
-	return o.TransferInitiationsCursor
+	return l.TransferInitiationsCursor
 }

@@ -29,50 +29,50 @@ func (a ActivityStripeTransfer) MarshalJSON() ([]byte, error) {
 }
 
 func (a *ActivityStripeTransfer) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ActivityStripeTransfer) GetAmount() *big.Int {
-	if o == nil {
+func (a *ActivityStripeTransfer) GetAmount() *big.Int {
+	if a == nil {
 		return nil
 	}
-	return o.Amount
+	return a.Amount
 }
 
-func (o *ActivityStripeTransfer) GetAsset() *string {
-	if o == nil {
+func (a *ActivityStripeTransfer) GetAsset() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Asset
+	return a.Asset
 }
 
-func (o *ActivityStripeTransfer) GetConnectorID() *string {
-	if o == nil {
+func (a *ActivityStripeTransfer) GetConnectorID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ConnectorID
+	return a.ConnectorID
 }
 
-func (o *ActivityStripeTransfer) GetDestination() *string {
-	if o == nil {
+func (a *ActivityStripeTransfer) GetDestination() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Destination
+	return a.Destination
 }
 
-func (o *ActivityStripeTransfer) GetMetadata() *Metadata {
-	if o == nil {
+func (a *ActivityStripeTransfer) GetMetadata() *Metadata {
+	if a == nil {
 		return nil
 	}
-	return o.Metadata
+	return a.Metadata
 }
 
-func (o *ActivityStripeTransfer) GetWaitingValidation() *bool {
-	if o == nil {
+func (a *ActivityStripeTransfer) GetWaitingValidation() *bool {
+	if a == nil {
 		return nil
 	}
-	return o.WaitingValidation
+	return a.WaitingValidation
 }

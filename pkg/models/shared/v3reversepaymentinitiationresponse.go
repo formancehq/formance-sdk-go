@@ -11,27 +11,27 @@ type V3ReversePaymentInitiationResponseData struct {
 	TaskID *string `json:"taskID,omitempty"`
 }
 
-func (o *V3ReversePaymentInitiationResponseData) GetPaymentInitiationReversalID() *string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationResponseData) GetPaymentInitiationReversalID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PaymentInitiationReversalID
+	return v.PaymentInitiationReversalID
 }
 
-func (o *V3ReversePaymentInitiationResponseData) GetTaskID() *string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationResponseData) GetTaskID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.TaskID
+	return v.TaskID
 }
 
 type V3ReversePaymentInitiationResponse struct {
 	Data V3ReversePaymentInitiationResponseData `json:"data"`
 }
 
-func (o *V3ReversePaymentInitiationResponse) GetData() V3ReversePaymentInitiationResponseData {
-	if o == nil {
+func (v *V3ReversePaymentInitiationResponse) GetData() V3ReversePaymentInitiationResponseData {
+	if v == nil {
 		return V3ReversePaymentInitiationResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

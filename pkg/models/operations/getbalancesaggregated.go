@@ -16,25 +16,25 @@ type GetBalancesAggregatedRequest struct {
 	UseInsertionDate *bool `queryParam:"style=form,explode=true,name=useInsertionDate"`
 }
 
-func (o *GetBalancesAggregatedRequest) GetAddress() *string {
-	if o == nil {
+func (g *GetBalancesAggregatedRequest) GetAddress() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Address
+	return g.Address
 }
 
-func (o *GetBalancesAggregatedRequest) GetLedger() string {
-	if o == nil {
+func (g *GetBalancesAggregatedRequest) GetLedger() string {
+	if g == nil {
 		return ""
 	}
-	return o.Ledger
+	return g.Ledger
 }
 
-func (o *GetBalancesAggregatedRequest) GetUseInsertionDate() *bool {
-	if o == nil {
+func (g *GetBalancesAggregatedRequest) GetUseInsertionDate() *bool {
+	if g == nil {
 		return nil
 	}
-	return o.UseInsertionDate
+	return g.UseInsertionDate
 }
 
 type GetBalancesAggregatedResponse struct {
@@ -48,30 +48,30 @@ type GetBalancesAggregatedResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetBalancesAggregatedResponse) GetAggregateBalancesResponse() *shared.AggregateBalancesResponse {
-	if o == nil {
+func (g *GetBalancesAggregatedResponse) GetAggregateBalancesResponse() *shared.AggregateBalancesResponse {
+	if g == nil {
 		return nil
 	}
-	return o.AggregateBalancesResponse
+	return g.AggregateBalancesResponse
 }
 
-func (o *GetBalancesAggregatedResponse) GetContentType() string {
-	if o == nil {
+func (g *GetBalancesAggregatedResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetBalancesAggregatedResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetBalancesAggregatedResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetBalancesAggregatedResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetBalancesAggregatedResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

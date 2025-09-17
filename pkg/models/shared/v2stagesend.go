@@ -20,43 +20,43 @@ func (v V2StageSend) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2StageSend) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2StageSend) GetAmount() *V2Monetary {
-	if o == nil {
+func (v *V2StageSend) GetAmount() *V2Monetary {
+	if v == nil {
 		return nil
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V2StageSend) GetDestination() *V2StageSendDestination {
-	if o == nil {
+func (v *V2StageSend) GetDestination() *V2StageSendDestination {
+	if v == nil {
 		return nil
 	}
-	return o.Destination
+	return v.Destination
 }
 
-func (o *V2StageSend) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2StageSend) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2StageSend) GetSource() *V2StageSendSource {
-	if o == nil {
+func (v *V2StageSend) GetSource() *V2StageSendSource {
+	if v == nil {
 		return nil
 	}
-	return o.Source
+	return v.Source
 }
 
-func (o *V2StageSend) GetTimestamp() *time.Time {
-	if o == nil {
+func (v *V2StageSend) GetTimestamp() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Timestamp
+	return v.Timestamp
 }

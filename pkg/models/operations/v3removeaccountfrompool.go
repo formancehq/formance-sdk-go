@@ -13,18 +13,18 @@ type V3RemoveAccountFromPoolRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolID"`
 }
 
-func (o *V3RemoveAccountFromPoolRequest) GetAccountID() string {
-	if o == nil {
+func (v *V3RemoveAccountFromPoolRequest) GetAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccountID
+	return v.AccountID
 }
 
-func (o *V3RemoveAccountFromPoolRequest) GetPoolID() string {
-	if o == nil {
+func (v *V3RemoveAccountFromPoolRequest) GetPoolID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PoolID
+	return v.PoolID
 }
 
 type V3RemoveAccountFromPoolResponse struct {
@@ -36,23 +36,23 @@ type V3RemoveAccountFromPoolResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V3RemoveAccountFromPoolResponse) GetContentType() string {
-	if o == nil {
+func (v *V3RemoveAccountFromPoolResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3RemoveAccountFromPoolResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3RemoveAccountFromPoolResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3RemoveAccountFromPoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3RemoveAccountFromPoolResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

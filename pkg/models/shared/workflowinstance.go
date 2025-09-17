@@ -23,64 +23,64 @@ func (w WorkflowInstance) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WorkflowInstance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"createdAt", "id", "terminated", "updatedAt", "workflowID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WorkflowInstance) GetCreatedAt() time.Time {
-	if o == nil {
+func (w *WorkflowInstance) GetCreatedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return w.CreatedAt
 }
 
-func (o *WorkflowInstance) GetError() *string {
-	if o == nil {
+func (w *WorkflowInstance) GetError() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Error
+	return w.Error
 }
 
-func (o *WorkflowInstance) GetID() string {
-	if o == nil {
+func (w *WorkflowInstance) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *WorkflowInstance) GetStatus() []StageStatus {
-	if o == nil {
+func (w *WorkflowInstance) GetStatus() []StageStatus {
+	if w == nil {
 		return nil
 	}
-	return o.Status
+	return w.Status
 }
 
-func (o *WorkflowInstance) GetTerminated() bool {
-	if o == nil {
+func (w *WorkflowInstance) GetTerminated() bool {
+	if w == nil {
 		return false
 	}
-	return o.Terminated
+	return w.Terminated
 }
 
-func (o *WorkflowInstance) GetTerminatedAt() *time.Time {
-	if o == nil {
+func (w *WorkflowInstance) GetTerminatedAt() *time.Time {
+	if w == nil {
 		return nil
 	}
-	return o.TerminatedAt
+	return w.TerminatedAt
 }
 
-func (o *WorkflowInstance) GetUpdatedAt() time.Time {
-	if o == nil {
+func (w *WorkflowInstance) GetUpdatedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return w.UpdatedAt
 }
 
-func (o *WorkflowInstance) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowInstance) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }

@@ -17,22 +17,22 @@ func (p PoolBalance) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PoolBalance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"amount", "asset"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *PoolBalance) GetAmount() *big.Int {
-	if o == nil {
+func (p *PoolBalance) GetAmount() *big.Int {
+	if p == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PoolBalance) GetAsset() string {
-	if o == nil {
+func (p *PoolBalance) GetAsset() string {
+	if p == nil {
 		return ""
 	}
-	return o.Asset
+	return p.Asset
 }

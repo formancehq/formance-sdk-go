@@ -13,18 +13,18 @@ type ReconcileRequest struct {
 	PolicyID string `pathParam:"style=simple,explode=false,name=policyID"`
 }
 
-func (o *ReconcileRequest) GetReconciliationRequest() shared.ReconciliationRequest {
-	if o == nil {
+func (r *ReconcileRequest) GetReconciliationRequest() shared.ReconciliationRequest {
+	if r == nil {
 		return shared.ReconciliationRequest{}
 	}
-	return o.ReconciliationRequest
+	return r.ReconciliationRequest
 }
 
-func (o *ReconcileRequest) GetPolicyID() string {
-	if o == nil {
+func (r *ReconcileRequest) GetPolicyID() string {
+	if r == nil {
 		return ""
 	}
-	return o.PolicyID
+	return r.PolicyID
 }
 
 type ReconcileResponse struct {
@@ -38,30 +38,30 @@ type ReconcileResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReconcileResponse) GetContentType() string {
-	if o == nil {
+func (r *ReconcileResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReconcileResponse) GetReconciliationResponse() *shared.ReconciliationResponse {
-	if o == nil {
+func (r *ReconcileResponse) GetReconciliationResponse() *shared.ReconciliationResponse {
+	if r == nil {
 		return nil
 	}
-	return o.ReconciliationResponse
+	return r.ReconciliationResponse
 }
 
-func (o *ReconcileResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReconcileResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReconcileResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReconcileResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

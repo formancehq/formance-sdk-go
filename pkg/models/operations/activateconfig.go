@@ -12,11 +12,11 @@ type ActivateConfigRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *ActivateConfigRequest) GetID() string {
-	if o == nil {
+func (a *ActivateConfigRequest) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
 type ActivateConfigResponse struct {
@@ -30,30 +30,30 @@ type ActivateConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ActivateConfigResponse) GetConfigResponse() *shared.ConfigResponse {
-	if o == nil {
+func (a *ActivateConfigResponse) GetConfigResponse() *shared.ConfigResponse {
+	if a == nil {
 		return nil
 	}
-	return o.ConfigResponse
+	return a.ConfigResponse
 }
 
-func (o *ActivateConfigResponse) GetContentType() string {
-	if o == nil {
+func (a *ActivateConfigResponse) GetContentType() string {
+	if a == nil {
 		return ""
 	}
-	return o.ContentType
+	return a.ContentType
 }
 
-func (o *ActivateConfigResponse) GetStatusCode() int {
-	if o == nil {
+func (a *ActivateConfigResponse) GetStatusCode() int {
+	if a == nil {
 		return 0
 	}
-	return o.StatusCode
+	return a.StatusCode
 }
 
-func (o *ActivateConfigResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (a *ActivateConfigResponse) GetRawResponse() *http.Response {
+	if a == nil {
 		return nil
 	}
-	return o.RawResponse
+	return a.RawResponse
 }

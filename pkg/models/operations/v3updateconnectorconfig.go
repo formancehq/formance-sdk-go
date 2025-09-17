@@ -13,109 +13,109 @@ type V3UpdateConnectorConfigRequest struct {
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequest() *shared.V3InstallConnectorRequest {
-	if o == nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequest() *shared.V3InstallConnectorRequest {
+	if v == nil {
 		return nil
 	}
-	return o.V3InstallConnectorRequest
+	return v.V3InstallConnectorRequest
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestAdyen() *shared.V3AdyenConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestAdyen() *shared.V3AdyenConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3AdyenConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestAtlar() *shared.V3AtlarConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestAtlar() *shared.V3AtlarConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3AtlarConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestBankingcircle() *shared.V3BankingcircleConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestBankingcircle() *shared.V3BankingcircleConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3BankingcircleConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestColumn() *shared.V3ColumnConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestColumn() *shared.V3ColumnConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3ColumnConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestCurrencycloud() *shared.V3CurrencycloudConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestCurrencycloud() *shared.V3CurrencycloudConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3CurrencycloudConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestDummypay() *shared.V3DummypayConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestDummypay() *shared.V3DummypayConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3DummypayConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestGeneric() *shared.V3GenericConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestGeneric() *shared.V3GenericConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3GenericConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestMangopay() *shared.V3MangopayConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestMangopay() *shared.V3MangopayConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3MangopayConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestModulr() *shared.V3ModulrConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestModulr() *shared.V3ModulrConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3ModulrConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestMoneycorp() *shared.V3MoneycorpConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestMoneycorp() *shared.V3MoneycorpConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3MoneycorpConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestQonto() *shared.V3QontoConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestQonto() *shared.V3QontoConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3QontoConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestStripe() *shared.V3StripeConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestStripe() *shared.V3StripeConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3StripeConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestWise() *shared.V3WiseConfig {
-	if v := o.GetV3InstallConnectorRequest(); v != nil {
+func (v *V3UpdateConnectorConfigRequest) GetV3InstallConnectorRequestWise() *shared.V3WiseConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3WiseConfig
 	}
 	return nil
 }
 
-func (o *V3UpdateConnectorConfigRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3UpdateConnectorConfigRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
 type V3UpdateConnectorConfigResponse struct {
@@ -127,23 +127,23 @@ type V3UpdateConnectorConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V3UpdateConnectorConfigResponse) GetContentType() string {
-	if o == nil {
+func (v *V3UpdateConnectorConfigResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3UpdateConnectorConfigResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3UpdateConnectorConfigResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3UpdateConnectorConfigResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3UpdateConnectorConfigResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

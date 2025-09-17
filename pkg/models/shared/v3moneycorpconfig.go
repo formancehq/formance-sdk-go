@@ -21,57 +21,57 @@ func (v V3MoneycorpConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3MoneycorpConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "clientID", "endpoint", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3MoneycorpConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3MoneycorpConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3MoneycorpConfig) GetClientID() string {
-	if o == nil {
+func (v *V3MoneycorpConfig) GetClientID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ClientID
+	return v.ClientID
 }
 
-func (o *V3MoneycorpConfig) GetEndpoint() string {
-	if o == nil {
+func (v *V3MoneycorpConfig) GetEndpoint() string {
+	if v == nil {
 		return ""
 	}
-	return o.Endpoint
+	return v.Endpoint
 }
 
-func (o *V3MoneycorpConfig) GetName() string {
-	if o == nil {
+func (v *V3MoneycorpConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3MoneycorpConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3MoneycorpConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3MoneycorpConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3MoneycorpConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3MoneycorpConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3MoneycorpConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }

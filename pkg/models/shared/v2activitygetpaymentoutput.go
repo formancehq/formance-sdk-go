@@ -6,9 +6,9 @@ type V2ActivityGetPaymentOutput struct {
 	Data V2Payment `json:"data"`
 }
 
-func (o *V2ActivityGetPaymentOutput) GetData() V2Payment {
-	if o == nil {
+func (v *V2ActivityGetPaymentOutput) GetData() V2Payment {
+	if v == nil {
 		return V2Payment{}
 	}
-	return o.Data
+	return v.Data
 }

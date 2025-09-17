@@ -12,11 +12,11 @@ type GetPoolBalancesLatestRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
-func (o *GetPoolBalancesLatestRequest) GetPoolID() string {
-	if o == nil {
+func (g *GetPoolBalancesLatestRequest) GetPoolID() string {
+	if g == nil {
 		return ""
 	}
-	return o.PoolID
+	return g.PoolID
 }
 
 type GetPoolBalancesLatestResponse struct {
@@ -30,30 +30,30 @@ type GetPoolBalancesLatestResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetPoolBalancesLatestResponse) GetContentType() string {
-	if o == nil {
+func (g *GetPoolBalancesLatestResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetPoolBalancesLatestResponse) GetPoolBalancesResponse() *shared.PoolBalancesResponse {
-	if o == nil {
+func (g *GetPoolBalancesLatestResponse) GetPoolBalancesResponse() *shared.PoolBalancesResponse {
+	if g == nil {
 		return nil
 	}
-	return o.PoolBalancesResponse
+	return g.PoolBalancesResponse
 }
 
-func (o *GetPoolBalancesLatestResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetPoolBalancesLatestResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetPoolBalancesLatestResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetPoolBalancesLatestResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

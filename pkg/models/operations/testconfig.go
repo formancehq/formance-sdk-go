@@ -12,11 +12,11 @@ type TestConfigRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *TestConfigRequest) GetID() string {
-	if o == nil {
+func (t *TestConfigRequest) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
 type TestConfigResponse struct {
@@ -30,30 +30,30 @@ type TestConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *TestConfigResponse) GetAttemptResponse() *shared.AttemptResponse {
-	if o == nil {
+func (t *TestConfigResponse) GetAttemptResponse() *shared.AttemptResponse {
+	if t == nil {
 		return nil
 	}
-	return o.AttemptResponse
+	return t.AttemptResponse
 }
 
-func (o *TestConfigResponse) GetContentType() string {
-	if o == nil {
+func (t *TestConfigResponse) GetContentType() string {
+	if t == nil {
 		return ""
 	}
-	return o.ContentType
+	return t.ContentType
 }
 
-func (o *TestConfigResponse) GetStatusCode() int {
-	if o == nil {
+func (t *TestConfigResponse) GetStatusCode() int {
+	if t == nil {
 		return 0
 	}
-	return o.StatusCode
+	return t.StatusCode
 }
 
-func (o *TestConfigResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (t *TestConfigResponse) GetRawResponse() *http.Response {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponse
+	return t.RawResponse
 }

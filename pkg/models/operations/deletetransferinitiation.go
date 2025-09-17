@@ -11,11 +11,11 @@ type DeleteTransferInitiationRequest struct {
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`
 }
 
-func (o *DeleteTransferInitiationRequest) GetTransferID() string {
-	if o == nil {
+func (d *DeleteTransferInitiationRequest) GetTransferID() string {
+	if d == nil {
 		return ""
 	}
-	return o.TransferID
+	return d.TransferID
 }
 
 type DeleteTransferInitiationResponse struct {
@@ -27,23 +27,23 @@ type DeleteTransferInitiationResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *DeleteTransferInitiationResponse) GetContentType() string {
-	if o == nil {
+func (d *DeleteTransferInitiationResponse) GetContentType() string {
+	if d == nil {
 		return ""
 	}
-	return o.ContentType
+	return d.ContentType
 }
 
-func (o *DeleteTransferInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (d *DeleteTransferInitiationResponse) GetStatusCode() int {
+	if d == nil {
 		return 0
 	}
-	return o.StatusCode
+	return d.StatusCode
 }
 
-func (o *DeleteTransferInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (d *DeleteTransferInitiationResponse) GetRawResponse() *http.Response {
+	if d == nil {
 		return nil
 	}
-	return o.RawResponse
+	return d.RawResponse
 }

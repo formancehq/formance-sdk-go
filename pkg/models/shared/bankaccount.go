@@ -27,92 +27,92 @@ func (b BankAccount) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"country", "createdAt", "id", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *BankAccount) GetAccountID() *string {
-	if o == nil {
+func (b *BankAccount) GetAccountID() *string {
+	if b == nil {
 		return nil
 	}
-	return o.AccountID
+	return b.AccountID
 }
 
-func (o *BankAccount) GetAccountNumber() *string {
-	if o == nil {
+func (b *BankAccount) GetAccountNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return b.AccountNumber
 }
 
-func (o *BankAccount) GetConnectorID() *string {
-	if o == nil {
+func (b *BankAccount) GetConnectorID() *string {
+	if b == nil {
 		return nil
 	}
-	return o.ConnectorID
+	return b.ConnectorID
 }
 
-func (o *BankAccount) GetCountry() string {
-	if o == nil {
+func (b *BankAccount) GetCountry() string {
+	if b == nil {
 		return ""
 	}
-	return o.Country
+	return b.Country
 }
 
-func (o *BankAccount) GetCreatedAt() time.Time {
-	if o == nil {
+func (b *BankAccount) GetCreatedAt() time.Time {
+	if b == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return b.CreatedAt
 }
 
-func (o *BankAccount) GetIban() *string {
-	if o == nil {
+func (b *BankAccount) GetIban() *string {
+	if b == nil {
 		return nil
 	}
-	return o.Iban
+	return b.Iban
 }
 
-func (o *BankAccount) GetID() string {
-	if o == nil {
+func (b *BankAccount) GetID() string {
+	if b == nil {
 		return ""
 	}
-	return o.ID
+	return b.ID
 }
 
-func (o *BankAccount) GetMetadata() map[string]string {
-	if o == nil {
+func (b *BankAccount) GetMetadata() map[string]string {
+	if b == nil {
 		return nil
 	}
-	return o.Metadata
+	return b.Metadata
 }
 
-func (o *BankAccount) GetName() string {
-	if o == nil {
+func (b *BankAccount) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return o.Name
+	return b.Name
 }
 
-func (o *BankAccount) GetProvider() *string {
-	if o == nil {
+func (b *BankAccount) GetProvider() *string {
+	if b == nil {
 		return nil
 	}
-	return o.Provider
+	return b.Provider
 }
 
-func (o *BankAccount) GetRelatedAccounts() []BankAccountRelatedAccounts {
-	if o == nil {
+func (b *BankAccount) GetRelatedAccounts() []BankAccountRelatedAccounts {
+	if b == nil {
 		return nil
 	}
-	return o.RelatedAccounts
+	return b.RelatedAccounts
 }
 
-func (o *BankAccount) GetSwiftBicCode() *string {
-	if o == nil {
+func (b *BankAccount) GetSwiftBicCode() *string {
+	if b == nil {
 		return nil
 	}
-	return o.SwiftBicCode
+	return b.SwiftBicCode
 }

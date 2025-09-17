@@ -8,23 +8,23 @@ type V2ActivityAddAccountMetadata struct {
 	Metadata map[string]string `json:"metadata"`
 }
 
-func (o *V2ActivityAddAccountMetadata) GetID() string {
-	if o == nil {
+func (v *V2ActivityAddAccountMetadata) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2ActivityAddAccountMetadata) GetLedger() string {
-	if o == nil {
+func (v *V2ActivityAddAccountMetadata) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2ActivityAddAccountMetadata) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2ActivityAddAccountMetadata) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }

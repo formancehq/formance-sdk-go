@@ -13,18 +13,18 @@ type V3AddAccountToPoolRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolID"`
 }
 
-func (o *V3AddAccountToPoolRequest) GetAccountID() string {
-	if o == nil {
+func (v *V3AddAccountToPoolRequest) GetAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccountID
+	return v.AccountID
 }
 
-func (o *V3AddAccountToPoolRequest) GetPoolID() string {
-	if o == nil {
+func (v *V3AddAccountToPoolRequest) GetPoolID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PoolID
+	return v.PoolID
 }
 
 type V3AddAccountToPoolResponse struct {
@@ -36,23 +36,23 @@ type V3AddAccountToPoolResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V3AddAccountToPoolResponse) GetContentType() string {
-	if o == nil {
+func (v *V3AddAccountToPoolResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3AddAccountToPoolResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3AddAccountToPoolResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3AddAccountToPoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3AddAccountToPoolResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

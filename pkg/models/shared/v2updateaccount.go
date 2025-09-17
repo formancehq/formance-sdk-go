@@ -2,29 +2,44 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2UpdateAccount struct {
 	ID       string            `json:"id"`
 	Ledger   string            `json:"ledger"`
 	Metadata map[string]string `json:"metadata"`
 }
 
-func (o *V2UpdateAccount) GetID() string {
-	if o == nil {
-		return ""
-	}
-	return o.ID
+func (v V2UpdateAccount) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
 }
 
-func (o *V2UpdateAccount) GetLedger() string {
-	if o == nil {
-		return ""
+func (v *V2UpdateAccount) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id", "ledger", "metadata"}); err != nil {
+		return err
 	}
-	return o.Ledger
+	return nil
 }
 
-func (o *V2UpdateAccount) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2UpdateAccount) GetID() string {
+	if v == nil {
+		return ""
+	}
+	return v.ID
+}
+
+func (v *V2UpdateAccount) GetLedger() string {
+	if v == nil {
+		return ""
+	}
+	return v.Ledger
+}
+
+func (v *V2UpdateAccount) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }

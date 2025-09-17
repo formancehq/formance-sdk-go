@@ -21,25 +21,25 @@ type V2ListTriggersOccurrencesRequest struct {
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`
 }
 
-func (o *V2ListTriggersOccurrencesRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2ListTriggersOccurrencesRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ListTriggersOccurrencesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2ListTriggersOccurrencesRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2ListTriggersOccurrencesRequest) GetTriggerID() string {
-	if o == nil {
+func (v *V2ListTriggersOccurrencesRequest) GetTriggerID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TriggerID
+	return v.TriggerID
 }
 
 type V2ListTriggersOccurrencesResponse struct {
@@ -53,30 +53,30 @@ type V2ListTriggersOccurrencesResponse struct {
 	V2ListTriggersOccurrencesResponse *shared.V2ListTriggersOccurrencesResponse
 }
 
-func (o *V2ListTriggersOccurrencesResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ListTriggersOccurrencesResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ListTriggersOccurrencesResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ListTriggersOccurrencesResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ListTriggersOccurrencesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ListTriggersOccurrencesResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ListTriggersOccurrencesResponse) GetV2ListTriggersOccurrencesResponse() *shared.V2ListTriggersOccurrencesResponse {
-	if o == nil {
+func (v *V2ListTriggersOccurrencesResponse) GetV2ListTriggersOccurrencesResponse() *shared.V2ListTriggersOccurrencesResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2ListTriggersOccurrencesResponse
+	return v.V2ListTriggersOccurrencesResponse
 }

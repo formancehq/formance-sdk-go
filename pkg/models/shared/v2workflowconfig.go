@@ -7,16 +7,16 @@ type V2WorkflowConfig struct {
 	Stages []map[string]any `json:"stages"`
 }
 
-func (o *V2WorkflowConfig) GetName() *string {
-	if o == nil {
+func (v *V2WorkflowConfig) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2WorkflowConfig) GetStages() []map[string]any {
-	if o == nil {
+func (v *V2WorkflowConfig) GetStages() []map[string]any {
+	if v == nil {
 		return []map[string]any{}
 	}
-	return o.Stages
+	return v.Stages
 }

@@ -6,9 +6,9 @@ type ConfigResponse struct {
 	Data WebhooksConfig `json:"data"`
 }
 
-func (o *ConfigResponse) GetData() WebhooksConfig {
-	if o == nil {
+func (c *ConfigResponse) GetData() WebhooksConfig {
+	if c == nil {
 		return WebhooksConfig{}
 	}
-	return o.Data
+	return c.Data
 }

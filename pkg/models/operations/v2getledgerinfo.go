@@ -12,11 +12,11 @@ type V2GetLedgerInfoRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2GetLedgerInfoRequest) GetLedger() string {
-	if o == nil {
+func (v *V2GetLedgerInfoRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2GetLedgerInfoResponse struct {
@@ -30,30 +30,30 @@ type V2GetLedgerInfoResponse struct {
 	V2LedgerInfoResponse *shared.V2LedgerInfoResponse
 }
 
-func (o *V2GetLedgerInfoResponse) GetContentType() string {
-	if o == nil {
+func (v *V2GetLedgerInfoResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2GetLedgerInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2GetLedgerInfoResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2GetLedgerInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2GetLedgerInfoResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2GetLedgerInfoResponse) GetV2LedgerInfoResponse() *shared.V2LedgerInfoResponse {
-	if o == nil {
+func (v *V2GetLedgerInfoResponse) GetV2LedgerInfoResponse() *shared.V2LedgerInfoResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2LedgerInfoResponse
+	return v.V2LedgerInfoResponse
 }

@@ -14,18 +14,18 @@ type ListInstancesRequest struct {
 	WorkflowID *string `queryParam:"style=form,explode=true,name=workflowID"`
 }
 
-func (o *ListInstancesRequest) GetRunning() *bool {
-	if o == nil {
+func (l *ListInstancesRequest) GetRunning() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.Running
+	return l.Running
 }
 
-func (o *ListInstancesRequest) GetWorkflowID() *string {
-	if o == nil {
+func (l *ListInstancesRequest) GetWorkflowID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.WorkflowID
+	return l.WorkflowID
 }
 
 type ListInstancesResponse struct {
@@ -39,30 +39,30 @@ type ListInstancesResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListInstancesResponse) GetContentType() string {
-	if o == nil {
+func (l *ListInstancesResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListInstancesResponse) GetListRunsResponse() *shared.ListRunsResponse {
-	if o == nil {
+func (l *ListInstancesResponse) GetListRunsResponse() *shared.ListRunsResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ListRunsResponse
+	return l.ListRunsResponse
 }
 
-func (o *ListInstancesResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListInstancesResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListInstancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListInstancesResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

@@ -19,18 +19,18 @@ type V2ListLedgersRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *V2ListLedgersRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2ListLedgersRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ListLedgersRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2ListLedgersRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
 type V2ListLedgersResponse struct {
@@ -44,30 +44,30 @@ type V2ListLedgersResponse struct {
 	V2LedgerListResponse *shared.V2LedgerListResponse
 }
 
-func (o *V2ListLedgersResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ListLedgersResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ListLedgersResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ListLedgersResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ListLedgersResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ListLedgersResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ListLedgersResponse) GetV2LedgerListResponse() *shared.V2LedgerListResponse {
-	if o == nil {
+func (v *V2ListLedgersResponse) GetV2LedgerListResponse() *shared.V2LedgerListResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2LedgerListResponse
+	return v.V2LedgerListResponse
 }

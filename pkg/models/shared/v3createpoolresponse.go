@@ -7,9 +7,9 @@ type V3CreatePoolResponse struct {
 	Data string `json:"data"`
 }
 
-func (o *V3CreatePoolResponse) GetData() string {
-	if o == nil {
+func (v *V3CreatePoolResponse) GetData() string {
+	if v == nil {
 		return ""
 	}
-	return o.Data
+	return v.Data
 }

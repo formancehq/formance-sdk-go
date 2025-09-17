@@ -62,12 +62,13 @@ Add an account to a pool
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3AddAccountToPool" method="post" path="/api/payments/v3/pools/{poolID}/accounts/{accountID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -76,10 +77,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -121,12 +122,13 @@ Add a bank account to a payment service user
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3AddBankAccountToPaymentServiceUser" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/bank-accounts/{bankAccountID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -135,10 +137,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -180,12 +182,13 @@ Approve a payment initiation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ApprovePaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/approve" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -194,10 +197,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -239,12 +242,13 @@ Create a formance account object. This object will not be forwarded to the conne
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3CreateAccount" method="post" path="/api/payments/v3/accounts" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -252,10 +256,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -295,12 +299,13 @@ Create a formance bank account object. This object will not be forwarded to the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3CreateBankAccount" method="post" path="/api/payments/v3/bank-accounts" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -308,10 +313,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -351,12 +356,13 @@ Create a formance payment object. This object will not be forwarded to the conne
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3CreatePayment" method="post" path="/api/payments/v3/payments" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -364,10 +370,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -406,12 +412,13 @@ Create a formance payment service user object
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3CreatePaymentServiceUser" method="post" path="/api/payments/v3/payment-service-users" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -419,10 +426,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -461,12 +468,13 @@ Create a formance pool object
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3CreatePool" method="post" path="/api/payments/v3/pools" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -474,10 +482,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -516,12 +524,13 @@ Delete a payment initiation by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3DeletePaymentInitiation" method="delete" path="/api/payments/v3/payment-initiations/{paymentInitiationID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -530,10 +539,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -574,12 +583,13 @@ Delete a pool by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3DeletePool" method="delete" path="/api/payments/v3/pools/{poolID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -588,10 +598,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -632,12 +642,13 @@ Forward a Bank Account to a PSP for creation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ForwardBankAccount" method="post" path="/api/payments/v3/bank-accounts/{bankAccountID}/forward" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -646,10 +657,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -690,12 +701,13 @@ Forward a payment service user's bank account to a connector
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ForwardPaymentServiceUserBankAccount" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/bank-accounts/{bankAccountID}/forward" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -704,10 +716,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -749,12 +761,13 @@ Get an account by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetAccount" method="get" path="/api/payments/v3/accounts/{accountID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -763,10 +776,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -807,12 +820,13 @@ Get account balances
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetAccountBalances" method="get" path="/api/payments/v3/accounts/{accountID}/balances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -821,17 +835,17 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.GetAccountBalances(ctx, operations.V3GetAccountBalancesRequest{
         AccountID: "<id>",
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -867,12 +881,13 @@ Get a Bank Account by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetBankAccount" method="get" path="/api/payments/v3/bank-accounts/{bankAccountID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -881,10 +896,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -925,12 +940,13 @@ Get a connector configuration by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetConnectorConfig" method="get" path="/api/payments/v3/connectors/{connectorID}/config" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -939,10 +955,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -983,12 +999,13 @@ Get a connector schedule by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetConnectorSchedule" method="get" path="/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -997,10 +1014,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1042,12 +1059,13 @@ Get a payment by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetPayment" method="get" path="/api/payments/v3/payments/{paymentID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1056,10 +1074,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1100,12 +1118,13 @@ Get a payment initiation by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetPaymentInitiation" method="get" path="/api/payments/v3/payment-initiations/{paymentInitiationID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1114,10 +1133,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1158,12 +1177,13 @@ Get a payment service user by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetPaymentServiceUser" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1172,10 +1192,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1216,12 +1236,13 @@ Get a pool by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetPool" method="get" path="/api/payments/v3/pools/{poolID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1230,10 +1251,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1274,12 +1295,13 @@ Get historical pool balances from a particular point in time
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetPoolBalances" method="get" path="/api/payments/v3/pools/{poolID}/balances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1288,10 +1310,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1332,12 +1354,13 @@ Get latest pool balances
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetPoolBalancesLatest" method="get" path="/api/payments/v3/pools/{poolID}/balances/latest" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1346,10 +1369,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1390,12 +1413,13 @@ Get a task and its result by ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3GetTask" method="get" path="/api/payments/v3/tasks/{taskID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1404,10 +1428,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1448,12 +1472,13 @@ Initiate a payment
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3InitiatePayment" method="post" path="/api/payments/v3/payment-initiations" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1462,10 +1487,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1504,12 +1529,13 @@ Install a connector
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3InstallConnector" method="post" path="/api/payments/v3/connectors/install/{connector}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1518,10 +1544,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1562,12 +1588,13 @@ List all accounts
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListAccounts" method="get" path="/api/payments/v3/accounts" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1576,16 +1603,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListAccounts(ctx, operations.V3ListAccountsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1621,12 +1648,13 @@ List all bank accounts
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListBankAccounts" method="get" path="/api/payments/v3/bank-accounts" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1635,16 +1663,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListBankAccounts(ctx, operations.V3ListBankAccountsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1680,12 +1708,13 @@ List all connector configurations
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListConnectorConfigs" method="get" path="/api/payments/v3/connectors/configs" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -1693,10 +1722,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1734,12 +1763,13 @@ List all connector schedule instances
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListConnectorScheduleInstances" method="get" path="/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}/instances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1748,17 +1778,17 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListConnectorScheduleInstances(ctx, operations.V3ListConnectorScheduleInstancesRequest{
         ConnectorID: "<id>",
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
         ScheduleID: "<id>",
     })
     if err != nil {
@@ -1795,12 +1825,13 @@ List all connector schedules
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListConnectorSchedules" method="get" path="/api/payments/v3/connectors/{connectorID}/schedules" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1809,17 +1840,17 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListConnectorSchedules(ctx, operations.V3ListConnectorSchedulesRequest{
         ConnectorID: "<id>",
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1855,12 +1886,13 @@ List all connectors
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListConnectors" method="get" path="/api/payments/v3/connectors" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1869,16 +1901,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListConnectors(ctx, operations.V3ListConnectorsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1914,12 +1946,13 @@ List all payment initiation adjustments
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListPaymentInitiationAdjustments" method="get" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/adjustments" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1928,16 +1961,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentInitiationAdjustments(ctx, operations.V3ListPaymentInitiationAdjustmentsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
         PaymentInitiationID: "<id>",
     })
     if err != nil {
@@ -1974,12 +2007,13 @@ List all payments related to a payment initiation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListPaymentInitiationRelatedPayments" method="get" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/payments" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1988,16 +2022,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentInitiationRelatedPayments(ctx, operations.V3ListPaymentInitiationRelatedPaymentsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
         PaymentInitiationID: "<id>",
     })
     if err != nil {
@@ -2034,12 +2068,13 @@ List all payment initiations
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListPaymentInitiations" method="get" path="/api/payments/v3/payment-initiations" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2048,16 +2083,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentInitiations(ctx, operations.V3ListPaymentInitiationsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2093,12 +2128,13 @@ List all payment service users
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUsers" method="get" path="/api/payments/v3/payment-service-users" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2107,16 +2143,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentServiceUsers(ctx, operations.V3ListPaymentServiceUsersRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2152,12 +2188,13 @@ List all payments
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListPayments" method="get" path="/api/payments/v3/payments" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2166,16 +2203,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPayments(ctx, operations.V3ListPaymentsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2211,12 +2248,13 @@ List all pools
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ListPools" method="get" path="/api/payments/v3/pools" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2225,16 +2263,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPools(ctx, operations.V3ListPoolsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2270,12 +2308,13 @@ Reject a payment initiation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3RejectPaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/reject" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2284,10 +2323,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2328,12 +2367,13 @@ Remove an account from a pool
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3RemoveAccountFromPool" method="delete" path="/api/payments/v3/pools/{poolID}/accounts/{accountID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2342,10 +2382,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2387,12 +2427,13 @@ Reset a connector. Be aware that this will delete all data and stop all existing
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ResetConnector" method="post" path="/api/payments/v3/connectors/{connectorID}/reset" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2401,10 +2442,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2445,12 +2486,13 @@ Retry a payment initiation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3RetryPaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/retry" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2459,10 +2501,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2503,12 +2545,13 @@ Reverse a payment initiation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3ReversePaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/reverse" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2517,10 +2560,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2561,12 +2604,13 @@ Uninstall a connector
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3UninstallConnector" method="delete" path="/api/payments/v3/connectors/{connectorID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2575,10 +2619,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2619,12 +2663,13 @@ Update a bank account's metadata
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3UpdateBankAccountMetadata" method="patch" path="/api/payments/v3/bank-accounts/{bankAccountID}/metadata" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2633,10 +2678,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2677,12 +2722,13 @@ Update a payment's metadata
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3UpdatePaymentMetadata" method="patch" path="/api/payments/v3/payments/{paymentID}/metadata" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2691,10 +2737,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2735,12 +2781,13 @@ Update connector config
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v3UpdateConnectorConfig" method="patch" path="/api/payments/v3/connectors/{connectorID}/config" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -2749,10 +2796,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 

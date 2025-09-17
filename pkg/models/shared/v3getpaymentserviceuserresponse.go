@@ -6,9 +6,9 @@ type V3GetPaymentServiceUserResponse struct {
 	Data V3PaymentServiceUser `json:"data"`
 }
 
-func (o *V3GetPaymentServiceUserResponse) GetData() V3PaymentServiceUser {
-	if o == nil {
+func (v *V3GetPaymentServiceUserResponse) GetData() V3PaymentServiceUser {
+	if v == nil {
 		return V3PaymentServiceUser{}
 	}
-	return o.Data
+	return v.Data
 }

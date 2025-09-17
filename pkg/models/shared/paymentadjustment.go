@@ -24,43 +24,43 @@ func (p PaymentAdjustment) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentAdjustment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"amount", "createdAt", "raw", "reference", "status"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *PaymentAdjustment) GetAmount() *big.Int {
-	if o == nil {
+func (p *PaymentAdjustment) GetAmount() *big.Int {
+	if p == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PaymentAdjustment) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PaymentAdjustment) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PaymentAdjustment) GetRaw() PaymentAdjustmentRaw {
-	if o == nil {
+func (p *PaymentAdjustment) GetRaw() PaymentAdjustmentRaw {
+	if p == nil {
 		return PaymentAdjustmentRaw{}
 	}
-	return o.Raw
+	return p.Raw
 }
 
-func (o *PaymentAdjustment) GetReference() string {
-	if o == nil {
+func (p *PaymentAdjustment) GetReference() string {
+	if p == nil {
 		return ""
 	}
-	return o.Reference
+	return p.Reference
 }
 
-func (o *PaymentAdjustment) GetStatus() PaymentStatus {
-	if o == nil {
+func (p *PaymentAdjustment) GetStatus() PaymentStatus {
+	if p == nil {
 		return PaymentStatus("")
 	}
-	return o.Status
+	return p.Status
 }

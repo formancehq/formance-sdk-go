@@ -18,10 +18,10 @@ const (
 )
 
 type Stage struct {
-	StageSend      *StageSend      `queryParam:"inline"`
-	StageDelay     *StageDelay     `queryParam:"inline"`
-	StageWaitEvent *StageWaitEvent `queryParam:"inline"`
-	Update         *Update         `queryParam:"inline"`
+	StageSend      *StageSend      `queryParam:"inline" name:"Stage"`
+	StageDelay     *StageDelay     `queryParam:"inline" name:"Stage"`
+	StageWaitEvent *StageWaitEvent `queryParam:"inline" name:"Stage"`
+	Update         *Update         `queryParam:"inline" name:"Stage"`
 
 	Type StageType
 }
@@ -65,30 +65,30 @@ func CreateStageUpdate(update Update) Stage {
 func (u *Stage) UnmarshalJSON(data []byte) error {
 
 	var stageWaitEvent StageWaitEvent = StageWaitEvent{}
-	if err := utils.UnmarshalJSON(data, &stageWaitEvent, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &stageWaitEvent, "", true, nil); err == nil {
 		u.StageWaitEvent = &stageWaitEvent
 		u.Type = StageTypeStageWaitEvent
 		return nil
 	}
 
-	var update Update = Update{}
-	if err := utils.UnmarshalJSON(data, &update, "", true, true); err == nil {
-		u.Update = &update
-		u.Type = StageTypeUpdate
+	var stageSend StageSend = StageSend{}
+	if err := utils.UnmarshalJSON(data, &stageSend, "", true, nil); err == nil {
+		u.StageSend = &stageSend
+		u.Type = StageTypeStageSend
 		return nil
 	}
 
 	var stageDelay StageDelay = StageDelay{}
-	if err := utils.UnmarshalJSON(data, &stageDelay, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &stageDelay, "", true, nil); err == nil {
 		u.StageDelay = &stageDelay
 		u.Type = StageTypeStageDelay
 		return nil
 	}
 
-	var stageSend StageSend = StageSend{}
-	if err := utils.UnmarshalJSON(data, &stageSend, "", true, true); err == nil {
-		u.StageSend = &stageSend
-		u.Type = StageTypeStageSend
+	var update Update = Update{}
+	if err := utils.UnmarshalJSON(data, &update, "", true, nil); err == nil {
+		u.Update = &update
+		u.Type = StageTypeUpdate
 		return nil
 	}
 

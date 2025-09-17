@@ -8,34 +8,34 @@ type V3ConnectorConfigsResponseData struct {
 	Required     bool    `json:"required"`
 }
 
-func (o *V3ConnectorConfigsResponseData) GetDataType() string {
-	if o == nil {
+func (v *V3ConnectorConfigsResponseData) GetDataType() string {
+	if v == nil {
 		return ""
 	}
-	return o.DataType
+	return v.DataType
 }
 
-func (o *V3ConnectorConfigsResponseData) GetDefaultValue() *string {
-	if o == nil {
+func (v *V3ConnectorConfigsResponseData) GetDefaultValue() *string {
+	if v == nil {
 		return nil
 	}
-	return o.DefaultValue
+	return v.DefaultValue
 }
 
-func (o *V3ConnectorConfigsResponseData) GetRequired() bool {
-	if o == nil {
+func (v *V3ConnectorConfigsResponseData) GetRequired() bool {
+	if v == nil {
 		return false
 	}
-	return o.Required
+	return v.Required
 }
 
 type V3ConnectorConfigsResponse struct {
 	Data map[string]map[string]V3ConnectorConfigsResponseData `json:"data"`
 }
 
-func (o *V3ConnectorConfigsResponse) GetData() map[string]map[string]V3ConnectorConfigsResponseData {
-	if o == nil {
+func (v *V3ConnectorConfigsResponse) GetData() map[string]map[string]V3ConnectorConfigsResponseData {
+	if v == nil {
 		return map[string]map[string]V3ConnectorConfigsResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

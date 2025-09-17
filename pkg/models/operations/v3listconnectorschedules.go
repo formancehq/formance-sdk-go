@@ -18,32 +18,32 @@ type V3ListConnectorSchedulesRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *V3ListConnectorSchedulesRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V3ListConnectorSchedulesRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V3ListConnectorSchedulesRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3ListConnectorSchedulesRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3ListConnectorSchedulesRequest) GetCursor() *string {
-	if o == nil {
+func (v *V3ListConnectorSchedulesRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V3ListConnectorSchedulesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3ListConnectorSchedulesRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
 type V3ListConnectorSchedulesResponse struct {
@@ -57,30 +57,30 @@ type V3ListConnectorSchedulesResponse struct {
 	V3ConnectorSchedulesCursorResponse *shared.V3ConnectorSchedulesCursorResponse
 }
 
-func (o *V3ListConnectorSchedulesResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ListConnectorSchedulesResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ListConnectorSchedulesResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ListConnectorSchedulesResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ListConnectorSchedulesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ListConnectorSchedulesResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ListConnectorSchedulesResponse) GetV3ConnectorSchedulesCursorResponse() *shared.V3ConnectorSchedulesCursorResponse {
-	if o == nil {
+func (v *V3ListConnectorSchedulesResponse) GetV3ConnectorSchedulesCursorResponse() *shared.V3ConnectorSchedulesCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3ConnectorSchedulesCursorResponse
+	return v.V3ConnectorSchedulesCursorResponse
 }

@@ -10,48 +10,48 @@ type V3BalancesCursorResponseCursor struct {
 	Previous *string     `json:"previous,omitempty"`
 }
 
-func (o *V3BalancesCursorResponseCursor) GetData() []V3Balance {
-	if o == nil {
+func (v *V3BalancesCursorResponseCursor) GetData() []V3Balance {
+	if v == nil {
 		return []V3Balance{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V3BalancesCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V3BalancesCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V3BalancesCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V3BalancesCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V3BalancesCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V3BalancesCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3BalancesCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V3BalancesCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V3BalancesCursorResponse struct {
 	Cursor V3BalancesCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V3BalancesCursorResponse) GetCursor() V3BalancesCursorResponseCursor {
-	if o == nil {
+func (v *V3BalancesCursorResponse) GetCursor() V3BalancesCursorResponseCursor {
+	if v == nil {
 		return V3BalancesCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

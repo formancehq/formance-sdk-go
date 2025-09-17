@@ -28,92 +28,92 @@ func (v V3CreatePaymentRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3CreatePaymentRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "asset", "connectorID", "createdAt", "initialAmount", "reference", "scheme", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3CreatePaymentRequest) GetAdjustments() []V3CreatePaymentAdjustmentRequest {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetAdjustments() []V3CreatePaymentAdjustmentRequest {
+	if v == nil {
 		return nil
 	}
-	return o.Adjustments
+	return v.Adjustments
 }
 
-func (o *V3CreatePaymentRequest) GetAmount() *big.Int {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetAmount() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V3CreatePaymentRequest) GetAsset() string {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetAsset() string {
+	if v == nil {
 		return ""
 	}
-	return o.Asset
+	return v.Asset
 }
 
-func (o *V3CreatePaymentRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3CreatePaymentRequest) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3CreatePaymentRequest) GetDestinationAccountID() *string {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetDestinationAccountID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.DestinationAccountID
+	return v.DestinationAccountID
 }
 
-func (o *V3CreatePaymentRequest) GetInitialAmount() *big.Int {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetInitialAmount() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.InitialAmount
+	return v.InitialAmount
 }
 
-func (o *V3CreatePaymentRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3CreatePaymentRequest) GetReference() string {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetReference() string {
+	if v == nil {
 		return ""
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V3CreatePaymentRequest) GetScheme() string {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetScheme() string {
+	if v == nil {
 		return ""
 	}
-	return o.Scheme
+	return v.Scheme
 }
 
-func (o *V3CreatePaymentRequest) GetSourceAccountID() *string {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetSourceAccountID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.SourceAccountID
+	return v.SourceAccountID
 }
 
-func (o *V3CreatePaymentRequest) GetType() V3PaymentTypeEnum {
-	if o == nil {
+func (v *V3CreatePaymentRequest) GetType() V3PaymentTypeEnum {
+	if v == nil {
 		return V3PaymentTypeEnum("")
 	}
-	return o.Type
+	return v.Type
 }

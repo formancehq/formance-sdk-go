@@ -23,39 +23,39 @@ type V2CreateTransactionRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2CreateTransactionRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (v *V2CreateTransactionRequest) GetIdempotencyKey() *string {
+	if v == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return v.IdempotencyKey
 }
 
-func (o *V2CreateTransactionRequest) GetV2PostTransaction() shared.V2PostTransaction {
-	if o == nil {
+func (v *V2CreateTransactionRequest) GetV2PostTransaction() shared.V2PostTransaction {
+	if v == nil {
 		return shared.V2PostTransaction{}
 	}
-	return o.V2PostTransaction
+	return v.V2PostTransaction
 }
 
-func (o *V2CreateTransactionRequest) GetDryRun() *bool {
-	if o == nil {
+func (v *V2CreateTransactionRequest) GetDryRun() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.DryRun
+	return v.DryRun
 }
 
-func (o *V2CreateTransactionRequest) GetForce() *bool {
-	if o == nil {
+func (v *V2CreateTransactionRequest) GetForce() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Force
+	return v.Force
 }
 
-func (o *V2CreateTransactionRequest) GetLedger() string {
-	if o == nil {
+func (v *V2CreateTransactionRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2CreateTransactionResponse struct {
@@ -69,30 +69,30 @@ type V2CreateTransactionResponse struct {
 	V2CreateTransactionResponse *shared.V2CreateTransactionResponse
 }
 
-func (o *V2CreateTransactionResponse) GetContentType() string {
-	if o == nil {
+func (v *V2CreateTransactionResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2CreateTransactionResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2CreateTransactionResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2CreateTransactionResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2CreateTransactionResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2CreateTransactionResponse) GetV2CreateTransactionResponse() *shared.V2CreateTransactionResponse {
-	if o == nil {
+func (v *V2CreateTransactionResponse) GetV2CreateTransactionResponse() *shared.V2CreateTransactionResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2CreateTransactionResponse
+	return v.V2CreateTransactionResponse
 }

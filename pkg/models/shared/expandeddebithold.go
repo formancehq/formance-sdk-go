@@ -28,78 +28,78 @@ func (e ExpandedDebitHold) MarshalJSON() ([]byte, error) {
 }
 
 func (e *ExpandedDebitHold) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"asset", "description", "id", "metadata", "originalAmount", "remaining", "walletID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ExpandedDebitHold) GetAsset() string {
-	if o == nil {
+func (e *ExpandedDebitHold) GetAsset() string {
+	if e == nil {
 		return ""
 	}
-	return o.Asset
+	return e.Asset
 }
 
-func (o *ExpandedDebitHold) GetDescription() string {
-	if o == nil {
+func (e *ExpandedDebitHold) GetDescription() string {
+	if e == nil {
 		return ""
 	}
-	return o.Description
+	return e.Description
 }
 
-func (o *ExpandedDebitHold) GetDestination() *Subject {
-	if o == nil {
+func (e *ExpandedDebitHold) GetDestination() *Subject {
+	if e == nil {
 		return nil
 	}
-	return o.Destination
+	return e.Destination
 }
 
-func (o *ExpandedDebitHold) GetDestinationAccount() *LedgerAccountSubject {
-	if v := o.GetDestination(); v != nil {
+func (e *ExpandedDebitHold) GetDestinationAccount() *LedgerAccountSubject {
+	if v := e.GetDestination(); v != nil {
 		return v.LedgerAccountSubject
 	}
 	return nil
 }
 
-func (o *ExpandedDebitHold) GetDestinationWallet() *WalletSubject {
-	if v := o.GetDestination(); v != nil {
+func (e *ExpandedDebitHold) GetDestinationWallet() *WalletSubject {
+	if v := e.GetDestination(); v != nil {
 		return v.WalletSubject
 	}
 	return nil
 }
 
-func (o *ExpandedDebitHold) GetID() string {
-	if o == nil {
+func (e *ExpandedDebitHold) GetID() string {
+	if e == nil {
 		return ""
 	}
-	return o.ID
+	return e.ID
 }
 
-func (o *ExpandedDebitHold) GetMetadata() map[string]string {
-	if o == nil {
+func (e *ExpandedDebitHold) GetMetadata() map[string]string {
+	if e == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return e.Metadata
 }
 
-func (o *ExpandedDebitHold) GetOriginalAmount() *big.Int {
-	if o == nil {
+func (e *ExpandedDebitHold) GetOriginalAmount() *big.Int {
+	if e == nil {
 		return big.NewInt(0)
 	}
-	return o.OriginalAmount
+	return e.OriginalAmount
 }
 
-func (o *ExpandedDebitHold) GetRemaining() *big.Int {
-	if o == nil {
+func (e *ExpandedDebitHold) GetRemaining() *big.Int {
+	if e == nil {
 		return big.NewInt(0)
 	}
-	return o.Remaining
+	return e.Remaining
 }
 
-func (o *ExpandedDebitHold) GetWalletID() string {
-	if o == nil {
+func (e *ExpandedDebitHold) GetWalletID() string {
+	if e == nil {
 		return ""
 	}
-	return o.WalletID
+	return e.WalletID
 }

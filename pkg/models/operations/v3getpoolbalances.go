@@ -21,24 +21,24 @@ func (v V3GetPoolBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3GetPoolBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"poolID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3GetPoolBalancesRequest) GetAt() *time.Time {
-	if o == nil {
+func (v *V3GetPoolBalancesRequest) GetAt() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.At
+	return v.At
 }
 
-func (o *V3GetPoolBalancesRequest) GetPoolID() string {
-	if o == nil {
+func (v *V3GetPoolBalancesRequest) GetPoolID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PoolID
+	return v.PoolID
 }
 
 type V3GetPoolBalancesResponse struct {
@@ -52,30 +52,30 @@ type V3GetPoolBalancesResponse struct {
 	V3PoolBalancesResponse *shared.V3PoolBalancesResponse
 }
 
-func (o *V3GetPoolBalancesResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetPoolBalancesResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetPoolBalancesResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetPoolBalancesResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetPoolBalancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetPoolBalancesResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetPoolBalancesResponse) GetV3PoolBalancesResponse() *shared.V3PoolBalancesResponse {
-	if o == nil {
+func (v *V3GetPoolBalancesResponse) GetV3PoolBalancesResponse() *shared.V3PoolBalancesResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3PoolBalancesResponse
+	return v.V3PoolBalancesResponse
 }

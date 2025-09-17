@@ -7,9 +7,9 @@ type ReconciliationResponse struct {
 	Data Reconciliation `json:"data"`
 }
 
-func (o *ReconciliationResponse) GetData() Reconciliation {
-	if o == nil {
+func (r *ReconciliationResponse) GetData() Reconciliation {
+	if r == nil {
 		return Reconciliation{}
 	}
-	return o.Data
+	return r.Data
 }

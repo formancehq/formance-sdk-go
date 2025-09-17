@@ -8,20 +8,20 @@ type V3ApprovePaymentInitiationResponseData struct {
 	TaskID string `json:"taskID"`
 }
 
-func (o *V3ApprovePaymentInitiationResponseData) GetTaskID() string {
-	if o == nil {
+func (v *V3ApprovePaymentInitiationResponseData) GetTaskID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TaskID
+	return v.TaskID
 }
 
 type V3ApprovePaymentInitiationResponse struct {
 	Data V3ApprovePaymentInitiationResponseData `json:"data"`
 }
 
-func (o *V3ApprovePaymentInitiationResponse) GetData() V3ApprovePaymentInitiationResponseData {
-	if o == nil {
+func (v *V3ApprovePaymentInitiationResponse) GetData() V3ApprovePaymentInitiationResponseData {
+	if v == nil {
 		return V3ApprovePaymentInitiationResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

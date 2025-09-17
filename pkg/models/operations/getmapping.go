@@ -12,11 +12,11 @@ type GetMappingRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *GetMappingRequest) GetLedger() string {
-	if o == nil {
+func (g *GetMappingRequest) GetLedger() string {
+	if g == nil {
 		return ""
 	}
-	return o.Ledger
+	return g.Ledger
 }
 
 type GetMappingResponse struct {
@@ -30,30 +30,30 @@ type GetMappingResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetMappingResponse) GetContentType() string {
-	if o == nil {
+func (g *GetMappingResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetMappingResponse) GetMappingResponse() *shared.MappingResponse {
-	if o == nil {
+func (g *GetMappingResponse) GetMappingResponse() *shared.MappingResponse {
+	if g == nil {
 		return nil
 	}
-	return o.MappingResponse
+	return g.MappingResponse
 }
 
-func (o *GetMappingResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetMappingResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetMappingResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetMappingResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

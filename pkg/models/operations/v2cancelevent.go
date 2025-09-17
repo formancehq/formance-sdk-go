@@ -11,11 +11,11 @@ type V2CancelEventRequest struct {
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`
 }
 
-func (o *V2CancelEventRequest) GetInstanceID() string {
-	if o == nil {
+func (v *V2CancelEventRequest) GetInstanceID() string {
+	if v == nil {
 		return ""
 	}
-	return o.InstanceID
+	return v.InstanceID
 }
 
 type V2CancelEventResponse struct {
@@ -27,23 +27,23 @@ type V2CancelEventResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2CancelEventResponse) GetContentType() string {
-	if o == nil {
+func (v *V2CancelEventResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2CancelEventResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2CancelEventResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2CancelEventResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2CancelEventResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

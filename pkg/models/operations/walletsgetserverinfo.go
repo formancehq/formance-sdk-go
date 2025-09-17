@@ -18,30 +18,30 @@ type WalletsgetServerInfoResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *WalletsgetServerInfoResponse) GetContentType() string {
-	if o == nil {
+func (w *WalletsgetServerInfoResponse) GetContentType() string {
+	if w == nil {
 		return ""
 	}
-	return o.ContentType
+	return w.ContentType
 }
 
-func (o *WalletsgetServerInfoResponse) GetServerInfo() *shared.ServerInfo {
-	if o == nil {
+func (w *WalletsgetServerInfoResponse) GetServerInfo() *shared.ServerInfo {
+	if w == nil {
 		return nil
 	}
-	return o.ServerInfo
+	return w.ServerInfo
 }
 
-func (o *WalletsgetServerInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (w *WalletsgetServerInfoResponse) GetStatusCode() int {
+	if w == nil {
 		return 0
 	}
-	return o.StatusCode
+	return w.StatusCode
 }
 
-func (o *WalletsgetServerInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (w *WalletsgetServerInfoResponse) GetRawResponse() *http.Response {
+	if w == nil {
 		return nil
 	}
-	return o.RawResponse
+	return w.RawResponse
 }

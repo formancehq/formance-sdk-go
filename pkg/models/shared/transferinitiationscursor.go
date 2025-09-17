@@ -10,39 +10,39 @@ type TransferInitiationsCursorCursor struct {
 	Previous *string              `json:"previous,omitempty"`
 }
 
-func (o *TransferInitiationsCursorCursor) GetData() []TransferInitiation {
-	if o == nil {
+func (t *TransferInitiationsCursorCursor) GetData() []TransferInitiation {
+	if t == nil {
 		return []TransferInitiation{}
 	}
-	return o.Data
+	return t.Data
 }
 
-func (o *TransferInitiationsCursorCursor) GetHasMore() bool {
-	if o == nil {
+func (t *TransferInitiationsCursorCursor) GetHasMore() bool {
+	if t == nil {
 		return false
 	}
-	return o.HasMore
+	return t.HasMore
 }
 
-func (o *TransferInitiationsCursorCursor) GetNext() *string {
-	if o == nil {
+func (t *TransferInitiationsCursorCursor) GetNext() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Next
+	return t.Next
 }
 
-func (o *TransferInitiationsCursorCursor) GetPageSize() int64 {
-	if o == nil {
+func (t *TransferInitiationsCursorCursor) GetPageSize() int64 {
+	if t == nil {
 		return 0
 	}
-	return o.PageSize
+	return t.PageSize
 }
 
-func (o *TransferInitiationsCursorCursor) GetPrevious() *string {
-	if o == nil {
+func (t *TransferInitiationsCursorCursor) GetPrevious() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Previous
+	return t.Previous
 }
 
 // TransferInitiationsCursor - OK
@@ -50,9 +50,9 @@ type TransferInitiationsCursor struct {
 	Cursor TransferInitiationsCursorCursor `json:"cursor"`
 }
 
-func (o *TransferInitiationsCursor) GetCursor() TransferInitiationsCursorCursor {
-	if o == nil {
+func (t *TransferInitiationsCursor) GetCursor() TransferInitiationsCursorCursor {
+	if t == nil {
 		return TransferInitiationsCursorCursor{}
 	}
-	return o.Cursor
+	return t.Cursor
 }

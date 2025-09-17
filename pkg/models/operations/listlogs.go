@@ -38,52 +38,52 @@ func (l ListLogsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListLogsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListLogsRequest) GetAfter() *string {
-	if o == nil {
+func (l *ListLogsRequest) GetAfter() *string {
+	if l == nil {
 		return nil
 	}
-	return o.After
+	return l.After
 }
 
-func (o *ListLogsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListLogsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListLogsRequest) GetEndTime() *time.Time {
-	if o == nil {
+func (l *ListLogsRequest) GetEndTime() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.EndTime
+	return l.EndTime
 }
 
-func (o *ListLogsRequest) GetLedger() string {
-	if o == nil {
+func (l *ListLogsRequest) GetLedger() string {
+	if l == nil {
 		return ""
 	}
-	return o.Ledger
+	return l.Ledger
 }
 
-func (o *ListLogsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListLogsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListLogsRequest) GetStartTime() *time.Time {
-	if o == nil {
+func (l *ListLogsRequest) GetStartTime() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.StartTime
+	return l.StartTime
 }
 
 type ListLogsResponse struct {
@@ -97,30 +97,30 @@ type ListLogsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListLogsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListLogsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListLogsResponse) GetLogsCursorResponse() *shared.LogsCursorResponse {
-	if o == nil {
+func (l *ListLogsResponse) GetLogsCursorResponse() *shared.LogsCursorResponse {
+	if l == nil {
 		return nil
 	}
-	return o.LogsCursorResponse
+	return l.LogsCursorResponse
 }
 
-func (o *ListLogsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListLogsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListLogsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListLogsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

@@ -22,14 +22,14 @@ const (
 )
 
 type TaskResponseData struct {
-	TaskStripe        *TaskStripe        `queryParam:"inline"`
-	TaskWise          *TaskWise          `queryParam:"inline"`
-	TaskCurrencyCloud *TaskCurrencyCloud `queryParam:"inline"`
-	TaskDummyPay      *TaskDummyPay      `queryParam:"inline"`
-	TaskModulr        *TaskModulr        `queryParam:"inline"`
-	TaskBankingCircle *TaskBankingCircle `queryParam:"inline"`
-	TaskMangoPay      *TaskMangoPay      `queryParam:"inline"`
-	TaskMoneycorp     *TaskMoneycorp     `queryParam:"inline"`
+	TaskStripe        *TaskStripe        `queryParam:"inline" name:"data"`
+	TaskWise          *TaskWise          `queryParam:"inline" name:"data"`
+	TaskCurrencyCloud *TaskCurrencyCloud `queryParam:"inline" name:"data"`
+	TaskDummyPay      *TaskDummyPay      `queryParam:"inline" name:"data"`
+	TaskModulr        *TaskModulr        `queryParam:"inline" name:"data"`
+	TaskBankingCircle *TaskBankingCircle `queryParam:"inline" name:"data"`
+	TaskMangoPay      *TaskMangoPay      `queryParam:"inline" name:"data"`
+	TaskMoneycorp     *TaskMoneycorp     `queryParam:"inline" name:"data"`
 
 	Type TaskResponseDataType
 }
@@ -109,56 +109,56 @@ func CreateTaskResponseDataTaskMoneycorp(taskMoneycorp TaskMoneycorp) TaskRespon
 func (u *TaskResponseData) UnmarshalJSON(data []byte) error {
 
 	var taskStripe TaskStripe = TaskStripe{}
-	if err := utils.UnmarshalJSON(data, &taskStripe, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskStripe, "", true, nil); err == nil {
 		u.TaskStripe = &taskStripe
 		u.Type = TaskResponseDataTypeTaskStripe
 		return nil
 	}
 
 	var taskWise TaskWise = TaskWise{}
-	if err := utils.UnmarshalJSON(data, &taskWise, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskWise, "", true, nil); err == nil {
 		u.TaskWise = &taskWise
 		u.Type = TaskResponseDataTypeTaskWise
 		return nil
 	}
 
 	var taskCurrencyCloud TaskCurrencyCloud = TaskCurrencyCloud{}
-	if err := utils.UnmarshalJSON(data, &taskCurrencyCloud, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskCurrencyCloud, "", true, nil); err == nil {
 		u.TaskCurrencyCloud = &taskCurrencyCloud
 		u.Type = TaskResponseDataTypeTaskCurrencyCloud
 		return nil
 	}
 
 	var taskDummyPay TaskDummyPay = TaskDummyPay{}
-	if err := utils.UnmarshalJSON(data, &taskDummyPay, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskDummyPay, "", true, nil); err == nil {
 		u.TaskDummyPay = &taskDummyPay
 		u.Type = TaskResponseDataTypeTaskDummyPay
 		return nil
 	}
 
 	var taskModulr TaskModulr = TaskModulr{}
-	if err := utils.UnmarshalJSON(data, &taskModulr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskModulr, "", true, nil); err == nil {
 		u.TaskModulr = &taskModulr
 		u.Type = TaskResponseDataTypeTaskModulr
 		return nil
 	}
 
 	var taskBankingCircle TaskBankingCircle = TaskBankingCircle{}
-	if err := utils.UnmarshalJSON(data, &taskBankingCircle, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskBankingCircle, "", true, nil); err == nil {
 		u.TaskBankingCircle = &taskBankingCircle
 		u.Type = TaskResponseDataTypeTaskBankingCircle
 		return nil
 	}
 
 	var taskMangoPay TaskMangoPay = TaskMangoPay{}
-	if err := utils.UnmarshalJSON(data, &taskMangoPay, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskMangoPay, "", true, nil); err == nil {
 		u.TaskMangoPay = &taskMangoPay
 		u.Type = TaskResponseDataTypeTaskMangoPay
 		return nil
 	}
 
 	var taskMoneycorp TaskMoneycorp = TaskMoneycorp{}
-	if err := utils.UnmarshalJSON(data, &taskMoneycorp, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskMoneycorp, "", true, nil); err == nil {
 		u.TaskMoneycorp = &taskMoneycorp
 		u.Type = TaskResponseDataTypeTaskMoneycorp
 		return nil
@@ -208,9 +208,9 @@ type TaskResponse struct {
 	Data TaskResponseData `json:"data"`
 }
 
-func (o *TaskResponse) GetData() TaskResponseData {
-	if o == nil {
+func (t *TaskResponse) GetData() TaskResponseData {
+	if t == nil {
 		return TaskResponseData{}
 	}
-	return o.Data
+	return t.Data
 }

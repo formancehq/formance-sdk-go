@@ -27,45 +27,45 @@ func (v V2RevertTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2RevertTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id", "ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2RevertTransactionRequest) GetAtEffectiveDate() *bool {
-	if o == nil {
+func (v *V2RevertTransactionRequest) GetAtEffectiveDate() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.AtEffectiveDate
+	return v.AtEffectiveDate
 }
 
-func (o *V2RevertTransactionRequest) GetDryRun() *bool {
-	if o == nil {
+func (v *V2RevertTransactionRequest) GetDryRun() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.DryRun
+	return v.DryRun
 }
 
-func (o *V2RevertTransactionRequest) GetForce() *bool {
-	if o == nil {
+func (v *V2RevertTransactionRequest) GetForce() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Force
+	return v.Force
 }
 
-func (o *V2RevertTransactionRequest) GetID() *big.Int {
-	if o == nil {
+func (v *V2RevertTransactionRequest) GetID() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2RevertTransactionRequest) GetLedger() string {
-	if o == nil {
+func (v *V2RevertTransactionRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2RevertTransactionResponse struct {
@@ -79,30 +79,30 @@ type V2RevertTransactionResponse struct {
 	V2CreateTransactionResponse *shared.V2CreateTransactionResponse
 }
 
-func (o *V2RevertTransactionResponse) GetContentType() string {
-	if o == nil {
+func (v *V2RevertTransactionResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2RevertTransactionResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2RevertTransactionResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2RevertTransactionResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2RevertTransactionResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2RevertTransactionResponse) GetV2CreateTransactionResponse() *shared.V2CreateTransactionResponse {
-	if o == nil {
+func (v *V2RevertTransactionResponse) GetV2CreateTransactionResponse() *shared.V2CreateTransactionResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2CreateTransactionResponse
+	return v.V2CreateTransactionResponse
 }

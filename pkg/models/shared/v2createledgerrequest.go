@@ -8,23 +8,23 @@ type V2CreateLedgerRequest struct {
 	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
-func (o *V2CreateLedgerRequest) GetBucket() *string {
-	if o == nil {
+func (v *V2CreateLedgerRequest) GetBucket() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Bucket
+	return v.Bucket
 }
 
-func (o *V2CreateLedgerRequest) GetFeatures() map[string]string {
-	if o == nil {
+func (v *V2CreateLedgerRequest) GetFeatures() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Features
+	return v.Features
 }
 
-func (o *V2CreateLedgerRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2CreateLedgerRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }

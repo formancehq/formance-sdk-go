@@ -20,36 +20,36 @@ func (w WiseConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WiseConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"apiKey", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WiseConfig) GetAPIKey() string {
-	if o == nil {
+func (w *WiseConfig) GetAPIKey() string {
+	if w == nil {
 		return ""
 	}
-	return o.APIKey
+	return w.APIKey
 }
 
-func (o *WiseConfig) GetName() string {
-	if o == nil {
+func (w *WiseConfig) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return o.Name
+	return w.Name
 }
 
-func (o *WiseConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (w *WiseConfig) GetPollingPeriod() *string {
+	if w == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return w.PollingPeriod
 }
 
-func (o *WiseConfig) GetProvider() *string {
-	if o == nil {
+func (w *WiseConfig) GetProvider() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Provider
+	return w.Provider
 }

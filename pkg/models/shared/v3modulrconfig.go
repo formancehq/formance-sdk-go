@@ -21,57 +21,57 @@ func (v V3ModulrConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3ModulrConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "apiSecret", "endpoint", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3ModulrConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3ModulrConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3ModulrConfig) GetAPISecret() string {
-	if o == nil {
+func (v *V3ModulrConfig) GetAPISecret() string {
+	if v == nil {
 		return ""
 	}
-	return o.APISecret
+	return v.APISecret
 }
 
-func (o *V3ModulrConfig) GetEndpoint() string {
-	if o == nil {
+func (v *V3ModulrConfig) GetEndpoint() string {
+	if v == nil {
 		return ""
 	}
-	return o.Endpoint
+	return v.Endpoint
 }
 
-func (o *V3ModulrConfig) GetName() string {
-	if o == nil {
+func (v *V3ModulrConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3ModulrConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3ModulrConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3ModulrConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3ModulrConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3ModulrConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3ModulrConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }

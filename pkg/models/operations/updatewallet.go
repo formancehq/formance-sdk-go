@@ -11,11 +11,11 @@ type UpdateWalletRequestBody struct {
 	Metadata map[string]string `json:"metadata"`
 }
 
-func (o *UpdateWalletRequestBody) GetMetadata() map[string]string {
-	if o == nil {
+func (u *UpdateWalletRequestBody) GetMetadata() map[string]string {
+	if u == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return u.Metadata
 }
 
 type UpdateWalletRequest struct {
@@ -25,25 +25,25 @@ type UpdateWalletRequest struct {
 	ID             string                   `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *UpdateWalletRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (u *UpdateWalletRequest) GetIdempotencyKey() *string {
+	if u == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return u.IdempotencyKey
 }
 
-func (o *UpdateWalletRequest) GetRequestBody() *UpdateWalletRequestBody {
-	if o == nil {
+func (u *UpdateWalletRequest) GetRequestBody() *UpdateWalletRequestBody {
+	if u == nil {
 		return nil
 	}
-	return o.RequestBody
+	return u.RequestBody
 }
 
-func (o *UpdateWalletRequest) GetID() string {
-	if o == nil {
+func (u *UpdateWalletRequest) GetID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ID
+	return u.ID
 }
 
 type UpdateWalletResponse struct {
@@ -55,23 +55,23 @@ type UpdateWalletResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *UpdateWalletResponse) GetContentType() string {
-	if o == nil {
+func (u *UpdateWalletResponse) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UpdateWalletResponse) GetStatusCode() int {
-	if o == nil {
+func (u *UpdateWalletResponse) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UpdateWalletResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UpdateWalletResponse) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

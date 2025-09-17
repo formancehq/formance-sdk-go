@@ -12,18 +12,29 @@ type V2PostTransactionScript struct {
 	Vars  map[string]string `json:"vars,omitempty"`
 }
 
-func (o *V2PostTransactionScript) GetPlain() string {
-	if o == nil {
-		return ""
-	}
-	return o.Plain
+func (v V2PostTransactionScript) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
 }
 
-func (o *V2PostTransactionScript) GetVars() map[string]string {
-	if o == nil {
+func (v *V2PostTransactionScript) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"plain"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2PostTransactionScript) GetPlain() string {
+	if v == nil {
+		return ""
+	}
+	return v.Plain
+}
+
+func (v *V2PostTransactionScript) GetVars() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Vars
+	return v.Vars
 }
 
 type V2PostTransaction struct {
@@ -39,43 +50,43 @@ func (v V2PostTransaction) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2PostTransaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"metadata"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2PostTransaction) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2PostTransaction) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2PostTransaction) GetPostings() []V2Posting {
-	if o == nil {
+func (v *V2PostTransaction) GetPostings() []V2Posting {
+	if v == nil {
 		return nil
 	}
-	return o.Postings
+	return v.Postings
 }
 
-func (o *V2PostTransaction) GetReference() *string {
-	if o == nil {
+func (v *V2PostTransaction) GetReference() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V2PostTransaction) GetScript() *V2PostTransactionScript {
-	if o == nil {
+func (v *V2PostTransaction) GetScript() *V2PostTransactionScript {
+	if v == nil {
 		return nil
 	}
-	return o.Script
+	return v.Script
 }
 
-func (o *V2PostTransaction) GetTimestamp() *time.Time {
-	if o == nil {
+func (v *V2PostTransaction) GetTimestamp() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Timestamp
+	return v.Timestamp
 }

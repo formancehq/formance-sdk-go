@@ -19,36 +19,36 @@ func (t TransferInitiationPayments) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferInitiationPayments) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"createdAt", "paymentID", "status"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TransferInitiationPayments) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TransferInitiationPayments) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TransferInitiationPayments) GetError() *string {
-	if o == nil {
+func (t *TransferInitiationPayments) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TransferInitiationPayments) GetPaymentID() string {
-	if o == nil {
+func (t *TransferInitiationPayments) GetPaymentID() string {
+	if t == nil {
 		return ""
 	}
-	return o.PaymentID
+	return t.PaymentID
 }
 
-func (o *TransferInitiationPayments) GetStatus() PaymentStatus {
-	if o == nil {
+func (t *TransferInitiationPayments) GetStatus() PaymentStatus {
+	if t == nil {
 		return PaymentStatus("")
 	}
-	return o.Status
+	return t.Status
 }

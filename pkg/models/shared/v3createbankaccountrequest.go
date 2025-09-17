@@ -11,44 +11,44 @@ type V3CreateBankAccountRequest struct {
 	SwiftBicCode  *string           `json:"swiftBicCode,omitempty"`
 }
 
-func (o *V3CreateBankAccountRequest) GetAccountNumber() *string {
-	if o == nil {
+func (v *V3CreateBankAccountRequest) GetAccountNumber() *string {
+	if v == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return v.AccountNumber
 }
 
-func (o *V3CreateBankAccountRequest) GetCountry() *string {
-	if o == nil {
+func (v *V3CreateBankAccountRequest) GetCountry() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Country
+	return v.Country
 }
 
-func (o *V3CreateBankAccountRequest) GetIban() *string {
-	if o == nil {
+func (v *V3CreateBankAccountRequest) GetIban() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Iban
+	return v.Iban
 }
 
-func (o *V3CreateBankAccountRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3CreateBankAccountRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3CreateBankAccountRequest) GetName() string {
-	if o == nil {
+func (v *V3CreateBankAccountRequest) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3CreateBankAccountRequest) GetSwiftBicCode() *string {
-	if o == nil {
+func (v *V3CreateBankAccountRequest) GetSwiftBicCode() *string {
+	if v == nil {
 		return nil
 	}
-	return o.SwiftBicCode
+	return v.SwiftBicCode
 }

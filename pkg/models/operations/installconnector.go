@@ -13,62 +13,62 @@ type InstallConnectorRequest struct {
 	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfig() shared.ConnectorConfig {
-	if o == nil {
+func (i *InstallConnectorRequest) GetConnectorConfig() shared.ConnectorConfig {
+	if i == nil {
 		return shared.ConnectorConfig{}
 	}
-	return o.ConnectorConfig
+	return i.ConnectorConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigAdyen() *shared.AdyenConfig {
-	return o.GetConnectorConfig().AdyenConfig
+func (i *InstallConnectorRequest) GetConnectorConfigAdyen() *shared.AdyenConfig {
+	return i.GetConnectorConfig().AdyenConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigAtlar() *shared.AtlarConfig {
-	return o.GetConnectorConfig().AtlarConfig
+func (i *InstallConnectorRequest) GetConnectorConfigAtlar() *shared.AtlarConfig {
+	return i.GetConnectorConfig().AtlarConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigBankingcircle() *shared.BankingCircleConfig {
-	return o.GetConnectorConfig().BankingCircleConfig
+func (i *InstallConnectorRequest) GetConnectorConfigBankingcircle() *shared.BankingCircleConfig {
+	return i.GetConnectorConfig().BankingCircleConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigCurrencycloud() *shared.CurrencyCloudConfig {
-	return o.GetConnectorConfig().CurrencyCloudConfig
+func (i *InstallConnectorRequest) GetConnectorConfigCurrencycloud() *shared.CurrencyCloudConfig {
+	return i.GetConnectorConfig().CurrencyCloudConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigDummypay() *shared.DummyPayConfig {
-	return o.GetConnectorConfig().DummyPayConfig
+func (i *InstallConnectorRequest) GetConnectorConfigDummypay() *shared.DummyPayConfig {
+	return i.GetConnectorConfig().DummyPayConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigGeneric() *shared.GenericConfig {
-	return o.GetConnectorConfig().GenericConfig
+func (i *InstallConnectorRequest) GetConnectorConfigGeneric() *shared.GenericConfig {
+	return i.GetConnectorConfig().GenericConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigMangopay() *shared.MangoPayConfig {
-	return o.GetConnectorConfig().MangoPayConfig
+func (i *InstallConnectorRequest) GetConnectorConfigMangopay() *shared.MangoPayConfig {
+	return i.GetConnectorConfig().MangoPayConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigModulr() *shared.ModulrConfig {
-	return o.GetConnectorConfig().ModulrConfig
+func (i *InstallConnectorRequest) GetConnectorConfigModulr() *shared.ModulrConfig {
+	return i.GetConnectorConfig().ModulrConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigMoneycorp() *shared.MoneycorpConfig {
-	return o.GetConnectorConfig().MoneycorpConfig
+func (i *InstallConnectorRequest) GetConnectorConfigMoneycorp() *shared.MoneycorpConfig {
+	return i.GetConnectorConfig().MoneycorpConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigStripe() *shared.StripeConfig {
-	return o.GetConnectorConfig().StripeConfig
+func (i *InstallConnectorRequest) GetConnectorConfigStripe() *shared.StripeConfig {
+	return i.GetConnectorConfig().StripeConfig
 }
 
-func (o *InstallConnectorRequest) GetConnectorConfigWise() *shared.WiseConfig {
-	return o.GetConnectorConfig().WiseConfig
+func (i *InstallConnectorRequest) GetConnectorConfigWise() *shared.WiseConfig {
+	return i.GetConnectorConfig().WiseConfig
 }
 
-func (o *InstallConnectorRequest) GetConnector() shared.Connector {
-	if o == nil {
+func (i *InstallConnectorRequest) GetConnector() shared.Connector {
+	if i == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return i.Connector
 }
 
 type InstallConnectorResponse struct {
@@ -82,30 +82,30 @@ type InstallConnectorResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *InstallConnectorResponse) GetConnectorResponse() *shared.ConnectorResponse {
-	if o == nil {
+func (i *InstallConnectorResponse) GetConnectorResponse() *shared.ConnectorResponse {
+	if i == nil {
 		return nil
 	}
-	return o.ConnectorResponse
+	return i.ConnectorResponse
 }
 
-func (o *InstallConnectorResponse) GetContentType() string {
-	if o == nil {
+func (i *InstallConnectorResponse) GetContentType() string {
+	if i == nil {
 		return ""
 	}
-	return o.ContentType
+	return i.ContentType
 }
 
-func (o *InstallConnectorResponse) GetStatusCode() int {
-	if o == nil {
+func (i *InstallConnectorResponse) GetStatusCode() int {
+	if i == nil {
 		return 0
 	}
-	return o.StatusCode
+	return i.StatusCode
 }
 
-func (o *InstallConnectorResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (i *InstallConnectorResponse) GetRawResponse() *http.Response {
+	if i == nil {
 		return nil
 	}
-	return o.RawResponse
+	return i.RawResponse
 }

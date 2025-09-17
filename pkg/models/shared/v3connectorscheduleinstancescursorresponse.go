@@ -10,48 +10,48 @@ type V3ConnectorScheduleInstancesCursorResponseCursor struct {
 	Previous *string      `json:"previous,omitempty"`
 }
 
-func (o *V3ConnectorScheduleInstancesCursorResponseCursor) GetData() []V3Instance {
-	if o == nil {
+func (v *V3ConnectorScheduleInstancesCursorResponseCursor) GetData() []V3Instance {
+	if v == nil {
 		return []V3Instance{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V3ConnectorScheduleInstancesCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V3ConnectorScheduleInstancesCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V3ConnectorScheduleInstancesCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V3ConnectorScheduleInstancesCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V3ConnectorScheduleInstancesCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V3ConnectorScheduleInstancesCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3ConnectorScheduleInstancesCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V3ConnectorScheduleInstancesCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V3ConnectorScheduleInstancesCursorResponse struct {
 	Cursor V3ConnectorScheduleInstancesCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V3ConnectorScheduleInstancesCursorResponse) GetCursor() V3ConnectorScheduleInstancesCursorResponseCursor {
-	if o == nil {
+func (v *V3ConnectorScheduleInstancesCursorResponse) GetCursor() V3ConnectorScheduleInstancesCursorResponseCursor {
+	if v == nil {
 		return V3ConnectorScheduleInstancesCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

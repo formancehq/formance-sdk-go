@@ -18,30 +18,30 @@ type CreateBankAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreateBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
-	if o == nil {
+func (c *CreateBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
+	if c == nil {
 		return nil
 	}
-	return o.BankAccountResponse
+	return c.BankAccountResponse
 }
 
-func (o *CreateBankAccountResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateBankAccountResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateBankAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateBankAccountResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateBankAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateBankAccountResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

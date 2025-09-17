@@ -14,25 +14,25 @@ type CreditWalletRequest struct {
 	ID             string  `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *CreditWalletRequest) GetCreditWalletRequest() *shared.CreditWalletRequest {
-	if o == nil {
+func (c *CreditWalletRequest) GetCreditWalletRequest() *shared.CreditWalletRequest {
+	if c == nil {
 		return nil
 	}
-	return o.CreditWalletRequest
+	return c.CreditWalletRequest
 }
 
-func (o *CreditWalletRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (c *CreditWalletRequest) GetIdempotencyKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return c.IdempotencyKey
 }
 
-func (o *CreditWalletRequest) GetID() string {
-	if o == nil {
+func (c *CreditWalletRequest) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
 type CreditWalletResponse struct {
@@ -44,23 +44,23 @@ type CreditWalletResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreditWalletResponse) GetContentType() string {
-	if o == nil {
+func (c *CreditWalletResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreditWalletResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreditWalletResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreditWalletResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreditWalletResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

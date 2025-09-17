@@ -7,16 +7,16 @@ type ActivityGetAccount struct {
 	Ledger string `json:"ledger"`
 }
 
-func (o *ActivityGetAccount) GetID() string {
-	if o == nil {
+func (a *ActivityGetAccount) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *ActivityGetAccount) GetLedger() string {
-	if o == nil {
+func (a *ActivityGetAccount) GetLedger() string {
+	if a == nil {
 		return ""
 	}
-	return o.Ledger
+	return a.Ledger
 }

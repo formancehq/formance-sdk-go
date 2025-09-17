@@ -28,12 +28,13 @@ Confirm a hold
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="confirmHold" method="post" path="/api/wallets/holds/{hold_id}/confirm" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -43,17 +44,17 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.ConfirmHold(ctx, operations.ConfirmHoldRequest{
         ConfirmHoldRequest: &shared.ConfirmHoldRequest{
             Amount: big.NewInt(100),
-            Final: formancesdkgo.Bool(true),
+            Final: v3.Pointer(true),
         },
         HoldID: "<id>",
     })
@@ -91,12 +92,13 @@ Create a balance
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="createBalance" method="post" path="/api/wallets/wallets/{id}/balances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -105,10 +107,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -149,12 +151,13 @@ Create a new wallet
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="createWallet" method="post" path="/api/wallets/wallets" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -163,10 +166,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -205,12 +208,13 @@ Credit a wallet
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="creditWallet" method="post" path="/api/wallets/wallets/{id}/credit" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -220,10 +224,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -274,12 +278,13 @@ Debit a wallet
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="debitWallet" method="post" path="/api/wallets/wallets/{id}/debit" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -289,10 +294,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -305,7 +310,7 @@ func main() {
             Metadata: map[string]string{
                 "key": "",
             },
-            Pending: formancesdkgo.Bool(true),
+            Pending: v3.Pointer(true),
         },
         ID: "<id>",
     })
@@ -343,12 +348,13 @@ Get detailed balance
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getBalance" method="get" path="/api/wallets/wallets/{id}/balances/{balanceName}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -357,10 +363,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -402,12 +408,13 @@ Get a hold
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getHold" method="get" path="/api/wallets/holds/{holdID}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -416,10 +423,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -460,12 +467,13 @@ Get all holds for a wallet
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getHolds" method="get" path="/api/wallets/holds" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -474,20 +482,20 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.GetHolds(ctx, operations.GetHoldsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Metadata: map[string]string{
             "admin": "true",
         },
-        PageSize: formancesdkgo.Int64(100),
-        WalletID: formancesdkgo.String("wallet1"),
+        PageSize: v3.Pointer[int64](100),
+        WalletID: v3.Pointer("wallet1"),
     })
     if err != nil {
         log.Fatal(err)
@@ -521,12 +529,13 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getTransactions" method="get" path="/api/wallets/transactions" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -535,17 +544,17 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.GetTransactions(ctx, operations.GetTransactionsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
-        WalletID: formancesdkgo.String("wallet1"),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
+        WalletID: v3.Pointer("wallet1"),
     })
     if err != nil {
         log.Fatal(err)
@@ -581,12 +590,13 @@ Get a wallet
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getWallet" method="get" path="/api/wallets/wallets/{id}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -595,10 +605,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -639,12 +649,13 @@ Get wallet summary
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getWalletSummary" method="get" path="/api/wallets/wallets/{id}/summary" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -653,10 +664,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -697,12 +708,13 @@ List balances of a wallet
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listBalances" method="get" path="/api/wallets/wallets/{id}/balances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -711,10 +723,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -754,12 +766,13 @@ List all wallets
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listWallets" method="get" path="/api/wallets/wallets" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -768,21 +781,21 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.ListWallets(ctx, operations.ListWalletsRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Expand: formancesdkgo.String("balances"),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Expand: v3.Pointer("balances"),
         Metadata: map[string]string{
             "admin": "true",
         },
-        Name: formancesdkgo.String("wallet1"),
-        PageSize: formancesdkgo.Int64(100),
+        Name: v3.Pointer("wallet1"),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -818,12 +831,13 @@ Update a wallet
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="updateWallet" method="patch" path="/api/wallets/wallets/{id}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -832,10 +846,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -876,12 +890,13 @@ Cancel a hold
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="voidHold" method="post" path="/api/wallets/holds/{hold_id}/void" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -890,10 +905,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -934,12 +949,13 @@ Get server info
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="walletsgetServerInfo" method="get" path="/api/wallets/_info" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -947,10 +963,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 

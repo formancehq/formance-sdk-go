@@ -12,11 +12,11 @@ type GetHoldRequest struct {
 	HoldID string `pathParam:"style=simple,explode=false,name=holdID"`
 }
 
-func (o *GetHoldRequest) GetHoldID() string {
-	if o == nil {
+func (g *GetHoldRequest) GetHoldID() string {
+	if g == nil {
 		return ""
 	}
-	return o.HoldID
+	return g.HoldID
 }
 
 type GetHoldResponse struct {
@@ -30,30 +30,30 @@ type GetHoldResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetHoldResponse) GetContentType() string {
-	if o == nil {
+func (g *GetHoldResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetHoldResponse) GetGetHoldResponse() *shared.GetHoldResponse {
-	if o == nil {
+func (g *GetHoldResponse) GetGetHoldResponse() *shared.GetHoldResponse {
+	if g == nil {
 		return nil
 	}
-	return o.GetHoldResponse
+	return g.GetHoldResponse
 }
 
-func (o *GetHoldResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetHoldResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetHoldResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetHoldResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

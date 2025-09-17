@@ -20,43 +20,43 @@ func (s StageStatus) MarshalJSON() ([]byte, error) {
 }
 
 func (s *StageStatus) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"instanceID", "stage", "startedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *StageStatus) GetError() *string {
-	if o == nil {
+func (s *StageStatus) GetError() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Error
+	return s.Error
 }
 
-func (o *StageStatus) GetInstanceID() string {
-	if o == nil {
+func (s *StageStatus) GetInstanceID() string {
+	if s == nil {
 		return ""
 	}
-	return o.InstanceID
+	return s.InstanceID
 }
 
-func (o *StageStatus) GetStage() float64 {
-	if o == nil {
+func (s *StageStatus) GetStage() float64 {
+	if s == nil {
 		return 0.0
 	}
-	return o.Stage
+	return s.Stage
 }
 
-func (o *StageStatus) GetStartedAt() time.Time {
-	if o == nil {
+func (s *StageStatus) GetStartedAt() time.Time {
+	if s == nil {
 		return time.Time{}
 	}
-	return o.StartedAt
+	return s.StartedAt
 }
 
-func (o *StageStatus) GetTerminatedAt() *time.Time {
-	if o == nil {
+func (s *StageStatus) GetTerminatedAt() *time.Time {
+	if s == nil {
 		return nil
 	}
-	return o.TerminatedAt
+	return s.TerminatedAt
 }

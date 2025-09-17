@@ -19,25 +19,25 @@ type CreateTransactionRequest struct {
 	Preview *bool `queryParam:"style=form,explode=true,name=preview"`
 }
 
-func (o *CreateTransactionRequest) GetPostTransaction() shared.PostTransaction {
-	if o == nil {
+func (c *CreateTransactionRequest) GetPostTransaction() shared.PostTransaction {
+	if c == nil {
 		return shared.PostTransaction{}
 	}
-	return o.PostTransaction
+	return c.PostTransaction
 }
 
-func (o *CreateTransactionRequest) GetLedger() string {
-	if o == nil {
+func (c *CreateTransactionRequest) GetLedger() string {
+	if c == nil {
 		return ""
 	}
-	return o.Ledger
+	return c.Ledger
 }
 
-func (o *CreateTransactionRequest) GetPreview() *bool {
-	if o == nil {
+func (c *CreateTransactionRequest) GetPreview() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Preview
+	return c.Preview
 }
 
 type CreateTransactionResponse struct {
@@ -51,30 +51,30 @@ type CreateTransactionResponse struct {
 	TransactionsResponse *shared.TransactionsResponse
 }
 
-func (o *CreateTransactionResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateTransactionResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateTransactionResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateTransactionResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateTransactionResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateTransactionResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }
 
-func (o *CreateTransactionResponse) GetTransactionsResponse() *shared.TransactionsResponse {
-	if o == nil {
+func (c *CreateTransactionResponse) GetTransactionsResponse() *shared.TransactionsResponse {
+	if c == nil {
 		return nil
 	}
-	return o.TransactionsResponse
+	return c.TransactionsResponse
 }

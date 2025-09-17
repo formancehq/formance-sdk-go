@@ -7,9 +7,9 @@ type V3InstallConnectorResponse struct {
 	Data string `json:"data"`
 }
 
-func (o *V3InstallConnectorResponse) GetData() string {
-	if o == nil {
+func (v *V3InstallConnectorResponse) GetData() string {
+	if v == nil {
 		return ""
 	}
-	return o.Data
+	return v.Data
 }

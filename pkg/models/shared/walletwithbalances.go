@@ -11,11 +11,11 @@ type WalletWithBalancesBalances struct {
 	Main AssetHolder `json:"main"`
 }
 
-func (o *WalletWithBalancesBalances) GetMain() AssetHolder {
-	if o == nil {
+func (w *WalletWithBalancesBalances) GetMain() AssetHolder {
+	if w == nil {
 		return AssetHolder{}
 	}
-	return o.Main
+	return w.Main
 }
 
 type WalletWithBalances struct {
@@ -34,50 +34,50 @@ func (w WalletWithBalances) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WalletWithBalances) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"balances", "createdAt", "id", "ledger", "metadata", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WalletWithBalances) GetBalances() WalletWithBalancesBalances {
-	if o == nil {
+func (w *WalletWithBalances) GetBalances() WalletWithBalancesBalances {
+	if w == nil {
 		return WalletWithBalancesBalances{}
 	}
-	return o.Balances
+	return w.Balances
 }
 
-func (o *WalletWithBalances) GetCreatedAt() time.Time {
-	if o == nil {
+func (w *WalletWithBalances) GetCreatedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return w.CreatedAt
 }
 
-func (o *WalletWithBalances) GetID() string {
-	if o == nil {
+func (w *WalletWithBalances) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *WalletWithBalances) GetLedger() string {
-	if o == nil {
+func (w *WalletWithBalances) GetLedger() string {
+	if w == nil {
 		return ""
 	}
-	return o.Ledger
+	return w.Ledger
 }
 
-func (o *WalletWithBalances) GetMetadata() map[string]string {
-	if o == nil {
+func (w *WalletWithBalances) GetMetadata() map[string]string {
+	if w == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return w.Metadata
 }
 
-func (o *WalletWithBalances) GetName() string {
-	if o == nil {
+func (w *WalletWithBalances) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return o.Name
+	return w.Name
 }

@@ -14,18 +14,18 @@ type V3GetConnectorScheduleRequest struct {
 	ScheduleID string `pathParam:"style=simple,explode=false,name=scheduleID"`
 }
 
-func (o *V3GetConnectorScheduleRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3GetConnectorScheduleRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3GetConnectorScheduleRequest) GetScheduleID() string {
-	if o == nil {
+func (v *V3GetConnectorScheduleRequest) GetScheduleID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ScheduleID
+	return v.ScheduleID
 }
 
 type V3GetConnectorScheduleResponse struct {
@@ -39,30 +39,30 @@ type V3GetConnectorScheduleResponse struct {
 	V3ConnectorScheduleResponse *shared.V3ConnectorScheduleResponse
 }
 
-func (o *V3GetConnectorScheduleResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetConnectorScheduleResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetConnectorScheduleResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetConnectorScheduleResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetConnectorScheduleResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetConnectorScheduleResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetConnectorScheduleResponse) GetV3ConnectorScheduleResponse() *shared.V3ConnectorScheduleResponse {
-	if o == nil {
+func (v *V3GetConnectorScheduleResponse) GetV3ConnectorScheduleResponse() *shared.V3ConnectorScheduleResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3ConnectorScheduleResponse
+	return v.V3ConnectorScheduleResponse
 }

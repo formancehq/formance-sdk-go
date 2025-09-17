@@ -12,11 +12,11 @@ type V2GetInstanceHistoryRequest struct {
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`
 }
 
-func (o *V2GetInstanceHistoryRequest) GetInstanceID() string {
-	if o == nil {
+func (v *V2GetInstanceHistoryRequest) GetInstanceID() string {
+	if v == nil {
 		return ""
 	}
-	return o.InstanceID
+	return v.InstanceID
 }
 
 type V2GetInstanceHistoryResponse struct {
@@ -30,30 +30,30 @@ type V2GetInstanceHistoryResponse struct {
 	V2GetWorkflowInstanceHistoryResponse *shared.V2GetWorkflowInstanceHistoryResponse
 }
 
-func (o *V2GetInstanceHistoryResponse) GetContentType() string {
-	if o == nil {
+func (v *V2GetInstanceHistoryResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2GetInstanceHistoryResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2GetInstanceHistoryResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2GetInstanceHistoryResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2GetInstanceHistoryResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2GetInstanceHistoryResponse) GetV2GetWorkflowInstanceHistoryResponse() *shared.V2GetWorkflowInstanceHistoryResponse {
-	if o == nil {
+func (v *V2GetInstanceHistoryResponse) GetV2GetWorkflowInstanceHistoryResponse() *shared.V2GetWorkflowInstanceHistoryResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2GetWorkflowInstanceHistoryResponse
+	return v.V2GetWorkflowInstanceHistoryResponse
 }

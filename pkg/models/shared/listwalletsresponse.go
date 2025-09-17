@@ -10,48 +10,48 @@ type ListWalletsResponseCursor struct {
 	Previous *string  `json:"previous,omitempty"`
 }
 
-func (o *ListWalletsResponseCursor) GetData() []Wallet {
-	if o == nil {
+func (l *ListWalletsResponseCursor) GetData() []Wallet {
+	if l == nil {
 		return []Wallet{}
 	}
-	return o.Data
+	return l.Data
 }
 
-func (o *ListWalletsResponseCursor) GetHasMore() *bool {
-	if o == nil {
+func (l *ListWalletsResponseCursor) GetHasMore() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.HasMore
+	return l.HasMore
 }
 
-func (o *ListWalletsResponseCursor) GetNext() *string {
-	if o == nil {
+func (l *ListWalletsResponseCursor) GetNext() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Next
+	return l.Next
 }
 
-func (o *ListWalletsResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (l *ListWalletsResponseCursor) GetPageSize() int64 {
+	if l == nil {
 		return 0
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListWalletsResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (l *ListWalletsResponseCursor) GetPrevious() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Previous
+	return l.Previous
 }
 
 type ListWalletsResponse struct {
 	Cursor ListWalletsResponseCursor `json:"cursor"`
 }
 
-func (o *ListWalletsResponse) GetCursor() ListWalletsResponseCursor {
-	if o == nil {
+func (l *ListWalletsResponse) GetCursor() ListWalletsResponseCursor {
+	if l == nil {
 		return ListWalletsResponseCursor{}
 	}
-	return o.Cursor
+	return l.Cursor
 }

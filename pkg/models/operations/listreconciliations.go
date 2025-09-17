@@ -19,18 +19,18 @@ type ListReconciliationsRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *ListReconciliationsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListReconciliationsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListReconciliationsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListReconciliationsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
 type ListReconciliationsResponse struct {
@@ -44,30 +44,30 @@ type ListReconciliationsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListReconciliationsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListReconciliationsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListReconciliationsResponse) GetReconciliationsCursorResponse() *shared.ReconciliationsCursorResponse {
-	if o == nil {
+func (l *ListReconciliationsResponse) GetReconciliationsCursorResponse() *shared.ReconciliationsCursorResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ReconciliationsCursorResponse
+	return l.ReconciliationsCursorResponse
 }
 
-func (o *ListReconciliationsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListReconciliationsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListReconciliationsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListReconciliationsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

@@ -20,43 +20,43 @@ func (w WalletSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WalletSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"availableFunds", "balances", "expirableFunds", "expiredFunds", "holdFunds"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WalletSummary) GetAvailableFunds() map[string]*big.Int {
-	if o == nil {
+func (w *WalletSummary) GetAvailableFunds() map[string]*big.Int {
+	if w == nil {
 		return map[string]*big.Int{}
 	}
-	return o.AvailableFunds
+	return w.AvailableFunds
 }
 
-func (o *WalletSummary) GetBalances() []BalanceWithAssets {
-	if o == nil {
+func (w *WalletSummary) GetBalances() []BalanceWithAssets {
+	if w == nil {
 		return []BalanceWithAssets{}
 	}
-	return o.Balances
+	return w.Balances
 }
 
-func (o *WalletSummary) GetExpirableFunds() map[string]*big.Int {
-	if o == nil {
+func (w *WalletSummary) GetExpirableFunds() map[string]*big.Int {
+	if w == nil {
 		return map[string]*big.Int{}
 	}
-	return o.ExpirableFunds
+	return w.ExpirableFunds
 }
 
-func (o *WalletSummary) GetExpiredFunds() map[string]*big.Int {
-	if o == nil {
+func (w *WalletSummary) GetExpiredFunds() map[string]*big.Int {
+	if w == nil {
 		return map[string]*big.Int{}
 	}
-	return o.ExpiredFunds
+	return w.ExpiredFunds
 }
 
-func (o *WalletSummary) GetHoldFunds() map[string]*big.Int {
-	if o == nil {
+func (w *WalletSummary) GetHoldFunds() map[string]*big.Int {
+	if w == nil {
 		return map[string]*big.Int{}
 	}
-	return o.HoldFunds
+	return w.HoldFunds
 }

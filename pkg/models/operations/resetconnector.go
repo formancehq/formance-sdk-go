@@ -12,11 +12,11 @@ type ResetConnectorRequest struct {
 	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
 }
 
-func (o *ResetConnectorRequest) GetConnector() shared.Connector {
-	if o == nil {
+func (r *ResetConnectorRequest) GetConnector() shared.Connector {
+	if r == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return r.Connector
 }
 
 type ResetConnectorResponse struct {
@@ -28,23 +28,23 @@ type ResetConnectorResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ResetConnectorResponse) GetContentType() string {
-	if o == nil {
+func (r *ResetConnectorResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ResetConnectorResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ResetConnectorResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ResetConnectorResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ResetConnectorResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

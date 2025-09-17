@@ -22,24 +22,24 @@ func (g GetPoolBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetPoolBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"at", "poolId"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GetPoolBalancesRequest) GetAt() time.Time {
-	if o == nil {
+func (g *GetPoolBalancesRequest) GetAt() time.Time {
+	if g == nil {
 		return time.Time{}
 	}
-	return o.At
+	return g.At
 }
 
-func (o *GetPoolBalancesRequest) GetPoolID() string {
-	if o == nil {
+func (g *GetPoolBalancesRequest) GetPoolID() string {
+	if g == nil {
 		return ""
 	}
-	return o.PoolID
+	return g.PoolID
 }
 
 type GetPoolBalancesResponse struct {
@@ -53,30 +53,30 @@ type GetPoolBalancesResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetPoolBalancesResponse) GetContentType() string {
-	if o == nil {
+func (g *GetPoolBalancesResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetPoolBalancesResponse) GetPoolBalancesResponse() *shared.PoolBalancesResponse {
-	if o == nil {
+func (g *GetPoolBalancesResponse) GetPoolBalancesResponse() *shared.PoolBalancesResponse {
+	if g == nil {
 		return nil
 	}
-	return o.PoolBalancesResponse
+	return g.PoolBalancesResponse
 }
 
-func (o *GetPoolBalancesResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetPoolBalancesResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetPoolBalancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetPoolBalancesResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

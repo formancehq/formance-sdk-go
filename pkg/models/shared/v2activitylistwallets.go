@@ -6,9 +6,9 @@ type V2ActivityListWallets struct {
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *V2ActivityListWallets) GetName() *string {
-	if o == nil {
+func (v *V2ActivityListWallets) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }

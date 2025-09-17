@@ -13,18 +13,18 @@ type V3ForwardBankAccountRequest struct {
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountID"`
 }
 
-func (o *V3ForwardBankAccountRequest) GetV3ForwardBankAccountRequest() *shared.V3ForwardBankAccountRequest {
-	if o == nil {
+func (v *V3ForwardBankAccountRequest) GetV3ForwardBankAccountRequest() *shared.V3ForwardBankAccountRequest {
+	if v == nil {
 		return nil
 	}
-	return o.V3ForwardBankAccountRequest
+	return v.V3ForwardBankAccountRequest
 }
 
-func (o *V3ForwardBankAccountRequest) GetBankAccountID() string {
-	if o == nil {
+func (v *V3ForwardBankAccountRequest) GetBankAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return v.BankAccountID
 }
 
 type V3ForwardBankAccountResponse struct {
@@ -38,30 +38,30 @@ type V3ForwardBankAccountResponse struct {
 	V3ForwardBankAccountResponse *shared.V3ForwardBankAccountResponse
 }
 
-func (o *V3ForwardBankAccountResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ForwardBankAccountResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ForwardBankAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ForwardBankAccountResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ForwardBankAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ForwardBankAccountResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ForwardBankAccountResponse) GetV3ForwardBankAccountResponse() *shared.V3ForwardBankAccountResponse {
-	if o == nil {
+func (v *V3ForwardBankAccountResponse) GetV3ForwardBankAccountResponse() *shared.V3ForwardBankAccountResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3ForwardBankAccountResponse
+	return v.V3ForwardBankAccountResponse
 }

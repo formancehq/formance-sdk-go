@@ -13,18 +13,18 @@ type CreateSecretRequest struct {
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-func (o *CreateSecretRequest) GetCreateSecretRequest() *shared.CreateSecretRequest {
-	if o == nil {
+func (c *CreateSecretRequest) GetCreateSecretRequest() *shared.CreateSecretRequest {
+	if c == nil {
 		return nil
 	}
-	return o.CreateSecretRequest
+	return c.CreateSecretRequest
 }
 
-func (o *CreateSecretRequest) GetClientID() string {
-	if o == nil {
+func (c *CreateSecretRequest) GetClientID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ClientID
+	return c.ClientID
 }
 
 type CreateSecretResponse struct {
@@ -38,30 +38,30 @@ type CreateSecretResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreateSecretResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateSecretResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateSecretResponse) GetCreateSecretResponse() *shared.CreateSecretResponse {
-	if o == nil {
+func (c *CreateSecretResponse) GetCreateSecretResponse() *shared.CreateSecretResponse {
+	if c == nil {
 		return nil
 	}
-	return o.CreateSecretResponse
+	return c.CreateSecretResponse
 }
 
-func (o *CreateSecretResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateSecretResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateSecretResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateSecretResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

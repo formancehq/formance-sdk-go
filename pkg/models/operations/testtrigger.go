@@ -13,18 +13,18 @@ type TestTriggerRequest struct {
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`
 }
 
-func (o *TestTriggerRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (t *TestTriggerRequest) GetRequestBody() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.RequestBody
+	return t.RequestBody
 }
 
-func (o *TestTriggerRequest) GetTriggerID() string {
-	if o == nil {
+func (t *TestTriggerRequest) GetTriggerID() string {
+	if t == nil {
 		return ""
 	}
-	return o.TriggerID
+	return t.TriggerID
 }
 
 type TestTriggerResponse struct {
@@ -38,30 +38,30 @@ type TestTriggerResponse struct {
 	V2TestTriggerResponse *shared.V2TestTriggerResponse
 }
 
-func (o *TestTriggerResponse) GetContentType() string {
-	if o == nil {
+func (t *TestTriggerResponse) GetContentType() string {
+	if t == nil {
 		return ""
 	}
-	return o.ContentType
+	return t.ContentType
 }
 
-func (o *TestTriggerResponse) GetStatusCode() int {
-	if o == nil {
+func (t *TestTriggerResponse) GetStatusCode() int {
+	if t == nil {
 		return 0
 	}
-	return o.StatusCode
+	return t.StatusCode
 }
 
-func (o *TestTriggerResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (t *TestTriggerResponse) GetRawResponse() *http.Response {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponse
+	return t.RawResponse
 }
 
-func (o *TestTriggerResponse) GetV2TestTriggerResponse() *shared.V2TestTriggerResponse {
-	if o == nil {
+func (t *TestTriggerResponse) GetV2TestTriggerResponse() *shared.V2TestTriggerResponse {
+	if t == nil {
 		return nil
 	}
-	return o.V2TestTriggerResponse
+	return t.V2TestTriggerResponse
 }

@@ -12,11 +12,11 @@ type GetTransferInitiationRequest struct {
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`
 }
 
-func (o *GetTransferInitiationRequest) GetTransferID() string {
-	if o == nil {
+func (g *GetTransferInitiationRequest) GetTransferID() string {
+	if g == nil {
 		return ""
 	}
-	return o.TransferID
+	return g.TransferID
 }
 
 type GetTransferInitiationResponse struct {
@@ -30,30 +30,30 @@ type GetTransferInitiationResponse struct {
 	TransferInitiationResponse *shared.TransferInitiationResponse
 }
 
-func (o *GetTransferInitiationResponse) GetContentType() string {
-	if o == nil {
+func (g *GetTransferInitiationResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetTransferInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetTransferInitiationResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetTransferInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetTransferInitiationResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }
 
-func (o *GetTransferInitiationResponse) GetTransferInitiationResponse() *shared.TransferInitiationResponse {
-	if o == nil {
+func (g *GetTransferInitiationResponse) GetTransferInitiationResponse() *shared.TransferInitiationResponse {
+	if g == nil {
 		return nil
 	}
-	return o.TransferInitiationResponse
+	return g.TransferInitiationResponse
 }

@@ -39,7 +39,7 @@ func (o OrchestrationV2PostTransaction) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OrchestrationV2PostTransaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"metadata"}); err != nil {
 		return err
 	}
 	return nil

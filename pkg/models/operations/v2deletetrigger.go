@@ -11,11 +11,11 @@ type V2DeleteTriggerRequest struct {
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`
 }
 
-func (o *V2DeleteTriggerRequest) GetTriggerID() string {
-	if o == nil {
+func (v *V2DeleteTriggerRequest) GetTriggerID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TriggerID
+	return v.TriggerID
 }
 
 type V2DeleteTriggerResponse struct {
@@ -27,23 +27,23 @@ type V2DeleteTriggerResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2DeleteTriggerResponse) GetContentType() string {
-	if o == nil {
+func (v *V2DeleteTriggerResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2DeleteTriggerResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2DeleteTriggerResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2DeleteTriggerResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2DeleteTriggerResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

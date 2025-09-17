@@ -15,25 +15,25 @@ type RunScriptRequest struct {
 	Preview *bool `queryParam:"style=form,explode=true,name=preview"`
 }
 
-func (o *RunScriptRequest) GetScript() shared.Script {
-	if o == nil {
+func (r *RunScriptRequest) GetScript() shared.Script {
+	if r == nil {
 		return shared.Script{}
 	}
-	return o.Script
+	return r.Script
 }
 
-func (o *RunScriptRequest) GetLedger() string {
-	if o == nil {
+func (r *RunScriptRequest) GetLedger() string {
+	if r == nil {
 		return ""
 	}
-	return o.Ledger
+	return r.Ledger
 }
 
-func (o *RunScriptRequest) GetPreview() *bool {
-	if o == nil {
+func (r *RunScriptRequest) GetPreview() *bool {
+	if r == nil {
 		return nil
 	}
-	return o.Preview
+	return r.Preview
 }
 
 type RunScriptResponse struct {
@@ -53,30 +53,30 @@ type RunScriptResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *RunScriptResponse) GetContentType() string {
-	if o == nil {
+func (r *RunScriptResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *RunScriptResponse) GetScriptResponse() *shared.ScriptResponse {
-	if o == nil {
+func (r *RunScriptResponse) GetScriptResponse() *shared.ScriptResponse {
+	if r == nil {
 		return nil
 	}
-	return o.ScriptResponse
+	return r.ScriptResponse
 }
 
-func (o *RunScriptResponse) GetStatusCode() int {
-	if o == nil {
+func (r *RunScriptResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *RunScriptResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *RunScriptResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

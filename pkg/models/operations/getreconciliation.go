@@ -12,11 +12,11 @@ type GetReconciliationRequest struct {
 	ReconciliationID string `pathParam:"style=simple,explode=false,name=reconciliationID"`
 }
 
-func (o *GetReconciliationRequest) GetReconciliationID() string {
-	if o == nil {
+func (g *GetReconciliationRequest) GetReconciliationID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ReconciliationID
+	return g.ReconciliationID
 }
 
 type GetReconciliationResponse struct {
@@ -30,30 +30,30 @@ type GetReconciliationResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetReconciliationResponse) GetContentType() string {
-	if o == nil {
+func (g *GetReconciliationResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetReconciliationResponse) GetReconciliationResponse() *shared.ReconciliationResponse {
-	if o == nil {
+func (g *GetReconciliationResponse) GetReconciliationResponse() *shared.ReconciliationResponse {
+	if g == nil {
 		return nil
 	}
-	return o.ReconciliationResponse
+	return g.ReconciliationResponse
 }
 
-func (o *GetReconciliationResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetReconciliationResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetReconciliationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetReconciliationResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

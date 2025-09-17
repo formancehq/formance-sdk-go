@@ -26,31 +26,31 @@ func (g GetTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GetTransactionsRequest) GetCursor() *string {
-	if o == nil {
+func (g *GetTransactionsRequest) GetCursor() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Cursor
+	return g.Cursor
 }
 
-func (o *GetTransactionsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (g *GetTransactionsRequest) GetPageSize() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.PageSize
+	return g.PageSize
 }
 
-func (o *GetTransactionsRequest) GetWalletID() *string {
-	if o == nil {
+func (g *GetTransactionsRequest) GetWalletID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.WalletID
+	return g.WalletID
 }
 
 type GetTransactionsResponse struct {
@@ -64,30 +64,30 @@ type GetTransactionsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetTransactionsResponse) GetContentType() string {
-	if o == nil {
+func (g *GetTransactionsResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetTransactionsResponse) GetGetTransactionsResponse() *shared.GetTransactionsResponse {
-	if o == nil {
+func (g *GetTransactionsResponse) GetGetTransactionsResponse() *shared.GetTransactionsResponse {
+	if g == nil {
 		return nil
 	}
-	return o.GetTransactionsResponse
+	return g.GetTransactionsResponse
 }
 
-func (o *GetTransactionsResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetTransactionsResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetTransactionsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetTransactionsResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

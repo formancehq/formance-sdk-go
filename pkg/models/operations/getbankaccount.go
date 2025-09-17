@@ -12,11 +12,11 @@ type GetBankAccountRequest struct {
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountId"`
 }
 
-func (o *GetBankAccountRequest) GetBankAccountID() string {
-	if o == nil {
+func (g *GetBankAccountRequest) GetBankAccountID() string {
+	if g == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return g.BankAccountID
 }
 
 type GetBankAccountResponse struct {
@@ -30,30 +30,30 @@ type GetBankAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
-	if o == nil {
+func (g *GetBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
+	if g == nil {
 		return nil
 	}
-	return o.BankAccountResponse
+	return g.BankAccountResponse
 }
 
-func (o *GetBankAccountResponse) GetContentType() string {
-	if o == nil {
+func (g *GetBankAccountResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetBankAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetBankAccountResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetBankAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetBankAccountResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

@@ -12,11 +12,11 @@ type V3GetAccountRequest struct {
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`
 }
 
-func (o *V3GetAccountRequest) GetAccountID() string {
-	if o == nil {
+func (v *V3GetAccountRequest) GetAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccountID
+	return v.AccountID
 }
 
 type V3GetAccountResponse struct {
@@ -30,30 +30,30 @@ type V3GetAccountResponse struct {
 	V3GetAccountResponse *shared.V3GetAccountResponse
 }
 
-func (o *V3GetAccountResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetAccountResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetAccountResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetAccountResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetAccountResponse) GetV3GetAccountResponse() *shared.V3GetAccountResponse {
-	if o == nil {
+func (v *V3GetAccountResponse) GetV3GetAccountResponse() *shared.V3GetAccountResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3GetAccountResponse
+	return v.V3GetAccountResponse
 }

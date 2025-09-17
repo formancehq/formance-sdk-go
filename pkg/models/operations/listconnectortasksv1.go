@@ -29,38 +29,38 @@ func (l ListConnectorTasksV1Request) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListConnectorTasksV1Request) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"connector", "connectorId"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListConnectorTasksV1Request) GetConnector() shared.Connector {
-	if o == nil {
+func (l *ListConnectorTasksV1Request) GetConnector() shared.Connector {
+	if l == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return l.Connector
 }
 
-func (o *ListConnectorTasksV1Request) GetConnectorID() string {
-	if o == nil {
+func (l *ListConnectorTasksV1Request) GetConnectorID() string {
+	if l == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return l.ConnectorID
 }
 
-func (o *ListConnectorTasksV1Request) GetCursor() *string {
-	if o == nil {
+func (l *ListConnectorTasksV1Request) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListConnectorTasksV1Request) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListConnectorTasksV1Request) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
 type ListConnectorTasksV1Response struct {
@@ -74,30 +74,30 @@ type ListConnectorTasksV1Response struct {
 	TasksCursor *shared.TasksCursor
 }
 
-func (o *ListConnectorTasksV1Response) GetContentType() string {
-	if o == nil {
+func (l *ListConnectorTasksV1Response) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListConnectorTasksV1Response) GetStatusCode() int {
-	if o == nil {
+func (l *ListConnectorTasksV1Response) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListConnectorTasksV1Response) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListConnectorTasksV1Response) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }
 
-func (o *ListConnectorTasksV1Response) GetTasksCursor() *shared.TasksCursor {
-	if o == nil {
+func (l *ListConnectorTasksV1Response) GetTasksCursor() *shared.TasksCursor {
+	if l == nil {
 		return nil
 	}
-	return o.TasksCursor
+	return l.TasksCursor
 }

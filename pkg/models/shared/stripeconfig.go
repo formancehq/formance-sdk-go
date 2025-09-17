@@ -23,43 +23,43 @@ func (s StripeConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (s *StripeConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"apiKey", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *StripeConfig) GetAPIKey() string {
-	if o == nil {
+func (s *StripeConfig) GetAPIKey() string {
+	if s == nil {
 		return ""
 	}
-	return o.APIKey
+	return s.APIKey
 }
 
-func (o *StripeConfig) GetName() string {
-	if o == nil {
+func (s *StripeConfig) GetName() string {
+	if s == nil {
 		return ""
 	}
-	return o.Name
+	return s.Name
 }
 
-func (o *StripeConfig) GetPageSize() *int64 {
-	if o == nil {
+func (s *StripeConfig) GetPageSize() *int64 {
+	if s == nil {
 		return nil
 	}
-	return o.PageSize
+	return s.PageSize
 }
 
-func (o *StripeConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (s *StripeConfig) GetPollingPeriod() *string {
+	if s == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return s.PollingPeriod
 }
 
-func (o *StripeConfig) GetProvider() *string {
-	if o == nil {
+func (s *StripeConfig) GetProvider() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Provider
+	return s.Provider
 }

@@ -12,51 +12,51 @@ type WorkflowInstanceHistoryStageOutput struct {
 	RevertTransaction *ActivityCreateTransactionOutput  `json:"RevertTransaction,omitempty"`
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *ActivityCreateTransactionOutput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *ActivityCreateTransactionOutput {
+	if w == nil {
 		return nil
 	}
-	return o.CreateTransaction
+	return w.CreateTransaction
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetDebitWallet() *ActivityDebitWalletOutput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageOutput) GetDebitWallet() *ActivityDebitWalletOutput {
+	if w == nil {
 		return nil
 	}
-	return o.DebitWallet
+	return w.DebitWallet
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetGetAccount() *ActivityGetAccountOutput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageOutput) GetGetAccount() *ActivityGetAccountOutput {
+	if w == nil {
 		return nil
 	}
-	return o.GetAccount
+	return w.GetAccount
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetGetPayment() *ActivityGetPaymentOutput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageOutput) GetGetPayment() *ActivityGetPaymentOutput {
+	if w == nil {
 		return nil
 	}
-	return o.GetPayment
+	return w.GetPayment
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetGetWallet() *ActivityGetWalletOutput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageOutput) GetGetWallet() *ActivityGetWalletOutput {
+	if w == nil {
 		return nil
 	}
-	return o.GetWallet
+	return w.GetWallet
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetListWallets() *OrchestrationListWalletsResponse {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageOutput) GetListWallets() *OrchestrationListWalletsResponse {
+	if w == nil {
 		return nil
 	}
-	return o.ListWallets
+	return w.ListWallets
 }
 
-func (o *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *ActivityCreateTransactionOutput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *ActivityCreateTransactionOutput {
+	if w == nil {
 		return nil
 	}
-	return o.RevertTransaction
+	return w.RevertTransaction
 }

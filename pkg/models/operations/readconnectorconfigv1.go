@@ -14,18 +14,18 @@ type ReadConnectorConfigV1Request struct {
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorId"`
 }
 
-func (o *ReadConnectorConfigV1Request) GetConnector() shared.Connector {
-	if o == nil {
+func (r *ReadConnectorConfigV1Request) GetConnector() shared.Connector {
+	if r == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return r.Connector
 }
 
-func (o *ReadConnectorConfigV1Request) GetConnectorID() string {
-	if o == nil {
+func (r *ReadConnectorConfigV1Request) GetConnectorID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return r.ConnectorID
 }
 
 type ReadConnectorConfigV1Response struct {
@@ -39,30 +39,30 @@ type ReadConnectorConfigV1Response struct {
 	RawResponse *http.Response
 }
 
-func (o *ReadConnectorConfigV1Response) GetConnectorConfigResponse() *shared.ConnectorConfigResponse {
-	if o == nil {
+func (r *ReadConnectorConfigV1Response) GetConnectorConfigResponse() *shared.ConnectorConfigResponse {
+	if r == nil {
 		return nil
 	}
-	return o.ConnectorConfigResponse
+	return r.ConnectorConfigResponse
 }
 
-func (o *ReadConnectorConfigV1Response) GetContentType() string {
-	if o == nil {
+func (r *ReadConnectorConfigV1Response) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReadConnectorConfigV1Response) GetStatusCode() int {
-	if o == nil {
+func (r *ReadConnectorConfigV1Response) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReadConnectorConfigV1Response) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReadConnectorConfigV1Response) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

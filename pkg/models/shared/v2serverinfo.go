@@ -6,9 +6,9 @@ type V2ServerInfo struct {
 	Version string `json:"version"`
 }
 
-func (o *V2ServerInfo) GetVersion() string {
-	if o == nil {
+func (v *V2ServerInfo) GetVersion() string {
+	if v == nil {
 		return ""
 	}
-	return o.Version
+	return v.Version
 }

@@ -26,17 +26,17 @@ const (
 )
 
 type ConnectorConfig struct {
-	StripeConfig        *StripeConfig        `queryParam:"inline"`
-	DummyPayConfig      *DummyPayConfig      `queryParam:"inline"`
-	WiseConfig          *WiseConfig          `queryParam:"inline"`
-	ModulrConfig        *ModulrConfig        `queryParam:"inline"`
-	CurrencyCloudConfig *CurrencyCloudConfig `queryParam:"inline"`
-	BankingCircleConfig *BankingCircleConfig `queryParam:"inline"`
-	MangoPayConfig      *MangoPayConfig      `queryParam:"inline"`
-	MoneycorpConfig     *MoneycorpConfig     `queryParam:"inline"`
-	AtlarConfig         *AtlarConfig         `queryParam:"inline"`
-	AdyenConfig         *AdyenConfig         `queryParam:"inline"`
-	GenericConfig       *GenericConfig       `queryParam:"inline"`
+	StripeConfig        *StripeConfig        `queryParam:"inline" name:"ConnectorConfig"`
+	DummyPayConfig      *DummyPayConfig      `queryParam:"inline" name:"ConnectorConfig"`
+	WiseConfig          *WiseConfig          `queryParam:"inline" name:"ConnectorConfig"`
+	ModulrConfig        *ModulrConfig        `queryParam:"inline" name:"ConnectorConfig"`
+	CurrencyCloudConfig *CurrencyCloudConfig `queryParam:"inline" name:"ConnectorConfig"`
+	BankingCircleConfig *BankingCircleConfig `queryParam:"inline" name:"ConnectorConfig"`
+	MangoPayConfig      *MangoPayConfig      `queryParam:"inline" name:"ConnectorConfig"`
+	MoneycorpConfig     *MoneycorpConfig     `queryParam:"inline" name:"ConnectorConfig"`
+	AtlarConfig         *AtlarConfig         `queryParam:"inline" name:"ConnectorConfig"`
+	AdyenConfig         *AdyenConfig         `queryParam:"inline" name:"ConnectorConfig"`
+	GenericConfig       *GenericConfig       `queryParam:"inline" name:"ConnectorConfig"`
 
 	Type ConnectorConfigType
 }
@@ -187,7 +187,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 	switch dis.Provider {
 	case "Adyen":
 		adyenConfig := new(AdyenConfig)
-		if err := utils.UnmarshalJSON(data, &adyenConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &adyenConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Adyen) type AdyenConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -196,7 +196,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Atlar":
 		atlarConfig := new(AtlarConfig)
-		if err := utils.UnmarshalJSON(data, &atlarConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &atlarConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Atlar) type AtlarConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -205,7 +205,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Bankingcircle":
 		bankingCircleConfig := new(BankingCircleConfig)
-		if err := utils.UnmarshalJSON(data, &bankingCircleConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &bankingCircleConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Bankingcircle) type BankingCircleConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -214,7 +214,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Currencycloud":
 		currencyCloudConfig := new(CurrencyCloudConfig)
-		if err := utils.UnmarshalJSON(data, &currencyCloudConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &currencyCloudConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Currencycloud) type CurrencyCloudConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -223,7 +223,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Dummypay":
 		dummyPayConfig := new(DummyPayConfig)
-		if err := utils.UnmarshalJSON(data, &dummyPayConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &dummyPayConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Dummypay) type DummyPayConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -232,7 +232,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Generic":
 		genericConfig := new(GenericConfig)
-		if err := utils.UnmarshalJSON(data, &genericConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &genericConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Generic) type GenericConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -241,7 +241,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Mangopay":
 		mangoPayConfig := new(MangoPayConfig)
-		if err := utils.UnmarshalJSON(data, &mangoPayConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &mangoPayConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Mangopay) type MangoPayConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -250,7 +250,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Modulr":
 		modulrConfig := new(ModulrConfig)
-		if err := utils.UnmarshalJSON(data, &modulrConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &modulrConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Modulr) type ModulrConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -259,7 +259,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Moneycorp":
 		moneycorpConfig := new(MoneycorpConfig)
-		if err := utils.UnmarshalJSON(data, &moneycorpConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &moneycorpConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Moneycorp) type MoneycorpConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -268,7 +268,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Stripe":
 		stripeConfig := new(StripeConfig)
-		if err := utils.UnmarshalJSON(data, &stripeConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &stripeConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Stripe) type StripeConfig within ConnectorConfig: %w", string(data), err)
 		}
 
@@ -277,7 +277,7 @@ func (u *ConnectorConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Wise":
 		wiseConfig := new(WiseConfig)
-		if err := utils.UnmarshalJSON(data, &wiseConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &wiseConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Wise) type WiseConfig within ConnectorConfig: %w", string(data), err)
 		}
 

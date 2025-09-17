@@ -18,30 +18,30 @@ type GetInfoResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetInfoResponse) GetConfigInfoResponse() *shared.ConfigInfoResponse {
-	if o == nil {
+func (g *GetInfoResponse) GetConfigInfoResponse() *shared.ConfigInfoResponse {
+	if g == nil {
 		return nil
 	}
-	return o.ConfigInfoResponse
+	return g.ConfigInfoResponse
 }
 
-func (o *GetInfoResponse) GetContentType() string {
-	if o == nil {
+func (g *GetInfoResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetInfoResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetInfoResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

@@ -2,21 +2,36 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2LedgerAccountSubject struct {
 	Identifier string `json:"identifier"`
 	Type       string `json:"type"`
 }
 
-func (o *V2LedgerAccountSubject) GetIdentifier() string {
-	if o == nil {
-		return ""
-	}
-	return o.Identifier
+func (v V2LedgerAccountSubject) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
 }
 
-func (o *V2LedgerAccountSubject) GetType() string {
-	if o == nil {
+func (v *V2LedgerAccountSubject) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"identifier", "type"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2LedgerAccountSubject) GetIdentifier() string {
+	if v == nil {
 		return ""
 	}
-	return o.Type
+	return v.Identifier
+}
+
+func (v *V2LedgerAccountSubject) GetType() string {
+	if v == nil {
+		return ""
+	}
+	return v.Type
 }

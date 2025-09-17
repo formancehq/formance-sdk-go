@@ -2,13 +2,28 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2StageSendSourcePayment struct {
 	ID string `json:"id"`
 }
 
-func (o *V2StageSendSourcePayment) GetID() string {
-	if o == nil {
+func (v V2StageSendSourcePayment) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2StageSendSourcePayment) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2StageSendSourcePayment) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }

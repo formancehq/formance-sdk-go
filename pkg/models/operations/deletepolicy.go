@@ -11,11 +11,11 @@ type DeletePolicyRequest struct {
 	PolicyID string `pathParam:"style=simple,explode=false,name=policyID"`
 }
 
-func (o *DeletePolicyRequest) GetPolicyID() string {
-	if o == nil {
+func (d *DeletePolicyRequest) GetPolicyID() string {
+	if d == nil {
 		return ""
 	}
-	return o.PolicyID
+	return d.PolicyID
 }
 
 type DeletePolicyResponse struct {
@@ -27,23 +27,23 @@ type DeletePolicyResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *DeletePolicyResponse) GetContentType() string {
-	if o == nil {
+func (d *DeletePolicyResponse) GetContentType() string {
+	if d == nil {
 		return ""
 	}
-	return o.ContentType
+	return d.ContentType
 }
 
-func (o *DeletePolicyResponse) GetStatusCode() int {
-	if o == nil {
+func (d *DeletePolicyResponse) GetStatusCode() int {
+	if d == nil {
 		return 0
 	}
-	return o.StatusCode
+	return d.StatusCode
 }
 
-func (o *DeletePolicyResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (d *DeletePolicyResponse) GetRawResponse() *http.Response {
+	if d == nil {
 		return nil
 	}
-	return o.RawResponse
+	return d.RawResponse
 }

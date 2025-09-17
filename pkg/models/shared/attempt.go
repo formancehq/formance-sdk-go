@@ -25,78 +25,78 @@ func (a Attempt) MarshalJSON() ([]byte, error) {
 }
 
 func (a *Attempt) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"config", "createdAt", "id", "payload", "retryAttempt", "status", "statusCode", "updatedAt", "webhookID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Attempt) GetConfig() WebhooksConfig {
-	if o == nil {
+func (a *Attempt) GetConfig() WebhooksConfig {
+	if a == nil {
 		return WebhooksConfig{}
 	}
-	return o.Config
+	return a.Config
 }
 
-func (o *Attempt) GetCreatedAt() time.Time {
-	if o == nil {
+func (a *Attempt) GetCreatedAt() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return a.CreatedAt
 }
 
-func (o *Attempt) GetID() string {
-	if o == nil {
+func (a *Attempt) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *Attempt) GetNextRetryAfter() *time.Time {
-	if o == nil {
+func (a *Attempt) GetNextRetryAfter() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return o.NextRetryAfter
+	return a.NextRetryAfter
 }
 
-func (o *Attempt) GetPayload() string {
-	if o == nil {
+func (a *Attempt) GetPayload() string {
+	if a == nil {
 		return ""
 	}
-	return o.Payload
+	return a.Payload
 }
 
-func (o *Attempt) GetRetryAttempt() int64 {
-	if o == nil {
+func (a *Attempt) GetRetryAttempt() int64 {
+	if a == nil {
 		return 0
 	}
-	return o.RetryAttempt
+	return a.RetryAttempt
 }
 
-func (o *Attempt) GetStatus() string {
-	if o == nil {
+func (a *Attempt) GetStatus() string {
+	if a == nil {
 		return ""
 	}
-	return o.Status
+	return a.Status
 }
 
-func (o *Attempt) GetStatusCode() int64 {
-	if o == nil {
+func (a *Attempt) GetStatusCode() int64 {
+	if a == nil {
 		return 0
 	}
-	return o.StatusCode
+	return a.StatusCode
 }
 
-func (o *Attempt) GetUpdatedAt() time.Time {
-	if o == nil {
+func (a *Attempt) GetUpdatedAt() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return a.UpdatedAt
 }
 
-func (o *Attempt) GetWebhookID() string {
-	if o == nil {
+func (a *Attempt) GetWebhookID() string {
+	if a == nil {
 		return ""
 	}
-	return o.WebhookID
+	return a.WebhookID
 }

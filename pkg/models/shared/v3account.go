@@ -28,78 +28,78 @@ func (v V3Account) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Account) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"connectorID", "createdAt", "id", "provider", "raw", "reference", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3Account) GetConnectorID() string {
-	if o == nil {
+func (v *V3Account) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3Account) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3Account) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3Account) GetDefaultAsset() *string {
-	if o == nil {
+func (v *V3Account) GetDefaultAsset() *string {
+	if v == nil {
 		return nil
 	}
-	return o.DefaultAsset
+	return v.DefaultAsset
 }
 
-func (o *V3Account) GetID() string {
-	if o == nil {
+func (v *V3Account) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3Account) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3Account) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3Account) GetName() *string {
-	if o == nil {
+func (v *V3Account) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3Account) GetProvider() string {
-	if o == nil {
+func (v *V3Account) GetProvider() string {
+	if v == nil {
 		return ""
 	}
-	return o.Provider
+	return v.Provider
 }
 
-func (o *V3Account) GetRaw() V3AccountRaw {
-	if o == nil {
+func (v *V3Account) GetRaw() V3AccountRaw {
+	if v == nil {
 		return V3AccountRaw{}
 	}
-	return o.Raw
+	return v.Raw
 }
 
-func (o *V3Account) GetReference() string {
-	if o == nil {
+func (v *V3Account) GetReference() string {
+	if v == nil {
 		return ""
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V3Account) GetType() V3AccountTypeEnum {
-	if o == nil {
+func (v *V3Account) GetType() V3AccountTypeEnum {
+	if v == nil {
 		return V3AccountTypeEnum("")
 	}
-	return o.Type
+	return v.Type
 }

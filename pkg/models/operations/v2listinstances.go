@@ -23,32 +23,32 @@ type V2ListInstancesRequest struct {
 	WorkflowID *string `queryParam:"style=form,explode=true,name=workflowID"`
 }
 
-func (o *V2ListInstancesRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2ListInstancesRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ListInstancesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2ListInstancesRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2ListInstancesRequest) GetRunning() *bool {
-	if o == nil {
+func (v *V2ListInstancesRequest) GetRunning() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Running
+	return v.Running
 }
 
-func (o *V2ListInstancesRequest) GetWorkflowID() *string {
-	if o == nil {
+func (v *V2ListInstancesRequest) GetWorkflowID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.WorkflowID
+	return v.WorkflowID
 }
 
 type V2ListInstancesResponse struct {
@@ -62,30 +62,30 @@ type V2ListInstancesResponse struct {
 	V2ListRunsResponse *shared.V2ListRunsResponse
 }
 
-func (o *V2ListInstancesResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ListInstancesResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ListInstancesResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ListInstancesResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ListInstancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ListInstancesResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ListInstancesResponse) GetV2ListRunsResponse() *shared.V2ListRunsResponse {
-	if o == nil {
+func (v *V2ListInstancesResponse) GetV2ListRunsResponse() *shared.V2ListRunsResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2ListRunsResponse
+	return v.V2ListRunsResponse
 }

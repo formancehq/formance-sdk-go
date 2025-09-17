@@ -22,57 +22,57 @@ func (d DummyPayConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DummyPayConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"directory", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *DummyPayConfig) GetDirectory() string {
-	if o == nil {
+func (d *DummyPayConfig) GetDirectory() string {
+	if d == nil {
 		return ""
 	}
-	return o.Directory
+	return d.Directory
 }
 
-func (o *DummyPayConfig) GetFilePollingPeriod() *string {
-	if o == nil {
+func (d *DummyPayConfig) GetFilePollingPeriod() *string {
+	if d == nil {
 		return nil
 	}
-	return o.FilePollingPeriod
+	return d.FilePollingPeriod
 }
 
-func (o *DummyPayConfig) GetName() string {
-	if o == nil {
+func (d *DummyPayConfig) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return o.Name
+	return d.Name
 }
 
-func (o *DummyPayConfig) GetNumberOfAccountsPreGenerated() *int64 {
-	if o == nil {
+func (d *DummyPayConfig) GetNumberOfAccountsPreGenerated() *int64 {
+	if d == nil {
 		return nil
 	}
-	return o.NumberOfAccountsPreGenerated
+	return d.NumberOfAccountsPreGenerated
 }
 
-func (o *DummyPayConfig) GetNumberOfPaymentsPreGenerated() *int64 {
-	if o == nil {
+func (d *DummyPayConfig) GetNumberOfPaymentsPreGenerated() *int64 {
+	if d == nil {
 		return nil
 	}
-	return o.NumberOfPaymentsPreGenerated
+	return d.NumberOfPaymentsPreGenerated
 }
 
-func (o *DummyPayConfig) GetPrefixFileToIngest() *string {
-	if o == nil {
+func (d *DummyPayConfig) GetPrefixFileToIngest() *string {
+	if d == nil {
 		return nil
 	}
-	return o.PrefixFileToIngest
+	return d.PrefixFileToIngest
 }
 
-func (o *DummyPayConfig) GetProvider() *string {
-	if o == nil {
+func (d *DummyPayConfig) GetProvider() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Provider
+	return d.Provider
 }

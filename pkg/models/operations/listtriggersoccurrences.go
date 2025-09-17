@@ -12,11 +12,11 @@ type ListTriggersOccurrencesRequest struct {
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`
 }
 
-func (o *ListTriggersOccurrencesRequest) GetTriggerID() string {
-	if o == nil {
+func (l *ListTriggersOccurrencesRequest) GetTriggerID() string {
+	if l == nil {
 		return ""
 	}
-	return o.TriggerID
+	return l.TriggerID
 }
 
 type ListTriggersOccurrencesResponse struct {
@@ -30,30 +30,30 @@ type ListTriggersOccurrencesResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListTriggersOccurrencesResponse) GetContentType() string {
-	if o == nil {
+func (l *ListTriggersOccurrencesResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListTriggersOccurrencesResponse) GetListTriggersOccurrencesResponse() *shared.ListTriggersOccurrencesResponse {
-	if o == nil {
+func (l *ListTriggersOccurrencesResponse) GetListTriggersOccurrencesResponse() *shared.ListTriggersOccurrencesResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ListTriggersOccurrencesResponse
+	return l.ListTriggersOccurrencesResponse
 }
 
-func (o *ListTriggersOccurrencesResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListTriggersOccurrencesResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListTriggersOccurrencesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListTriggersOccurrencesResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

@@ -24,43 +24,43 @@ func (v V2PaymentAdjustment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2PaymentAdjustment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"absolute", "amount", "date", "raw", "status"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2PaymentAdjustment) GetAbsolute() bool {
-	if o == nil {
+func (v *V2PaymentAdjustment) GetAbsolute() bool {
+	if v == nil {
 		return false
 	}
-	return o.Absolute
+	return v.Absolute
 }
 
-func (o *V2PaymentAdjustment) GetAmount() *big.Int {
-	if o == nil {
+func (v *V2PaymentAdjustment) GetAmount() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V2PaymentAdjustment) GetDate() time.Time {
-	if o == nil {
+func (v *V2PaymentAdjustment) GetDate() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.Date
+	return v.Date
 }
 
-func (o *V2PaymentAdjustment) GetRaw() V2PaymentAdjustmentRaw {
-	if o == nil {
+func (v *V2PaymentAdjustment) GetRaw() V2PaymentAdjustmentRaw {
+	if v == nil {
 		return V2PaymentAdjustmentRaw{}
 	}
-	return o.Raw
+	return v.Raw
 }
 
-func (o *V2PaymentAdjustment) GetStatus() V2PaymentStatus {
-	if o == nil {
+func (v *V2PaymentAdjustment) GetStatus() V2PaymentStatus {
+	if v == nil {
 		return V2PaymentStatus("")
 	}
-	return o.Status
+	return v.Status
 }

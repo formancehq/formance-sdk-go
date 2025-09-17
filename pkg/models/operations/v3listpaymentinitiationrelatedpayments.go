@@ -18,32 +18,32 @@ type V3ListPaymentInitiationRelatedPaymentsRequest struct {
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsRequest) GetCursor() *string {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsRequest) GetPaymentInitiationID() string {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetPaymentInitiationID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentInitiationID
+	return v.PaymentInitiationID
 }
 
 type V3ListPaymentInitiationRelatedPaymentsResponse struct {
@@ -57,30 +57,30 @@ type V3ListPaymentInitiationRelatedPaymentsResponse struct {
 	V3PaymentInitiationRelatedPaymentsCursorResponse *shared.V3PaymentInitiationRelatedPaymentsCursorResponse
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ListPaymentInitiationRelatedPaymentsResponse) GetV3PaymentInitiationRelatedPaymentsCursorResponse() *shared.V3PaymentInitiationRelatedPaymentsCursorResponse {
-	if o == nil {
+func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetV3PaymentInitiationRelatedPaymentsCursorResponse() *shared.V3PaymentInitiationRelatedPaymentsCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3PaymentInitiationRelatedPaymentsCursorResponse
+	return v.V3PaymentInitiationRelatedPaymentsCursorResponse
 }

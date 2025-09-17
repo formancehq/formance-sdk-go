@@ -21,50 +21,50 @@ func (t TriggerOccurrence) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TriggerOccurrence) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"date", "event", "triggerID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TriggerOccurrence) GetDate() time.Time {
-	if o == nil {
+func (t *TriggerOccurrence) GetDate() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.Date
+	return t.Date
 }
 
-func (o *TriggerOccurrence) GetError() *string {
-	if o == nil {
+func (t *TriggerOccurrence) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TriggerOccurrence) GetEvent() map[string]any {
-	if o == nil {
+func (t *TriggerOccurrence) GetEvent() map[string]any {
+	if t == nil {
 		return map[string]any{}
 	}
-	return o.Event
+	return t.Event
 }
 
-func (o *TriggerOccurrence) GetTriggerID() string {
-	if o == nil {
+func (t *TriggerOccurrence) GetTriggerID() string {
+	if t == nil {
 		return ""
 	}
-	return o.TriggerID
+	return t.TriggerID
 }
 
-func (o *TriggerOccurrence) GetWorkflowInstance() *WorkflowInstance {
-	if o == nil {
+func (t *TriggerOccurrence) GetWorkflowInstance() *WorkflowInstance {
+	if t == nil {
 		return nil
 	}
-	return o.WorkflowInstance
+	return t.WorkflowInstance
 }
 
-func (o *TriggerOccurrence) GetWorkflowInstanceID() *string {
-	if o == nil {
+func (t *TriggerOccurrence) GetWorkflowInstanceID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.WorkflowInstanceID
+	return t.WorkflowInstanceID
 }

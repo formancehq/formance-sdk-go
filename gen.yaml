@@ -13,9 +13,14 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
   telemetryEnabled: false
 go:
-  version: 3.5.0
+  version: 3.6.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
   author: Formance
@@ -34,6 +39,10 @@ go:
   inputModelSuffix: input
   maxMethodParams: 0
   methodArguments: require-security-and-request
+  modulePath: ""
+  nullableOptionalWrapper: false
   outputModelSuffix: output
   packageName: github.com/formancehq/formance-sdk-go
+  respectRequiredFields: false
   responseFormat: envelope
+  sdkPackageName: ""

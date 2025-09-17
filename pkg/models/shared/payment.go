@@ -35,120 +35,120 @@ func (p Payment) MarshalJSON() ([]byte, error) {
 }
 
 func (p *Payment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"adjustments", "amount", "asset", "connectorID", "createdAt", "destinationAccountID", "id", "initialAmount", "metadata", "raw", "reference", "scheme", "sourceAccountID", "status", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Payment) GetAdjustments() []PaymentAdjustment {
-	if o == nil {
+func (p *Payment) GetAdjustments() []PaymentAdjustment {
+	if p == nil {
 		return []PaymentAdjustment{}
 	}
-	return o.Adjustments
+	return p.Adjustments
 }
 
-func (o *Payment) GetAmount() *big.Int {
-	if o == nil {
+func (p *Payment) GetAmount() *big.Int {
+	if p == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *Payment) GetAsset() string {
-	if o == nil {
+func (p *Payment) GetAsset() string {
+	if p == nil {
 		return ""
 	}
-	return o.Asset
+	return p.Asset
 }
 
-func (o *Payment) GetConnectorID() string {
-	if o == nil {
+func (p *Payment) GetConnectorID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return p.ConnectorID
 }
 
-func (o *Payment) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *Payment) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *Payment) GetDestinationAccountID() string {
-	if o == nil {
+func (p *Payment) GetDestinationAccountID() string {
+	if p == nil {
 		return ""
 	}
-	return o.DestinationAccountID
+	return p.DestinationAccountID
 }
 
-func (o *Payment) GetID() string {
-	if o == nil {
+func (p *Payment) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *Payment) GetInitialAmount() *big.Int {
-	if o == nil {
+func (p *Payment) GetInitialAmount() *big.Int {
+	if p == nil {
 		return big.NewInt(0)
 	}
-	return o.InitialAmount
+	return p.InitialAmount
 }
 
-func (o *Payment) GetMetadata() map[string]string {
-	if o == nil {
+func (p *Payment) GetMetadata() map[string]string {
+	if p == nil {
 		return nil
 	}
-	return o.Metadata
+	return p.Metadata
 }
 
-func (o *Payment) GetProvider() *Connector {
-	if o == nil {
+func (p *Payment) GetProvider() *Connector {
+	if p == nil {
 		return nil
 	}
-	return o.Provider
+	return p.Provider
 }
 
-func (o *Payment) GetRaw() *Raw {
-	if o == nil {
+func (p *Payment) GetRaw() *Raw {
+	if p == nil {
 		return nil
 	}
-	return o.Raw
+	return p.Raw
 }
 
-func (o *Payment) GetReference() string {
-	if o == nil {
+func (p *Payment) GetReference() string {
+	if p == nil {
 		return ""
 	}
-	return o.Reference
+	return p.Reference
 }
 
-func (o *Payment) GetScheme() PaymentScheme {
-	if o == nil {
+func (p *Payment) GetScheme() PaymentScheme {
+	if p == nil {
 		return PaymentScheme("")
 	}
-	return o.Scheme
+	return p.Scheme
 }
 
-func (o *Payment) GetSourceAccountID() string {
-	if o == nil {
+func (p *Payment) GetSourceAccountID() string {
+	if p == nil {
 		return ""
 	}
-	return o.SourceAccountID
+	return p.SourceAccountID
 }
 
-func (o *Payment) GetStatus() PaymentStatus {
-	if o == nil {
+func (p *Payment) GetStatus() PaymentStatus {
+	if p == nil {
 		return PaymentStatus("")
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *Payment) GetType() PaymentType {
-	if o == nil {
+func (p *Payment) GetType() PaymentType {
+	if p == nil {
 		return PaymentType("")
 	}
-	return o.Type
+	return p.Type
 }

@@ -23,64 +23,64 @@ func (v V3Instance) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Instance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"connectorID", "createdAt", "id", "scheduleID", "terminated", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3Instance) GetConnectorID() string {
-	if o == nil {
+func (v *V3Instance) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3Instance) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3Instance) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3Instance) GetError() *string {
-	if o == nil {
+func (v *V3Instance) GetError() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Error
+	return v.Error
 }
 
-func (o *V3Instance) GetID() string {
-	if o == nil {
+func (v *V3Instance) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3Instance) GetScheduleID() string {
-	if o == nil {
+func (v *V3Instance) GetScheduleID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ScheduleID
+	return v.ScheduleID
 }
 
-func (o *V3Instance) GetTerminated() bool {
-	if o == nil {
+func (v *V3Instance) GetTerminated() bool {
+	if v == nil {
 		return false
 	}
-	return o.Terminated
+	return v.Terminated
 }
 
-func (o *V3Instance) GetTerminatedAt() *time.Time {
-	if o == nil {
+func (v *V3Instance) GetTerminatedAt() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.TerminatedAt
+	return v.TerminatedAt
 }
 
-func (o *V3Instance) GetUpdatedAt() time.Time {
-	if o == nil {
+func (v *V3Instance) GetUpdatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return v.UpdatedAt
 }

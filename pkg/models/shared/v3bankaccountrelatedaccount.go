@@ -17,22 +17,22 @@ func (v V3BankAccountRelatedAccount) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3BankAccountRelatedAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountID", "createdAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3BankAccountRelatedAccount) GetAccountID() string {
-	if o == nil {
+func (v *V3BankAccountRelatedAccount) GetAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccountID
+	return v.AccountID
 }
 
-func (o *V3BankAccountRelatedAccount) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3BankAccountRelatedAccount) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }

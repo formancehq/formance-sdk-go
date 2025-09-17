@@ -18,30 +18,30 @@ type CreatePolicyResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreatePolicyResponse) GetContentType() string {
-	if o == nil {
+func (c *CreatePolicyResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreatePolicyResponse) GetPolicyResponse() *shared.PolicyResponse {
-	if o == nil {
+func (c *CreatePolicyResponse) GetPolicyResponse() *shared.PolicyResponse {
+	if c == nil {
 		return nil
 	}
-	return o.PolicyResponse
+	return c.PolicyResponse
 }
 
-func (o *CreatePolicyResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreatePolicyResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreatePolicyResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreatePolicyResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

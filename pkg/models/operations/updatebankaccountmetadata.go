@@ -13,18 +13,18 @@ type UpdateBankAccountMetadataRequest struct {
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountId"`
 }
 
-func (o *UpdateBankAccountMetadataRequest) GetUpdateBankAccountMetadataRequest() shared.UpdateBankAccountMetadataRequest {
-	if o == nil {
+func (u *UpdateBankAccountMetadataRequest) GetUpdateBankAccountMetadataRequest() shared.UpdateBankAccountMetadataRequest {
+	if u == nil {
 		return shared.UpdateBankAccountMetadataRequest{}
 	}
-	return o.UpdateBankAccountMetadataRequest
+	return u.UpdateBankAccountMetadataRequest
 }
 
-func (o *UpdateBankAccountMetadataRequest) GetBankAccountID() string {
-	if o == nil {
+func (u *UpdateBankAccountMetadataRequest) GetBankAccountID() string {
+	if u == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return u.BankAccountID
 }
 
 type UpdateBankAccountMetadataResponse struct {
@@ -36,23 +36,23 @@ type UpdateBankAccountMetadataResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *UpdateBankAccountMetadataResponse) GetContentType() string {
-	if o == nil {
+func (u *UpdateBankAccountMetadataResponse) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UpdateBankAccountMetadataResponse) GetStatusCode() int {
-	if o == nil {
+func (u *UpdateBankAccountMetadataResponse) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UpdateBankAccountMetadataResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UpdateBankAccountMetadataResponse) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

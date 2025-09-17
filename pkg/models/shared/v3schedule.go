@@ -18,29 +18,29 @@ func (v V3Schedule) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Schedule) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"connectorID", "createdAt", "id"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3Schedule) GetConnectorID() string {
-	if o == nil {
+func (v *V3Schedule) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3Schedule) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3Schedule) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3Schedule) GetID() string {
-	if o == nil {
+func (v *V3Schedule) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }

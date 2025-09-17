@@ -44,66 +44,66 @@ func (g GetAccountBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetAccountBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"accountId"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GetAccountBalancesRequest) GetAccountID() string {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetAccountID() string {
+	if g == nil {
 		return ""
 	}
-	return o.AccountID
+	return g.AccountID
 }
 
-func (o *GetAccountBalancesRequest) GetAsset() *string {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetAsset() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Asset
+	return g.Asset
 }
 
-func (o *GetAccountBalancesRequest) GetCursor() *string {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetCursor() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Cursor
+	return g.Cursor
 }
 
-func (o *GetAccountBalancesRequest) GetFrom() *time.Time {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetFrom() *time.Time {
+	if g == nil {
 		return nil
 	}
-	return o.From
+	return g.From
 }
 
-func (o *GetAccountBalancesRequest) GetLimit() *int64 {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetLimit() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.Limit
+	return g.Limit
 }
 
-func (o *GetAccountBalancesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetPageSize() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.PageSize
+	return g.PageSize
 }
 
-func (o *GetAccountBalancesRequest) GetSort() []string {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetSort() []string {
+	if g == nil {
 		return nil
 	}
-	return o.Sort
+	return g.Sort
 }
 
-func (o *GetAccountBalancesRequest) GetTo() *time.Time {
-	if o == nil {
+func (g *GetAccountBalancesRequest) GetTo() *time.Time {
+	if g == nil {
 		return nil
 	}
-	return o.To
+	return g.To
 }
 
 type GetAccountBalancesResponse struct {
@@ -117,30 +117,30 @@ type GetAccountBalancesResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetAccountBalancesResponse) GetBalancesCursor() *shared.BalancesCursor {
-	if o == nil {
+func (g *GetAccountBalancesResponse) GetBalancesCursor() *shared.BalancesCursor {
+	if g == nil {
 		return nil
 	}
-	return o.BalancesCursor
+	return g.BalancesCursor
 }
 
-func (o *GetAccountBalancesResponse) GetContentType() string {
-	if o == nil {
+func (g *GetAccountBalancesResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetAccountBalancesResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetAccountBalancesResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetAccountBalancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetAccountBalancesResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

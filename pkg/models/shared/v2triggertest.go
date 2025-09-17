@@ -7,18 +7,18 @@ type Filter struct {
 	Match *bool   `json:"match,omitempty"`
 }
 
-func (o *Filter) GetError() *string {
-	if o == nil {
+func (f *Filter) GetError() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Error
+	return f.Error
 }
 
-func (o *Filter) GetMatch() *bool {
-	if o == nil {
+func (f *Filter) GetMatch() *bool {
+	if f == nil {
 		return nil
 	}
-	return o.Match
+	return f.Match
 }
 
 type Variables struct {
@@ -26,18 +26,18 @@ type Variables struct {
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *Variables) GetError() *string {
-	if o == nil {
+func (v *Variables) GetError() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Error
+	return v.Error
 }
 
-func (o *Variables) GetValue() *string {
-	if o == nil {
+func (v *Variables) GetValue() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Value
+	return v.Value
 }
 
 type V2TriggerTest struct {
@@ -45,16 +45,16 @@ type V2TriggerTest struct {
 	Variables map[string]Variables `json:"variables,omitempty"`
 }
 
-func (o *V2TriggerTest) GetFilter() *Filter {
-	if o == nil {
+func (v *V2TriggerTest) GetFilter() *Filter {
+	if v == nil {
 		return nil
 	}
-	return o.Filter
+	return v.Filter
 }
 
-func (o *V2TriggerTest) GetVariables() map[string]Variables {
-	if o == nil {
+func (v *V2TriggerTest) GetVariables() map[string]Variables {
+	if v == nil {
 		return nil
 	}
-	return o.Variables
+	return v.Variables
 }

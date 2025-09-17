@@ -6,9 +6,9 @@ type ActivityGetPayment struct {
 	ID string `json:"id"`
 }
 
-func (o *ActivityGetPayment) GetID() string {
-	if o == nil {
+func (a *ActivityGetPayment) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }

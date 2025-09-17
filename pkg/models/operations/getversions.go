@@ -18,30 +18,30 @@ type GetVersionsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetVersionsResponse) GetContentType() string {
-	if o == nil {
+func (g *GetVersionsResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetVersionsResponse) GetGetVersionsResponse() *shared.GetVersionsResponse {
-	if o == nil {
+func (g *GetVersionsResponse) GetGetVersionsResponse() *shared.GetVersionsResponse {
+	if g == nil {
 		return nil
 	}
-	return o.GetVersionsResponse
+	return g.GetVersionsResponse
 }
 
-func (o *GetVersionsResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetVersionsResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetVersionsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetVersionsResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

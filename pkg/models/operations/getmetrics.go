@@ -17,30 +17,30 @@ type GetMetricsResponse struct {
 	Object map[string]any
 }
 
-func (o *GetMetricsResponse) GetContentType() string {
-	if o == nil {
+func (g *GetMetricsResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetMetricsResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetMetricsResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetMetricsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetMetricsResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }
 
-func (o *GetMetricsResponse) GetObject() map[string]any {
-	if o == nil {
+func (g *GetMetricsResponse) GetObject() map[string]any {
+	if g == nil {
 		return nil
 	}
-	return o.Object
+	return g.Object
 }

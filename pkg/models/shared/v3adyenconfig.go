@@ -23,71 +23,71 @@ func (v V3AdyenConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3AdyenConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "companyID", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3AdyenConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3AdyenConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3AdyenConfig) GetCompanyID() string {
-	if o == nil {
+func (v *V3AdyenConfig) GetCompanyID() string {
+	if v == nil {
 		return ""
 	}
-	return o.CompanyID
+	return v.CompanyID
 }
 
-func (o *V3AdyenConfig) GetLiveEndpointPrefix() *string {
-	if o == nil {
+func (v *V3AdyenConfig) GetLiveEndpointPrefix() *string {
+	if v == nil {
 		return nil
 	}
-	return o.LiveEndpointPrefix
+	return v.LiveEndpointPrefix
 }
 
-func (o *V3AdyenConfig) GetName() string {
-	if o == nil {
+func (v *V3AdyenConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3AdyenConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3AdyenConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3AdyenConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3AdyenConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3AdyenConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3AdyenConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }
 
-func (o *V3AdyenConfig) GetWebhookPassword() *string {
-	if o == nil {
+func (v *V3AdyenConfig) GetWebhookPassword() *string {
+	if v == nil {
 		return nil
 	}
-	return o.WebhookPassword
+	return v.WebhookPassword
 }
 
-func (o *V3AdyenConfig) GetWebhookUsername() *string {
-	if o == nil {
+func (v *V3AdyenConfig) GetWebhookUsername() *string {
+	if v == nil {
 		return nil
 	}
-	return o.WebhookUsername
+	return v.WebhookUsername
 }

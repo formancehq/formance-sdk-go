@@ -14,18 +14,18 @@ type V2GetInstanceStageHistoryRequest struct {
 	Number int64 `pathParam:"style=simple,explode=false,name=number"`
 }
 
-func (o *V2GetInstanceStageHistoryRequest) GetInstanceID() string {
-	if o == nil {
+func (v *V2GetInstanceStageHistoryRequest) GetInstanceID() string {
+	if v == nil {
 		return ""
 	}
-	return o.InstanceID
+	return v.InstanceID
 }
 
-func (o *V2GetInstanceStageHistoryRequest) GetNumber() int64 {
-	if o == nil {
+func (v *V2GetInstanceStageHistoryRequest) GetNumber() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.Number
+	return v.Number
 }
 
 type V2GetInstanceStageHistoryResponse struct {
@@ -39,30 +39,30 @@ type V2GetInstanceStageHistoryResponse struct {
 	V2GetWorkflowInstanceHistoryStageResponse *shared.V2GetWorkflowInstanceHistoryStageResponse
 }
 
-func (o *V2GetInstanceStageHistoryResponse) GetContentType() string {
-	if o == nil {
+func (v *V2GetInstanceStageHistoryResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2GetInstanceStageHistoryResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2GetInstanceStageHistoryResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2GetInstanceStageHistoryResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2GetInstanceStageHistoryResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2GetInstanceStageHistoryResponse) GetV2GetWorkflowInstanceHistoryStageResponse() *shared.V2GetWorkflowInstanceHistoryStageResponse {
-	if o == nil {
+func (v *V2GetInstanceStageHistoryResponse) GetV2GetWorkflowInstanceHistoryStageResponse() *shared.V2GetWorkflowInstanceHistoryStageResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2GetWorkflowInstanceHistoryStageResponse
+	return v.V2GetWorkflowInstanceHistoryStageResponse
 }

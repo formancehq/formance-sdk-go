@@ -6,9 +6,9 @@ type GetBalanceResponse struct {
 	Data BalanceWithAssets `json:"data"`
 }
 
-func (o *GetBalanceResponse) GetData() BalanceWithAssets {
-	if o == nil {
+func (g *GetBalanceResponse) GetData() BalanceWithAssets {
+	if g == nil {
 		return BalanceWithAssets{}
 	}
-	return o.Data
+	return g.Data
 }

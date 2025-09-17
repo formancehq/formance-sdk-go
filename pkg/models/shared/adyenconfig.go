@@ -22,50 +22,50 @@ func (a AdyenConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AdyenConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"apiKey", "hmacKey", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *AdyenConfig) GetAPIKey() string {
-	if o == nil {
+func (a *AdyenConfig) GetAPIKey() string {
+	if a == nil {
 		return ""
 	}
-	return o.APIKey
+	return a.APIKey
 }
 
-func (o *AdyenConfig) GetHmacKey() string {
-	if o == nil {
+func (a *AdyenConfig) GetHmacKey() string {
+	if a == nil {
 		return ""
 	}
-	return o.HmacKey
+	return a.HmacKey
 }
 
-func (o *AdyenConfig) GetLiveEndpointPrefix() *string {
-	if o == nil {
+func (a *AdyenConfig) GetLiveEndpointPrefix() *string {
+	if a == nil {
 		return nil
 	}
-	return o.LiveEndpointPrefix
+	return a.LiveEndpointPrefix
 }
 
-func (o *AdyenConfig) GetName() string {
-	if o == nil {
+func (a *AdyenConfig) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return o.Name
+	return a.Name
 }
 
-func (o *AdyenConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (a *AdyenConfig) GetPollingPeriod() *string {
+	if a == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return a.PollingPeriod
 }
 
-func (o *AdyenConfig) GetProvider() *string {
-	if o == nil {
+func (a *AdyenConfig) GetProvider() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Provider
+	return a.Provider
 }

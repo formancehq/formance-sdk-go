@@ -12,21 +12,43 @@ type Descriptor struct {
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *Descriptor) GetKey() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Key
+func (d Descriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
 }
 
-func (o *Descriptor) GetName() *string {
-	if o == nil {
+func (d *Descriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (d *Descriptor) GetKey() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Name
+	return d.Key
+}
+
+func (d *Descriptor) GetName() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Name
 }
 
 type TaskBankingCircleState struct {
+}
+
+func (t TaskBankingCircleState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskBankingCircleState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskBankingCircle struct {
@@ -45,64 +67,64 @@ func (t TaskBankingCircle) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskBankingCircle) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskBankingCircle) GetConnectorID() string {
-	if o == nil {
+func (t *TaskBankingCircle) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskBankingCircle) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskBankingCircle) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskBankingCircle) GetDescriptor() Descriptor {
-	if o == nil {
+func (t *TaskBankingCircle) GetDescriptor() Descriptor {
+	if t == nil {
 		return Descriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskBankingCircle) GetError() *string {
-	if o == nil {
+func (t *TaskBankingCircle) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskBankingCircle) GetID() string {
-	if o == nil {
+func (t *TaskBankingCircle) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskBankingCircle) GetState() *TaskBankingCircleState {
-	if o == nil {
+func (t *TaskBankingCircle) GetState() *TaskBankingCircleState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskBankingCircle) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskBankingCircle) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskBankingCircle) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskBankingCircle) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

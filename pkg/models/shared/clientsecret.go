@@ -9,30 +9,30 @@ type ClientSecret struct {
 	Name       string         `json:"name"`
 }
 
-func (o *ClientSecret) GetID() string {
-	if o == nil {
+func (c *ClientSecret) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *ClientSecret) GetLastDigits() string {
-	if o == nil {
+func (c *ClientSecret) GetLastDigits() string {
+	if c == nil {
 		return ""
 	}
-	return o.LastDigits
+	return c.LastDigits
 }
 
-func (o *ClientSecret) GetMetadata() map[string]any {
-	if o == nil {
+func (c *ClientSecret) GetMetadata() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *ClientSecret) GetName() string {
-	if o == nil {
+func (c *ClientSecret) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }

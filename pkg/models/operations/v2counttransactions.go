@@ -20,31 +20,31 @@ func (v V2CountTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2CountTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2CountTransactionsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V2CountTransactionsRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2CountTransactionsRequest) GetLedger() string {
-	if o == nil {
+func (v *V2CountTransactionsRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2CountTransactionsRequest) GetPit() *time.Time {
-	if o == nil {
+func (v *V2CountTransactionsRequest) GetPit() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Pit
+	return v.Pit
 }
 
 type V2CountTransactionsResponse struct {
@@ -57,30 +57,30 @@ type V2CountTransactionsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2CountTransactionsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2CountTransactionsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2CountTransactionsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (v *V2CountTransactionsResponse) GetHeaders() map[string][]string {
+	if v == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return v.Headers
 }
 
-func (o *V2CountTransactionsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2CountTransactionsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2CountTransactionsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2CountTransactionsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

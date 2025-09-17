@@ -19,43 +19,43 @@ func (v V3DummypayConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3DummypayConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"directory", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3DummypayConfig) GetDirectory() string {
-	if o == nil {
+func (v *V3DummypayConfig) GetDirectory() string {
+	if v == nil {
 		return ""
 	}
-	return o.Directory
+	return v.Directory
 }
 
-func (o *V3DummypayConfig) GetName() string {
-	if o == nil {
+func (v *V3DummypayConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3DummypayConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3DummypayConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3DummypayConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3DummypayConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3DummypayConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3DummypayConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }

@@ -30,45 +30,45 @@ func (v V2ListLogsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2ListLogsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2ListLogsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V2ListLogsRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2ListLogsRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2ListLogsRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ListLogsRequest) GetLedger() string {
-	if o == nil {
+func (v *V2ListLogsRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2ListLogsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2ListLogsRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2ListLogsRequest) GetPit() *time.Time {
-	if o == nil {
+func (v *V2ListLogsRequest) GetPit() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Pit
+	return v.Pit
 }
 
 type V2ListLogsResponse struct {
@@ -82,30 +82,30 @@ type V2ListLogsResponse struct {
 	V2LogsCursorResponse *shared.V2LogsCursorResponse
 }
 
-func (o *V2ListLogsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ListLogsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ListLogsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ListLogsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ListLogsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ListLogsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ListLogsResponse) GetV2LogsCursorResponse() *shared.V2LogsCursorResponse {
-	if o == nil {
+func (v *V2ListLogsResponse) GetV2LogsCursorResponse() *shared.V2LogsCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2LogsCursorResponse
+	return v.V2LogsCursorResponse
 }

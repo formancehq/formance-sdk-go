@@ -10,39 +10,39 @@ type BalancesCursorCursor struct {
 	Previous *string          `json:"previous,omitempty"`
 }
 
-func (o *BalancesCursorCursor) GetData() []AccountBalance {
-	if o == nil {
+func (b *BalancesCursorCursor) GetData() []AccountBalance {
+	if b == nil {
 		return []AccountBalance{}
 	}
-	return o.Data
+	return b.Data
 }
 
-func (o *BalancesCursorCursor) GetHasMore() bool {
-	if o == nil {
+func (b *BalancesCursorCursor) GetHasMore() bool {
+	if b == nil {
 		return false
 	}
-	return o.HasMore
+	return b.HasMore
 }
 
-func (o *BalancesCursorCursor) GetNext() *string {
-	if o == nil {
+func (b *BalancesCursorCursor) GetNext() *string {
+	if b == nil {
 		return nil
 	}
-	return o.Next
+	return b.Next
 }
 
-func (o *BalancesCursorCursor) GetPageSize() int64 {
-	if o == nil {
+func (b *BalancesCursorCursor) GetPageSize() int64 {
+	if b == nil {
 		return 0
 	}
-	return o.PageSize
+	return b.PageSize
 }
 
-func (o *BalancesCursorCursor) GetPrevious() *string {
-	if o == nil {
+func (b *BalancesCursorCursor) GetPrevious() *string {
+	if b == nil {
 		return nil
 	}
-	return o.Previous
+	return b.Previous
 }
 
 // BalancesCursor - OK
@@ -50,9 +50,9 @@ type BalancesCursor struct {
 	Cursor BalancesCursorCursor `json:"cursor"`
 }
 
-func (o *BalancesCursor) GetCursor() BalancesCursorCursor {
-	if o == nil {
+func (b *BalancesCursor) GetCursor() BalancesCursorCursor {
+	if b == nil {
 		return BalancesCursorCursor{}
 	}
-	return o.Cursor
+	return b.Cursor
 }

@@ -16,79 +16,79 @@ type V2WorkflowInstanceHistoryStageInput struct {
 	VoidHold           *V2ActivityVoidHold           `json:"VoidHold,omitempty"`
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetAddAccountMetadata() *V2ActivityAddAccountMetadata {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetAddAccountMetadata() *V2ActivityAddAccountMetadata {
+	if v == nil {
 		return nil
 	}
-	return o.AddAccountMetadata
+	return v.AddAccountMetadata
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetConfirmHold() *V2ActivityConfirmHold {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetConfirmHold() *V2ActivityConfirmHold {
+	if v == nil {
 		return nil
 	}
-	return o.ConfirmHold
+	return v.ConfirmHold
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetCreateTransaction() *V2ActivityCreateTransaction {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetCreateTransaction() *V2ActivityCreateTransaction {
+	if v == nil {
 		return nil
 	}
-	return o.CreateTransaction
+	return v.CreateTransaction
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetCreditWallet() *V2ActivityCreditWallet {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetCreditWallet() *V2ActivityCreditWallet {
+	if v == nil {
 		return nil
 	}
-	return o.CreditWallet
+	return v.CreditWallet
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetDebitWallet() *V2ActivityDebitWallet {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetDebitWallet() *V2ActivityDebitWallet {
+	if v == nil {
 		return nil
 	}
-	return o.DebitWallet
+	return v.DebitWallet
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetGetAccount() *V2ActivityGetAccount {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetGetAccount() *V2ActivityGetAccount {
+	if v == nil {
 		return nil
 	}
-	return o.GetAccount
+	return v.GetAccount
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetGetPayment() *V2ActivityGetPayment {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetGetPayment() *V2ActivityGetPayment {
+	if v == nil {
 		return nil
 	}
-	return o.GetPayment
+	return v.GetPayment
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetGetWallet() *V2ActivityGetWallet {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetGetWallet() *V2ActivityGetWallet {
+	if v == nil {
 		return nil
 	}
-	return o.GetWallet
+	return v.GetWallet
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetListWallets() *V2ActivityListWallets {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetListWallets() *V2ActivityListWallets {
+	if v == nil {
 		return nil
 	}
-	return o.ListWallets
+	return v.ListWallets
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetStripeTransfer() *V2ActivityStripeTransfer {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetStripeTransfer() *V2ActivityStripeTransfer {
+	if v == nil {
 		return nil
 	}
-	return o.StripeTransfer
+	return v.StripeTransfer
 }
 
-func (o *V2WorkflowInstanceHistoryStageInput) GetVoidHold() *V2ActivityVoidHold {
-	if o == nil {
+func (v *V2WorkflowInstanceHistoryStageInput) GetVoidHold() *V2ActivityVoidHold {
+	if v == nil {
 		return nil
 	}
-	return o.VoidHold
+	return v.VoidHold
 }

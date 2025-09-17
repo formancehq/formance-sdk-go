@@ -8,20 +8,20 @@ type V3UninstallConnectorResponseData struct {
 	TaskID string `json:"taskID"`
 }
 
-func (o *V3UninstallConnectorResponseData) GetTaskID() string {
-	if o == nil {
+func (v *V3UninstallConnectorResponseData) GetTaskID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TaskID
+	return v.TaskID
 }
 
 type V3UninstallConnectorResponse struct {
 	Data V3UninstallConnectorResponseData `json:"data"`
 }
 
-func (o *V3UninstallConnectorResponse) GetData() V3UninstallConnectorResponseData {
-	if o == nil {
+func (v *V3UninstallConnectorResponse) GetData() V3UninstallConnectorResponseData {
+	if v == nil {
 		return V3UninstallConnectorResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

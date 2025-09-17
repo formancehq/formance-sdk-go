@@ -15,23 +15,23 @@ type GetOIDCWellKnownsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetOIDCWellKnownsResponse) GetContentType() string {
-	if o == nil {
+func (g *GetOIDCWellKnownsResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetOIDCWellKnownsResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetOIDCWellKnownsResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetOIDCWellKnownsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetOIDCWellKnownsResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

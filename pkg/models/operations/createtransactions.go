@@ -13,18 +13,18 @@ type CreateTransactionsRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *CreateTransactionsRequest) GetTransactions() shared.Transactions {
-	if o == nil {
+func (c *CreateTransactionsRequest) GetTransactions() shared.Transactions {
+	if c == nil {
 		return shared.Transactions{}
 	}
-	return o.Transactions
+	return c.Transactions
 }
 
-func (o *CreateTransactionsRequest) GetLedger() string {
-	if o == nil {
+func (c *CreateTransactionsRequest) GetLedger() string {
+	if c == nil {
 		return ""
 	}
-	return o.Ledger
+	return c.Ledger
 }
 
 type CreateTransactionsResponse struct {
@@ -38,30 +38,30 @@ type CreateTransactionsResponse struct {
 	TransactionsResponse *shared.TransactionsResponse
 }
 
-func (o *CreateTransactionsResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateTransactionsResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateTransactionsResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateTransactionsResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateTransactionsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateTransactionsResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }
 
-func (o *CreateTransactionsResponse) GetTransactionsResponse() *shared.TransactionsResponse {
-	if o == nil {
+func (c *CreateTransactionsResponse) GetTransactionsResponse() *shared.TransactionsResponse {
+	if c == nil {
 		return nil
 	}
-	return o.TransactionsResponse
+	return c.TransactionsResponse
 }

@@ -19,43 +19,43 @@ func (v V3StripeConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3StripeConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3StripeConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3StripeConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3StripeConfig) GetName() string {
-	if o == nil {
+func (v *V3StripeConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3StripeConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3StripeConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3StripeConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3StripeConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3StripeConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3StripeConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }

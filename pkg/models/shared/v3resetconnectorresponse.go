@@ -8,9 +8,9 @@ type V3ResetConnectorResponse struct {
 	Data string `json:"data"`
 }
 
-func (o *V3ResetConnectorResponse) GetData() string {
-	if o == nil {
+func (v *V3ResetConnectorResponse) GetData() string {
+	if v == nil {
 		return ""
 	}
-	return o.Data
+	return v.Data
 }

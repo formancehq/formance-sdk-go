@@ -22,50 +22,50 @@ func (m ModulrConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (m *ModulrConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"apiKey", "apiSecret", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ModulrConfig) GetAPIKey() string {
-	if o == nil {
+func (m *ModulrConfig) GetAPIKey() string {
+	if m == nil {
 		return ""
 	}
-	return o.APIKey
+	return m.APIKey
 }
 
-func (o *ModulrConfig) GetAPISecret() string {
-	if o == nil {
+func (m *ModulrConfig) GetAPISecret() string {
+	if m == nil {
 		return ""
 	}
-	return o.APISecret
+	return m.APISecret
 }
 
-func (o *ModulrConfig) GetEndpoint() *string {
-	if o == nil {
+func (m *ModulrConfig) GetEndpoint() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Endpoint
+	return m.Endpoint
 }
 
-func (o *ModulrConfig) GetName() string {
-	if o == nil {
+func (m *ModulrConfig) GetName() string {
+	if m == nil {
 		return ""
 	}
-	return o.Name
+	return m.Name
 }
 
-func (o *ModulrConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (m *ModulrConfig) GetPollingPeriod() *string {
+	if m == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return m.PollingPeriod
 }
 
-func (o *ModulrConfig) GetProvider() *string {
-	if o == nil {
+func (m *ModulrConfig) GetProvider() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Provider
+	return m.Provider
 }

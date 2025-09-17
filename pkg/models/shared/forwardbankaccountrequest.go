@@ -6,9 +6,9 @@ type ForwardBankAccountRequest struct {
 	ConnectorID string `json:"connectorID"`
 }
 
-func (o *ForwardBankAccountRequest) GetConnectorID() string {
-	if o == nil {
+func (f *ForwardBankAccountRequest) GetConnectorID() string {
+	if f == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return f.ConnectorID
 }

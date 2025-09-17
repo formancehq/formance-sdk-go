@@ -22,43 +22,43 @@ func (v V2Wallet) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Wallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "ledger", "metadata", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2Wallet) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V2Wallet) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V2Wallet) GetID() string {
-	if o == nil {
+func (v *V2Wallet) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2Wallet) GetLedger() string {
-	if o == nil {
+func (v *V2Wallet) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2Wallet) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2Wallet) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2Wallet) GetName() string {
-	if o == nil {
+func (v *V2Wallet) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
