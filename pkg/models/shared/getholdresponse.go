@@ -6,9 +6,9 @@ type GetHoldResponse struct {
 	Data ExpandedDebitHold `json:"data"`
 }
 
-func (o *GetHoldResponse) GetData() ExpandedDebitHold {
-	if o == nil {
+func (g *GetHoldResponse) GetData() ExpandedDebitHold {
+	if g == nil {
 		return ExpandedDebitHold{}
 	}
-	return o.Data
+	return g.Data
 }

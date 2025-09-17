@@ -14,58 +14,58 @@ type Hold struct {
 	WalletID string `json:"walletID"`
 }
 
-func (o *Hold) GetAsset() string {
-	if o == nil {
+func (h *Hold) GetAsset() string {
+	if h == nil {
 		return ""
 	}
-	return o.Asset
+	return h.Asset
 }
 
-func (o *Hold) GetDescription() string {
-	if o == nil {
+func (h *Hold) GetDescription() string {
+	if h == nil {
 		return ""
 	}
-	return o.Description
+	return h.Description
 }
 
-func (o *Hold) GetDestination() *Subject {
-	if o == nil {
+func (h *Hold) GetDestination() *Subject {
+	if h == nil {
 		return nil
 	}
-	return o.Destination
+	return h.Destination
 }
 
-func (o *Hold) GetDestinationAccount() *LedgerAccountSubject {
-	if v := o.GetDestination(); v != nil {
+func (h *Hold) GetDestinationAccount() *LedgerAccountSubject {
+	if v := h.GetDestination(); v != nil {
 		return v.LedgerAccountSubject
 	}
 	return nil
 }
 
-func (o *Hold) GetDestinationWallet() *WalletSubject {
-	if v := o.GetDestination(); v != nil {
+func (h *Hold) GetDestinationWallet() *WalletSubject {
+	if v := h.GetDestination(); v != nil {
 		return v.WalletSubject
 	}
 	return nil
 }
 
-func (o *Hold) GetID() string {
-	if o == nil {
+func (h *Hold) GetID() string {
+	if h == nil {
 		return ""
 	}
-	return o.ID
+	return h.ID
 }
 
-func (o *Hold) GetMetadata() map[string]string {
-	if o == nil {
+func (h *Hold) GetMetadata() map[string]string {
+	if h == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return h.Metadata
 }
 
-func (o *Hold) GetWalletID() string {
-	if o == nil {
+func (h *Hold) GetWalletID() string {
+	if h == nil {
 		return ""
 	}
-	return o.WalletID
+	return h.WalletID
 }

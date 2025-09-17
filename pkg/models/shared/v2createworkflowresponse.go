@@ -6,9 +6,9 @@ type V2CreateWorkflowResponse struct {
 	Data V2Workflow `json:"data"`
 }
 
-func (o *V2CreateWorkflowResponse) GetData() V2Workflow {
-	if o == nil {
+func (v *V2CreateWorkflowResponse) GetData() V2Workflow {
+	if v == nil {
 		return V2Workflow{}
 	}
-	return o.Data
+	return v.Data
 }

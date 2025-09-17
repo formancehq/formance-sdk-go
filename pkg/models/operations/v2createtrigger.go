@@ -18,30 +18,30 @@ type V2CreateTriggerResponse struct {
 	V2CreateTriggerResponse *shared.V2CreateTriggerResponse
 }
 
-func (o *V2CreateTriggerResponse) GetContentType() string {
-	if o == nil {
+func (v *V2CreateTriggerResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2CreateTriggerResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2CreateTriggerResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2CreateTriggerResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2CreateTriggerResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2CreateTriggerResponse) GetV2CreateTriggerResponse() *shared.V2CreateTriggerResponse {
-	if o == nil {
+func (v *V2CreateTriggerResponse) GetV2CreateTriggerResponse() *shared.V2CreateTriggerResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2CreateTriggerResponse
+	return v.V2CreateTriggerResponse
 }

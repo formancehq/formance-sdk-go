@@ -7,9 +7,9 @@ type TransferResponse struct {
 	ID *string `json:"id,omitempty"`
 }
 
-func (o *TransferResponse) GetID() *string {
-	if o == nil {
+func (t *TransferResponse) GetID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ID
+	return t.ID
 }

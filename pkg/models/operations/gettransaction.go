@@ -21,24 +21,24 @@ func (g GetTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"ledger", "txid"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GetTransactionRequest) GetLedger() string {
-	if o == nil {
+func (g *GetTransactionRequest) GetLedger() string {
+	if g == nil {
 		return ""
 	}
-	return o.Ledger
+	return g.Ledger
 }
 
-func (o *GetTransactionRequest) GetTxid() *big.Int {
-	if o == nil {
+func (g *GetTransactionRequest) GetTxid() *big.Int {
+	if g == nil {
 		return big.NewInt(0)
 	}
-	return o.Txid
+	return g.Txid
 }
 
 type GetTransactionResponse struct {
@@ -52,30 +52,30 @@ type GetTransactionResponse struct {
 	TransactionResponse *shared.TransactionResponse
 }
 
-func (o *GetTransactionResponse) GetContentType() string {
-	if o == nil {
+func (g *GetTransactionResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetTransactionResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetTransactionResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetTransactionResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetTransactionResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }
 
-func (o *GetTransactionResponse) GetTransactionResponse() *shared.TransactionResponse {
-	if o == nil {
+func (g *GetTransactionResponse) GetTransactionResponse() *shared.TransactionResponse {
+	if g == nil {
 		return nil
 	}
-	return o.TransactionResponse
+	return g.TransactionResponse
 }

@@ -20,43 +20,43 @@ func (b BankAccountRelatedAccounts) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BankAccountRelatedAccounts) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"accountID", "connectorID", "createdAt", "id", "provider"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *BankAccountRelatedAccounts) GetAccountID() string {
-	if o == nil {
+func (b *BankAccountRelatedAccounts) GetAccountID() string {
+	if b == nil {
 		return ""
 	}
-	return o.AccountID
+	return b.AccountID
 }
 
-func (o *BankAccountRelatedAccounts) GetConnectorID() string {
-	if o == nil {
+func (b *BankAccountRelatedAccounts) GetConnectorID() string {
+	if b == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return b.ConnectorID
 }
 
-func (o *BankAccountRelatedAccounts) GetCreatedAt() time.Time {
-	if o == nil {
+func (b *BankAccountRelatedAccounts) GetCreatedAt() time.Time {
+	if b == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return b.CreatedAt
 }
 
-func (o *BankAccountRelatedAccounts) GetID() string {
-	if o == nil {
+func (b *BankAccountRelatedAccounts) GetID() string {
+	if b == nil {
 		return ""
 	}
-	return o.ID
+	return b.ID
 }
 
-func (o *BankAccountRelatedAccounts) GetProvider() string {
-	if o == nil {
+func (b *BankAccountRelatedAccounts) GetProvider() string {
+	if b == nil {
 		return ""
 	}
-	return o.Provider
+	return b.Provider
 }

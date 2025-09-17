@@ -15,25 +15,25 @@ type V2RunWorkflowRequest struct {
 	WorkflowID string `pathParam:"style=simple,explode=false,name=workflowID"`
 }
 
-func (o *V2RunWorkflowRequest) GetRequestBody() map[string]string {
-	if o == nil {
+func (v *V2RunWorkflowRequest) GetRequestBody() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2RunWorkflowRequest) GetWait() *bool {
-	if o == nil {
+func (v *V2RunWorkflowRequest) GetWait() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Wait
+	return v.Wait
 }
 
-func (o *V2RunWorkflowRequest) GetWorkflowID() string {
-	if o == nil {
+func (v *V2RunWorkflowRequest) GetWorkflowID() string {
+	if v == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return v.WorkflowID
 }
 
 type V2RunWorkflowResponse struct {
@@ -47,30 +47,30 @@ type V2RunWorkflowResponse struct {
 	V2RunWorkflowResponse *shared.V2RunWorkflowResponse
 }
 
-func (o *V2RunWorkflowResponse) GetContentType() string {
-	if o == nil {
+func (v *V2RunWorkflowResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2RunWorkflowResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2RunWorkflowResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2RunWorkflowResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2RunWorkflowResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2RunWorkflowResponse) GetV2RunWorkflowResponse() *shared.V2RunWorkflowResponse {
-	if o == nil {
+func (v *V2RunWorkflowResponse) GetV2RunWorkflowResponse() *shared.V2RunWorkflowResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2RunWorkflowResponse
+	return v.V2RunWorkflowResponse
 }

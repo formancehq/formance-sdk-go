@@ -14,18 +14,18 @@ type GetManyConfigsRequest struct {
 	ID *string `queryParam:"style=form,explode=true,name=id"`
 }
 
-func (o *GetManyConfigsRequest) GetEndpoint() *string {
-	if o == nil {
+func (g *GetManyConfigsRequest) GetEndpoint() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Endpoint
+	return g.Endpoint
 }
 
-func (o *GetManyConfigsRequest) GetID() *string {
-	if o == nil {
+func (g *GetManyConfigsRequest) GetID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.ID
+	return g.ID
 }
 
 type GetManyConfigsResponse struct {
@@ -39,30 +39,30 @@ type GetManyConfigsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetManyConfigsResponse) GetConfigsResponse() *shared.ConfigsResponse {
-	if o == nil {
+func (g *GetManyConfigsResponse) GetConfigsResponse() *shared.ConfigsResponse {
+	if g == nil {
 		return nil
 	}
-	return o.ConfigsResponse
+	return g.ConfigsResponse
 }
 
-func (o *GetManyConfigsResponse) GetContentType() string {
-	if o == nil {
+func (g *GetManyConfigsResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetManyConfigsResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetManyConfigsResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetManyConfigsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetManyConfigsResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

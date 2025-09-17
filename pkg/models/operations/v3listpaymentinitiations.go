@@ -16,25 +16,25 @@ type V3ListPaymentInitiationsRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *V3ListPaymentInitiationsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V3ListPaymentInitiationsRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V3ListPaymentInitiationsRequest) GetCursor() *string {
-	if o == nil {
+func (v *V3ListPaymentInitiationsRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V3ListPaymentInitiationsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3ListPaymentInitiationsRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
 type V3ListPaymentInitiationsResponse struct {
@@ -48,30 +48,30 @@ type V3ListPaymentInitiationsResponse struct {
 	V3PaymentInitiationsCursorResponse *shared.V3PaymentInitiationsCursorResponse
 }
 
-func (o *V3ListPaymentInitiationsResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ListPaymentInitiationsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ListPaymentInitiationsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ListPaymentInitiationsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ListPaymentInitiationsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ListPaymentInitiationsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ListPaymentInitiationsResponse) GetV3PaymentInitiationsCursorResponse() *shared.V3PaymentInitiationsCursorResponse {
-	if o == nil {
+func (v *V3ListPaymentInitiationsResponse) GetV3PaymentInitiationsCursorResponse() *shared.V3PaymentInitiationsCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3PaymentInitiationsCursorResponse
+	return v.V3PaymentInitiationsCursorResponse
 }

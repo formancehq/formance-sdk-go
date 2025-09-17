@@ -13,28 +13,50 @@ type TaskModulrDescriptor struct {
 	Name      *string `json:"name,omitempty"`
 }
 
-func (o *TaskModulrDescriptor) GetAccountID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AccountID
+func (t TaskModulrDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TaskModulrDescriptor) GetKey() *string {
-	if o == nil {
-		return nil
+func (t *TaskModulrDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
 	}
-	return o.Key
+	return nil
 }
 
-func (o *TaskModulrDescriptor) GetName() *string {
-	if o == nil {
+func (t *TaskModulrDescriptor) GetAccountID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.AccountID
+}
+
+func (t *TaskModulrDescriptor) GetKey() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Key
+}
+
+func (t *TaskModulrDescriptor) GetName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Name
 }
 
 type TaskModulrState struct {
+}
+
+func (t TaskModulrState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskModulrState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskModulr struct {
@@ -53,64 +75,64 @@ func (t TaskModulr) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskModulr) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskModulr) GetConnectorID() string {
-	if o == nil {
+func (t *TaskModulr) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskModulr) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskModulr) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskModulr) GetDescriptor() TaskModulrDescriptor {
-	if o == nil {
+func (t *TaskModulr) GetDescriptor() TaskModulrDescriptor {
+	if t == nil {
 		return TaskModulrDescriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskModulr) GetError() *string {
-	if o == nil {
+func (t *TaskModulr) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskModulr) GetID() string {
-	if o == nil {
+func (t *TaskModulr) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskModulr) GetState() *TaskModulrState {
-	if o == nil {
+func (t *TaskModulr) GetState() *TaskModulrState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskModulr) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskModulr) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskModulr) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskModulr) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

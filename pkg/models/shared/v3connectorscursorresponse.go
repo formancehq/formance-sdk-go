@@ -10,48 +10,48 @@ type V3ConnectorsCursorResponseCursor struct {
 	Previous *string       `json:"previous,omitempty"`
 }
 
-func (o *V3ConnectorsCursorResponseCursor) GetData() []V3Connector {
-	if o == nil {
+func (v *V3ConnectorsCursorResponseCursor) GetData() []V3Connector {
+	if v == nil {
 		return []V3Connector{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V3ConnectorsCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V3ConnectorsCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V3ConnectorsCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V3ConnectorsCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V3ConnectorsCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V3ConnectorsCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3ConnectorsCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V3ConnectorsCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V3ConnectorsCursorResponse struct {
 	Cursor V3ConnectorsCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V3ConnectorsCursorResponse) GetCursor() V3ConnectorsCursorResponseCursor {
-	if o == nil {
+func (v *V3ConnectorsCursorResponse) GetCursor() V3ConnectorsCursorResponseCursor {
+	if v == nil {
 		return V3ConnectorsCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

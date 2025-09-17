@@ -11,11 +11,11 @@ type Balances struct {
 	Main V2AssetHolder `json:"main"`
 }
 
-func (o *Balances) GetMain() V2AssetHolder {
-	if o == nil {
+func (b *Balances) GetMain() V2AssetHolder {
+	if b == nil {
 		return V2AssetHolder{}
 	}
-	return o.Main
+	return b.Main
 }
 
 type V2WalletWithBalances struct {
@@ -34,50 +34,50 @@ func (v V2WalletWithBalances) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2WalletWithBalances) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"balances", "createdAt", "id", "ledger", "metadata", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2WalletWithBalances) GetBalances() Balances {
-	if o == nil {
+func (v *V2WalletWithBalances) GetBalances() Balances {
+	if v == nil {
 		return Balances{}
 	}
-	return o.Balances
+	return v.Balances
 }
 
-func (o *V2WalletWithBalances) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V2WalletWithBalances) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V2WalletWithBalances) GetID() string {
-	if o == nil {
+func (v *V2WalletWithBalances) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2WalletWithBalances) GetLedger() string {
-	if o == nil {
+func (v *V2WalletWithBalances) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2WalletWithBalances) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2WalletWithBalances) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2WalletWithBalances) GetName() string {
-	if o == nil {
+func (v *V2WalletWithBalances) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }

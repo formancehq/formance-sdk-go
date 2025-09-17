@@ -39,12 +39,13 @@ Set the metadata of a transaction by its ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2AddMetadataOnTransaction" method="post" path="/api/ledger/v2/{ledger}/transactions/{id}/metadata" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -54,10 +55,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -65,7 +66,7 @@ func main() {
         RequestBody: map[string]string{
             "admin": "true",
         },
-        DryRun: formancesdkgo.Bool(true),
+        DryRun: v3.Pointer(true),
         ID: big.NewInt(1234),
         Ledger: "ledger001",
     })
@@ -103,12 +104,13 @@ Add metadata to an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2AddMetadataToAccount" method="post" path="/api/ledger/v2/{ledger}/accounts/{address}/metadata" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -117,10 +119,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -129,7 +131,7 @@ func main() {
             "admin": "true",
         },
         Address: "users:001",
-        DryRun: formancesdkgo.Bool(true),
+        DryRun: v3.Pointer(true),
         Ledger: "ledger001",
     })
     if err != nil {
@@ -166,12 +168,13 @@ Count the accounts from a ledger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2CountAccounts" method="head" path="/api/ledger/v2/{ledger}/accounts" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -180,10 +183,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -228,12 +231,13 @@ Count the transactions from a ledger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2CountTransactions" method="head" path="/api/ledger/v2/{ledger}/transactions" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -242,10 +246,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -289,12 +293,13 @@ Bulk request
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2CreateBulk" method="post" path="/api/ledger/v2/{ledger}/_bulk" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -303,10 +308,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -318,10 +323,10 @@ func main() {
                 },
             ),
         },
-        Atomic: formancesdkgo.Bool(true),
-        ContinueOnFailure: formancesdkgo.Bool(true),
+        Atomic: v3.Pointer(true),
+        ContinueOnFailure: v3.Pointer(true),
         Ledger: "ledger001",
-        Parallel: formancesdkgo.Bool(true),
+        Parallel: v3.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)
@@ -357,12 +362,13 @@ Create a ledger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2CreateLedger" method="post" path="/api/ledger/v2/{ledger}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -371,10 +377,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -420,12 +426,13 @@ Create a new transaction to a ledger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2CreateTransaction" method="post" path="/api/ledger/v2/{ledger}/transactions" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -435,10 +442,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -455,7 +462,7 @@ func main() {
                     Source: "users:001",
                 },
             },
-            Reference: formancesdkgo.String("ref:001"),
+            Reference: v3.Pointer("ref:001"),
             Script: &shared.V2PostTransactionScript{
                 Plain: "vars {\n" +
                 "account $user\n" +
@@ -470,8 +477,8 @@ func main() {
                 },
             },
         },
-        DryRun: formancesdkgo.Bool(true),
-        Force: formancesdkgo.Bool(true),
+        DryRun: v3.Pointer(true),
+        Force: v3.Pointer(true),
         Ledger: "ledger001",
     })
     if err != nil {
@@ -508,12 +515,13 @@ Delete metadata by key
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2DeleteAccountMetadata" method="delete" path="/api/ledger/v2/{ledger}/accounts/{address}/metadata/{key}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -522,10 +530,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -568,12 +576,13 @@ Delete ledger metadata by key
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2DeleteLedgerMetadata" method="delete" path="/api/ledger/v2/{ledger}/metadata/{key}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -582,10 +591,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -627,12 +636,13 @@ Delete metadata by key
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2DeleteTransactionMetadata" method="delete" path="/api/ledger/v2/{ledger}/transactions/{id}/metadata/{key}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -642,10 +652,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -688,12 +698,13 @@ Export logs
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2ExportLogs" method="post" path="/api/ledger/v2/{ledger}/logs/export" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -702,10 +713,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -745,12 +756,13 @@ Get account by its address
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2GetAccount" method="get" path="/api/ledger/v2/{ledger}/accounts/{address}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -759,10 +771,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -804,12 +816,13 @@ Get the aggregated balances from selected accounts
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2GetBalancesAggregated" method="get" path="/api/ledger/v2/{ledger}/aggregate/balances" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -818,10 +831,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -867,12 +880,13 @@ Show server information
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2GetInfo" method="get" path="/api/ledger/_/info" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -880,10 +894,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -921,12 +935,13 @@ Get a ledger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2GetLedger" method="get" path="/api/ledger/v2/{ledger}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -935,10 +950,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -979,12 +994,13 @@ Get information about a ledger
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2GetLedgerInfo" method="get" path="/api/ledger/v2/{ledger}/_info" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -993,10 +1009,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1037,12 +1053,13 @@ Read in memory metrics
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getMetrics" method="get" path="/api/ledger/_/metrics" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -1050,10 +1067,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1091,12 +1108,13 @@ Get transaction from a ledger by its ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2GetTransaction" method="get" path="/api/ledger/v2/{ledger}/transactions/{id}" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -1106,10 +1124,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1151,12 +1169,13 @@ Get list of volumes with balances for (account/asset)
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2GetVolumesWithBalances" method="get" path="/api/ledger/v2/{ledger}/volumes" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1165,10 +1184,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1176,10 +1195,10 @@ func main() {
         RequestBody: map[string]any{
             "key": "<value>",
         },
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        GroupBy: formancesdkgo.Int64(3),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        GroupBy: v3.Pointer[int64](3),
         Ledger: "ledger001",
-        PageSize: formancesdkgo.Int64(100),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1213,12 +1232,13 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2ImportLogs" method="post" path="/api/ledger/v2/{ledger}/logs/import" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"os"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -1228,10 +1248,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1278,12 +1298,13 @@ List accounts from a ledger, sorted by address in descending order.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2ListAccounts" method="get" path="/api/ledger/v2/{ledger}/accounts" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1292,10 +1313,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1303,9 +1324,9 @@ func main() {
         RequestBody: map[string]any{
 
         },
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-        PageSize: formancesdkgo.Int64(100),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1341,12 +1362,13 @@ List ledgers
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2ListLedgers" method="get" path="/api/ledger/v2" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1355,16 +1377,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Ledger.V2.ListLedgers(ctx, operations.V2ListLedgersRequest{
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: formancesdkgo.Int64(100),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1400,12 +1422,13 @@ List the logs from a ledger, sorted by ID in descending order.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2ListLogs" method="get" path="/api/ledger/v2/{ledger}/logs" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1414,10 +1437,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1425,9 +1448,9 @@ func main() {
         RequestBody: map[string]any{
 
         },
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-        PageSize: formancesdkgo.Int64(100),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1463,12 +1486,13 @@ List transactions from a ledger, sorted by id in descending order.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2ListTransactions" method="get" path="/api/ledger/v2/{ledger}/transactions" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1477,10 +1501,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1488,9 +1512,9 @@ func main() {
         RequestBody: map[string]any{
 
         },
-        Cursor: formancesdkgo.String("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
-        PageSize: formancesdkgo.Int64(100),
+        PageSize: v3.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1527,12 +1551,13 @@ Get statistics from a ledger. (aggregate metrics on accounts and transactions)
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2ReadStats" method="get" path="/api/ledger/v2/{ledger}/stats" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1541,10 +1566,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1585,12 +1610,13 @@ Revert a ledger transaction by its ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2RevertTransaction" method="post" path="/api/ledger/v2/{ledger}/transactions/{id}/revert" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
@@ -1600,15 +1626,15 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Ledger.V2.RevertTransaction(ctx, operations.V2RevertTransactionRequest{
-        DryRun: formancesdkgo.Bool(true),
+        DryRun: v3.Pointer(true),
         ID: big.NewInt(1234),
         Ledger: "ledger001",
     })
@@ -1646,12 +1672,13 @@ Update ledger metadata
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="v2UpdateLedgerMetadata" method="put" path="/api/ledger/v2/{ledger}/metadata" -->
 ```go
 package main
 
 import(
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1660,10 +1687,10 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := formancesdkgo.New(
-        formancesdkgo.WithSecurity(shared.Security{
-            ClientID: formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 

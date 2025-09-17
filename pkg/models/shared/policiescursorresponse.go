@@ -10,39 +10,39 @@ type PoliciesCursorResponseCursor struct {
 	Previous *string  `json:"previous,omitempty"`
 }
 
-func (o *PoliciesCursorResponseCursor) GetData() []Policy {
-	if o == nil {
+func (p *PoliciesCursorResponseCursor) GetData() []Policy {
+	if p == nil {
 		return []Policy{}
 	}
-	return o.Data
+	return p.Data
 }
 
-func (o *PoliciesCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (p *PoliciesCursorResponseCursor) GetHasMore() bool {
+	if p == nil {
 		return false
 	}
-	return o.HasMore
+	return p.HasMore
 }
 
-func (o *PoliciesCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (p *PoliciesCursorResponseCursor) GetNext() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Next
+	return p.Next
 }
 
-func (o *PoliciesCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (p *PoliciesCursorResponseCursor) GetPageSize() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.PageSize
+	return p.PageSize
 }
 
-func (o *PoliciesCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (p *PoliciesCursorResponseCursor) GetPrevious() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Previous
+	return p.Previous
 }
 
 // PoliciesCursorResponse - OK
@@ -50,9 +50,9 @@ type PoliciesCursorResponse struct {
 	Cursor PoliciesCursorResponseCursor `json:"cursor"`
 }
 
-func (o *PoliciesCursorResponse) GetCursor() PoliciesCursorResponseCursor {
-	if o == nil {
+func (p *PoliciesCursorResponse) GetCursor() PoliciesCursorResponseCursor {
+	if p == nil {
 		return PoliciesCursorResponseCursor{}
 	}
-	return o.Cursor
+	return p.Cursor
 }

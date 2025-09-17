@@ -2,13 +2,28 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type StageSendDestinationPayment struct {
 	Psp string `json:"psp"`
 }
 
-func (o *StageSendDestinationPayment) GetPsp() string {
-	if o == nil {
+func (s StageSendDestinationPayment) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *StageSendDestinationPayment) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"psp"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *StageSendDestinationPayment) GetPsp() string {
+	if s == nil {
 		return ""
 	}
-	return o.Psp
+	return s.Psp
 }

@@ -7,16 +7,16 @@ type V2ActivityCreateTransaction struct {
 	Ledger *string                         `json:"ledger,omitempty"`
 }
 
-func (o *V2ActivityCreateTransaction) GetData() *OrchestrationV2PostTransaction {
-	if o == nil {
+func (v *V2ActivityCreateTransaction) GetData() *OrchestrationV2PostTransaction {
+	if v == nil {
 		return nil
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2ActivityCreateTransaction) GetLedger() *string {
-	if o == nil {
+func (v *V2ActivityCreateTransaction) GetLedger() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Ledger
+	return v.Ledger
 }

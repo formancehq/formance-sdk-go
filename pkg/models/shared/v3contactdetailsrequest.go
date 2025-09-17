@@ -7,16 +7,16 @@ type V3ContactDetailsRequest struct {
 	PhoneNumber *string `json:"phoneNumber,omitempty"`
 }
 
-func (o *V3ContactDetailsRequest) GetEmail() *string {
-	if o == nil {
+func (v *V3ContactDetailsRequest) GetEmail() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Email
+	return v.Email
 }
 
-func (o *V3ContactDetailsRequest) GetPhoneNumber() *string {
-	if o == nil {
+func (v *V3ContactDetailsRequest) GetPhoneNumber() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return v.PhoneNumber
 }

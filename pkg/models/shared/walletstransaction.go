@@ -24,64 +24,64 @@ func (w WalletsTransaction) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WalletsTransaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"id", "metadata", "postings", "timestamp"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WalletsTransaction) GetID() int64 {
-	if o == nil {
+func (w *WalletsTransaction) GetID() int64 {
+	if w == nil {
 		return 0
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *WalletsTransaction) GetLedger() *string {
-	if o == nil {
+func (w *WalletsTransaction) GetLedger() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Ledger
+	return w.Ledger
 }
 
-func (o *WalletsTransaction) GetMetadata() map[string]string {
-	if o == nil {
+func (w *WalletsTransaction) GetMetadata() map[string]string {
+	if w == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return w.Metadata
 }
 
-func (o *WalletsTransaction) GetPostCommitVolumes() map[string]map[string]WalletsVolume {
-	if o == nil {
+func (w *WalletsTransaction) GetPostCommitVolumes() map[string]map[string]WalletsVolume {
+	if w == nil {
 		return nil
 	}
-	return o.PostCommitVolumes
+	return w.PostCommitVolumes
 }
 
-func (o *WalletsTransaction) GetPostings() []Posting {
-	if o == nil {
+func (w *WalletsTransaction) GetPostings() []Posting {
+	if w == nil {
 		return []Posting{}
 	}
-	return o.Postings
+	return w.Postings
 }
 
-func (o *WalletsTransaction) GetPreCommitVolumes() map[string]map[string]WalletsVolume {
-	if o == nil {
+func (w *WalletsTransaction) GetPreCommitVolumes() map[string]map[string]WalletsVolume {
+	if w == nil {
 		return nil
 	}
-	return o.PreCommitVolumes
+	return w.PreCommitVolumes
 }
 
-func (o *WalletsTransaction) GetReference() *string {
-	if o == nil {
+func (w *WalletsTransaction) GetReference() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Reference
+	return w.Reference
 }
 
-func (o *WalletsTransaction) GetTimestamp() time.Time {
-	if o == nil {
+func (w *WalletsTransaction) GetTimestamp() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.Timestamp
+	return w.Timestamp
 }

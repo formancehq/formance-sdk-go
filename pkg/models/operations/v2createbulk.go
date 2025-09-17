@@ -19,39 +19,39 @@ type V2CreateBulkRequest struct {
 	Parallel *bool `queryParam:"style=form,explode=true,name=parallel"`
 }
 
-func (o *V2CreateBulkRequest) GetRequestBody() []shared.V2BulkElement {
-	if o == nil {
+func (v *V2CreateBulkRequest) GetRequestBody() []shared.V2BulkElement {
+	if v == nil {
 		return []shared.V2BulkElement{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2CreateBulkRequest) GetAtomic() *bool {
-	if o == nil {
+func (v *V2CreateBulkRequest) GetAtomic() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Atomic
+	return v.Atomic
 }
 
-func (o *V2CreateBulkRequest) GetContinueOnFailure() *bool {
-	if o == nil {
+func (v *V2CreateBulkRequest) GetContinueOnFailure() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.ContinueOnFailure
+	return v.ContinueOnFailure
 }
 
-func (o *V2CreateBulkRequest) GetLedger() string {
-	if o == nil {
+func (v *V2CreateBulkRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2CreateBulkRequest) GetParallel() *bool {
-	if o == nil {
+func (v *V2CreateBulkRequest) GetParallel() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Parallel
+	return v.Parallel
 }
 
 type V2CreateBulkResponse struct {
@@ -65,30 +65,30 @@ type V2CreateBulkResponse struct {
 	V2BulkResponse *shared.V2BulkResponse
 }
 
-func (o *V2CreateBulkResponse) GetContentType() string {
-	if o == nil {
+func (v *V2CreateBulkResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2CreateBulkResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2CreateBulkResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2CreateBulkResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2CreateBulkResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2CreateBulkResponse) GetV2BulkResponse() *shared.V2BulkResponse {
-	if o == nil {
+func (v *V2CreateBulkResponse) GetV2BulkResponse() *shared.V2BulkResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2BulkResponse
+	return v.V2BulkResponse
 }

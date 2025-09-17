@@ -13,18 +13,18 @@ type ConnectorsTransferRequest struct {
 	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
 }
 
-func (o *ConnectorsTransferRequest) GetTransferRequest() shared.TransferRequest {
-	if o == nil {
+func (c *ConnectorsTransferRequest) GetTransferRequest() shared.TransferRequest {
+	if c == nil {
 		return shared.TransferRequest{}
 	}
-	return o.TransferRequest
+	return c.TransferRequest
 }
 
-func (o *ConnectorsTransferRequest) GetConnector() shared.Connector {
-	if o == nil {
+func (c *ConnectorsTransferRequest) GetConnector() shared.Connector {
+	if c == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return c.Connector
 }
 
 type ConnectorsTransferResponse struct {
@@ -38,30 +38,30 @@ type ConnectorsTransferResponse struct {
 	TransferResponse *shared.TransferResponse
 }
 
-func (o *ConnectorsTransferResponse) GetContentType() string {
-	if o == nil {
+func (c *ConnectorsTransferResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *ConnectorsTransferResponse) GetStatusCode() int {
-	if o == nil {
+func (c *ConnectorsTransferResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *ConnectorsTransferResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *ConnectorsTransferResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }
 
-func (o *ConnectorsTransferResponse) GetTransferResponse() *shared.TransferResponse {
-	if o == nil {
+func (c *ConnectorsTransferResponse) GetTransferResponse() *shared.TransferResponse {
+	if c == nil {
 		return nil
 	}
-	return o.TransferResponse
+	return c.TransferResponse
 }

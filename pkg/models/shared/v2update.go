@@ -2,13 +2,28 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2Update struct {
 	Account *V2UpdateAccount `json:"account,omitempty"`
 }
 
-func (o *V2Update) GetAccount() *V2UpdateAccount {
-	if o == nil {
+func (v V2Update) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2Update) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2Update) GetAccount() *V2UpdateAccount {
+	if v == nil {
 		return nil
 	}
-	return o.Account
+	return v.Account
 }

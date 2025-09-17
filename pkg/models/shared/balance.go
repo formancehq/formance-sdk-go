@@ -19,29 +19,29 @@ func (b Balance) MarshalJSON() ([]byte, error) {
 }
 
 func (b *Balance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Balance) GetExpiresAt() *time.Time {
-	if o == nil {
+func (b *Balance) GetExpiresAt() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return o.ExpiresAt
+	return b.ExpiresAt
 }
 
-func (o *Balance) GetName() string {
-	if o == nil {
+func (b *Balance) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return o.Name
+	return b.Name
 }
 
-func (o *Balance) GetPriority() *big.Int {
-	if o == nil {
+func (b *Balance) GetPriority() *big.Int {
+	if b == nil {
 		return nil
 	}
-	return o.Priority
+	return b.Priority
 }

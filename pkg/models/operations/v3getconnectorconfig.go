@@ -12,11 +12,11 @@ type V3GetConnectorConfigRequest struct {
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 }
 
-func (o *V3GetConnectorConfigRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3GetConnectorConfigRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
 type V3GetConnectorConfigResponse struct {
@@ -30,30 +30,30 @@ type V3GetConnectorConfigResponse struct {
 	V3GetConnectorConfigResponse *shared.V3GetConnectorConfigResponse
 }
 
-func (o *V3GetConnectorConfigResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetConnectorConfigResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetConnectorConfigResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetConnectorConfigResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetConnectorConfigResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetConnectorConfigResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetConnectorConfigResponse) GetV3GetConnectorConfigResponse() *shared.V3GetConnectorConfigResponse {
-	if o == nil {
+func (v *V3GetConnectorConfigResponse) GetV3GetConnectorConfigResponse() *shared.V3GetConnectorConfigResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3GetConnectorConfigResponse
+	return v.V3GetConnectorConfigResponse
 }

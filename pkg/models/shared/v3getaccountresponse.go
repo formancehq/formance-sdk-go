@@ -6,9 +6,9 @@ type V3GetAccountResponse struct {
 	Data V3Account `json:"data"`
 }
 
-func (o *V3GetAccountResponse) GetData() V3Account {
-	if o == nil {
+func (v *V3GetAccountResponse) GetData() V3Account {
+	if v == nil {
 		return V3Account{}
 	}
-	return o.Data
+	return v.Data
 }

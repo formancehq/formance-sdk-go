@@ -10,37 +10,37 @@ type V2TriggerData struct {
 	WorkflowID string         `json:"workflowID"`
 }
 
-func (o *V2TriggerData) GetEvent() string {
-	if o == nil {
+func (v *V2TriggerData) GetEvent() string {
+	if v == nil {
 		return ""
 	}
-	return o.Event
+	return v.Event
 }
 
-func (o *V2TriggerData) GetFilter() *string {
-	if o == nil {
+func (v *V2TriggerData) GetFilter() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Filter
+	return v.Filter
 }
 
-func (o *V2TriggerData) GetName() *string {
-	if o == nil {
+func (v *V2TriggerData) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2TriggerData) GetVars() map[string]any {
-	if o == nil {
+func (v *V2TriggerData) GetVars() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.Vars
+	return v.Vars
 }
 
-func (o *V2TriggerData) GetWorkflowID() string {
-	if o == nil {
+func (v *V2TriggerData) GetWorkflowID() string {
+	if v == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return v.WorkflowID
 }

@@ -21,43 +21,43 @@ func (g GenericConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GenericConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"apiKey", "endpoint", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GenericConfig) GetAPIKey() string {
-	if o == nil {
+func (g *GenericConfig) GetAPIKey() string {
+	if g == nil {
 		return ""
 	}
-	return o.APIKey
+	return g.APIKey
 }
 
-func (o *GenericConfig) GetEndpoint() string {
-	if o == nil {
+func (g *GenericConfig) GetEndpoint() string {
+	if g == nil {
 		return ""
 	}
-	return o.Endpoint
+	return g.Endpoint
 }
 
-func (o *GenericConfig) GetName() string {
-	if o == nil {
+func (g *GenericConfig) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return o.Name
+	return g.Name
 }
 
-func (o *GenericConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (g *GenericConfig) GetPollingPeriod() *string {
+	if g == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return g.PollingPeriod
 }
 
-func (o *GenericConfig) GetProvider() *string {
-	if o == nil {
+func (g *GenericConfig) GetProvider() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Provider
+	return g.Provider
 }

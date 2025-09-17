@@ -62,134 +62,134 @@ func (t TransferInitiation) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferInitiation) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"amount", "asset", "connectorID", "createdAt", "description", "destinationAccountID", "id", "initialAmount", "provider", "reference", "scheduledAt", "sourceAccountID", "status", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TransferInitiation) GetAmount() *big.Int {
-	if o == nil {
+func (t *TransferInitiation) GetAmount() *big.Int {
+	if t == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return t.Amount
 }
 
-func (o *TransferInitiation) GetAsset() string {
-	if o == nil {
+func (t *TransferInitiation) GetAsset() string {
+	if t == nil {
 		return ""
 	}
-	return o.Asset
+	return t.Asset
 }
 
-func (o *TransferInitiation) GetConnectorID() string {
-	if o == nil {
+func (t *TransferInitiation) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TransferInitiation) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TransferInitiation) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TransferInitiation) GetDescription() string {
-	if o == nil {
+func (t *TransferInitiation) GetDescription() string {
+	if t == nil {
 		return ""
 	}
-	return o.Description
+	return t.Description
 }
 
-func (o *TransferInitiation) GetDestinationAccountID() string {
-	if o == nil {
+func (t *TransferInitiation) GetDestinationAccountID() string {
+	if t == nil {
 		return ""
 	}
-	return o.DestinationAccountID
+	return t.DestinationAccountID
 }
 
-func (o *TransferInitiation) GetError() *string {
-	if o == nil {
+func (t *TransferInitiation) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TransferInitiation) GetID() string {
-	if o == nil {
+func (t *TransferInitiation) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TransferInitiation) GetInitialAmount() *big.Int {
-	if o == nil {
+func (t *TransferInitiation) GetInitialAmount() *big.Int {
+	if t == nil {
 		return big.NewInt(0)
 	}
-	return o.InitialAmount
+	return t.InitialAmount
 }
 
-func (o *TransferInitiation) GetMetadata() map[string]string {
-	if o == nil {
+func (t *TransferInitiation) GetMetadata() map[string]string {
+	if t == nil {
 		return nil
 	}
-	return o.Metadata
+	return t.Metadata
 }
 
-func (o *TransferInitiation) GetProvider() *string {
-	if o == nil {
+func (t *TransferInitiation) GetProvider() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Provider
+	return t.Provider
 }
 
-func (o *TransferInitiation) GetReference() string {
-	if o == nil {
+func (t *TransferInitiation) GetReference() string {
+	if t == nil {
 		return ""
 	}
-	return o.Reference
+	return t.Reference
 }
 
-func (o *TransferInitiation) GetRelatedAdjustments() []TransferInitiationAdjusments {
-	if o == nil {
+func (t *TransferInitiation) GetRelatedAdjustments() []TransferInitiationAdjusments {
+	if t == nil {
 		return nil
 	}
-	return o.RelatedAdjustments
+	return t.RelatedAdjustments
 }
 
-func (o *TransferInitiation) GetRelatedPayments() []TransferInitiationPayments {
-	if o == nil {
+func (t *TransferInitiation) GetRelatedPayments() []TransferInitiationPayments {
+	if t == nil {
 		return nil
 	}
-	return o.RelatedPayments
+	return t.RelatedPayments
 }
 
-func (o *TransferInitiation) GetScheduledAt() time.Time {
-	if o == nil {
+func (t *TransferInitiation) GetScheduledAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.ScheduledAt
+	return t.ScheduledAt
 }
 
-func (o *TransferInitiation) GetSourceAccountID() string {
-	if o == nil {
+func (t *TransferInitiation) GetSourceAccountID() string {
+	if t == nil {
 		return ""
 	}
-	return o.SourceAccountID
+	return t.SourceAccountID
 }
 
-func (o *TransferInitiation) GetStatus() TransferInitiationStatus {
-	if o == nil {
+func (t *TransferInitiation) GetStatus() TransferInitiationStatus {
+	if t == nil {
 		return TransferInitiationStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TransferInitiation) GetType() TransferInitiationType {
-	if o == nil {
+func (t *TransferInitiation) GetType() TransferInitiationType {
+	if t == nil {
 		return TransferInitiationType("")
 	}
-	return o.Type
+	return t.Type
 }

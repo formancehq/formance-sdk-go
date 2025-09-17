@@ -13,18 +13,18 @@ type V2UpdateLedgerMetadataRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2UpdateLedgerMetadataRequest) GetRequestBody() map[string]string {
-	if o == nil {
+func (v *V2UpdateLedgerMetadataRequest) GetRequestBody() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2UpdateLedgerMetadataRequest) GetLedger() string {
-	if o == nil {
+func (v *V2UpdateLedgerMetadataRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2UpdateLedgerMetadataResponse struct {
@@ -38,30 +38,30 @@ type V2UpdateLedgerMetadataResponse struct {
 	V2ErrorResponse *shared.V2ErrorResponse
 }
 
-func (o *V2UpdateLedgerMetadataResponse) GetContentType() string {
-	if o == nil {
+func (v *V2UpdateLedgerMetadataResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2UpdateLedgerMetadataResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2UpdateLedgerMetadataResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2UpdateLedgerMetadataResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2UpdateLedgerMetadataResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
-	if o == nil {
+func (v *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2ErrorResponse
+	return v.V2ErrorResponse
 }

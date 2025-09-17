@@ -14,18 +14,18 @@ type UninstallConnectorV1Request struct {
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorId"`
 }
 
-func (o *UninstallConnectorV1Request) GetConnector() shared.Connector {
-	if o == nil {
+func (u *UninstallConnectorV1Request) GetConnector() shared.Connector {
+	if u == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return u.Connector
 }
 
-func (o *UninstallConnectorV1Request) GetConnectorID() string {
-	if o == nil {
+func (u *UninstallConnectorV1Request) GetConnectorID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return u.ConnectorID
 }
 
 type UninstallConnectorV1Response struct {
@@ -37,23 +37,23 @@ type UninstallConnectorV1Response struct {
 	RawResponse *http.Response
 }
 
-func (o *UninstallConnectorV1Response) GetContentType() string {
-	if o == nil {
+func (u *UninstallConnectorV1Response) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UninstallConnectorV1Response) GetStatusCode() int {
-	if o == nil {
+func (u *UninstallConnectorV1Response) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UninstallConnectorV1Response) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UninstallConnectorV1Response) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

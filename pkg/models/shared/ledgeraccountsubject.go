@@ -2,21 +2,36 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type LedgerAccountSubject struct {
 	Identifier string `json:"identifier"`
 	Type       string `json:"type"`
 }
 
-func (o *LedgerAccountSubject) GetIdentifier() string {
-	if o == nil {
-		return ""
-	}
-	return o.Identifier
+func (l LedgerAccountSubject) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
 }
 
-func (o *LedgerAccountSubject) GetType() string {
-	if o == nil {
+func (l *LedgerAccountSubject) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"identifier", "type"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (l *LedgerAccountSubject) GetIdentifier() string {
+	if l == nil {
 		return ""
 	}
-	return o.Type
+	return l.Identifier
+}
+
+func (l *LedgerAccountSubject) GetType() string {
+	if l == nil {
+		return ""
+	}
+	return l.Type
 }

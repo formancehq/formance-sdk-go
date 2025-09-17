@@ -28,38 +28,38 @@ func (g GetHoldsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetHoldsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GetHoldsRequest) GetCursor() *string {
-	if o == nil {
+func (g *GetHoldsRequest) GetCursor() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Cursor
+	return g.Cursor
 }
 
-func (o *GetHoldsRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (g *GetHoldsRequest) GetMetadata() map[string]string {
+	if g == nil {
 		return nil
 	}
-	return o.Metadata
+	return g.Metadata
 }
 
-func (o *GetHoldsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (g *GetHoldsRequest) GetPageSize() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.PageSize
+	return g.PageSize
 }
 
-func (o *GetHoldsRequest) GetWalletID() *string {
-	if o == nil {
+func (g *GetHoldsRequest) GetWalletID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.WalletID
+	return g.WalletID
 }
 
 type GetHoldsResponse struct {
@@ -73,30 +73,30 @@ type GetHoldsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetHoldsResponse) GetContentType() string {
-	if o == nil {
+func (g *GetHoldsResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetHoldsResponse) GetGetHoldsResponse() *shared.GetHoldsResponse {
-	if o == nil {
+func (g *GetHoldsResponse) GetGetHoldsResponse() *shared.GetHoldsResponse {
+	if g == nil {
 		return nil
 	}
-	return o.GetHoldsResponse
+	return g.GetHoldsResponse
 }
 
-func (o *GetHoldsResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetHoldsResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetHoldsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetHoldsResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

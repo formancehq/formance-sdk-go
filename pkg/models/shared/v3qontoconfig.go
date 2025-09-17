@@ -22,64 +22,64 @@ func (v V3QontoConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3QontoConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "clientID", "endpoint", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3QontoConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3QontoConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3QontoConfig) GetClientID() string {
-	if o == nil {
+func (v *V3QontoConfig) GetClientID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ClientID
+	return v.ClientID
 }
 
-func (o *V3QontoConfig) GetEndpoint() string {
-	if o == nil {
+func (v *V3QontoConfig) GetEndpoint() string {
+	if v == nil {
 		return ""
 	}
-	return o.Endpoint
+	return v.Endpoint
 }
 
-func (o *V3QontoConfig) GetName() string {
-	if o == nil {
+func (v *V3QontoConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3QontoConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3QontoConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3QontoConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3QontoConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3QontoConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3QontoConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }
 
-func (o *V3QontoConfig) GetStagingToken() *string {
-	if o == nil {
+func (v *V3QontoConfig) GetStagingToken() *string {
+	if v == nil {
 		return nil
 	}
-	return o.StagingToken
+	return v.StagingToken
 }

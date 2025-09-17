@@ -11,27 +11,27 @@ type V3InitiatePaymentResponseData struct {
 	TaskID *string `json:"taskID,omitempty"`
 }
 
-func (o *V3InitiatePaymentResponseData) GetPaymentInitiationID() *string {
-	if o == nil {
+func (v *V3InitiatePaymentResponseData) GetPaymentInitiationID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PaymentInitiationID
+	return v.PaymentInitiationID
 }
 
-func (o *V3InitiatePaymentResponseData) GetTaskID() *string {
-	if o == nil {
+func (v *V3InitiatePaymentResponseData) GetTaskID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.TaskID
+	return v.TaskID
 }
 
 type V3InitiatePaymentResponse struct {
 	Data V3InitiatePaymentResponseData `json:"data"`
 }
 
-func (o *V3InitiatePaymentResponse) GetData() V3InitiatePaymentResponseData {
-	if o == nil {
+func (v *V3InitiatePaymentResponse) GetData() V3InitiatePaymentResponseData {
+	if v == nil {
 		return V3InitiatePaymentResponseData{}
 	}
-	return o.Data
+	return v.Data
 }

@@ -18,30 +18,30 @@ type CreateTransferInitiationResponse struct {
 	TransferInitiationResponse *shared.TransferInitiationResponse
 }
 
-func (o *CreateTransferInitiationResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateTransferInitiationResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateTransferInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateTransferInitiationResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateTransferInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateTransferInitiationResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }
 
-func (o *CreateTransferInitiationResponse) GetTransferInitiationResponse() *shared.TransferInitiationResponse {
-	if o == nil {
+func (c *CreateTransferInitiationResponse) GetTransferInitiationResponse() *shared.TransferInitiationResponse {
+	if c == nil {
 		return nil
 	}
-	return o.TransferInitiationResponse
+	return c.TransferInitiationResponse
 }

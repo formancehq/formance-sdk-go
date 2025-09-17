@@ -25,71 +25,71 @@ func (d DebitWalletRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DebitWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"amount", "metadata"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *DebitWalletRequest) GetAmount() Monetary {
-	if o == nil {
+func (d *DebitWalletRequest) GetAmount() Monetary {
+	if d == nil {
 		return Monetary{}
 	}
-	return o.Amount
+	return d.Amount
 }
 
-func (o *DebitWalletRequest) GetBalances() []string {
-	if o == nil {
+func (d *DebitWalletRequest) GetBalances() []string {
+	if d == nil {
 		return nil
 	}
-	return o.Balances
+	return d.Balances
 }
 
-func (o *DebitWalletRequest) GetDescription() *string {
-	if o == nil {
+func (d *DebitWalletRequest) GetDescription() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Description
+	return d.Description
 }
 
-func (o *DebitWalletRequest) GetDestination() *Subject {
-	if o == nil {
+func (d *DebitWalletRequest) GetDestination() *Subject {
+	if d == nil {
 		return nil
 	}
-	return o.Destination
+	return d.Destination
 }
 
-func (o *DebitWalletRequest) GetDestinationAccount() *LedgerAccountSubject {
-	if v := o.GetDestination(); v != nil {
+func (d *DebitWalletRequest) GetDestinationAccount() *LedgerAccountSubject {
+	if v := d.GetDestination(); v != nil {
 		return v.LedgerAccountSubject
 	}
 	return nil
 }
 
-func (o *DebitWalletRequest) GetDestinationWallet() *WalletSubject {
-	if v := o.GetDestination(); v != nil {
+func (d *DebitWalletRequest) GetDestinationWallet() *WalletSubject {
+	if v := d.GetDestination(); v != nil {
 		return v.WalletSubject
 	}
 	return nil
 }
 
-func (o *DebitWalletRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (d *DebitWalletRequest) GetMetadata() map[string]string {
+	if d == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return d.Metadata
 }
 
-func (o *DebitWalletRequest) GetPending() *bool {
-	if o == nil {
+func (d *DebitWalletRequest) GetPending() *bool {
+	if d == nil {
 		return nil
 	}
-	return o.Pending
+	return d.Pending
 }
 
-func (o *DebitWalletRequest) GetTimestamp() *time.Time {
-	if o == nil {
+func (d *DebitWalletRequest) GetTimestamp() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return o.Timestamp
+	return d.Timestamp
 }

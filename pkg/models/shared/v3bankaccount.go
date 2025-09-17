@@ -24,71 +24,71 @@ func (v V3BankAccount) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3BankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3BankAccount) GetAccountNumber() *string {
-	if o == nil {
+func (v *V3BankAccount) GetAccountNumber() *string {
+	if v == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return v.AccountNumber
 }
 
-func (o *V3BankAccount) GetCountry() *string {
-	if o == nil {
+func (v *V3BankAccount) GetCountry() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Country
+	return v.Country
 }
 
-func (o *V3BankAccount) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3BankAccount) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3BankAccount) GetIban() *string {
-	if o == nil {
+func (v *V3BankAccount) GetIban() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Iban
+	return v.Iban
 }
 
-func (o *V3BankAccount) GetID() string {
-	if o == nil {
+func (v *V3BankAccount) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3BankAccount) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3BankAccount) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3BankAccount) GetName() string {
-	if o == nil {
+func (v *V3BankAccount) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3BankAccount) GetRelatedAccounts() []V3BankAccountRelatedAccount {
-	if o == nil {
+func (v *V3BankAccount) GetRelatedAccounts() []V3BankAccountRelatedAccount {
+	if v == nil {
 		return nil
 	}
-	return o.RelatedAccounts
+	return v.RelatedAccounts
 }
 
-func (o *V3BankAccount) GetSwiftBicCode() *string {
-	if o == nil {
+func (v *V3BankAccount) GetSwiftBicCode() *string {
+	if v == nil {
 		return nil
 	}
-	return o.SwiftBicCode
+	return v.SwiftBicCode
 }

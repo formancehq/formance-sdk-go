@@ -21,25 +21,25 @@ type V2ListTriggersRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *V2ListTriggersRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2ListTriggersRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ListTriggersRequest) GetName() *string {
-	if o == nil {
+func (v *V2ListTriggersRequest) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2ListTriggersRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2ListTriggersRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
 type V2ListTriggersResponse struct {
@@ -53,30 +53,30 @@ type V2ListTriggersResponse struct {
 	V2ListTriggersResponse *shared.V2ListTriggersResponse
 }
 
-func (o *V2ListTriggersResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ListTriggersResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ListTriggersResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ListTriggersResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ListTriggersResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ListTriggersResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ListTriggersResponse) GetV2ListTriggersResponse() *shared.V2ListTriggersResponse {
-	if o == nil {
+func (v *V2ListTriggersResponse) GetV2ListTriggersResponse() *shared.V2ListTriggersResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2ListTriggersResponse
+	return v.V2ListTriggersResponse
 }

@@ -12,11 +12,11 @@ type V3UninstallConnectorRequest struct {
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 }
 
-func (o *V3UninstallConnectorRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3UninstallConnectorRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
 type V3UninstallConnectorResponse struct {
@@ -30,30 +30,30 @@ type V3UninstallConnectorResponse struct {
 	V3UninstallConnectorResponse *shared.V3UninstallConnectorResponse
 }
 
-func (o *V3UninstallConnectorResponse) GetContentType() string {
-	if o == nil {
+func (v *V3UninstallConnectorResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3UninstallConnectorResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3UninstallConnectorResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3UninstallConnectorResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3UninstallConnectorResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3UninstallConnectorResponse) GetV3UninstallConnectorResponse() *shared.V3UninstallConnectorResponse {
-	if o == nil {
+func (v *V3UninstallConnectorResponse) GetV3UninstallConnectorResponse() *shared.V3UninstallConnectorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3UninstallConnectorResponse
+	return v.V3UninstallConnectorResponse
 }

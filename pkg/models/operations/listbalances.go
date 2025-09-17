@@ -11,11 +11,11 @@ type ListBalancesRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *ListBalancesRequest) GetID() string {
-	if o == nil {
+func (l *ListBalancesRequest) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return o.ID
+	return l.ID
 }
 
 type ListBalancesResponse struct {
@@ -29,30 +29,30 @@ type ListBalancesResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListBalancesResponse) GetContentType() string {
-	if o == nil {
+func (l *ListBalancesResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListBalancesResponse) GetListBalancesResponse() *shared.ListBalancesResponse {
-	if o == nil {
+func (l *ListBalancesResponse) GetListBalancesResponse() *shared.ListBalancesResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ListBalancesResponse
+	return l.ListBalancesResponse
 }
 
-func (o *ListBalancesResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListBalancesResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListBalancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListBalancesResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

@@ -9,30 +9,30 @@ type ConfigUser struct {
 	Secret     *string  `json:"secret,omitempty"`
 }
 
-func (o *ConfigUser) GetEndpoint() string {
-	if o == nil {
+func (c *ConfigUser) GetEndpoint() string {
+	if c == nil {
 		return ""
 	}
-	return o.Endpoint
+	return c.Endpoint
 }
 
-func (o *ConfigUser) GetEventTypes() []string {
-	if o == nil {
+func (c *ConfigUser) GetEventTypes() []string {
+	if c == nil {
 		return []string{}
 	}
-	return o.EventTypes
+	return c.EventTypes
 }
 
-func (o *ConfigUser) GetName() *string {
-	if o == nil {
+func (c *ConfigUser) GetName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *ConfigUser) GetSecret() *string {
-	if o == nil {
+func (c *ConfigUser) GetSecret() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Secret
+	return c.Secret
 }

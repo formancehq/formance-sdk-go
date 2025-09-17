@@ -19,22 +19,22 @@ func (c ConfirmHoldRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (c *ConfirmHoldRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ConfirmHoldRequest) GetAmount() *big.Int {
-	if o == nil {
+func (c *ConfirmHoldRequest) GetAmount() *big.Int {
+	if c == nil {
 		return nil
 	}
-	return o.Amount
+	return c.Amount
 }
 
-func (o *ConfirmHoldRequest) GetFinal() *bool {
-	if o == nil {
+func (c *ConfirmHoldRequest) GetFinal() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Final
+	return c.Final
 }

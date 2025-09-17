@@ -10,37 +10,37 @@ type V3CreatePaymentServiceUserRequest struct {
 	Name           string                   `json:"name"`
 }
 
-func (o *V3CreatePaymentServiceUserRequest) GetAddress() *V3AddressRequest {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserRequest) GetAddress() *V3AddressRequest {
+	if v == nil {
 		return nil
 	}
-	return o.Address
+	return v.Address
 }
 
-func (o *V3CreatePaymentServiceUserRequest) GetBankAccountIDs() []string {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserRequest) GetBankAccountIDs() []string {
+	if v == nil {
 		return nil
 	}
-	return o.BankAccountIDs
+	return v.BankAccountIDs
 }
 
-func (o *V3CreatePaymentServiceUserRequest) GetContactDetails() *V3ContactDetailsRequest {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserRequest) GetContactDetails() *V3ContactDetailsRequest {
+	if v == nil {
 		return nil
 	}
-	return o.ContactDetails
+	return v.ContactDetails
 }
 
-func (o *V3CreatePaymentServiceUserRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3CreatePaymentServiceUserRequest) GetName() string {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserRequest) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }

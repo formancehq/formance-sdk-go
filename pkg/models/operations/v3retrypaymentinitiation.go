@@ -12,11 +12,11 @@ type V3RetryPaymentInitiationRequest struct {
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
 }
 
-func (o *V3RetryPaymentInitiationRequest) GetPaymentInitiationID() string {
-	if o == nil {
+func (v *V3RetryPaymentInitiationRequest) GetPaymentInitiationID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentInitiationID
+	return v.PaymentInitiationID
 }
 
 type V3RetryPaymentInitiationResponse struct {
@@ -30,30 +30,30 @@ type V3RetryPaymentInitiationResponse struct {
 	V3RetryPaymentInitiationResponse *shared.V3RetryPaymentInitiationResponse
 }
 
-func (o *V3RetryPaymentInitiationResponse) GetContentType() string {
-	if o == nil {
+func (v *V3RetryPaymentInitiationResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3RetryPaymentInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3RetryPaymentInitiationResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3RetryPaymentInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3RetryPaymentInitiationResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3RetryPaymentInitiationResponse) GetV3RetryPaymentInitiationResponse() *shared.V3RetryPaymentInitiationResponse {
-	if o == nil {
+func (v *V3RetryPaymentInitiationResponse) GetV3RetryPaymentInitiationResponse() *shared.V3RetryPaymentInitiationResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3RetryPaymentInitiationResponse
+	return v.V3RetryPaymentInitiationResponse
 }

@@ -25,39 +25,39 @@ type GetBalancesRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *GetBalancesRequest) GetAddress() *string {
-	if o == nil {
+func (g *GetBalancesRequest) GetAddress() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Address
+	return g.Address
 }
 
-func (o *GetBalancesRequest) GetAfter() *string {
-	if o == nil {
+func (g *GetBalancesRequest) GetAfter() *string {
+	if g == nil {
 		return nil
 	}
-	return o.After
+	return g.After
 }
 
-func (o *GetBalancesRequest) GetCursor() *string {
-	if o == nil {
+func (g *GetBalancesRequest) GetCursor() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Cursor
+	return g.Cursor
 }
 
-func (o *GetBalancesRequest) GetLedger() string {
-	if o == nil {
+func (g *GetBalancesRequest) GetLedger() string {
+	if g == nil {
 		return ""
 	}
-	return o.Ledger
+	return g.Ledger
 }
 
-func (o *GetBalancesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (g *GetBalancesRequest) GetPageSize() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.PageSize
+	return g.PageSize
 }
 
 type GetBalancesResponse struct {
@@ -71,30 +71,30 @@ type GetBalancesResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetBalancesResponse) GetBalancesCursorResponse() *shared.BalancesCursorResponse {
-	if o == nil {
+func (g *GetBalancesResponse) GetBalancesCursorResponse() *shared.BalancesCursorResponse {
+	if g == nil {
 		return nil
 	}
-	return o.BalancesCursorResponse
+	return g.BalancesCursorResponse
 }
 
-func (o *GetBalancesResponse) GetContentType() string {
-	if o == nil {
+func (g *GetBalancesResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetBalancesResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetBalancesResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetBalancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetBalancesResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

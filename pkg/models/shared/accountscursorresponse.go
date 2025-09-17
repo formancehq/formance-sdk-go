@@ -10,48 +10,48 @@ type AccountsCursorResponseCursor struct {
 	Previous *string   `json:"previous,omitempty"`
 }
 
-func (o *AccountsCursorResponseCursor) GetData() []Account {
-	if o == nil {
+func (a *AccountsCursorResponseCursor) GetData() []Account {
+	if a == nil {
 		return []Account{}
 	}
-	return o.Data
+	return a.Data
 }
 
-func (o *AccountsCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (a *AccountsCursorResponseCursor) GetHasMore() bool {
+	if a == nil {
 		return false
 	}
-	return o.HasMore
+	return a.HasMore
 }
 
-func (o *AccountsCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (a *AccountsCursorResponseCursor) GetNext() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Next
+	return a.Next
 }
 
-func (o *AccountsCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (a *AccountsCursorResponseCursor) GetPageSize() int64 {
+	if a == nil {
 		return 0
 	}
-	return o.PageSize
+	return a.PageSize
 }
 
-func (o *AccountsCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (a *AccountsCursorResponseCursor) GetPrevious() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Previous
+	return a.Previous
 }
 
 type AccountsCursorResponse struct {
 	Cursor AccountsCursorResponseCursor `json:"cursor"`
 }
 
-func (o *AccountsCursorResponse) GetCursor() AccountsCursorResponseCursor {
-	if o == nil {
+func (a *AccountsCursorResponse) GetCursor() AccountsCursorResponseCursor {
+	if a == nil {
 		return AccountsCursorResponseCursor{}
 	}
-	return o.Cursor
+	return a.Cursor
 }

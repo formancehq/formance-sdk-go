@@ -10,48 +10,48 @@ type V3PaymentServiceUsersCursorResponseCursor struct {
 	Previous *string                `json:"previous,omitempty"`
 }
 
-func (o *V3PaymentServiceUsersCursorResponseCursor) GetData() []V3PaymentServiceUser {
-	if o == nil {
+func (v *V3PaymentServiceUsersCursorResponseCursor) GetData() []V3PaymentServiceUser {
+	if v == nil {
 		return []V3PaymentServiceUser{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V3PaymentServiceUsersCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V3PaymentServiceUsersCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V3PaymentServiceUsersCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V3PaymentServiceUsersCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V3PaymentServiceUsersCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V3PaymentServiceUsersCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3PaymentServiceUsersCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V3PaymentServiceUsersCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V3PaymentServiceUsersCursorResponse struct {
 	Cursor V3PaymentServiceUsersCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V3PaymentServiceUsersCursorResponse) GetCursor() V3PaymentServiceUsersCursorResponseCursor {
-	if o == nil {
+func (v *V3PaymentServiceUsersCursorResponse) GetCursor() V3PaymentServiceUsersCursorResponseCursor {
+	if v == nil {
 		return V3PaymentServiceUsersCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

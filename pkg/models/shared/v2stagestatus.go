@@ -20,43 +20,43 @@ func (v V2StageStatus) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2StageStatus) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"instanceID", "stage", "startedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2StageStatus) GetError() *string {
-	if o == nil {
+func (v *V2StageStatus) GetError() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Error
+	return v.Error
 }
 
-func (o *V2StageStatus) GetInstanceID() string {
-	if o == nil {
+func (v *V2StageStatus) GetInstanceID() string {
+	if v == nil {
 		return ""
 	}
-	return o.InstanceID
+	return v.InstanceID
 }
 
-func (o *V2StageStatus) GetStage() float64 {
-	if o == nil {
+func (v *V2StageStatus) GetStage() float64 {
+	if v == nil {
 		return 0.0
 	}
-	return o.Stage
+	return v.Stage
 }
 
-func (o *V2StageStatus) GetStartedAt() time.Time {
-	if o == nil {
+func (v *V2StageStatus) GetStartedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.StartedAt
+	return v.StartedAt
 }
 
-func (o *V2StageStatus) GetTerminatedAt() *time.Time {
-	if o == nil {
+func (v *V2StageStatus) GetTerminatedAt() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.TerminatedAt
+	return v.TerminatedAt
 }

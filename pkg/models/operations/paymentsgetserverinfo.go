@@ -18,30 +18,30 @@ type PaymentsgetServerInfoResponse struct {
 	PaymentsServerInfo *shared.PaymentsServerInfo
 }
 
-func (o *PaymentsgetServerInfoResponse) GetContentType() string {
-	if o == nil {
+func (p *PaymentsgetServerInfoResponse) GetContentType() string {
+	if p == nil {
 		return ""
 	}
-	return o.ContentType
+	return p.ContentType
 }
 
-func (o *PaymentsgetServerInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (p *PaymentsgetServerInfoResponse) GetStatusCode() int {
+	if p == nil {
 		return 0
 	}
-	return o.StatusCode
+	return p.StatusCode
 }
 
-func (o *PaymentsgetServerInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (p *PaymentsgetServerInfoResponse) GetRawResponse() *http.Response {
+	if p == nil {
 		return nil
 	}
-	return o.RawResponse
+	return p.RawResponse
 }
 
-func (o *PaymentsgetServerInfoResponse) GetPaymentsServerInfo() *shared.PaymentsServerInfo {
-	if o == nil {
+func (p *PaymentsgetServerInfoResponse) GetPaymentsServerInfo() *shared.PaymentsServerInfo {
+	if p == nil {
 		return nil
 	}
-	return o.PaymentsServerInfo
+	return p.PaymentsServerInfo
 }

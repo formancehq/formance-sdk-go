@@ -11,11 +11,11 @@ type GetWalletRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *GetWalletRequest) GetID() string {
-	if o == nil {
+func (g *GetWalletRequest) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ID
+	return g.ID
 }
 
 type GetWalletResponse struct {
@@ -29,30 +29,30 @@ type GetWalletResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetWalletResponse) GetActivityGetWalletOutput() *shared.ActivityGetWalletOutput {
-	if o == nil {
+func (g *GetWalletResponse) GetActivityGetWalletOutput() *shared.ActivityGetWalletOutput {
+	if g == nil {
 		return nil
 	}
-	return o.ActivityGetWalletOutput
+	return g.ActivityGetWalletOutput
 }
 
-func (o *GetWalletResponse) GetContentType() string {
-	if o == nil {
+func (g *GetWalletResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetWalletResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetWalletResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetWalletResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetWalletResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

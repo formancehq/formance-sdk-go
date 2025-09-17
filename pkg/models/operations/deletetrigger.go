@@ -11,11 +11,11 @@ type DeleteTriggerRequest struct {
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`
 }
 
-func (o *DeleteTriggerRequest) GetTriggerID() string {
-	if o == nil {
+func (d *DeleteTriggerRequest) GetTriggerID() string {
+	if d == nil {
 		return ""
 	}
-	return o.TriggerID
+	return d.TriggerID
 }
 
 type DeleteTriggerResponse struct {
@@ -27,23 +27,23 @@ type DeleteTriggerResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *DeleteTriggerResponse) GetContentType() string {
-	if o == nil {
+func (d *DeleteTriggerResponse) GetContentType() string {
+	if d == nil {
 		return ""
 	}
-	return o.ContentType
+	return d.ContentType
 }
 
-func (o *DeleteTriggerResponse) GetStatusCode() int {
-	if o == nil {
+func (d *DeleteTriggerResponse) GetStatusCode() int {
+	if d == nil {
 		return 0
 	}
-	return o.StatusCode
+	return d.StatusCode
 }
 
-func (o *DeleteTriggerResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (d *DeleteTriggerResponse) GetRawResponse() *http.Response {
+	if d == nil {
 		return nil
 	}
-	return o.RawResponse
+	return d.RawResponse
 }

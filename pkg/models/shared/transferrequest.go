@@ -19,36 +19,36 @@ func (t TransferRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"amount", "asset", "destination"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TransferRequest) GetAmount() *big.Int {
-	if o == nil {
+func (t *TransferRequest) GetAmount() *big.Int {
+	if t == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return t.Amount
 }
 
-func (o *TransferRequest) GetAsset() string {
-	if o == nil {
+func (t *TransferRequest) GetAsset() string {
+	if t == nil {
 		return ""
 	}
-	return o.Asset
+	return t.Asset
 }
 
-func (o *TransferRequest) GetDestination() string {
-	if o == nil {
+func (t *TransferRequest) GetDestination() string {
+	if t == nil {
 		return ""
 	}
-	return o.Destination
+	return t.Destination
 }
 
-func (o *TransferRequest) GetSource() *string {
-	if o == nil {
+func (t *TransferRequest) GetSource() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Source
+	return t.Source
 }

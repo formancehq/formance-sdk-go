@@ -22,50 +22,50 @@ func (m MangoPayConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MangoPayConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"apiKey", "clientID", "endpoint", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *MangoPayConfig) GetAPIKey() string {
-	if o == nil {
+func (m *MangoPayConfig) GetAPIKey() string {
+	if m == nil {
 		return ""
 	}
-	return o.APIKey
+	return m.APIKey
 }
 
-func (o *MangoPayConfig) GetClientID() string {
-	if o == nil {
+func (m *MangoPayConfig) GetClientID() string {
+	if m == nil {
 		return ""
 	}
-	return o.ClientID
+	return m.ClientID
 }
 
-func (o *MangoPayConfig) GetEndpoint() string {
-	if o == nil {
+func (m *MangoPayConfig) GetEndpoint() string {
+	if m == nil {
 		return ""
 	}
-	return o.Endpoint
+	return m.Endpoint
 }
 
-func (o *MangoPayConfig) GetName() string {
-	if o == nil {
+func (m *MangoPayConfig) GetName() string {
+	if m == nil {
 		return ""
 	}
-	return o.Name
+	return m.Name
 }
 
-func (o *MangoPayConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (m *MangoPayConfig) GetPollingPeriod() *string {
+	if m == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return m.PollingPeriod
 }
 
-func (o *MangoPayConfig) GetProvider() *string {
-	if o == nil {
+func (m *MangoPayConfig) GetProvider() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Provider
+	return m.Provider
 }

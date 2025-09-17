@@ -12,18 +12,18 @@ type VoidHoldRequest struct {
 	HoldID         string  `pathParam:"style=simple,explode=false,name=hold_id"`
 }
 
-func (o *VoidHoldRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (v *VoidHoldRequest) GetIdempotencyKey() *string {
+	if v == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return v.IdempotencyKey
 }
 
-func (o *VoidHoldRequest) GetHoldID() string {
-	if o == nil {
+func (v *VoidHoldRequest) GetHoldID() string {
+	if v == nil {
 		return ""
 	}
-	return o.HoldID
+	return v.HoldID
 }
 
 type VoidHoldResponse struct {
@@ -35,23 +35,23 @@ type VoidHoldResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *VoidHoldResponse) GetContentType() string {
-	if o == nil {
+func (v *VoidHoldResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *VoidHoldResponse) GetStatusCode() int {
-	if o == nil {
+func (v *VoidHoldResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *VoidHoldResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *VoidHoldResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

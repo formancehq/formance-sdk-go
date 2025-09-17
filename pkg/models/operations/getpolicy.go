@@ -12,11 +12,11 @@ type GetPolicyRequest struct {
 	PolicyID string `pathParam:"style=simple,explode=false,name=policyID"`
 }
 
-func (o *GetPolicyRequest) GetPolicyID() string {
-	if o == nil {
+func (g *GetPolicyRequest) GetPolicyID() string {
+	if g == nil {
 		return ""
 	}
-	return o.PolicyID
+	return g.PolicyID
 }
 
 type GetPolicyResponse struct {
@@ -30,30 +30,30 @@ type GetPolicyResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetPolicyResponse) GetContentType() string {
-	if o == nil {
+func (g *GetPolicyResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetPolicyResponse) GetPolicyResponse() *shared.PolicyResponse {
-	if o == nil {
+func (g *GetPolicyResponse) GetPolicyResponse() *shared.PolicyResponse {
+	if g == nil {
 		return nil
 	}
-	return o.PolicyResponse
+	return g.PolicyResponse
 }
 
-func (o *GetPolicyResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetPolicyResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetPolicyResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetPolicyResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

@@ -15,69 +15,69 @@ type UpdateConnectorConfigV1Request struct {
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorId"`
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfig() shared.ConnectorConfig {
-	if o == nil {
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfig() shared.ConnectorConfig {
+	if u == nil {
 		return shared.ConnectorConfig{}
 	}
-	return o.ConnectorConfig
+	return u.ConnectorConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigAdyen() *shared.AdyenConfig {
-	return o.GetConnectorConfig().AdyenConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigAdyen() *shared.AdyenConfig {
+	return u.GetConnectorConfig().AdyenConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigAtlar() *shared.AtlarConfig {
-	return o.GetConnectorConfig().AtlarConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigAtlar() *shared.AtlarConfig {
+	return u.GetConnectorConfig().AtlarConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigBankingcircle() *shared.BankingCircleConfig {
-	return o.GetConnectorConfig().BankingCircleConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigBankingcircle() *shared.BankingCircleConfig {
+	return u.GetConnectorConfig().BankingCircleConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigCurrencycloud() *shared.CurrencyCloudConfig {
-	return o.GetConnectorConfig().CurrencyCloudConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigCurrencycloud() *shared.CurrencyCloudConfig {
+	return u.GetConnectorConfig().CurrencyCloudConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigDummypay() *shared.DummyPayConfig {
-	return o.GetConnectorConfig().DummyPayConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigDummypay() *shared.DummyPayConfig {
+	return u.GetConnectorConfig().DummyPayConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigGeneric() *shared.GenericConfig {
-	return o.GetConnectorConfig().GenericConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigGeneric() *shared.GenericConfig {
+	return u.GetConnectorConfig().GenericConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigMangopay() *shared.MangoPayConfig {
-	return o.GetConnectorConfig().MangoPayConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigMangopay() *shared.MangoPayConfig {
+	return u.GetConnectorConfig().MangoPayConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigModulr() *shared.ModulrConfig {
-	return o.GetConnectorConfig().ModulrConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigModulr() *shared.ModulrConfig {
+	return u.GetConnectorConfig().ModulrConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigMoneycorp() *shared.MoneycorpConfig {
-	return o.GetConnectorConfig().MoneycorpConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigMoneycorp() *shared.MoneycorpConfig {
+	return u.GetConnectorConfig().MoneycorpConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigStripe() *shared.StripeConfig {
-	return o.GetConnectorConfig().StripeConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigStripe() *shared.StripeConfig {
+	return u.GetConnectorConfig().StripeConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorConfigWise() *shared.WiseConfig {
-	return o.GetConnectorConfig().WiseConfig
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfigWise() *shared.WiseConfig {
+	return u.GetConnectorConfig().WiseConfig
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnector() shared.Connector {
-	if o == nil {
+func (u *UpdateConnectorConfigV1Request) GetConnector() shared.Connector {
+	if u == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return u.Connector
 }
 
-func (o *UpdateConnectorConfigV1Request) GetConnectorID() string {
-	if o == nil {
+func (u *UpdateConnectorConfigV1Request) GetConnectorID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return u.ConnectorID
 }
 
 type UpdateConnectorConfigV1Response struct {
@@ -89,23 +89,23 @@ type UpdateConnectorConfigV1Response struct {
 	RawResponse *http.Response
 }
 
-func (o *UpdateConnectorConfigV1Response) GetContentType() string {
-	if o == nil {
+func (u *UpdateConnectorConfigV1Response) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UpdateConnectorConfigV1Response) GetStatusCode() int {
-	if o == nil {
+func (u *UpdateConnectorConfigV1Response) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UpdateConnectorConfigV1Response) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UpdateConnectorConfigV1Response) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

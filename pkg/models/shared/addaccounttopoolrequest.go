@@ -6,9 +6,9 @@ type AddAccountToPoolRequest struct {
 	AccountID string `json:"accountID"`
 }
 
-func (o *AddAccountToPoolRequest) GetAccountID() string {
-	if o == nil {
+func (a *AddAccountToPoolRequest) GetAccountID() string {
+	if a == nil {
 		return ""
 	}
-	return o.AccountID
+	return a.AccountID
 }

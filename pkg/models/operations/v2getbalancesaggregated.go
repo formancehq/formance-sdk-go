@@ -23,38 +23,38 @@ func (v V2GetBalancesAggregatedRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2GetBalancesAggregatedRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2GetBalancesAggregatedRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V2GetBalancesAggregatedRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2GetBalancesAggregatedRequest) GetLedger() string {
-	if o == nil {
+func (v *V2GetBalancesAggregatedRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2GetBalancesAggregatedRequest) GetPit() *time.Time {
-	if o == nil {
+func (v *V2GetBalancesAggregatedRequest) GetPit() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Pit
+	return v.Pit
 }
 
-func (o *V2GetBalancesAggregatedRequest) GetUseInsertionDate() *bool {
-	if o == nil {
+func (v *V2GetBalancesAggregatedRequest) GetUseInsertionDate() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.UseInsertionDate
+	return v.UseInsertionDate
 }
 
 type V2GetBalancesAggregatedResponse struct {
@@ -68,30 +68,30 @@ type V2GetBalancesAggregatedResponse struct {
 	V2AggregateBalancesResponse *shared.V2AggregateBalancesResponse
 }
 
-func (o *V2GetBalancesAggregatedResponse) GetContentType() string {
-	if o == nil {
+func (v *V2GetBalancesAggregatedResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2GetBalancesAggregatedResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2GetBalancesAggregatedResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2GetBalancesAggregatedResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2GetBalancesAggregatedResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2GetBalancesAggregatedResponse) GetV2AggregateBalancesResponse() *shared.V2AggregateBalancesResponse {
-	if o == nil {
+func (v *V2GetBalancesAggregatedResponse) GetV2AggregateBalancesResponse() *shared.V2AggregateBalancesResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2AggregateBalancesResponse
+	return v.V2AggregateBalancesResponse
 }

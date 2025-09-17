@@ -23,57 +23,57 @@ func (v V3PaymentInitiationAdjustment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3PaymentInitiationAdjustment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "status"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3PaymentInitiationAdjustment) GetAmount() *big.Int {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustment) GetAmount() *big.Int {
+	if v == nil {
 		return nil
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V3PaymentInitiationAdjustment) GetAsset() *string {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustment) GetAsset() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Asset
+	return v.Asset
 }
 
-func (o *V3PaymentInitiationAdjustment) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustment) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3PaymentInitiationAdjustment) GetError() *string {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustment) GetError() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Error
+	return v.Error
 }
 
-func (o *V3PaymentInitiationAdjustment) GetID() string {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustment) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3PaymentInitiationAdjustment) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustment) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3PaymentInitiationAdjustment) GetStatus() V3PaymentInitiationStatusEnum {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustment) GetStatus() V3PaymentInitiationStatusEnum {
+	if v == nil {
 		return V3PaymentInitiationStatusEnum("")
 	}
-	return o.Status
+	return v.Status
 }

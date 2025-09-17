@@ -6,9 +6,9 @@ type V2PaymentMetadata struct {
 	Key *string `json:"key,omitempty"`
 }
 
-func (o *V2PaymentMetadata) GetKey() *string {
-	if o == nil {
+func (v *V2PaymentMetadata) GetKey() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Key
+	return v.Key
 }

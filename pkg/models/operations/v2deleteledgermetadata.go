@@ -13,18 +13,18 @@ type V2DeleteLedgerMetadataRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2DeleteLedgerMetadataRequest) GetKey() string {
-	if o == nil {
+func (v *V2DeleteLedgerMetadataRequest) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }
 
-func (o *V2DeleteLedgerMetadataRequest) GetLedger() string {
-	if o == nil {
+func (v *V2DeleteLedgerMetadataRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2DeleteLedgerMetadataResponse struct {
@@ -36,23 +36,23 @@ type V2DeleteLedgerMetadataResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2DeleteLedgerMetadataResponse) GetContentType() string {
-	if o == nil {
+func (v *V2DeleteLedgerMetadataResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2DeleteLedgerMetadataResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2DeleteLedgerMetadataResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2DeleteLedgerMetadataResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2DeleteLedgerMetadataResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

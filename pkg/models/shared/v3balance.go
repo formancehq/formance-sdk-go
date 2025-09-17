@@ -21,43 +21,43 @@ func (v V3Balance) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Balance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountID", "asset", "balance", "createdAt", "lastUpdatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3Balance) GetAccountID() string {
-	if o == nil {
+func (v *V3Balance) GetAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccountID
+	return v.AccountID
 }
 
-func (o *V3Balance) GetAsset() string {
-	if o == nil {
+func (v *V3Balance) GetAsset() string {
+	if v == nil {
 		return ""
 	}
-	return o.Asset
+	return v.Asset
 }
 
-func (o *V3Balance) GetBalance() *big.Int {
-	if o == nil {
+func (v *V3Balance) GetBalance() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.Balance
+	return v.Balance
 }
 
-func (o *V3Balance) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3Balance) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3Balance) GetLastUpdatedAt() time.Time {
-	if o == nil {
+func (v *V3Balance) GetLastUpdatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.LastUpdatedAt
+	return v.LastUpdatedAt
 }

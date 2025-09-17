@@ -13,18 +13,18 @@ type UpdateClientRequest struct {
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-func (o *UpdateClientRequest) GetClientOptions() *shared.ClientOptions {
-	if o == nil {
+func (u *UpdateClientRequest) GetClientOptions() *shared.ClientOptions {
+	if u == nil {
 		return nil
 	}
-	return o.ClientOptions
+	return u.ClientOptions
 }
 
-func (o *UpdateClientRequest) GetClientID() string {
-	if o == nil {
+func (u *UpdateClientRequest) GetClientID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ClientID
+	return u.ClientID
 }
 
 type UpdateClientResponse struct {
@@ -38,30 +38,30 @@ type UpdateClientResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *UpdateClientResponse) GetContentType() string {
-	if o == nil {
+func (u *UpdateClientResponse) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UpdateClientResponse) GetCreateClientResponse() *shared.CreateClientResponse {
-	if o == nil {
+func (u *UpdateClientResponse) GetCreateClientResponse() *shared.CreateClientResponse {
+	if u == nil {
 		return nil
 	}
-	return o.CreateClientResponse
+	return u.CreateClientResponse
 }
 
-func (o *UpdateClientResponse) GetStatusCode() int {
-	if o == nil {
+func (u *UpdateClientResponse) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UpdateClientResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UpdateClientResponse) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

@@ -6,9 +6,9 @@ type DebitWalletResponse struct {
 	Data Hold `json:"data"`
 }
 
-func (o *DebitWalletResponse) GetData() Hold {
-	if o == nil {
+func (d *DebitWalletResponse) GetData() Hold {
+	if d == nil {
 		return Hold{}
 	}
-	return o.Data
+	return d.Data
 }

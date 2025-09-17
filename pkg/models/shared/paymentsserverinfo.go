@@ -8,16 +8,16 @@ type PaymentsServerInfo struct {
 	Version *string `json:"version,omitempty"`
 }
 
-func (o *PaymentsServerInfo) GetDebug() *bool {
-	if o == nil {
+func (p *PaymentsServerInfo) GetDebug() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Debug
+	return p.Debug
 }
 
-func (o *PaymentsServerInfo) GetVersion() *string {
-	if o == nil {
+func (p *PaymentsServerInfo) GetVersion() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Version
+	return p.Version
 }

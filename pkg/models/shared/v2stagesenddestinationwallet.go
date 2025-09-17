@@ -2,21 +2,36 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2StageSendDestinationWallet struct {
 	Balance *string `json:"balance,omitempty"`
 	ID      string  `json:"id"`
 }
 
-func (o *V2StageSendDestinationWallet) GetBalance() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Balance
+func (v V2StageSendDestinationWallet) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
 }
 
-func (o *V2StageSendDestinationWallet) GetID() string {
-	if o == nil {
+func (v *V2StageSendDestinationWallet) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2StageSendDestinationWallet) GetBalance() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Balance
+}
+
+func (v *V2StageSendDestinationWallet) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }

@@ -12,11 +12,11 @@ type ReadClientRequest struct {
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-func (o *ReadClientRequest) GetClientID() string {
-	if o == nil {
+func (r *ReadClientRequest) GetClientID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ClientID
+	return r.ClientID
 }
 
 type ReadClientResponse struct {
@@ -30,30 +30,30 @@ type ReadClientResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReadClientResponse) GetContentType() string {
-	if o == nil {
+func (r *ReadClientResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReadClientResponse) GetReadClientResponse() *shared.ReadClientResponse {
-	if o == nil {
+func (r *ReadClientResponse) GetReadClientResponse() *shared.ReadClientResponse {
+	if r == nil {
 		return nil
 	}
-	return o.ReadClientResponse
+	return r.ReadClientResponse
 }
 
-func (o *ReadClientResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReadClientResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReadClientResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReadClientResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

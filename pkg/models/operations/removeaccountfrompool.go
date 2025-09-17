@@ -13,18 +13,18 @@ type RemoveAccountFromPoolRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
-func (o *RemoveAccountFromPoolRequest) GetAccountID() string {
-	if o == nil {
+func (r *RemoveAccountFromPoolRequest) GetAccountID() string {
+	if r == nil {
 		return ""
 	}
-	return o.AccountID
+	return r.AccountID
 }
 
-func (o *RemoveAccountFromPoolRequest) GetPoolID() string {
-	if o == nil {
+func (r *RemoveAccountFromPoolRequest) GetPoolID() string {
+	if r == nil {
 		return ""
 	}
-	return o.PoolID
+	return r.PoolID
 }
 
 type RemoveAccountFromPoolResponse struct {
@@ -36,23 +36,23 @@ type RemoveAccountFromPoolResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *RemoveAccountFromPoolResponse) GetContentType() string {
-	if o == nil {
+func (r *RemoveAccountFromPoolResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *RemoveAccountFromPoolResponse) GetStatusCode() int {
-	if o == nil {
+func (r *RemoveAccountFromPoolResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *RemoveAccountFromPoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *RemoveAccountFromPoolResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

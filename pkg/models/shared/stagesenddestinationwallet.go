@@ -2,21 +2,36 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type StageSendDestinationWallet struct {
 	Balance *string `json:"balance,omitempty"`
 	ID      string  `json:"id"`
 }
 
-func (o *StageSendDestinationWallet) GetBalance() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Balance
+func (s StageSendDestinationWallet) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (o *StageSendDestinationWallet) GetID() string {
-	if o == nil {
+func (s *StageSendDestinationWallet) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *StageSendDestinationWallet) GetBalance() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Balance
+}
+
+func (s *StageSendDestinationWallet) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }

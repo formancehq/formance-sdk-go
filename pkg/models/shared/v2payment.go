@@ -142,113 +142,113 @@ func (v V2Payment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Payment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"adjustments", "asset", "connectorID", "createdAt", "destinationAccountID", "id", "initialAmount", "metadata", "raw", "reference", "scheme", "sourceAccountID", "status", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2Payment) GetAdjustments() []V2PaymentAdjustment {
-	if o == nil {
+func (v *V2Payment) GetAdjustments() []V2PaymentAdjustment {
+	if v == nil {
 		return []V2PaymentAdjustment{}
 	}
-	return o.Adjustments
+	return v.Adjustments
 }
 
-func (o *V2Payment) GetAsset() string {
-	if o == nil {
+func (v *V2Payment) GetAsset() string {
+	if v == nil {
 		return ""
 	}
-	return o.Asset
+	return v.Asset
 }
 
-func (o *V2Payment) GetConnectorID() string {
-	if o == nil {
+func (v *V2Payment) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V2Payment) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V2Payment) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V2Payment) GetDestinationAccountID() string {
-	if o == nil {
+func (v *V2Payment) GetDestinationAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.DestinationAccountID
+	return v.DestinationAccountID
 }
 
-func (o *V2Payment) GetID() string {
-	if o == nil {
+func (v *V2Payment) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2Payment) GetInitialAmount() *big.Int {
-	if o == nil {
+func (v *V2Payment) GetInitialAmount() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.InitialAmount
+	return v.InitialAmount
 }
 
-func (o *V2Payment) GetMetadata() *V2PaymentMetadata {
-	if o == nil {
+func (v *V2Payment) GetMetadata() *V2PaymentMetadata {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2Payment) GetProvider() *V2Connector {
-	if o == nil {
+func (v *V2Payment) GetProvider() *V2Connector {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }
 
-func (o *V2Payment) GetRaw() *V2PaymentRaw {
-	if o == nil {
+func (v *V2Payment) GetRaw() *V2PaymentRaw {
+	if v == nil {
 		return nil
 	}
-	return o.Raw
+	return v.Raw
 }
 
-func (o *V2Payment) GetReference() string {
-	if o == nil {
+func (v *V2Payment) GetReference() string {
+	if v == nil {
 		return ""
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V2Payment) GetScheme() Scheme {
-	if o == nil {
+func (v *V2Payment) GetScheme() Scheme {
+	if v == nil {
 		return Scheme("")
 	}
-	return o.Scheme
+	return v.Scheme
 }
 
-func (o *V2Payment) GetSourceAccountID() string {
-	if o == nil {
+func (v *V2Payment) GetSourceAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.SourceAccountID
+	return v.SourceAccountID
 }
 
-func (o *V2Payment) GetStatus() V2PaymentStatus {
-	if o == nil {
+func (v *V2Payment) GetStatus() V2PaymentStatus {
+	if v == nil {
 		return V2PaymentStatus("")
 	}
-	return o.Status
+	return v.Status
 }
 
-func (o *V2Payment) GetType() V2PaymentType {
-	if o == nil {
+func (v *V2Payment) GetType() V2PaymentType {
+	if v == nil {
 		return V2PaymentType("")
 	}
-	return o.Type
+	return v.Type
 }

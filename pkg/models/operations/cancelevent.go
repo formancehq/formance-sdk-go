@@ -11,11 +11,11 @@ type CancelEventRequest struct {
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`
 }
 
-func (o *CancelEventRequest) GetInstanceID() string {
-	if o == nil {
+func (c *CancelEventRequest) GetInstanceID() string {
+	if c == nil {
 		return ""
 	}
-	return o.InstanceID
+	return c.InstanceID
 }
 
 type CancelEventResponse struct {
@@ -27,23 +27,23 @@ type CancelEventResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CancelEventResponse) GetContentType() string {
-	if o == nil {
+func (c *CancelEventResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CancelEventResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CancelEventResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CancelEventResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CancelEventResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

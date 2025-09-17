@@ -13,28 +13,50 @@ type TaskMangoPayDescriptor struct {
 	UserID *string `json:"userID,omitempty"`
 }
 
-func (o *TaskMangoPayDescriptor) GetKey() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Key
+func (t TaskMangoPayDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TaskMangoPayDescriptor) GetName() *string {
-	if o == nil {
-		return nil
+func (t *TaskMangoPayDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
 	}
-	return o.Name
+	return nil
 }
 
-func (o *TaskMangoPayDescriptor) GetUserID() *string {
-	if o == nil {
+func (t *TaskMangoPayDescriptor) GetKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.UserID
+	return t.Key
+}
+
+func (t *TaskMangoPayDescriptor) GetName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Name
+}
+
+func (t *TaskMangoPayDescriptor) GetUserID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.UserID
 }
 
 type TaskMangoPayState struct {
+}
+
+func (t TaskMangoPayState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskMangoPayState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskMangoPay struct {
@@ -53,64 +75,64 @@ func (t TaskMangoPay) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskMangoPay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskMangoPay) GetConnectorID() string {
-	if o == nil {
+func (t *TaskMangoPay) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskMangoPay) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskMangoPay) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskMangoPay) GetDescriptor() TaskMangoPayDescriptor {
-	if o == nil {
+func (t *TaskMangoPay) GetDescriptor() TaskMangoPayDescriptor {
+	if t == nil {
 		return TaskMangoPayDescriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskMangoPay) GetError() *string {
-	if o == nil {
+func (t *TaskMangoPay) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskMangoPay) GetID() string {
-	if o == nil {
+func (t *TaskMangoPay) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskMangoPay) GetState() *TaskMangoPayState {
-	if o == nil {
+func (t *TaskMangoPay) GetState() *TaskMangoPayState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskMangoPay) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskMangoPay) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskMangoPay) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskMangoPay) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

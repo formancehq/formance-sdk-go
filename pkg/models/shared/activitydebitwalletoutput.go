@@ -6,9 +6,9 @@ type ActivityDebitWalletOutput struct {
 	Data OrchestrationHold `json:"data"`
 }
 
-func (o *ActivityDebitWalletOutput) GetData() OrchestrationHold {
-	if o == nil {
+func (a *ActivityDebitWalletOutput) GetData() OrchestrationHold {
+	if a == nil {
 		return OrchestrationHold{}
 	}
-	return o.Data
+	return a.Data
 }

@@ -20,43 +20,43 @@ func (t TransferInitiationAdjusments) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferInitiationAdjusments) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"adjustmentID", "createdAt", "status"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TransferInitiationAdjusments) GetAdjustmentID() string {
-	if o == nil {
+func (t *TransferInitiationAdjusments) GetAdjustmentID() string {
+	if t == nil {
 		return ""
 	}
-	return o.AdjustmentID
+	return t.AdjustmentID
 }
 
-func (o *TransferInitiationAdjusments) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TransferInitiationAdjusments) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TransferInitiationAdjusments) GetError() *string {
-	if o == nil {
+func (t *TransferInitiationAdjusments) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TransferInitiationAdjusments) GetMetadata() map[string]string {
-	if o == nil {
+func (t *TransferInitiationAdjusments) GetMetadata() map[string]string {
+	if t == nil {
 		return nil
 	}
-	return o.Metadata
+	return t.Metadata
 }
 
-func (o *TransferInitiationAdjusments) GetStatus() TransferInitiationStatus {
-	if o == nil {
+func (t *TransferInitiationAdjusments) GetStatus() TransferInitiationStatus {
+	if t == nil {
 		return TransferInitiationStatus("")
 	}
-	return o.Status
+	return t.Status
 }

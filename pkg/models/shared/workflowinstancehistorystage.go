@@ -25,78 +25,78 @@ func (w WorkflowInstanceHistoryStage) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WorkflowInstanceHistoryStage) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"attempt", "input", "name", "startedAt", "terminated"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WorkflowInstanceHistoryStage) GetAttempt() int64 {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetAttempt() int64 {
+	if w == nil {
 		return 0
 	}
-	return o.Attempt
+	return w.Attempt
 }
 
-func (o *WorkflowInstanceHistoryStage) GetError() *string {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetError() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Error
+	return w.Error
 }
 
-func (o *WorkflowInstanceHistoryStage) GetInput() WorkflowInstanceHistoryStageInput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetInput() WorkflowInstanceHistoryStageInput {
+	if w == nil {
 		return WorkflowInstanceHistoryStageInput{}
 	}
-	return o.Input
+	return w.Input
 }
 
-func (o *WorkflowInstanceHistoryStage) GetLastFailure() *string {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetLastFailure() *string {
+	if w == nil {
 		return nil
 	}
-	return o.LastFailure
+	return w.LastFailure
 }
 
-func (o *WorkflowInstanceHistoryStage) GetName() string {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return o.Name
+	return w.Name
 }
 
-func (o *WorkflowInstanceHistoryStage) GetNextExecution() *time.Time {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetNextExecution() *time.Time {
+	if w == nil {
 		return nil
 	}
-	return o.NextExecution
+	return w.NextExecution
 }
 
-func (o *WorkflowInstanceHistoryStage) GetOutput() *WorkflowInstanceHistoryStageOutput {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetOutput() *WorkflowInstanceHistoryStageOutput {
+	if w == nil {
 		return nil
 	}
-	return o.Output
+	return w.Output
 }
 
-func (o *WorkflowInstanceHistoryStage) GetStartedAt() time.Time {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetStartedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.StartedAt
+	return w.StartedAt
 }
 
-func (o *WorkflowInstanceHistoryStage) GetTerminated() bool {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetTerminated() bool {
+	if w == nil {
 		return false
 	}
-	return o.Terminated
+	return w.Terminated
 }
 
-func (o *WorkflowInstanceHistoryStage) GetTerminatedAt() *time.Time {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStage) GetTerminatedAt() *time.Time {
+	if w == nil {
 		return nil
 	}
-	return o.TerminatedAt
+	return w.TerminatedAt
 }

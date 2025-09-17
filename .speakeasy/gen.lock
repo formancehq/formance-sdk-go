@@ -3,10 +3,10 @@ id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
   docChecksum: 2303b8447e474d428256a66f5ab2f945
   docVersion: v3.0.5
-  speakeasyVersion: 1.565.0
-  generationVersion: 2.630.9
-  releaseVersion: 3.5.0
-  configChecksum: a132c6c7a62d4f631b6ab84756ee61a7
+  speakeasyVersion: 1.617.1
+  generationVersion: 2.701.8
+  releaseVersion: 3.6.0
+  configChecksum: 5278e99a118ce98863ccd29e51221d2a
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -16,25 +16,25 @@ features:
     additionalDependencies: 0.1.0
     bigint: 0.0.2
     constsAndDefaults: 0.1.12
-    core: 3.8.1
+    core: 3.10.0
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     downloadStreams: 0.1.2
     envVarSecurityUsage: 0.3.2
     errors: 2.83.0
     getRequestBodies: 2.81.1
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.3
     ignores: 2.81.1
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
-    nullables: 0.1.1
-    oauth2ClientCredentials: 0.3.1
+    nullables: 0.2.0
+    oauth2ClientCredentials: 0.4.0
     responseFormat: 0.1.2
-    retries: 2.83.3
+    retries: 2.84.2
     sdkHooks: 0.2.0
-    unions: 2.85.11
+    unions: 2.85.14
     uploadStreams: 0.1.0
 generatedFiles:
   - .gitattributes
@@ -1696,6 +1696,8 @@ generatedFiles:
   - payments.go
   - pkg/models/operations/options.go
   - pkg/models/sdkerrors/sdkerror.go
+  - pkg/optionalnullable/optionalnullable.go
+  - pkg/optionalnullable/optionalnullable_test.go
   - pkg/retry/config.go
   - pkg/types/bigint.go
   - pkg/types/date.go

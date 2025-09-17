@@ -19,36 +19,36 @@ func (v V3Pool) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Pool) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "name", "poolAccounts"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3Pool) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3Pool) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3Pool) GetID() string {
-	if o == nil {
+func (v *V3Pool) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3Pool) GetName() string {
-	if o == nil {
+func (v *V3Pool) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3Pool) GetPoolAccounts() []string {
-	if o == nil {
+func (v *V3Pool) GetPoolAccounts() []string {
+	if v == nil {
 		return []string{}
 	}
-	return o.PoolAccounts
+	return v.PoolAccounts
 }

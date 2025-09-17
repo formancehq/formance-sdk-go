@@ -12,11 +12,11 @@ type GetPoolRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
-func (o *GetPoolRequest) GetPoolID() string {
-	if o == nil {
+func (g *GetPoolRequest) GetPoolID() string {
+	if g == nil {
 		return ""
 	}
-	return o.PoolID
+	return g.PoolID
 }
 
 type GetPoolResponse struct {
@@ -30,30 +30,30 @@ type GetPoolResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetPoolResponse) GetContentType() string {
-	if o == nil {
+func (g *GetPoolResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetPoolResponse) GetPoolResponse() *shared.PoolResponse {
-	if o == nil {
+func (g *GetPoolResponse) GetPoolResponse() *shared.PoolResponse {
+	if g == nil {
 		return nil
 	}
-	return o.PoolResponse
+	return g.PoolResponse
 }
 
-func (o *GetPoolResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetPoolResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetPoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetPoolResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

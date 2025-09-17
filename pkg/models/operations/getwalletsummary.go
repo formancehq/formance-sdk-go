@@ -11,11 +11,11 @@ type GetWalletSummaryRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *GetWalletSummaryRequest) GetID() string {
-	if o == nil {
+func (g *GetWalletSummaryRequest) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ID
+	return g.ID
 }
 
 type GetWalletSummaryResponse struct {
@@ -29,30 +29,30 @@ type GetWalletSummaryResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetWalletSummaryResponse) GetContentType() string {
-	if o == nil {
+func (g *GetWalletSummaryResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetWalletSummaryResponse) GetGetWalletSummaryResponse() *shared.GetWalletSummaryResponse {
-	if o == nil {
+func (g *GetWalletSummaryResponse) GetGetWalletSummaryResponse() *shared.GetWalletSummaryResponse {
+	if g == nil {
 		return nil
 	}
-	return o.GetWalletSummaryResponse
+	return g.GetWalletSummaryResponse
 }
 
-func (o *GetWalletSummaryResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetWalletSummaryResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetWalletSummaryResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetWalletSummaryResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

@@ -12,11 +12,11 @@ type ReadStatsRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *ReadStatsRequest) GetLedger() string {
-	if o == nil {
+func (r *ReadStatsRequest) GetLedger() string {
+	if r == nil {
 		return ""
 	}
-	return o.Ledger
+	return r.Ledger
 }
 
 type ReadStatsResponse struct {
@@ -30,30 +30,30 @@ type ReadStatsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReadStatsResponse) GetContentType() string {
-	if o == nil {
+func (r *ReadStatsResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReadStatsResponse) GetStatsResponse() *shared.StatsResponse {
-	if o == nil {
+func (r *ReadStatsResponse) GetStatsResponse() *shared.StatsResponse {
+	if r == nil {
 		return nil
 	}
-	return o.StatsResponse
+	return r.StatsResponse
 }
 
-func (o *ReadStatsResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReadStatsResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReadStatsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReadStatsResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

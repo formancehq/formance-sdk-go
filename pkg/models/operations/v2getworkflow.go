@@ -12,11 +12,11 @@ type V2GetWorkflowRequest struct {
 	FlowID string `pathParam:"style=simple,explode=false,name=flowId"`
 }
 
-func (o *V2GetWorkflowRequest) GetFlowID() string {
-	if o == nil {
+func (v *V2GetWorkflowRequest) GetFlowID() string {
+	if v == nil {
 		return ""
 	}
-	return o.FlowID
+	return v.FlowID
 }
 
 type V2GetWorkflowResponse struct {
@@ -30,30 +30,30 @@ type V2GetWorkflowResponse struct {
 	V2GetWorkflowResponse *shared.V2GetWorkflowResponse
 }
 
-func (o *V2GetWorkflowResponse) GetContentType() string {
-	if o == nil {
+func (v *V2GetWorkflowResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2GetWorkflowResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2GetWorkflowResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2GetWorkflowResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2GetWorkflowResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2GetWorkflowResponse) GetV2GetWorkflowResponse() *shared.V2GetWorkflowResponse {
-	if o == nil {
+func (v *V2GetWorkflowResponse) GetV2GetWorkflowResponse() *shared.V2GetWorkflowResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2GetWorkflowResponse
+	return v.V2GetWorkflowResponse
 }

@@ -18,30 +18,30 @@ type ListAllConnectorsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListAllConnectorsResponse) GetConnectorsResponse() *shared.ConnectorsResponse {
-	if o == nil {
+func (l *ListAllConnectorsResponse) GetConnectorsResponse() *shared.ConnectorsResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ConnectorsResponse
+	return l.ConnectorsResponse
 }
 
-func (o *ListAllConnectorsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListAllConnectorsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListAllConnectorsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListAllConnectorsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListAllConnectorsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListAllConnectorsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

@@ -19,18 +19,18 @@ type V2ListWorkflowsRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *V2ListWorkflowsRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2ListWorkflowsRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2ListWorkflowsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2ListWorkflowsRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
 type V2ListWorkflowsResponse struct {
@@ -44,30 +44,30 @@ type V2ListWorkflowsResponse struct {
 	V2ListWorkflowsResponse *shared.V2ListWorkflowsResponse
 }
 
-func (o *V2ListWorkflowsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ListWorkflowsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ListWorkflowsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ListWorkflowsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ListWorkflowsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ListWorkflowsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ListWorkflowsResponse) GetV2ListWorkflowsResponse() *shared.V2ListWorkflowsResponse {
-	if o == nil {
+func (v *V2ListWorkflowsResponse) GetV2ListWorkflowsResponse() *shared.V2ListWorkflowsResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2ListWorkflowsResponse
+	return v.V2ListWorkflowsResponse
 }

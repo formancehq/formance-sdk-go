@@ -12,11 +12,11 @@ type V3GetPoolRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolID"`
 }
 
-func (o *V3GetPoolRequest) GetPoolID() string {
-	if o == nil {
+func (v *V3GetPoolRequest) GetPoolID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PoolID
+	return v.PoolID
 }
 
 type V3GetPoolResponse struct {
@@ -30,30 +30,30 @@ type V3GetPoolResponse struct {
 	V3GetPoolResponse *shared.V3GetPoolResponse
 }
 
-func (o *V3GetPoolResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetPoolResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetPoolResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetPoolResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetPoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetPoolResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetPoolResponse) GetV3GetPoolResponse() *shared.V3GetPoolResponse {
-	if o == nil {
+func (v *V3GetPoolResponse) GetV3GetPoolResponse() *shared.V3GetPoolResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3GetPoolResponse
+	return v.V3GetPoolResponse
 }

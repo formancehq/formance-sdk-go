@@ -10,48 +10,48 @@ type GetHoldsResponseCursor struct {
 	Previous *string `json:"previous,omitempty"`
 }
 
-func (o *GetHoldsResponseCursor) GetData() []Hold {
-	if o == nil {
+func (g *GetHoldsResponseCursor) GetData() []Hold {
+	if g == nil {
 		return []Hold{}
 	}
-	return o.Data
+	return g.Data
 }
 
-func (o *GetHoldsResponseCursor) GetHasMore() *bool {
-	if o == nil {
+func (g *GetHoldsResponseCursor) GetHasMore() *bool {
+	if g == nil {
 		return nil
 	}
-	return o.HasMore
+	return g.HasMore
 }
 
-func (o *GetHoldsResponseCursor) GetNext() *string {
-	if o == nil {
+func (g *GetHoldsResponseCursor) GetNext() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Next
+	return g.Next
 }
 
-func (o *GetHoldsResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (g *GetHoldsResponseCursor) GetPageSize() int64 {
+	if g == nil {
 		return 0
 	}
-	return o.PageSize
+	return g.PageSize
 }
 
-func (o *GetHoldsResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (g *GetHoldsResponseCursor) GetPrevious() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Previous
+	return g.Previous
 }
 
 type GetHoldsResponse struct {
 	Cursor GetHoldsResponseCursor `json:"cursor"`
 }
 
-func (o *GetHoldsResponse) GetCursor() GetHoldsResponseCursor {
-	if o == nil {
+func (g *GetHoldsResponse) GetCursor() GetHoldsResponseCursor {
+	if g == nil {
 		return GetHoldsResponseCursor{}
 	}
-	return o.Cursor
+	return g.Cursor
 }

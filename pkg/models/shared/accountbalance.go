@@ -23,50 +23,50 @@ func (a AccountBalance) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountBalance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"accountId", "asset", "balance", "createdAt", "currency", "lastUpdatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *AccountBalance) GetAccountID() string {
-	if o == nil {
+func (a *AccountBalance) GetAccountID() string {
+	if a == nil {
 		return ""
 	}
-	return o.AccountID
+	return a.AccountID
 }
 
-func (o *AccountBalance) GetAsset() string {
-	if o == nil {
+func (a *AccountBalance) GetAsset() string {
+	if a == nil {
 		return ""
 	}
-	return o.Asset
+	return a.Asset
 }
 
-func (o *AccountBalance) GetBalance() *big.Int {
-	if o == nil {
+func (a *AccountBalance) GetBalance() *big.Int {
+	if a == nil {
 		return big.NewInt(0)
 	}
-	return o.Balance
+	return a.Balance
 }
 
-func (o *AccountBalance) GetCreatedAt() time.Time {
-	if o == nil {
+func (a *AccountBalance) GetCreatedAt() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return a.CreatedAt
 }
 
-func (o *AccountBalance) GetCurrency() string {
-	if o == nil {
+func (a *AccountBalance) GetCurrency() string {
+	if a == nil {
 		return ""
 	}
-	return o.Currency
+	return a.Currency
 }
 
-func (o *AccountBalance) GetLastUpdatedAt() time.Time {
-	if o == nil {
+func (a *AccountBalance) GetLastUpdatedAt() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.LastUpdatedAt
+	return a.LastUpdatedAt
 }

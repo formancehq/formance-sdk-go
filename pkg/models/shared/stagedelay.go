@@ -17,22 +17,22 @@ func (s StageDelay) MarshalJSON() ([]byte, error) {
 }
 
 func (s *StageDelay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *StageDelay) GetDuration() *string {
-	if o == nil {
+func (s *StageDelay) GetDuration() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Duration
+	return s.Duration
 }
 
-func (o *StageDelay) GetUntil() *time.Time {
-	if o == nil {
+func (s *StageDelay) GetUntil() *time.Time {
+	if s == nil {
 		return nil
 	}
-	return o.Until
+	return s.Until
 }

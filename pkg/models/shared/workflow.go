@@ -19,36 +19,36 @@ func (w Workflow) MarshalJSON() ([]byte, error) {
 }
 
 func (w *Workflow) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"config", "createdAt", "id", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Workflow) GetConfig() WorkflowConfig {
-	if o == nil {
+func (w *Workflow) GetConfig() WorkflowConfig {
+	if w == nil {
 		return WorkflowConfig{}
 	}
-	return o.Config
+	return w.Config
 }
 
-func (o *Workflow) GetCreatedAt() time.Time {
-	if o == nil {
+func (w *Workflow) GetCreatedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return w.CreatedAt
 }
 
-func (o *Workflow) GetID() string {
-	if o == nil {
+func (w *Workflow) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *Workflow) GetUpdatedAt() time.Time {
-	if o == nil {
+func (w *Workflow) GetUpdatedAt() time.Time {
+	if w == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return w.UpdatedAt
 }

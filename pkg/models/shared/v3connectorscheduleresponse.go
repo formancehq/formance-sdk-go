@@ -6,9 +6,9 @@ type V3ConnectorScheduleResponse struct {
 	Data V3Schedule `json:"data"`
 }
 
-func (o *V3ConnectorScheduleResponse) GetData() V3Schedule {
-	if o == nil {
+func (v *V3ConnectorScheduleResponse) GetData() V3Schedule {
+	if v == nil {
 		return V3Schedule{}
 	}
-	return o.Data
+	return v.Data
 }

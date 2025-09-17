@@ -7,16 +7,16 @@ type ActivityRevertTransaction struct {
 	Ledger string `json:"ledger"`
 }
 
-func (o *ActivityRevertTransaction) GetID() string {
-	if o == nil {
+func (a *ActivityRevertTransaction) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *ActivityRevertTransaction) GetLedger() string {
-	if o == nil {
+func (a *ActivityRevertTransaction) GetLedger() string {
+	if a == nil {
 		return ""
 	}
-	return o.Ledger
+	return a.Ledger
 }

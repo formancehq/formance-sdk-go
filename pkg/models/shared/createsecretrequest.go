@@ -7,16 +7,16 @@ type CreateSecretRequest struct {
 	Name     string         `json:"name"`
 }
 
-func (o *CreateSecretRequest) GetMetadata() map[string]any {
-	if o == nil {
+func (c *CreateSecretRequest) GetMetadata() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *CreateSecretRequest) GetName() string {
-	if o == nil {
+func (c *CreateSecretRequest) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }

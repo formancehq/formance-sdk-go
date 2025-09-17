@@ -6,9 +6,9 @@ type V2ActivityConfirmHold struct {
 	ID string `json:"id"`
 }
 
-func (o *V2ActivityConfirmHold) GetID() string {
-	if o == nil {
+func (v *V2ActivityConfirmHold) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }

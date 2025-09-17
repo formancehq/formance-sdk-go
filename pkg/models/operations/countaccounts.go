@@ -15,25 +15,25 @@ type CountAccountsRequest struct {
 	Metadata map[string]any `queryParam:"style=deepObject,explode=true,name=metadata"`
 }
 
-func (o *CountAccountsRequest) GetAddress() *string {
-	if o == nil {
+func (c *CountAccountsRequest) GetAddress() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Address
+	return c.Address
 }
 
-func (o *CountAccountsRequest) GetLedger() string {
-	if o == nil {
+func (c *CountAccountsRequest) GetLedger() string {
+	if c == nil {
 		return ""
 	}
-	return o.Ledger
+	return c.Ledger
 }
 
-func (o *CountAccountsRequest) GetMetadata() map[string]any {
-	if o == nil {
+func (c *CountAccountsRequest) GetMetadata() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
 type CountAccountsResponse struct {
@@ -46,30 +46,30 @@ type CountAccountsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CountAccountsResponse) GetContentType() string {
-	if o == nil {
+func (c *CountAccountsResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CountAccountsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (c *CountAccountsResponse) GetHeaders() map[string][]string {
+	if c == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return c.Headers
 }
 
-func (o *CountAccountsResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CountAccountsResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CountAccountsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CountAccountsResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

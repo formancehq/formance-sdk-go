@@ -12,11 +12,11 @@ type V3ResetConnectorRequest struct {
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 }
 
-func (o *V3ResetConnectorRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3ResetConnectorRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
 type V3ResetConnectorResponse struct {
@@ -30,30 +30,30 @@ type V3ResetConnectorResponse struct {
 	V3ResetConnectorResponse *shared.V3ResetConnectorResponse
 }
 
-func (o *V3ResetConnectorResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ResetConnectorResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ResetConnectorResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ResetConnectorResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ResetConnectorResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ResetConnectorResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ResetConnectorResponse) GetV3ResetConnectorResponse() *shared.V3ResetConnectorResponse {
-	if o == nil {
+func (v *V3ResetConnectorResponse) GetV3ResetConnectorResponse() *shared.V3ResetConnectorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3ResetConnectorResponse
+	return v.V3ResetConnectorResponse
 }

@@ -6,9 +6,9 @@ type CreateClientResponse struct {
 	Data *Client `json:"data,omitempty"`
 }
 
-func (o *CreateClientResponse) GetData() *Client {
-	if o == nil {
+func (c *CreateClientResponse) GetData() *Client {
+	if c == nil {
 		return nil
 	}
-	return o.Data
+	return c.Data
 }

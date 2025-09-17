@@ -11,11 +11,11 @@ type V2DeleteWorkflowRequest struct {
 	FlowID string `pathParam:"style=simple,explode=false,name=flowId"`
 }
 
-func (o *V2DeleteWorkflowRequest) GetFlowID() string {
-	if o == nil {
+func (v *V2DeleteWorkflowRequest) GetFlowID() string {
+	if v == nil {
 		return ""
 	}
-	return o.FlowID
+	return v.FlowID
 }
 
 type V2DeleteWorkflowResponse struct {
@@ -27,23 +27,23 @@ type V2DeleteWorkflowResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2DeleteWorkflowResponse) GetContentType() string {
-	if o == nil {
+func (v *V2DeleteWorkflowResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2DeleteWorkflowResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2DeleteWorkflowResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2DeleteWorkflowResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2DeleteWorkflowResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

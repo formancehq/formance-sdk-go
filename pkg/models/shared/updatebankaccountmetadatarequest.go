@@ -6,9 +6,9 @@ type UpdateBankAccountMetadataRequest struct {
 	Metadata map[string]string `json:"metadata"`
 }
 
-func (o *UpdateBankAccountMetadataRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (u *UpdateBankAccountMetadataRequest) GetMetadata() map[string]string {
+	if u == nil {
 		return nil
 	}
-	return o.Metadata
+	return u.Metadata
 }

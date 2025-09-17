@@ -10,48 +10,48 @@ type V2ListTriggersResponseCursor struct {
 	Previous *string     `json:"previous,omitempty"`
 }
 
-func (o *V2ListTriggersResponseCursor) GetData() []V2Trigger {
-	if o == nil {
+func (v *V2ListTriggersResponseCursor) GetData() []V2Trigger {
+	if v == nil {
 		return []V2Trigger{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2ListTriggersResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V2ListTriggersResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V2ListTriggersResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V2ListTriggersResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V2ListTriggersResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V2ListTriggersResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2ListTriggersResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V2ListTriggersResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V2ListTriggersResponse struct {
 	Cursor V2ListTriggersResponseCursor `json:"cursor"`
 }
 
-func (o *V2ListTriggersResponse) GetCursor() V2ListTriggersResponseCursor {
-	if o == nil {
+func (v *V2ListTriggersResponse) GetCursor() V2ListTriggersResponseCursor {
+	if v == nil {
 		return V2ListTriggersResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

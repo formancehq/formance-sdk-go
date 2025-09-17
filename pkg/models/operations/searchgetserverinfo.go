@@ -18,30 +18,30 @@ type SearchgetServerInfoResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *SearchgetServerInfoResponse) GetContentType() string {
-	if o == nil {
+func (s *SearchgetServerInfoResponse) GetContentType() string {
+	if s == nil {
 		return ""
 	}
-	return o.ContentType
+	return s.ContentType
 }
 
-func (o *SearchgetServerInfoResponse) GetServerInfo() *shared.ServerInfo {
-	if o == nil {
+func (s *SearchgetServerInfoResponse) GetServerInfo() *shared.ServerInfo {
+	if s == nil {
 		return nil
 	}
-	return o.ServerInfo
+	return s.ServerInfo
 }
 
-func (o *SearchgetServerInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (s *SearchgetServerInfoResponse) GetStatusCode() int {
+	if s == nil {
 		return 0
 	}
-	return o.StatusCode
+	return s.StatusCode
 }
 
-func (o *SearchgetServerInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (s *SearchgetServerInfoResponse) GetRawResponse() *http.Response {
+	if s == nil {
 		return nil
 	}
-	return o.RawResponse
+	return s.RawResponse
 }

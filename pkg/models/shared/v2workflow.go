@@ -19,36 +19,36 @@ func (v V2Workflow) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Workflow) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"config", "createdAt", "id", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2Workflow) GetConfig() V2WorkflowConfig {
-	if o == nil {
+func (v *V2Workflow) GetConfig() V2WorkflowConfig {
+	if v == nil {
 		return V2WorkflowConfig{}
 	}
-	return o.Config
+	return v.Config
 }
 
-func (o *V2Workflow) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V2Workflow) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V2Workflow) GetID() string {
-	if o == nil {
+func (v *V2Workflow) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2Workflow) GetUpdatedAt() time.Time {
-	if o == nil {
+func (v *V2Workflow) GetUpdatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return v.UpdatedAt
 }

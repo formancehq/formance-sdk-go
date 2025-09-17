@@ -17,86 +17,86 @@ type WorkflowInstanceHistoryStageInput struct {
 	VoidHold           *ActivityVoidHold           `json:"VoidHold,omitempty"`
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetAddAccountMetadata() *ActivityAddAccountMetadata {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetAddAccountMetadata() *ActivityAddAccountMetadata {
+	if w == nil {
 		return nil
 	}
-	return o.AddAccountMetadata
+	return w.AddAccountMetadata
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetConfirmHold() *ActivityConfirmHold {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetConfirmHold() *ActivityConfirmHold {
+	if w == nil {
 		return nil
 	}
-	return o.ConfirmHold
+	return w.ConfirmHold
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetCreateTransaction() *ActivityCreateTransaction {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetCreateTransaction() *ActivityCreateTransaction {
+	if w == nil {
 		return nil
 	}
-	return o.CreateTransaction
+	return w.CreateTransaction
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetCreditWallet() *ActivityCreditWallet {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetCreditWallet() *ActivityCreditWallet {
+	if w == nil {
 		return nil
 	}
-	return o.CreditWallet
+	return w.CreditWallet
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetDebitWallet() *ActivityDebitWallet {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetDebitWallet() *ActivityDebitWallet {
+	if w == nil {
 		return nil
 	}
-	return o.DebitWallet
+	return w.DebitWallet
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetGetAccount() *ActivityGetAccount {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetGetAccount() *ActivityGetAccount {
+	if w == nil {
 		return nil
 	}
-	return o.GetAccount
+	return w.GetAccount
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetGetPayment() *ActivityGetPayment {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetGetPayment() *ActivityGetPayment {
+	if w == nil {
 		return nil
 	}
-	return o.GetPayment
+	return w.GetPayment
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetGetWallet() *ActivityGetWallet {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetGetWallet() *ActivityGetWallet {
+	if w == nil {
 		return nil
 	}
-	return o.GetWallet
+	return w.GetWallet
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetListWallets() *ActivityListWallets {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetListWallets() *ActivityListWallets {
+	if w == nil {
 		return nil
 	}
-	return o.ListWallets
+	return w.ListWallets
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetRevertTransaction() *ActivityRevertTransaction {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetRevertTransaction() *ActivityRevertTransaction {
+	if w == nil {
 		return nil
 	}
-	return o.RevertTransaction
+	return w.RevertTransaction
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetStripeTransfer() *ActivityStripeTransfer {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetStripeTransfer() *ActivityStripeTransfer {
+	if w == nil {
 		return nil
 	}
-	return o.StripeTransfer
+	return w.StripeTransfer
 }
 
-func (o *WorkflowInstanceHistoryStageInput) GetVoidHold() *ActivityVoidHold {
-	if o == nil {
+func (w *WorkflowInstanceHistoryStageInput) GetVoidHold() *ActivityVoidHold {
+	if w == nil {
 		return nil
 	}
-	return o.VoidHold
+	return w.VoidHold
 }

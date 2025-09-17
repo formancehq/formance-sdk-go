@@ -2,31 +2,46 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2BulkElementAddMetadataData struct {
 	Metadata   map[string]string `json:"metadata"`
 	TargetID   V2TargetID        `json:"targetId"`
 	TargetType V2TargetType      `json:"targetType"`
 }
 
-func (o *V2BulkElementAddMetadataData) GetMetadata() map[string]string {
-	if o == nil {
+func (v V2BulkElementAddMetadataData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2BulkElementAddMetadataData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"metadata", "targetId", "targetType"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2BulkElementAddMetadataData) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2BulkElementAddMetadataData) GetTargetID() V2TargetID {
-	if o == nil {
+func (v *V2BulkElementAddMetadataData) GetTargetID() V2TargetID {
+	if v == nil {
 		return V2TargetID{}
 	}
-	return o.TargetID
+	return v.TargetID
 }
 
-func (o *V2BulkElementAddMetadataData) GetTargetType() V2TargetType {
-	if o == nil {
+func (v *V2BulkElementAddMetadataData) GetTargetType() V2TargetType {
+	if v == nil {
 		return V2TargetType("")
 	}
-	return o.TargetType
+	return v.TargetType
 }
 
 type V2BulkElementAddMetadata struct {
@@ -35,23 +50,34 @@ type V2BulkElementAddMetadata struct {
 	Ik     *string                       `json:"ik,omitempty"`
 }
 
-func (o *V2BulkElementAddMetadata) GetAction() string {
-	if o == nil {
+func (v V2BulkElementAddMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2BulkElementAddMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"action"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2BulkElementAddMetadata) GetAction() string {
+	if v == nil {
 		return ""
 	}
-	return o.Action
+	return v.Action
 }
 
-func (o *V2BulkElementAddMetadata) GetData() *V2BulkElementAddMetadataData {
-	if o == nil {
+func (v *V2BulkElementAddMetadata) GetData() *V2BulkElementAddMetadataData {
+	if v == nil {
 		return nil
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2BulkElementAddMetadata) GetIk() *string {
-	if o == nil {
+func (v *V2BulkElementAddMetadata) GetIk() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Ik
+	return v.Ik
 }

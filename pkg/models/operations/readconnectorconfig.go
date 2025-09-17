@@ -12,11 +12,11 @@ type ReadConnectorConfigRequest struct {
 	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
 }
 
-func (o *ReadConnectorConfigRequest) GetConnector() shared.Connector {
-	if o == nil {
+func (r *ReadConnectorConfigRequest) GetConnector() shared.Connector {
+	if r == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return r.Connector
 }
 
 type ReadConnectorConfigResponse struct {
@@ -30,30 +30,30 @@ type ReadConnectorConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReadConnectorConfigResponse) GetConnectorConfigResponse() *shared.ConnectorConfigResponse {
-	if o == nil {
+func (r *ReadConnectorConfigResponse) GetConnectorConfigResponse() *shared.ConnectorConfigResponse {
+	if r == nil {
 		return nil
 	}
-	return o.ConnectorConfigResponse
+	return r.ConnectorConfigResponse
 }
 
-func (o *ReadConnectorConfigResponse) GetContentType() string {
-	if o == nil {
+func (r *ReadConnectorConfigResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReadConnectorConfigResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReadConnectorConfigResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReadConnectorConfigResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReadConnectorConfigResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

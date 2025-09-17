@@ -8,16 +8,16 @@ type CreateWalletRequest struct {
 	Name     string            `json:"name"`
 }
 
-func (o *CreateWalletRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (c *CreateWalletRequest) GetMetadata() map[string]string {
+	if c == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *CreateWalletRequest) GetName() string {
-	if o == nil {
+func (c *CreateWalletRequest) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }

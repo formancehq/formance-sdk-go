@@ -6,9 +6,9 @@ type ActivityVoidHold struct {
 	ID string `json:"id"`
 }
 
-func (o *ActivityVoidHold) GetID() string {
-	if o == nil {
+func (a *ActivityVoidHold) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }

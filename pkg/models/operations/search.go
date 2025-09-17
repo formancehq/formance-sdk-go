@@ -18,30 +18,30 @@ type SearchResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *SearchResponse) GetContentType() string {
-	if o == nil {
+func (s *SearchResponse) GetContentType() string {
+	if s == nil {
 		return ""
 	}
-	return o.ContentType
+	return s.ContentType
 }
 
-func (o *SearchResponse) GetResponse() *shared.Response {
-	if o == nil {
+func (s *SearchResponse) GetResponse() *shared.Response {
+	if s == nil {
 		return nil
 	}
-	return o.Response
+	return s.Response
 }
 
-func (o *SearchResponse) GetStatusCode() int {
-	if o == nil {
+func (s *SearchResponse) GetStatusCode() int {
+	if s == nil {
 		return 0
 	}
-	return o.StatusCode
+	return s.StatusCode
 }
 
-func (o *SearchResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (s *SearchResponse) GetRawResponse() *http.Response {
+	if s == nil {
 		return nil
 	}
-	return o.RawResponse
+	return s.RawResponse
 }

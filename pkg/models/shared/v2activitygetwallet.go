@@ -6,9 +6,9 @@ type V2ActivityGetWallet struct {
 	ID string `json:"id"`
 }
 
-func (o *V2ActivityGetWallet) GetID() string {
-	if o == nil {
+func (v *V2ActivityGetWallet) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }

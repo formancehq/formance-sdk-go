@@ -12,11 +12,11 @@ type GetInstanceRequest struct {
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`
 }
 
-func (o *GetInstanceRequest) GetInstanceID() string {
-	if o == nil {
+func (g *GetInstanceRequest) GetInstanceID() string {
+	if g == nil {
 		return ""
 	}
-	return o.InstanceID
+	return g.InstanceID
 }
 
 type GetInstanceResponse struct {
@@ -30,30 +30,30 @@ type GetInstanceResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetInstanceResponse) GetContentType() string {
-	if o == nil {
+func (g *GetInstanceResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetInstanceResponse) GetGetWorkflowInstanceResponse() *shared.GetWorkflowInstanceResponse {
-	if o == nil {
+func (g *GetInstanceResponse) GetGetWorkflowInstanceResponse() *shared.GetWorkflowInstanceResponse {
+	if g == nil {
 		return nil
 	}
-	return o.GetWorkflowInstanceResponse
+	return g.GetWorkflowInstanceResponse
 }
 
-func (o *GetInstanceResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetInstanceResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetInstanceResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetInstanceResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

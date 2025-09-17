@@ -17,8 +17,8 @@ const (
 )
 
 type V2Subject struct {
-	V2LedgerAccountSubject *V2LedgerAccountSubject `queryParam:"inline"`
-	V2WalletSubject        *V2WalletSubject        `queryParam:"inline"`
+	V2LedgerAccountSubject *V2LedgerAccountSubject `queryParam:"inline" name:"V2Subject"`
+	V2WalletSubject        *V2WalletSubject        `queryParam:"inline" name:"V2Subject"`
 
 	Type V2SubjectType
 }
@@ -61,7 +61,7 @@ func (u *V2Subject) UnmarshalJSON(data []byte) error {
 	switch dis.Type {
 	case "ACCOUNT":
 		v2LedgerAccountSubject := new(V2LedgerAccountSubject)
-		if err := utils.UnmarshalJSON(data, &v2LedgerAccountSubject, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v2LedgerAccountSubject, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == ACCOUNT) type V2LedgerAccountSubject within V2Subject: %w", string(data), err)
 		}
 
@@ -70,7 +70,7 @@ func (u *V2Subject) UnmarshalJSON(data []byte) error {
 		return nil
 	case "WALLET":
 		v2WalletSubject := new(V2WalletSubject)
-		if err := utils.UnmarshalJSON(data, &v2WalletSubject, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v2WalletSubject, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == WALLET) type V2WalletSubject within V2Subject: %w", string(data), err)
 		}
 

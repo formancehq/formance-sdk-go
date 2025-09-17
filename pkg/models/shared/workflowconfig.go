@@ -7,16 +7,16 @@ type WorkflowConfig struct {
 	Stages []map[string]any `json:"stages"`
 }
 
-func (o *WorkflowConfig) GetName() *string {
-	if o == nil {
+func (w *WorkflowConfig) GetName() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Name
+	return w.Name
 }
 
-func (o *WorkflowConfig) GetStages() []map[string]any {
-	if o == nil {
+func (w *WorkflowConfig) GetStages() []map[string]any {
+	if w == nil {
 		return []map[string]any{}
 	}
-	return o.Stages
+	return w.Stages
 }

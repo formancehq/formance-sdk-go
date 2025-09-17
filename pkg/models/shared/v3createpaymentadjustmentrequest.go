@@ -22,50 +22,50 @@ func (v V3CreatePaymentAdjustmentRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3CreatePaymentAdjustmentRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "reference", "status"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3CreatePaymentAdjustmentRequest) GetAmount() *big.Int {
-	if o == nil {
+func (v *V3CreatePaymentAdjustmentRequest) GetAmount() *big.Int {
+	if v == nil {
 		return nil
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V3CreatePaymentAdjustmentRequest) GetAsset() *string {
-	if o == nil {
+func (v *V3CreatePaymentAdjustmentRequest) GetAsset() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Asset
+	return v.Asset
 }
 
-func (o *V3CreatePaymentAdjustmentRequest) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3CreatePaymentAdjustmentRequest) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3CreatePaymentAdjustmentRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3CreatePaymentAdjustmentRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3CreatePaymentAdjustmentRequest) GetReference() string {
-	if o == nil {
+func (v *V3CreatePaymentAdjustmentRequest) GetReference() string {
+	if v == nil {
 		return ""
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V3CreatePaymentAdjustmentRequest) GetStatus() V3PaymentStatusEnum {
-	if o == nil {
+func (v *V3CreatePaymentAdjustmentRequest) GetStatus() V3PaymentStatusEnum {
+	if v == nil {
 		return V3PaymentStatusEnum("")
 	}
-	return o.Status
+	return v.Status
 }

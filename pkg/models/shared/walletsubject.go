@@ -2,29 +2,44 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type WalletSubject struct {
 	Balance    *string `json:"balance,omitempty"`
 	Identifier string  `json:"identifier"`
 	Type       string  `json:"type"`
 }
 
-func (o *WalletSubject) GetBalance() *string {
-	if o == nil {
+func (w WalletSubject) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *WalletSubject) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"identifier", "type"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (w *WalletSubject) GetBalance() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Balance
+	return w.Balance
 }
 
-func (o *WalletSubject) GetIdentifier() string {
-	if o == nil {
+func (w *WalletSubject) GetIdentifier() string {
+	if w == nil {
 		return ""
 	}
-	return o.Identifier
+	return w.Identifier
 }
 
-func (o *WalletSubject) GetType() string {
-	if o == nil {
+func (w *WalletSubject) GetType() string {
+	if w == nil {
 		return ""
 	}
-	return o.Type
+	return w.Type
 }

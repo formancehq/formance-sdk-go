@@ -2,13 +2,28 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type Update struct {
 	Account *UpdateAccount `json:"account,omitempty"`
 }
 
-func (o *Update) GetAccount() *UpdateAccount {
-	if o == nil {
+func (u Update) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *Update) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (u *Update) GetAccount() *UpdateAccount {
+	if u == nil {
 		return nil
 	}
-	return o.Account
+	return u.Account
 }

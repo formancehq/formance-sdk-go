@@ -16,25 +16,25 @@ type V3ListAccountsRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
-func (o *V3ListAccountsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V3ListAccountsRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V3ListAccountsRequest) GetCursor() *string {
-	if o == nil {
+func (v *V3ListAccountsRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V3ListAccountsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3ListAccountsRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
 type V3ListAccountsResponse struct {
@@ -48,30 +48,30 @@ type V3ListAccountsResponse struct {
 	V3AccountsCursorResponse *shared.V3AccountsCursorResponse
 }
 
-func (o *V3ListAccountsResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ListAccountsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ListAccountsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ListAccountsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ListAccountsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ListAccountsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ListAccountsResponse) GetV3AccountsCursorResponse() *shared.V3AccountsCursorResponse {
-	if o == nil {
+func (v *V3ListAccountsResponse) GetV3AccountsCursorResponse() *shared.V3AccountsCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3AccountsCursorResponse
+	return v.V3AccountsCursorResponse
 }

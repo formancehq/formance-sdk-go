@@ -21,50 +21,50 @@ func (p Policy) MarshalJSON() ([]byte, error) {
 }
 
 func (p *Policy) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"createdAt", "id", "ledgerName", "ledgerQuery", "name", "paymentsPoolID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Policy) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *Policy) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *Policy) GetID() string {
-	if o == nil {
+func (p *Policy) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *Policy) GetLedgerName() string {
-	if o == nil {
+func (p *Policy) GetLedgerName() string {
+	if p == nil {
 		return ""
 	}
-	return o.LedgerName
+	return p.LedgerName
 }
 
-func (o *Policy) GetLedgerQuery() map[string]any {
-	if o == nil {
+func (p *Policy) GetLedgerQuery() map[string]any {
+	if p == nil {
 		return map[string]any{}
 	}
-	return o.LedgerQuery
+	return p.LedgerQuery
 }
 
-func (o *Policy) GetName() string {
-	if o == nil {
+func (p *Policy) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }
 
-func (o *Policy) GetPaymentsPoolID() string {
-	if o == nil {
+func (p *Policy) GetPaymentsPoolID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentsPoolID
+	return p.PaymentsPoolID
 }

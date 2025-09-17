@@ -20,31 +20,31 @@ func (v V2CountAccountsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2CountAccountsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2CountAccountsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V2CountAccountsRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2CountAccountsRequest) GetLedger() string {
-	if o == nil {
+func (v *V2CountAccountsRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2CountAccountsRequest) GetPit() *time.Time {
-	if o == nil {
+func (v *V2CountAccountsRequest) GetPit() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Pit
+	return v.Pit
 }
 
 type V2CountAccountsResponse struct {
@@ -57,30 +57,30 @@ type V2CountAccountsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2CountAccountsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2CountAccountsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2CountAccountsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (v *V2CountAccountsResponse) GetHeaders() map[string][]string {
+	if v == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return v.Headers
 }
 
-func (o *V2CountAccountsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2CountAccountsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2CountAccountsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2CountAccountsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

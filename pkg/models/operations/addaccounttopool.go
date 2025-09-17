@@ -13,18 +13,18 @@ type AddAccountToPoolRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
-func (o *AddAccountToPoolRequest) GetAddAccountToPoolRequest() shared.AddAccountToPoolRequest {
-	if o == nil {
+func (a *AddAccountToPoolRequest) GetAddAccountToPoolRequest() shared.AddAccountToPoolRequest {
+	if a == nil {
 		return shared.AddAccountToPoolRequest{}
 	}
-	return o.AddAccountToPoolRequest
+	return a.AddAccountToPoolRequest
 }
 
-func (o *AddAccountToPoolRequest) GetPoolID() string {
-	if o == nil {
+func (a *AddAccountToPoolRequest) GetPoolID() string {
+	if a == nil {
 		return ""
 	}
-	return o.PoolID
+	return a.PoolID
 }
 
 type AddAccountToPoolResponse struct {
@@ -36,23 +36,23 @@ type AddAccountToPoolResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *AddAccountToPoolResponse) GetContentType() string {
-	if o == nil {
+func (a *AddAccountToPoolResponse) GetContentType() string {
+	if a == nil {
 		return ""
 	}
-	return o.ContentType
+	return a.ContentType
 }
 
-func (o *AddAccountToPoolResponse) GetStatusCode() int {
-	if o == nil {
+func (a *AddAccountToPoolResponse) GetStatusCode() int {
+	if a == nil {
 		return 0
 	}
-	return o.StatusCode
+	return a.StatusCode
 }
 
-func (o *AddAccountToPoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (a *AddAccountToPoolResponse) GetRawResponse() *http.Response {
+	if a == nil {
 		return nil
 	}
-	return o.RawResponse
+	return a.RawResponse
 }

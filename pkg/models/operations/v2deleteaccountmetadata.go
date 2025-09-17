@@ -17,32 +17,32 @@ type V2DeleteAccountMetadataRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2DeleteAccountMetadataRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (v *V2DeleteAccountMetadataRequest) GetIdempotencyKey() *string {
+	if v == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return v.IdempotencyKey
 }
 
-func (o *V2DeleteAccountMetadataRequest) GetAddress() string {
-	if o == nil {
+func (v *V2DeleteAccountMetadataRequest) GetAddress() string {
+	if v == nil {
 		return ""
 	}
-	return o.Address
+	return v.Address
 }
 
-func (o *V2DeleteAccountMetadataRequest) GetKey() string {
-	if o == nil {
+func (v *V2DeleteAccountMetadataRequest) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }
 
-func (o *V2DeleteAccountMetadataRequest) GetLedger() string {
-	if o == nil {
+func (v *V2DeleteAccountMetadataRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2DeleteAccountMetadataResponse struct {
@@ -54,23 +54,23 @@ type V2DeleteAccountMetadataResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2DeleteAccountMetadataResponse) GetContentType() string {
-	if o == nil {
+func (v *V2DeleteAccountMetadataResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2DeleteAccountMetadataResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2DeleteAccountMetadataResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2DeleteAccountMetadataResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2DeleteAccountMetadataResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

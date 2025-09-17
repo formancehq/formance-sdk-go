@@ -23,50 +23,50 @@ func (v V2CreditWalletRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2CreditWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "metadata", "sources"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2CreditWalletRequest) GetAmount() V2Monetary {
-	if o == nil {
+func (v *V2CreditWalletRequest) GetAmount() V2Monetary {
+	if v == nil {
 		return V2Monetary{}
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V2CreditWalletRequest) GetBalance() *string {
-	if o == nil {
+func (v *V2CreditWalletRequest) GetBalance() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Balance
+	return v.Balance
 }
 
-func (o *V2CreditWalletRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2CreditWalletRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2CreditWalletRequest) GetReference() *string {
-	if o == nil {
+func (v *V2CreditWalletRequest) GetReference() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V2CreditWalletRequest) GetSources() []V2Subject {
-	if o == nil {
+func (v *V2CreditWalletRequest) GetSources() []V2Subject {
+	if v == nil {
 		return []V2Subject{}
 	}
-	return o.Sources
+	return v.Sources
 }
 
-func (o *V2CreditWalletRequest) GetTimestamp() *time.Time {
-	if o == nil {
+func (v *V2CreditWalletRequest) GetTimestamp() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Timestamp
+	return v.Timestamp
 }

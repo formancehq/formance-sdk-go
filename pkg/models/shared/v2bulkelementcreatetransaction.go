@@ -2,29 +2,44 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2BulkElementCreateTransaction struct {
 	Action string             `json:"action"`
 	Data   *V2PostTransaction `json:"data,omitempty"`
 	Ik     *string            `json:"ik,omitempty"`
 }
 
-func (o *V2BulkElementCreateTransaction) GetAction() string {
-	if o == nil {
+func (v V2BulkElementCreateTransaction) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2BulkElementCreateTransaction) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"action"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2BulkElementCreateTransaction) GetAction() string {
+	if v == nil {
 		return ""
 	}
-	return o.Action
+	return v.Action
 }
 
-func (o *V2BulkElementCreateTransaction) GetData() *V2PostTransaction {
-	if o == nil {
+func (v *V2BulkElementCreateTransaction) GetData() *V2PostTransaction {
+	if v == nil {
 		return nil
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2BulkElementCreateTransaction) GetIk() *string {
-	if o == nil {
+func (v *V2BulkElementCreateTransaction) GetIk() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Ik
+	return v.Ik
 }

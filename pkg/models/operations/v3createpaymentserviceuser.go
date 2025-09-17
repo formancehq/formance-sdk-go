@@ -18,30 +18,30 @@ type V3CreatePaymentServiceUserResponse struct {
 	V3CreatePaymentServiceUserResponse *shared.V3CreatePaymentServiceUserResponse
 }
 
-func (o *V3CreatePaymentServiceUserResponse) GetContentType() string {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3CreatePaymentServiceUserResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3CreatePaymentServiceUserResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3CreatePaymentServiceUserResponse) GetV3CreatePaymentServiceUserResponse() *shared.V3CreatePaymentServiceUserResponse {
-	if o == nil {
+func (v *V3CreatePaymentServiceUserResponse) GetV3CreatePaymentServiceUserResponse() *shared.V3CreatePaymentServiceUserResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3CreatePaymentServiceUserResponse
+	return v.V3CreatePaymentServiceUserResponse
 }

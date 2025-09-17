@@ -10,11 +10,11 @@ type SendEventRequestBody struct {
 	Name string `json:"name"`
 }
 
-func (o *SendEventRequestBody) GetName() string {
-	if o == nil {
+func (s *SendEventRequestBody) GetName() string {
+	if s == nil {
 		return ""
 	}
-	return o.Name
+	return s.Name
 }
 
 type SendEventRequest struct {
@@ -23,18 +23,18 @@ type SendEventRequest struct {
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`
 }
 
-func (o *SendEventRequest) GetRequestBody() *SendEventRequestBody {
-	if o == nil {
+func (s *SendEventRequest) GetRequestBody() *SendEventRequestBody {
+	if s == nil {
 		return nil
 	}
-	return o.RequestBody
+	return s.RequestBody
 }
 
-func (o *SendEventRequest) GetInstanceID() string {
-	if o == nil {
+func (s *SendEventRequest) GetInstanceID() string {
+	if s == nil {
 		return ""
 	}
-	return o.InstanceID
+	return s.InstanceID
 }
 
 type SendEventResponse struct {
@@ -46,23 +46,23 @@ type SendEventResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *SendEventResponse) GetContentType() string {
-	if o == nil {
+func (s *SendEventResponse) GetContentType() string {
+	if s == nil {
 		return ""
 	}
-	return o.ContentType
+	return s.ContentType
 }
 
-func (o *SendEventResponse) GetStatusCode() int {
-	if o == nil {
+func (s *SendEventResponse) GetStatusCode() int {
+	if s == nil {
 		return 0
 	}
-	return o.StatusCode
+	return s.StatusCode
 }
 
-func (o *SendEventResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (s *SendEventResponse) GetRawResponse() *http.Response {
+	if s == nil {
 		return nil
 	}
-	return o.RawResponse
+	return s.RawResponse
 }

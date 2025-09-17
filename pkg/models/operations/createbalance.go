@@ -14,25 +14,25 @@ type CreateBalanceRequest struct {
 	ID             string  `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *CreateBalanceRequest) GetCreateBalanceRequest() *shared.CreateBalanceRequest {
-	if o == nil {
+func (c *CreateBalanceRequest) GetCreateBalanceRequest() *shared.CreateBalanceRequest {
+	if c == nil {
 		return nil
 	}
-	return o.CreateBalanceRequest
+	return c.CreateBalanceRequest
 }
 
-func (o *CreateBalanceRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (c *CreateBalanceRequest) GetIdempotencyKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return c.IdempotencyKey
 }
 
-func (o *CreateBalanceRequest) GetID() string {
-	if o == nil {
+func (c *CreateBalanceRequest) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
 type CreateBalanceResponse struct {
@@ -46,30 +46,30 @@ type CreateBalanceResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreateBalanceResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateBalanceResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateBalanceResponse) GetCreateBalanceResponse() *shared.CreateBalanceResponse {
-	if o == nil {
+func (c *CreateBalanceResponse) GetCreateBalanceResponse() *shared.CreateBalanceResponse {
+	if c == nil {
 		return nil
 	}
-	return o.CreateBalanceResponse
+	return c.CreateBalanceResponse
 }
 
-func (o *CreateBalanceResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateBalanceResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateBalanceResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateBalanceResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

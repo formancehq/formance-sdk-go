@@ -10,48 +10,48 @@ type V3BankAccountsCursorResponseCursor struct {
 	Previous *string         `json:"previous,omitempty"`
 }
 
-func (o *V3BankAccountsCursorResponseCursor) GetData() []V3BankAccount {
-	if o == nil {
+func (v *V3BankAccountsCursorResponseCursor) GetData() []V3BankAccount {
+	if v == nil {
 		return []V3BankAccount{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V3BankAccountsCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V3BankAccountsCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V3BankAccountsCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V3BankAccountsCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V3BankAccountsCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V3BankAccountsCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3BankAccountsCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V3BankAccountsCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V3BankAccountsCursorResponse struct {
 	Cursor V3BankAccountsCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V3BankAccountsCursorResponse) GetCursor() V3BankAccountsCursorResponseCursor {
-	if o == nil {
+func (v *V3BankAccountsCursorResponse) GetCursor() V3BankAccountsCursorResponseCursor {
+	if v == nil {
 		return V3BankAccountsCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

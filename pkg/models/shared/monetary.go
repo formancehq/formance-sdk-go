@@ -19,22 +19,22 @@ func (m Monetary) MarshalJSON() ([]byte, error) {
 }
 
 func (m *Monetary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"amount", "asset"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Monetary) GetAmount() *big.Int {
-	if o == nil {
+func (m *Monetary) GetAmount() *big.Int {
+	if m == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return m.Amount
 }
 
-func (o *Monetary) GetAsset() string {
-	if o == nil {
+func (m *Monetary) GetAsset() string {
+	if m == nil {
 		return ""
 	}
-	return o.Asset
+	return m.Asset
 }

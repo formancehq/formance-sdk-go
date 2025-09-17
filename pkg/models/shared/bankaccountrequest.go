@@ -12,51 +12,51 @@ type BankAccountRequest struct {
 	SwiftBicCode  *string           `json:"swiftBicCode,omitempty"`
 }
 
-func (o *BankAccountRequest) GetAccountNumber() *string {
-	if o == nil {
+func (b *BankAccountRequest) GetAccountNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return b.AccountNumber
 }
 
-func (o *BankAccountRequest) GetConnectorID() *string {
-	if o == nil {
+func (b *BankAccountRequest) GetConnectorID() *string {
+	if b == nil {
 		return nil
 	}
-	return o.ConnectorID
+	return b.ConnectorID
 }
 
-func (o *BankAccountRequest) GetCountry() string {
-	if o == nil {
+func (b *BankAccountRequest) GetCountry() string {
+	if b == nil {
 		return ""
 	}
-	return o.Country
+	return b.Country
 }
 
-func (o *BankAccountRequest) GetIban() *string {
-	if o == nil {
+func (b *BankAccountRequest) GetIban() *string {
+	if b == nil {
 		return nil
 	}
-	return o.Iban
+	return b.Iban
 }
 
-func (o *BankAccountRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (b *BankAccountRequest) GetMetadata() map[string]string {
+	if b == nil {
 		return nil
 	}
-	return o.Metadata
+	return b.Metadata
 }
 
-func (o *BankAccountRequest) GetName() string {
-	if o == nil {
+func (b *BankAccountRequest) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return o.Name
+	return b.Name
 }
 
-func (o *BankAccountRequest) GetSwiftBicCode() *string {
-	if o == nil {
+func (b *BankAccountRequest) GetSwiftBicCode() *string {
+	if b == nil {
 		return nil
 	}
-	return o.SwiftBicCode
+	return b.SwiftBicCode
 }

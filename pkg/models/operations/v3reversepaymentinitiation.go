@@ -13,18 +13,18 @@ type V3ReversePaymentInitiationRequest struct {
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
 }
 
-func (o *V3ReversePaymentInitiationRequest) GetV3ReversePaymentInitiationRequest() *shared.V3ReversePaymentInitiationRequest {
-	if o == nil {
+func (v *V3ReversePaymentInitiationRequest) GetV3ReversePaymentInitiationRequest() *shared.V3ReversePaymentInitiationRequest {
+	if v == nil {
 		return nil
 	}
-	return o.V3ReversePaymentInitiationRequest
+	return v.V3ReversePaymentInitiationRequest
 }
 
-func (o *V3ReversePaymentInitiationRequest) GetPaymentInitiationID() string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationRequest) GetPaymentInitiationID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentInitiationID
+	return v.PaymentInitiationID
 }
 
 type V3ReversePaymentInitiationResponse struct {
@@ -38,30 +38,30 @@ type V3ReversePaymentInitiationResponse struct {
 	V3ReversePaymentInitiationResponse *shared.V3ReversePaymentInitiationResponse
 }
 
-func (o *V3ReversePaymentInitiationResponse) GetContentType() string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3ReversePaymentInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3ReversePaymentInitiationResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3ReversePaymentInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3ReversePaymentInitiationResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3ReversePaymentInitiationResponse) GetV3ReversePaymentInitiationResponse() *shared.V3ReversePaymentInitiationResponse {
-	if o == nil {
+func (v *V3ReversePaymentInitiationResponse) GetV3ReversePaymentInitiationResponse() *shared.V3ReversePaymentInitiationResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3ReversePaymentInitiationResponse
+	return v.V3ReversePaymentInitiationResponse
 }

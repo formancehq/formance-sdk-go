@@ -19,25 +19,25 @@ type AddMetadataToAccountRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *AddMetadataToAccountRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (a *AddMetadataToAccountRequest) GetRequestBody() map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.RequestBody
+	return a.RequestBody
 }
 
-func (o *AddMetadataToAccountRequest) GetAddress() string {
-	if o == nil {
+func (a *AddMetadataToAccountRequest) GetAddress() string {
+	if a == nil {
 		return ""
 	}
-	return o.Address
+	return a.Address
 }
 
-func (o *AddMetadataToAccountRequest) GetLedger() string {
-	if o == nil {
+func (a *AddMetadataToAccountRequest) GetLedger() string {
+	if a == nil {
 		return ""
 	}
-	return o.Ledger
+	return a.Ledger
 }
 
 type AddMetadataToAccountResponse struct {
@@ -49,23 +49,23 @@ type AddMetadataToAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *AddMetadataToAccountResponse) GetContentType() string {
-	if o == nil {
+func (a *AddMetadataToAccountResponse) GetContentType() string {
+	if a == nil {
 		return ""
 	}
-	return o.ContentType
+	return a.ContentType
 }
 
-func (o *AddMetadataToAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (a *AddMetadataToAccountResponse) GetStatusCode() int {
+	if a == nil {
 		return 0
 	}
-	return o.StatusCode
+	return a.StatusCode
 }
 
-func (o *AddMetadataToAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (a *AddMetadataToAccountResponse) GetRawResponse() *http.Response {
+	if a == nil {
 		return nil
 	}
-	return o.RawResponse
+	return a.RawResponse
 }

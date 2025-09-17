@@ -16,15 +16,15 @@ func (v V2AssetHolder) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2AssetHolder) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"assets"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2AssetHolder) GetAssets() map[string]*big.Int {
-	if o == nil {
+func (v *V2AssetHolder) GetAssets() map[string]*big.Int {
+	if v == nil {
 		return map[string]*big.Int{}
 	}
-	return o.Assets
+	return v.Assets
 }

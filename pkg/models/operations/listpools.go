@@ -30,38 +30,38 @@ func (l ListPoolsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListPoolsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListPoolsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPoolsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPoolsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListPoolsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListPoolsRequest) GetQuery() *string {
-	if o == nil {
+func (l *ListPoolsRequest) GetQuery() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Query
+	return l.Query
 }
 
-func (o *ListPoolsRequest) GetSort() []string {
-	if o == nil {
+func (l *ListPoolsRequest) GetSort() []string {
+	if l == nil {
 		return nil
 	}
-	return o.Sort
+	return l.Sort
 }
 
 type ListPoolsResponse struct {
@@ -75,30 +75,30 @@ type ListPoolsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListPoolsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListPoolsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListPoolsResponse) GetPoolsCursor() *shared.PoolsCursor {
-	if o == nil {
+func (l *ListPoolsResponse) GetPoolsCursor() *shared.PoolsCursor {
+	if l == nil {
 		return nil
 	}
-	return o.PoolsCursor
+	return l.PoolsCursor
 }
 
-func (o *ListPoolsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListPoolsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListPoolsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListPoolsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

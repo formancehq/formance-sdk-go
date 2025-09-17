@@ -21,57 +21,57 @@ func (v V3MangopayConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3MangopayConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "clientID", "endpoint", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3MangopayConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3MangopayConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3MangopayConfig) GetClientID() string {
-	if o == nil {
+func (v *V3MangopayConfig) GetClientID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ClientID
+	return v.ClientID
 }
 
-func (o *V3MangopayConfig) GetEndpoint() string {
-	if o == nil {
+func (v *V3MangopayConfig) GetEndpoint() string {
+	if v == nil {
 		return ""
 	}
-	return o.Endpoint
+	return v.Endpoint
 }
 
-func (o *V3MangopayConfig) GetName() string {
-	if o == nil {
+func (v *V3MangopayConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3MangopayConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3MangopayConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3MangopayConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3MangopayConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3MangopayConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3MangopayConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }

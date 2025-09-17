@@ -13,18 +13,18 @@ type ChangeConfigSecretRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *ChangeConfigSecretRequest) GetConfigChangeSecret() *shared.ConfigChangeSecret {
-	if o == nil {
+func (c *ChangeConfigSecretRequest) GetConfigChangeSecret() *shared.ConfigChangeSecret {
+	if c == nil {
 		return nil
 	}
-	return o.ConfigChangeSecret
+	return c.ConfigChangeSecret
 }
 
-func (o *ChangeConfigSecretRequest) GetID() string {
-	if o == nil {
+func (c *ChangeConfigSecretRequest) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
 type ChangeConfigSecretResponse struct {
@@ -38,30 +38,30 @@ type ChangeConfigSecretResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ChangeConfigSecretResponse) GetConfigResponse() *shared.ConfigResponse {
-	if o == nil {
+func (c *ChangeConfigSecretResponse) GetConfigResponse() *shared.ConfigResponse {
+	if c == nil {
 		return nil
 	}
-	return o.ConfigResponse
+	return c.ConfigResponse
 }
 
-func (o *ChangeConfigSecretResponse) GetContentType() string {
-	if o == nil {
+func (c *ChangeConfigSecretResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *ChangeConfigSecretResponse) GetStatusCode() int {
-	if o == nil {
+func (c *ChangeConfigSecretResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *ChangeConfigSecretResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *ChangeConfigSecretResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

@@ -6,9 +6,9 @@ type V3ForwardPaymentServiceUserBankAccountRequest struct {
 	ConnectorID string `json:"connectorID"`
 }
 
-func (o *V3ForwardPaymentServiceUserBankAccountRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3ForwardPaymentServiceUserBankAccountRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }

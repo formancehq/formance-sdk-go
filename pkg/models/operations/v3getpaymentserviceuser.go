@@ -12,11 +12,11 @@ type V3GetPaymentServiceUserRequest struct {
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
 }
 
-func (o *V3GetPaymentServiceUserRequest) GetPaymentServiceUserID() string {
-	if o == nil {
+func (v *V3GetPaymentServiceUserRequest) GetPaymentServiceUserID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentServiceUserID
+	return v.PaymentServiceUserID
 }
 
 type V3GetPaymentServiceUserResponse struct {
@@ -30,30 +30,30 @@ type V3GetPaymentServiceUserResponse struct {
 	V3GetPaymentServiceUserResponse *shared.V3GetPaymentServiceUserResponse
 }
 
-func (o *V3GetPaymentServiceUserResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetPaymentServiceUserResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetPaymentServiceUserResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetPaymentServiceUserResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetPaymentServiceUserResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetPaymentServiceUserResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetPaymentServiceUserResponse) GetV3GetPaymentServiceUserResponse() *shared.V3GetPaymentServiceUserResponse {
-	if o == nil {
+func (v *V3GetPaymentServiceUserResponse) GetV3GetPaymentServiceUserResponse() *shared.V3GetPaymentServiceUserResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3GetPaymentServiceUserResponse
+	return v.V3GetPaymentServiceUserResponse
 }

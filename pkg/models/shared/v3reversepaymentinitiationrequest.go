@@ -20,43 +20,43 @@ func (v V3ReversePaymentInitiationRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3ReversePaymentInitiationRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "asset", "description", "reference"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3ReversePaymentInitiationRequest) GetAmount() *big.Int {
-	if o == nil {
+func (v *V3ReversePaymentInitiationRequest) GetAmount() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V3ReversePaymentInitiationRequest) GetAsset() string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationRequest) GetAsset() string {
+	if v == nil {
 		return ""
 	}
-	return o.Asset
+	return v.Asset
 }
 
-func (o *V3ReversePaymentInitiationRequest) GetDescription() string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationRequest) GetDescription() string {
+	if v == nil {
 		return ""
 	}
-	return o.Description
+	return v.Description
 }
 
-func (o *V3ReversePaymentInitiationRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3ReversePaymentInitiationRequest) GetReference() string {
-	if o == nil {
+func (v *V3ReversePaymentInitiationRequest) GetReference() string {
+	if v == nil {
 		return ""
 	}
-	return o.Reference
+	return v.Reference
 }

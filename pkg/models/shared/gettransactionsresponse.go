@@ -10,48 +10,48 @@ type GetTransactionsResponseCursor struct {
 	Previous *string              `json:"previous,omitempty"`
 }
 
-func (o *GetTransactionsResponseCursor) GetData() []WalletsTransaction {
-	if o == nil {
+func (g *GetTransactionsResponseCursor) GetData() []WalletsTransaction {
+	if g == nil {
 		return []WalletsTransaction{}
 	}
-	return o.Data
+	return g.Data
 }
 
-func (o *GetTransactionsResponseCursor) GetHasMore() *bool {
-	if o == nil {
+func (g *GetTransactionsResponseCursor) GetHasMore() *bool {
+	if g == nil {
 		return nil
 	}
-	return o.HasMore
+	return g.HasMore
 }
 
-func (o *GetTransactionsResponseCursor) GetNext() *string {
-	if o == nil {
+func (g *GetTransactionsResponseCursor) GetNext() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Next
+	return g.Next
 }
 
-func (o *GetTransactionsResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (g *GetTransactionsResponseCursor) GetPageSize() int64 {
+	if g == nil {
 		return 0
 	}
-	return o.PageSize
+	return g.PageSize
 }
 
-func (o *GetTransactionsResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (g *GetTransactionsResponseCursor) GetPrevious() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Previous
+	return g.Previous
 }
 
 type GetTransactionsResponse struct {
 	Cursor GetTransactionsResponseCursor `json:"cursor"`
 }
 
-func (o *GetTransactionsResponse) GetCursor() GetTransactionsResponseCursor {
-	if o == nil {
+func (g *GetTransactionsResponse) GetCursor() GetTransactionsResponseCursor {
+	if g == nil {
 		return GetTransactionsResponseCursor{}
 	}
-	return o.Cursor
+	return g.Cursor
 }

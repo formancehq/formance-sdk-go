@@ -8,23 +8,23 @@ type Account struct {
 	Type     *string        `json:"type,omitempty"`
 }
 
-func (o *Account) GetAddress() string {
-	if o == nil {
+func (a *Account) GetAddress() string {
+	if a == nil {
 		return ""
 	}
-	return o.Address
+	return a.Address
 }
 
-func (o *Account) GetMetadata() map[string]any {
-	if o == nil {
+func (a *Account) GetMetadata() map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Metadata
+	return a.Metadata
 }
 
-func (o *Account) GetType() *string {
-	if o == nil {
+func (a *Account) GetType() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Type
+	return a.Type
 }

@@ -6,9 +6,9 @@ type AttemptResponse struct {
 	Data Attempt `json:"data"`
 }
 
-func (o *AttemptResponse) GetData() Attempt {
-	if o == nil {
+func (a *AttemptResponse) GetData() Attempt {
+	if a == nil {
 		return Attempt{}
 	}
-	return o.Data
+	return a.Data
 }

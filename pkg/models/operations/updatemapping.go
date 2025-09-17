@@ -13,18 +13,18 @@ type UpdateMappingRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *UpdateMappingRequest) GetMapping() *shared.Mapping {
-	if o == nil {
+func (u *UpdateMappingRequest) GetMapping() *shared.Mapping {
+	if u == nil {
 		return nil
 	}
-	return o.Mapping
+	return u.Mapping
 }
 
-func (o *UpdateMappingRequest) GetLedger() string {
-	if o == nil {
+func (u *UpdateMappingRequest) GetLedger() string {
+	if u == nil {
 		return ""
 	}
-	return o.Ledger
+	return u.Ledger
 }
 
 type UpdateMappingResponse struct {
@@ -38,30 +38,30 @@ type UpdateMappingResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *UpdateMappingResponse) GetContentType() string {
-	if o == nil {
+func (u *UpdateMappingResponse) GetContentType() string {
+	if u == nil {
 		return ""
 	}
-	return o.ContentType
+	return u.ContentType
 }
 
-func (o *UpdateMappingResponse) GetMappingResponse() *shared.MappingResponse {
-	if o == nil {
+func (u *UpdateMappingResponse) GetMappingResponse() *shared.MappingResponse {
+	if u == nil {
 		return nil
 	}
-	return o.MappingResponse
+	return u.MappingResponse
 }
 
-func (o *UpdateMappingResponse) GetStatusCode() int {
-	if o == nil {
+func (u *UpdateMappingResponse) GetStatusCode() int {
+	if u == nil {
 		return 0
 	}
-	return o.StatusCode
+	return u.StatusCode
 }
 
-func (o *UpdateMappingResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (u *UpdateMappingResponse) GetRawResponse() *http.Response {
+	if u == nil {
 		return nil
 	}
-	return o.RawResponse
+	return u.RawResponse
 }

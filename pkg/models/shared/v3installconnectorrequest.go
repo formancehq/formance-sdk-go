@@ -28,19 +28,19 @@ const (
 )
 
 type V3InstallConnectorRequest struct {
-	V3AdyenConfig         *V3AdyenConfig         `queryParam:"inline"`
-	V3AtlarConfig         *V3AtlarConfig         `queryParam:"inline"`
-	V3BankingcircleConfig *V3BankingcircleConfig `queryParam:"inline"`
-	V3ColumnConfig        *V3ColumnConfig        `queryParam:"inline"`
-	V3CurrencycloudConfig *V3CurrencycloudConfig `queryParam:"inline"`
-	V3DummypayConfig      *V3DummypayConfig      `queryParam:"inline"`
-	V3GenericConfig       *V3GenericConfig       `queryParam:"inline"`
-	V3MangopayConfig      *V3MangopayConfig      `queryParam:"inline"`
-	V3ModulrConfig        *V3ModulrConfig        `queryParam:"inline"`
-	V3MoneycorpConfig     *V3MoneycorpConfig     `queryParam:"inline"`
-	V3QontoConfig         *V3QontoConfig         `queryParam:"inline"`
-	V3StripeConfig        *V3StripeConfig        `queryParam:"inline"`
-	V3WiseConfig          *V3WiseConfig          `queryParam:"inline"`
+	V3AdyenConfig         *V3AdyenConfig         `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3AtlarConfig         *V3AtlarConfig         `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3BankingcircleConfig *V3BankingcircleConfig `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3ColumnConfig        *V3ColumnConfig        `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3CurrencycloudConfig *V3CurrencycloudConfig `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3DummypayConfig      *V3DummypayConfig      `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3GenericConfig       *V3GenericConfig       `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3MangopayConfig      *V3MangopayConfig      `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3ModulrConfig        *V3ModulrConfig        `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3MoneycorpConfig     *V3MoneycorpConfig     `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3QontoConfig         *V3QontoConfig         `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3StripeConfig        *V3StripeConfig        `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3WiseConfig          *V3WiseConfig          `queryParam:"inline" name:"V3InstallConnectorRequest"`
 
 	Type V3InstallConnectorRequestType
 }
@@ -215,7 +215,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 	switch dis.Provider {
 	case "Adyen":
 		v3AdyenConfig := new(V3AdyenConfig)
-		if err := utils.UnmarshalJSON(data, &v3AdyenConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3AdyenConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Adyen) type V3AdyenConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -224,7 +224,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Atlar":
 		v3AtlarConfig := new(V3AtlarConfig)
-		if err := utils.UnmarshalJSON(data, &v3AtlarConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3AtlarConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Atlar) type V3AtlarConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -233,7 +233,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Bankingcircle":
 		v3BankingcircleConfig := new(V3BankingcircleConfig)
-		if err := utils.UnmarshalJSON(data, &v3BankingcircleConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3BankingcircleConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Bankingcircle) type V3BankingcircleConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -242,7 +242,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Column":
 		v3ColumnConfig := new(V3ColumnConfig)
-		if err := utils.UnmarshalJSON(data, &v3ColumnConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3ColumnConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Column) type V3ColumnConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -251,7 +251,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Currencycloud":
 		v3CurrencycloudConfig := new(V3CurrencycloudConfig)
-		if err := utils.UnmarshalJSON(data, &v3CurrencycloudConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3CurrencycloudConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Currencycloud) type V3CurrencycloudConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -260,7 +260,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Dummypay":
 		v3DummypayConfig := new(V3DummypayConfig)
-		if err := utils.UnmarshalJSON(data, &v3DummypayConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3DummypayConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Dummypay) type V3DummypayConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -269,7 +269,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Generic":
 		v3GenericConfig := new(V3GenericConfig)
-		if err := utils.UnmarshalJSON(data, &v3GenericConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3GenericConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Generic) type V3GenericConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -278,7 +278,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Mangopay":
 		v3MangopayConfig := new(V3MangopayConfig)
-		if err := utils.UnmarshalJSON(data, &v3MangopayConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3MangopayConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Mangopay) type V3MangopayConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -287,7 +287,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Modulr":
 		v3ModulrConfig := new(V3ModulrConfig)
-		if err := utils.UnmarshalJSON(data, &v3ModulrConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3ModulrConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Modulr) type V3ModulrConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -296,7 +296,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Moneycorp":
 		v3MoneycorpConfig := new(V3MoneycorpConfig)
-		if err := utils.UnmarshalJSON(data, &v3MoneycorpConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3MoneycorpConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Moneycorp) type V3MoneycorpConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -305,7 +305,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Qonto":
 		v3QontoConfig := new(V3QontoConfig)
-		if err := utils.UnmarshalJSON(data, &v3QontoConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3QontoConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Qonto) type V3QontoConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -314,7 +314,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Stripe":
 		v3StripeConfig := new(V3StripeConfig)
-		if err := utils.UnmarshalJSON(data, &v3StripeConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3StripeConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Stripe) type V3StripeConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 
@@ -323,7 +323,7 @@ func (u *V3InstallConnectorRequest) UnmarshalJSON(data []byte) error {
 		return nil
 	case "Wise":
 		v3WiseConfig := new(V3WiseConfig)
-		if err := utils.UnmarshalJSON(data, &v3WiseConfig, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &v3WiseConfig, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Wise) type V3WiseConfig within V3InstallConnectorRequest: %w", string(data), err)
 		}
 

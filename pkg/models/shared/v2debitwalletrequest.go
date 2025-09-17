@@ -25,71 +25,71 @@ func (v V2DebitWalletRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2DebitWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "metadata"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2DebitWalletRequest) GetAmount() V2Monetary {
-	if o == nil {
+func (v *V2DebitWalletRequest) GetAmount() V2Monetary {
+	if v == nil {
 		return V2Monetary{}
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V2DebitWalletRequest) GetBalances() []string {
-	if o == nil {
+func (v *V2DebitWalletRequest) GetBalances() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Balances
+	return v.Balances
 }
 
-func (o *V2DebitWalletRequest) GetDescription() *string {
-	if o == nil {
+func (v *V2DebitWalletRequest) GetDescription() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Description
+	return v.Description
 }
 
-func (o *V2DebitWalletRequest) GetDestination() *V2Subject {
-	if o == nil {
+func (v *V2DebitWalletRequest) GetDestination() *V2Subject {
+	if v == nil {
 		return nil
 	}
-	return o.Destination
+	return v.Destination
 }
 
-func (o *V2DebitWalletRequest) GetDestinationAccount() *V2LedgerAccountSubject {
-	if v := o.GetDestination(); v != nil {
+func (v *V2DebitWalletRequest) GetDestinationAccount() *V2LedgerAccountSubject {
+	if v := v.GetDestination(); v != nil {
 		return v.V2LedgerAccountSubject
 	}
 	return nil
 }
 
-func (o *V2DebitWalletRequest) GetDestinationWallet() *V2WalletSubject {
-	if v := o.GetDestination(); v != nil {
+func (v *V2DebitWalletRequest) GetDestinationWallet() *V2WalletSubject {
+	if v := v.GetDestination(); v != nil {
 		return v.V2WalletSubject
 	}
 	return nil
 }
 
-func (o *V2DebitWalletRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2DebitWalletRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2DebitWalletRequest) GetPending() *bool {
-	if o == nil {
+func (v *V2DebitWalletRequest) GetPending() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.Pending
+	return v.Pending
 }
 
-func (o *V2DebitWalletRequest) GetTimestamp() *time.Time {
-	if o == nil {
+func (v *V2DebitWalletRequest) GetTimestamp() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.Timestamp
+	return v.Timestamp
 }

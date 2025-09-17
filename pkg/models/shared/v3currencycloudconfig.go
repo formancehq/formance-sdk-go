@@ -21,57 +21,57 @@ func (v V3CurrencycloudConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3CurrencycloudConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "endpoint", "loginID", "name"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3CurrencycloudConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3CurrencycloudConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3CurrencycloudConfig) GetEndpoint() string {
-	if o == nil {
+func (v *V3CurrencycloudConfig) GetEndpoint() string {
+	if v == nil {
 		return ""
 	}
-	return o.Endpoint
+	return v.Endpoint
 }
 
-func (o *V3CurrencycloudConfig) GetLoginID() string {
-	if o == nil {
+func (v *V3CurrencycloudConfig) GetLoginID() string {
+	if v == nil {
 		return ""
 	}
-	return o.LoginID
+	return v.LoginID
 }
 
-func (o *V3CurrencycloudConfig) GetName() string {
-	if o == nil {
+func (v *V3CurrencycloudConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3CurrencycloudConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3CurrencycloudConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3CurrencycloudConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3CurrencycloudConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3CurrencycloudConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3CurrencycloudConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }

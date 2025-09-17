@@ -22,57 +22,57 @@ func (v V2Trigger) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Trigger) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "event", "id", "workflowID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2Trigger) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V2Trigger) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V2Trigger) GetEvent() string {
-	if o == nil {
+func (v *V2Trigger) GetEvent() string {
+	if v == nil {
 		return ""
 	}
-	return o.Event
+	return v.Event
 }
 
-func (o *V2Trigger) GetFilter() *string {
-	if o == nil {
+func (v *V2Trigger) GetFilter() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Filter
+	return v.Filter
 }
 
-func (o *V2Trigger) GetID() string {
-	if o == nil {
+func (v *V2Trigger) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2Trigger) GetName() *string {
-	if o == nil {
+func (v *V2Trigger) GetName() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V2Trigger) GetVars() map[string]any {
-	if o == nil {
+func (v *V2Trigger) GetVars() map[string]any {
+	if v == nil {
 		return nil
 	}
-	return o.Vars
+	return v.Vars
 }
 
-func (o *V2Trigger) GetWorkflowID() string {
-	if o == nil {
+func (v *V2Trigger) GetWorkflowID() string {
+	if v == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return v.WorkflowID
 }

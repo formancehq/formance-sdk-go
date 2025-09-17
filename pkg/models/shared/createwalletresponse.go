@@ -6,9 +6,9 @@ type CreateWalletResponse struct {
 	Data Wallet `json:"data"`
 }
 
-func (o *CreateWalletResponse) GetData() Wallet {
-	if o == nil {
+func (c *CreateWalletResponse) GetData() Wallet {
+	if c == nil {
 		return Wallet{}
 	}
-	return o.Data
+	return c.Data
 }

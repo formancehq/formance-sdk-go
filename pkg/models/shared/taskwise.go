@@ -13,28 +13,50 @@ type TaskWiseDescriptor struct {
 	ProfileID *int64  `json:"profileID,omitempty"`
 }
 
-func (o *TaskWiseDescriptor) GetKey() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Key
+func (t TaskWiseDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TaskWiseDescriptor) GetName() *string {
-	if o == nil {
-		return nil
+func (t *TaskWiseDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
 	}
-	return o.Name
+	return nil
 }
 
-func (o *TaskWiseDescriptor) GetProfileID() *int64 {
-	if o == nil {
+func (t *TaskWiseDescriptor) GetKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ProfileID
+	return t.Key
+}
+
+func (t *TaskWiseDescriptor) GetName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Name
+}
+
+func (t *TaskWiseDescriptor) GetProfileID() *int64 {
+	if t == nil {
+		return nil
+	}
+	return t.ProfileID
 }
 
 type TaskWiseState struct {
+}
+
+func (t TaskWiseState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskWiseState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskWise struct {
@@ -53,64 +75,64 @@ func (t TaskWise) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskWise) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskWise) GetConnectorID() string {
-	if o == nil {
+func (t *TaskWise) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskWise) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskWise) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskWise) GetDescriptor() TaskWiseDescriptor {
-	if o == nil {
+func (t *TaskWise) GetDescriptor() TaskWiseDescriptor {
+	if t == nil {
 		return TaskWiseDescriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskWise) GetError() *string {
-	if o == nil {
+func (t *TaskWise) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskWise) GetID() string {
-	if o == nil {
+func (t *TaskWise) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskWise) GetState() *TaskWiseState {
-	if o == nil {
+func (t *TaskWise) GetState() *TaskWiseState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskWise) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskWise) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskWise) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskWise) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

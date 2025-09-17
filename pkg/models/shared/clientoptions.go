@@ -13,58 +13,58 @@ type ClientOptions struct {
 	Trusted                *bool          `json:"trusted,omitempty"`
 }
 
-func (o *ClientOptions) GetDescription() *string {
-	if o == nil {
+func (c *ClientOptions) GetDescription() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Description
+	return c.Description
 }
 
-func (o *ClientOptions) GetMetadata() map[string]any {
-	if o == nil {
+func (c *ClientOptions) GetMetadata() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *ClientOptions) GetName() string {
-	if o == nil {
+func (c *ClientOptions) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *ClientOptions) GetPostLogoutRedirectUris() []string {
-	if o == nil {
+func (c *ClientOptions) GetPostLogoutRedirectUris() []string {
+	if c == nil {
 		return nil
 	}
-	return o.PostLogoutRedirectUris
+	return c.PostLogoutRedirectUris
 }
 
-func (o *ClientOptions) GetPublic() *bool {
-	if o == nil {
+func (c *ClientOptions) GetPublic() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Public
+	return c.Public
 }
 
-func (o *ClientOptions) GetRedirectUris() []string {
-	if o == nil {
+func (c *ClientOptions) GetRedirectUris() []string {
+	if c == nil {
 		return nil
 	}
-	return o.RedirectUris
+	return c.RedirectUris
 }
 
-func (o *ClientOptions) GetScopes() []string {
-	if o == nil {
+func (c *ClientOptions) GetScopes() []string {
+	if c == nil {
 		return nil
 	}
-	return o.Scopes
+	return c.Scopes
 }
 
-func (o *ClientOptions) GetTrusted() *bool {
-	if o == nil {
+func (c *ClientOptions) GetTrusted() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Trusted
+	return c.Trusted
 }

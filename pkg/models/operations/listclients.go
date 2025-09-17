@@ -18,30 +18,30 @@ type ListClientsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListClientsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListClientsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListClientsResponse) GetListClientsResponse() *shared.ListClientsResponse {
-	if o == nil {
+func (l *ListClientsResponse) GetListClientsResponse() *shared.ListClientsResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ListClientsResponse
+	return l.ListClientsResponse
 }
 
-func (o *ListClientsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListClientsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListClientsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListClientsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

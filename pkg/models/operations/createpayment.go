@@ -18,30 +18,30 @@ type CreatePaymentResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreatePaymentResponse) GetContentType() string {
-	if o == nil {
+func (c *CreatePaymentResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreatePaymentResponse) GetPaymentResponse() *shared.PaymentResponse {
-	if o == nil {
+func (c *CreatePaymentResponse) GetPaymentResponse() *shared.PaymentResponse {
+	if c == nil {
 		return nil
 	}
-	return o.PaymentResponse
+	return c.PaymentResponse
 }
 
-func (o *CreatePaymentResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreatePaymentResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreatePaymentResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreatePaymentResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

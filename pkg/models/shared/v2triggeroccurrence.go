@@ -21,50 +21,50 @@ func (v V2TriggerOccurrence) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2TriggerOccurrence) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"date", "event", "triggerID"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2TriggerOccurrence) GetDate() time.Time {
-	if o == nil {
+func (v *V2TriggerOccurrence) GetDate() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.Date
+	return v.Date
 }
 
-func (o *V2TriggerOccurrence) GetError() *string {
-	if o == nil {
+func (v *V2TriggerOccurrence) GetError() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Error
+	return v.Error
 }
 
-func (o *V2TriggerOccurrence) GetEvent() map[string]any {
-	if o == nil {
+func (v *V2TriggerOccurrence) GetEvent() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.Event
+	return v.Event
 }
 
-func (o *V2TriggerOccurrence) GetTriggerID() string {
-	if o == nil {
+func (v *V2TriggerOccurrence) GetTriggerID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TriggerID
+	return v.TriggerID
 }
 
-func (o *V2TriggerOccurrence) GetWorkflowInstance() *V2WorkflowInstance {
-	if o == nil {
+func (v *V2TriggerOccurrence) GetWorkflowInstance() *V2WorkflowInstance {
+	if v == nil {
 		return nil
 	}
-	return o.WorkflowInstance
+	return v.WorkflowInstance
 }
 
-func (o *V2TriggerOccurrence) GetWorkflowInstanceID() *string {
-	if o == nil {
+func (v *V2TriggerOccurrence) GetWorkflowInstanceID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.WorkflowInstanceID
+	return v.WorkflowInstanceID
 }

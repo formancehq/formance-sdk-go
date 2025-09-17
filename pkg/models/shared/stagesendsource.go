@@ -2,29 +2,44 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type StageSendSource struct {
 	Account *StageSendDestinationAccount `json:"account,omitempty"`
 	Payment *StageSendSourcePayment      `json:"payment,omitempty"`
 	Wallet  *StageSendDestinationWallet  `json:"wallet,omitempty"`
 }
 
-func (o *StageSendSource) GetAccount() *StageSendDestinationAccount {
-	if o == nil {
-		return nil
-	}
-	return o.Account
+func (s StageSendSource) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (o *StageSendSource) GetPayment() *StageSendSourcePayment {
-	if o == nil {
-		return nil
+func (s *StageSendSource) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
+		return err
 	}
-	return o.Payment
+	return nil
 }
 
-func (o *StageSendSource) GetWallet() *StageSendDestinationWallet {
-	if o == nil {
+func (s *StageSendSource) GetAccount() *StageSendDestinationAccount {
+	if s == nil {
 		return nil
 	}
-	return o.Wallet
+	return s.Account
+}
+
+func (s *StageSendSource) GetPayment() *StageSendSourcePayment {
+	if s == nil {
+		return nil
+	}
+	return s.Payment
+}
+
+func (s *StageSendSource) GetWallet() *StageSendDestinationWallet {
+	if s == nil {
+		return nil
+	}
+	return s.Wallet
 }

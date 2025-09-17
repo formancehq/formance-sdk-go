@@ -11,14 +11,36 @@ type TaskCurrencyCloudDescriptor struct {
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *TaskCurrencyCloudDescriptor) GetName() *string {
-	if o == nil {
+func (t TaskCurrencyCloudDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskCurrencyCloudDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *TaskCurrencyCloudDescriptor) GetName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.Name
 }
 
 type TaskCurrencyCloudState struct {
+}
+
+func (t TaskCurrencyCloudState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskCurrencyCloudState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskCurrencyCloud struct {
@@ -37,64 +59,64 @@ func (t TaskCurrencyCloud) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskCurrencyCloud) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskCurrencyCloud) GetConnectorID() string {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskCurrencyCloud) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskCurrencyCloud) GetDescriptor() TaskCurrencyCloudDescriptor {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetDescriptor() TaskCurrencyCloudDescriptor {
+	if t == nil {
 		return TaskCurrencyCloudDescriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskCurrencyCloud) GetError() *string {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskCurrencyCloud) GetID() string {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskCurrencyCloud) GetState() *TaskCurrencyCloudState {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetState() *TaskCurrencyCloudState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskCurrencyCloud) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskCurrencyCloud) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskCurrencyCloud) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

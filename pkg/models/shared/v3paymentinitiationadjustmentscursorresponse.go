@@ -10,48 +10,48 @@ type V3PaymentInitiationAdjustmentsCursorResponseCursor struct {
 	Previous *string                         `json:"previous,omitempty"`
 }
 
-func (o *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetData() []V3PaymentInitiationAdjustment {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetData() []V3PaymentInitiationAdjustment {
+	if v == nil {
 		return []V3PaymentInitiationAdjustment{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V3PaymentInitiationAdjustmentsCursorResponse struct {
 	Cursor V3PaymentInitiationAdjustmentsCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V3PaymentInitiationAdjustmentsCursorResponse) GetCursor() V3PaymentInitiationAdjustmentsCursorResponseCursor {
-	if o == nil {
+func (v *V3PaymentInitiationAdjustmentsCursorResponse) GetCursor() V3PaymentInitiationAdjustmentsCursorResponseCursor {
+	if v == nil {
 		return V3PaymentInitiationAdjustmentsCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

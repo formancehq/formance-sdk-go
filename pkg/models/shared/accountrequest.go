@@ -22,57 +22,57 @@ func (a AccountRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"connectorID", "createdAt", "reference", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *AccountRequest) GetAccountName() *string {
-	if o == nil {
+func (a *AccountRequest) GetAccountName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.AccountName
+	return a.AccountName
 }
 
-func (o *AccountRequest) GetConnectorID() string {
-	if o == nil {
+func (a *AccountRequest) GetConnectorID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return a.ConnectorID
 }
 
-func (o *AccountRequest) GetCreatedAt() time.Time {
-	if o == nil {
+func (a *AccountRequest) GetCreatedAt() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return a.CreatedAt
 }
 
-func (o *AccountRequest) GetDefaultAsset() *string {
-	if o == nil {
+func (a *AccountRequest) GetDefaultAsset() *string {
+	if a == nil {
 		return nil
 	}
-	return o.DefaultAsset
+	return a.DefaultAsset
 }
 
-func (o *AccountRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (a *AccountRequest) GetMetadata() map[string]string {
+	if a == nil {
 		return nil
 	}
-	return o.Metadata
+	return a.Metadata
 }
 
-func (o *AccountRequest) GetReference() string {
-	if o == nil {
+func (a *AccountRequest) GetReference() string {
+	if a == nil {
 		return ""
 	}
-	return o.Reference
+	return a.Reference
 }
 
-func (o *AccountRequest) GetType() AccountType {
-	if o == nil {
+func (a *AccountRequest) GetType() AccountType {
+	if a == nil {
 		return AccountType("")
 	}
-	return o.Type
+	return a.Type
 }

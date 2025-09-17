@@ -13,51 +13,51 @@ type V2Hold struct {
 	WalletID string `json:"walletID"`
 }
 
-func (o *V2Hold) GetDescription() string {
-	if o == nil {
+func (v *V2Hold) GetDescription() string {
+	if v == nil {
 		return ""
 	}
-	return o.Description
+	return v.Description
 }
 
-func (o *V2Hold) GetDestination() *V2Subject {
-	if o == nil {
+func (v *V2Hold) GetDestination() *V2Subject {
+	if v == nil {
 		return nil
 	}
-	return o.Destination
+	return v.Destination
 }
 
-func (o *V2Hold) GetDestinationAccount() *V2LedgerAccountSubject {
-	if v := o.GetDestination(); v != nil {
+func (v *V2Hold) GetDestinationAccount() *V2LedgerAccountSubject {
+	if v := v.GetDestination(); v != nil {
 		return v.V2LedgerAccountSubject
 	}
 	return nil
 }
 
-func (o *V2Hold) GetDestinationWallet() *V2WalletSubject {
-	if v := o.GetDestination(); v != nil {
+func (v *V2Hold) GetDestinationWallet() *V2WalletSubject {
+	if v := v.GetDestination(); v != nil {
 		return v.V2WalletSubject
 	}
 	return nil
 }
 
-func (o *V2Hold) GetID() string {
-	if o == nil {
+func (v *V2Hold) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V2Hold) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2Hold) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2Hold) GetWalletID() string {
-	if o == nil {
+func (v *V2Hold) GetWalletID() string {
+	if v == nil {
 		return ""
 	}
-	return o.WalletID
+	return v.WalletID
 }

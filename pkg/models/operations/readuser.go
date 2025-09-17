@@ -12,11 +12,11 @@ type ReadUserRequest struct {
 	UserID string `pathParam:"style=simple,explode=false,name=userId"`
 }
 
-func (o *ReadUserRequest) GetUserID() string {
-	if o == nil {
+func (r *ReadUserRequest) GetUserID() string {
+	if r == nil {
 		return ""
 	}
-	return o.UserID
+	return r.UserID
 }
 
 type ReadUserResponse struct {
@@ -30,30 +30,30 @@ type ReadUserResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReadUserResponse) GetContentType() string {
-	if o == nil {
+func (r *ReadUserResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReadUserResponse) GetReadUserResponse() *shared.ReadUserResponse {
-	if o == nil {
+func (r *ReadUserResponse) GetReadUserResponse() *shared.ReadUserResponse {
+	if r == nil {
 		return nil
 	}
-	return o.ReadUserResponse
+	return r.ReadUserResponse
 }
 
-func (o *ReadUserResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReadUserResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReadUserResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReadUserResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

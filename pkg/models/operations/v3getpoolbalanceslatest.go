@@ -12,11 +12,11 @@ type V3GetPoolBalancesLatestRequest struct {
 	PoolID string `pathParam:"style=simple,explode=false,name=poolID"`
 }
 
-func (o *V3GetPoolBalancesLatestRequest) GetPoolID() string {
-	if o == nil {
+func (v *V3GetPoolBalancesLatestRequest) GetPoolID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PoolID
+	return v.PoolID
 }
 
 type V3GetPoolBalancesLatestResponse struct {
@@ -30,30 +30,30 @@ type V3GetPoolBalancesLatestResponse struct {
 	V3PoolBalancesResponse *shared.V3PoolBalancesResponse
 }
 
-func (o *V3GetPoolBalancesLatestResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetPoolBalancesLatestResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetPoolBalancesLatestResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetPoolBalancesLatestResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetPoolBalancesLatestResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetPoolBalancesLatestResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetPoolBalancesLatestResponse) GetV3PoolBalancesResponse() *shared.V3PoolBalancesResponse {
-	if o == nil {
+func (v *V3GetPoolBalancesLatestResponse) GetV3PoolBalancesResponse() *shared.V3PoolBalancesResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3PoolBalancesResponse
+	return v.V3PoolBalancesResponse
 }

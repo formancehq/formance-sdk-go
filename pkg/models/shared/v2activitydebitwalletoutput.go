@@ -6,9 +6,9 @@ type V2ActivityDebitWalletOutput struct {
 	Data V2Hold `json:"data"`
 }
 
-func (o *V2ActivityDebitWalletOutput) GetData() V2Hold {
-	if o == nil {
+func (v *V2ActivityDebitWalletOutput) GetData() V2Hold {
+	if v == nil {
 		return V2Hold{}
 	}
-	return o.Data
+	return v.Data
 }

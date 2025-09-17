@@ -12,11 +12,11 @@ type GetLedgerInfoRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *GetLedgerInfoRequest) GetLedger() string {
-	if o == nil {
+func (g *GetLedgerInfoRequest) GetLedger() string {
+	if g == nil {
 		return ""
 	}
-	return o.Ledger
+	return g.Ledger
 }
 
 type GetLedgerInfoResponse struct {
@@ -30,30 +30,30 @@ type GetLedgerInfoResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetLedgerInfoResponse) GetContentType() string {
-	if o == nil {
+func (g *GetLedgerInfoResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetLedgerInfoResponse) GetLedgerInfoResponse() *shared.LedgerInfoResponse {
-	if o == nil {
+func (g *GetLedgerInfoResponse) GetLedgerInfoResponse() *shared.LedgerInfoResponse {
+	if g == nil {
 		return nil
 	}
-	return o.LedgerInfoResponse
+	return g.LedgerInfoResponse
 }
 
-func (o *GetLedgerInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetLedgerInfoResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetLedgerInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetLedgerInfoResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

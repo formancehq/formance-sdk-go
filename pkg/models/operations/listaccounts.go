@@ -38,60 +38,60 @@ type ListAccountsRequest struct {
 	PaginationToken *string `queryParam:"style=form,explode=true,name=pagination_token"`
 }
 
-func (o *ListAccountsRequest) GetAddress() *string {
-	if o == nil {
+func (l *ListAccountsRequest) GetAddress() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Address
+	return l.Address
 }
 
-func (o *ListAccountsRequest) GetAfter() *string {
-	if o == nil {
+func (l *ListAccountsRequest) GetAfter() *string {
+	if l == nil {
 		return nil
 	}
-	return o.After
+	return l.After
 }
 
-func (o *ListAccountsRequest) GetBalance() *int64 {
-	if o == nil {
+func (l *ListAccountsRequest) GetBalance() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Balance
+	return l.Balance
 }
 
-func (o *ListAccountsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListAccountsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListAccountsRequest) GetLedger() string {
-	if o == nil {
+func (l *ListAccountsRequest) GetLedger() string {
+	if l == nil {
 		return ""
 	}
-	return o.Ledger
+	return l.Ledger
 }
 
-func (o *ListAccountsRequest) GetMetadata() map[string]any {
-	if o == nil {
+func (l *ListAccountsRequest) GetMetadata() map[string]any {
+	if l == nil {
 		return nil
 	}
-	return o.Metadata
+	return l.Metadata
 }
 
-func (o *ListAccountsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListAccountsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListAccountsRequest) GetPaginationToken() *string {
-	if o == nil {
+func (l *ListAccountsRequest) GetPaginationToken() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PaginationToken
+	return l.PaginationToken
 }
 
 type ListAccountsResponse struct {
@@ -107,37 +107,37 @@ type ListAccountsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListAccountsResponse) GetAccountsCursorResponse() *shared.AccountsCursorResponse {
-	if o == nil {
+func (l *ListAccountsResponse) GetAccountsCursorResponse() *shared.AccountsCursorResponse {
+	if l == nil {
 		return nil
 	}
-	return o.AccountsCursorResponse
+	return l.AccountsCursorResponse
 }
 
-func (o *ListAccountsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListAccountsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListAccountsResponse) GetErrorResponse() *shared.ErrorResponse {
-	if o == nil {
+func (l *ListAccountsResponse) GetErrorResponse() *shared.ErrorResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ErrorResponse
+	return l.ErrorResponse
 }
 
-func (o *ListAccountsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListAccountsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListAccountsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListAccountsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

@@ -17,22 +17,22 @@ func (v V3PoolBalance) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3PoolBalance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "asset"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3PoolBalance) GetAmount() *big.Int {
-	if o == nil {
+func (v *V3PoolBalance) GetAmount() *big.Int {
+	if v == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return v.Amount
 }
 
-func (o *V3PoolBalance) GetAsset() string {
-	if o == nil {
+func (v *V3PoolBalance) GetAsset() string {
+	if v == nil {
 		return ""
 	}
-	return o.Asset
+	return v.Asset
 }

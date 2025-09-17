@@ -18,30 +18,30 @@ type CreatePoolResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreatePoolResponse) GetContentType() string {
-	if o == nil {
+func (c *CreatePoolResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreatePoolResponse) GetPoolResponse() *shared.PoolResponse {
-	if o == nil {
+func (c *CreatePoolResponse) GetPoolResponse() *shared.PoolResponse {
+	if c == nil {
 		return nil
 	}
-	return o.PoolResponse
+	return c.PoolResponse
 }
 
-func (o *CreatePoolResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreatePoolResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreatePoolResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreatePoolResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

@@ -14,25 +14,25 @@ type ConfirmHoldRequest struct {
 	HoldID         string  `pathParam:"style=simple,explode=false,name=hold_id"`
 }
 
-func (o *ConfirmHoldRequest) GetConfirmHoldRequest() *shared.ConfirmHoldRequest {
-	if o == nil {
+func (c *ConfirmHoldRequest) GetConfirmHoldRequest() *shared.ConfirmHoldRequest {
+	if c == nil {
 		return nil
 	}
-	return o.ConfirmHoldRequest
+	return c.ConfirmHoldRequest
 }
 
-func (o *ConfirmHoldRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (c *ConfirmHoldRequest) GetIdempotencyKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return c.IdempotencyKey
 }
 
-func (o *ConfirmHoldRequest) GetHoldID() string {
-	if o == nil {
+func (c *ConfirmHoldRequest) GetHoldID() string {
+	if c == nil {
 		return ""
 	}
-	return o.HoldID
+	return c.HoldID
 }
 
 type ConfirmHoldResponse struct {
@@ -44,23 +44,23 @@ type ConfirmHoldResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ConfirmHoldResponse) GetContentType() string {
-	if o == nil {
+func (c *ConfirmHoldResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *ConfirmHoldResponse) GetStatusCode() int {
-	if o == nil {
+func (c *ConfirmHoldResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *ConfirmHoldResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *ConfirmHoldResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

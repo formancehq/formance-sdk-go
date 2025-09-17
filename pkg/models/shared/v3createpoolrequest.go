@@ -7,16 +7,16 @@ type V3CreatePoolRequest struct {
 	Name       string   `json:"name"`
 }
 
-func (o *V3CreatePoolRequest) GetAccountIDs() []string {
-	if o == nil {
+func (v *V3CreatePoolRequest) GetAccountIDs() []string {
+	if v == nil {
 		return []string{}
 	}
-	return o.AccountIDs
+	return v.AccountIDs
 }
 
-func (o *V3CreatePoolRequest) GetName() string {
-	if o == nil {
+func (v *V3CreatePoolRequest) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }

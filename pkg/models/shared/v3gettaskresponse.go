@@ -6,9 +6,9 @@ type V3GetTaskResponse struct {
 	Data V3Task `json:"data"`
 }
 
-func (o *V3GetTaskResponse) GetData() V3Task {
-	if o == nil {
+func (v *V3GetTaskResponse) GetData() V3Task {
+	if v == nil {
 		return V3Task{}
 	}
-	return o.Data
+	return v.Data
 }

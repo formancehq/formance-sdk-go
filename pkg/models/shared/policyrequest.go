@@ -9,30 +9,30 @@ type PolicyRequest struct {
 	PaymentsPoolID string         `json:"paymentsPoolID"`
 }
 
-func (o *PolicyRequest) GetLedgerName() string {
-	if o == nil {
+func (p *PolicyRequest) GetLedgerName() string {
+	if p == nil {
 		return ""
 	}
-	return o.LedgerName
+	return p.LedgerName
 }
 
-func (o *PolicyRequest) GetLedgerQuery() map[string]any {
-	if o == nil {
+func (p *PolicyRequest) GetLedgerQuery() map[string]any {
+	if p == nil {
 		return map[string]any{}
 	}
-	return o.LedgerQuery
+	return p.LedgerQuery
 }
 
-func (o *PolicyRequest) GetName() string {
-	if o == nil {
+func (p *PolicyRequest) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }
 
-func (o *PolicyRequest) GetPaymentsPoolID() string {
-	if o == nil {
+func (p *PolicyRequest) GetPaymentsPoolID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentsPoolID
+	return p.PaymentsPoolID
 }

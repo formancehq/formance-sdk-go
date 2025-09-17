@@ -22,7 +22,7 @@ func (o OrchestrationWallet) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OrchestrationWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"createdAt", "id", "ledger", "metadata", "name"}); err != nil {
 		return err
 	}
 	return nil

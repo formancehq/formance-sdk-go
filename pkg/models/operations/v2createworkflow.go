@@ -18,30 +18,30 @@ type V2CreateWorkflowResponse struct {
 	V2CreateWorkflowResponse *shared.V2CreateWorkflowResponse
 }
 
-func (o *V2CreateWorkflowResponse) GetContentType() string {
-	if o == nil {
+func (v *V2CreateWorkflowResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2CreateWorkflowResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2CreateWorkflowResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2CreateWorkflowResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2CreateWorkflowResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2CreateWorkflowResponse) GetV2CreateWorkflowResponse() *shared.V2CreateWorkflowResponse {
-	if o == nil {
+func (v *V2CreateWorkflowResponse) GetV2CreateWorkflowResponse() *shared.V2CreateWorkflowResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2CreateWorkflowResponse
+	return v.V2CreateWorkflowResponse
 }

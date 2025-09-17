@@ -6,9 +6,9 @@ type V2GetTransactionResponse struct {
 	Data V2Transaction `json:"data"`
 }
 
-func (o *V2GetTransactionResponse) GetData() V2Transaction {
-	if o == nil {
+func (v *V2GetTransactionResponse) GetData() V2Transaction {
+	if v == nil {
 		return V2Transaction{}
 	}
-	return o.Data
+	return v.Data
 }

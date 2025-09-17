@@ -20,50 +20,50 @@ func (v V3WiseConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3WiseConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"apiKey", "name", "webhookPublicKey"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3WiseConfig) GetAPIKey() string {
-	if o == nil {
+func (v *V3WiseConfig) GetAPIKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.APIKey
+	return v.APIKey
 }
 
-func (o *V3WiseConfig) GetName() string {
-	if o == nil {
+func (v *V3WiseConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3WiseConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3WiseConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3WiseConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3WiseConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3WiseConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3WiseConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }
 
-func (o *V3WiseConfig) GetWebhookPublicKey() string {
-	if o == nil {
+func (v *V3WiseConfig) GetWebhookPublicKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.WebhookPublicKey
+	return v.WebhookPublicKey
 }

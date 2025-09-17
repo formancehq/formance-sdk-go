@@ -20,24 +20,24 @@ func (v V3InitiatePaymentRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3InitiatePaymentRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3InitiatePaymentRequest) GetV3InitiatePaymentRequest() *shared.V3InitiatePaymentRequest {
-	if o == nil {
+func (v *V3InitiatePaymentRequest) GetV3InitiatePaymentRequest() *shared.V3InitiatePaymentRequest {
+	if v == nil {
 		return nil
 	}
-	return o.V3InitiatePaymentRequest
+	return v.V3InitiatePaymentRequest
 }
 
-func (o *V3InitiatePaymentRequest) GetNoValidation() *bool {
-	if o == nil {
+func (v *V3InitiatePaymentRequest) GetNoValidation() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.NoValidation
+	return v.NoValidation
 }
 
 type V3InitiatePaymentResponse struct {
@@ -51,30 +51,30 @@ type V3InitiatePaymentResponse struct {
 	V3InitiatePaymentResponse *shared.V3InitiatePaymentResponse
 }
 
-func (o *V3InitiatePaymentResponse) GetContentType() string {
-	if o == nil {
+func (v *V3InitiatePaymentResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3InitiatePaymentResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3InitiatePaymentResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3InitiatePaymentResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3InitiatePaymentResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3InitiatePaymentResponse) GetV3InitiatePaymentResponse() *shared.V3InitiatePaymentResponse {
-	if o == nil {
+func (v *V3InitiatePaymentResponse) GetV3InitiatePaymentResponse() *shared.V3InitiatePaymentResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3InitiatePaymentResponse
+	return v.V3InitiatePaymentResponse
 }

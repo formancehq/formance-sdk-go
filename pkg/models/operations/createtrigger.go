@@ -18,30 +18,30 @@ type CreateTriggerResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreateTriggerResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateTriggerResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateTriggerResponse) GetCreateTriggerResponse() *shared.CreateTriggerResponse {
-	if o == nil {
+func (c *CreateTriggerResponse) GetCreateTriggerResponse() *shared.CreateTriggerResponse {
+	if c == nil {
 		return nil
 	}
-	return o.CreateTriggerResponse
+	return c.CreateTriggerResponse
 }
 
-func (o *CreateTriggerResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateTriggerResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateTriggerResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateTriggerResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

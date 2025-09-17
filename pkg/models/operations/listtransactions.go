@@ -48,87 +48,87 @@ func (l ListTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListTransactionsRequest) GetAccount() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetAccount() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Account
+	return l.Account
 }
 
-func (o *ListTransactionsRequest) GetAfter() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetAfter() *string {
+	if l == nil {
 		return nil
 	}
-	return o.After
+	return l.After
 }
 
-func (o *ListTransactionsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListTransactionsRequest) GetDestination() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetDestination() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Destination
+	return l.Destination
 }
 
-func (o *ListTransactionsRequest) GetEndTime() *time.Time {
-	if o == nil {
+func (l *ListTransactionsRequest) GetEndTime() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.EndTime
+	return l.EndTime
 }
 
-func (o *ListTransactionsRequest) GetLedger() string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetLedger() string {
+	if l == nil {
 		return ""
 	}
-	return o.Ledger
+	return l.Ledger
 }
 
-func (o *ListTransactionsRequest) GetMetadata() map[string]any {
-	if o == nil {
+func (l *ListTransactionsRequest) GetMetadata() map[string]any {
+	if l == nil {
 		return nil
 	}
-	return o.Metadata
+	return l.Metadata
 }
 
-func (o *ListTransactionsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListTransactionsRequest) GetReference() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetReference() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Reference
+	return l.Reference
 }
 
-func (o *ListTransactionsRequest) GetSource() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetSource() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Source
+	return l.Source
 }
 
-func (o *ListTransactionsRequest) GetStartTime() *time.Time {
-	if o == nil {
+func (l *ListTransactionsRequest) GetStartTime() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.StartTime
+	return l.StartTime
 }
 
 type ListTransactionsResponse struct {
@@ -142,30 +142,30 @@ type ListTransactionsResponse struct {
 	TransactionsCursorResponse *shared.TransactionsCursorResponse
 }
 
-func (o *ListTransactionsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListTransactionsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListTransactionsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListTransactionsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListTransactionsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListTransactionsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }
 
-func (o *ListTransactionsResponse) GetTransactionsCursorResponse() *shared.TransactionsCursorResponse {
-	if o == nil {
+func (l *ListTransactionsResponse) GetTransactionsCursorResponse() *shared.TransactionsCursorResponse {
+	if l == nil {
 		return nil
 	}
-	return o.TransactionsCursorResponse
+	return l.TransactionsCursorResponse
 }

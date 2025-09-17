@@ -13,18 +13,18 @@ type V3AddBankAccountToPaymentServiceUserRequest struct {
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
 }
 
-func (o *V3AddBankAccountToPaymentServiceUserRequest) GetBankAccountID() string {
-	if o == nil {
+func (v *V3AddBankAccountToPaymentServiceUserRequest) GetBankAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return v.BankAccountID
 }
 
-func (o *V3AddBankAccountToPaymentServiceUserRequest) GetPaymentServiceUserID() string {
-	if o == nil {
+func (v *V3AddBankAccountToPaymentServiceUserRequest) GetPaymentServiceUserID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentServiceUserID
+	return v.PaymentServiceUserID
 }
 
 type V3AddBankAccountToPaymentServiceUserResponse struct {
@@ -36,23 +36,23 @@ type V3AddBankAccountToPaymentServiceUserResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V3AddBankAccountToPaymentServiceUserResponse) GetContentType() string {
-	if o == nil {
+func (v *V3AddBankAccountToPaymentServiceUserResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3AddBankAccountToPaymentServiceUserResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3AddBankAccountToPaymentServiceUserResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3AddBankAccountToPaymentServiceUserResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3AddBankAccountToPaymentServiceUserResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

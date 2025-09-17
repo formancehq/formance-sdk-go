@@ -6,9 +6,9 @@ type ListTriggersResponse struct {
 	Data []Trigger `json:"data"`
 }
 
-func (o *ListTriggersResponse) GetData() []Trigger {
-	if o == nil {
+func (l *ListTriggersResponse) GetData() []Trigger {
+	if l == nil {
 		return []Trigger{}
 	}
-	return o.Data
+	return l.Data
 }

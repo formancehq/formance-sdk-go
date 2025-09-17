@@ -8,23 +8,23 @@ type Pool struct {
 	Name     string   `json:"name"`
 }
 
-func (o *Pool) GetAccounts() []string {
-	if o == nil {
+func (p *Pool) GetAccounts() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.Accounts
+	return p.Accounts
 }
 
-func (o *Pool) GetID() string {
-	if o == nil {
+func (p *Pool) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *Pool) GetName() string {
-	if o == nil {
+func (p *Pool) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }

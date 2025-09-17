@@ -12,11 +12,11 @@ type ListTriggersRequest struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-func (o *ListTriggersRequest) GetName() *string {
-	if o == nil {
+func (l *ListTriggersRequest) GetName() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Name
+	return l.Name
 }
 
 type ListTriggersResponse struct {
@@ -30,30 +30,30 @@ type ListTriggersResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListTriggersResponse) GetContentType() string {
-	if o == nil {
+func (l *ListTriggersResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListTriggersResponse) GetListTriggersResponse() *shared.ListTriggersResponse {
-	if o == nil {
+func (l *ListTriggersResponse) GetListTriggersResponse() *shared.ListTriggersResponse {
+	if l == nil {
 		return nil
 	}
-	return o.ListTriggersResponse
+	return l.ListTriggersResponse
 }
 
-func (o *ListTriggersResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListTriggersResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListTriggersResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListTriggersResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

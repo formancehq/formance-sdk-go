@@ -18,18 +18,18 @@ type GetAccountRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *GetAccountRequest) GetAddress() string {
-	if o == nil {
+func (g *GetAccountRequest) GetAddress() string {
+	if g == nil {
 		return ""
 	}
-	return o.Address
+	return g.Address
 }
 
-func (o *GetAccountRequest) GetLedger() string {
-	if o == nil {
+func (g *GetAccountRequest) GetLedger() string {
+	if g == nil {
 		return ""
 	}
-	return o.Ledger
+	return g.Ledger
 }
 
 type GetAccountResponse struct {
@@ -43,30 +43,30 @@ type GetAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *GetAccountResponse) GetAccountResponse() *shared.AccountResponse {
-	if o == nil {
+func (g *GetAccountResponse) GetAccountResponse() *shared.AccountResponse {
+	if g == nil {
 		return nil
 	}
-	return o.AccountResponse
+	return g.AccountResponse
 }
 
-func (o *GetAccountResponse) GetContentType() string {
-	if o == nil {
+func (g *GetAccountResponse) GetContentType() string {
+	if g == nil {
 		return ""
 	}
-	return o.ContentType
+	return g.ContentType
 }
 
-func (o *GetAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (g *GetAccountResponse) GetStatusCode() int {
+	if g == nil {
 		return 0
 	}
-	return o.StatusCode
+	return g.StatusCode
 }
 
-func (o *GetAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (g *GetAccountResponse) GetRawResponse() *http.Response {
+	if g == nil {
 		return nil
 	}
-	return o.RawResponse
+	return g.RawResponse
 }

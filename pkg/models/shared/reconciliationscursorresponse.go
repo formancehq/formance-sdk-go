@@ -10,39 +10,39 @@ type ReconciliationsCursorResponseCursor struct {
 	Previous *string          `json:"previous,omitempty"`
 }
 
-func (o *ReconciliationsCursorResponseCursor) GetData() []Reconciliation {
-	if o == nil {
+func (r *ReconciliationsCursorResponseCursor) GetData() []Reconciliation {
+	if r == nil {
 		return []Reconciliation{}
 	}
-	return o.Data
+	return r.Data
 }
 
-func (o *ReconciliationsCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (r *ReconciliationsCursorResponseCursor) GetHasMore() bool {
+	if r == nil {
 		return false
 	}
-	return o.HasMore
+	return r.HasMore
 }
 
-func (o *ReconciliationsCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (r *ReconciliationsCursorResponseCursor) GetNext() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Next
+	return r.Next
 }
 
-func (o *ReconciliationsCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (r *ReconciliationsCursorResponseCursor) GetPageSize() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.PageSize
+	return r.PageSize
 }
 
-func (o *ReconciliationsCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (r *ReconciliationsCursorResponseCursor) GetPrevious() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Previous
+	return r.Previous
 }
 
 // ReconciliationsCursorResponse - OK
@@ -50,9 +50,9 @@ type ReconciliationsCursorResponse struct {
 	Cursor ReconciliationsCursorResponseCursor `json:"cursor"`
 }
 
-func (o *ReconciliationsCursorResponse) GetCursor() ReconciliationsCursorResponseCursor {
-	if o == nil {
+func (r *ReconciliationsCursorResponse) GetCursor() ReconciliationsCursorResponseCursor {
+	if r == nil {
 		return ReconciliationsCursorResponseCursor{}
 	}
-	return o.Cursor
+	return r.Cursor
 }

@@ -7,9 +7,9 @@ type PolicyResponse struct {
 	Data Policy `json:"data"`
 }
 
-func (o *PolicyResponse) GetData() Policy {
-	if o == nil {
+func (p *PolicyResponse) GetData() Policy {
+	if p == nil {
 		return Policy{}
 	}
-	return o.Data
+	return p.Data
 }

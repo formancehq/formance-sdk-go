@@ -13,18 +13,18 @@ type CreateWalletRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 }
 
-func (o *CreateWalletRequest) GetCreateWalletRequest() *shared.CreateWalletRequest {
-	if o == nil {
+func (c *CreateWalletRequest) GetCreateWalletRequest() *shared.CreateWalletRequest {
+	if c == nil {
 		return nil
 	}
-	return o.CreateWalletRequest
+	return c.CreateWalletRequest
 }
 
-func (o *CreateWalletRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (c *CreateWalletRequest) GetIdempotencyKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return c.IdempotencyKey
 }
 
 type CreateWalletResponse struct {
@@ -38,30 +38,30 @@ type CreateWalletResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreateWalletResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateWalletResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateWalletResponse) GetCreateWalletResponse() *shared.CreateWalletResponse {
-	if o == nil {
+func (c *CreateWalletResponse) GetCreateWalletResponse() *shared.CreateWalletResponse {
+	if c == nil {
 		return nil
 	}
-	return o.CreateWalletResponse
+	return c.CreateWalletResponse
 }
 
-func (o *CreateWalletResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateWalletResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateWalletResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateWalletResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

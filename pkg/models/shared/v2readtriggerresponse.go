@@ -6,9 +6,9 @@ type V2ReadTriggerResponse struct {
 	Data V2Trigger `json:"data"`
 }
 
-func (o *V2ReadTriggerResponse) GetData() V2Trigger {
-	if o == nil {
+func (v *V2ReadTriggerResponse) GetData() V2Trigger {
+	if v == nil {
 		return V2Trigger{}
 	}
-	return o.Data
+	return v.Data
 }

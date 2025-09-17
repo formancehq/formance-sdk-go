@@ -2,13 +2,28 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type StageWaitEvent struct {
 	Event string `json:"event"`
 }
 
-func (o *StageWaitEvent) GetEvent() string {
-	if o == nil {
+func (s StageWaitEvent) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *StageWaitEvent) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"event"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *StageWaitEvent) GetEvent() string {
+	if s == nil {
 		return ""
 	}
-	return o.Event
+	return s.Event
 }

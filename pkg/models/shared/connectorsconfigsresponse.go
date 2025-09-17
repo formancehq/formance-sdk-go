@@ -8,25 +8,25 @@ type ConnectorsConfigsResponseData struct {
 	Required     bool    `json:"required"`
 }
 
-func (o *ConnectorsConfigsResponseData) GetDataType() string {
-	if o == nil {
+func (c *ConnectorsConfigsResponseData) GetDataType() string {
+	if c == nil {
 		return ""
 	}
-	return o.DataType
+	return c.DataType
 }
 
-func (o *ConnectorsConfigsResponseData) GetDefaultValue() *string {
-	if o == nil {
+func (c *ConnectorsConfigsResponseData) GetDefaultValue() *string {
+	if c == nil {
 		return nil
 	}
-	return o.DefaultValue
+	return c.DefaultValue
 }
 
-func (o *ConnectorsConfigsResponseData) GetRequired() bool {
-	if o == nil {
+func (c *ConnectorsConfigsResponseData) GetRequired() bool {
+	if c == nil {
 		return false
 	}
-	return o.Required
+	return c.Required
 }
 
 // ConnectorsConfigsResponse - OK
@@ -34,9 +34,9 @@ type ConnectorsConfigsResponse struct {
 	Data map[string]map[string]ConnectorsConfigsResponseData `json:"data"`
 }
 
-func (o *ConnectorsConfigsResponse) GetData() map[string]map[string]ConnectorsConfigsResponseData {
-	if o == nil {
+func (c *ConnectorsConfigsResponse) GetData() map[string]map[string]ConnectorsConfigsResponseData {
+	if c == nil {
 		return map[string]map[string]ConnectorsConfigsResponseData{}
 	}
-	return o.Data
+	return c.Data
 }

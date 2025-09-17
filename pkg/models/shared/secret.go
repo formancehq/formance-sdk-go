@@ -10,37 +10,37 @@ type Secret struct {
 	Name       string         `json:"name"`
 }
 
-func (o *Secret) GetClear() string {
-	if o == nil {
+func (s *Secret) GetClear() string {
+	if s == nil {
 		return ""
 	}
-	return o.Clear
+	return s.Clear
 }
 
-func (o *Secret) GetID() string {
-	if o == nil {
+func (s *Secret) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *Secret) GetLastDigits() string {
-	if o == nil {
+func (s *Secret) GetLastDigits() string {
+	if s == nil {
 		return ""
 	}
-	return o.LastDigits
+	return s.LastDigits
 }
 
-func (o *Secret) GetMetadata() map[string]any {
-	if o == nil {
+func (s *Secret) GetMetadata() map[string]any {
+	if s == nil {
 		return nil
 	}
-	return o.Metadata
+	return s.Metadata
 }
 
-func (o *Secret) GetName() string {
-	if o == nil {
+func (s *Secret) GetName() string {
+	if s == nil {
 		return ""
 	}
-	return o.Name
+	return s.Name
 }

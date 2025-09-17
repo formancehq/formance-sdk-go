@@ -6,9 +6,9 @@ type V2StatsResponse struct {
 	Data V2Stats `json:"data"`
 }
 
-func (o *V2StatsResponse) GetData() V2Stats {
-	if o == nil {
+func (v *V2StatsResponse) GetData() V2Stats {
+	if v == nil {
 		return V2Stats{}
 	}
-	return o.Data
+	return v.Data
 }

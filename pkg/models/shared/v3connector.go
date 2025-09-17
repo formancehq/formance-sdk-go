@@ -25,57 +25,57 @@ func (v V3Connector) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Connector) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"config", "createdAt", "id", "name", "provider", "reference", "scheduledForDeletion"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3Connector) GetConfig() V3ConnectorConfig {
-	if o == nil {
+func (v *V3Connector) GetConfig() V3ConnectorConfig {
+	if v == nil {
 		return V3ConnectorConfig{}
 	}
-	return o.Config
+	return v.Config
 }
 
-func (o *V3Connector) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3Connector) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3Connector) GetID() string {
-	if o == nil {
+func (v *V3Connector) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ID
+	return v.ID
 }
 
-func (o *V3Connector) GetName() string {
-	if o == nil {
+func (v *V3Connector) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3Connector) GetProvider() string {
-	if o == nil {
+func (v *V3Connector) GetProvider() string {
+	if v == nil {
 		return ""
 	}
-	return o.Provider
+	return v.Provider
 }
 
-func (o *V3Connector) GetReference() string {
-	if o == nil {
+func (v *V3Connector) GetReference() string {
+	if v == nil {
 		return ""
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V3Connector) GetScheduledForDeletion() bool {
-	if o == nil {
+func (v *V3Connector) GetScheduledForDeletion() bool {
+	if v == nil {
 		return false
 	}
-	return o.ScheduledForDeletion
+	return v.ScheduledForDeletion
 }

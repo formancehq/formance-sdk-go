@@ -31,45 +31,45 @@ func (p PaymentslistAccountsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentslistAccountsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *PaymentslistAccountsRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (p *PaymentslistAccountsRequest) GetRequestBody() map[string]any {
+	if p == nil {
 		return nil
 	}
-	return o.RequestBody
+	return p.RequestBody
 }
 
-func (o *PaymentslistAccountsRequest) GetCursor() *string {
-	if o == nil {
+func (p *PaymentslistAccountsRequest) GetCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Cursor
+	return p.Cursor
 }
 
-func (o *PaymentslistAccountsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (p *PaymentslistAccountsRequest) GetPageSize() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.PageSize
+	return p.PageSize
 }
 
-func (o *PaymentslistAccountsRequest) GetQuery() *string {
-	if o == nil {
+func (p *PaymentslistAccountsRequest) GetQuery() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Query
+	return p.Query
 }
 
-func (o *PaymentslistAccountsRequest) GetSort() []string {
-	if o == nil {
+func (p *PaymentslistAccountsRequest) GetSort() []string {
+	if p == nil {
 		return nil
 	}
-	return o.Sort
+	return p.Sort
 }
 
 type PaymentslistAccountsResponse struct {
@@ -83,30 +83,30 @@ type PaymentslistAccountsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *PaymentslistAccountsResponse) GetAccountsCursor() *shared.AccountsCursor {
-	if o == nil {
+func (p *PaymentslistAccountsResponse) GetAccountsCursor() *shared.AccountsCursor {
+	if p == nil {
 		return nil
 	}
-	return o.AccountsCursor
+	return p.AccountsCursor
 }
 
-func (o *PaymentslistAccountsResponse) GetContentType() string {
-	if o == nil {
+func (p *PaymentslistAccountsResponse) GetContentType() string {
+	if p == nil {
 		return ""
 	}
-	return o.ContentType
+	return p.ContentType
 }
 
-func (o *PaymentslistAccountsResponse) GetStatusCode() int {
-	if o == nil {
+func (p *PaymentslistAccountsResponse) GetStatusCode() int {
+	if p == nil {
 		return 0
 	}
-	return o.StatusCode
+	return p.StatusCode
 }
 
-func (o *PaymentslistAccountsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (p *PaymentslistAccountsResponse) GetRawResponse() *http.Response {
+	if p == nil {
 		return nil
 	}
-	return o.RawResponse
+	return p.RawResponse
 }

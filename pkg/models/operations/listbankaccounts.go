@@ -27,31 +27,31 @@ func (l ListBankAccountsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListBankAccountsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListBankAccountsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListBankAccountsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListBankAccountsRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListBankAccountsRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
-func (o *ListBankAccountsRequest) GetSort() []string {
-	if o == nil {
+func (l *ListBankAccountsRequest) GetSort() []string {
+	if l == nil {
 		return nil
 	}
-	return o.Sort
+	return l.Sort
 }
 
 type ListBankAccountsResponse struct {
@@ -65,30 +65,30 @@ type ListBankAccountsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ListBankAccountsResponse) GetBankAccountsCursor() *shared.BankAccountsCursor {
-	if o == nil {
+func (l *ListBankAccountsResponse) GetBankAccountsCursor() *shared.BankAccountsCursor {
+	if l == nil {
 		return nil
 	}
-	return o.BankAccountsCursor
+	return l.BankAccountsCursor
 }
 
-func (o *ListBankAccountsResponse) GetContentType() string {
-	if o == nil {
+func (l *ListBankAccountsResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListBankAccountsResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListBankAccountsResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListBankAccountsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListBankAccountsResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }

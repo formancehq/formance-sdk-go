@@ -12,11 +12,11 @@ type V2ReadTriggerRequest struct {
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`
 }
 
-func (o *V2ReadTriggerRequest) GetTriggerID() string {
-	if o == nil {
+func (v *V2ReadTriggerRequest) GetTriggerID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TriggerID
+	return v.TriggerID
 }
 
 type V2ReadTriggerResponse struct {
@@ -30,30 +30,30 @@ type V2ReadTriggerResponse struct {
 	V2ReadTriggerResponse *shared.V2ReadTriggerResponse
 }
 
-func (o *V2ReadTriggerResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ReadTriggerResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ReadTriggerResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ReadTriggerResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ReadTriggerResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ReadTriggerResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2ReadTriggerResponse) GetV2ReadTriggerResponse() *shared.V2ReadTriggerResponse {
-	if o == nil {
+func (v *V2ReadTriggerResponse) GetV2ReadTriggerResponse() *shared.V2ReadTriggerResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2ReadTriggerResponse
+	return v.V2ReadTriggerResponse
 }

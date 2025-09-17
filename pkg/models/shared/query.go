@@ -17,65 +17,65 @@ type Query struct {
 	Terms    []string  `json:"terms,omitempty"`
 }
 
-func (o *Query) GetAfter() []string {
-	if o == nil {
+func (q *Query) GetAfter() []string {
+	if q == nil {
 		return nil
 	}
-	return o.After
+	return q.After
 }
 
-func (o *Query) GetCursor() *string {
-	if o == nil {
+func (q *Query) GetCursor() *string {
+	if q == nil {
 		return nil
 	}
-	return o.Cursor
+	return q.Cursor
 }
 
-func (o *Query) GetLedgers() []string {
-	if o == nil {
+func (q *Query) GetLedgers() []string {
+	if q == nil {
 		return nil
 	}
-	return o.Ledgers
+	return q.Ledgers
 }
 
-func (o *Query) GetPageSize() *int64 {
-	if o == nil {
+func (q *Query) GetPageSize() *int64 {
+	if q == nil {
 		return nil
 	}
-	return o.PageSize
+	return q.PageSize
 }
 
-func (o *Query) GetPolicy() *string {
-	if o == nil {
+func (q *Query) GetPolicy() *string {
+	if q == nil {
 		return nil
 	}
-	return o.Policy
+	return q.Policy
 }
 
-func (o *Query) GetRaw() *QueryRaw {
-	if o == nil {
+func (q *Query) GetRaw() *QueryRaw {
+	if q == nil {
 		return nil
 	}
-	return o.Raw
+	return q.Raw
 }
 
-func (o *Query) GetSort() *string {
-	if o == nil {
+func (q *Query) GetSort() *string {
+	if q == nil {
 		return nil
 	}
-	return o.Sort
+	return q.Sort
 }
 
-func (o *Query) GetTarget() *string {
-	if o == nil {
+func (q *Query) GetTarget() *string {
+	if q == nil {
 		return nil
 	}
-	return o.Target
+	return q.Target
 }
 
-func (o *Query) GetTerms() []string {
-	if o == nil {
+func (q *Query) GetTerms() []string {
+	if q == nil {
 		return nil
 	}
-	return o.Terms
+	return q.Terms
 }

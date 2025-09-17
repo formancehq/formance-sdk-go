@@ -11,11 +11,11 @@ type V2ExportLogsRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2ExportLogsRequest) GetLedger() string {
-	if o == nil {
+func (v *V2ExportLogsRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2ExportLogsResponse struct {
@@ -27,23 +27,23 @@ type V2ExportLogsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2ExportLogsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ExportLogsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ExportLogsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ExportLogsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ExportLogsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ExportLogsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

@@ -13,18 +13,18 @@ type V2ImportLogsRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (o *V2ImportLogsRequest) GetV2ImportLogsRequest() any {
-	if o == nil {
+func (v *V2ImportLogsRequest) GetV2ImportLogsRequest() any {
+	if v == nil {
 		return nil
 	}
-	return o.V2ImportLogsRequest
+	return v.V2ImportLogsRequest
 }
 
-func (o *V2ImportLogsRequest) GetLedger() string {
-	if o == nil {
+func (v *V2ImportLogsRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
 type V2ImportLogsResponse struct {
@@ -36,23 +36,23 @@ type V2ImportLogsResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2ImportLogsResponse) GetContentType() string {
-	if o == nil {
+func (v *V2ImportLogsResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2ImportLogsResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2ImportLogsResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2ImportLogsResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2ImportLogsResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

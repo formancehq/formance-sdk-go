@@ -9,30 +9,30 @@ type V2Account struct {
 	Volumes          map[string]V2Volume `json:"volumes,omitempty"`
 }
 
-func (o *V2Account) GetAddress() string {
-	if o == nil {
+func (v *V2Account) GetAddress() string {
+	if v == nil {
 		return ""
 	}
-	return o.Address
+	return v.Address
 }
 
-func (o *V2Account) GetEffectiveVolumes() map[string]V2Volume {
-	if o == nil {
+func (v *V2Account) GetEffectiveVolumes() map[string]V2Volume {
+	if v == nil {
 		return nil
 	}
-	return o.EffectiveVolumes
+	return v.EffectiveVolumes
 }
 
-func (o *V2Account) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V2Account) GetMetadata() map[string]string {
+	if v == nil {
 		return map[string]string{}
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V2Account) GetVolumes() map[string]V2Volume {
-	if o == nil {
+func (v *V2Account) GetVolumes() map[string]V2Volume {
+	if v == nil {
 		return nil
 	}
-	return o.Volumes
+	return v.Volumes
 }

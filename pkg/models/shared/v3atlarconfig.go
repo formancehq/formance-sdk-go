@@ -21,57 +21,57 @@ func (v V3AtlarConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3AtlarConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accessKey", "baseUrl", "name", "secret"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3AtlarConfig) GetAccessKey() string {
-	if o == nil {
+func (v *V3AtlarConfig) GetAccessKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccessKey
+	return v.AccessKey
 }
 
-func (o *V3AtlarConfig) GetBaseURL() string {
-	if o == nil {
+func (v *V3AtlarConfig) GetBaseURL() string {
+	if v == nil {
 		return ""
 	}
-	return o.BaseURL
+	return v.BaseURL
 }
 
-func (o *V3AtlarConfig) GetName() string {
-	if o == nil {
+func (v *V3AtlarConfig) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
-func (o *V3AtlarConfig) GetPageSize() *int64 {
-	if o == nil {
+func (v *V3AtlarConfig) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V3AtlarConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (v *V3AtlarConfig) GetPollingPeriod() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return v.PollingPeriod
 }
 
-func (o *V3AtlarConfig) GetProvider() *string {
-	if o == nil {
+func (v *V3AtlarConfig) GetProvider() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Provider
+	return v.Provider
 }
 
-func (o *V3AtlarConfig) GetSecret() string {
-	if o == nil {
+func (v *V3AtlarConfig) GetSecret() string {
+	if v == nil {
 		return ""
 	}
-	return o.Secret
+	return v.Secret
 }

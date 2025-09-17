@@ -2,31 +2,46 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2BulkElementDeleteMetadataData struct {
 	Key        string       `json:"key"`
 	TargetID   V2TargetID   `json:"targetId"`
 	TargetType V2TargetType `json:"targetType"`
 }
 
-func (o *V2BulkElementDeleteMetadataData) GetKey() string {
-	if o == nil {
+func (v V2BulkElementDeleteMetadataData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2BulkElementDeleteMetadataData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"key", "targetId", "targetType"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2BulkElementDeleteMetadataData) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }
 
-func (o *V2BulkElementDeleteMetadataData) GetTargetID() V2TargetID {
-	if o == nil {
+func (v *V2BulkElementDeleteMetadataData) GetTargetID() V2TargetID {
+	if v == nil {
 		return V2TargetID{}
 	}
-	return o.TargetID
+	return v.TargetID
 }
 
-func (o *V2BulkElementDeleteMetadataData) GetTargetType() V2TargetType {
-	if o == nil {
+func (v *V2BulkElementDeleteMetadataData) GetTargetType() V2TargetType {
+	if v == nil {
 		return V2TargetType("")
 	}
-	return o.TargetType
+	return v.TargetType
 }
 
 type V2BulkElementDeleteMetadata struct {
@@ -35,23 +50,34 @@ type V2BulkElementDeleteMetadata struct {
 	Ik     *string                          `json:"ik,omitempty"`
 }
 
-func (o *V2BulkElementDeleteMetadata) GetAction() string {
-	if o == nil {
+func (v V2BulkElementDeleteMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2BulkElementDeleteMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"action"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2BulkElementDeleteMetadata) GetAction() string {
+	if v == nil {
 		return ""
 	}
-	return o.Action
+	return v.Action
 }
 
-func (o *V2BulkElementDeleteMetadata) GetData() *V2BulkElementDeleteMetadataData {
-	if o == nil {
+func (v *V2BulkElementDeleteMetadata) GetData() *V2BulkElementDeleteMetadataData {
+	if v == nil {
 		return nil
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2BulkElementDeleteMetadata) GetIk() *string {
-	if o == nil {
+func (v *V2BulkElementDeleteMetadata) GetIk() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Ik
+	return v.Ik
 }

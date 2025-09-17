@@ -25,71 +25,71 @@ func (b BankingCircleConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BankingCircleConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"authorizationEndpoint", "endpoint", "name", "password", "userCertificate", "userCertificateKey", "username"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *BankingCircleConfig) GetAuthorizationEndpoint() string {
-	if o == nil {
+func (b *BankingCircleConfig) GetAuthorizationEndpoint() string {
+	if b == nil {
 		return ""
 	}
-	return o.AuthorizationEndpoint
+	return b.AuthorizationEndpoint
 }
 
-func (o *BankingCircleConfig) GetEndpoint() string {
-	if o == nil {
+func (b *BankingCircleConfig) GetEndpoint() string {
+	if b == nil {
 		return ""
 	}
-	return o.Endpoint
+	return b.Endpoint
 }
 
-func (o *BankingCircleConfig) GetName() string {
-	if o == nil {
+func (b *BankingCircleConfig) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return o.Name
+	return b.Name
 }
 
-func (o *BankingCircleConfig) GetPassword() string {
-	if o == nil {
+func (b *BankingCircleConfig) GetPassword() string {
+	if b == nil {
 		return ""
 	}
-	return o.Password
+	return b.Password
 }
 
-func (o *BankingCircleConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (b *BankingCircleConfig) GetPollingPeriod() *string {
+	if b == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return b.PollingPeriod
 }
 
-func (o *BankingCircleConfig) GetProvider() *string {
-	if o == nil {
+func (b *BankingCircleConfig) GetProvider() *string {
+	if b == nil {
 		return nil
 	}
-	return o.Provider
+	return b.Provider
 }
 
-func (o *BankingCircleConfig) GetUserCertificate() string {
-	if o == nil {
+func (b *BankingCircleConfig) GetUserCertificate() string {
+	if b == nil {
 		return ""
 	}
-	return o.UserCertificate
+	return b.UserCertificate
 }
 
-func (o *BankingCircleConfig) GetUserCertificateKey() string {
-	if o == nil {
+func (b *BankingCircleConfig) GetUserCertificateKey() string {
+	if b == nil {
 		return ""
 	}
-	return o.UserCertificateKey
+	return b.UserCertificateKey
 }
 
-func (o *BankingCircleConfig) GetUsername() string {
-	if o == nil {
+func (b *BankingCircleConfig) GetUsername() string {
+	if b == nil {
 		return ""
 	}
-	return o.Username
+	return b.Username
 }

@@ -23,31 +23,31 @@ func (r RevertTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (r *RevertTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"ledger", "txid"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *RevertTransactionRequest) GetDisableChecks() *bool {
-	if o == nil {
+func (r *RevertTransactionRequest) GetDisableChecks() *bool {
+	if r == nil {
 		return nil
 	}
-	return o.DisableChecks
+	return r.DisableChecks
 }
 
-func (o *RevertTransactionRequest) GetLedger() string {
-	if o == nil {
+func (r *RevertTransactionRequest) GetLedger() string {
+	if r == nil {
 		return ""
 	}
-	return o.Ledger
+	return r.Ledger
 }
 
-func (o *RevertTransactionRequest) GetTxid() *big.Int {
-	if o == nil {
+func (r *RevertTransactionRequest) GetTxid() *big.Int {
+	if r == nil {
 		return big.NewInt(0)
 	}
-	return o.Txid
+	return r.Txid
 }
 
 type RevertTransactionResponse struct {
@@ -61,30 +61,30 @@ type RevertTransactionResponse struct {
 	TransactionResponse *shared.TransactionResponse
 }
 
-func (o *RevertTransactionResponse) GetContentType() string {
-	if o == nil {
+func (r *RevertTransactionResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *RevertTransactionResponse) GetStatusCode() int {
-	if o == nil {
+func (r *RevertTransactionResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *RevertTransactionResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *RevertTransactionResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }
 
-func (o *RevertTransactionResponse) GetTransactionResponse() *shared.TransactionResponse {
-	if o == nil {
+func (r *RevertTransactionResponse) GetTransactionResponse() *shared.TransactionResponse {
+	if r == nil {
 		return nil
 	}
-	return o.TransactionResponse
+	return r.TransactionResponse
 }

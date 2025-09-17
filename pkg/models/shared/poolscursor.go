@@ -10,39 +10,39 @@ type PoolsCursorCursor struct {
 	Previous *string `json:"previous,omitempty"`
 }
 
-func (o *PoolsCursorCursor) GetData() []Pool {
-	if o == nil {
+func (p *PoolsCursorCursor) GetData() []Pool {
+	if p == nil {
 		return []Pool{}
 	}
-	return o.Data
+	return p.Data
 }
 
-func (o *PoolsCursorCursor) GetHasMore() bool {
-	if o == nil {
+func (p *PoolsCursorCursor) GetHasMore() bool {
+	if p == nil {
 		return false
 	}
-	return o.HasMore
+	return p.HasMore
 }
 
-func (o *PoolsCursorCursor) GetNext() *string {
-	if o == nil {
+func (p *PoolsCursorCursor) GetNext() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Next
+	return p.Next
 }
 
-func (o *PoolsCursorCursor) GetPageSize() int64 {
-	if o == nil {
+func (p *PoolsCursorCursor) GetPageSize() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.PageSize
+	return p.PageSize
 }
 
-func (o *PoolsCursorCursor) GetPrevious() *string {
-	if o == nil {
+func (p *PoolsCursorCursor) GetPrevious() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Previous
+	return p.Previous
 }
 
 // PoolsCursor - OK
@@ -50,9 +50,9 @@ type PoolsCursor struct {
 	Cursor PoolsCursorCursor `json:"cursor"`
 }
 
-func (o *PoolsCursor) GetCursor() PoolsCursorCursor {
-	if o == nil {
+func (p *PoolsCursor) GetCursor() PoolsCursorCursor {
+	if p == nil {
 		return PoolsCursorCursor{}
 	}
-	return o.Cursor
+	return p.Cursor
 }

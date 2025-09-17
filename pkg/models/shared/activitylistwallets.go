@@ -6,9 +6,9 @@ type ActivityListWallets struct {
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *ActivityListWallets) GetName() *string {
-	if o == nil {
+func (a *ActivityListWallets) GetName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Name
+	return a.Name
 }

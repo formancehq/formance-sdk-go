@@ -10,11 +10,11 @@ type V2SendEventRequestBody struct {
 	Name string `json:"name"`
 }
 
-func (o *V2SendEventRequestBody) GetName() string {
-	if o == nil {
+func (v *V2SendEventRequestBody) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return o.Name
+	return v.Name
 }
 
 type V2SendEventRequest struct {
@@ -23,18 +23,18 @@ type V2SendEventRequest struct {
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`
 }
 
-func (o *V2SendEventRequest) GetRequestBody() *V2SendEventRequestBody {
-	if o == nil {
+func (v *V2SendEventRequest) GetRequestBody() *V2SendEventRequestBody {
+	if v == nil {
 		return nil
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2SendEventRequest) GetInstanceID() string {
-	if o == nil {
+func (v *V2SendEventRequest) GetInstanceID() string {
+	if v == nil {
 		return ""
 	}
-	return o.InstanceID
+	return v.InstanceID
 }
 
 type V2SendEventResponse struct {
@@ -46,23 +46,23 @@ type V2SendEventResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *V2SendEventResponse) GetContentType() string {
-	if o == nil {
+func (v *V2SendEventResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2SendEventResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2SendEventResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2SendEventResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2SendEventResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }

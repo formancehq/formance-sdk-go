@@ -27,31 +27,31 @@ func (l ListConnectorTasksRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListConnectorTasksRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"connector"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListConnectorTasksRequest) GetConnector() shared.Connector {
-	if o == nil {
+func (l *ListConnectorTasksRequest) GetConnector() shared.Connector {
+	if l == nil {
 		return shared.Connector("")
 	}
-	return o.Connector
+	return l.Connector
 }
 
-func (o *ListConnectorTasksRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListConnectorTasksRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListConnectorTasksRequest) GetPageSize() *int64 {
-	if o == nil {
+func (l *ListConnectorTasksRequest) GetPageSize() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.PageSize
+	return l.PageSize
 }
 
 type ListConnectorTasksResponse struct {
@@ -65,30 +65,30 @@ type ListConnectorTasksResponse struct {
 	TasksCursor *shared.TasksCursor
 }
 
-func (o *ListConnectorTasksResponse) GetContentType() string {
-	if o == nil {
+func (l *ListConnectorTasksResponse) GetContentType() string {
+	if l == nil {
 		return ""
 	}
-	return o.ContentType
+	return l.ContentType
 }
 
-func (o *ListConnectorTasksResponse) GetStatusCode() int {
-	if o == nil {
+func (l *ListConnectorTasksResponse) GetStatusCode() int {
+	if l == nil {
 		return 0
 	}
-	return o.StatusCode
+	return l.StatusCode
 }
 
-func (o *ListConnectorTasksResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (l *ListConnectorTasksResponse) GetRawResponse() *http.Response {
+	if l == nil {
 		return nil
 	}
-	return o.RawResponse
+	return l.RawResponse
 }
 
-func (o *ListConnectorTasksResponse) GetTasksCursor() *shared.TasksCursor {
-	if o == nil {
+func (l *ListConnectorTasksResponse) GetTasksCursor() *shared.TasksCursor {
+	if l == nil {
 		return nil
 	}
-	return o.TasksCursor
+	return l.TasksCursor
 }

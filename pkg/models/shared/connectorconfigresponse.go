@@ -7,53 +7,53 @@ type ConnectorConfigResponse struct {
 	Data ConnectorConfig `json:"data"`
 }
 
-func (o *ConnectorConfigResponse) GetData() ConnectorConfig {
-	if o == nil {
+func (c *ConnectorConfigResponse) GetData() ConnectorConfig {
+	if c == nil {
 		return ConnectorConfig{}
 	}
-	return o.Data
+	return c.Data
 }
 
-func (o *ConnectorConfigResponse) GetDataAdyen() *AdyenConfig {
-	return o.GetData().AdyenConfig
+func (c *ConnectorConfigResponse) GetDataAdyen() *AdyenConfig {
+	return c.GetData().AdyenConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataAtlar() *AtlarConfig {
-	return o.GetData().AtlarConfig
+func (c *ConnectorConfigResponse) GetDataAtlar() *AtlarConfig {
+	return c.GetData().AtlarConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataBankingcircle() *BankingCircleConfig {
-	return o.GetData().BankingCircleConfig
+func (c *ConnectorConfigResponse) GetDataBankingcircle() *BankingCircleConfig {
+	return c.GetData().BankingCircleConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataCurrencycloud() *CurrencyCloudConfig {
-	return o.GetData().CurrencyCloudConfig
+func (c *ConnectorConfigResponse) GetDataCurrencycloud() *CurrencyCloudConfig {
+	return c.GetData().CurrencyCloudConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataDummypay() *DummyPayConfig {
-	return o.GetData().DummyPayConfig
+func (c *ConnectorConfigResponse) GetDataDummypay() *DummyPayConfig {
+	return c.GetData().DummyPayConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataGeneric() *GenericConfig {
-	return o.GetData().GenericConfig
+func (c *ConnectorConfigResponse) GetDataGeneric() *GenericConfig {
+	return c.GetData().GenericConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataMangopay() *MangoPayConfig {
-	return o.GetData().MangoPayConfig
+func (c *ConnectorConfigResponse) GetDataMangopay() *MangoPayConfig {
+	return c.GetData().MangoPayConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataModulr() *ModulrConfig {
-	return o.GetData().ModulrConfig
+func (c *ConnectorConfigResponse) GetDataModulr() *ModulrConfig {
+	return c.GetData().ModulrConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataMoneycorp() *MoneycorpConfig {
-	return o.GetData().MoneycorpConfig
+func (c *ConnectorConfigResponse) GetDataMoneycorp() *MoneycorpConfig {
+	return c.GetData().MoneycorpConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataStripe() *StripeConfig {
-	return o.GetData().StripeConfig
+func (c *ConnectorConfigResponse) GetDataStripe() *StripeConfig {
+	return c.GetData().StripeConfig
 }
 
-func (o *ConnectorConfigResponse) GetDataWise() *WiseConfig {
-	return o.GetData().WiseConfig
+func (c *ConnectorConfigResponse) GetDataWise() *WiseConfig {
+	return c.GetData().WiseConfig
 }

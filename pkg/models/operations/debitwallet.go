@@ -14,25 +14,25 @@ type DebitWalletRequest struct {
 	ID             string  `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *DebitWalletRequest) GetDebitWalletRequest() *shared.DebitWalletRequest {
-	if o == nil {
+func (d *DebitWalletRequest) GetDebitWalletRequest() *shared.DebitWalletRequest {
+	if d == nil {
 		return nil
 	}
-	return o.DebitWalletRequest
+	return d.DebitWalletRequest
 }
 
-func (o *DebitWalletRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (d *DebitWalletRequest) GetIdempotencyKey() *string {
+	if d == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return d.IdempotencyKey
 }
 
-func (o *DebitWalletRequest) GetID() string {
-	if o == nil {
+func (d *DebitWalletRequest) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ID
+	return d.ID
 }
 
 type DebitWalletResponse struct {
@@ -46,30 +46,30 @@ type DebitWalletResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *DebitWalletResponse) GetContentType() string {
-	if o == nil {
+func (d *DebitWalletResponse) GetContentType() string {
+	if d == nil {
 		return ""
 	}
-	return o.ContentType
+	return d.ContentType
 }
 
-func (o *DebitWalletResponse) GetDebitWalletResponse() *shared.DebitWalletResponse {
-	if o == nil {
+func (d *DebitWalletResponse) GetDebitWalletResponse() *shared.DebitWalletResponse {
+	if d == nil {
 		return nil
 	}
-	return o.DebitWalletResponse
+	return d.DebitWalletResponse
 }
 
-func (o *DebitWalletResponse) GetStatusCode() int {
-	if o == nil {
+func (d *DebitWalletResponse) GetStatusCode() int {
+	if d == nil {
 		return 0
 	}
-	return o.StatusCode
+	return d.StatusCode
 }
 
-func (o *DebitWalletResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (d *DebitWalletResponse) GetRawResponse() *http.Response {
+	if d == nil {
 		return nil
 	}
-	return o.RawResponse
+	return d.RawResponse
 }

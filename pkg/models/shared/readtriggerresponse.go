@@ -6,9 +6,9 @@ type ReadTriggerResponse struct {
 	Data Trigger `json:"data"`
 }
 
-func (o *ReadTriggerResponse) GetData() Trigger {
-	if o == nil {
+func (r *ReadTriggerResponse) GetData() Trigger {
+	if r == nil {
 		return Trigger{}
 	}
-	return o.Data
+	return r.Data
 }

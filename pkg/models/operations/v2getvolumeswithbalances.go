@@ -35,66 +35,66 @@ func (v V2GetVolumesWithBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2GetVolumesWithBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetRequestBody() map[string]any {
+	if v == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return v.RequestBody
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetCursor() *string {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetCursor() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Cursor
+	return v.Cursor
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetEndTime() *time.Time {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetEndTime() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.EndTime
+	return v.EndTime
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetGroupBy() *int64 {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetGroupBy() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.GroupBy
+	return v.GroupBy
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetInsertionDate() *bool {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetInsertionDate() *bool {
+	if v == nil {
 		return nil
 	}
-	return o.InsertionDate
+	return v.InsertionDate
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetLedger() string {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetLedger() string {
+	if v == nil {
 		return ""
 	}
-	return o.Ledger
+	return v.Ledger
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetPageSize() *int64 {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetPageSize() *int64 {
+	if v == nil {
 		return nil
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2GetVolumesWithBalancesRequest) GetStartTime() *time.Time {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesRequest) GetStartTime() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return o.StartTime
+	return v.StartTime
 }
 
 type V2GetVolumesWithBalancesResponse struct {
@@ -108,30 +108,30 @@ type V2GetVolumesWithBalancesResponse struct {
 	V2VolumesWithBalanceCursorResponse *shared.V2VolumesWithBalanceCursorResponse
 }
 
-func (o *V2GetVolumesWithBalancesResponse) GetContentType() string {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V2GetVolumesWithBalancesResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V2GetVolumesWithBalancesResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V2GetVolumesWithBalancesResponse) GetV2VolumesWithBalanceCursorResponse() *shared.V2VolumesWithBalanceCursorResponse {
-	if o == nil {
+func (v *V2GetVolumesWithBalancesResponse) GetV2VolumesWithBalanceCursorResponse() *shared.V2VolumesWithBalanceCursorResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V2VolumesWithBalanceCursorResponse
+	return v.V2VolumesWithBalanceCursorResponse
 }

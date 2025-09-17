@@ -37,9 +37,9 @@ type UpdateTransferInitiationStatusRequest struct {
 	Status Status `json:"status"`
 }
 
-func (o *UpdateTransferInitiationStatusRequest) GetStatus() Status {
-	if o == nil {
+func (u *UpdateTransferInitiationStatusRequest) GetStatus() Status {
+	if u == nil {
 		return Status("")
 	}
-	return o.Status
+	return u.Status
 }

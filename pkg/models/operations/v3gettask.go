@@ -12,11 +12,11 @@ type V3GetTaskRequest struct {
 	TaskID string `pathParam:"style=simple,explode=false,name=taskID"`
 }
 
-func (o *V3GetTaskRequest) GetTaskID() string {
-	if o == nil {
+func (v *V3GetTaskRequest) GetTaskID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TaskID
+	return v.TaskID
 }
 
 type V3GetTaskResponse struct {
@@ -30,30 +30,30 @@ type V3GetTaskResponse struct {
 	V3GetTaskResponse *shared.V3GetTaskResponse
 }
 
-func (o *V3GetTaskResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetTaskResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetTaskResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetTaskResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetTaskResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetTaskResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetTaskResponse) GetV3GetTaskResponse() *shared.V3GetTaskResponse {
-	if o == nil {
+func (v *V3GetTaskResponse) GetV3GetTaskResponse() *shared.V3GetTaskResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3GetTaskResponse
+	return v.V3GetTaskResponse
 }

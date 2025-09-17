@@ -8,23 +8,23 @@ type User struct {
 	Subject *string `json:"subject,omitempty"`
 }
 
-func (o *User) GetEmail() *string {
-	if o == nil {
+func (u *User) GetEmail() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Email
+	return u.Email
 }
 
-func (o *User) GetID() *string {
-	if o == nil {
+func (u *User) GetID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.ID
+	return u.ID
 }
 
-func (o *User) GetSubject() *string {
-	if o == nil {
+func (u *User) GetSubject() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Subject
+	return u.Subject
 }

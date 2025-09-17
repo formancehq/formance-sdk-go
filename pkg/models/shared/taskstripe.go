@@ -13,28 +13,50 @@ type TaskStripeDescriptor struct {
 	Name    string `json:"name"`
 }
 
-func (o *TaskStripeDescriptor) GetAccount() string {
-	if o == nil {
-		return ""
-	}
-	return o.Account
+func (t TaskStripeDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TaskStripeDescriptor) GetMain() *bool {
-	if o == nil {
+func (t *TaskStripeDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"account", "name"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *TaskStripeDescriptor) GetAccount() string {
+	if t == nil {
+		return ""
+	}
+	return t.Account
+}
+
+func (t *TaskStripeDescriptor) GetMain() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.Main
+	return t.Main
 }
 
-func (o *TaskStripeDescriptor) GetName() string {
-	if o == nil {
+func (t *TaskStripeDescriptor) GetName() string {
+	if t == nil {
 		return ""
 	}
-	return o.Name
+	return t.Name
 }
 
 type TaskStripeState struct {
+}
+
+func (t TaskStripeState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskStripeState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TaskStripe struct {
@@ -53,64 +75,64 @@ func (t TaskStripe) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaskStripe) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"connectorID", "createdAt", "descriptor", "id", "status", "updatedAt"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaskStripe) GetConnectorID() string {
-	if o == nil {
+func (t *TaskStripe) GetConnectorID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return t.ConnectorID
 }
 
-func (o *TaskStripe) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TaskStripe) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TaskStripe) GetDescriptor() TaskStripeDescriptor {
-	if o == nil {
+func (t *TaskStripe) GetDescriptor() TaskStripeDescriptor {
+	if t == nil {
 		return TaskStripeDescriptor{}
 	}
-	return o.Descriptor
+	return t.Descriptor
 }
 
-func (o *TaskStripe) GetError() *string {
-	if o == nil {
+func (t *TaskStripe) GetError() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TaskStripe) GetID() string {
-	if o == nil {
+func (t *TaskStripe) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TaskStripe) GetState() *TaskStripeState {
-	if o == nil {
+func (t *TaskStripe) GetState() *TaskStripeState {
+	if t == nil {
 		return nil
 	}
-	return o.State
+	return t.State
 }
 
-func (o *TaskStripe) GetStatus() TaskStatus {
-	if o == nil {
+func (t *TaskStripe) GetStatus() TaskStatus {
+	if t == nil {
 		return TaskStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TaskStripe) GetUpdatedAt() time.Time {
-	if o == nil {
+func (t *TaskStripe) GetUpdatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

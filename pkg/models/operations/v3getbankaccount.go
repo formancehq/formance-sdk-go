@@ -12,11 +12,11 @@ type V3GetBankAccountRequest struct {
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountID"`
 }
 
-func (o *V3GetBankAccountRequest) GetBankAccountID() string {
-	if o == nil {
+func (v *V3GetBankAccountRequest) GetBankAccountID() string {
+	if v == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return v.BankAccountID
 }
 
 type V3GetBankAccountResponse struct {
@@ -30,30 +30,30 @@ type V3GetBankAccountResponse struct {
 	V3GetBankAccountResponse *shared.V3GetBankAccountResponse
 }
 
-func (o *V3GetBankAccountResponse) GetContentType() string {
-	if o == nil {
+func (v *V3GetBankAccountResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3GetBankAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3GetBankAccountResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3GetBankAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3GetBankAccountResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3GetBankAccountResponse) GetV3GetBankAccountResponse() *shared.V3GetBankAccountResponse {
-	if o == nil {
+func (v *V3GetBankAccountResponse) GetV3GetBankAccountResponse() *shared.V3GetBankAccountResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3GetBankAccountResponse
+	return v.V3GetBankAccountResponse
 }

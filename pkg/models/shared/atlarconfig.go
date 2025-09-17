@@ -36,64 +36,64 @@ func (a AtlarConfig) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AtlarConfig) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"accessKey", "name", "secret"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *AtlarConfig) GetAccessKey() string {
-	if o == nil {
+func (a *AtlarConfig) GetAccessKey() string {
+	if a == nil {
 		return ""
 	}
-	return o.AccessKey
+	return a.AccessKey
 }
 
-func (o *AtlarConfig) GetBaseURL() *string {
-	if o == nil {
+func (a *AtlarConfig) GetBaseURL() *string {
+	if a == nil {
 		return nil
 	}
-	return o.BaseURL
+	return a.BaseURL
 }
 
-func (o *AtlarConfig) GetName() string {
-	if o == nil {
+func (a *AtlarConfig) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return o.Name
+	return a.Name
 }
 
-func (o *AtlarConfig) GetPageSize() *int64 {
-	if o == nil {
+func (a *AtlarConfig) GetPageSize() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.PageSize
+	return a.PageSize
 }
 
-func (o *AtlarConfig) GetPollingPeriod() *string {
-	if o == nil {
+func (a *AtlarConfig) GetPollingPeriod() *string {
+	if a == nil {
 		return nil
 	}
-	return o.PollingPeriod
+	return a.PollingPeriod
 }
 
-func (o *AtlarConfig) GetProvider() *string {
-	if o == nil {
+func (a *AtlarConfig) GetProvider() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Provider
+	return a.Provider
 }
 
-func (o *AtlarConfig) GetSecret() string {
-	if o == nil {
+func (a *AtlarConfig) GetSecret() string {
+	if a == nil {
 		return ""
 	}
-	return o.Secret
+	return a.Secret
 }
 
-func (o *AtlarConfig) GetTransferInitiationStatusPollingPeriod() *string {
-	if o == nil {
+func (a *AtlarConfig) GetTransferInitiationStatusPollingPeriod() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TransferInitiationStatusPollingPeriod
+	return a.TransferInitiationStatusPollingPeriod
 }

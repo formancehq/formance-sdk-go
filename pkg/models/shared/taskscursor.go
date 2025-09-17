@@ -22,14 +22,14 @@ const (
 )
 
 type TasksCursorData struct {
-	TaskStripe        *TaskStripe        `queryParam:"inline"`
-	TaskWise          *TaskWise          `queryParam:"inline"`
-	TaskCurrencyCloud *TaskCurrencyCloud `queryParam:"inline"`
-	TaskDummyPay      *TaskDummyPay      `queryParam:"inline"`
-	TaskModulr        *TaskModulr        `queryParam:"inline"`
-	TaskBankingCircle *TaskBankingCircle `queryParam:"inline"`
-	TaskMangoPay      *TaskMangoPay      `queryParam:"inline"`
-	TaskMoneycorp     *TaskMoneycorp     `queryParam:"inline"`
+	TaskStripe        *TaskStripe        `queryParam:"inline" name:"data"`
+	TaskWise          *TaskWise          `queryParam:"inline" name:"data"`
+	TaskCurrencyCloud *TaskCurrencyCloud `queryParam:"inline" name:"data"`
+	TaskDummyPay      *TaskDummyPay      `queryParam:"inline" name:"data"`
+	TaskModulr        *TaskModulr        `queryParam:"inline" name:"data"`
+	TaskBankingCircle *TaskBankingCircle `queryParam:"inline" name:"data"`
+	TaskMangoPay      *TaskMangoPay      `queryParam:"inline" name:"data"`
+	TaskMoneycorp     *TaskMoneycorp     `queryParam:"inline" name:"data"`
 
 	Type TasksCursorDataType
 }
@@ -109,56 +109,56 @@ func CreateTasksCursorDataTaskMoneycorp(taskMoneycorp TaskMoneycorp) TasksCursor
 func (u *TasksCursorData) UnmarshalJSON(data []byte) error {
 
 	var taskStripe TaskStripe = TaskStripe{}
-	if err := utils.UnmarshalJSON(data, &taskStripe, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskStripe, "", true, nil); err == nil {
 		u.TaskStripe = &taskStripe
 		u.Type = TasksCursorDataTypeTaskStripe
 		return nil
 	}
 
 	var taskWise TaskWise = TaskWise{}
-	if err := utils.UnmarshalJSON(data, &taskWise, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskWise, "", true, nil); err == nil {
 		u.TaskWise = &taskWise
 		u.Type = TasksCursorDataTypeTaskWise
 		return nil
 	}
 
 	var taskCurrencyCloud TaskCurrencyCloud = TaskCurrencyCloud{}
-	if err := utils.UnmarshalJSON(data, &taskCurrencyCloud, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskCurrencyCloud, "", true, nil); err == nil {
 		u.TaskCurrencyCloud = &taskCurrencyCloud
 		u.Type = TasksCursorDataTypeTaskCurrencyCloud
 		return nil
 	}
 
 	var taskDummyPay TaskDummyPay = TaskDummyPay{}
-	if err := utils.UnmarshalJSON(data, &taskDummyPay, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskDummyPay, "", true, nil); err == nil {
 		u.TaskDummyPay = &taskDummyPay
 		u.Type = TasksCursorDataTypeTaskDummyPay
 		return nil
 	}
 
 	var taskModulr TaskModulr = TaskModulr{}
-	if err := utils.UnmarshalJSON(data, &taskModulr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskModulr, "", true, nil); err == nil {
 		u.TaskModulr = &taskModulr
 		u.Type = TasksCursorDataTypeTaskModulr
 		return nil
 	}
 
 	var taskBankingCircle TaskBankingCircle = TaskBankingCircle{}
-	if err := utils.UnmarshalJSON(data, &taskBankingCircle, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskBankingCircle, "", true, nil); err == nil {
 		u.TaskBankingCircle = &taskBankingCircle
 		u.Type = TasksCursorDataTypeTaskBankingCircle
 		return nil
 	}
 
 	var taskMangoPay TaskMangoPay = TaskMangoPay{}
-	if err := utils.UnmarshalJSON(data, &taskMangoPay, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskMangoPay, "", true, nil); err == nil {
 		u.TaskMangoPay = &taskMangoPay
 		u.Type = TasksCursorDataTypeTaskMangoPay
 		return nil
 	}
 
 	var taskMoneycorp TaskMoneycorp = TaskMoneycorp{}
-	if err := utils.UnmarshalJSON(data, &taskMoneycorp, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &taskMoneycorp, "", true, nil); err == nil {
 		u.TaskMoneycorp = &taskMoneycorp
 		u.Type = TasksCursorDataTypeTaskMoneycorp
 		return nil
@@ -211,39 +211,39 @@ type TasksCursorCursor struct {
 	Previous *string           `json:"previous,omitempty"`
 }
 
-func (o *TasksCursorCursor) GetData() []TasksCursorData {
-	if o == nil {
+func (t *TasksCursorCursor) GetData() []TasksCursorData {
+	if t == nil {
 		return []TasksCursorData{}
 	}
-	return o.Data
+	return t.Data
 }
 
-func (o *TasksCursorCursor) GetHasMore() bool {
-	if o == nil {
+func (t *TasksCursorCursor) GetHasMore() bool {
+	if t == nil {
 		return false
 	}
-	return o.HasMore
+	return t.HasMore
 }
 
-func (o *TasksCursorCursor) GetNext() *string {
-	if o == nil {
+func (t *TasksCursorCursor) GetNext() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Next
+	return t.Next
 }
 
-func (o *TasksCursorCursor) GetPageSize() int64 {
-	if o == nil {
+func (t *TasksCursorCursor) GetPageSize() int64 {
+	if t == nil {
 		return 0
 	}
-	return o.PageSize
+	return t.PageSize
 }
 
-func (o *TasksCursorCursor) GetPrevious() *string {
-	if o == nil {
+func (t *TasksCursorCursor) GetPrevious() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Previous
+	return t.Previous
 }
 
 // TasksCursor - OK
@@ -251,9 +251,9 @@ type TasksCursor struct {
 	Cursor TasksCursorCursor `json:"cursor"`
 }
 
-func (o *TasksCursor) GetCursor() TasksCursorCursor {
-	if o == nil {
+func (t *TasksCursor) GetCursor() TasksCursorCursor {
+	if t == nil {
 		return TasksCursorCursor{}
 	}
-	return o.Cursor
+	return t.Cursor
 }

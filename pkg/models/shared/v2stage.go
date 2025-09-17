@@ -18,10 +18,10 @@ const (
 )
 
 type V2Stage struct {
-	V2StageSend      *V2StageSend      `queryParam:"inline"`
-	V2StageDelay     *V2StageDelay     `queryParam:"inline"`
-	V2StageWaitEvent *V2StageWaitEvent `queryParam:"inline"`
-	V2Update         *V2Update         `queryParam:"inline"`
+	V2StageSend      *V2StageSend      `queryParam:"inline" name:"V2Stage"`
+	V2StageDelay     *V2StageDelay     `queryParam:"inline" name:"V2Stage"`
+	V2StageWaitEvent *V2StageWaitEvent `queryParam:"inline" name:"V2Stage"`
+	V2Update         *V2Update         `queryParam:"inline" name:"V2Stage"`
 
 	Type V2StageType
 }
@@ -65,30 +65,30 @@ func CreateV2StageV2Update(v2Update V2Update) V2Stage {
 func (u *V2Stage) UnmarshalJSON(data []byte) error {
 
 	var v2StageWaitEvent V2StageWaitEvent = V2StageWaitEvent{}
-	if err := utils.UnmarshalJSON(data, &v2StageWaitEvent, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &v2StageWaitEvent, "", true, nil); err == nil {
 		u.V2StageWaitEvent = &v2StageWaitEvent
 		u.Type = V2StageTypeV2StageWaitEvent
 		return nil
 	}
 
-	var v2Update V2Update = V2Update{}
-	if err := utils.UnmarshalJSON(data, &v2Update, "", true, true); err == nil {
-		u.V2Update = &v2Update
-		u.Type = V2StageTypeV2Update
+	var v2StageSend V2StageSend = V2StageSend{}
+	if err := utils.UnmarshalJSON(data, &v2StageSend, "", true, nil); err == nil {
+		u.V2StageSend = &v2StageSend
+		u.Type = V2StageTypeV2StageSend
 		return nil
 	}
 
 	var v2StageDelay V2StageDelay = V2StageDelay{}
-	if err := utils.UnmarshalJSON(data, &v2StageDelay, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &v2StageDelay, "", true, nil); err == nil {
 		u.V2StageDelay = &v2StageDelay
 		u.Type = V2StageTypeV2StageDelay
 		return nil
 	}
 
-	var v2StageSend V2StageSend = V2StageSend{}
-	if err := utils.UnmarshalJSON(data, &v2StageSend, "", true, true); err == nil {
-		u.V2StageSend = &v2StageSend
-		u.Type = V2StageTypeV2StageSend
+	var v2Update V2Update = V2Update{}
+	if err := utils.UnmarshalJSON(data, &v2Update, "", true, nil); err == nil {
+		u.V2Update = &v2Update
+		u.Type = V2StageTypeV2Update
 		return nil
 	}
 

@@ -20,43 +20,43 @@ func (r ReverseTransferInitiationRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReverseTransferInitiationRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"amount", "asset", "description", "metadata", "reference"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ReverseTransferInitiationRequest) GetAmount() *big.Int {
-	if o == nil {
+func (r *ReverseTransferInitiationRequest) GetAmount() *big.Int {
+	if r == nil {
 		return big.NewInt(0)
 	}
-	return o.Amount
+	return r.Amount
 }
 
-func (o *ReverseTransferInitiationRequest) GetAsset() string {
-	if o == nil {
+func (r *ReverseTransferInitiationRequest) GetAsset() string {
+	if r == nil {
 		return ""
 	}
-	return o.Asset
+	return r.Asset
 }
 
-func (o *ReverseTransferInitiationRequest) GetDescription() string {
-	if o == nil {
+func (r *ReverseTransferInitiationRequest) GetDescription() string {
+	if r == nil {
 		return ""
 	}
-	return o.Description
+	return r.Description
 }
 
-func (o *ReverseTransferInitiationRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (r *ReverseTransferInitiationRequest) GetMetadata() map[string]string {
+	if r == nil {
 		return nil
 	}
-	return o.Metadata
+	return r.Metadata
 }
 
-func (o *ReverseTransferInitiationRequest) GetReference() string {
-	if o == nil {
+func (r *ReverseTransferInitiationRequest) GetReference() string {
+	if r == nil {
 		return ""
 	}
-	return o.Reference
+	return r.Reference
 }

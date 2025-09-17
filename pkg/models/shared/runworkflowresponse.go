@@ -6,9 +6,9 @@ type RunWorkflowResponse struct {
 	Data WorkflowInstance `json:"data"`
 }
 
-func (o *RunWorkflowResponse) GetData() WorkflowInstance {
-	if o == nil {
+func (r *RunWorkflowResponse) GetData() WorkflowInstance {
+	if r == nil {
 		return WorkflowInstance{}
 	}
-	return o.Data
+	return r.Data
 }

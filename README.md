@@ -58,7 +58,7 @@ and standard method from web, mobile and desktop applications.
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/formancehq/formance-sdk-go
+go get github.com/formancehq/formance-sdk-go/v3
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -72,7 +72,7 @@ package main
 
 import (
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -80,10 +80,10 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := formancesdkgo.New(
-		formancesdkgo.WithSecurity(shared.Security{
-			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+	s := v3.New(
+		v3.WithSecurity(shared.Security{
+			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
 		}),
 	)
 
@@ -412,7 +412,7 @@ package main
 import (
 	"context"
 	"errors"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
@@ -423,10 +423,10 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := formancesdkgo.New(
-		formancesdkgo.WithSecurity(shared.Security{
-			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+	s := v3.New(
+		v3.WithSecurity(shared.Security{
+			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
 		}),
 	)
 
@@ -434,7 +434,7 @@ func main() {
 		RequestBody: map[string]string{
 			"admin": "true",
 		},
-		DryRun: formancesdkgo.Bool(true),
+		DryRun: v3.Pointer(true),
 		ID:     big.NewInt(1234),
 		Ledger: "ledger001",
 	})
@@ -483,7 +483,7 @@ package main
 
 import (
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -491,13 +491,13 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := formancesdkgo.New(
-		formancesdkgo.WithServerIndex(1),
-		formancesdkgo.WithEnvironment("us-east-1"),
-		formancesdkgo.WithOrganization("<value>"),
-		formancesdkgo.WithSecurity(shared.Security{
-			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+	s := v3.New(
+		v3.WithServerIndex(1),
+		v3.WithEnvironment("us-east-1"),
+		v3.WithOrganization("<value>"),
+		v3.WithSecurity(shared.Security{
+			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
 		}),
 	)
 
@@ -520,7 +520,7 @@ package main
 
 import (
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -528,11 +528,11 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := formancesdkgo.New(
-		formancesdkgo.WithServerURL("https://orgID-stackID.eu.sandbox.formance.cloud"),
-		formancesdkgo.WithSecurity(shared.Security{
-			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+	s := v3.New(
+		v3.WithServerURL("https://orgID-stackID.eu.sandbox.formance.cloud"),
+		v3.WithSecurity(shared.Security{
+			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
 		}),
 	)
 
@@ -565,12 +565,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/formancehq/formance-sdk-go/v3"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = v3.New(v3.WithClient(httpClient))
 )
 ```
 
@@ -594,7 +595,7 @@ package main
 
 import (
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
@@ -602,10 +603,10 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := formancesdkgo.New(
-		formancesdkgo.WithSecurity(shared.Security{
-			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+	s := v3.New(
+		v3.WithSecurity(shared.Security{
+			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
 		}),
 	)
 
@@ -632,7 +633,7 @@ package main
 
 import (
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"log"
@@ -642,10 +643,10 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := formancesdkgo.New(
-		formancesdkgo.WithSecurity(shared.Security{
-			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+	s := v3.New(
+		v3.WithSecurity(shared.Security{
+			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
 		}),
 	)
 
@@ -676,7 +677,7 @@ package main
 
 import (
 	"context"
-	formancesdkgo "github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"log"
@@ -685,8 +686,8 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := formancesdkgo.New(
-		formancesdkgo.WithRetryConfig(
+	s := v3.New(
+		v3.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
 				Backoff: &retry.BackoffStrategy{
@@ -697,9 +698,9 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		formancesdkgo.WithSecurity(shared.Security{
-			ClientID:     formancesdkgo.String("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: formancesdkgo.String("<YOUR_CLIENT_SECRET_HERE>"),
+		v3.WithSecurity(shared.Security{
+			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
 		}),
 	)
 

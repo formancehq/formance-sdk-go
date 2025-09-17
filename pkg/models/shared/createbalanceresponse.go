@@ -6,9 +6,9 @@ type CreateBalanceResponse struct {
 	Data CreateBalanceRequest `json:"data"`
 }
 
-func (o *CreateBalanceResponse) GetData() CreateBalanceRequest {
-	if o == nil {
+func (c *CreateBalanceResponse) GetData() CreateBalanceRequest {
+	if c == nil {
 		return CreateBalanceRequest{}
 	}
-	return o.Data
+	return c.Data
 }

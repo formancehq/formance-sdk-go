@@ -7,9 +7,9 @@ type PoolBalancesResponse struct {
 	Data PoolBalances `json:"data"`
 }
 
-func (o *PoolBalancesResponse) GetData() PoolBalances {
-	if o == nil {
+func (p *PoolBalancesResponse) GetData() PoolBalances {
+	if p == nil {
 		return PoolBalances{}
 	}
-	return o.Data
+	return p.Data
 }

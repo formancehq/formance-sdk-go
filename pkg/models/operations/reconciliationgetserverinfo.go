@@ -18,30 +18,30 @@ type ReconciliationgetServerInfoResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReconciliationgetServerInfoResponse) GetContentType() string {
-	if o == nil {
+func (r *ReconciliationgetServerInfoResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReconciliationgetServerInfoResponse) GetServerInfo() *shared.ServerInfo {
-	if o == nil {
+func (r *ReconciliationgetServerInfoResponse) GetServerInfo() *shared.ServerInfo {
+	if r == nil {
 		return nil
 	}
-	return o.ServerInfo
+	return r.ServerInfo
 }
 
-func (o *ReconciliationgetServerInfoResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReconciliationgetServerInfoResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReconciliationgetServerInfoResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReconciliationgetServerInfoResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

@@ -11,11 +11,11 @@ type RetryTransferInitiationRequest struct {
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`
 }
 
-func (o *RetryTransferInitiationRequest) GetTransferID() string {
-	if o == nil {
+func (r *RetryTransferInitiationRequest) GetTransferID() string {
+	if r == nil {
 		return ""
 	}
-	return o.TransferID
+	return r.TransferID
 }
 
 type RetryTransferInitiationResponse struct {
@@ -27,23 +27,23 @@ type RetryTransferInitiationResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *RetryTransferInitiationResponse) GetContentType() string {
-	if o == nil {
+func (r *RetryTransferInitiationResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *RetryTransferInitiationResponse) GetStatusCode() int {
-	if o == nil {
+func (r *RetryTransferInitiationResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *RetryTransferInitiationResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *RetryTransferInitiationResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

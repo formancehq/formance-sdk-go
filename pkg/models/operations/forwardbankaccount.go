@@ -13,18 +13,18 @@ type ForwardBankAccountRequest struct {
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountId"`
 }
 
-func (o *ForwardBankAccountRequest) GetForwardBankAccountRequest() shared.ForwardBankAccountRequest {
-	if o == nil {
+func (f *ForwardBankAccountRequest) GetForwardBankAccountRequest() shared.ForwardBankAccountRequest {
+	if f == nil {
 		return shared.ForwardBankAccountRequest{}
 	}
-	return o.ForwardBankAccountRequest
+	return f.ForwardBankAccountRequest
 }
 
-func (o *ForwardBankAccountRequest) GetBankAccountID() string {
-	if o == nil {
+func (f *ForwardBankAccountRequest) GetBankAccountID() string {
+	if f == nil {
 		return ""
 	}
-	return o.BankAccountID
+	return f.BankAccountID
 }
 
 type ForwardBankAccountResponse struct {
@@ -38,30 +38,30 @@ type ForwardBankAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ForwardBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
-	if o == nil {
+func (f *ForwardBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
+	if f == nil {
 		return nil
 	}
-	return o.BankAccountResponse
+	return f.BankAccountResponse
 }
 
-func (o *ForwardBankAccountResponse) GetContentType() string {
-	if o == nil {
+func (f *ForwardBankAccountResponse) GetContentType() string {
+	if f == nil {
 		return ""
 	}
-	return o.ContentType
+	return f.ContentType
 }
 
-func (o *ForwardBankAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (f *ForwardBankAccountResponse) GetStatusCode() int {
+	if f == nil {
 		return 0
 	}
-	return o.StatusCode
+	return f.StatusCode
 }
 
-func (o *ForwardBankAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (f *ForwardBankAccountResponse) GetRawResponse() *http.Response {
+	if f == nil {
 		return nil
 	}
-	return o.RawResponse
+	return f.RawResponse
 }

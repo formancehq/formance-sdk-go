@@ -18,30 +18,30 @@ type V3CreateAccountResponse struct {
 	V3CreateAccountResponse *shared.V3CreateAccountResponse
 }
 
-func (o *V3CreateAccountResponse) GetContentType() string {
-	if o == nil {
+func (v *V3CreateAccountResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3CreateAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3CreateAccountResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3CreateAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3CreateAccountResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3CreateAccountResponse) GetV3CreateAccountResponse() *shared.V3CreateAccountResponse {
-	if o == nil {
+func (v *V3CreateAccountResponse) GetV3CreateAccountResponse() *shared.V3CreateAccountResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3CreateAccountResponse
+	return v.V3CreateAccountResponse
 }

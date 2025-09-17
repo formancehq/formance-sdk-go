@@ -18,30 +18,30 @@ type CreateClientResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *CreateClientResponse) GetContentType() string {
-	if o == nil {
+func (c *CreateClientResponse) GetContentType() string {
+	if c == nil {
 		return ""
 	}
-	return o.ContentType
+	return c.ContentType
 }
 
-func (o *CreateClientResponse) GetCreateClientResponse() *shared.CreateClientResponse {
-	if o == nil {
+func (c *CreateClientResponse) GetCreateClientResponse() *shared.CreateClientResponse {
+	if c == nil {
 		return nil
 	}
-	return o.CreateClientResponse
+	return c.CreateClientResponse
 }
 
-func (o *CreateClientResponse) GetStatusCode() int {
-	if o == nil {
+func (c *CreateClientResponse) GetStatusCode() int {
+	if c == nil {
 		return 0
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateClientResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (c *CreateClientResponse) GetRawResponse() *http.Response {
+	if c == nil {
 		return nil
 	}
-	return o.RawResponse
+	return c.RawResponse
 }

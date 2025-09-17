@@ -6,11 +6,11 @@ type Data struct {
 	ConnectorID string `json:"connectorID"`
 }
 
-func (o *Data) GetConnectorID() string {
-	if o == nil {
+func (d *Data) GetConnectorID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return d.ConnectorID
 }
 
 // ConnectorResponse - OK
@@ -18,9 +18,9 @@ type ConnectorResponse struct {
 	Data Data `json:"data"`
 }
 
-func (o *ConnectorResponse) GetData() Data {
-	if o == nil {
+func (c *ConnectorResponse) GetData() Data {
+	if c == nil {
 		return Data{}
 	}
-	return o.Data
+	return c.Data
 }

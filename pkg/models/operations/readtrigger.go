@@ -12,11 +12,11 @@ type ReadTriggerRequest struct {
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`
 }
 
-func (o *ReadTriggerRequest) GetTriggerID() string {
-	if o == nil {
+func (r *ReadTriggerRequest) GetTriggerID() string {
+	if r == nil {
 		return ""
 	}
-	return o.TriggerID
+	return r.TriggerID
 }
 
 type ReadTriggerResponse struct {
@@ -30,30 +30,30 @@ type ReadTriggerResponse struct {
 	RawResponse *http.Response
 }
 
-func (o *ReadTriggerResponse) GetContentType() string {
-	if o == nil {
+func (r *ReadTriggerResponse) GetContentType() string {
+	if r == nil {
 		return ""
 	}
-	return o.ContentType
+	return r.ContentType
 }
 
-func (o *ReadTriggerResponse) GetReadTriggerResponse() *shared.ReadTriggerResponse {
-	if o == nil {
+func (r *ReadTriggerResponse) GetReadTriggerResponse() *shared.ReadTriggerResponse {
+	if r == nil {
 		return nil
 	}
-	return o.ReadTriggerResponse
+	return r.ReadTriggerResponse
 }
 
-func (o *ReadTriggerResponse) GetStatusCode() int {
-	if o == nil {
+func (r *ReadTriggerResponse) GetStatusCode() int {
+	if r == nil {
 		return 0
 	}
-	return o.StatusCode
+	return r.StatusCode
 }
 
-func (o *ReadTriggerResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (r *ReadTriggerResponse) GetRawResponse() *http.Response {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponse
+	return r.RawResponse
 }

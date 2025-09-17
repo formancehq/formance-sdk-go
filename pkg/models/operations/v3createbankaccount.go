@@ -18,30 +18,30 @@ type V3CreateBankAccountResponse struct {
 	V3CreateBankAccountResponse *shared.V3CreateBankAccountResponse
 }
 
-func (o *V3CreateBankAccountResponse) GetContentType() string {
-	if o == nil {
+func (v *V3CreateBankAccountResponse) GetContentType() string {
+	if v == nil {
 		return ""
 	}
-	return o.ContentType
+	return v.ContentType
 }
 
-func (o *V3CreateBankAccountResponse) GetStatusCode() int {
-	if o == nil {
+func (v *V3CreateBankAccountResponse) GetStatusCode() int {
+	if v == nil {
 		return 0
 	}
-	return o.StatusCode
+	return v.StatusCode
 }
 
-func (o *V3CreateBankAccountResponse) GetRawResponse() *http.Response {
-	if o == nil {
+func (v *V3CreateBankAccountResponse) GetRawResponse() *http.Response {
+	if v == nil {
 		return nil
 	}
-	return o.RawResponse
+	return v.RawResponse
 }
 
-func (o *V3CreateBankAccountResponse) GetV3CreateBankAccountResponse() *shared.V3CreateBankAccountResponse {
-	if o == nil {
+func (v *V3CreateBankAccountResponse) GetV3CreateBankAccountResponse() *shared.V3CreateBankAccountResponse {
+	if v == nil {
 		return nil
 	}
-	return o.V3CreateBankAccountResponse
+	return v.V3CreateBankAccountResponse
 }

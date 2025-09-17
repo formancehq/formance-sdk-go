@@ -6,9 +6,9 @@ type GetWalletSummaryResponse struct {
 	Data WalletSummary `json:"data"`
 }
 
-func (o *GetWalletSummaryResponse) GetData() WalletSummary {
-	if o == nil {
+func (g *GetWalletSummaryResponse) GetData() WalletSummary {
+	if g == nil {
 		return WalletSummary{}
 	}
-	return o.Data
+	return g.Data
 }

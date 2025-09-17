@@ -6,9 +6,9 @@ type ReadUserResponse struct {
 	Data *User `json:"data,omitempty"`
 }
 
-func (o *ReadUserResponse) GetData() *User {
-	if o == nil {
+func (r *ReadUserResponse) GetData() *User {
+	if r == nil {
 		return nil
 	}
-	return o.Data
+	return r.Data
 }

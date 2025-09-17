@@ -6,9 +6,9 @@ type ActivityGetAccountOutput struct {
 	Data OrchestrationAccount `json:"data"`
 }
 
-func (o *ActivityGetAccountOutput) GetData() OrchestrationAccount {
-	if o == nil {
+func (a *ActivityGetAccountOutput) GetData() OrchestrationAccount {
+	if a == nil {
 		return OrchestrationAccount{}
 	}
-	return o.Data
+	return a.Data
 }

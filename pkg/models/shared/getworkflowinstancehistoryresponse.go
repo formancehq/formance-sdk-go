@@ -6,9 +6,9 @@ type GetWorkflowInstanceHistoryResponse struct {
 	Data []WorkflowInstanceHistory `json:"data"`
 }
 
-func (o *GetWorkflowInstanceHistoryResponse) GetData() []WorkflowInstanceHistory {
-	if o == nil {
+func (g *GetWorkflowInstanceHistoryResponse) GetData() []WorkflowInstanceHistory {
+	if g == nil {
 		return []WorkflowInstanceHistory{}
 	}
-	return o.Data
+	return g.Data
 }

@@ -10,48 +10,48 @@ type V2ListRunsResponseCursor struct {
 	Previous *string              `json:"previous,omitempty"`
 }
 
-func (o *V2ListRunsResponseCursor) GetData() []V2WorkflowInstance {
-	if o == nil {
+func (v *V2ListRunsResponseCursor) GetData() []V2WorkflowInstance {
+	if v == nil {
 		return []V2WorkflowInstance{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2ListRunsResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V2ListRunsResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V2ListRunsResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V2ListRunsResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V2ListRunsResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V2ListRunsResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2ListRunsResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V2ListRunsResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V2ListRunsResponse struct {
 	Cursor V2ListRunsResponseCursor `json:"cursor"`
 }
 
-func (o *V2ListRunsResponse) GetCursor() V2ListRunsResponseCursor {
-	if o == nil {
+func (v *V2ListRunsResponse) GetCursor() V2ListRunsResponseCursor {
+	if v == nil {
 		return V2ListRunsResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }

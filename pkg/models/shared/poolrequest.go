@@ -7,16 +7,16 @@ type PoolRequest struct {
 	Name       string   `json:"name"`
 }
 
-func (o *PoolRequest) GetAccountIDs() []string {
-	if o == nil {
+func (p *PoolRequest) GetAccountIDs() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.AccountIDs
+	return p.AccountIDs
 }
 
-func (o *PoolRequest) GetName() string {
-	if o == nil {
+func (p *PoolRequest) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }

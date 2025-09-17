@@ -22,57 +22,57 @@ func (v V3CreateAccountRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3CreateAccountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountName", "connectorID", "createdAt", "reference", "type"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *V3CreateAccountRequest) GetAccountName() string {
-	if o == nil {
+func (v *V3CreateAccountRequest) GetAccountName() string {
+	if v == nil {
 		return ""
 	}
-	return o.AccountName
+	return v.AccountName
 }
 
-func (o *V3CreateAccountRequest) GetConnectorID() string {
-	if o == nil {
+func (v *V3CreateAccountRequest) GetConnectorID() string {
+	if v == nil {
 		return ""
 	}
-	return o.ConnectorID
+	return v.ConnectorID
 }
 
-func (o *V3CreateAccountRequest) GetCreatedAt() time.Time {
-	if o == nil {
+func (v *V3CreateAccountRequest) GetCreatedAt() time.Time {
+	if v == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return v.CreatedAt
 }
 
-func (o *V3CreateAccountRequest) GetDefaultAsset() *string {
-	if o == nil {
+func (v *V3CreateAccountRequest) GetDefaultAsset() *string {
+	if v == nil {
 		return nil
 	}
-	return o.DefaultAsset
+	return v.DefaultAsset
 }
 
-func (o *V3CreateAccountRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (v *V3CreateAccountRequest) GetMetadata() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return o.Metadata
+	return v.Metadata
 }
 
-func (o *V3CreateAccountRequest) GetReference() string {
-	if o == nil {
+func (v *V3CreateAccountRequest) GetReference() string {
+	if v == nil {
 		return ""
 	}
-	return o.Reference
+	return v.Reference
 }
 
-func (o *V3CreateAccountRequest) GetType() V3AccountTypeEnum {
-	if o == nil {
+func (v *V3CreateAccountRequest) GetType() V3AccountTypeEnum {
+	if v == nil {
 		return V3AccountTypeEnum("")
 	}
-	return o.Type
+	return v.Type
 }

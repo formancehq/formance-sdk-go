@@ -10,48 +10,48 @@ type V2AccountsCursorResponseCursor struct {
 	Previous *string     `json:"previous,omitempty"`
 }
 
-func (o *V2AccountsCursorResponseCursor) GetData() []V2Account {
-	if o == nil {
+func (v *V2AccountsCursorResponseCursor) GetData() []V2Account {
+	if v == nil {
 		return []V2Account{}
 	}
-	return o.Data
+	return v.Data
 }
 
-func (o *V2AccountsCursorResponseCursor) GetHasMore() bool {
-	if o == nil {
+func (v *V2AccountsCursorResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return o.HasMore
+	return v.HasMore
 }
 
-func (o *V2AccountsCursorResponseCursor) GetNext() *string {
-	if o == nil {
+func (v *V2AccountsCursorResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Next
+	return v.Next
 }
 
-func (o *V2AccountsCursorResponseCursor) GetPageSize() int64 {
-	if o == nil {
+func (v *V2AccountsCursorResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return o.PageSize
+	return v.PageSize
 }
 
-func (o *V2AccountsCursorResponseCursor) GetPrevious() *string {
-	if o == nil {
+func (v *V2AccountsCursorResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return o.Previous
+	return v.Previous
 }
 
 type V2AccountsCursorResponse struct {
 	Cursor V2AccountsCursorResponseCursor `json:"cursor"`
 }
 
-func (o *V2AccountsCursorResponse) GetCursor() V2AccountsCursorResponseCursor {
-	if o == nil {
+func (v *V2AccountsCursorResponse) GetCursor() V2AccountsCursorResponseCursor {
+	if v == nil {
 		return V2AccountsCursorResponseCursor{}
 	}
-	return o.Cursor
+	return v.Cursor
 }
