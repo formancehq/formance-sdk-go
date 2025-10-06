@@ -26,7 +26,11 @@ type V2GetVolumesWithBalancesRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// The maximum number of results to return per page.
 	//
-	PageSize  *int64     `queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	// Sort results using a field name and order (ascending or descending).
+	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
+	//
+	Sort      *string    `queryParam:"style=form,explode=true,name=sort"`
 	StartTime *time.Time `queryParam:"style=form,explode=true,name=startTime"`
 }
 
@@ -88,6 +92,13 @@ func (v *V2GetVolumesWithBalancesRequest) GetPageSize() *int64 {
 		return nil
 	}
 	return v.PageSize
+}
+
+func (v *V2GetVolumesWithBalancesRequest) GetSort() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Sort
 }
 
 func (v *V2GetVolumesWithBalancesRequest) GetStartTime() *time.Time {

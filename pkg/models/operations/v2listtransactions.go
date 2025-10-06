@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// Order - Deprecated: Use sort param
 type Order string
 
 const (
@@ -45,12 +46,19 @@ type V2ListTransactionsRequest struct {
 	Expand *string `queryParam:"style=form,explode=true,name=expand"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
-	Order  *Order `queryParam:"style=form,explode=true,name=order"`
+	// Deprecated: Use sort param
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Order *Order `queryParam:"style=form,explode=true,name=order"`
 	// The maximum number of results to return per page.
 	//
 	PageSize *int64     `queryParam:"style=form,explode=true,name=pageSize"`
 	Pit      *time.Time `queryParam:"style=form,explode=true,name=pit"`
 	Reverse  *bool      `queryParam:"style=form,explode=true,name=reverse"`
+	// Sort results using a field name and order (ascending or descending).
+	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
+	//
+	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 }
 
 func (v V2ListTransactionsRequest) MarshalJSON() ([]byte, error) {
@@ -118,6 +126,13 @@ func (v *V2ListTransactionsRequest) GetReverse() *bool {
 		return nil
 	}
 	return v.Reverse
+}
+
+func (v *V2ListTransactionsRequest) GetSort() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Sort
 }
 
 type V2ListTransactionsResponse struct {

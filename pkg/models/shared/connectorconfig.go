@@ -26,17 +26,17 @@ const (
 )
 
 type ConnectorConfig struct {
-	StripeConfig        *StripeConfig        `queryParam:"inline" name:"ConnectorConfig"`
-	DummyPayConfig      *DummyPayConfig      `queryParam:"inline" name:"ConnectorConfig"`
-	WiseConfig          *WiseConfig          `queryParam:"inline" name:"ConnectorConfig"`
-	ModulrConfig        *ModulrConfig        `queryParam:"inline" name:"ConnectorConfig"`
-	CurrencyCloudConfig *CurrencyCloudConfig `queryParam:"inline" name:"ConnectorConfig"`
-	BankingCircleConfig *BankingCircleConfig `queryParam:"inline" name:"ConnectorConfig"`
-	MangoPayConfig      *MangoPayConfig      `queryParam:"inline" name:"ConnectorConfig"`
-	MoneycorpConfig     *MoneycorpConfig     `queryParam:"inline" name:"ConnectorConfig"`
-	AtlarConfig         *AtlarConfig         `queryParam:"inline" name:"ConnectorConfig"`
-	AdyenConfig         *AdyenConfig         `queryParam:"inline" name:"ConnectorConfig"`
-	GenericConfig       *GenericConfig       `queryParam:"inline" name:"ConnectorConfig"`
+	StripeConfig        *StripeConfig        `queryParam:"inline,name=ConnectorConfig"`
+	DummyPayConfig      *DummyPayConfig      `queryParam:"inline,name=ConnectorConfig"`
+	WiseConfig          *WiseConfig          `queryParam:"inline,name=ConnectorConfig"`
+	ModulrConfig        *ModulrConfig        `queryParam:"inline,name=ConnectorConfig"`
+	CurrencyCloudConfig *CurrencyCloudConfig `queryParam:"inline,name=ConnectorConfig"`
+	BankingCircleConfig *BankingCircleConfig `queryParam:"inline,name=ConnectorConfig"`
+	MangoPayConfig      *MangoPayConfig      `queryParam:"inline,name=ConnectorConfig"`
+	MoneycorpConfig     *MoneycorpConfig     `queryParam:"inline,name=ConnectorConfig"`
+	AtlarConfig         *AtlarConfig         `queryParam:"inline,name=ConnectorConfig"`
+	AdyenConfig         *AdyenConfig         `queryParam:"inline,name=ConnectorConfig"`
+	GenericConfig       *GenericConfig       `queryParam:"inline,name=ConnectorConfig"`
 
 	Type ConnectorConfigType
 }

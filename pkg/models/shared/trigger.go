@@ -14,6 +14,7 @@ type Trigger struct {
 	ID         string         `json:"id"`
 	Name       *string        `json:"name,omitempty"`
 	Vars       map[string]any `json:"vars,omitempty"`
+	Version    *string        `json:"version,omitempty"`
 	WorkflowID string         `json:"workflowID"`
 }
 
@@ -68,6 +69,13 @@ func (t *Trigger) GetVars() map[string]any {
 		return nil
 	}
 	return t.Vars
+}
+
+func (t *Trigger) GetVersion() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Version
 }
 
 func (t *Trigger) GetWorkflowID() string {

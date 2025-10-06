@@ -210,11 +210,11 @@ const (
 )
 
 type V2BulkElementResult struct {
-	V2BulkElementResultCreateTransactionSchemas *V2BulkElementResultCreateTransactionSchemas `queryParam:"inline" name:"V2BulkElementResult"`
-	Schemas                                     *Schemas                                     `queryParam:"inline" name:"V2BulkElementResult"`
-	V2BulkElementResultRevertTransactionSchemas *V2BulkElementResultRevertTransactionSchemas `queryParam:"inline" name:"V2BulkElementResult"`
-	V2BulkElementResultDeleteMetadataSchemas    *V2BulkElementResultDeleteMetadataSchemas    `queryParam:"inline" name:"V2BulkElementResult"`
-	V2BulkElementResultErrorSchemas             *V2BulkElementResultErrorSchemas             `queryParam:"inline" name:"V2BulkElementResult"`
+	V2BulkElementResultCreateTransactionSchemas *V2BulkElementResultCreateTransactionSchemas `queryParam:"inline,name=V2BulkElementResult"`
+	Schemas                                     *Schemas                                     `queryParam:"inline,name=V2BulkElementResult"`
+	V2BulkElementResultRevertTransactionSchemas *V2BulkElementResultRevertTransactionSchemas `queryParam:"inline,name=V2BulkElementResult"`
+	V2BulkElementResultDeleteMetadataSchemas    *V2BulkElementResultDeleteMetadataSchemas    `queryParam:"inline,name=V2BulkElementResult"`
+	V2BulkElementResultErrorSchemas             *V2BulkElementResultErrorSchemas             `queryParam:"inline,name=V2BulkElementResult"`
 
 	Type V2BulkElementResultType
 }

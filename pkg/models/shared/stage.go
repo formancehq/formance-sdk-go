@@ -18,10 +18,10 @@ const (
 )
 
 type Stage struct {
-	StageSend      *StageSend      `queryParam:"inline" name:"Stage"`
-	StageDelay     *StageDelay     `queryParam:"inline" name:"Stage"`
-	StageWaitEvent *StageWaitEvent `queryParam:"inline" name:"Stage"`
-	Update         *Update         `queryParam:"inline" name:"Stage"`
+	StageSend      *StageSend      `queryParam:"inline,name=Stage"`
+	StageDelay     *StageDelay     `queryParam:"inline,name=Stage"`
+	StageWaitEvent *StageWaitEvent `queryParam:"inline,name=Stage"`
+	Update         *Update         `queryParam:"inline,name=Stage"`
 
 	Type StageType
 }

@@ -24,6 +24,10 @@ type V2ListAccountsRequest struct {
 	//
 	PageSize *int64     `queryParam:"style=form,explode=true,name=pageSize"`
 	Pit      *time.Time `queryParam:"style=form,explode=true,name=pit"`
+	// Sort results using a field name and order (ascending or descending).
+	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
+	//
+	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 }
 
 func (v V2ListAccountsRequest) MarshalJSON() ([]byte, error) {
@@ -77,6 +81,13 @@ func (v *V2ListAccountsRequest) GetPit() *time.Time {
 		return nil
 	}
 	return v.Pit
+}
+
+func (v *V2ListAccountsRequest) GetSort() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Sort
 }
 
 type V2ListAccountsResponse struct {

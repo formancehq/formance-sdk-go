@@ -14,6 +14,7 @@ type V2Trigger struct {
 	ID         string         `json:"id"`
 	Name       *string        `json:"name,omitempty"`
 	Vars       map[string]any `json:"vars,omitempty"`
+	Version    *string        `json:"version,omitempty"`
 	WorkflowID string         `json:"workflowID"`
 }
 
@@ -68,6 +69,13 @@ func (v *V2Trigger) GetVars() map[string]any {
 		return nil
 	}
 	return v.Vars
+}
+
+func (v *V2Trigger) GetVersion() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Version
 }
 
 func (v *V2Trigger) GetWorkflowID() string {

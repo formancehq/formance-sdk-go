@@ -18,10 +18,10 @@ const (
 )
 
 type V2Stage struct {
-	V2StageSend      *V2StageSend      `queryParam:"inline" name:"V2Stage"`
-	V2StageDelay     *V2StageDelay     `queryParam:"inline" name:"V2Stage"`
-	V2StageWaitEvent *V2StageWaitEvent `queryParam:"inline" name:"V2Stage"`
-	V2Update         *V2Update         `queryParam:"inline" name:"V2Stage"`
+	V2StageSend      *V2StageSend      `queryParam:"inline,name=V2Stage"`
+	V2StageDelay     *V2StageDelay     `queryParam:"inline,name=V2Stage"`
+	V2StageWaitEvent *V2StageWaitEvent `queryParam:"inline,name=V2Stage"`
+	V2Update         *V2Update         `queryParam:"inline,name=V2Stage"`
 
 	Type V2StageType
 }

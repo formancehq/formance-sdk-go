@@ -10,6 +10,8 @@ import (
 type V2Ledger struct {
 	AddedAt  time.Time         `json:"addedAt"`
 	Bucket   string            `json:"bucket"`
+	Features map[string]string `json:"features,omitempty"`
+	ID       *int64            `json:"id,omitempty"`
 	Metadata map[string]string `json:"metadata,omitempty"`
 	Name     string            `json:"name"`
 }
@@ -37,6 +39,20 @@ func (v *V2Ledger) GetBucket() string {
 		return ""
 	}
 	return v.Bucket
+}
+
+func (v *V2Ledger) GetFeatures() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Features
+}
+
+func (v *V2Ledger) GetID() *int64 {
+	if v == nil {
+		return nil
+	}
+	return v.ID
 }
 
 func (v *V2Ledger) GetMetadata() map[string]string {

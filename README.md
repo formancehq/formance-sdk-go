@@ -27,7 +27,6 @@ and standard method from web, mobile and desktop applications.
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [github.com/formancehq/formance-sdk-go/v2](#githubcomformancehqformance-sdk-gov2)
-  * [🏗 **Welcome to your new SDK!** 🏗](#welcome-to-your-new-sdk)
 * [Introduction](#introduction)
 * [Authentication](#authentication)
   * [SDK Installation](#sdk-installation)
@@ -119,6 +118,8 @@ func main() {
 
 ### [Ledger](docs/sdks/ledger/README.md)
 
+* [GetInfo](docs/sdks/ledger/README.md#getinfo) - Show server information
+* [GetMetrics](docs/sdks/ledger/README.md#getmetrics) - Read in memory metrics
 
 #### [Ledger.V1](docs/sdks/formancev1/README.md)
 
@@ -150,27 +151,36 @@ func main() {
 * [CountAccounts](docs/sdks/v2/README.md#countaccounts) - Count the accounts from a ledger
 * [CountTransactions](docs/sdks/v2/README.md#counttransactions) - Count the transactions from a ledger
 * [CreateBulk](docs/sdks/v2/README.md#createbulk) - Bulk request
+* [CreateExporter](docs/sdks/v2/README.md#createexporter) - Create exporter
 * [CreateLedger](docs/sdks/v2/README.md#createledger) - Create a ledger
+* [CreatePipeline](docs/sdks/v2/README.md#createpipeline) - Create pipeline
 * [CreateTransaction](docs/sdks/v2/README.md#createtransaction) - Create a new transaction to a ledger
 * [DeleteAccountMetadata](docs/sdks/v2/README.md#deleteaccountmetadata) - Delete metadata by key
+* [DeleteExporter](docs/sdks/v2/README.md#deleteexporter) - Delete exporter
 * [DeleteLedgerMetadata](docs/sdks/v2/README.md#deleteledgermetadata) - Delete ledger metadata by key
+* [DeletePipeline](docs/sdks/v2/README.md#deletepipeline) - Delete pipeline
 * [DeleteTransactionMetadata](docs/sdks/v2/README.md#deletetransactionmetadata) - Delete metadata by key
 * [ExportLogs](docs/sdks/v2/README.md#exportlogs) - Export logs
 * [GetAccount](docs/sdks/v2/README.md#getaccount) - Get account by its address
 * [GetBalancesAggregated](docs/sdks/v2/README.md#getbalancesaggregated) - Get the aggregated balances from selected accounts
-* [GetInfo](docs/sdks/v2/README.md#getinfo) - Show server information
+* [GetExporterState](docs/sdks/v2/README.md#getexporterstate) - Get exporter state
 * [GetLedger](docs/sdks/v2/README.md#getledger) - Get a ledger
 * [GetLedgerInfo](docs/sdks/v2/README.md#getledgerinfo) - Get information about a ledger
-* [GetMetrics](docs/sdks/v2/README.md#getmetrics) - Read in memory metrics
+* [GetPipelineState](docs/sdks/v2/README.md#getpipelinestate) - Get pipeline state
 * [GetTransaction](docs/sdks/v2/README.md#gettransaction) - Get transaction from a ledger by its ID
 * [GetVolumesWithBalances](docs/sdks/v2/README.md#getvolumeswithbalances) - Get list of volumes with balances for (account/asset)
 * [ImportLogs](docs/sdks/v2/README.md#importlogs)
 * [ListAccounts](docs/sdks/v2/README.md#listaccounts) - List accounts from a ledger
+* [ListExporters](docs/sdks/v2/README.md#listexporters) - List exporters
 * [ListLedgers](docs/sdks/v2/README.md#listledgers) - List ledgers
 * [ListLogs](docs/sdks/v2/README.md#listlogs) - List the logs from a ledger
+* [ListPipelines](docs/sdks/v2/README.md#listpipelines) - List pipelines
 * [ListTransactions](docs/sdks/v2/README.md#listtransactions) - List transactions from a ledger
 * [ReadStats](docs/sdks/v2/README.md#readstats) - Get statistics from a ledger
+* [ResetPipeline](docs/sdks/v2/README.md#resetpipeline) - Reset pipeline
 * [RevertTransaction](docs/sdks/v2/README.md#reverttransaction) - Revert a ledger transaction by its ID
+* [StartPipeline](docs/sdks/v2/README.md#startpipeline) - Start pipeline
+* [StopPipeline](docs/sdks/v2/README.md#stoppipeline) - Stop pipeline
 * [UpdateLedgerMetadata](docs/sdks/v2/README.md#updateledgermetadata) - Update ledger metadata
 
 ### [Orchestration](docs/sdks/orchestration/README.md)
@@ -388,7 +398,7 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `sdkerrors.SDKError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `AddMetadataOnTransaction` function may return the following errors:
+For example, the `GetInfo` function may return the following errors:
 
 | Error Type                | Status Code | Content Type     |
 | ------------------------- | ----------- | ---------------- |
@@ -404,11 +414,9 @@ import (
 	"context"
 	"errors"
 	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
-	"math/big"
 )
 
 func main() {
@@ -421,14 +429,7 @@ func main() {
 		}),
 	)
 
-	res, err := s.Ledger.V2.AddMetadataOnTransaction(ctx, operations.V2AddMetadataOnTransactionRequest{
-		RequestBody: map[string]string{
-			"admin": "true",
-		},
-		DryRun: v3.Pointer(true),
-		ID:     big.NewInt(1234),
-		Ledger: "ledger001",
-	})
+	res, err := s.Ledger.GetInfo(ctx)
 	if err != nil {
 
 		var e *sdkerrors.V2ErrorResponse
@@ -462,10 +463,10 @@ You can override the default server globally using the `WithServerIndex(serverIn
 
 If the selected server has variables, you may override its default values using the associated option(s):
 
-| Variable       | Option                                           | Supported Values                                                           | Default           | Description                                                   |
-| -------------- | ------------------------------------------------ | -------------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
-| `environment`  | `WithEnvironment(environment ServerEnvironment)` | - `"eu.sandbox"`<br/>- `"sandbox"`<br/>- `"eu-west-1"`<br/>- `"us-east-1"` | `"eu.sandbox"`    | The environment name. Defaults to the production environment. |
-| `organization` | `WithOrganization(organization string)`          | string                                                                     | `"orgID-stackID"` | The organization name. Defaults to a generic organization.    |
+| Variable       | Option                                           | Supported Values                                      | Default           | Description                                                   |
+| -------------- | ------------------------------------------------ | ----------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
+| `environment`  | `WithEnvironment(environment ServerEnvironment)` | - `"sandbox"`<br/>- `"eu-west-1"`<br/>- `"us-east-1"` | `"sandbox"`       | The environment name. Defaults to the production environment. |
+| `organization` | `WithOrganization(organization string)`          | string                                                | `"orgID-stackID"` | The organization name. Defaults to a generic organization.    |
 
 #### Example
 
@@ -520,7 +521,7 @@ func main() {
 	ctx := context.Background()
 
 	s := v3.New(
-		v3.WithServerURL("https://orgID-stackID.eu.sandbox.formance.cloud"),
+		v3.WithServerURL("https://orgID-stackID.sandbox.formance.cloud"),
 		v3.WithSecurity(shared.Security{
 			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
 			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),

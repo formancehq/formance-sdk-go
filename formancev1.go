@@ -796,7 +796,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 	}
 
 	switch {
-	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode == 204:
 		res.Headers = httpRes.Header
 
 	default:

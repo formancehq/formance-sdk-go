@@ -17,8 +17,8 @@ const (
 )
 
 type V2TargetID struct {
-	Str    *string  `queryParam:"inline" name:"V2TargetId"`
-	Bigint *big.Int `queryParam:"inline" name:"V2TargetId"`
+	Str    *string  `queryParam:"inline,name=V2TargetId"`
+	Bigint *big.Int `queryParam:"inline,name=V2TargetId"`
 
 	Type V2TargetIDType
 }
