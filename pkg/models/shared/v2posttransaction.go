@@ -3,9 +3,38 @@
 package shared
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"time"
 )
+
+// Runtime - The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
+type Runtime string
+
+const (
+	RuntimeExperimentalInterpreter Runtime = "experimental-interpreter"
+	RuntimeMachine                 Runtime = "machine"
+)
+
+func (e Runtime) ToPointer() *Runtime {
+	return &e
+}
+func (e *Runtime) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "experimental-interpreter":
+		fallthrough
+	case "machine":
+		*e = Runtime(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Runtime: %v", v)
+	}
+}
 
 type V2PostTransactionScript struct {
 	Plain string            `json:"plain"`
@@ -38,9 +67,13 @@ func (v *V2PostTransactionScript) GetVars() map[string]string {
 }
 
 type V2PostTransaction struct {
-	Metadata  map[string]string        `json:"metadata"`
-	Postings  []V2Posting              `json:"postings,omitempty"`
-	Reference *string                  `json:"reference,omitempty"`
+	AccountMetadata map[string]map[string]string `json:"accountMetadata,omitempty"`
+	Force           *bool                        `json:"force,omitempty"`
+	Metadata        map[string]string            `json:"metadata"`
+	Postings        []V2Posting                  `json:"postings,omitempty"`
+	Reference       *string                      `json:"reference,omitempty"`
+	// The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
+	Runtime   *Runtime                 `json:"runtime,omitempty"`
 	Script    *V2PostTransactionScript `json:"script,omitempty"`
 	Timestamp *time.Time               `json:"timestamp,omitempty"`
 }
@@ -54,6 +87,20 @@ func (v *V2PostTransaction) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2PostTransaction) GetAccountMetadata() map[string]map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.AccountMetadata
+}
+
+func (v *V2PostTransaction) GetForce() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.Force
 }
 
 func (v *V2PostTransaction) GetMetadata() map[string]string {
@@ -75,6 +122,13 @@ func (v *V2PostTransaction) GetReference() *string {
 		return nil
 	}
 	return v.Reference
+}
+
+func (v *V2PostTransaction) GetRuntime() *Runtime {
+	if v == nil {
+		return nil
+	}
+	return v.Runtime
 }
 
 func (v *V2PostTransaction) GetScript() *V2PostTransactionScript {

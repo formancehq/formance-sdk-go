@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version v3.0.5 and generator version 2.701.8
+// Generated from OpenAPI doc version v3.1.0 and generator version 2.721.3
 
 import (
 	"bytes"
@@ -117,10 +117,9 @@ func WithServerIndex(serverIndex int) SDKOption {
 type ServerEnvironment string
 
 const (
-	ServerEnvironmentEuSandbox ServerEnvironment = "eu.sandbox"
-	ServerEnvironmentSandbox   ServerEnvironment = "sandbox"
-	ServerEnvironmentEuWest1   ServerEnvironment = "eu-west-1"
-	ServerEnvironmentUsEast1   ServerEnvironment = "us-east-1"
+	ServerEnvironmentSandbox ServerEnvironment = "sandbox"
+	ServerEnvironmentEuWest1 ServerEnvironment = "eu-west-1"
+	ServerEnvironmentUsEast1 ServerEnvironment = "us-east-1"
 )
 
 func (e ServerEnvironment) ToPointer() *ServerEnvironment {
@@ -132,8 +131,6 @@ func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "eu.sandbox":
-		fallthrough
 	case "sandbox":
 		fallthrough
 	case "eu-west-1":
@@ -211,14 +208,14 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "3.6.0",
+		SDKVersion: "3.7.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.6.0 2.701.8 v3.0.5 github.com/formancehq/formance-sdk-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.7.0 2.721.3 v3.1.0 github.com/formancehq/formance-sdk-go/v3",
 			ServerList: ServerList,
 			ServerVariables: []map[string]string{
 				{},
 				{
-					"environment":  "eu.sandbox",
+					"environment":  "sandbox",
 					"organization": "orgID-stackID",
 				},
 			},

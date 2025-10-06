@@ -21,6 +21,7 @@ type V2Transaction struct {
 	Reverted                   bool                           `json:"reverted"`
 	RevertedAt                 *time.Time                     `json:"revertedAt,omitempty"`
 	Timestamp                  time.Time                      `json:"timestamp"`
+	UpdatedAt                  *time.Time                     `json:"updatedAt,omitempty"`
 }
 
 func (v V2Transaction) MarshalJSON() ([]byte, error) {
@@ -116,4 +117,11 @@ func (v *V2Transaction) GetTimestamp() time.Time {
 		return time.Time{}
 	}
 	return v.Timestamp
+}
+
+func (v *V2Transaction) GetUpdatedAt() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.UpdatedAt
 }

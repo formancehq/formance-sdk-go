@@ -18,6 +18,8 @@ type V2CreateTransactionRequest struct {
 	// Set the dryRun mode. dry run mode doesn't add the logs to the database or publish a message to the message broker.
 	DryRun *bool `queryParam:"style=form,explode=true,name=dryRun"`
 	// Disable balance checks when passing postings
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Force *bool `queryParam:"style=form,explode=true,name=force"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`

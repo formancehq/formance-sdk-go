@@ -17,8 +17,8 @@ const (
 )
 
 type V2Subject struct {
-	V2LedgerAccountSubject *V2LedgerAccountSubject `queryParam:"inline" name:"V2Subject"`
-	V2WalletSubject        *V2WalletSubject        `queryParam:"inline" name:"V2Subject"`
+	V2LedgerAccountSubject *V2LedgerAccountSubject `queryParam:"inline,name=V2Subject"`
+	V2WalletSubject        *V2WalletSubject        `queryParam:"inline,name=V2Subject"`
 
 	Type V2SubjectType
 }

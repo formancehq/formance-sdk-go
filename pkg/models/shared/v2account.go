@@ -2,11 +2,30 @@
 
 package shared
 
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+	"time"
+)
+
 type V2Account struct {
 	Address          string              `json:"address"`
 	EffectiveVolumes map[string]V2Volume `json:"effectiveVolumes,omitempty"`
+	FirstUsage       *time.Time          `json:"firstUsage,omitempty"`
+	InsertionDate    *time.Time          `json:"insertionDate,omitempty"`
 	Metadata         map[string]string   `json:"metadata"`
+	UpdatedAt        *time.Time          `json:"updatedAt,omitempty"`
 	Volumes          map[string]V2Volume `json:"volumes,omitempty"`
+}
+
+func (v V2Account) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2Account) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"address", "metadata"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2Account) GetAddress() string {
@@ -23,11 +42,32 @@ func (v *V2Account) GetEffectiveVolumes() map[string]V2Volume {
 	return v.EffectiveVolumes
 }
 
+func (v *V2Account) GetFirstUsage() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.FirstUsage
+}
+
+func (v *V2Account) GetInsertionDate() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.InsertionDate
+}
+
 func (v *V2Account) GetMetadata() map[string]string {
 	if v == nil {
 		return map[string]string{}
 	}
 	return v.Metadata
+}
+
+func (v *V2Account) GetUpdatedAt() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.UpdatedAt
 }
 
 func (v *V2Account) GetVolumes() map[string]V2Volume {

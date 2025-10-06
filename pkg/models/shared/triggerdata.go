@@ -7,6 +7,7 @@ type TriggerData struct {
 	Filter     *string        `json:"filter,omitempty"`
 	Name       *string        `json:"name,omitempty"`
 	Vars       map[string]any `json:"vars,omitempty"`
+	Version    *string        `json:"version,omitempty"`
 	WorkflowID string         `json:"workflowID"`
 }
 
@@ -36,6 +37,13 @@ func (t *TriggerData) GetVars() map[string]any {
 		return nil
 	}
 	return t.Vars
+}
+
+func (t *TriggerData) GetVersion() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Version
 }
 
 func (t *TriggerData) GetWorkflowID() string {

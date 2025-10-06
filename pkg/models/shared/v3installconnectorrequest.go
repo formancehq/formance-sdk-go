@@ -28,19 +28,19 @@ const (
 )
 
 type V3InstallConnectorRequest struct {
-	V3AdyenConfig         *V3AdyenConfig         `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3AtlarConfig         *V3AtlarConfig         `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3BankingcircleConfig *V3BankingcircleConfig `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3ColumnConfig        *V3ColumnConfig        `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3CurrencycloudConfig *V3CurrencycloudConfig `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3DummypayConfig      *V3DummypayConfig      `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3GenericConfig       *V3GenericConfig       `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3MangopayConfig      *V3MangopayConfig      `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3ModulrConfig        *V3ModulrConfig        `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3MoneycorpConfig     *V3MoneycorpConfig     `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3QontoConfig         *V3QontoConfig         `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3StripeConfig        *V3StripeConfig        `queryParam:"inline" name:"V3InstallConnectorRequest"`
-	V3WiseConfig          *V3WiseConfig          `queryParam:"inline" name:"V3InstallConnectorRequest"`
+	V3AdyenConfig         *V3AdyenConfig         `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3AtlarConfig         *V3AtlarConfig         `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3BankingcircleConfig *V3BankingcircleConfig `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3ColumnConfig        *V3ColumnConfig        `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3CurrencycloudConfig *V3CurrencycloudConfig `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3DummypayConfig      *V3DummypayConfig      `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3GenericConfig       *V3GenericConfig       `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3MangopayConfig      *V3MangopayConfig      `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3ModulrConfig        *V3ModulrConfig        `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3MoneycorpConfig     *V3MoneycorpConfig     `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3QontoConfig         *V3QontoConfig         `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3StripeConfig        *V3StripeConfig        `queryParam:"inline,name=V3InstallConnectorRequest"`
+	V3WiseConfig          *V3WiseConfig          `queryParam:"inline,name=V3InstallConnectorRequest"`
 
 	Type V3InstallConnectorRequestType
 }

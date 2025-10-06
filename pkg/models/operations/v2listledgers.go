@@ -8,6 +8,7 @@ import (
 )
 
 type V2ListLedgersRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -17,6 +18,17 @@ type V2ListLedgersRequest struct {
 	// The maximum number of results to return per page.
 	//
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	// Sort results using a field name and order (ascending or descending).
+	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
+	//
+	Sort *string `queryParam:"style=form,explode=true,name=sort"`
+}
+
+func (v *V2ListLedgersRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return map[string]any{}
+	}
+	return v.RequestBody
 }
 
 func (v *V2ListLedgersRequest) GetCursor() *string {
@@ -31,6 +43,13 @@ func (v *V2ListLedgersRequest) GetPageSize() *int64 {
 		return nil
 	}
 	return v.PageSize
+}
+
+func (v *V2ListLedgersRequest) GetSort() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Sort
 }
 
 type V2ListLedgersResponse struct {

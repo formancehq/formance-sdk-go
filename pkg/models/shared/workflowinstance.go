@@ -15,6 +15,7 @@ type WorkflowInstance struct {
 	Terminated   bool          `json:"terminated"`
 	TerminatedAt *time.Time    `json:"terminatedAt,omitempty"`
 	UpdatedAt    time.Time     `json:"updatedAt"`
+	Workflow     *Workflow     `json:"workflow,omitempty"`
 	WorkflowID   string        `json:"workflowID"`
 }
 
@@ -76,6 +77,13 @@ func (w *WorkflowInstance) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return w.UpdatedAt
+}
+
+func (w *WorkflowInstance) GetWorkflow() *Workflow {
+	if w == nil {
+		return nil
+	}
+	return w.Workflow
 }
 
 func (w *WorkflowInstance) GetWorkflowID() string {
