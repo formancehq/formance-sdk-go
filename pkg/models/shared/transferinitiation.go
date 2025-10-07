@@ -62,7 +62,7 @@ func (t TransferInitiation) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferInitiation) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"amount", "asset", "connectorID", "createdAt", "description", "destinationAccountID", "id", "initialAmount", "provider", "reference", "scheduledAt", "sourceAccountID", "status", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"amount", "asset", "connectorID", "createdAt", "description", "destinationAccountID", "id", "initialAmount", "reference", "scheduledAt", "sourceAccountID", "status", "type"}); err != nil {
 		return err
 	}
 	return nil

@@ -20,7 +20,7 @@ func (r ReverseTransferInitiationRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReverseTransferInitiationRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"amount", "asset", "description", "metadata", "reference"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"amount", "asset", "description", "reference"}); err != nil {
 		return err
 	}
 	return nil

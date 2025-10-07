@@ -1,4 +1,4 @@
-speakeasyVersion: 1.634.2
+speakeasyVersion: 1.635.1
 sources:
     stacks-source:
         sourceNamespace: stacks-source
@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:1cd53cc53e77bfa3f809e05c32dfd8b4df1e2a98b68ac561a10f664ce74064e1
         tags:
             - latest
-            - speakeasy-sdk-regen-1759750624
+            - speakeasy-sdk-regen-1759796375
             - v3.1.0
 targets:
     formance-sdk-go:
@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:7e5972b9253796fda72cfd3b80858d51f8c1026df843c265619594f900578b40
         sourceBlobDigest: sha256:1cd53cc53e77bfa3f809e05c32dfd8b4df1e2a98b68ac561a10f664ce74064e1
         codeSamplesNamespace: stacks-source-go-code-samples
-        codeSamplesRevisionDigest: sha256:0d6fd72a2d77f4952ca749716e75766c88bd62fcc7113cdb589c6990d53e93a6
+        codeSamplesRevisionDigest: sha256:9d969290632c40f722b00593c3cebeaf32348108a24f34e0ffea16becc859d87
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

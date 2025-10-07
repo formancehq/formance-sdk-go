@@ -3,10 +3,10 @@ id: 7eac0a45-60a2-40bb-9e85-26bd77ec2a6d
 management:
   docChecksum: fb444f688b96b35960ea0ebe55aa834f
   docVersion: v3.1.0
-  speakeasyVersion: 1.634.2
-  generationVersion: 2.721.3
-  releaseVersion: 3.7.0
-  configChecksum: e48f29f519aaacff399eaa17cef52d29
+  speakeasyVersion: 1.635.1
+  generationVersion: 2.722.2
+  releaseVersion: 3.7.1
+  configChecksum: 075264585584e02b53b0c2d3d1453a20
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
@@ -29,7 +29,7 @@ features:
     ignores: 2.81.1
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
-    nullables: 0.2.0
+    nullables: 0.2.1
     oauth2ClientCredentials: 0.4.0
     responseFormat: 0.1.2
     retries: 2.84.2
@@ -4073,4 +4073,3 @@ examples:
           application/json: {"details": "https://play.numscript.org/?payload=eyJlcnJvciI6ImFjY291bnQgaGFkIGluc3VmZmljaWVudCBmdW5kcyJ9", "errorCode": "VALIDATION", "errorMessage": "[VALIDATION] invalid 'cursor' query param"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Formance.Ledger.V2.ListLedgers()`: \n  *  `request.Request` **Changed** **Breaking** :warning:\n  *  `response.Cursor.Data.[]` **Changed**\n* `Formance.Ledger.V1.CountAccounts()`:  `response` **Changed** **Breaking** :warning:\n* `Formance.Ledger.V2.GetVolumesWithBalances()`: \n  *  `request.Request.Sort` **Added**\n* `Formance.Ledger.V2.GetLedger()`:  `response.Data` **Changed**\n* `Formance.Ledger.V2.DeleteExporter()`: **Added**\n* `Formance.Ledger.V2.DeletePipeline()`: **Added**\n* `Formance.Ledger.V2.GetExporterState()`: **Added**\n* `Formance.Ledger.V2.GetPipelineState()`: **Added**\n* `Formance.Ledger.V2.ListExporters()`: **Added**\n* `Formance.Ledger.V2.ListPipelines()`: **Added**\n* `Formance.Ledger.V2.ResetPipeline()`: **Added**\n* `Formance.Ledger.V2.StartPipeline()`: **Added**\n* `Formance.Ledger.V2.StopPipeline()`: **Added**\n* `Formance.Ledger.V2.GetInfo()`: **Deleted** **Breaking** :warning:\n* `Formance.Ledger.V2.GetMetrics()`: **Deleted** **Breaking** :warning:\n* `Formance.Ledger.V2.CreateBulk()`: \n  *  `request.Request.RequestBody.[].[addMetadata].Data` **Changed**\n  *  `response.Data.[]` **Changed**\n* `Formance.Ledger.V2.CreateTransaction()`: \n  *  `request.Request.V2PostTransaction` **Changed**\n  *  `response.Data.UpdatedAt` **Added**\n* `Formance.Ledger.V2.GetAccount()`:  `response.Data` **Changed**\n* `Formance.Ledger.V2.ListAccounts()`: \n  *  `request.Request.Sort` **Added**\n  *  `response.Cursor.Data.[]` **Changed**\n* `Formance.Ledger.V2.GetTransaction()`:  `response.Data.UpdatedAt` **Added**\n* `Formance.Ledger.V2.CreatePipeline()`: **Added**\n* `Formance.Ledger.GetInfo()`: **Added**\n* `Formance.Ledger.V2.RevertTransaction()`: \n  *  `request.Request.V2RevertTransactionRequest` **Added**\n  *  `response.Data.UpdatedAt` **Added**\n* `Formance.Ledger.V2.ListLogs()`: \n  *  `request.Request.Sort` **Added**\n* `Formance.Ledger.V2.ListTransactions()`: \n  *  `request.Request.Sort` **Added**\n  *  `response.Cursor.Data.[].UpdatedAt` **Added**\n* `Formance.Ledger.V2.CreateExporter()`: **Added**\n* `Formance.Ledger.GetMetrics()`: **Added**\n* `Formance.Orchestration.V1.CreateTrigger()`: \n  *  `request.Request.Version` **Added**\n  *  `response.Data.Version` **Added**\n* `Formance.Orchestration.V1.GetInstance()`:  `response.Data.Workflow` **Added**\n* `Formance.Orchestration.V1.ListInstances()`:  `response.Data.[].Workflow` **Added**\n* `Formance.Orchestration.V1.ListTriggers()`:  `response.Data.[].Version` **Added**\n* `Formance.Orchestration.V1.ListTriggersOccurrences()`:  `response.Data.[].WorkflowInstance.Workflow` **Added**\n* `Formance.Orchestration.V1.ReadTrigger()`:  `response.Data.Version` **Added**\n* `Formance.Orchestration.V1.RunWorkflow()`:  `response.Data.Workflow` **Added**\n* `Formance.Orchestration.V2.CreateTrigger()`: \n  *  `request.Request.Version` **Added**\n  *  `response.Data.Version` **Added**\n* `Formance.Orchestration.V2.GetInstance()`:  `response.Data.Workflow` **Added**\n* `Formance.Orchestration.V2.ListInstances()`:  `response.Cursor.Data.[].Workflow` **Added**\n* `Formance.Orchestration.V2.ListTriggers()`:  `response.Cursor.Data.[].Version` **Added**\n* `Formance.Orchestration.V2.ListTriggersOccurrences()`:  `response.Cursor.Data.[].WorkflowInstance.Workflow` **Added**\n* `Formance.Orchestration.V2.ReadTrigger()`:  `response.Data.Version` **Added**\n* `Formance.Orchestration.V2.RunWorkflow()`:  `response.Data.Workflow` **Added**\n"
