@@ -142,7 +142,7 @@ func (v V2Payment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Payment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"adjustments", "asset", "connectorID", "createdAt", "destinationAccountID", "id", "initialAmount", "metadata", "raw", "reference", "scheme", "sourceAccountID", "status", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"adjustments", "asset", "connectorID", "createdAt", "destinationAccountID", "id", "initialAmount", "reference", "scheme", "sourceAccountID", "status", "type"}); err != nil {
 		return err
 	}
 	return nil

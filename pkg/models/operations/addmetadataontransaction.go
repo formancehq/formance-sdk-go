@@ -22,7 +22,7 @@ func (a AddMetadataOnTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AddMetadataOnTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"RequestBody", "ledger", "txid"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"ledger", "txid"}); err != nil {
 		return err
 	}
 	return nil

@@ -35,7 +35,7 @@ func (p Payment) MarshalJSON() ([]byte, error) {
 }
 
 func (p *Payment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"adjustments", "amount", "asset", "connectorID", "createdAt", "destinationAccountID", "id", "initialAmount", "metadata", "raw", "reference", "scheme", "sourceAccountID", "status", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"adjustments", "amount", "asset", "connectorID", "createdAt", "destinationAccountID", "id", "initialAmount", "reference", "scheme", "sourceAccountID", "status", "type"}); err != nil {
 		return err
 	}
 	return nil
