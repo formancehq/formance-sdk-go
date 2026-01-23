@@ -5,8 +5,8 @@ management:
   docVersion: v3.1.0
   speakeasyVersion: 1.635.1
   generationVersion: 2.722.2
-  releaseVersion: 3.7.1
-  configChecksum: 075264585584e02b53b0c2d3d1453a20
+  releaseVersion: 3.7.2
+  configChecksum: 278ae393580b61d5d44263ec85d7667e
   repoURL: https://github.com/formancehq/formance-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/formancehq/formance-sdk-go
