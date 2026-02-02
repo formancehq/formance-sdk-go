@@ -21,6 +21,6 @@ func TestBuildAccountID(t *testing.T) {
 		connectorIDStr := "invalid"
 
 		_, err := BuildAccountID(connectorIDStr, "someAccountReference")
-		require.Errorf(t, err, "foo")
+		require.Error(t, err)
 	})
 }

@@ -16,12 +16,15 @@ type AccountID struct {
 	ConnectorID ConnectorID `json:"ConnectorID"`
 }
 
-// BuildAccountID creates an account ID string from a connector ID string and a reference.
+// BuildAccountID Build a Formance payments account ID from a connector ID and a reference.
 // The reference is the account identifier from the connector's provider.
 func BuildAccountID(connectorID string, reference string) (string, error) {
 	cid, err := connectorIDFromString(connectorID)
 	if err != nil {
 		return "", fmt.Errorf("invalid connector ID: %w", err)
+	}
+	if reference == "" {
+		return "", fmt.Errorf("invalid reference")
 	}
 
 	aid := AccountID{
@@ -29,20 +32,21 @@ func BuildAccountID(connectorID string, reference string) (string, error) {
 		ConnectorID: cid,
 	}
 
-	return aid.string(), nil
+	aidString, err := aid.string()
+	if err != nil {
+		return "", err
+	}
+
+	return aidString, nil
 }
 
-func (aid *AccountID) string() string {
-	if aid == nil || aid.Reference == "" {
-		return ""
-	}
-
+func (aid *AccountID) string() (string, error) {
 	data, err := canonicaljson.Marshal(aid)
 	if err != nil {
-		panic(err)
+		return "", fmt.Errorf("error during marhsalling of account id: %w", err)
 	}
 
-	return base64.URLEncoding.WithPadding(base64.NoPadding).EncodeToString(data)
+	return base64.URLEncoding.WithPadding(base64.NoPadding).EncodeToString(data), nil
 }
 
 type ConnectorID struct {
