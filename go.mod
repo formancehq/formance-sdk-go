@@ -3,6 +3,8 @@ module github.com/formancehq/formance-sdk-go/v3
 go 1.22
 
 require (
+	github.com/gibson042/canonicaljson-go v1.0.3
+	github.com/google/uuid v1.6.0
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/sync v0.8.0
 )
