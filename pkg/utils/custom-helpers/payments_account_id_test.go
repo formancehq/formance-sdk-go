@@ -14,7 +14,7 @@ func TestBuildAccountID(t *testing.T) {
 
 		accountIDStr, err := BuildAccountID(connectorIDStr, "acct_1JO38XEps47l2xRm")
 		require.NoError(t, err)
-		assert.Equal(t, accountIDStr, expectedAccountId)
+		assert.Equal(t, expectedAccountId, accountIDStr)
 	})
 
 	t.Run("Fail to build from invalid connectorId", func(t *testing.T) {
