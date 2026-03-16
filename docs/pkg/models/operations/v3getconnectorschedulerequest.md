@@ -5,5 +5,5 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `ConnectorID`      | *string*           | :heavy_check_mark: | The connector ID   |
-| `ScheduleID`       | *string*           | :heavy_check_mark: | The schedule ID    |
+| `ConnectorID`      | `string`           | :heavy_check_mark: | The connector ID   |
+| `ScheduleID`       | `string`           | :heavy_check_mark: | The schedule ID    |

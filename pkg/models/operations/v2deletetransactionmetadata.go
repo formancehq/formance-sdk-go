@@ -24,7 +24,7 @@ func (v V2DeleteTransactionMetadataRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2DeleteTransactionMetadataRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id", "key", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -58,9 +58,13 @@ func (v *V2DeleteTransactionMetadataRequest) GetLedger() string {
 	return v.Ledger
 }
 
+// #region class-body-v2deletetransactionmetadatarequest
+// #endregion class-body-v2deletetransactionmetadatarequest
+
 type V2DeleteTransactionMetadataResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -72,6 +76,13 @@ func (v *V2DeleteTransactionMetadataResponse) GetContentType() string {
 		return ""
 	}
 	return v.ContentType
+}
+
+func (v *V2DeleteTransactionMetadataResponse) GetHeaders() map[string][]string {
+	if v == nil {
+		return map[string][]string{}
+	}
+	return v.Headers
 }
 
 func (v *V2DeleteTransactionMetadataResponse) GetStatusCode() int {
@@ -87,3 +98,6 @@ func (v *V2DeleteTransactionMetadataResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2deletetransactionmetadataresponse
+// #endregion class-body-v2deletetransactionmetadataresponse

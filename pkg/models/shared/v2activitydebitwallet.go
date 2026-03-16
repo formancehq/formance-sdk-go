@@ -20,3 +20,6 @@ func (v *V2ActivityDebitWallet) GetID() *string {
 	}
 	return v.ID
 }
+
+// #region class-body-v2activitydebitwallet
+// #endregion class-body-v2activitydebitwallet

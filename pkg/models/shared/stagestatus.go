@@ -20,7 +20,7 @@ func (s StageStatus) MarshalJSON() ([]byte, error) {
 }
 
 func (s *StageStatus) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"instanceID", "stage", "startedAt"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil

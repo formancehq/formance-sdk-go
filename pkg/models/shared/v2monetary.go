@@ -38,3 +38,6 @@ func (v *V2Monetary) GetAsset() string {
 	}
 	return v.Asset
 }
+
+// #region class-body-v2monetary
+// #endregion class-body-v2monetary

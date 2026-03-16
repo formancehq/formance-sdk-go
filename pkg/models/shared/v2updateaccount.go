@@ -43,3 +43,6 @@ func (v *V2UpdateAccount) GetMetadata() map[string]string {
 	}
 	return v.Metadata
 }
+
+// #region class-body-v2updateaccount
+// #endregion class-body-v2updateaccount

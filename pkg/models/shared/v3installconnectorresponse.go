@@ -13,3 +13,6 @@ func (v *V3InstallConnectorResponse) GetData() string {
 	}
 	return v.Data
 }
+
+// #region class-body-v3installconnectorresponse
+// #endregion class-body-v3installconnectorresponse

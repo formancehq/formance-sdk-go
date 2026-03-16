@@ -3,9 +3,11 @@
 package shared
 
 type Pool struct {
-	Accounts []string `json:"accounts"`
-	ID       string   `json:"id"`
-	Name     string   `json:"name"`
+	Accounts []string       `json:"accounts"`
+	ID       string         `json:"id"`
+	Name     string         `json:"name"`
+	Query    map[string]any `json:"query,omitempty"`
+	Type     *PoolTypeEnum  `json:"type,omitempty"`
 }
 
 func (p *Pool) GetAccounts() []string {
@@ -27,4 +29,18 @@ func (p *Pool) GetName() string {
 		return ""
 	}
 	return p.Name
+}
+
+func (p *Pool) GetQuery() map[string]any {
+	if p == nil {
+		return nil
+	}
+	return p.Query
+}
+
+func (p *Pool) GetType() *PoolTypeEnum {
+	if p == nil {
+		return nil
+	}
+	return p.Type
 }

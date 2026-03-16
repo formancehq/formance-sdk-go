@@ -32,7 +32,7 @@ func newV1(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 }
 
 // CreateClient - Create client
-func (s *V1) CreateClient(ctx context.Context, request *shared.ClientOptions, opts ...operations.Option) (*operations.CreateClientResponse, error) {
+func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientRequest, opts ...operations.Option) (*operations.CreateClientResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -62,7 +62,7 @@ func (s *V1) CreateClient(ctx context.Context, request *shared.ClientOptions, op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createClient",
-		OAuth2Scopes:     []string{"auth:read", "auth:write"},
+		OAuth2Scopes:     []string{"auth:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
@@ -261,7 +261,7 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createSecret",
-		OAuth2Scopes:     []string{"auth:read", "auth:write"},
+		OAuth2Scopes:     []string{"auth:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateSecretRequest", "json", `request:"mediaType=application/json"`)
@@ -460,7 +460,7 @@ func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteClient",
-		OAuth2Scopes:     []string{"auth:read", "auth:write"},
+		OAuth2Scopes:     []string{"auth:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -589,6 +589,7 @@ func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRe
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -632,7 +633,7 @@ func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteSecret",
-		OAuth2Scopes:     []string{"auth:read", "auth:write"},
+		OAuth2Scopes:     []string{"auth:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -761,6 +762,7 @@ func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRe
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -804,7 +806,7 @@ func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getOIDCWellKnowns",
-		OAuth2Scopes:     []string{"auth:read", "auth:read"},
+		OAuth2Scopes:     []string{"auth:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -933,6 +935,7 @@ func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (
 
 	switch {
 	case httpRes.StatusCode == 200:
+		utils.DrainBody(httpRes)
 	default:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -976,7 +979,7 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getServerInfo",
-		OAuth2Scopes:     []string{"auth:read", "auth:read"},
+		OAuth2Scopes:     []string{"auth:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1168,7 +1171,7 @@ func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listClients",
-		OAuth2Scopes:     []string{"auth:read", "auth:read"},
+		OAuth2Scopes:     []string{"auth:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1361,7 +1364,7 @@ func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listUsers",
-		OAuth2Scopes:     []string{"auth:read", "auth:read"},
+		OAuth2Scopes:     []string{"auth:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1553,7 +1556,7 @@ func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientReques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "readClient",
-		OAuth2Scopes:     []string{"auth:read", "auth:read"},
+		OAuth2Scopes:     []string{"auth:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1746,7 +1749,7 @@ func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "readUser",
-		OAuth2Scopes:     []string{"auth:read", "auth:read"},
+		OAuth2Scopes:     []string{"auth:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1938,10 +1941,10 @@ func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateClient",
-		OAuth2Scopes:     []string{"auth:read", "auth:write"},
+		OAuth2Scopes:     []string{"auth:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "ClientOptions", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateClientRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -2081,12 +2084,12 @@ func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRe
 				return nil, err
 			}
 
-			var out shared.CreateClientResponse
+			var out shared.UpdateClientResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.CreateClientResponse = &out
+			res.UpdateClientResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

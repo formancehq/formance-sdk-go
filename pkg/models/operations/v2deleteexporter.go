@@ -18,6 +18,9 @@ func (v *V2DeleteExporterRequest) GetExporterID() string {
 	return v.ExporterID
 }
 
+// #region class-body-v2deleteexporterrequest
+// #endregion class-body-v2deleteexporterrequest
+
 type V2DeleteExporterResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -47,3 +50,6 @@ func (v *V2DeleteExporterResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2deleteexporterresponse
+// #endregion class-body-v2deleteexporterresponse

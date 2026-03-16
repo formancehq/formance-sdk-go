@@ -27,3 +27,6 @@ func (v *V2Update) GetAccount() *V2UpdateAccount {
 	}
 	return v.Account
 }
+
+// #region class-body-v2update
+// #endregion class-body-v2update

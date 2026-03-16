@@ -19,6 +19,9 @@ func (v *V2GetExporterStateRequest) GetExporterID() string {
 	return v.ExporterID
 }
 
+// #region class-body-v2getexporterstaterequest
+// #endregion class-body-v2getexporterstaterequest
+
 // V2GetExporterStateResponseBody - Exporter information
 type V2GetExporterStateResponseBody struct {
 	Data shared.V2Exporter `json:"data"`
@@ -30,6 +33,9 @@ func (v *V2GetExporterStateResponseBody) GetData() shared.V2Exporter {
 	}
 	return v.Data
 }
+
+// #region class-body-v2getexporterstateresponsebody
+// #endregion class-body-v2getexporterstateresponsebody
 
 type V2GetExporterStateResponse struct {
 	// HTTP response content type for this operation
@@ -69,3 +75,6 @@ func (v *V2GetExporterStateResponse) GetObject() *V2GetExporterStateResponseBody
 	}
 	return v.Object
 }
+
+// #region class-body-v2getexporterstateresponse
+// #endregion class-body-v2getexporterstateresponse

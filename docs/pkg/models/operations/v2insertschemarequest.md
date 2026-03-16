@@ -1,0 +1,11 @@
+# V2InsertSchemaRequest
+
+
+## Fields
+
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       | Example                                                           |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `IdempotencyKey`                                                  | `*string`                                                         | :heavy_minus_sign:                                                | Use an idempotency key                                            |                                                                   |
+| `V2SchemaData`                                                    | [shared.V2SchemaData](../../../pkg/models/shared/v2schemadata.md) | :heavy_check_mark:                                                | N/A                                                               |                                                                   |
+| `Ledger`                                                          | `string`                                                          | :heavy_check_mark:                                                | Name of the ledger.                                               | ledger001                                                         |
+| `Version`                                                         | `string`                                                          | :heavy_check_mark:                                                | Schema version.                                                   | v1.0.0                                                            |

@@ -25,7 +25,7 @@ func (a Attempt) MarshalJSON() ([]byte, error) {
 }
 
 func (a *Attempt) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"config", "createdAt", "id", "payload", "retryAttempt", "status", "statusCode", "updatedAt", "webhookID"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
 		return err
 	}
 	return nil

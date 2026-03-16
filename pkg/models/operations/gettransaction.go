@@ -21,7 +21,7 @@ func (g GetTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"ledger", "txid"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
 		return err
 	}
 	return nil

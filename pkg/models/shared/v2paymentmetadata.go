@@ -12,3 +12,6 @@ func (v *V2PaymentMetadata) GetKey() *string {
 	}
 	return v.Key
 }
+
+// #region class-body-v2paymentmetadata
+// #endregion class-body-v2paymentmetadata

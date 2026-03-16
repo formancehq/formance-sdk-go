@@ -12,3 +12,6 @@ func (v *V3GetPaymentResponse) GetData() V3Payment {
 	}
 	return v.Data
 }
+
+// #region class-body-v3getpaymentresponse
+// #endregion class-body-v3getpaymentresponse

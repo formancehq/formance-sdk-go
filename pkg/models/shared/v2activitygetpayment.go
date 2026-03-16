@@ -12,3 +12,6 @@ func (v *V2ActivityGetPayment) GetID() string {
 	}
 	return v.ID
 }
+
+// #region class-body-v2activitygetpayment
+// #endregion class-body-v2activitygetpayment

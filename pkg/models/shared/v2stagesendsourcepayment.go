@@ -27,3 +27,6 @@ func (v *V2StageSendSourcePayment) GetID() string {
 	}
 	return v.ID
 }
+
+// #region class-body-v2stagesendsourcepayment
+// #endregion class-body-v2stagesendsourcepayment

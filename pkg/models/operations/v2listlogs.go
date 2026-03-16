@@ -10,7 +10,6 @@ import (
 )
 
 type V2ListLogsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -34,17 +33,10 @@ func (v V2ListLogsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2ListLogsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
-}
-
-func (v *V2ListLogsRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return map[string]any{}
-	}
-	return v.RequestBody
 }
 
 func (v *V2ListLogsRequest) GetCursor() *string {
@@ -81,6 +73,9 @@ func (v *V2ListLogsRequest) GetSort() *string {
 	}
 	return v.Sort
 }
+
+// #region class-body-v2listlogsrequest
+// #endregion class-body-v2listlogsrequest
 
 type V2ListLogsResponse struct {
 	// HTTP response content type for this operation
@@ -120,3 +115,6 @@ func (v *V2ListLogsResponse) GetV2LogsCursorResponse() *shared.V2LogsCursorRespo
 	}
 	return v.V2LogsCursorResponse
 }
+
+// #region class-body-v2listlogsresponse
+// #endregion class-body-v2listlogsresponse

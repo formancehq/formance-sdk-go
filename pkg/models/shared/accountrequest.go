@@ -22,7 +22,7 @@ func (a AccountRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"connectorID", "createdAt", "reference", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
 		return err
 	}
 	return nil

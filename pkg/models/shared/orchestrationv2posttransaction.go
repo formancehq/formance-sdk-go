@@ -26,6 +26,9 @@ func (o *OrchestrationV2PostTransactionScript) GetVars() map[string]any {
 	return o.Vars
 }
 
+// #region class-body-orchestrationv2posttransactionscript
+// #endregion class-body-orchestrationv2posttransactionscript
+
 type OrchestrationV2PostTransaction struct {
 	Metadata  map[string]string                     `json:"metadata"`
 	Postings  []V2Posting                           `json:"postings,omitempty"`
@@ -39,7 +42,7 @@ func (o OrchestrationV2PostTransaction) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OrchestrationV2PostTransaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"metadata"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -79,3 +82,6 @@ func (o *OrchestrationV2PostTransaction) GetTimestamp() *time.Time {
 	}
 	return o.Timestamp
 }
+
+// #region class-body-orchestrationv2posttransaction
+// #endregion class-body-orchestrationv2posttransaction

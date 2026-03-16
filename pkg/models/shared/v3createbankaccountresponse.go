@@ -13,3 +13,6 @@ func (v *V3CreateBankAccountResponse) GetData() string {
 	}
 	return v.Data
 }
+
+// #region class-body-v3createbankaccountresponse
+// #endregion class-body-v3createbankaccountresponse

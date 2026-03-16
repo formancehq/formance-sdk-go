@@ -20,7 +20,7 @@ func (b BalanceWithAssets) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BalanceWithAssets) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"assets", "name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -28,7 +28,7 @@ func (e ExpandedDebitHold) MarshalJSON() ([]byte, error) {
 }
 
 func (e *ExpandedDebitHold) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"asset", "description", "id", "metadata", "originalAmount", "remaining", "walletID"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
 		return err
 	}
 	return nil

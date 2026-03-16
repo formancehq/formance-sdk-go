@@ -12,3 +12,6 @@ func (v *V3ForwardBankAccountRequest) GetConnectorID() string {
 	}
 	return v.ConnectorID
 }
+
+// #region class-body-v3forwardbankaccountrequest
+// #endregion class-body-v3forwardbankaccountrequest

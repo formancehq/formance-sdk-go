@@ -40,7 +40,7 @@ func (c CountTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CountTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil

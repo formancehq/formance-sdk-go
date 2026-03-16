@@ -36,3 +36,6 @@ func (v *V2StageDelay) GetUntil() *time.Time {
 	}
 	return v.Until
 }
+
+// #region class-body-v2stagedelay
+// #endregion class-body-v2stagedelay

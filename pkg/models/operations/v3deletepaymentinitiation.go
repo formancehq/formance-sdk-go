@@ -18,6 +18,9 @@ func (v *V3DeletePaymentInitiationRequest) GetPaymentInitiationID() string {
 	return v.PaymentInitiationID
 }
 
+// #region class-body-v3deletepaymentinitiationrequest
+// #endregion class-body-v3deletepaymentinitiationrequest
+
 type V3DeletePaymentInitiationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -47,3 +50,6 @@ func (v *V3DeletePaymentInitiationResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3deletepaymentinitiationresponse
+// #endregion class-body-v3deletepaymentinitiationresponse

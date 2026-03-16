@@ -9,7 +9,6 @@ import (
 )
 
 type V2CountTransactionsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string     `pathParam:"style=simple,explode=false,name=ledger"`
 	Pit    *time.Time `queryParam:"style=form,explode=true,name=pit"`
@@ -20,17 +19,10 @@ func (v V2CountTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2CountTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
-}
-
-func (v *V2CountTransactionsRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return map[string]any{}
-	}
-	return v.RequestBody
 }
 
 func (v *V2CountTransactionsRequest) GetLedger() string {
@@ -46,6 +38,9 @@ func (v *V2CountTransactionsRequest) GetPit() *time.Time {
 	}
 	return v.Pit
 }
+
+// #region class-body-v2counttransactionsrequest
+// #endregion class-body-v2counttransactionsrequest
 
 type V2CountTransactionsResponse struct {
 	// HTTP response content type for this operation
@@ -84,3 +79,6 @@ func (v *V2CountTransactionsResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2counttransactionsresponse
+// #endregion class-body-v2counttransactionsresponse

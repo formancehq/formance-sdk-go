@@ -12,3 +12,6 @@ func (v *V2ActivityConfirmHold) GetID() string {
 	}
 	return v.ID
 }
+
+// #region class-body-v2activityconfirmhold
+// #endregion class-body-v2activityconfirmhold

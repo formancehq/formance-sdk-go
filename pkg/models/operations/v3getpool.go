@@ -19,6 +19,9 @@ func (v *V3GetPoolRequest) GetPoolID() string {
 	return v.PoolID
 }
 
+// #region class-body-v3getpoolrequest
+// #endregion class-body-v3getpoolrequest
+
 type V3GetPoolResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3GetPoolResponse) GetV3GetPoolResponse() *shared.V3GetPoolResponse {
 	}
 	return v.V3GetPoolResponse
 }
+
+// #region class-body-v3getpoolresponse
+// #endregion class-body-v3getpoolresponse

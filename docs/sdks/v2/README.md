@@ -1,5 +1,4 @@
-# V2
-(*Ledger.V2*)
+# Ledger.V2
 
 ## Overview
 
@@ -15,6 +14,7 @@
 * [CreatePipeline](#createpipeline) - Create pipeline
 * [CreateTransaction](#createtransaction) - Create a new transaction to a ledger
 * [DeleteAccountMetadata](#deleteaccountmetadata) - Delete metadata by key
+* [DeleteBucket](#deletebucket) - Delete bucket
 * [DeleteExporter](#deleteexporter) - Delete exporter
 * [DeleteLedgerMetadata](#deleteledgermetadata) - Delete ledger metadata by key
 * [DeletePipeline](#deletepipeline) - Delete pipeline
@@ -26,20 +26,26 @@
 * [GetLedger](#getledger) - Get a ledger
 * [GetLedgerInfo](#getledgerinfo) - Get information about a ledger
 * [GetPipelineState](#getpipelinestate) - Get pipeline state
+* [GetSchema](#getschema) - Get a schema for a ledger by version
 * [GetTransaction](#gettransaction) - Get transaction from a ledger by its ID
 * [GetVolumesWithBalances](#getvolumeswithbalances) - Get list of volumes with balances for (account/asset)
 * [ImportLogs](#importlogs)
+* [InsertSchema](#insertschema) - Insert a schema for a ledger
 * [ListAccounts](#listaccounts) - List accounts from a ledger
 * [ListExporters](#listexporters) - List exporters
 * [ListLedgers](#listledgers) - List ledgers
 * [ListLogs](#listlogs) - List the logs from a ledger
 * [ListPipelines](#listpipelines) - List pipelines
+* [ListSchemas](#listschemas) - List all schemas for a ledger
 * [ListTransactions](#listtransactions) - List transactions from a ledger
 * [ReadStats](#readstats) - Get statistics from a ledger
 * [ResetPipeline](#resetpipeline) - Reset pipeline
+* [RestoreBucket](#restorebucket) - Restore bucket
 * [RevertTransaction](#reverttransaction) - Revert a ledger transaction by its ID
+* [RunQuery](#runquery) - Run a query template
 * [StartPipeline](#startpipeline) - Start pipeline
 * [StopPipeline](#stoppipeline) - Stop pipeline
+* [UpdateExporter](#updateexporter) - Update exporter
 * [UpdateLedgerMetadata](#updateledgermetadata) - Update ledger metadata
 
 ## AddMetadataOnTransaction
@@ -78,6 +84,7 @@ func main() {
         DryRun: v3.Pointer(true),
         ID: big.NewInt(1234),
         Ledger: "ledger001",
+        SchemaVersion: v3.Pointer("v1.0.0"),
     })
     if err != nil {
         log.Fatal(err)
@@ -142,6 +149,7 @@ func main() {
         Address: "users:001",
         DryRun: v3.Pointer(true),
         Ledger: "ledger001",
+        SchemaVersion: v3.Pointer("v1.0.0"),
     })
     if err != nil {
         log.Fatal(err)
@@ -200,10 +208,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.CountAccounts(ctx, operations.V2CountAccountsRequest{
-        RequestBody: map[string]any{
-            "key": "<value>",
-            "key1": "<value>",
-        },
         Ledger: "ledger001",
     })
     if err != nil {
@@ -263,9 +267,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.CountTransactions(ctx, operations.V2CountTransactionsRequest{
-        RequestBody: map[string]any{
-            "key": "<value>",
-        },
         Ledger: "ledger001",
     })
     if err != nil {
@@ -336,6 +337,7 @@ func main() {
         ContinueOnFailure: v3.Pointer(true),
         Ledger: "ledger001",
         Parallel: v3.Pointer(true),
+        SchemaVersion: v3.Pointer("v1.0.0"),
     })
     if err != nil {
         log.Fatal(err)
@@ -392,7 +394,7 @@ func main() {
         }),
     )
 
-    res, err := s.Ledger.V2.CreateExporter(ctx, shared.V2ExporterConfiguration{
+    res, err := s.Ledger.V2.CreateExporter(ctx, shared.V2CreateExporterRequest{
         Config: map[string]any{
             "key": "<value>",
         },
@@ -412,7 +414,7 @@ func main() {
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [shared.V2ExporterConfiguration](../../pkg/models/shared/v2exporterconfiguration.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `request`                                                                            | [shared.V2CreateExporterRequest](../../pkg/models/shared/v2createexporterrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
@@ -604,14 +606,8 @@ func main() {
             },
             Reference: v3.Pointer("ref:001"),
             Script: &shared.V2PostTransactionScript{
-                Plain: "vars {\n" +
-                "account $user\n" +
-                "}\n" +
-                "send [COIN 10] (\n" +
-                "	source = @world\n" +
-                "	destination = $user\n" +
-                ")\n" +
-                "",
+                Plain: v3.Pointer("vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\tdestination = $user\n)\n"),
+                Template: v3.Pointer("CUSTOMER_DEPOSIT"),
                 Vars: map[string]string{
                     "user": "users:042",
                 },
@@ -620,6 +616,7 @@ func main() {
         DryRun: v3.Pointer(true),
         Force: v3.Pointer(true),
         Ledger: "ledger001",
+        SchemaVersion: v3.Pointer("v1.0.0"),
     })
     if err != nil {
         log.Fatal(err)
@@ -702,6 +699,65 @@ func main() {
 ### Response
 
 **[*operations.V2DeleteAccountMetadataResponse](../../pkg/models/operations/v2deleteaccountmetadataresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V2ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## DeleteBucket
+
+Delete a bucket by marking all ledgers in the bucket as deleted (soft delete). All ledgers in the bucket will have their deleted_at field set to the current timestamp.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2DeleteBucket" method="delete" path="/api/ledger/v2/_/buckets/{bucket}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.DeleteBucket(ctx, operations.V2DeleteBucketRequest{
+        Bucket: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.V2DeleteBucketRequest](../../pkg/models/operations/v2deletebucketrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.V2DeleteBucketResponse](../../pkg/models/operations/v2deletebucketresponse.md), error**
 
 ### Errors
 
@@ -1098,11 +1154,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.GetBalancesAggregated(ctx, operations.V2GetBalancesAggregatedRequest{
-        RequestBody: map[string]any{
-            "key": "<value>",
-            "key1": "<value>",
-            "key2": "<value>",
-        },
         Ledger: "ledger001",
     })
     if err != nil {
@@ -1370,6 +1421,66 @@ func main() {
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## GetSchema
+
+Get a schema for a ledger by version
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2GetSchema" method="get" path="/api/ledger/v2/{ledger}/schemas/{version}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.GetSchema(ctx, operations.V2GetSchemaRequest{
+        Ledger: "ledger001",
+        Version: "v1.0.0",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2SchemaResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `request`                                                                          | [operations.V2GetSchemaRequest](../../pkg/models/operations/v2getschemarequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+
+### Response
+
+**[*operations.V2GetSchemaResponse](../../pkg/models/operations/v2getschemaresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V2ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## GetTransaction
 
 Get transaction from a ledger by its ID
@@ -1460,9 +1571,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.GetVolumesWithBalances(ctx, operations.V2GetVolumesWithBalancesRequest{
-        RequestBody: map[string]any{
-            "key": "<value>",
-        },
         Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         GroupBy: v3.Pointer[int64](3),
         Ledger: "ledger001",
@@ -1561,6 +1669,88 @@ func main() {
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## InsertSchema
+
+Insert a schema for a ledger
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2InsertSchema" method="post" path="/api/ledger/v2/{ledger}/schemas/{version}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.InsertSchema(ctx, operations.V2InsertSchemaRequest{
+        V2SchemaData: shared.V2SchemaData{
+            Chart: map[string]shared.V2ChartSegment{
+                "users": shared.V2ChartSegment{
+                    AdditionalProperties: map[string]shared.V2ChartSegment{
+                        "$userID": shared.V2ChartSegment{
+                            DotPattern: v3.Pointer("^[0-9]{16}$"),
+                        },
+                    },
+                },
+            },
+            Queries: map[string]shared.V2QueryTemplate{
+                "key": shared.V2QueryTemplate{
+                    Params: v3.Pointer(shared.CreateV2QueryParamsQueryTemplateAccountParams(
+                        shared.QueryTemplateAccountParams{
+                            Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+                            PageSize: v3.Pointer[int64](100),
+                            Sort: v3.Pointer("id:desc"),
+                        },
+                    )),
+                },
+            },
+        },
+        Ledger: "ledger001",
+        Version: "v1.0.0",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.V2InsertSchemaRequest](../../pkg/models/operations/v2insertschemarequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.V2InsertSchemaResponse](../../pkg/models/operations/v2insertschemaresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V2ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## ListAccounts
 
 List accounts from a ledger, sorted by address in descending order.
@@ -1590,9 +1780,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.ListAccounts(ctx, operations.V2ListAccountsRequest{
-        RequestBody: map[string]any{
-
-        },
         Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
         PageSize: v3.Pointer[int64](100),
@@ -1710,11 +1897,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.ListLedgers(ctx, operations.V2ListLedgersRequest{
-        RequestBody: map[string]any{
-            "key": "<value>",
-            "key1": "<value>",
-            "key2": "<value>",
-        },
         Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         PageSize: v3.Pointer[int64](100),
         Sort: v3.Pointer("id:desc"),
@@ -1776,9 +1958,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.ListLogs(ctx, operations.V2ListLogsRequest{
-        RequestBody: map[string]any{
-
-        },
         Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
         PageSize: v3.Pointer[int64](100),
@@ -1871,6 +2050,65 @@ func main() {
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## ListSchemas
+
+List all schemas for a ledger
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2ListSchemas" method="get" path="/api/ledger/v2/{ledger}/schemas" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.ListSchemas(ctx, operations.V2ListSchemasRequest{
+        Ledger: "ledger001",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2SchemasCursorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [operations.V2ListSchemasRequest](../../pkg/models/operations/v2listschemasrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
+
+### Response
+
+**[*operations.V2ListSchemasResponse](../../pkg/models/operations/v2listschemasresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V2ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## ListTransactions
 
 List transactions from a ledger, sorted by id in descending order.
@@ -1900,9 +2138,6 @@ func main() {
     )
 
     res, err := s.Ledger.V2.ListTransactions(ctx, operations.V2ListTransactionsRequest{
-        RequestBody: map[string]any{
-
-        },
         Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Ledger: "ledger001",
         PageSize: v3.Pointer[int64](100),
@@ -2056,6 +2291,65 @@ func main() {
 | sdkerrors.V2ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## RestoreBucket
+
+Restore a deleted bucket by unmarking all ledgers in the bucket as deleted. All ledgers in the bucket will have their deleted_at field set to NULL.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2RestoreBucket" method="post" path="/api/ledger/v2/_/buckets/{bucket}/restore" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.RestoreBucket(ctx, operations.V2RestoreBucketRequest{
+        Bucket: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.V2RestoreBucketRequest](../../pkg/models/operations/v2restorebucketrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.V2RestoreBucketResponse](../../pkg/models/operations/v2restorebucketresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V2ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## RevertTransaction
 
 Revert a ledger transaction by its ID
@@ -2089,11 +2383,12 @@ func main() {
         DryRun: v3.Pointer(true),
         ID: big.NewInt(1234),
         Ledger: "ledger001",
+        SchemaVersion: v3.Pointer("v1.0.0"),
     })
     if err != nil {
         log.Fatal(err)
     }
-    if res.V2CreateTransactionResponse != nil {
+    if res.V2RevertTransactionResponse != nil {
         // handle response
     }
 }
@@ -2110,6 +2405,89 @@ func main() {
 ### Response
 
 **[*operations.V2RevertTransactionResponse](../../pkg/models/operations/v2reverttransactionresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V2ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## RunQuery
+
+Run a query template on a ledger
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2RunQuery" method="post" path="/api/ledger/v2/{ledger}/queries/{id}/run" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.RunQuery(ctx, operations.V2RunQueryRequest{
+        RequestBody: operations.V2RunQueryRequestBody{
+            Params: v3.Pointer(shared.CreateV2QueryParamsQueryTemplateAccountParams(
+                shared.QueryTemplateAccountParams{
+                    Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+                    PageSize: v3.Pointer[int64](100),
+                    Sort: v3.Pointer("id:desc"),
+                },
+            )),
+        },
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        ID: "CUSTOMER_DEPOSIT",
+        Ledger: "ledger001",
+        PageSize: v3.Pointer[int64](100),
+        SchemaVersion: "v1.0.0",
+        Sort: v3.Pointer("id:desc"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.OneOf != nil {
+        switch res.OneOf.Type {
+            case operations.V2RunQueryResponseBodyTypeV2TransactionsCursorResponse:
+                // res.OneOf.V2TransactionsCursorResponse is populated
+            case operations.V2RunQueryResponseBodyTypeV2AccountsCursorResponse:
+                // res.OneOf.V2AccountsCursorResponse is populated
+            case operations.V2RunQueryResponseBodyTypeV2LogsCursorResponse:
+                // res.OneOf.V2LogsCursorResponse is populated
+            case operations.V2RunQueryResponseBodyTypeV2VolumesWithBalanceCursorResponse:
+                // res.OneOf.V2VolumesWithBalanceCursorResponse is populated
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [operations.V2RunQueryRequest](../../pkg/models/operations/v2runqueryrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
+
+### Response
+
+**[*operations.V2RunQueryResponse](../../pkg/models/operations/v2runqueryresponse.md), error**
 
 ### Errors
 
@@ -2230,6 +2608,73 @@ func main() {
 ### Response
 
 **[*operations.V2StopPipelineResponse](../../pkg/models/operations/v2stoppipelineresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V2ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## UpdateExporter
+
+Update exporter
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2UpdateExporter" method="put" path="/api/ledger/v2/_/exporters/{exporterID}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.UpdateExporter(ctx, operations.V2UpdateExporterRequest{
+        V2CreateExporterRequest: shared.V2CreateExporterRequest{
+            Config: map[string]any{
+                "key": "<value>",
+                "key1": "<value>",
+                "key2": "<value>",
+            },
+            Driver: "<value>",
+        },
+        ExporterID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.V2UpdateExporterRequest](../../pkg/models/operations/v2updateexporterrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.V2UpdateExporterResponse](../../pkg/models/operations/v2updateexporterresponse.md), error**
 
 ### Errors
 

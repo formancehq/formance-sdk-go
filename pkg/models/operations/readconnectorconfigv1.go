@@ -28,6 +28,9 @@ func (r *ReadConnectorConfigV1Request) GetConnectorID() string {
 	return r.ConnectorID
 }
 
+// #region class-body-readconnectorconfigv1request
+// #endregion class-body-readconnectorconfigv1request
+
 type ReadConnectorConfigV1Response struct {
 	// OK
 	ConnectorConfigResponse *shared.ConnectorConfigResponse
@@ -66,3 +69,6 @@ func (r *ReadConnectorConfigV1Response) GetRawResponse() *http.Response {
 	}
 	return r.RawResponse
 }
+
+// #region class-body-readconnectorconfigv1response
+// #endregion class-body-readconnectorconfigv1response

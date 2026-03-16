@@ -28,3 +28,6 @@ func (v *V2ActivityAddAccountMetadata) GetMetadata() map[string]string {
 	}
 	return v.Metadata
 }
+
+// #region class-body-v2activityaddaccountmetadata
+// #endregion class-body-v2activityaddaccountmetadata

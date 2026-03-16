@@ -24,7 +24,7 @@ func (v V2GetTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2GetTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -57,6 +57,9 @@ func (v *V2GetTransactionRequest) GetPit() *time.Time {
 	}
 	return v.Pit
 }
+
+// #region class-body-v2gettransactionrequest
+// #endregion class-body-v2gettransactionrequest
 
 type V2GetTransactionResponse struct {
 	// HTTP response content type for this operation
@@ -96,3 +99,6 @@ func (v *V2GetTransactionResponse) GetV2GetTransactionResponse() *shared.V2GetTr
 	}
 	return v.V2GetTransactionResponse
 }
+
+// #region class-body-v2gettransactionresponse
+// #endregion class-body-v2gettransactionresponse

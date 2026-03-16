@@ -10,7 +10,6 @@ import (
 )
 
 type V2GetBalancesAggregatedRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string     `pathParam:"style=simple,explode=false,name=ledger"`
 	Pit    *time.Time `queryParam:"style=form,explode=true,name=pit"`
@@ -23,17 +22,10 @@ func (v V2GetBalancesAggregatedRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2GetBalancesAggregatedRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
-}
-
-func (v *V2GetBalancesAggregatedRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return map[string]any{}
-	}
-	return v.RequestBody
 }
 
 func (v *V2GetBalancesAggregatedRequest) GetLedger() string {
@@ -56,6 +48,9 @@ func (v *V2GetBalancesAggregatedRequest) GetUseInsertionDate() *bool {
 	}
 	return v.UseInsertionDate
 }
+
+// #region class-body-v2getbalancesaggregatedrequest
+// #endregion class-body-v2getbalancesaggregatedrequest
 
 type V2GetBalancesAggregatedResponse struct {
 	// HTTP response content type for this operation
@@ -95,3 +90,6 @@ func (v *V2GetBalancesAggregatedResponse) GetV2AggregateBalancesResponse() *shar
 	}
 	return v.V2AggregateBalancesResponse
 }
+
+// #region class-body-v2getbalancesaggregatedresponse
+// #endregion class-body-v2getbalancesaggregatedresponse

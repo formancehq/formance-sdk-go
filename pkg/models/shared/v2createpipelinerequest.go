@@ -12,3 +12,6 @@ func (v *V2CreatePipelineRequest) GetExporterID() string {
 	}
 	return v.ExporterID
 }
+
+// #region class-body-v2createpipelinerequest
+// #endregion class-body-v2createpipelinerequest

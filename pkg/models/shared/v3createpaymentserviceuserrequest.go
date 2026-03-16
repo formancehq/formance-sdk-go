@@ -44,3 +44,6 @@ func (v *V3CreatePaymentServiceUserRequest) GetName() string {
 	}
 	return v.Name
 }
+
+// #region class-body-v3createpaymentserviceuserrequest
+// #endregion class-body-v3createpaymentserviceuserrequest

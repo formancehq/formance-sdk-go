@@ -20,7 +20,7 @@ type AtlarConfig struct {
 	PageSize *int64 `default:"25" json:"pageSize"`
 	// The frequency at which the connector tries to fetch new Transaction objects from the Atlar API.
 	//
-	PollingPeriod *string `default:"120s" json:"pollingPeriod"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
 	Provider      *string `default:"Atlar" json:"provider"`
 	// The secret used by the connector for authorizing requests to the Atlar API.
 	// You can obtain it along with the associated access key from the Atlar dashboard.
@@ -28,6 +28,8 @@ type AtlarConfig struct {
 	Secret string `json:"secret"`
 	// The frequency at which the connector tries to fetch the status of payment initiations from the Atlar API.
 	//
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	TransferInitiationStatusPollingPeriod *string `default:"120s" json:"transferInitiationStatusPollingPeriod"`
 }
 

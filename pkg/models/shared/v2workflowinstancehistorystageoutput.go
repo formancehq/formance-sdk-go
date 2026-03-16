@@ -52,3 +52,6 @@ func (v *V2WorkflowInstanceHistoryStageOutput) GetListWallets() *V2ListWalletsRe
 	}
 	return v.ListWallets
 }
+
+// #region class-body-v2workflowinstancehistorystageoutput
+// #endregion class-body-v2workflowinstancehistorystageoutput

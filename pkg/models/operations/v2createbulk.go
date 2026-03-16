@@ -17,6 +17,8 @@ type V2CreateBulkRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Process bulk elements in parallel
 	Parallel *bool `queryParam:"style=form,explode=true,name=parallel"`
+	// Default schema version to use for validation (can be overridden per element)
+	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
 }
 
 func (v *V2CreateBulkRequest) GetRequestBody() []shared.V2BulkElement {
@@ -53,6 +55,16 @@ func (v *V2CreateBulkRequest) GetParallel() *bool {
 	}
 	return v.Parallel
 }
+
+func (v *V2CreateBulkRequest) GetSchemaVersion() *string {
+	if v == nil {
+		return nil
+	}
+	return v.SchemaVersion
+}
+
+// #region class-body-v2createbulkrequest
+// #endregion class-body-v2createbulkrequest
 
 type V2CreateBulkResponse struct {
 	// HTTP response content type for this operation
@@ -92,3 +104,6 @@ func (v *V2CreateBulkResponse) GetV2BulkResponse() *shared.V2BulkResponse {
 	}
 	return v.V2BulkResponse
 }
+
+// #region class-body-v2createbulkresponse
+// #endregion class-body-v2createbulkresponse

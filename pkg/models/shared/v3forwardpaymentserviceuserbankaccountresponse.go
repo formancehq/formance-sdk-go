@@ -15,6 +15,9 @@ func (v *V3ForwardPaymentServiceUserBankAccountResponseData) GetTaskID() string 
 	return v.TaskID
 }
 
+// #region class-body-v3forwardpaymentserviceuserbankaccountresponsedata
+// #endregion class-body-v3forwardpaymentserviceuserbankaccountresponsedata
+
 type V3ForwardPaymentServiceUserBankAccountResponse struct {
 	Data V3ForwardPaymentServiceUserBankAccountResponseData `json:"data"`
 }
@@ -25,3 +28,6 @@ func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetData() V3ForwardPaym
 	}
 	return v.Data
 }
+
+// #region class-body-v3forwardpaymentserviceuserbankaccountresponse
+// #endregion class-body-v3forwardpaymentserviceuserbankaccountresponse

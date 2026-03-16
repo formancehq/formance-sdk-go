@@ -1,5 +1,4 @@
-# FormanceWalletsV1
-(*Wallets.V1*)
+# Wallets.V1
 
 ## Overview
 
@@ -618,7 +617,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ActivityGetWalletOutput != nil {
+    if res.GetWalletResponse != nil {
         // handle response
     }
 }

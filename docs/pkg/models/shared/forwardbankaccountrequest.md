@@ -5,4 +5,4 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `ConnectorID`      | *string*           | :heavy_check_mark: | N/A                |
+| `ConnectorID`      | `string`           | :heavy_check_mark: | N/A                |

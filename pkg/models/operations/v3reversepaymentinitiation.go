@@ -27,6 +27,9 @@ func (v *V3ReversePaymentInitiationRequest) GetPaymentInitiationID() string {
 	return v.PaymentInitiationID
 }
 
+// #region class-body-v3reversepaymentinitiationrequest
+// #endregion class-body-v3reversepaymentinitiationrequest
+
 type V3ReversePaymentInitiationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -65,3 +68,6 @@ func (v *V3ReversePaymentInitiationResponse) GetV3ReversePaymentInitiationRespon
 	}
 	return v.V3ReversePaymentInitiationResponse
 }
+
+// #region class-body-v3reversepaymentinitiationresponse
+// #endregion class-body-v3reversepaymentinitiationresponse

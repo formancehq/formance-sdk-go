@@ -8,19 +8,11 @@ import (
 )
 
 type V3ListBankAccountsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
-}
-
-func (v *V3ListBankAccountsRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.RequestBody
 }
 
 func (v *V3ListBankAccountsRequest) GetCursor() *string {
@@ -36,6 +28,9 @@ func (v *V3ListBankAccountsRequest) GetPageSize() *int64 {
 	}
 	return v.PageSize
 }
+
+// #region class-body-v3listbankaccountsrequest
+// #endregion class-body-v3listbankaccountsrequest
 
 type V3ListBankAccountsResponse struct {
 	// HTTP response content type for this operation
@@ -75,3 +70,6 @@ func (v *V3ListBankAccountsResponse) GetV3BankAccountsCursorResponse() *shared.V
 	}
 	return v.V3BankAccountsCursorResponse
 }
+
+// #region class-body-v3listbankaccountsresponse
+// #endregion class-body-v3listbankaccountsresponse

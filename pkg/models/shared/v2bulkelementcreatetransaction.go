@@ -43,3 +43,6 @@ func (v *V2BulkElementCreateTransaction) GetIk() *string {
 	}
 	return v.Ik
 }
+
+// #region class-body-v2bulkelementcreatetransaction
+// #endregion class-body-v2bulkelementcreatetransaction

@@ -45,3 +45,6 @@ func (v *V3CreatePoolResponse) GetV3CreatePoolResponse() *shared.V3CreatePoolRes
 	}
 	return v.V3CreatePoolResponse
 }
+
+// #region class-body-v3createpoolresponse
+// #endregion class-body-v3createpoolresponse

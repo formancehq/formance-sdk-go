@@ -19,6 +19,9 @@ func (v *V3GetBankAccountRequest) GetBankAccountID() string {
 	return v.BankAccountID
 }
 
+// #region class-body-v3getbankaccountrequest
+// #endregion class-body-v3getbankaccountrequest
+
 type V3GetBankAccountResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3GetBankAccountResponse) GetV3GetBankAccountResponse() *shared.V3GetBa
 	}
 	return v.V3GetBankAccountResponse
 }
+
+// #region class-body-v3getbankaccountresponse
+// #endregion class-body-v3getbankaccountresponse

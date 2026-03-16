@@ -22,14 +22,14 @@ const (
 )
 
 type TaskResponseData struct {
-	TaskStripe        *TaskStripe        `queryParam:"inline,name=data"`
-	TaskWise          *TaskWise          `queryParam:"inline,name=data"`
-	TaskCurrencyCloud *TaskCurrencyCloud `queryParam:"inline,name=data"`
-	TaskDummyPay      *TaskDummyPay      `queryParam:"inline,name=data"`
-	TaskModulr        *TaskModulr        `queryParam:"inline,name=data"`
-	TaskBankingCircle *TaskBankingCircle `queryParam:"inline,name=data"`
-	TaskMangoPay      *TaskMangoPay      `queryParam:"inline,name=data"`
-	TaskMoneycorp     *TaskMoneycorp     `queryParam:"inline,name=data"`
+	TaskStripe        *TaskStripe        `queryParam:"inline" union:"member"`
+	TaskWise          *TaskWise          `queryParam:"inline" union:"member"`
+	TaskCurrencyCloud *TaskCurrencyCloud `queryParam:"inline" union:"member"`
+	TaskDummyPay      *TaskDummyPay      `queryParam:"inline" union:"member"`
+	TaskModulr        *TaskModulr        `queryParam:"inline" union:"member"`
+	TaskBankingCircle *TaskBankingCircle `queryParam:"inline" union:"member"`
+	TaskMangoPay      *TaskMangoPay      `queryParam:"inline" union:"member"`
+	TaskMoneycorp     *TaskMoneycorp     `queryParam:"inline" union:"member"`
 
 	Type TaskResponseDataType
 }

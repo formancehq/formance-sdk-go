@@ -27,6 +27,9 @@ func (v *V2CreateLedgerRequest) GetLedger() string {
 	return v.Ledger
 }
 
+// #region class-body-v2createledgerrequest
+// #endregion class-body-v2createledgerrequest
+
 type V2CreateLedgerResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V2CreateLedgerResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2createledgerresponse
+// #endregion class-body-v2createledgerresponse

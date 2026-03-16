@@ -14,3 +14,6 @@ func (v *V3ResetConnectorResponse) GetData() string {
 	}
 	return v.Data
 }
+
+// #region class-body-v3resetconnectorresponse
+// #endregion class-body-v3resetconnectorresponse

@@ -17,7 +17,7 @@ func (r ReconciliationRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReconciliationRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"reconciledAtLedger", "reconciledAtPayments"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil

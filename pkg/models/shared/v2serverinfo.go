@@ -12,3 +12,6 @@ func (v *V2ServerInfo) GetVersion() string {
 	}
 	return v.Version
 }
+
+// #region class-body-v2serverinfo
+// #endregion class-body-v2serverinfo

@@ -19,6 +19,9 @@ func (v *V3GetTaskRequest) GetTaskID() string {
 	return v.TaskID
 }
 
+// #region class-body-v3gettaskrequest
+// #endregion class-body-v3gettaskrequest
+
 type V3GetTaskResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3GetTaskResponse) GetV3GetTaskResponse() *shared.V3GetTaskResponse {
 	}
 	return v.V3GetTaskResponse
 }
+
+// #region class-body-v3gettaskresponse
+// #endregion class-body-v3gettaskresponse

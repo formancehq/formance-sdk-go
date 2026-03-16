@@ -52,3 +52,6 @@ func (v *V3AddressRequest) GetStreetNumber() *string {
 	}
 	return v.StreetNumber
 }
+
+// #region class-body-v3addressrequest
+// #endregion class-body-v3addressrequest

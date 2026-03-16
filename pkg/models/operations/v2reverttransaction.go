@@ -10,6 +10,8 @@ import (
 )
 
 type V2RevertTransactionRequest struct {
+	// Use an idempotency key
+	IdempotencyKey             *string                            `header:"style=simple,explode=false,name=Idempotency-Key"`
 	V2RevertTransactionRequest *shared.V2RevertTransactionRequest `request:"mediaType=application/json"`
 	// Revert transaction at effective date of the original tx
 	AtEffectiveDate *bool `queryParam:"style=form,explode=true,name=atEffectiveDate"`
@@ -21,6 +23,8 @@ type V2RevertTransactionRequest struct {
 	ID *big.Int `pathParam:"style=simple,explode=false,name=id"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
+	// Schema version to use for validation
+	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
 }
 
 func (v V2RevertTransactionRequest) MarshalJSON() ([]byte, error) {
@@ -28,10 +32,17 @@ func (v V2RevertTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2RevertTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
+}
+
+func (v *V2RevertTransactionRequest) GetIdempotencyKey() *string {
+	if v == nil {
+		return nil
+	}
+	return v.IdempotencyKey
 }
 
 func (v *V2RevertTransactionRequest) GetV2RevertTransactionRequest() *shared.V2RevertTransactionRequest {
@@ -76,15 +87,26 @@ func (v *V2RevertTransactionRequest) GetLedger() string {
 	return v.Ledger
 }
 
+func (v *V2RevertTransactionRequest) GetSchemaVersion() *string {
+	if v == nil {
+		return nil
+	}
+	return v.SchemaVersion
+}
+
+// #region class-body-v2reverttransactionrequest
+// #endregion class-body-v2reverttransactionrequest
+
 type V2RevertTransactionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2CreateTransactionResponse *shared.V2CreateTransactionResponse
+	V2RevertTransactionResponse *shared.V2RevertTransactionResponse
 }
 
 func (v *V2RevertTransactionResponse) GetContentType() string {
@@ -92,6 +114,13 @@ func (v *V2RevertTransactionResponse) GetContentType() string {
 		return ""
 	}
 	return v.ContentType
+}
+
+func (v *V2RevertTransactionResponse) GetHeaders() map[string][]string {
+	if v == nil {
+		return map[string][]string{}
+	}
+	return v.Headers
 }
 
 func (v *V2RevertTransactionResponse) GetStatusCode() int {
@@ -108,9 +137,12 @@ func (v *V2RevertTransactionResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2RevertTransactionResponse) GetV2CreateTransactionResponse() *shared.V2CreateTransactionResponse {
+func (v *V2RevertTransactionResponse) GetV2RevertTransactionResponse() *shared.V2RevertTransactionResponse {
 	if v == nil {
 		return nil
 	}
-	return v.V2CreateTransactionResponse
+	return v.V2RevertTransactionResponse
 }
+
+// #region class-body-v2reverttransactionresponse
+// #endregion class-body-v2reverttransactionresponse

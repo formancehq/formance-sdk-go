@@ -20,7 +20,7 @@ func (a AccountWithVolumesAndBalances) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountWithVolumesAndBalances) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"address"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
 		return err
 	}
 	return nil

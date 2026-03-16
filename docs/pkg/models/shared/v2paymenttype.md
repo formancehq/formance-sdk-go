@@ -1,5 +1,15 @@
 # V2PaymentType
 
+## Example Usage
+
+```go
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+)
+
+value := shared.V2PaymentTypePayIn
+```
+
 
 ## Values
 

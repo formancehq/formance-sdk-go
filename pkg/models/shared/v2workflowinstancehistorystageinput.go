@@ -92,3 +92,6 @@ func (v *V2WorkflowInstanceHistoryStageInput) GetVoidHold() *V2ActivityVoidHold 
 	}
 	return v.VoidHold
 }
+
+// #region class-body-v2workflowinstancehistorystageinput
+// #endregion class-body-v2workflowinstancehistorystageinput

@@ -7,11 +7,14 @@ import (
 )
 
 type V3DummypayConfig struct {
-	Directory     string  `json:"directory"`
-	Name          string  `json:"name"`
-	PageSize      *int64  `default:"25" json:"pageSize"`
-	PollingPeriod *string `default:"2m" json:"pollingPeriod"`
-	Provider      *string `default:"Dummypay" json:"provider"`
+	Directory     string `json:"directory"`
+	LinkFlowError *bool  `json:"linkFlowError,omitempty"`
+	Name          string `json:"name"`
+	// Deprecated: From v3.1, this parameter will be ignored.
+	PageSize            *int64  `default:"25" json:"pageSize"`
+	PollingPeriod       *string `default:"30m" json:"pollingPeriod"`
+	Provider            *string `default:"Dummypay" json:"provider"`
+	UpdateLinkFlowError *bool   `json:"updateLinkFlowError,omitempty"`
 }
 
 func (v V3DummypayConfig) MarshalJSON() ([]byte, error) {
@@ -30,6 +33,13 @@ func (v *V3DummypayConfig) GetDirectory() string {
 		return ""
 	}
 	return v.Directory
+}
+
+func (v *V3DummypayConfig) GetLinkFlowError() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.LinkFlowError
 }
 
 func (v *V3DummypayConfig) GetName() string {
@@ -59,3 +69,13 @@ func (v *V3DummypayConfig) GetProvider() *string {
 	}
 	return v.Provider
 }
+
+func (v *V3DummypayConfig) GetUpdateLinkFlowError() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.UpdateLinkFlowError
+}
+
+// #region class-body-v3dummypayconfig
+// #endregion class-body-v3dummypayconfig

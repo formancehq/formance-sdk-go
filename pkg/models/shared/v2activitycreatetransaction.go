@@ -20,3 +20,6 @@ func (v *V2ActivityCreateTransaction) GetLedger() *string {
 	}
 	return v.Ledger
 }
+
+// #region class-body-v2activitycreatetransaction
+// #endregion class-body-v2activitycreatetransaction

@@ -7,10 +7,11 @@ import (
 )
 
 type V3WiseConfig struct {
-	APIKey           string  `json:"apiKey"`
-	Name             string  `json:"name"`
+	APIKey string `json:"apiKey"`
+	Name   string `json:"name"`
+	// Deprecated: From v3.1, this parameter will be ignored.
 	PageSize         *int64  `default:"25" json:"pageSize"`
-	PollingPeriod    *string `default:"2m" json:"pollingPeriod"`
+	PollingPeriod    *string `default:"30m" json:"pollingPeriod"`
 	Provider         *string `default:"Wise" json:"provider"`
 	WebhookPublicKey string  `json:"webhookPublicKey"`
 }
@@ -67,3 +68,6 @@ func (v *V3WiseConfig) GetWebhookPublicKey() string {
 	}
 	return v.WebhookPublicKey
 }
+
+// #region class-body-v3wiseconfig
+// #endregion class-body-v3wiseconfig

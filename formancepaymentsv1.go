@@ -63,7 +63,7 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "addAccountToPool",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "AddAccountToPoolRequest", "json", `request:"mediaType=application/json"`)
@@ -199,6 +199,7 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -258,7 +259,7 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "connectorsTransfer",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TransferRequest", "json", `request:"mediaType=application/json"`)
@@ -473,7 +474,7 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createAccount",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -688,7 +689,7 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createBankAccount",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -903,7 +904,7 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createPayment",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1118,7 +1119,7 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createPool",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1333,7 +1334,7 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createTransferInitiation",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1548,7 +1549,7 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deletePool",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1677,6 +1678,7 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1736,7 +1738,7 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteTransferInitiation",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1865,6 +1867,7 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1923,7 +1926,7 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "forwardBankAccount",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ForwardBankAccountRequest", "json", `request:"mediaType=application/json"`)
@@ -2137,7 +2140,7 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getAccountBalances",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2159,7 +2162,7 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2348,7 +2351,7 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getBankAccount",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2558,7 +2561,7 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getConnectorTask",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2766,7 +2769,7 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getConnectorTaskV1",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2973,7 +2976,7 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getPayment",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3180,7 +3183,7 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getPool",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3387,7 +3390,7 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getPoolBalances",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3409,7 +3412,7 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -3598,7 +3601,7 @@ func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getPoolBalancesLatest",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3734,12 +3737,12 @@ func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out shared.PoolBalancesResponse
+			var out shared.PoolBalancesLatestResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.PoolBalancesResponse = &out
+			res.PoolBalancesLatestResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -3805,7 +3808,7 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getTransferInitiation",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -4013,7 +4016,7 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "installConnector",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ConnectorConfig", "json", `request:"mediaType=application/json"`)
@@ -4228,7 +4231,7 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listAllConnectors",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -4436,7 +4439,7 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listBankAccounts",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -4458,7 +4461,7 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -4648,7 +4651,7 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listConfigsAvailableConnectors",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -4858,7 +4861,7 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listConnectorTasks",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -4880,7 +4883,7 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -5070,7 +5073,7 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listConnectorTasksV1",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -5092,7 +5095,7 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -5281,7 +5284,7 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listPayments",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -5303,7 +5306,7 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -5492,7 +5495,7 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listPools",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -5514,7 +5517,7 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -5703,7 +5706,7 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listTransferInitiations",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -5725,7 +5728,7 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -5914,7 +5917,7 @@ func (s *FormancePaymentsV1) PaymentsgetAccount(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "paymentsgetAccount",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -6121,7 +6124,7 @@ func (s *FormancePaymentsV1) PaymentsgetServerInfo(ctx context.Context, opts ...
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "paymentsgetServerInfo",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -6328,12 +6331,8 @@ func (s *FormancePaymentsV1) PaymentslistAccounts(ctx context.Context, request o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "paymentslistAccounts",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
-	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
-	if err != nil {
-		return nil, err
 	}
 
 	timeout := o.Timeout
@@ -6347,17 +6346,14 @@ func (s *FormancePaymentsV1) PaymentslistAccounts(ctx context.Context, request o
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-	if reqContentType != "" {
-		req.Header.Set("Content-Type", reqContentType)
-	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -6549,7 +6545,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "readConnectorConfig",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -6757,7 +6753,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "readConnectorConfigV1",
-		OAuth2Scopes:     []string{"auth:read", "payments:read"},
+		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -6965,7 +6961,7 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "removeAccountFromPool",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -7094,6 +7090,7 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -7156,7 +7153,7 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "resetConnector",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -7285,6 +7282,7 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -7345,7 +7343,7 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "resetConnectorV1",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -7474,6 +7472,7 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -7533,7 +7532,7 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "retryTransferInitiation",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -7662,6 +7661,7 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -7721,7 +7721,7 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "reverseTransferInitiation",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ReverseTransferInitiationRequest", "json", `request:"mediaType=application/json"`)
@@ -7857,6 +7857,7 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -7918,7 +7919,7 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "uninstallConnector",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -8047,6 +8048,7 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -8106,7 +8108,7 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "uninstallConnectorV1",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -8235,6 +8237,7 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -8293,7 +8296,7 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateBankAccountMetadata",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateBankAccountMetadataRequest", "json", `request:"mediaType=application/json"`)
@@ -8429,6 +8432,7 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -8488,7 +8492,7 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateConnectorConfigV1",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ConnectorConfig", "json", `request:"mediaType=application/json"`)
@@ -8624,6 +8628,7 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -8682,7 +8687,7 @@ func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateMetadata",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "RequestBody", "json", `request:"mediaType=application/json"`)
@@ -8818,6 +8823,202 @@ func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operati
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out sdkerrors.PaymentsErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// UpdatePoolQuery - Update the query of a pool
+func (s *FormancePaymentsV1) UpdatePoolQuery(ctx context.Context, request operations.UpdatePoolQueryRequest, opts ...operations.Option) (*operations.UpdatePoolQueryResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/query", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "updatePoolQuery",
+		OAuth2Scopes:     []string{"payments:write"},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdatePoolQueryRequest", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "PATCH", opURL, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"429",
+				"500",
+				"502",
+				"503",
+				"504",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.UpdatePoolQueryResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: httpRes.Header.Get("Content-Type"),
+		RawResponse: httpRes,
+	}
+
+	switch {
+	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -8877,7 +9078,7 @@ func (s *FormancePaymentsV1) UpdateTransferInitiationStatus(ctx context.Context,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateTransferInitiationStatus",
-		OAuth2Scopes:     []string{"auth:read", "payments:write"},
+		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateTransferInitiationStatusRequest", "json", `request:"mediaType=application/json"`)
@@ -9013,6 +9214,7 @@ func (s *FormancePaymentsV1) UpdateTransferInitiationStatus(ctx context.Context,
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):

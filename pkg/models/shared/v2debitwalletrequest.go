@@ -25,7 +25,7 @@ func (v V2DebitWalletRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2DebitWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "metadata"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -93,3 +93,6 @@ func (v *V2DebitWalletRequest) GetTimestamp() *time.Time {
 	}
 	return v.Timestamp
 }
+
+// #region class-body-v2debitwalletrequest
+// #endregion class-body-v2debitwalletrequest

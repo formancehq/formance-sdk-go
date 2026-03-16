@@ -28,6 +28,9 @@ func (v *V3GetConnectorScheduleRequest) GetScheduleID() string {
 	return v.ScheduleID
 }
 
+// #region class-body-v3getconnectorschedulerequest
+// #endregion class-body-v3getconnectorschedulerequest
+
 type V3GetConnectorScheduleResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -66,3 +69,6 @@ func (v *V3GetConnectorScheduleResponse) GetV3ConnectorScheduleResponse() *share
 	}
 	return v.V3ConnectorScheduleResponse
 }
+
+// #region class-body-v3getconnectorscheduleresponse
+// #endregion class-body-v3getconnectorscheduleresponse

@@ -27,7 +27,7 @@ func (l ListConnectorTasksRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListConnectorTasksRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"connector"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -20,7 +20,7 @@ func (v V2StageStatus) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2StageStatus) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"instanceID", "stage", "startedAt"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -60,3 +60,6 @@ func (v *V2StageStatus) GetTerminatedAt() *time.Time {
 	}
 	return v.TerminatedAt
 }
+
+// #region class-body-v2stagestatus
+// #endregion class-body-v2stagestatus

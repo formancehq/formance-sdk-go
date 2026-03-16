@@ -19,6 +19,9 @@ func (v *V3GetConnectorConfigRequest) GetConnectorID() string {
 	return v.ConnectorID
 }
 
+// #region class-body-v3getconnectorconfigrequest
+// #endregion class-body-v3getconnectorconfigrequest
+
 type V3GetConnectorConfigResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3GetConnectorConfigResponse) GetV3GetConnectorConfigResponse() *shared
 	}
 	return v.V3GetConnectorConfigResponse
 }
+
+// #region class-body-v3getconnectorconfigresponse
+// #endregion class-body-v3getconnectorconfigresponse

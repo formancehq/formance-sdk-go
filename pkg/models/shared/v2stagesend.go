@@ -60,3 +60,6 @@ func (v *V2StageSend) GetTimestamp() *time.Time {
 	}
 	return v.Timestamp
 }
+
+// #region class-body-v2stagesend
+// #endregion class-body-v2stagesend

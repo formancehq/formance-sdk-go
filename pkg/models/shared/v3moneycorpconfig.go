@@ -7,12 +7,13 @@ import (
 )
 
 type V3MoneycorpConfig struct {
-	APIKey        string  `json:"apiKey"`
-	ClientID      string  `json:"clientID"`
-	Endpoint      string  `json:"endpoint"`
-	Name          string  `json:"name"`
+	APIKey   string `json:"apiKey"`
+	ClientID string `json:"clientID"`
+	Endpoint string `json:"endpoint"`
+	Name     string `json:"name"`
+	// Deprecated: From v3.1, this parameter will be ignored.
 	PageSize      *int64  `default:"25" json:"pageSize"`
-	PollingPeriod *string `default:"2m" json:"pollingPeriod"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
 	Provider      *string `default:"Moneycorp" json:"provider"`
 }
 
@@ -75,3 +76,6 @@ func (v *V3MoneycorpConfig) GetProvider() *string {
 	}
 	return v.Provider
 }
+
+// #region class-body-v3moneycorpconfig
+// #endregion class-body-v3moneycorpconfig

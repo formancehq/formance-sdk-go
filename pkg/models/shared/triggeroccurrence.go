@@ -21,7 +21,7 @@ func (t TriggerOccurrence) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TriggerOccurrence) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"date", "event", "triggerID"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil

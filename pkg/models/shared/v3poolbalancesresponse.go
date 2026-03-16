@@ -12,3 +12,6 @@ func (v *V3PoolBalancesResponse) GetData() []V3PoolBalance {
 	}
 	return v.Data
 }
+
+// #region class-body-v3poolbalancesresponse
+// #endregion class-body-v3poolbalancesresponse

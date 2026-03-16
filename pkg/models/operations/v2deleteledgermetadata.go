@@ -27,6 +27,9 @@ func (v *V2DeleteLedgerMetadataRequest) GetLedger() string {
 	return v.Ledger
 }
 
+// #region class-body-v2deleteledgermetadatarequest
+// #endregion class-body-v2deleteledgermetadatarequest
+
 type V2DeleteLedgerMetadataResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V2DeleteLedgerMetadataResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2deleteledgermetadataresponse
+// #endregion class-body-v2deleteledgermetadataresponse

@@ -28,6 +28,9 @@ func (u *UninstallConnectorV1Request) GetConnectorID() string {
 	return u.ConnectorID
 }
 
+// #region class-body-uninstallconnectorv1request
+// #endregion class-body-uninstallconnectorv1request
+
 type UninstallConnectorV1Response struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (u *UninstallConnectorV1Response) GetRawResponse() *http.Response {
 	}
 	return u.RawResponse
 }
+
+// #region class-body-uninstallconnectorv1response
+// #endregion class-body-uninstallconnectorv1response

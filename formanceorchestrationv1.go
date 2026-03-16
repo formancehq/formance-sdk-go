@@ -63,7 +63,7 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "cancelEvent",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:write"},
+		OAuth2Scopes:     []string{"orchestration:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -192,6 +192,7 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -251,7 +252,7 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createTrigger",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:write"},
+		OAuth2Scopes:     []string{"orchestration:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
@@ -436,7 +437,7 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 
 // CreateWorkflow - Create workflow
 // Create a workflow
-func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *shared.WorkflowConfig, opts ...operations.Option) (*operations.CreateWorkflowResponse, error) {
+func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *shared.CreateWorkflowRequest, opts ...operations.Option) (*operations.CreateWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -466,7 +467,7 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createWorkflow",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:write"},
+		OAuth2Scopes:     []string{"orchestration:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
@@ -681,7 +682,7 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteTrigger",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:write"},
+		OAuth2Scopes:     []string{"orchestration:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -810,6 +811,7 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -869,7 +871,7 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteWorkflow",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:write"},
+		OAuth2Scopes:     []string{"orchestration:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -998,6 +1000,7 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1057,7 +1060,7 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getInstance",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1265,7 +1268,7 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getInstanceHistory",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1473,7 +1476,7 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getInstanceStageHistory",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1681,7 +1684,7 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getWorkflow",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1889,7 +1892,7 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listInstances",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1911,7 +1914,7 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2101,7 +2104,7 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listTriggers",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2123,7 +2126,7 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2313,7 +2316,7 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listTriggersOccurrences",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2521,7 +2524,7 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listWorkflows",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2728,7 +2731,7 @@ func (s *FormanceOrchestrationV1) OrchestrationgetServerInfo(ctx context.Context
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "orchestrationgetServerInfo",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2936,7 +2939,7 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "readTrigger",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:read"},
+		OAuth2Scopes:     []string{"orchestration:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3144,7 +3147,7 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "runWorkflow",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:write"},
+		OAuth2Scopes:     []string{"orchestration:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
@@ -3173,7 +3176,7 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -3363,7 +3366,7 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "sendEvent",
-		OAuth2Scopes:     []string{"auth:read", "orchestration:write"},
+		OAuth2Scopes:     []string{"orchestration:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
@@ -3499,6 +3502,7 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):

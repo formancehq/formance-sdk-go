@@ -45,3 +45,6 @@ func (v *V3CreateBankAccountResponse) GetV3CreateBankAccountResponse() *shared.V
 	}
 	return v.V3CreateBankAccountResponse
 }
+
+// #region class-body-v3createbankaccountresponse
+// #endregion class-body-v3createbankaccountresponse

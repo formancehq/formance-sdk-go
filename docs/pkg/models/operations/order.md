@@ -1,10 +1,21 @@
 # Order
 
-Deprecated: Use sort param
+The sort order
+
+## Example Usage
+
+```go
+import (
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+)
+
+value := operations.OrderAsc
+```
 
 
 ## Values
 
-| Name             | Value            |
-| ---------------- | ---------------- |
-| `OrderEffective` | effective        |
+| Name        | Value       |
+| ----------- | ----------- |
+| `OrderAsc`  | asc         |
+| `OrderDesc` | desc        |

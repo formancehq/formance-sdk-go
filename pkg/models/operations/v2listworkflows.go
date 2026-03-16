@@ -33,6 +33,9 @@ func (v *V2ListWorkflowsRequest) GetPageSize() *int64 {
 	return v.PageSize
 }
 
+// #region class-body-v2listworkflowsrequest
+// #endregion class-body-v2listworkflowsrequest
+
 type V2ListWorkflowsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -71,3 +74,6 @@ func (v *V2ListWorkflowsResponse) GetV2ListWorkflowsResponse() *shared.V2ListWor
 	}
 	return v.V2ListWorkflowsResponse
 }
+
+// #region class-body-v2listworkflowsresponse
+// #endregion class-body-v2listworkflowsresponse

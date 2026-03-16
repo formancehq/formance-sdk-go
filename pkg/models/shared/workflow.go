@@ -8,10 +8,10 @@ import (
 )
 
 type Workflow struct {
-	Config    WorkflowConfig `json:"config"`
-	CreatedAt time.Time      `json:"createdAt"`
-	ID        string         `json:"id"`
-	UpdatedAt time.Time      `json:"updatedAt"`
+	Config    CreateWorkflowRequest `json:"config"`
+	CreatedAt time.Time             `json:"createdAt"`
+	ID        string                `json:"id"`
+	UpdatedAt time.Time             `json:"updatedAt"`
 }
 
 func (w Workflow) MarshalJSON() ([]byte, error) {
@@ -19,15 +19,15 @@ func (w Workflow) MarshalJSON() ([]byte, error) {
 }
 
 func (w *Workflow) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"config", "createdAt", "id", "updatedAt"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (w *Workflow) GetConfig() WorkflowConfig {
+func (w *Workflow) GetConfig() CreateWorkflowRequest {
 	if w == nil {
-		return WorkflowConfig{}
+		return CreateWorkflowRequest{}
 	}
 	return w.Config
 }

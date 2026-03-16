@@ -19,7 +19,7 @@ func (p Posting) MarshalJSON() ([]byte, error) {
 }
 
 func (p *Posting) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"amount", "asset", "destination", "source"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil

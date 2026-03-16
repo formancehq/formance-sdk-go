@@ -6,4 +6,4 @@
 | Field                                      | Type                                       | Required                                   | Description                                |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | `At`                                       | [*time.Time](https://pkg.go.dev/time#Time) | :heavy_minus_sign:                         | The time to filter by                      |
-| `PoolID`                                   | *string*                                   | :heavy_check_mark:                         | The pool ID                                |
+| `PoolID`                                   | `string`                                   | :heavy_check_mark:                         | The pool ID                                |

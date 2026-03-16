@@ -62,7 +62,7 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "CreateTransactions",
-		OAuth2Scopes:     []string{"auth:read", "ledger:write"},
+		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Transactions", "json", `request:"mediaType=application/json"`)
@@ -276,7 +276,7 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "addMetadataOnTransaction",
-		OAuth2Scopes:     []string{"auth:read", "ledger:write"},
+		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "RequestBody", "json", `request:"mediaType=application/json"`)
@@ -412,6 +412,9 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 
 	switch {
 	case httpRes.StatusCode == 204:
+		res.Headers = httpRes.Header
+
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -470,7 +473,7 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "addMetadataToAccount",
-		OAuth2Scopes:     []string{"auth:read", "ledger:write"},
+		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "RequestBody", "json", `request:"mediaType=application/json"`)
@@ -606,6 +609,9 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 
 	switch {
 	case httpRes.StatusCode == 204:
+		res.Headers = httpRes.Header
+
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -664,7 +670,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "countAccounts",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -686,7 +692,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -799,6 +805,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 	case httpRes.StatusCode == 204:
 		res.Headers = httpRes.Header
 
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -857,7 +864,7 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "countTransactions",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -879,7 +886,7 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -992,6 +999,7 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
 
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1050,7 +1058,7 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createTransaction",
-		OAuth2Scopes:     []string{"auth:read", "ledger:write"},
+		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "PostTransaction", "json", `request:"mediaType=application/json"`)
@@ -1079,7 +1087,7 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1190,6 +1198,8 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 
 	switch {
 	case httpRes.StatusCode == 200:
+		res.Headers = httpRes.Header
+
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1268,7 +1278,7 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getAccount",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1475,7 +1485,7 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getBalances",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1497,7 +1507,7 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1686,7 +1696,7 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getBalancesAggregated",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1708,7 +1718,7 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1897,7 +1907,7 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getInfo",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2104,7 +2114,7 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getLedgerInfo",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2311,7 +2321,7 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getMapping",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2518,7 +2528,7 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getTransaction",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2726,7 +2736,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listAccounts",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2748,7 +2758,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2959,7 +2969,7 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listLogs",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2981,7 +2991,7 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -3171,7 +3181,7 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listTransactions",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3193,7 +3203,7 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -3383,7 +3393,7 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "readStats",
-		OAuth2Scopes:     []string{"auth:read", "ledger:read"},
+		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3590,7 +3600,7 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "revertTransaction",
-		OAuth2Scopes:     []string{"auth:read", "ledger:write"},
+		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3612,7 +3622,7 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -3723,6 +3733,8 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 
 	switch {
 	case httpRes.StatusCode == 201:
+		res.Headers = httpRes.Header
+
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3804,7 +3816,7 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "runScript",
-		OAuth2Scopes:     []string{"auth:read", "ledger:write"},
+		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Script", "json", `request:"mediaType=application/json"`)
@@ -3833,7 +3845,7 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -4007,7 +4019,7 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateMapping",
-		OAuth2Scopes:     []string{"auth:read", "ledger:write"},
+		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, true, false, "Mapping", "json", `request:"mediaType=application/json"`)

@@ -25,6 +25,9 @@ func (v *V3ReversePaymentInitiationResponseData) GetTaskID() *string {
 	return v.TaskID
 }
 
+// #region class-body-v3reversepaymentinitiationresponsedata
+// #endregion class-body-v3reversepaymentinitiationresponsedata
+
 type V3ReversePaymentInitiationResponse struct {
 	Data V3ReversePaymentInitiationResponseData `json:"data"`
 }
@@ -35,3 +38,6 @@ func (v *V3ReversePaymentInitiationResponse) GetData() V3ReversePaymentInitiatio
 	}
 	return v.Data
 }
+
+// #region class-body-v3reversepaymentinitiationresponse
+// #endregion class-body-v3reversepaymentinitiationresponse

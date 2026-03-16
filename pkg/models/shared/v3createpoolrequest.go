@@ -2,14 +2,17 @@
 
 package shared
 
+// V3CreatePoolRequest - Query and dynamic pools are available from Connectivity v3.1
 type V3CreatePoolRequest struct {
-	AccountIDs []string `json:"accountIDs"`
+	AccountIDs []string `json:"accountIDs,omitempty"`
 	Name       string   `json:"name"`
+	// The same query than in ListAccount. Allowed properties are id, reference, connector_id, type, default_asset, name, psu_id, open_banking_connection_id and metadata.
+	Query map[string]any `json:"query,omitempty"`
 }
 
 func (v *V3CreatePoolRequest) GetAccountIDs() []string {
 	if v == nil {
-		return []string{}
+		return nil
 	}
 	return v.AccountIDs
 }
@@ -20,3 +23,13 @@ func (v *V3CreatePoolRequest) GetName() string {
 	}
 	return v.Name
 }
+
+func (v *V3CreatePoolRequest) GetQuery() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Query
+}
+
+// #region class-body-v3createpoolrequest
+// #endregion class-body-v3createpoolrequest

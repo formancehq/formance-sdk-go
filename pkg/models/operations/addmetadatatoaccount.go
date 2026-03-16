@@ -43,6 +43,7 @@ func (a *AddMetadataToAccountRequest) GetLedger() string {
 type AddMetadataToAccountResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -54,6 +55,13 @@ func (a *AddMetadataToAccountResponse) GetContentType() string {
 		return ""
 	}
 	return a.ContentType
+}
+
+func (a *AddMetadataToAccountResponse) GetHeaders() map[string][]string {
+	if a == nil {
+		return map[string][]string{}
+	}
+	return a.Headers
 }
 
 func (a *AddMetadataToAccountResponse) GetStatusCode() int {

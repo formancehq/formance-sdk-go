@@ -17,6 +17,9 @@ func (v *V2SendEventRequestBody) GetName() string {
 	return v.Name
 }
 
+// #region class-body-v2sendeventrequestbody
+// #endregion class-body-v2sendeventrequestbody
+
 type V2SendEventRequest struct {
 	RequestBody *V2SendEventRequestBody `request:"mediaType=application/json"`
 	// The instance id
@@ -36,6 +39,9 @@ func (v *V2SendEventRequest) GetInstanceID() string {
 	}
 	return v.InstanceID
 }
+
+// #region class-body-v2sendeventrequest
+// #endregion class-body-v2sendeventrequest
 
 type V2SendEventResponse struct {
 	// HTTP response content type for this operation
@@ -66,3 +72,6 @@ func (v *V2SendEventResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2sendeventresponse
+// #endregion class-body-v2sendeventresponse

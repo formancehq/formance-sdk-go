@@ -12,3 +12,6 @@ func (v *V2ActivityGetWalletOutput) GetData() V2WalletWithBalances {
 	}
 	return v.Data
 }
+
+// #region class-body-v2activitygetwalletoutput
+// #endregion class-body-v2activitygetwalletoutput

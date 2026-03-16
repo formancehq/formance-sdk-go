@@ -24,7 +24,7 @@ func (w WalletsTransaction) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WalletsTransaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"id", "metadata", "postings", "timestamp"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil

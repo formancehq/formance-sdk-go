@@ -12,3 +12,6 @@ func (v *V3UpdateBankAccountMetadataRequest) GetMetadata() map[string]string {
 	}
 	return v.Metadata
 }
+
+// #region class-body-v3updatebankaccountmetadatarequest
+// #endregion class-body-v3updatebankaccountmetadatarequest

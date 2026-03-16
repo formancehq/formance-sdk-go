@@ -22,7 +22,7 @@ func (g GetPoolBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetPoolBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"at", "poolId"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
 		return err
 	}
 	return nil

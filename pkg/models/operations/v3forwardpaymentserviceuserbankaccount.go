@@ -36,6 +36,9 @@ func (v *V3ForwardPaymentServiceUserBankAccountRequest) GetPaymentServiceUserID(
 	return v.PaymentServiceUserID
 }
 
+// #region class-body-v3forwardpaymentserviceuserbankaccountrequest
+// #endregion class-body-v3forwardpaymentserviceuserbankaccountrequest
+
 type V3ForwardPaymentServiceUserBankAccountResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -74,3 +77,6 @@ func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetV3ForwardPaymentServ
 	}
 	return v.V3ForwardPaymentServiceUserBankAccountResponse
 }
+
+// #region class-body-v3forwardpaymentserviceuserbankaccountresponse
+// #endregion class-body-v3forwardpaymentserviceuserbankaccountresponse

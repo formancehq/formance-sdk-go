@@ -23,7 +23,7 @@ func (v V2CreditWalletRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2CreditWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "metadata", "sources"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -70,3 +70,6 @@ func (v *V2CreditWalletRequest) GetTimestamp() *time.Time {
 	}
 	return v.Timestamp
 }
+
+// #region class-body-v2creditwalletrequest
+// #endregion class-body-v2creditwalletrequest

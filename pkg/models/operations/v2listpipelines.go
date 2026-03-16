@@ -19,6 +19,9 @@ func (v *V2ListPipelinesRequest) GetLedger() string {
 	return v.Ledger
 }
 
+// #region class-body-v2listpipelinesrequest
+// #endregion class-body-v2listpipelinesrequest
+
 type V2ListPipelinesLedgerV2Cursor struct {
 	Data     []shared.V2Pipeline `json:"data"`
 	HasMore  bool                `json:"hasMore"`
@@ -62,6 +65,9 @@ func (v *V2ListPipelinesLedgerV2Cursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2listpipelinesledgerv2cursor
+// #endregion class-body-v2listpipelinesledgerv2cursor
+
 type V2ListPipelinesCursor struct {
 	Cursor V2ListPipelinesLedgerV2Cursor `json:"cursor"`
 	Data   []shared.V2Pipeline           `json:"data,omitempty"`
@@ -81,6 +87,9 @@ func (v *V2ListPipelinesCursor) GetData() []shared.V2Pipeline {
 	return v.Data
 }
 
+// #region class-body-v2listpipelinescursor
+// #endregion class-body-v2listpipelinescursor
+
 // V2ListPipelinesResponseBody - Pipelines list
 type V2ListPipelinesResponseBody struct {
 	Cursor *V2ListPipelinesCursor `json:"cursor,omitempty"`
@@ -92,6 +101,9 @@ func (v *V2ListPipelinesResponseBody) GetCursor() *V2ListPipelinesCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2listpipelinesresponsebody
+// #endregion class-body-v2listpipelinesresponsebody
 
 type V2ListPipelinesResponse struct {
 	// HTTP response content type for this operation
@@ -131,3 +143,6 @@ func (v *V2ListPipelinesResponse) GetObject() *V2ListPipelinesResponseBody {
 	}
 	return v.Object
 }
+
+// #region class-body-v2listpipelinesresponse
+// #endregion class-body-v2listpipelinesresponse

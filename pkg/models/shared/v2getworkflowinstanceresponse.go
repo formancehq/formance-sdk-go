@@ -12,3 +12,6 @@ func (v *V2GetWorkflowInstanceResponse) GetData() V2WorkflowInstance {
 	}
 	return v.Data
 }
+
+// #region class-body-v2getworkflowinstanceresponse
+// #endregion class-body-v2getworkflowinstanceresponse

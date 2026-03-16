@@ -12,3 +12,6 @@ func (v *V2GetWorkflowInstanceHistoryResponse) GetData() []V2WorkflowInstanceHis
 	}
 	return v.Data
 }
+
+// #region class-body-v2getworkflowinstancehistoryresponse
+// #endregion class-body-v2getworkflowinstancehistoryresponse

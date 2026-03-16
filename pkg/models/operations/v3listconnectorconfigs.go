@@ -45,3 +45,6 @@ func (v *V3ListConnectorConfigsResponse) GetV3ConnectorConfigsResponse() *shared
 	}
 	return v.V3ConnectorConfigsResponse
 }
+
+// #region class-body-v3listconnectorconfigsresponse
+// #endregion class-body-v3listconnectorconfigsresponse

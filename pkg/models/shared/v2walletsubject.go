@@ -43,3 +43,6 @@ func (v *V2WalletSubject) GetType() string {
 	}
 	return v.Type
 }
+
+// #region class-body-v2walletsubject
+// #endregion class-body-v2walletsubject

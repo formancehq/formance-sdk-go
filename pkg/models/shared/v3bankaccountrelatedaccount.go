@@ -17,7 +17,7 @@ func (v V3BankAccountRelatedAccount) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3BankAccountRelatedAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountID", "createdAt"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -36,3 +36,6 @@ func (v *V3BankAccountRelatedAccount) GetCreatedAt() time.Time {
 	}
 	return v.CreatedAt
 }
+
+// #region class-body-v3bankaccountrelatedaccount
+// #endregion class-body-v3bankaccountrelatedaccount

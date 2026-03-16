@@ -19,6 +19,9 @@ func (v *V3GetPaymentRequest) GetPaymentID() string {
 	return v.PaymentID
 }
 
+// #region class-body-v3getpaymentrequest
+// #endregion class-body-v3getpaymentrequest
+
 type V3GetPaymentResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3GetPaymentResponse) GetV3GetPaymentResponse() *shared.V3GetPaymentRes
 	}
 	return v.V3GetPaymentResponse
 }
+
+// #region class-body-v3getpaymentresponse
+// #endregion class-body-v3getpaymentresponse

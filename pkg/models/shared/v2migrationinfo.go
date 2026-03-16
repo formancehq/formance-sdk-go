@@ -83,3 +83,6 @@ func (v *V2MigrationInfo) GetVersion() *string {
 	}
 	return v.Version
 }
+
+// #region class-body-v2migrationinfo
+// #endregion class-body-v2migrationinfo

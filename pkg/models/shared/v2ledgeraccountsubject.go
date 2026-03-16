@@ -35,3 +35,6 @@ func (v *V2LedgerAccountSubject) GetType() string {
 	}
 	return v.Type
 }
+
+// #region class-body-v2ledgeraccountsubject
+// #endregion class-body-v2ledgeraccountsubject

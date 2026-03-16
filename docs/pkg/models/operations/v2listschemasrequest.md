@@ -1,0 +1,12 @@
+# V2ListSchemasRequest
+
+
+## Fields
+
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  | Example                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `Cursor`                                                     | `*string`                                                    | :heavy_minus_sign:                                           | The pagination cursor value                                  |                                                              |
+| `Ledger`                                                     | `string`                                                     | :heavy_check_mark:                                           | Name of the ledger.                                          | ledger001                                                    |
+| `Order`                                                      | [*operations.Order](../../../pkg/models/operations/order.md) | :heavy_minus_sign:                                           | The sort order                                               |                                                              |
+| `PageSize`                                                   | `*int64`                                                     | :heavy_minus_sign:                                           | The maximum number of results to return per page             |                                                              |
+| `Sort`                                                       | [*operations.Sort](../../../pkg/models/operations/sort.md)   | :heavy_minus_sign:                                           | The field to sort by                                         |                                                              |

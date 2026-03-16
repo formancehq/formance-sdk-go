@@ -19,6 +19,9 @@ func (v *V3ResetConnectorRequest) GetConnectorID() string {
 	return v.ConnectorID
 }
 
+// #region class-body-v3resetconnectorrequest
+// #endregion class-body-v3resetconnectorrequest
+
 type V3ResetConnectorResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3ResetConnectorResponse) GetV3ResetConnectorResponse() *shared.V3Reset
 	}
 	return v.V3ResetConnectorResponse
 }
+
+// #region class-body-v3resetconnectorresponse
+// #endregion class-body-v3resetconnectorresponse

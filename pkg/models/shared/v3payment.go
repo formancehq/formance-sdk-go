@@ -31,7 +31,7 @@ func (v V3Payment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Payment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "asset", "connectorID", "createdAt", "id", "initialAmount", "provider", "reference", "scheme", "status", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -141,3 +141,6 @@ func (v *V3Payment) GetType() V3PaymentTypeEnum {
 	}
 	return v.Type
 }
+
+// #region class-body-v3payment
+// #endregion class-body-v3payment

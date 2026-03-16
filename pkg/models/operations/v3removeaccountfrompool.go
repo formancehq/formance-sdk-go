@@ -27,6 +27,9 @@ func (v *V3RemoveAccountFromPoolRequest) GetPoolID() string {
 	return v.PoolID
 }
 
+// #region class-body-v3removeaccountfrompoolrequest
+// #endregion class-body-v3removeaccountfrompoolrequest
+
 type V3RemoveAccountFromPoolResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V3RemoveAccountFromPoolResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3removeaccountfrompoolresponse
+// #endregion class-body-v3removeaccountfrompoolresponse

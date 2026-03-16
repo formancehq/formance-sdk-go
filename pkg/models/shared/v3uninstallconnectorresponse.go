@@ -15,6 +15,9 @@ func (v *V3UninstallConnectorResponseData) GetTaskID() string {
 	return v.TaskID
 }
 
+// #region class-body-v3uninstallconnectorresponsedata
+// #endregion class-body-v3uninstallconnectorresponsedata
+
 type V3UninstallConnectorResponse struct {
 	Data V3UninstallConnectorResponseData `json:"data"`
 }
@@ -25,3 +28,6 @@ func (v *V3UninstallConnectorResponse) GetData() V3UninstallConnectorResponseDat
 	}
 	return v.Data
 }
+
+// #region class-body-v3uninstallconnectorresponse
+// #endregion class-body-v3uninstallconnectorresponse

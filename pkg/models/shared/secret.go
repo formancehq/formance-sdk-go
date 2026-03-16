@@ -3,11 +3,11 @@
 package shared
 
 type Secret struct {
-	Clear      string         `json:"clear"`
-	ID         string         `json:"id"`
-	LastDigits string         `json:"lastDigits"`
-	Metadata   map[string]any `json:"metadata,omitempty"`
-	Name       string         `json:"name"`
+	Clear      string            `json:"clear"`
+	ID         string            `json:"id"`
+	LastDigits string            `json:"lastDigits"`
+	Metadata   map[string]string `json:"metadata,omitempty"`
+	Name       string            `json:"name"`
 }
 
 func (s *Secret) GetClear() string {
@@ -31,7 +31,7 @@ func (s *Secret) GetLastDigits() string {
 	return s.LastDigits
 }
 
-func (s *Secret) GetMetadata() map[string]any {
+func (s *Secret) GetMetadata() map[string]string {
 	if s == nil {
 		return nil
 	}

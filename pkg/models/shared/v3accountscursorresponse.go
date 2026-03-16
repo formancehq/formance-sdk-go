@@ -45,6 +45,9 @@ func (v *V3AccountsCursorResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v3accountscursorresponsecursor
+// #endregion class-body-v3accountscursorresponsecursor
+
 type V3AccountsCursorResponse struct {
 	Cursor V3AccountsCursorResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V3AccountsCursorResponse) GetCursor() V3AccountsCursorResponseCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v3accountscursorresponse
+// #endregion class-body-v3accountscursorresponse

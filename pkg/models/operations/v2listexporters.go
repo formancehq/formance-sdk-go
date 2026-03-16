@@ -50,6 +50,9 @@ func (v *V2ListExportersCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2listexporterscursor
+// #endregion class-body-v2listexporterscursor
+
 type Cursor struct {
 	Cursor V2ListExportersCursor `json:"cursor"`
 	Data   []shared.V2Exporter   `json:"data,omitempty"`
@@ -80,6 +83,9 @@ func (v *V2ListExportersResponseBody) GetCursor() *Cursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2listexportersresponsebody
+// #endregion class-body-v2listexportersresponsebody
 
 type V2ListExportersResponse struct {
 	// HTTP response content type for this operation
@@ -119,3 +125,6 @@ func (v *V2ListExportersResponse) GetObject() *V2ListExportersResponseBody {
 	}
 	return v.Object
 }
+
+// #region class-body-v2listexportersresponse
+// #endregion class-body-v2listexportersresponse

@@ -63,7 +63,7 @@ func (s *FormanceReconciliationV1) CreatePolicy(ctx context.Context, request sha
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createPolicy",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:write"},
+		OAuth2Scopes:     []string{"reconciliation:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -278,7 +278,7 @@ func (s *FormanceReconciliationV1) DeletePolicy(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deletePolicy",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:write"},
+		OAuth2Scopes:     []string{"reconciliation:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -407,6 +407,7 @@ func (s *FormanceReconciliationV1) DeletePolicy(ctx context.Context, request ope
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -465,7 +466,7 @@ func (s *FormanceReconciliationV1) GetPolicy(ctx context.Context, request operat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getPolicy",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:read"},
+		OAuth2Scopes:     []string{"reconciliation:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -672,7 +673,7 @@ func (s *FormanceReconciliationV1) GetReconciliation(ctx context.Context, reques
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getReconciliation",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:read"},
+		OAuth2Scopes:     []string{"reconciliation:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -879,7 +880,7 @@ func (s *FormanceReconciliationV1) ListPolicies(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listPolicies",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:read"},
+		OAuth2Scopes:     []string{"reconciliation:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -901,7 +902,7 @@ func (s *FormanceReconciliationV1) ListPolicies(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1090,7 +1091,7 @@ func (s *FormanceReconciliationV1) ListReconciliations(ctx context.Context, requ
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listReconciliations",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:read"},
+		OAuth2Scopes:     []string{"reconciliation:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1112,7 +1113,7 @@ func (s *FormanceReconciliationV1) ListReconciliations(ctx context.Context, requ
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1302,7 +1303,7 @@ func (s *FormanceReconciliationV1) Reconcile(ctx context.Context, request operat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "reconcile",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:write"},
+		OAuth2Scopes:     []string{"reconciliation:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ReconciliationRequest", "json", `request:"mediaType=application/json"`)
@@ -1516,7 +1517,7 @@ func (s *FormanceReconciliationV1) ReconciliationgetServerInfo(ctx context.Conte
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "reconciliationgetServerInfo",
-		OAuth2Scopes:     []string{"auth:read", "reconciliation:read"},
+		OAuth2Scopes:     []string{"reconciliation:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

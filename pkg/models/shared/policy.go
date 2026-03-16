@@ -21,7 +21,7 @@ func (p Policy) MarshalJSON() ([]byte, error) {
 }
 
 func (p *Policy) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"createdAt", "id", "ledgerName", "ledgerQuery", "name", "paymentsPoolID"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -10,6 +10,9 @@ import (
 type V3ConnectorConfig struct {
 }
 
+// #region class-body-v3connectorconfig
+// #endregion class-body-v3connectorconfig
+
 type V3Connector struct {
 	Config               V3ConnectorConfig `json:"config"`
 	CreatedAt            time.Time         `json:"createdAt"`
@@ -25,7 +28,7 @@ func (v V3Connector) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Connector) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"config", "createdAt", "id", "name", "provider", "reference", "scheduledForDeletion"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -79,3 +82,6 @@ func (v *V3Connector) GetScheduledForDeletion() bool {
 	}
 	return v.ScheduledForDeletion
 }
+
+// #region class-body-v3connector
+// #endregion class-body-v3connector

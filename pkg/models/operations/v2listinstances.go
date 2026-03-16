@@ -51,6 +51,9 @@ func (v *V2ListInstancesRequest) GetWorkflowID() *string {
 	return v.WorkflowID
 }
 
+// #region class-body-v2listinstancesrequest
+// #endregion class-body-v2listinstancesrequest
+
 type V2ListInstancesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -89,3 +92,6 @@ func (v *V2ListInstancesResponse) GetV2ListRunsResponse() *shared.V2ListRunsResp
 	}
 	return v.V2ListRunsResponse
 }
+
+// #region class-body-v2listinstancesresponse
+// #endregion class-body-v2listinstancesresponse

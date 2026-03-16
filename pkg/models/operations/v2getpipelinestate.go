@@ -28,6 +28,9 @@ func (v *V2GetPipelineStateRequest) GetPipelineID() string {
 	return v.PipelineID
 }
 
+// #region class-body-v2getpipelinestaterequest
+// #endregion class-body-v2getpipelinestaterequest
+
 // V2GetPipelineStateResponseBody - Pipeline information
 type V2GetPipelineStateResponseBody struct {
 	Data shared.V2Pipeline `json:"data"`
@@ -39,6 +42,9 @@ func (v *V2GetPipelineStateResponseBody) GetData() shared.V2Pipeline {
 	}
 	return v.Data
 }
+
+// #region class-body-v2getpipelinestateresponsebody
+// #endregion class-body-v2getpipelinestateresponsebody
 
 type V2GetPipelineStateResponse struct {
 	// HTTP response content type for this operation
@@ -78,3 +84,6 @@ func (v *V2GetPipelineStateResponse) GetObject() *V2GetPipelineStateResponseBody
 	}
 	return v.Object
 }
+
+// #region class-body-v2getpipelinestateresponse
+// #endregion class-body-v2getpipelinestateresponse

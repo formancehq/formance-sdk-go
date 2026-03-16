@@ -18,7 +18,7 @@ func (v Volume) MarshalJSON() ([]byte, error) {
 }
 
 func (v *Volume) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"input", "output"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil

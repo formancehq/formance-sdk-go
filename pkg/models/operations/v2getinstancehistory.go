@@ -19,6 +19,9 @@ func (v *V2GetInstanceHistoryRequest) GetInstanceID() string {
 	return v.InstanceID
 }
 
+// #region class-body-v2getinstancehistoryrequest
+// #endregion class-body-v2getinstancehistoryrequest
+
 type V2GetInstanceHistoryResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V2GetInstanceHistoryResponse) GetV2GetWorkflowInstanceHistoryResponse()
 	}
 	return v.V2GetWorkflowInstanceHistoryResponse
 }
+
+// #region class-body-v2getinstancehistoryresponse
+// #endregion class-body-v2getinstancehistoryresponse

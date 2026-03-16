@@ -45,6 +45,9 @@ func (v *V3PoolsCursorResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v3poolscursorresponsecursor
+// #endregion class-body-v3poolscursorresponsecursor
+
 type V3PoolsCursorResponse struct {
 	Cursor V3PoolsCursorResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V3PoolsCursorResponse) GetCursor() V3PoolsCursorResponseCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v3poolscursorresponse
+// #endregion class-body-v3poolscursorresponse

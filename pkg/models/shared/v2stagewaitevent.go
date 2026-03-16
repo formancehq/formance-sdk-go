@@ -27,3 +27,6 @@ func (v *V2StageWaitEvent) GetEvent() string {
 	}
 	return v.Event
 }
+
+// #region class-body-v2stagewaitevent
+// #endregion class-body-v2stagewaitevent

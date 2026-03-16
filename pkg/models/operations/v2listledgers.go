@@ -4,17 +4,20 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
 
 type V2ListLedgersRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
 	// No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
+	// If true, include deleted ledgers in the results. By default, deleted ledgers are excluded.
+	//
+	IncludeDeleted *bool `default:"false" queryParam:"style=form,explode=true,name=includeDeleted"`
 	// The maximum number of results to return per page.
 	//
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
@@ -24,11 +27,15 @@ type V2ListLedgersRequest struct {
 	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 }
 
-func (v *V2ListLedgersRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return map[string]any{}
+func (v V2ListLedgersRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2ListLedgersRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
 	}
-	return v.RequestBody
+	return nil
 }
 
 func (v *V2ListLedgersRequest) GetCursor() *string {
@@ -36,6 +43,13 @@ func (v *V2ListLedgersRequest) GetCursor() *string {
 		return nil
 	}
 	return v.Cursor
+}
+
+func (v *V2ListLedgersRequest) GetIncludeDeleted() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.IncludeDeleted
 }
 
 func (v *V2ListLedgersRequest) GetPageSize() *int64 {
@@ -51,6 +65,9 @@ func (v *V2ListLedgersRequest) GetSort() *string {
 	}
 	return v.Sort
 }
+
+// #region class-body-v2listledgersrequest
+// #endregion class-body-v2listledgersrequest
 
 type V2ListLedgersResponse struct {
 	// HTTP response content type for this operation
@@ -90,3 +107,6 @@ func (v *V2ListLedgersResponse) GetV2LedgerListResponse() *shared.V2LedgerListRe
 	}
 	return v.V2LedgerListResponse
 }
+
+// #region class-body-v2listledgersresponse
+// #endregion class-body-v2listledgersresponse

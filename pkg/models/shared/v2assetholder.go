@@ -16,7 +16,7 @@ func (v V2AssetHolder) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2AssetHolder) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"assets"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -28,3 +28,6 @@ func (v *V2AssetHolder) GetAssets() map[string]*big.Int {
 	}
 	return v.Assets
 }
+
+// #region class-body-v2assetholder
+// #endregion class-body-v2assetholder

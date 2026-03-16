@@ -1,5 +1,4 @@
-# V3
-(*Payments.V3*)
+# Payments.V3
 
 ## Overview
 
@@ -12,14 +11,19 @@
 
 * [CreateBankAccount](#createbankaccount) - Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
 
+* [CreateLinkForPaymentServiceUser](#createlinkforpaymentserviceuser) - Create an authentication link for a payment service user on a connector, for oauth flow
 * [CreatePayment](#createpayment) - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
 
 * [CreatePaymentServiceUser](#createpaymentserviceuser) - Create a formance payment service user object
 * [CreatePool](#createpool) - Create a formance pool object
 * [DeletePaymentInitiation](#deletepaymentinitiation) - Delete a payment initiation by ID
+* [DeletePaymentServiceUser](#deletepaymentserviceuser) - Delete a payment service user by ID
+* [DeletePaymentServiceUserConnectionFromConnectorID](#deletepaymentserviceuserconnectionfromconnectorid) - Delete a connection for a payment service user on a connector
+* [DeletePaymentServiceUserConnector](#deletepaymentserviceuserconnector) - Remove a payment service user from a connector, the PSU will still exist in Formance
 * [DeletePool](#deletepool) - Delete a pool by ID
 * [ForwardBankAccount](#forwardbankaccount) - Forward a Bank Account to a PSP for creation
 * [ForwardPaymentServiceUserBankAccount](#forwardpaymentserviceuserbankaccount) - Forward a payment service user's bank account to a connector
+* [ForwardPaymentServiceUserToProvider](#forwardpaymentserviceusertoprovider) - Register/forward a payment service user on/to a connector
 * [GetAccount](#getaccount) - Get an account by ID
 * [GetAccountBalances](#getaccountbalances) - Get account balances
 * [GetBankAccount](#getbankaccount) - Get a Bank Account by ID
@@ -28,6 +32,7 @@
 * [GetPayment](#getpayment) - Get a payment by ID
 * [GetPaymentInitiation](#getpaymentinitiation) - Get a payment initiation by ID
 * [GetPaymentServiceUser](#getpaymentserviceuser) - Get a payment service user by ID
+* [GetPaymentServiceUserLinkAttemptFromConnectorID](#getpaymentserviceuserlinkattemptfromconnectorid) - Get a link attempt for a payment service user on a connector
 * [GetPool](#getpool) - Get a pool by ID
 * [GetPoolBalances](#getpoolbalances) - Get historical pool balances from a particular point in time
 * [GetPoolBalancesLatest](#getpoolbalanceslatest) - Get latest pool balances
@@ -43,6 +48,11 @@
 * [ListPaymentInitiationAdjustments](#listpaymentinitiationadjustments) - List all payment initiation adjustments
 * [ListPaymentInitiationRelatedPayments](#listpaymentinitiationrelatedpayments) - List all payments related to a payment initiation
 * [ListPaymentInitiations](#listpaymentinitiations) - List all payment initiations
+* [ListPaymentServiceUserConnections](#listpaymentserviceuserconnections) - List all connections for a payment service user
+* [ListPaymentServiceUserConnectionsFromConnectorID](#listpaymentserviceuserconnectionsfromconnectorid) - List enabled connections for a payment service user on a connector (i.e. the various banks PSUser has enabled on the connector)
+* [ListPaymentServiceUserLinkAttemptsFromConnectorID](#listpaymentserviceuserlinkattemptsfromconnectorid) - List all link attempts for a payment service user on a connector.
+Allows to check if users used the link and completed the oauth flow.
+
 * [ListPaymentServiceUsers](#listpaymentserviceusers) - List all payment service users
 * [ListPayments](#listpayments) - List all payments
 * [ListPools](#listpools) - List all pools
@@ -53,7 +63,9 @@
 * [ReversePaymentInitiation](#reversepaymentinitiation) - Reverse a payment initiation
 * [UninstallConnector](#uninstallconnector) - Uninstall a connector
 * [UpdateBankAccountMetadata](#updatebankaccountmetadata) - Update a bank account's metadata
+* [UpdateLinkForPaymentServiceUserOnConnector](#updatelinkforpaymentserviceuseronconnector) - Update/Regenerate a link for a payment service user on a connector
 * [UpdatePaymentMetadata](#updatepaymentmetadata) - Update a payment's metadata
+* [UpdatePoolQuery](#updatepoolquery) - Update the query of a pool
 * [V3UpdateConnectorConfig](#v3updateconnectorconfig) - Update the config of a connector
 
 ## AddAccountToPool
@@ -349,6 +361,66 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## CreateLinkForPaymentServiceUser
+
+Create an authentication link for a payment service user on a connector, for oauth flow
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3CreateLinkForPaymentServiceUser" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/create-link" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.CreateLinkForPaymentServiceUser(ctx, operations.V3CreateLinkForPaymentServiceUserRequest{
+        ConnectorID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserCreateLinkResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                          | :heavy_check_mark:                                                                                                             | The context to use for the request.                                                                                            |
+| `request`                                                                                                                      | [operations.V3CreateLinkForPaymentServiceUserRequest](../../pkg/models/operations/v3createlinkforpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
+| `opts`                                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                             | The options for this request.                                                                                                  |
+
+### Response
+
+**[*operations.V3CreateLinkForPaymentServiceUserResponse](../../pkg/models/operations/v3createlinkforpaymentserviceuserresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## CreatePayment
 
 Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
@@ -577,6 +649,186 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## DeletePaymentServiceUser
+
+Delete a payment service user by ID
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3DeletePaymentServiceUser" method="delete" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.DeletePaymentServiceUser(ctx, operations.V3DeletePaymentServiceUserRequest{
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserDeleteResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
+| `request`                                                                                                        | [operations.V3DeletePaymentServiceUserRequest](../../pkg/models/operations/v3deletepaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
+
+### Response
+
+**[*operations.V3DeletePaymentServiceUserResponse](../../pkg/models/operations/v3deletepaymentserviceuserresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## DeletePaymentServiceUserConnectionFromConnectorID
+
+Delete a connection for a payment service user on a connector
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3DeletePaymentServiceUserConnectionFromConnectorID" method="delete" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections/{connectionID}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.DeletePaymentServiceUserConnectionFromConnectorID(ctx, operations.V3DeletePaymentServiceUserConnectionFromConnectorIDRequest{
+        ConnectionID: "<id>",
+        ConnectorID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserDeleteConnectionResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                          | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                                                              | :heavy_check_mark:                                                                                                                                                 | The context to use for the request.                                                                                                                                |
+| `request`                                                                                                                                                          | [operations.V3DeletePaymentServiceUserConnectionFromConnectorIDRequest](../../pkg/models/operations/v3deletepaymentserviceuserconnectionfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                                 | The request object to use for the request.                                                                                                                         |
+| `opts`                                                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                 | The options for this request.                                                                                                                                      |
+
+### Response
+
+**[*operations.V3DeletePaymentServiceUserConnectionFromConnectorIDResponse](../../pkg/models/operations/v3deletepaymentserviceuserconnectionfromconnectoridresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## DeletePaymentServiceUserConnector
+
+Remove a payment service user from a connector, the PSU will still exist in Formance
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3DeletePaymentServiceUserConnector" method="delete" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.DeletePaymentServiceUserConnector(ctx, operations.V3DeletePaymentServiceUserConnectorRequest{
+        ConnectorID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserDeleteConnectorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                          | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                              | :heavy_check_mark:                                                                                                                 | The context to use for the request.                                                                                                |
+| `request`                                                                                                                          | [operations.V3DeletePaymentServiceUserConnectorRequest](../../pkg/models/operations/v3deletepaymentserviceuserconnectorrequest.md) | :heavy_check_mark:                                                                                                                 | The request object to use for the request.                                                                                         |
+| `opts`                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                       | :heavy_minus_sign:                                                                                                                 | The options for this request.                                                                                                      |
+
+### Response
+
+**[*operations.V3DeletePaymentServiceUserConnectorResponse](../../pkg/models/operations/v3deletepaymentserviceuserconnectorresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## DeletePool
 
 Delete a pool by ID
@@ -747,6 +999,66 @@ func main() {
 ### Response
 
 **[*operations.V3ForwardPaymentServiceUserBankAccountResponse](../../pkg/models/operations/v3forwardpaymentserviceuserbankaccountresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## ForwardPaymentServiceUserToProvider
+
+Register/forward a payment service user on/to a connector
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ForwardPaymentServiceUserToProvider" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/forward" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ForwardPaymentServiceUserToProvider(ctx, operations.V3ForwardPaymentServiceUserToProviderRequest{
+        ConnectorID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                              | Type                                                                                                                                   | Required                                                                                                                               | Description                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                  | :heavy_check_mark:                                                                                                                     | The context to use for the request.                                                                                                    |
+| `request`                                                                                                                              | [operations.V3ForwardPaymentServiceUserToProviderRequest](../../pkg/models/operations/v3forwardpaymentserviceusertoproviderrequest.md) | :heavy_check_mark:                                                                                                                     | The request object to use for the request.                                                                                             |
+| `opts`                                                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                                                           | :heavy_minus_sign:                                                                                                                     | The options for this request.                                                                                                          |
+
+### Response
+
+**[*operations.V3ForwardPaymentServiceUserToProviderResponse](../../pkg/models/operations/v3forwardpaymentserviceusertoproviderresponse.md), error**
 
 ### Errors
 
@@ -969,7 +1281,47 @@ func main() {
         log.Fatal(err)
     }
     if res.V3GetConnectorConfigResponse != nil {
-        // handle response
+        switch res.V3GetConnectorConfigResponse.Data.Type {
+            case shared.V3InstallConnectorRequestTypeAdyen:
+                // res.V3GetConnectorConfigResponse.Data.V3AdyenConfig is populated
+            case shared.V3InstallConnectorRequestTypeAtlar:
+                // res.V3GetConnectorConfigResponse.Data.V3AtlarConfig is populated
+            case shared.V3InstallConnectorRequestTypeBankingcircle:
+                // res.V3GetConnectorConfigResponse.Data.V3BankingcircleConfig is populated
+            case shared.V3InstallConnectorRequestTypeCoinbaseprime:
+                // res.V3GetConnectorConfigResponse.Data.V3CoinbaseprimeConfig is populated
+            case shared.V3InstallConnectorRequestTypeColumn:
+                // res.V3GetConnectorConfigResponse.Data.V3ColumnConfig is populated
+            case shared.V3InstallConnectorRequestTypeCurrencycloud:
+                // res.V3GetConnectorConfigResponse.Data.V3CurrencycloudConfig is populated
+            case shared.V3InstallConnectorRequestTypeDummypay:
+                // res.V3GetConnectorConfigResponse.Data.V3DummypayConfig is populated
+            case shared.V3InstallConnectorRequestTypeFireblocks:
+                // res.V3GetConnectorConfigResponse.Data.V3FireblocksConfig is populated
+            case shared.V3InstallConnectorRequestTypeGeneric:
+                // res.V3GetConnectorConfigResponse.Data.V3GenericConfig is populated
+            case shared.V3InstallConnectorRequestTypeIncrease:
+                // res.V3GetConnectorConfigResponse.Data.V3IncreaseConfig is populated
+            case shared.V3InstallConnectorRequestTypeMangopay:
+                // res.V3GetConnectorConfigResponse.Data.V3MangopayConfig is populated
+            case shared.V3InstallConnectorRequestTypeModulr:
+                // res.V3GetConnectorConfigResponse.Data.V3ModulrConfig is populated
+            case shared.V3InstallConnectorRequestTypeMoneycorp:
+                // res.V3GetConnectorConfigResponse.Data.V3MoneycorpConfig is populated
+            case shared.V3InstallConnectorRequestTypePlaid:
+                // res.V3GetConnectorConfigResponse.Data.V3PlaidConfig is populated
+            case shared.V3InstallConnectorRequestTypePowens:
+                // res.V3GetConnectorConfigResponse.Data.V3PowensConfig is populated
+            case shared.V3InstallConnectorRequestTypeQonto:
+                // res.V3GetConnectorConfigResponse.Data.V3QontoConfig is populated
+            case shared.V3InstallConnectorRequestTypeStripe:
+                // res.V3GetConnectorConfigResponse.Data.V3StripeConfig is populated
+            case shared.V3InstallConnectorRequestTypeTink:
+                // res.V3GetConnectorConfigResponse.Data.V3TinkConfig is populated
+            case shared.V3InstallConnectorRequestTypeWise:
+                // res.V3GetConnectorConfigResponse.Data.V3WiseConfig is populated
+        }
+
     }
 }
 ```
@@ -1222,6 +1574,67 @@ func main() {
 ### Response
 
 **[*operations.V3GetPaymentServiceUserResponse](../../pkg/models/operations/v3getpaymentserviceuserresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## GetPaymentServiceUserLinkAttemptFromConnectorID
+
+Get a link attempt for a payment service user on a connector
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetPaymentServiceUserLinkAttemptFromConnectorID" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/link-attempts/{attemptID}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.GetPaymentServiceUserLinkAttemptFromConnectorID(ctx, operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDRequest{
+        AttemptID: "<id>",
+        ConnectorID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserLinkAttempt != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                      | Type                                                                                                                                                           | Required                                                                                                                                                       | Description                                                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                                                          | :heavy_check_mark:                                                                                                                                             | The context to use for the request.                                                                                                                            |
+| `request`                                                                                                                                                      | [operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDRequest](../../pkg/models/operations/v3getpaymentserviceuserlinkattemptfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                             | The request object to use for the request.                                                                                                                     |
+| `opts`                                                                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                   | :heavy_minus_sign:                                                                                                                                             | The options for this request.                                                                                                                                  |
+
+### Response
+
+**[*operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse](../../pkg/models/operations/v3getpaymentserviceuserlinkattemptfromconnectoridresponse.md), error**
 
 ### Errors
 
@@ -2122,6 +2535,193 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## ListPaymentServiceUserConnections
+
+List all connections for a payment service user
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUserConnections" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connections" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ListPaymentServiceUserConnections(ctx, operations.V3ListPaymentServiceUserConnectionsRequest{
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserConnectionsCursorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                          | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                              | :heavy_check_mark:                                                                                                                 | The context to use for the request.                                                                                                |
+| `request`                                                                                                                          | [operations.V3ListPaymentServiceUserConnectionsRequest](../../pkg/models/operations/v3listpaymentserviceuserconnectionsrequest.md) | :heavy_check_mark:                                                                                                                 | The request object to use for the request.                                                                                         |
+| `opts`                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                       | :heavy_minus_sign:                                                                                                                 | The options for this request.                                                                                                      |
+
+### Response
+
+**[*operations.V3ListPaymentServiceUserConnectionsResponse](../../pkg/models/operations/v3listpaymentserviceuserconnectionsresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## ListPaymentServiceUserConnectionsFromConnectorID
+
+List enabled connections for a payment service user on a connector (i.e. the various banks PSUser has enabled on the connector)
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUserConnectionsFromConnectorID" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ListPaymentServiceUserConnectionsFromConnectorID(ctx, operations.V3ListPaymentServiceUserConnectionsFromConnectorIDRequest{
+        ConnectorID: "<id>",
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserConnectionsCursorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                        | Type                                                                                                                                                             | Required                                                                                                                                                         | Description                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                                                            | :heavy_check_mark:                                                                                                                                               | The context to use for the request.                                                                                                                              |
+| `request`                                                                                                                                                        | [operations.V3ListPaymentServiceUserConnectionsFromConnectorIDRequest](../../pkg/models/operations/v3listpaymentserviceuserconnectionsfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                               | The request object to use for the request.                                                                                                                       |
+| `opts`                                                                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                               | The options for this request.                                                                                                                                    |
+
+### Response
+
+**[*operations.V3ListPaymentServiceUserConnectionsFromConnectorIDResponse](../../pkg/models/operations/v3listpaymentserviceuserconnectionsfromconnectoridresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## ListPaymentServiceUserLinkAttemptsFromConnectorID
+
+List all link attempts for a payment service user on a connector.
+Allows to check if users used the link and completed the oauth flow.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUserLinkAttemptsFromConnectorID" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/link-attempts" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx, operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest{
+        ConnectorID: "<id>",
+        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v3.Pointer[int64](100),
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserLinkAttemptsCursorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                          | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                                                              | :heavy_check_mark:                                                                                                                                                 | The context to use for the request.                                                                                                                                |
+| `request`                                                                                                                                                          | [operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest](../../pkg/models/operations/v3listpaymentserviceuserlinkattemptsfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                                 | The request object to use for the request.                                                                                                                         |
+| `opts`                                                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                 | The options for this request.                                                                                                                                      |
+
+### Response
+
+**[*operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse](../../pkg/models/operations/v3listpaymentserviceuserlinkattemptsfromconnectoridresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## ListPaymentServiceUsers
 
 List all payment service users
@@ -2716,6 +3316,67 @@ func main() {
 | sdkerrors.V3ErrorResponse | default                   | application/json          |
 | sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
+## UpdateLinkForPaymentServiceUserOnConnector
+
+Update/Regenerate a link for a payment service user on a connector
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3UpdateLinkForPaymentServiceUserOnConnector" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections/{connectionID}/update-link" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.UpdateLinkForPaymentServiceUserOnConnector(ctx, operations.V3UpdateLinkForPaymentServiceUserOnConnectorRequest{
+        ConnectionID: "<id>",
+        ConnectorID: "<id>",
+        PaymentServiceUserID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3PaymentServiceUserUpdateLinkResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                            | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                                | :heavy_check_mark:                                                                                                                                   | The context to use for the request.                                                                                                                  |
+| `request`                                                                                                                                            | [operations.V3UpdateLinkForPaymentServiceUserOnConnectorRequest](../../pkg/models/operations/v3updatelinkforpaymentserviceuseronconnectorrequest.md) | :heavy_check_mark:                                                                                                                                   | The request object to use for the request.                                                                                                           |
+| `opts`                                                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                                                         | :heavy_minus_sign:                                                                                                                                   | The options for this request.                                                                                                                        |
+
+### Response
+
+**[*operations.V3UpdateLinkForPaymentServiceUserOnConnectorResponse](../../pkg/models/operations/v3updatelinkforpaymentserviceuseronconnectorresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
 ## UpdatePaymentMetadata
 
 Update a payment's metadata
@@ -2767,6 +3428,65 @@ func main() {
 ### Response
 
 **[*operations.V3UpdatePaymentMetadataResponse](../../pkg/models/operations/v3updatepaymentmetadataresponse.md), error**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.V3ErrorResponse | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+
+## UpdatePoolQuery
+
+Update the query of a pool
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3UpdatePoolQuery" method="patch" path="/api/payments/v3/pools/{poolID}/query" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.UpdatePoolQuery(ctx, operations.V3UpdatePoolQueryRequest{
+        PoolID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3UpdatePoolQueryRequest](../../pkg/models/operations/v3updatepoolqueryrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3UpdatePoolQueryResponse](../../pkg/models/operations/v3updatepoolqueryresponse.md), error**
 
 ### Errors
 

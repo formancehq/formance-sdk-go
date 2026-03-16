@@ -12,3 +12,6 @@ func (v *V3GetTaskResponse) GetData() V3Task {
 	}
 	return v.Data
 }
+
+// #region class-body-v3gettaskresponse
+// #endregion class-body-v3gettaskresponse

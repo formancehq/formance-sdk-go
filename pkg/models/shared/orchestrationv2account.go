@@ -36,3 +36,6 @@ func (o *OrchestrationV2Account) GetVolumes() map[string]V2Volume {
 	}
 	return o.Volumes
 }
+
+// #region class-body-orchestrationv2account
+// #endregion class-body-orchestrationv2account

@@ -29,7 +29,7 @@ func (l ListConnectorTasksV1Request) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListConnectorTasksV1Request) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"connector", "connectorId"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -62,6 +62,9 @@ func (l *ListConnectorTasksV1Request) GetPageSize() *int64 {
 	}
 	return l.PageSize
 }
+
+// #region class-body-listconnectortasksv1request
+// #endregion class-body-listconnectortasksv1request
 
 type ListConnectorTasksV1Response struct {
 	// HTTP response content type for this operation
@@ -101,3 +104,6 @@ func (l *ListConnectorTasksV1Response) GetTasksCursor() *shared.TasksCursor {
 	}
 	return l.TasksCursor
 }
+
+// #region class-body-listconnectortasksv1response
+// #endregion class-body-listconnectortasksv1response

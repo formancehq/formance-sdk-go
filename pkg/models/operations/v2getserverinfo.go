@@ -45,3 +45,6 @@ func (v *V2GetServerInfoResponse) GetV2ServerInfo() *shared.V2ServerInfo {
 	}
 	return v.V2ServerInfo
 }
+
+// #region class-body-v2getserverinforesponse
+// #endregion class-body-v2getserverinforesponse

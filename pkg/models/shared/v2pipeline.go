@@ -21,7 +21,7 @@ func (v V2Pipeline) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Pipeline) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "exporterID", "id", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -68,3 +68,6 @@ func (v *V2Pipeline) GetLedger() string {
 	}
 	return v.Ledger
 }
+
+// #region class-body-v2pipeline
+// #endregion class-body-v2pipeline

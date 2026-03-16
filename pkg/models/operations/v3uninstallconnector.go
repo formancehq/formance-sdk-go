@@ -19,6 +19,9 @@ func (v *V3UninstallConnectorRequest) GetConnectorID() string {
 	return v.ConnectorID
 }
 
+// #region class-body-v3uninstallconnectorrequest
+// #endregion class-body-v3uninstallconnectorrequest
+
 type V3UninstallConnectorResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3UninstallConnectorResponse) GetV3UninstallConnectorResponse() *shared
 	}
 	return v.V3UninstallConnectorResponse
 }
+
+// #region class-body-v3uninstallconnectorresponse
+// #endregion class-body-v3uninstallconnectorresponse

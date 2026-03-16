@@ -27,6 +27,9 @@ func (v *V2CreatePipelineRequest) GetLedger() string {
 	return v.Ledger
 }
 
+// #region class-body-v2createpipelinerequest
+// #endregion class-body-v2createpipelinerequest
+
 // V2CreatePipelineResponseBody - Created ipeline
 type V2CreatePipelineResponseBody struct {
 	Data shared.V2Pipeline `json:"data"`
@@ -38,6 +41,9 @@ func (v *V2CreatePipelineResponseBody) GetData() shared.V2Pipeline {
 	}
 	return v.Data
 }
+
+// #region class-body-v2createpipelineresponsebody
+// #endregion class-body-v2createpipelineresponsebody
 
 type V2CreatePipelineResponse struct {
 	// HTTP response content type for this operation
@@ -77,3 +83,6 @@ func (v *V2CreatePipelineResponse) GetObject() *V2CreatePipelineResponseBody {
 	}
 	return v.Object
 }
+
+// #region class-body-v2createpipelineresponse
+// #endregion class-body-v2createpipelineresponse

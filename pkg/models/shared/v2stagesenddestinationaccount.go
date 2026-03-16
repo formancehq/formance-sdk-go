@@ -35,3 +35,6 @@ func (v *V2StageSendDestinationAccount) GetLedger() *string {
 	}
 	return v.Ledger
 }
+
+// #region class-body-v2stagesenddestinationaccount
+// #endregion class-body-v2stagesenddestinationaccount

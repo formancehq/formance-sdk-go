@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version v3.1.0 and generator version 2.722.2
+// Generated from OpenAPI doc version v0.0.0 and generator version 2.865.2
 
 import (
 	"bytes"
@@ -86,7 +86,7 @@ type Formance struct {
 
 type SDKOption func(*Formance)
 
-// WithServerURL allows the overriding of the default server URL
+// WithServerURL allows providing an alternative server URL
 func WithServerURL(serverURL string) SDKOption {
 	return func(sdk *Formance) {
 		sdk.sdkConfiguration.ServerURL = serverURL
@@ -119,9 +119,9 @@ func WithServerIndex(serverIndex int) SDKOption {
 type ServerEnvironment string
 
 const (
-	ServerEnvironmentSandbox ServerEnvironment = "sandbox"
-	ServerEnvironmentEuWest1 ServerEnvironment = "eu-west-1"
-	ServerEnvironmentUsEast1 ServerEnvironment = "us-east-1"
+	ServerEnvironmentEuSandbox ServerEnvironment = "eu.sandbox"
+	ServerEnvironmentEuWest1   ServerEnvironment = "eu-west-1"
+	ServerEnvironmentUsEast1   ServerEnvironment = "us-east-1"
 )
 
 func (e ServerEnvironment) ToPointer() *ServerEnvironment {
@@ -133,7 +133,7 @@ func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "sandbox":
+	case "eu.sandbox":
 		fallthrough
 	case "eu-west-1":
 		fallthrough
@@ -210,14 +210,14 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "3.7.2",
+		SDKVersion: "3.8.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.7.2 2.722.2 v3.1.0 github.com/formancehq/formance-sdk-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.8.0 2.865.2 v0.0.0 github.com/formancehq/formance-sdk-go/v3",
 			ServerList: ServerList,
 			ServerVariables: []map[string]string{
 				{},
 				{
-					"environment":  "sandbox",
+					"environment":  "eu.sandbox",
 					"organization": "orgID-stackID",
 				},
 			},
@@ -283,8 +283,8 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getVersions",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -304,10 +304,6 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

@@ -8,7 +8,6 @@ import (
 )
 
 type V3ListConnectorSchedulesRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
@@ -16,13 +15,6 @@ type V3ListConnectorSchedulesRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
-}
-
-func (v *V3ListConnectorSchedulesRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.RequestBody
 }
 
 func (v *V3ListConnectorSchedulesRequest) GetConnectorID() string {
@@ -45,6 +37,9 @@ func (v *V3ListConnectorSchedulesRequest) GetPageSize() *int64 {
 	}
 	return v.PageSize
 }
+
+// #region class-body-v3listconnectorschedulesrequest
+// #endregion class-body-v3listconnectorschedulesrequest
 
 type V3ListConnectorSchedulesResponse struct {
 	// HTTP response content type for this operation
@@ -84,3 +79,6 @@ func (v *V3ListConnectorSchedulesResponse) GetV3ConnectorSchedulesCursorResponse
 	}
 	return v.V3ConnectorSchedulesCursorResponse
 }
+
+// #region class-body-v3listconnectorschedulesresponse
+// #endregion class-body-v3listconnectorschedulesresponse

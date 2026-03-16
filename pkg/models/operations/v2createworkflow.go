@@ -45,3 +45,6 @@ func (v *V2CreateWorkflowResponse) GetV2CreateWorkflowResponse() *shared.V2Creat
 	}
 	return v.V2CreateWorkflowResponse
 }
+
+// #region class-body-v2createworkflowresponse
+// #endregion class-body-v2createworkflowresponse

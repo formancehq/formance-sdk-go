@@ -12,3 +12,6 @@ func (v *V2AccountResponse) GetData() V2Account {
 	}
 	return v.Data
 }
+
+// #region class-body-v2accountresponse
+// #endregion class-body-v2accountresponse

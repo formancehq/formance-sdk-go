@@ -51,3 +51,27 @@ taskResponseData := shared.CreateTaskResponseDataTaskMangoPay(shared.TaskMangoPa
 taskResponseData := shared.CreateTaskResponseDataTaskMoneycorp(shared.TaskMoneycorp{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch taskResponseData.Type {
+	case shared.TaskResponseDataTypeTaskStripe:
+		// taskResponseData.TaskStripe is populated
+	case shared.TaskResponseDataTypeTaskWise:
+		// taskResponseData.TaskWise is populated
+	case shared.TaskResponseDataTypeTaskCurrencyCloud:
+		// taskResponseData.TaskCurrencyCloud is populated
+	case shared.TaskResponseDataTypeTaskDummyPay:
+		// taskResponseData.TaskDummyPay is populated
+	case shared.TaskResponseDataTypeTaskModulr:
+		// taskResponseData.TaskModulr is populated
+	case shared.TaskResponseDataTypeTaskBankingCircle:
+		// taskResponseData.TaskBankingCircle is populated
+	case shared.TaskResponseDataTypeTaskMangoPay:
+		// taskResponseData.TaskMangoPay is populated
+	case shared.TaskResponseDataTypeTaskMoneycorp:
+		// taskResponseData.TaskMoneycorp is populated
+}
+```

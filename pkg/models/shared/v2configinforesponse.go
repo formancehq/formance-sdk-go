@@ -20,3 +20,6 @@ func (v *V2ConfigInfoResponse) GetVersion() string {
 	}
 	return v.Version
 }
+
+// #region class-body-v2configinforesponse
+// #endregion class-body-v2configinforesponse

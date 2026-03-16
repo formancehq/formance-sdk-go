@@ -1,5 +1,4 @@
-# FormancePaymentsV1
-(*Payments.V1*)
+# Payments.V1
 
 ## Overview
 
@@ -48,6 +47,7 @@
 * [UpdateBankAccountMetadata](#updatebankaccountmetadata) - Update metadata of a bank account
 * [UpdateConnectorConfigV1](#updateconnectorconfigv1) - Update the config of a connector
 * [UpdateMetadata](#updatemetadata) - Update metadata
+* [UpdatePoolQuery](#updatepoolquery) - Update the query of a pool
 * [UpdateTransferInitiationStatus](#updatetransferinitiationstatus) - Update the status of a transfer initiation
 
 ## AddAccountToPool
@@ -394,10 +394,6 @@ func main() {
     )
 
     res, err := s.Payments.V1.CreatePool(ctx, shared.PoolRequest{
-        AccountIDs: []string{
-            "<value 1>",
-            "<value 2>",
-        },
         Name: "<value>",
     })
     if err != nil {
@@ -838,7 +834,25 @@ func main() {
         log.Fatal(err)
     }
     if res.TaskResponse != nil {
-        // handle response
+        switch res.TaskResponse.Data.Type {
+            case shared.TaskResponseDataTypeTaskStripe:
+                // res.TaskResponse.Data.TaskStripe is populated
+            case shared.TaskResponseDataTypeTaskWise:
+                // res.TaskResponse.Data.TaskWise is populated
+            case shared.TaskResponseDataTypeTaskCurrencyCloud:
+                // res.TaskResponse.Data.TaskCurrencyCloud is populated
+            case shared.TaskResponseDataTypeTaskDummyPay:
+                // res.TaskResponse.Data.TaskDummyPay is populated
+            case shared.TaskResponseDataTypeTaskModulr:
+                // res.TaskResponse.Data.TaskModulr is populated
+            case shared.TaskResponseDataTypeTaskBankingCircle:
+                // res.TaskResponse.Data.TaskBankingCircle is populated
+            case shared.TaskResponseDataTypeTaskMangoPay:
+                // res.TaskResponse.Data.TaskMangoPay is populated
+            case shared.TaskResponseDataTypeTaskMoneycorp:
+                // res.TaskResponse.Data.TaskMoneycorp is populated
+        }
+
     }
 }
 ```
@@ -899,7 +913,25 @@ func main() {
         log.Fatal(err)
     }
     if res.TaskResponse != nil {
-        // handle response
+        switch res.TaskResponse.Data.Type {
+            case shared.TaskResponseDataTypeTaskStripe:
+                // res.TaskResponse.Data.TaskStripe is populated
+            case shared.TaskResponseDataTypeTaskWise:
+                // res.TaskResponse.Data.TaskWise is populated
+            case shared.TaskResponseDataTypeTaskCurrencyCloud:
+                // res.TaskResponse.Data.TaskCurrencyCloud is populated
+            case shared.TaskResponseDataTypeTaskDummyPay:
+                // res.TaskResponse.Data.TaskDummyPay is populated
+            case shared.TaskResponseDataTypeTaskModulr:
+                // res.TaskResponse.Data.TaskModulr is populated
+            case shared.TaskResponseDataTypeTaskBankingCircle:
+                // res.TaskResponse.Data.TaskBankingCircle is populated
+            case shared.TaskResponseDataTypeTaskMangoPay:
+                // res.TaskResponse.Data.TaskMangoPay is populated
+            case shared.TaskResponseDataTypeTaskMoneycorp:
+                // res.TaskResponse.Data.TaskMoneycorp is populated
+        }
+
     }
 }
 ```
@@ -1136,7 +1168,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PoolBalancesResponse != nil {
+    if res.PoolBalancesLatestResponse != nil {
         // handle response
     }
 }
@@ -1993,7 +2025,31 @@ func main() {
         log.Fatal(err)
     }
     if res.ConnectorConfigResponse != nil {
-        // handle response
+        switch res.ConnectorConfigResponse.Data.Type {
+            case shared.ConnectorConfigTypeAdyen:
+                // res.ConnectorConfigResponse.Data.AdyenConfig is populated
+            case shared.ConnectorConfigTypeAtlar:
+                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
+            case shared.ConnectorConfigTypeBankingcircle:
+                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
+            case shared.ConnectorConfigTypeCurrencycloud:
+                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
+            case shared.ConnectorConfigTypeDummypay:
+                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
+            case shared.ConnectorConfigTypeGeneric:
+                // res.ConnectorConfigResponse.Data.GenericConfig is populated
+            case shared.ConnectorConfigTypeMangopay:
+                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
+            case shared.ConnectorConfigTypeModulr:
+                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
+            case shared.ConnectorConfigTypeMoneycorp:
+                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
+            case shared.ConnectorConfigTypeStripe:
+                // res.ConnectorConfigResponse.Data.StripeConfig is populated
+            case shared.ConnectorConfigTypeWise:
+                // res.ConnectorConfigResponse.Data.WiseConfig is populated
+        }
+
     }
 }
 ```
@@ -2053,7 +2109,31 @@ func main() {
         log.Fatal(err)
     }
     if res.ConnectorConfigResponse != nil {
-        // handle response
+        switch res.ConnectorConfigResponse.Data.Type {
+            case shared.ConnectorConfigTypeAdyen:
+                // res.ConnectorConfigResponse.Data.AdyenConfig is populated
+            case shared.ConnectorConfigTypeAtlar:
+                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
+            case shared.ConnectorConfigTypeBankingcircle:
+                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
+            case shared.ConnectorConfigTypeCurrencycloud:
+                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
+            case shared.ConnectorConfigTypeDummypay:
+                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
+            case shared.ConnectorConfigTypeGeneric:
+                // res.ConnectorConfigResponse.Data.GenericConfig is populated
+            case shared.ConnectorConfigTypeMangopay:
+                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
+            case shared.ConnectorConfigTypeModulr:
+                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
+            case shared.ConnectorConfigTypeMoneycorp:
+                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
+            case shared.ConnectorConfigTypeStripe:
+                // res.ConnectorConfigResponse.Data.StripeConfig is populated
+            case shared.ConnectorConfigTypeWise:
+                // res.ConnectorConfigResponse.Data.WiseConfig is populated
+        }
+
     }
 }
 ```
@@ -2699,6 +2779,70 @@ func main() {
 ### Response
 
 **[*operations.UpdateMetadataResponse](../../pkg/models/operations/updatemetadataresponse.md), error**
+
+### Errors
+
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
+| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+
+## UpdatePoolQuery
+
+Update the query of a pool
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="updatePoolQuery" method="patch" path="/api/payments/pools/{poolId}/query" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V1.UpdatePoolQuery(ctx, operations.UpdatePoolQueryRequest{
+        UpdatePoolQueryRequest: shared.UpdatePoolQueryRequest{
+            Query: map[string]any{
+                "key": "<value>",
+            },
+        },
+        PoolID: "XXX",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.UpdatePoolQueryRequest](../../pkg/models/operations/updatepoolqueryrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.UpdatePoolQueryResponse](../../pkg/models/operations/updatepoolqueryresponse.md), error**
 
 ### Errors
 

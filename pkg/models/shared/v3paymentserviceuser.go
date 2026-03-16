@@ -22,7 +22,7 @@ func (v V3PaymentServiceUser) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3PaymentServiceUser) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -76,3 +76,6 @@ func (v *V3PaymentServiceUser) GetName() string {
 	}
 	return v.Name
 }
+
+// #region class-body-v3paymentserviceuser
+// #endregion class-body-v3paymentserviceuser

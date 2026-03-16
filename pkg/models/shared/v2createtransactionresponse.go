@@ -12,3 +12,6 @@ func (v *V2CreateTransactionResponse) GetData() V2Transaction {
 	}
 	return v.Data
 }
+
+// #region class-body-v2createtransactionresponse
+// #endregion class-body-v2createtransactionresponse

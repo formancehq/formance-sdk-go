@@ -58,3 +58,6 @@ func (v *V2TriggerTest) GetVariables() map[string]Variables {
 	}
 	return v.Variables
 }
+
+// #region class-body-v2triggertest
+// #endregion class-body-v2triggertest

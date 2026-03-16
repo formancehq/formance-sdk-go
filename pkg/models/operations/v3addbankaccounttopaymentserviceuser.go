@@ -27,6 +27,9 @@ func (v *V3AddBankAccountToPaymentServiceUserRequest) GetPaymentServiceUserID() 
 	return v.PaymentServiceUserID
 }
 
+// #region class-body-v3addbankaccounttopaymentserviceuserrequest
+// #endregion class-body-v3addbankaccounttopaymentserviceuserrequest
+
 type V3AddBankAccountToPaymentServiceUserResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V3AddBankAccountToPaymentServiceUserResponse) GetRawResponse() *http.Re
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3addbankaccounttopaymentserviceuserresponse
+// #endregion class-body-v3addbankaccounttopaymentserviceuserresponse

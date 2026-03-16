@@ -12,6 +12,9 @@ import (
 type V2ActivityStripeTransferMetadata struct {
 }
 
+// #region class-body-v2activitystripetransfermetadata
+// #endregion class-body-v2activitystripetransfermetadata
+
 type V2ActivityStripeTransfer struct {
 	Amount      *big.Int `json:"amount,omitempty"`
 	Asset       *string  `json:"asset,omitempty"`
@@ -76,3 +79,6 @@ func (v *V2ActivityStripeTransfer) GetWaitingValidation() *bool {
 	}
 	return v.WaitingValidation
 }
+
+// #region class-body-v2activitystripetransfer
+// #endregion class-body-v2activitystripetransfer

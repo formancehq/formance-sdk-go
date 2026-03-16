@@ -12,3 +12,6 @@ func (v *V2GetLedgerResponse) GetData() V2Ledger {
 	}
 	return v.Data
 }
+
+// #region class-body-v2getledgerresponse
+// #endregion class-body-v2getledgerresponse

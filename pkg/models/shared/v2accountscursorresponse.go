@@ -2,12 +2,29 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2AccountsCursorResponseCursor struct {
 	Data     []V2Account `json:"data"`
 	HasMore  bool        `json:"hasMore"`
 	Next     *string     `json:"next,omitempty"`
 	PageSize int64       `json:"pageSize"`
 	Previous *string     `json:"previous,omitempty"`
+}
+
+func (v V2AccountsCursorResponseCursor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2AccountsCursorResponseCursor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"data", "hasMore", "pageSize"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2AccountsCursorResponseCursor) GetData() []V2Account {
@@ -45,8 +62,46 @@ func (v *V2AccountsCursorResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2accountscursorresponsecursor
+// #endregion class-body-v2accountscursorresponsecursor
+
+type Resource string
+
+const (
+	ResourceAccounts Resource = "accounts"
+)
+
+func (e Resource) ToPointer() *Resource {
+	return &e
+}
+func (e *Resource) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "accounts":
+		*e = Resource(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Resource: %v", v)
+	}
+}
+
 type V2AccountsCursorResponse struct {
-	Cursor V2AccountsCursorResponseCursor `json:"cursor"`
+	Cursor   V2AccountsCursorResponseCursor `json:"cursor"`
+	Resource *Resource                      `json:"resource,omitempty"`
+}
+
+func (v V2AccountsCursorResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2AccountsCursorResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"cursor"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2AccountsCursorResponse) GetCursor() V2AccountsCursorResponseCursor {
@@ -55,3 +110,13 @@ func (v *V2AccountsCursorResponse) GetCursor() V2AccountsCursorResponseCursor {
 	}
 	return v.Cursor
 }
+
+func (v *V2AccountsCursorResponse) GetResource() *Resource {
+	if v == nil {
+		return nil
+	}
+	return v.Resource
+}
+
+// #region class-body-v2accountscursorresponse
+// #endregion class-body-v2accountscursorresponse

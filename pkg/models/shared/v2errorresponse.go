@@ -28,3 +28,6 @@ func (v *V2ErrorResponse) GetErrorMessage() string {
 	}
 	return v.ErrorMessage
 }
+
+// #region class-body-v2errorresponse
+// #endregion class-body-v2errorresponse

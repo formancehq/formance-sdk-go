@@ -80,6 +80,9 @@ func (u *UpdateConnectorConfigV1Request) GetConnectorID() string {
 	return u.ConnectorID
 }
 
+// #region class-body-updateconnectorconfigv1request
+// #endregion class-body-updateconnectorconfigv1request
+
 type UpdateConnectorConfigV1Response struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -109,3 +112,6 @@ func (u *UpdateConnectorConfigV1Response) GetRawResponse() *http.Response {
 	}
 	return u.RawResponse
 }
+
+// #region class-body-updateconnectorconfigv1response
+// #endregion class-body-updateconnectorconfigv1response

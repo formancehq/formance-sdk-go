@@ -27,6 +27,9 @@ func (v *V3UpdatePaymentMetadataRequest) GetPaymentID() string {
 	return v.PaymentID
 }
 
+// #region class-body-v3updatepaymentmetadatarequest
+// #endregion class-body-v3updatepaymentmetadatarequest
+
 type V3UpdatePaymentMetadataResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V3UpdatePaymentMetadataResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3updatepaymentmetadataresponse
+// #endregion class-body-v3updatepaymentmetadataresponse

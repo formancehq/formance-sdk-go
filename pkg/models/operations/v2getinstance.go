@@ -19,6 +19,9 @@ func (v *V2GetInstanceRequest) GetInstanceID() string {
 	return v.InstanceID
 }
 
+// #region class-body-v2getinstancerequest
+// #endregion class-body-v2getinstancerequest
+
 type V2GetInstanceResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V2GetInstanceResponse) GetV2GetWorkflowInstanceResponse() *shared.V2Get
 	}
 	return v.V2GetWorkflowInstanceResponse
 }
+
+// #region class-body-v2getinstanceresponse
+// #endregion class-body-v2getinstanceresponse

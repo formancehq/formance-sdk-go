@@ -15,6 +15,9 @@ func (v *V3RetryPaymentInitiationResponseData) GetTaskID() string {
 	return v.TaskID
 }
 
+// #region class-body-v3retrypaymentinitiationresponsedata
+// #endregion class-body-v3retrypaymentinitiationresponsedata
+
 type V3RetryPaymentInitiationResponse struct {
 	Data V3RetryPaymentInitiationResponseData `json:"data"`
 }
@@ -25,3 +28,6 @@ func (v *V3RetryPaymentInitiationResponse) GetData() V3RetryPaymentInitiationRes
 	}
 	return v.Data
 }
+
+// #region class-body-v3retrypaymentinitiationresponse
+// #endregion class-body-v3retrypaymentinitiationresponse

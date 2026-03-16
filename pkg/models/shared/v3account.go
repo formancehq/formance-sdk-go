@@ -10,7 +10,11 @@ import (
 type V3AccountRaw struct {
 }
 
+// #region class-body-v3accountraw
+// #endregion class-body-v3accountraw
+
 type V3Account struct {
+	Connector    *V3ConnectorBase  `json:"connector,omitempty"`
 	ConnectorID  string            `json:"connectorID"`
 	CreatedAt    time.Time         `json:"createdAt"`
 	DefaultAsset *string           `json:"defaultAsset,omitempty"`
@@ -28,10 +32,17 @@ func (v V3Account) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Account) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"connectorID", "createdAt", "id", "provider", "raw", "reference", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
+}
+
+func (v *V3Account) GetConnector() *V3ConnectorBase {
+	if v == nil {
+		return nil
+	}
+	return v.Connector
 }
 
 func (v *V3Account) GetConnectorID() string {
@@ -103,3 +114,6 @@ func (v *V3Account) GetType() V3AccountTypeEnum {
 	}
 	return v.Type
 }
+
+// #region class-body-v3account
+// #endregion class-body-v3account

@@ -36,6 +36,9 @@ func (v *V2RunWorkflowRequest) GetWorkflowID() string {
 	return v.WorkflowID
 }
 
+// #region class-body-v2runworkflowrequest
+// #endregion class-body-v2runworkflowrequest
+
 type V2RunWorkflowResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -74,3 +77,6 @@ func (v *V2RunWorkflowResponse) GetV2RunWorkflowResponse() *shared.V2RunWorkflow
 	}
 	return v.V2RunWorkflowResponse
 }
+
+// #region class-body-v2runworkflowresponse
+// #endregion class-body-v2runworkflowresponse
