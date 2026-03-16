@@ -42,6 +42,9 @@ func (v *V2ListTriggersOccurrencesRequest) GetTriggerID() string {
 	return v.TriggerID
 }
 
+// #region class-body-v2listtriggersoccurrencesrequest
+// #endregion class-body-v2listtriggersoccurrencesrequest
+
 type V2ListTriggersOccurrencesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -80,3 +83,6 @@ func (v *V2ListTriggersOccurrencesResponse) GetV2ListTriggersOccurrencesResponse
 	}
 	return v.V2ListTriggersOccurrencesResponse
 }
+
+// #region class-body-v2listtriggersoccurrencesresponse
+// #endregion class-body-v2listtriggersoccurrencesresponse

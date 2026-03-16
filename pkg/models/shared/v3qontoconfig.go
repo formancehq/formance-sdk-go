@@ -7,12 +7,13 @@ import (
 )
 
 type V3QontoConfig struct {
-	APIKey        string  `json:"apiKey"`
-	ClientID      string  `json:"clientID"`
-	Endpoint      string  `json:"endpoint"`
-	Name          string  `json:"name"`
+	APIKey   string `json:"apiKey"`
+	ClientID string `json:"clientID"`
+	Endpoint string `json:"endpoint"`
+	Name     string `json:"name"`
+	// Deprecated: From v3.1, this parameter will be ignored.
 	PageSize      *int64  `default:"25" json:"pageSize"`
-	PollingPeriod *string `default:"2m" json:"pollingPeriod"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
 	Provider      *string `default:"Qonto" json:"provider"`
 	StagingToken  *string `json:"stagingToken,omitempty"`
 }
@@ -83,3 +84,6 @@ func (v *V3QontoConfig) GetStagingToken() *string {
 	}
 	return v.StagingToken
 }
+
+// #region class-body-v3qontoconfig
+// #endregion class-body-v3qontoconfig

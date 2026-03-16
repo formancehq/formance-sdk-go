@@ -24,7 +24,7 @@ func (v V2WorkflowInstance) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2WorkflowInstance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "terminated", "updatedAt", "workflowID"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -92,3 +92,6 @@ func (v *V2WorkflowInstance) GetWorkflowID() string {
 	}
 	return v.WorkflowID
 }
+
+// #region class-body-v2workflowinstance
+// #endregion class-body-v2workflowinstance

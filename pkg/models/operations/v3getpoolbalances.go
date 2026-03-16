@@ -21,7 +21,7 @@ func (v V3GetPoolBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3GetPoolBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"poolID"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,6 +40,9 @@ func (v *V3GetPoolBalancesRequest) GetPoolID() string {
 	}
 	return v.PoolID
 }
+
+// #region class-body-v3getpoolbalancesrequest
+// #endregion class-body-v3getpoolbalancesrequest
 
 type V3GetPoolBalancesResponse struct {
 	// HTTP response content type for this operation
@@ -79,3 +82,6 @@ func (v *V3GetPoolBalancesResponse) GetV3PoolBalancesResponse() *shared.V3PoolBa
 	}
 	return v.V3PoolBalancesResponse
 }
+
+// #region class-body-v3getpoolbalancesresponse
+// #endregion class-body-v3getpoolbalancesresponse

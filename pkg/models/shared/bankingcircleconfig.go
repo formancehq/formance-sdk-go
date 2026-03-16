@@ -13,7 +13,7 @@ type BankingCircleConfig struct {
 	Password              string `json:"password"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Banking Circle API.
 	//
-	PollingPeriod      *string `default:"120s" json:"pollingPeriod"`
+	PollingPeriod      *string `default:"30m" json:"pollingPeriod"`
 	Provider           *string `default:"Bankingcircle" json:"provider"`
 	UserCertificate    string  `json:"userCertificate"`
 	UserCertificateKey string  `json:"userCertificateKey"`

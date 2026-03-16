@@ -5,4 +5,4 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `ClientID`         | *string*           | :heavy_check_mark: | Client ID          |
+| `ClientID`         | `string`           | :heavy_check_mark: | Client ID          |

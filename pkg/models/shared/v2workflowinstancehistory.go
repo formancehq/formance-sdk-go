@@ -21,7 +21,7 @@ func (v V2WorkflowInstanceHistory) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2WorkflowInstanceHistory) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"input", "name", "startedAt", "terminated"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -68,3 +68,6 @@ func (v *V2WorkflowInstanceHistory) GetTerminatedAt() *time.Time {
 	}
 	return v.TerminatedAt
 }
+
+// #region class-body-v2workflowinstancehistory
+// #endregion class-body-v2workflowinstancehistory

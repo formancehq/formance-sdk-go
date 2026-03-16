@@ -12,3 +12,6 @@ func (v *V2ActivityListWallets) GetName() *string {
 	}
 	return v.Name
 }
+
+// #region class-body-v2activitylistwallets
+// #endregion class-body-v2activitylistwallets

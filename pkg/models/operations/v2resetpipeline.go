@@ -27,6 +27,9 @@ func (v *V2ResetPipelineRequest) GetPipelineID() string {
 	return v.PipelineID
 }
 
+// #region class-body-v2resetpipelinerequest
+// #endregion class-body-v2resetpipelinerequest
+
 type V2ResetPipelineResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V2ResetPipelineResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2resetpipelineresponse
+// #endregion class-body-v2resetpipelineresponse

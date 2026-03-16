@@ -12,3 +12,6 @@ func (v *V3GetPaymentInitiationResponse) GetData() V3PaymentInitiation {
 	}
 	return v.Data
 }
+
+// #region class-body-v3getpaymentinitiationresponse
+// #endregion class-body-v3getpaymentinitiationresponse

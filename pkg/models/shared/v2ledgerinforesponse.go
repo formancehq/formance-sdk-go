@@ -12,3 +12,6 @@ func (v *V2LedgerInfoResponse) GetData() *V2LedgerInfo {
 	}
 	return v.Data
 }
+
+// #region class-body-v2ledgerinforesponse
+// #endregion class-body-v2ledgerinforesponse

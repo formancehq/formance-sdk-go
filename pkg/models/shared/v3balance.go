@@ -21,7 +21,7 @@ func (v V3Balance) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Balance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountID", "asset", "balance", "createdAt", "lastUpdatedAt"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -61,3 +61,6 @@ func (v *V3Balance) GetLastUpdatedAt() time.Time {
 	}
 	return v.LastUpdatedAt
 }
+
+// #region class-body-v3balance
+// #endregion class-body-v3balance

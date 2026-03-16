@@ -52,3 +52,6 @@ func (v *V3CreateBankAccountRequest) GetSwiftBicCode() *string {
 	}
 	return v.SwiftBicCode
 }
+
+// #region class-body-v3createbankaccountrequest
+// #endregion class-body-v3createbankaccountrequest

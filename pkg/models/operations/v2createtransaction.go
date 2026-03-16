@@ -18,11 +18,11 @@ type V2CreateTransactionRequest struct {
 	// Set the dryRun mode. dry run mode doesn't add the logs to the database or publish a message to the message broker.
 	DryRun *bool `queryParam:"style=form,explode=true,name=dryRun"`
 	// Disable balance checks when passing postings
-	//
-	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Force *bool `queryParam:"style=form,explode=true,name=force"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
+	// Schema version to use for validation
+	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
 }
 
 func (v *V2CreateTransactionRequest) GetIdempotencyKey() *string {
@@ -60,9 +60,20 @@ func (v *V2CreateTransactionRequest) GetLedger() string {
 	return v.Ledger
 }
 
+func (v *V2CreateTransactionRequest) GetSchemaVersion() *string {
+	if v == nil {
+		return nil
+	}
+	return v.SchemaVersion
+}
+
+// #region class-body-v2createtransactionrequest
+// #endregion class-body-v2createtransactionrequest
+
 type V2CreateTransactionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -76,6 +87,13 @@ func (v *V2CreateTransactionResponse) GetContentType() string {
 		return ""
 	}
 	return v.ContentType
+}
+
+func (v *V2CreateTransactionResponse) GetHeaders() map[string][]string {
+	if v == nil {
+		return map[string][]string{}
+	}
+	return v.Headers
 }
 
 func (v *V2CreateTransactionResponse) GetStatusCode() int {
@@ -98,3 +116,6 @@ func (v *V2CreateTransactionResponse) GetV2CreateTransactionResponse() *shared.V
 	}
 	return v.V2CreateTransactionResponse
 }
+
+// #region class-body-v2createtransactionresponse
+// #endregion class-body-v2createtransactionresponse

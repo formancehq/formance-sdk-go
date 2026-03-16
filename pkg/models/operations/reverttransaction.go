@@ -23,7 +23,7 @@ func (r RevertTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (r *RevertTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"ledger", "txid"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -53,6 +53,7 @@ func (r *RevertTransactionRequest) GetTxid() *big.Int {
 type RevertTransactionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -66,6 +67,13 @@ func (r *RevertTransactionResponse) GetContentType() string {
 		return ""
 	}
 	return r.ContentType
+}
+
+func (r *RevertTransactionResponse) GetHeaders() map[string][]string {
+	if r == nil {
+		return map[string][]string{}
+	}
+	return r.Headers
 }
 
 func (r *RevertTransactionResponse) GetStatusCode() int {

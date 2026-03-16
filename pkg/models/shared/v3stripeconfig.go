@@ -7,10 +7,11 @@ import (
 )
 
 type V3StripeConfig struct {
-	APIKey        string  `json:"apiKey"`
-	Name          string  `json:"name"`
+	APIKey string `json:"apiKey"`
+	Name   string `json:"name"`
+	// Deprecated: From v3.1, this parameter will be ignored.
 	PageSize      *int64  `default:"25" json:"pageSize"`
-	PollingPeriod *string `default:"2m" json:"pollingPeriod"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
 	Provider      *string `default:"Stripe" json:"provider"`
 }
 
@@ -59,3 +60,6 @@ func (v *V3StripeConfig) GetProvider() *string {
 	}
 	return v.Provider
 }
+
+// #region class-body-v3stripeconfig
+// #endregion class-body-v3stripeconfig

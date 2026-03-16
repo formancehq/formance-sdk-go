@@ -63,7 +63,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "activateConfig",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:write"},
+		OAuth2Scopes:     []string{"webhooks:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -274,7 +274,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "changeConfigSecret",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:write"},
+		OAuth2Scopes:     []string{"webhooks:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "ConfigChangeSecret", "json", `request:"mediaType=application/json"`)
@@ -489,7 +489,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deactivateConfig",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:write"},
+		OAuth2Scopes:     []string{"webhooks:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -697,7 +697,7 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "deleteConfig",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:write"},
+		OAuth2Scopes:     []string{"webhooks:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -826,6 +826,7 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 
 	switch {
 	case httpRes.StatusCode == 200:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -885,7 +886,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getManyConfigs",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:read"},
+		OAuth2Scopes:     []string{"webhooks:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -907,7 +908,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1105,7 +1106,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "insertConfig",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:write"},
+		OAuth2Scopes:     []string{"webhooks:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -1320,7 +1321,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "testConfig",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:read"},
+		OAuth2Scopes:     []string{"webhooks:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1528,7 +1529,7 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateConfig",
-		OAuth2Scopes:     []string{"auth:read", "webhooks:write"},
+		OAuth2Scopes:     []string{"webhooks:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ConfigUser", "json", `request:"mediaType=application/json"`)
@@ -1664,6 +1665,7 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 
 	switch {
 	case httpRes.StatusCode == 200:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):

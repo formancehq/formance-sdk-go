@@ -10,7 +10,6 @@ import (
 )
 
 type V2ListAccountsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -35,17 +34,10 @@ func (v V2ListAccountsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2ListAccountsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
-}
-
-func (v *V2ListAccountsRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return map[string]any{}
-	}
-	return v.RequestBody
 }
 
 func (v *V2ListAccountsRequest) GetCursor() *string {
@@ -90,6 +82,9 @@ func (v *V2ListAccountsRequest) GetSort() *string {
 	return v.Sort
 }
 
+// #region class-body-v2listaccountsrequest
+// #endregion class-body-v2listaccountsrequest
+
 type V2ListAccountsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -128,3 +123,6 @@ func (v *V2ListAccountsResponse) GetV2AccountsCursorResponse() *shared.V2Account
 	}
 	return v.V2AccountsCursorResponse
 }
+
+// #region class-body-v2listaccountsresponse
+// #endregion class-body-v2listaccountsresponse

@@ -45,6 +45,9 @@ func (v *V2ListTriggersResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2listtriggersresponsecursor
+// #endregion class-body-v2listtriggersresponsecursor
+
 type V2ListTriggersResponse struct {
 	Cursor V2ListTriggersResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V2ListTriggersResponse) GetCursor() V2ListTriggersResponseCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2listtriggersresponse
+// #endregion class-body-v2listtriggersresponse

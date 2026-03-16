@@ -12,3 +12,6 @@ func (v *V2RevertTransactionRequest) GetMetadata() map[string]string {
 	}
 	return v.Metadata
 }
+
+// #region class-body-v2reverttransactionrequest
+// #endregion class-body-v2reverttransactionrequest

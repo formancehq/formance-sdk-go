@@ -18,7 +18,7 @@ func (w WalletsVolume) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WalletsVolume) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"balance", "input", "output"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil

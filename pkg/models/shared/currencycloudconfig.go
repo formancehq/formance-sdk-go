@@ -14,7 +14,7 @@ type CurrencyCloudConfig struct {
 	LoginID string `json:"loginID"`
 	Name    string `json:"name"`
 	// The frequency at which the connector will fetch transactions
-	PollingPeriod *string `default:"120s" json:"pollingPeriod"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
 	Provider      *string `default:"Currencycloud" json:"provider"`
 }
 

@@ -45,6 +45,9 @@ func (v *V2ListWalletsResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2listwalletsresponsecursor
+// #endregion class-body-v2listwalletsresponsecursor
+
 type V2ListWalletsResponse struct {
 	Cursor V2ListWalletsResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V2ListWalletsResponse) GetCursor() V2ListWalletsResponseCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2listwalletsresponse
+// #endregion class-body-v2listwalletsresponse

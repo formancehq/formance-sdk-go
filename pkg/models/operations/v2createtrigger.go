@@ -45,3 +45,6 @@ func (v *V2CreateTriggerResponse) GetV2CreateTriggerResponse() *shared.V2CreateT
 	}
 	return v.V2CreateTriggerResponse
 }
+
+// #region class-body-v2createtriggerresponse
+// #endregion class-body-v2createtriggerresponse

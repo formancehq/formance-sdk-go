@@ -3,42 +3,14 @@
 package shared
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"time"
 )
 
-// Runtime - The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
-type Runtime string
-
-const (
-	RuntimeExperimentalInterpreter Runtime = "experimental-interpreter"
-	RuntimeMachine                 Runtime = "machine"
-)
-
-func (e Runtime) ToPointer() *Runtime {
-	return &e
-}
-func (e *Runtime) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "experimental-interpreter":
-		fallthrough
-	case "machine":
-		*e = Runtime(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Runtime: %v", v)
-	}
-}
-
 type V2PostTransactionScript struct {
-	Plain string            `json:"plain"`
-	Vars  map[string]string `json:"vars,omitempty"`
+	Plain    *string           `json:"plain,omitempty"`
+	Template *string           `json:"template,omitempty"`
+	Vars     map[string]string `json:"vars,omitempty"`
 }
 
 func (v V2PostTransactionScript) MarshalJSON() ([]byte, error) {
@@ -46,17 +18,24 @@ func (v V2PostTransactionScript) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2PostTransactionScript) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"plain"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (v *V2PostTransactionScript) GetPlain() string {
+func (v *V2PostTransactionScript) GetPlain() *string {
 	if v == nil {
-		return ""
+		return nil
 	}
 	return v.Plain
+}
+
+func (v *V2PostTransactionScript) GetTemplate() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Template
 }
 
 func (v *V2PostTransactionScript) GetVars() map[string]string {
@@ -65,6 +44,9 @@ func (v *V2PostTransactionScript) GetVars() map[string]string {
 	}
 	return v.Vars
 }
+
+// #region class-body-v2posttransactionscript
+// #endregion class-body-v2posttransactionscript
 
 type V2PostTransaction struct {
 	AccountMetadata map[string]map[string]string `json:"accountMetadata,omitempty"`
@@ -144,3 +126,6 @@ func (v *V2PostTransaction) GetTimestamp() *time.Time {
 	}
 	return v.Timestamp
 }
+
+// #region class-body-v2posttransaction
+// #endregion class-body-v2posttransaction

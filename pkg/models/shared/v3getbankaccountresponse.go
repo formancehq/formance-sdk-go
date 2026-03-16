@@ -12,3 +12,6 @@ func (v *V3GetBankAccountResponse) GetData() V3BankAccount {
 	}
 	return v.Data
 }
+
+// #region class-body-v3getbankaccountresponse
+// #endregion class-body-v3getbankaccountresponse

@@ -12,3 +12,6 @@ func (v *V2ActivityCreateTransactionOutput) GetData() []OrchestrationV2Transacti
 	}
 	return v.Data
 }
+
+// #region class-body-v2activitycreatetransactionoutput
+// #endregion class-body-v2activitycreatetransactionoutput

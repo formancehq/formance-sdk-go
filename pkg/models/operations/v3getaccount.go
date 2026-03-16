@@ -19,6 +19,9 @@ func (v *V3GetAccountRequest) GetAccountID() string {
 	return v.AccountID
 }
 
+// #region class-body-v3getaccountrequest
+// #endregion class-body-v3getaccountrequest
+
 type V3GetAccountResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V3GetAccountResponse) GetV3GetAccountResponse() *shared.V3GetAccountRes
 	}
 	return v.V3GetAccountResponse
 }
+
+// #region class-body-v3getaccountresponse
+// #endregion class-body-v3getaccountresponse

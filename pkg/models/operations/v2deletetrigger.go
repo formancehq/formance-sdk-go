@@ -18,6 +18,9 @@ func (v *V2DeleteTriggerRequest) GetTriggerID() string {
 	return v.TriggerID
 }
 
+// #region class-body-v2deletetriggerrequest
+// #endregion class-body-v2deletetriggerrequest
+
 type V2DeleteTriggerResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -47,3 +50,6 @@ func (v *V2DeleteTriggerResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2deletetriggerresponse
+// #endregion class-body-v2deletetriggerresponse

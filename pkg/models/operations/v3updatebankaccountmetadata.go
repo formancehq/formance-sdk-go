@@ -27,6 +27,9 @@ func (v *V3UpdateBankAccountMetadataRequest) GetBankAccountID() string {
 	return v.BankAccountID
 }
 
+// #region class-body-v3updatebankaccountmetadatarequest
+// #endregion class-body-v3updatebankaccountmetadatarequest
+
 type V3UpdateBankAccountMetadataResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V3UpdateBankAccountMetadataResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3updatebankaccountmetadataresponse
+// #endregion class-body-v3updatebankaccountmetadataresponse

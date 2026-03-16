@@ -16,7 +16,7 @@ func (v V2AggregateBalancesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2AggregateBalancesResponse) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"data"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -28,3 +28,6 @@ func (v *V2AggregateBalancesResponse) GetData() map[string]*big.Int {
 	}
 	return v.Data
 }
+
+// #region class-body-v2aggregatebalancesresponse
+// #endregion class-body-v2aggregatebalancesresponse

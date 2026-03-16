@@ -13,6 +13,9 @@ func (v *V2LedgerInfoStorage) GetMigrations() []V2MigrationInfo {
 	return v.Migrations
 }
 
+// #region class-body-v2ledgerinfostorage
+// #endregion class-body-v2ledgerinfostorage
+
 type V2LedgerInfo struct {
 	Name    *string              `json:"name,omitempty"`
 	Storage *V2LedgerInfoStorage `json:"storage,omitempty"`
@@ -31,3 +34,6 @@ func (v *V2LedgerInfo) GetStorage() *V2LedgerInfoStorage {
 	}
 	return v.Storage
 }
+
+// #region class-body-v2ledgerinfo
+// #endregion class-body-v2ledgerinfo

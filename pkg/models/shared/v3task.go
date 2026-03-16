@@ -22,7 +22,7 @@ func (v V3Task) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Task) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "status", "updatedAt"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -76,3 +76,6 @@ func (v *V3Task) GetUpdatedAt() time.Time {
 	}
 	return v.UpdatedAt
 }
+
+// #region class-body-v3task
+// #endregion class-body-v3task

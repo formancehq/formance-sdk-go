@@ -18,6 +18,9 @@ func (v *V3DeletePoolRequest) GetPoolID() string {
 	return v.PoolID
 }
 
+// #region class-body-v3deletepoolrequest
+// #endregion class-body-v3deletepoolrequest
+
 type V3DeletePoolResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -47,3 +50,6 @@ func (v *V3DeletePoolResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3deletepoolresponse
+// #endregion class-body-v3deletepoolresponse

@@ -7,11 +7,12 @@ import (
 )
 
 type V3ColumnConfig struct {
-	APIKey        string  `json:"apiKey"`
-	Endpoint      string  `json:"endpoint"`
-	Name          string  `json:"name"`
+	APIKey   string `json:"apiKey"`
+	Endpoint string `json:"endpoint"`
+	Name     string `json:"name"`
+	// Deprecated: From v3.1, this parameter will be ignored.
 	PageSize      *int64  `default:"25" json:"pageSize"`
-	PollingPeriod *string `default:"2m" json:"pollingPeriod"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
 	Provider      *string `default:"Column" json:"provider"`
 }
 
@@ -67,3 +68,6 @@ func (v *V3ColumnConfig) GetProvider() *string {
 	}
 	return v.Provider
 }
+
+// #region class-body-v3columnconfig
+// #endregion class-body-v3columnconfig

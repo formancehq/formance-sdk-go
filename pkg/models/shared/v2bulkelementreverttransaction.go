@@ -8,9 +8,10 @@ import (
 )
 
 type V2BulkElementRevertTransactionData struct {
-	AtEffectiveDate *bool    `json:"atEffectiveDate,omitempty"`
-	Force           *bool    `json:"force,omitempty"`
-	ID              *big.Int `json:"id"`
+	AtEffectiveDate *bool             `json:"atEffectiveDate,omitempty"`
+	Force           *bool             `json:"force,omitempty"`
+	ID              *big.Int          `json:"id"`
+	Metadata        map[string]string `json:"metadata,omitempty"`
 }
 
 func (v V2BulkElementRevertTransactionData) MarshalJSON() ([]byte, error) {
@@ -44,6 +45,16 @@ func (v *V2BulkElementRevertTransactionData) GetID() *big.Int {
 	}
 	return v.ID
 }
+
+func (v *V2BulkElementRevertTransactionData) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
+// #region class-body-v2bulkelementreverttransactiondata
+// #endregion class-body-v2bulkelementreverttransactiondata
 
 type V2BulkElementRevertTransaction struct {
 	Action string                              `json:"action"`
@@ -82,3 +93,6 @@ func (v *V2BulkElementRevertTransaction) GetIk() *string {
 	}
 	return v.Ik
 }
+
+// #region class-body-v2bulkelementreverttransaction
+// #endregion class-body-v2bulkelementreverttransaction

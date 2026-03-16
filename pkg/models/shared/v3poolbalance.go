@@ -8,8 +8,9 @@ import (
 )
 
 type V3PoolBalance struct {
-	Amount *big.Int `json:"amount"`
-	Asset  string   `json:"asset"`
+	Amount          *big.Int `json:"amount"`
+	Asset           string   `json:"asset"`
+	RelatedAccounts []string `json:"relatedAccounts,omitempty"`
 }
 
 func (v V3PoolBalance) MarshalJSON() ([]byte, error) {
@@ -17,7 +18,7 @@ func (v V3PoolBalance) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3PoolBalance) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "asset"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -36,3 +37,13 @@ func (v *V3PoolBalance) GetAsset() string {
 	}
 	return v.Asset
 }
+
+func (v *V3PoolBalance) GetRelatedAccounts() []string {
+	if v == nil {
+		return nil
+	}
+	return v.RelatedAccounts
+}
+
+// #region class-body-v3poolbalance
+// #endregion class-body-v3poolbalance

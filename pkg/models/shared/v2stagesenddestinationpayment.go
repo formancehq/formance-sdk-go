@@ -27,3 +27,6 @@ func (v *V2StageSendDestinationPayment) GetPsp() string {
 	}
 	return v.Psp
 }
+
+// #region class-body-v2stagesenddestinationpayment
+// #endregion class-body-v2stagesenddestinationpayment

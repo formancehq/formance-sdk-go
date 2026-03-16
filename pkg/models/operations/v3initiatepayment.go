@@ -40,6 +40,9 @@ func (v *V3InitiatePaymentRequest) GetNoValidation() *bool {
 	return v.NoValidation
 }
 
+// #region class-body-v3initiatepaymentrequest
+// #endregion class-body-v3initiatepaymentrequest
+
 type V3InitiatePaymentResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -78,3 +81,6 @@ func (v *V3InitiatePaymentResponse) GetV3InitiatePaymentResponse() *shared.V3Ini
 	}
 	return v.V3InitiatePaymentResponse
 }
+
+// #region class-body-v3initiatepaymentresponse
+// #endregion class-body-v3initiatepaymentresponse

@@ -52,3 +52,6 @@ func (v *V2TriggerData) GetWorkflowID() string {
 	}
 	return v.WorkflowID
 }
+
+// #region class-body-v2triggerdata
+// #endregion class-body-v2triggerdata

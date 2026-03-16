@@ -3,11 +3,11 @@
 package shared
 
 type CreateSecretRequest struct {
-	Metadata map[string]any `json:"metadata,omitempty"`
-	Name     string         `json:"name"`
+	Metadata map[string]string `json:"metadata,omitempty"`
+	Name     string            `json:"name"`
 }
 
-func (c *CreateSecretRequest) GetMetadata() map[string]any {
+func (c *CreateSecretRequest) GetMetadata() map[string]string {
 	if c == nil {
 		return nil
 	}

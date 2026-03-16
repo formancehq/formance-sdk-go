@@ -34,7 +34,7 @@ func (v V2WalletWithBalances) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2WalletWithBalances) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"balances", "createdAt", "id", "ledger", "metadata", "name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -81,3 +81,6 @@ func (v *V2WalletWithBalances) GetName() string {
 	}
 	return v.Name
 }
+
+// #region class-body-v2walletwithbalances
+// #endregion class-body-v2walletwithbalances

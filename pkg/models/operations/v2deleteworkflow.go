@@ -18,6 +18,9 @@ func (v *V2DeleteWorkflowRequest) GetFlowID() string {
 	return v.FlowID
 }
 
+// #region class-body-v2deleteworkflowrequest
+// #endregion class-body-v2deleteworkflowrequest
+
 type V2DeleteWorkflowResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -47,3 +50,6 @@ func (v *V2DeleteWorkflowResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2deleteworkflowresponse
+// #endregion class-body-v2deleteworkflowresponse

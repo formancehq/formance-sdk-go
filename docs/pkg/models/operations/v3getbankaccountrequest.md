@@ -5,4 +5,4 @@
 
 | Field               | Type                | Required            | Description         |
 | ------------------- | ------------------- | ------------------- | ------------------- |
-| `BankAccountID`     | *string*            | :heavy_check_mark:  | The bank account ID |
+| `BankAccountID`     | `string`            | :heavy_check_mark:  | The bank account ID |

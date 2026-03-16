@@ -61,3 +61,6 @@ func (v *V2Hold) GetWalletID() string {
 	}
 	return v.WalletID
 }
+
+// #region class-body-v2hold
+// #endregion class-body-v2hold

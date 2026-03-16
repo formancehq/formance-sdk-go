@@ -12,3 +12,6 @@ func (v *V3CreateAccountResponse) GetData() V3Account {
 	}
 	return v.Data
 }
+
+// #region class-body-v3createaccountresponse
+// #endregion class-body-v3createaccountresponse

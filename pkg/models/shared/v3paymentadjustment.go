@@ -11,6 +11,9 @@ import (
 type V3PaymentAdjustmentRaw struct {
 }
 
+// #region class-body-v3paymentadjustmentraw
+// #endregion class-body-v3paymentadjustmentraw
+
 type V3PaymentAdjustment struct {
 	Amount    *big.Int               `json:"amount,omitempty"`
 	Asset     *string                `json:"asset,omitempty"`
@@ -27,7 +30,7 @@ func (v V3PaymentAdjustment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3PaymentAdjustment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "id", "raw", "reference", "status"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -88,3 +91,6 @@ func (v *V3PaymentAdjustment) GetStatus() V3PaymentStatusEnum {
 	}
 	return v.Status
 }
+
+// #region class-body-v3paymentadjustment
+// #endregion class-body-v3paymentadjustment

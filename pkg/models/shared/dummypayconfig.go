@@ -9,7 +9,7 @@ import (
 type DummyPayConfig struct {
 	Directory string `json:"directory"`
 	// The frequency at which the connector will try to fetch new payment objects from the directory
-	FilePollingPeriod            *string `default:"10s" json:"filePollingPeriod"`
+	FilePollingPeriod            *string `default:"30s" json:"filePollingPeriod"`
 	Name                         string  `json:"name"`
 	NumberOfAccountsPreGenerated *int64  `json:"numberOfAccountsPreGenerated,omitempty"`
 	NumberOfPaymentsPreGenerated *int64  `json:"numberOfPaymentsPreGenerated,omitempty"`

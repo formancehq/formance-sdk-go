@@ -18,6 +18,9 @@ func (v *V3RejectPaymentInitiationRequest) GetPaymentInitiationID() string {
 	return v.PaymentInitiationID
 }
 
+// #region class-body-v3rejectpaymentinitiationrequest
+// #endregion class-body-v3rejectpaymentinitiationrequest
+
 type V3RejectPaymentInitiationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -47,3 +50,6 @@ func (v *V3RejectPaymentInitiationResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3rejectpaymentinitiationresponse
+// #endregion class-body-v3rejectpaymentinitiationresponse

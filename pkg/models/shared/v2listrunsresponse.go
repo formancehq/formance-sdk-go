@@ -45,6 +45,9 @@ func (v *V2ListRunsResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2listrunsresponsecursor
+// #endregion class-body-v2listrunsresponsecursor
+
 type V2ListRunsResponse struct {
 	Cursor V2ListRunsResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V2ListRunsResponse) GetCursor() V2ListRunsResponseCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2listrunsresponse
+// #endregion class-body-v2listrunsresponse

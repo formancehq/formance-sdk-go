@@ -12,3 +12,6 @@ func (v *V3GetPoolResponse) GetData() V3Pool {
 	}
 	return v.Data
 }
+
+// #region class-body-v3getpoolresponse
+// #endregion class-body-v3getpoolresponse

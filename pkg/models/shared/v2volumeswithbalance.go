@@ -60,3 +60,6 @@ func (v *V2VolumesWithBalance) GetOutput() *big.Int {
 	}
 	return v.Output
 }
+
+// #region class-body-v2volumeswithbalance
+// #endregion class-body-v2volumeswithbalance

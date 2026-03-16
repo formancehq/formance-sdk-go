@@ -12,3 +12,6 @@ func (v *V2ActivityGetPaymentOutput) GetData() V2Payment {
 	}
 	return v.Data
 }
+
+// #region class-body-v2activitygetpaymentoutput
+// #endregion class-body-v2activitygetpaymentoutput

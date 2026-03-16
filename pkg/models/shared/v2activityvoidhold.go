@@ -12,3 +12,6 @@ func (v *V2ActivityVoidHold) GetID() string {
 	}
 	return v.ID
 }
+
+// #region class-body-v2activityvoidhold
+// #endregion class-body-v2activityvoidhold

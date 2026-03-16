@@ -8,10 +8,10 @@ import (
 )
 
 type TransferInitiationPayments struct {
-	CreatedAt time.Time     `json:"createdAt"`
-	Error     *string       `json:"error,omitempty"`
-	PaymentID string        `json:"paymentID"`
-	Status    PaymentStatus `json:"status"`
+	CreatedAt time.Time           `json:"createdAt"`
+	Error     *string             `json:"error,omitempty"`
+	PaymentID string              `json:"paymentID"`
+	Status    LegacyPaymentStatus `json:"status"`
 }
 
 func (t TransferInitiationPayments) MarshalJSON() ([]byte, error) {
@@ -19,7 +19,7 @@ func (t TransferInitiationPayments) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferInitiationPayments) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"createdAt", "paymentID", "status"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -46,9 +46,9 @@ func (t *TransferInitiationPayments) GetPaymentID() string {
 	return t.PaymentID
 }
 
-func (t *TransferInitiationPayments) GetStatus() PaymentStatus {
+func (t *TransferInitiationPayments) GetStatus() LegacyPaymentStatus {
 	if t == nil {
-		return PaymentStatus("")
+		return LegacyPaymentStatus("")
 	}
 	return t.Status
 }

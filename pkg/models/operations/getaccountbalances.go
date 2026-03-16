@@ -44,7 +44,7 @@ func (g GetAccountBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GetAccountBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"accountId"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -12,3 +12,6 @@ func (v *V2ActivityGetAccountOutput) GetData() OrchestrationV2Account {
 	}
 	return v.Data
 }
+
+// #region class-body-v2activitygetaccountoutput
+// #endregion class-body-v2activitygetaccountoutput

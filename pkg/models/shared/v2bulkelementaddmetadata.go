@@ -44,6 +44,9 @@ func (v *V2BulkElementAddMetadataData) GetTargetType() V2TargetType {
 	return v.TargetType
 }
 
+// #region class-body-v2bulkelementaddmetadatadata
+// #endregion class-body-v2bulkelementaddmetadatadata
+
 type V2BulkElementAddMetadata struct {
 	Action string                        `json:"action"`
 	Data   *V2BulkElementAddMetadataData `json:"data,omitempty"`
@@ -81,3 +84,6 @@ func (v *V2BulkElementAddMetadata) GetIk() *string {
 	}
 	return v.Ik
 }
+
+// #region class-body-v2bulkelementaddmetadata
+// #endregion class-body-v2bulkelementaddmetadata

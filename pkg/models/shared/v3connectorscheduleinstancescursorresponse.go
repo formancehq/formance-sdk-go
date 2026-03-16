@@ -45,6 +45,9 @@ func (v *V3ConnectorScheduleInstancesCursorResponseCursor) GetPrevious() *string
 	return v.Previous
 }
 
+// #region class-body-v3connectorscheduleinstancescursorresponsecursor
+// #endregion class-body-v3connectorscheduleinstancescursorresponsecursor
+
 type V3ConnectorScheduleInstancesCursorResponse struct {
 	Cursor V3ConnectorScheduleInstancesCursorResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V3ConnectorScheduleInstancesCursorResponse) GetCursor() V3ConnectorSche
 	}
 	return v.Cursor
 }
+
+// #region class-body-v3connectorscheduleinstancescursorresponse
+// #endregion class-body-v3connectorscheduleinstancescursorresponse

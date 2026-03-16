@@ -23,7 +23,7 @@ func (c CreditWalletRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreditWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"amount"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil

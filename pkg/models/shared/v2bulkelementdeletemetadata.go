@@ -44,6 +44,9 @@ func (v *V2BulkElementDeleteMetadataData) GetTargetType() V2TargetType {
 	return v.TargetType
 }
 
+// #region class-body-v2bulkelementdeletemetadatadata
+// #endregion class-body-v2bulkelementdeletemetadatadata
+
 type V2BulkElementDeleteMetadata struct {
 	Action string                           `json:"action"`
 	Data   *V2BulkElementDeleteMetadataData `json:"data,omitempty"`
@@ -81,3 +84,6 @@ func (v *V2BulkElementDeleteMetadata) GetIk() *string {
 	}
 	return v.Ik
 }
+
+// #region class-body-v2bulkelementdeletemetadata
+// #endregion class-body-v2bulkelementdeletemetadata

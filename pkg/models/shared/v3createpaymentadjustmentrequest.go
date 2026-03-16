@@ -22,7 +22,7 @@ func (v V3CreatePaymentAdjustmentRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3CreatePaymentAdjustmentRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"createdAt", "reference", "status"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -69,3 +69,6 @@ func (v *V3CreatePaymentAdjustmentRequest) GetStatus() V3PaymentStatusEnum {
 	}
 	return v.Status
 }
+
+// #region class-body-v3createpaymentadjustmentrequest
+// #endregion class-body-v3createpaymentadjustmentrequest

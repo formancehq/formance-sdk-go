@@ -17,7 +17,7 @@ func (v V2Stats) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Stats) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accounts", "transactions"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -36,3 +36,6 @@ func (v *V2Stats) GetTransactions() *big.Int {
 	}
 	return v.Transactions
 }
+
+// #region class-body-v2stats
+// #endregion class-body-v2stats

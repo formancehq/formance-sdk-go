@@ -2,12 +2,29 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+)
+
 type V2TransactionsCursorResponseCursor struct {
 	Data     []V2Transaction `json:"data"`
 	HasMore  bool            `json:"hasMore"`
 	Next     *string         `json:"next,omitempty"`
 	PageSize int64           `json:"pageSize"`
 	Previous *string         `json:"previous,omitempty"`
+}
+
+func (v V2TransactionsCursorResponseCursor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2TransactionsCursorResponseCursor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"data", "hasMore", "pageSize"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2TransactionsCursorResponseCursor) GetData() []V2Transaction {
@@ -45,8 +62,46 @@ func (v *V2TransactionsCursorResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2transactionscursorresponsecursor
+// #endregion class-body-v2transactionscursorresponsecursor
+
+type V2TransactionsCursorResponseResource string
+
+const (
+	V2TransactionsCursorResponseResourceTransactions V2TransactionsCursorResponseResource = "transactions"
+)
+
+func (e V2TransactionsCursorResponseResource) ToPointer() *V2TransactionsCursorResponseResource {
+	return &e
+}
+func (e *V2TransactionsCursorResponseResource) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "transactions":
+		*e = V2TransactionsCursorResponseResource(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for V2TransactionsCursorResponseResource: %v", v)
+	}
+}
+
 type V2TransactionsCursorResponse struct {
-	Cursor V2TransactionsCursorResponseCursor `json:"cursor"`
+	Cursor   V2TransactionsCursorResponseCursor    `json:"cursor"`
+	Resource *V2TransactionsCursorResponseResource `json:"resource,omitempty"`
+}
+
+func (v V2TransactionsCursorResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2TransactionsCursorResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"cursor"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (v *V2TransactionsCursorResponse) GetCursor() V2TransactionsCursorResponseCursor {
@@ -55,3 +110,13 @@ func (v *V2TransactionsCursorResponse) GetCursor() V2TransactionsCursorResponseC
 	}
 	return v.Cursor
 }
+
+func (v *V2TransactionsCursorResponse) GetResource() *V2TransactionsCursorResponseResource {
+	if v == nil {
+		return nil
+	}
+	return v.Resource
+}
+
+// #region class-body-v2transactionscursorresponse
+// #endregion class-body-v2transactionscursorresponse

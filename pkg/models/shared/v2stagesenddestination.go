@@ -43,3 +43,6 @@ func (v *V2StageSendDestination) GetWallet() *V2StageSendDestinationWallet {
 	}
 	return v.Wallet
 }
+
+// #region class-body-v2stagesenddestination
+// #endregion class-body-v2stagesenddestination

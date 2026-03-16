@@ -45,3 +45,6 @@ func (v *V3CreatePaymentServiceUserResponse) GetV3CreatePaymentServiceUserRespon
 	}
 	return v.V3CreatePaymentServiceUserResponse
 }
+
+// #region class-body-v3createpaymentserviceuserresponse
+// #endregion class-body-v3createpaymentserviceuserresponse

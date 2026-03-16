@@ -27,7 +27,7 @@ func (v V2GetAccountRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2GetAccountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"address", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -60,6 +60,9 @@ func (v *V2GetAccountRequest) GetPit() *time.Time {
 	}
 	return v.Pit
 }
+
+// #region class-body-v2getaccountrequest
+// #endregion class-body-v2getaccountrequest
 
 type V2GetAccountResponse struct {
 	// HTTP response content type for this operation
@@ -99,3 +102,6 @@ func (v *V2GetAccountResponse) GetV2AccountResponse() *shared.V2AccountResponse 
 	}
 	return v.V2AccountResponse
 }
+
+// #region class-body-v2getaccountresponse
+// #endregion class-body-v2getaccountresponse

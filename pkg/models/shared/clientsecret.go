@@ -3,10 +3,10 @@
 package shared
 
 type ClientSecret struct {
-	ID         string         `json:"id"`
-	LastDigits string         `json:"lastDigits"`
-	Metadata   map[string]any `json:"metadata,omitempty"`
-	Name       string         `json:"name"`
+	ID         string            `json:"id"`
+	LastDigits string            `json:"lastDigits"`
+	Metadata   map[string]string `json:"metadata,omitempty"`
+	Name       string            `json:"name"`
 }
 
 func (c *ClientSecret) GetID() string {
@@ -23,7 +23,7 @@ func (c *ClientSecret) GetLastDigits() string {
 	return c.LastDigits
 }
 
-func (c *ClientSecret) GetMetadata() map[string]any {
+func (c *ClientSecret) GetMetadata() map[string]string {
 	if c == nil {
 		return nil
 	}

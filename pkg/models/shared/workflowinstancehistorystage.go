@@ -25,7 +25,7 @@ func (w WorkflowInstanceHistoryStage) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WorkflowInstanceHistoryStage) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"attempt", "input", "name", "startedAt", "terminated"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil

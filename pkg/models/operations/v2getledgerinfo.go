@@ -19,6 +19,9 @@ func (v *V2GetLedgerInfoRequest) GetLedger() string {
 	return v.Ledger
 }
 
+// #region class-body-v2getledgerinforequest
+// #endregion class-body-v2getledgerinforequest
+
 type V2GetLedgerInfoResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V2GetLedgerInfoResponse) GetV2LedgerInfoResponse() *shared.V2LedgerInfo
 	}
 	return v.V2LedgerInfoResponse
 }
+
+// #region class-body-v2getledgerinforesponse
+// #endregion class-body-v2getledgerinforesponse

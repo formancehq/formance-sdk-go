@@ -44,3 +44,6 @@ func (v *V2Volume) GetOutput() *big.Int {
 	}
 	return v.Output
 }
+
+// #region class-body-v2volume
+// #endregion class-body-v2volume

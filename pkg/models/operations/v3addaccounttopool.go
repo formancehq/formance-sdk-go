@@ -27,6 +27,9 @@ func (v *V3AddAccountToPoolRequest) GetPoolID() string {
 	return v.PoolID
 }
 
+// #region class-body-v3addaccounttopoolrequest
+// #endregion class-body-v3addaccounttopoolrequest
+
 type V3AddAccountToPoolResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -56,3 +59,6 @@ func (v *V3AddAccountToPoolResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v3addaccounttopoolresponse
+// #endregion class-body-v3addaccounttopoolresponse

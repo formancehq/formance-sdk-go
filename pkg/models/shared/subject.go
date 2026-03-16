@@ -17,8 +17,8 @@ const (
 )
 
 type Subject struct {
-	LedgerAccountSubject *LedgerAccountSubject `queryParam:"inline,name=Subject"`
-	WalletSubject        *WalletSubject        `queryParam:"inline,name=Subject"`
+	LedgerAccountSubject *LedgerAccountSubject `queryParam:"inline" union:"member"`
+	WalletSubject        *WalletSubject        `queryParam:"inline" union:"member"`
 
 	Type SubjectType
 }

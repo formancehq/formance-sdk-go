@@ -12,3 +12,6 @@ func (v *V2StatsResponse) GetData() V2Stats {
 	}
 	return v.Data
 }
+
+// #region class-body-v2statsresponse
+// #endregion class-body-v2statsresponse

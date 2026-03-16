@@ -22,7 +22,7 @@ func (a AddMetadataOnTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AddMetadataOnTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"ledger", "txid"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -52,6 +52,7 @@ func (a *AddMetadataOnTransactionRequest) GetTxid() *big.Int {
 type AddMetadataOnTransactionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -63,6 +64,13 @@ func (a *AddMetadataOnTransactionResponse) GetContentType() string {
 		return ""
 	}
 	return a.ContentType
+}
+
+func (a *AddMetadataOnTransactionResponse) GetHeaders() map[string][]string {
+	if a == nil {
+		return map[string][]string{}
+	}
+	return a.Headers
 }
 
 func (a *AddMetadataOnTransactionResponse) GetStatusCode() int {

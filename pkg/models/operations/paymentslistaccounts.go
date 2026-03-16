@@ -9,7 +9,6 @@ import (
 )
 
 type PaymentslistAccountsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -35,13 +34,6 @@ func (p *PaymentslistAccountsRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (p *PaymentslistAccountsRequest) GetRequestBody() map[string]any {
-	if p == nil {
-		return nil
-	}
-	return p.RequestBody
 }
 
 func (p *PaymentslistAccountsRequest) GetCursor() *string {

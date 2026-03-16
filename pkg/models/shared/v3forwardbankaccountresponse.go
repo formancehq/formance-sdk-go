@@ -15,6 +15,9 @@ func (v *V3ForwardBankAccountResponseData) GetTaskID() string {
 	return v.TaskID
 }
 
+// #region class-body-v3forwardbankaccountresponsedata
+// #endregion class-body-v3forwardbankaccountresponsedata
+
 type V3ForwardBankAccountResponse struct {
 	Data V3ForwardBankAccountResponseData `json:"data"`
 }
@@ -25,3 +28,6 @@ func (v *V3ForwardBankAccountResponse) GetData() V3ForwardBankAccountResponseDat
 	}
 	return v.Data
 }
+
+// #region class-body-v3forwardbankaccountresponse
+// #endregion class-body-v3forwardbankaccountresponse

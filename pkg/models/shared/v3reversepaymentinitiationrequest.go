@@ -20,7 +20,7 @@ func (v V3ReversePaymentInitiationRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3ReversePaymentInitiationRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"amount", "asset", "description", "reference"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -60,3 +60,6 @@ func (v *V3ReversePaymentInitiationRequest) GetReference() string {
 	}
 	return v.Reference
 }
+
+// #region class-body-v3reversepaymentinitiationrequest
+// #endregion class-body-v3reversepaymentinitiationrequest

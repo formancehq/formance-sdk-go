@@ -8,10 +8,10 @@ import (
 )
 
 type V2Workflow struct {
-	Config    V2WorkflowConfig `json:"config"`
-	CreatedAt time.Time        `json:"createdAt"`
-	ID        string           `json:"id"`
-	UpdatedAt time.Time        `json:"updatedAt"`
+	Config    V2CreateWorkflowRequest `json:"config"`
+	CreatedAt time.Time               `json:"createdAt"`
+	ID        string                  `json:"id"`
+	UpdatedAt time.Time               `json:"updatedAt"`
 }
 
 func (v V2Workflow) MarshalJSON() ([]byte, error) {
@@ -19,15 +19,15 @@ func (v V2Workflow) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Workflow) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"config", "createdAt", "id", "updatedAt"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (v *V2Workflow) GetConfig() V2WorkflowConfig {
+func (v *V2Workflow) GetConfig() V2CreateWorkflowRequest {
 	if v == nil {
-		return V2WorkflowConfig{}
+		return V2CreateWorkflowRequest{}
 	}
 	return v.Config
 }
@@ -52,3 +52,6 @@ func (v *V2Workflow) GetUpdatedAt() time.Time {
 	}
 	return v.UpdatedAt
 }
+
+// #region class-body-v2workflow
+// #endregion class-body-v2workflow

@@ -15,6 +15,9 @@ func (v *V3ApprovePaymentInitiationResponseData) GetTaskID() string {
 	return v.TaskID
 }
 
+// #region class-body-v3approvepaymentinitiationresponsedata
+// #endregion class-body-v3approvepaymentinitiationresponsedata
+
 type V3ApprovePaymentInitiationResponse struct {
 	Data V3ApprovePaymentInitiationResponseData `json:"data"`
 }
@@ -25,3 +28,6 @@ func (v *V3ApprovePaymentInitiationResponse) GetData() V3ApprovePaymentInitiatio
 	}
 	return v.Data
 }
+
+// #region class-body-v3approvepaymentinitiationresponse
+// #endregion class-body-v3approvepaymentinitiationresponse

@@ -54,3 +54,6 @@ func (v *V2GetInfoResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
 	}
 	return v.V2ErrorResponse
 }
+
+// #region class-body-v2getinforesponse
+// #endregion class-body-v2getinforesponse

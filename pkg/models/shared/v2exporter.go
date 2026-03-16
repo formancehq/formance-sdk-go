@@ -19,7 +19,7 @@ func (v V2Exporter) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Exporter) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"config", "createdAt", "driver", "id"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -52,3 +52,6 @@ func (v *V2Exporter) GetID() string {
 	}
 	return v.ID
 }
+
+// #region class-body-v2exporter
+// #endregion class-body-v2exporter

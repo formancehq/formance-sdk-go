@@ -41,6 +41,13 @@ func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestBankingcircle() 
 	return nil
 }
 
+func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestCoinbaseprime() *shared.V3CoinbaseprimeConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3CoinbaseprimeConfig
+	}
+	return nil
+}
+
 func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestColumn() *shared.V3ColumnConfig {
 	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3ColumnConfig
@@ -62,9 +69,23 @@ func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestDummypay() *shar
 	return nil
 }
 
+func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestFireblocks() *shared.V3FireblocksConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3FireblocksConfig
+	}
+	return nil
+}
+
 func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestGeneric() *shared.V3GenericConfig {
 	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3GenericConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestIncrease() *shared.V3IncreaseConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3IncreaseConfig
 	}
 	return nil
 }
@@ -90,6 +111,20 @@ func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestMoneycorp() *sha
 	return nil
 }
 
+func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestPlaid() *shared.V3PlaidConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3PlaidConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestPowens() *shared.V3PowensConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3PowensConfig
+	}
+	return nil
+}
+
 func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestQonto() *shared.V3QontoConfig {
 	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3QontoConfig
@@ -100,6 +135,13 @@ func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestQonto() *shared.
 func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestStripe() *shared.V3StripeConfig {
 	if v := v.GetV3InstallConnectorRequest(); v != nil {
 		return v.V3StripeConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestTink() *shared.V3TinkConfig {
+	if v := v.GetV3InstallConnectorRequest(); v != nil {
+		return v.V3TinkConfig
 	}
 	return nil
 }
@@ -117,6 +159,9 @@ func (v *V3InstallConnectorRequest) GetConnector() string {
 	}
 	return v.Connector
 }
+
+// #region class-body-v3installconnectorrequest
+// #endregion class-body-v3installconnectorrequest
 
 type V3InstallConnectorResponse struct {
 	// HTTP response content type for this operation
@@ -156,3 +201,6 @@ func (v *V3InstallConnectorResponse) GetV3InstallConnectorResponse() *shared.V3I
 	}
 	return v.V3InstallConnectorResponse
 }
+
+// #region class-body-v3installconnectorresponse
+// #endregion class-body-v3installconnectorresponse

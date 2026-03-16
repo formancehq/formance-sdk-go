@@ -11,6 +11,9 @@ import (
 type V2PaymentAdjustmentRaw struct {
 }
 
+// #region class-body-v2paymentadjustmentraw
+// #endregion class-body-v2paymentadjustmentraw
+
 type V2PaymentAdjustment struct {
 	Absolute bool                   `json:"absolute"`
 	Amount   *big.Int               `json:"amount"`
@@ -24,7 +27,7 @@ func (v V2PaymentAdjustment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2PaymentAdjustment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"absolute", "amount", "date", "raw", "status"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -64,3 +67,6 @@ func (v *V2PaymentAdjustment) GetStatus() V2PaymentStatus {
 	}
 	return v.Status
 }
+
+// #region class-body-v2paymentadjustment
+// #endregion class-body-v2paymentadjustment

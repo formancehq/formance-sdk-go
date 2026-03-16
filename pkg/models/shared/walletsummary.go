@@ -20,7 +20,7 @@ func (w WalletSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WalletSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"availableFunds", "balances", "expirableFunds", "expiredFunds", "holdFunds"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil

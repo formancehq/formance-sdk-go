@@ -13,7 +13,7 @@ type MoneycorpConfig struct {
 	Name     string `json:"name"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from MoneyCorp API.
 	//
-	PollingPeriod *string `default:"120s" json:"pollingPeriod"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
 	Provider      *string `default:"Moneycorp" json:"provider"`
 }
 

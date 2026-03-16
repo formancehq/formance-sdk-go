@@ -33,3 +33,21 @@ v2BulkElementResult := shared.CreateV2BulkElementResultError(shared.V2BulkElemen
 v2BulkElementResult := shared.CreateV2BulkElementResultRevertTransaction(shared.V2BulkElementResultRevertTransactionSchemas{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch v2BulkElementResult.Type {
+	case shared.V2BulkElementResultTypeAddMetadata:
+		// v2BulkElementResult.Schemas is populated
+	case shared.V2BulkElementResultTypeCreateTransaction:
+		// v2BulkElementResult.V2BulkElementResultCreateTransactionSchemas is populated
+	case shared.V2BulkElementResultTypeDeleteMetadata:
+		// v2BulkElementResult.V2BulkElementResultDeleteMetadataSchemas is populated
+	case shared.V2BulkElementResultTypeError:
+		// v2BulkElementResult.V2BulkElementResultErrorSchemas is populated
+	case shared.V2BulkElementResultTypeRevertTransaction:
+		// v2BulkElementResult.V2BulkElementResultRevertTransactionSchemas is populated
+}
+```

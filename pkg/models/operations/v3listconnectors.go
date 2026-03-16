@@ -8,19 +8,11 @@ import (
 )
 
 type V3ListConnectorsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
-}
-
-func (v *V3ListConnectorsRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.RequestBody
 }
 
 func (v *V3ListConnectorsRequest) GetCursor() *string {
@@ -36,6 +28,9 @@ func (v *V3ListConnectorsRequest) GetPageSize() *int64 {
 	}
 	return v.PageSize
 }
+
+// #region class-body-v3listconnectorsrequest
+// #endregion class-body-v3listconnectorsrequest
 
 type V3ListConnectorsResponse struct {
 	// HTTP response content type for this operation
@@ -75,3 +70,6 @@ func (v *V3ListConnectorsResponse) GetV3ConnectorsCursorResponse() *shared.V3Con
 	}
 	return v.V3ConnectorsCursorResponse
 }
+
+// #region class-body-v3listconnectorsresponse
+// #endregion class-body-v3listconnectorsresponse

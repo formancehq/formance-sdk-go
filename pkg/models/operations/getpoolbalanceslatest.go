@@ -23,7 +23,7 @@ type GetPoolBalancesLatestResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PoolBalancesResponse *shared.PoolBalancesResponse
+	PoolBalancesLatestResponse *shared.PoolBalancesLatestResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,11 +37,11 @@ func (g *GetPoolBalancesLatestResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetPoolBalancesLatestResponse) GetPoolBalancesResponse() *shared.PoolBalancesResponse {
+func (g *GetPoolBalancesLatestResponse) GetPoolBalancesLatestResponse() *shared.PoolBalancesLatestResponse {
 	if g == nil {
 		return nil
 	}
-	return g.PoolBalancesResponse
+	return g.PoolBalancesLatestResponse
 }
 
 func (g *GetPoolBalancesLatestResponse) GetStatusCode() int {

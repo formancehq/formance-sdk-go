@@ -27,6 +27,9 @@ func (v *V2UpdateLedgerMetadataRequest) GetLedger() string {
 	return v.Ledger
 }
 
+// #region class-body-v2updateledgermetadatarequest
+// #endregion class-body-v2updateledgermetadatarequest
+
 type V2UpdateLedgerMetadataResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -65,3 +68,6 @@ func (v *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *shared.V2ErrorRes
 	}
 	return v.V2ErrorResponse
 }
+
+// #region class-body-v2updateledgermetadataresponse
+// #endregion class-body-v2updateledgermetadataresponse

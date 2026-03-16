@@ -63,6 +63,9 @@ func (v *V2BulkElementResultErrorSchemas) GetResponseType() string {
 	return v.ResponseType
 }
 
+// #region class-body-v2bulkelementresulterrorschemas
+// #endregion class-body-v2bulkelementresulterrorschemas
+
 type V2BulkElementResultDeleteMetadataSchemas struct {
 	LogID        int64  `json:"logID"`
 	ResponseType string `json:"responseType"`
@@ -92,6 +95,9 @@ func (v *V2BulkElementResultDeleteMetadataSchemas) GetResponseType() string {
 	}
 	return v.ResponseType
 }
+
+// #region class-body-v2bulkelementresultdeletemetadataschemas
+// #endregion class-body-v2bulkelementresultdeletemetadataschemas
 
 type V2BulkElementResultRevertTransactionSchemas struct {
 	Data         V2Transaction `json:"data"`
@@ -130,6 +136,9 @@ func (v *V2BulkElementResultRevertTransactionSchemas) GetResponseType() string {
 	}
 	return v.ResponseType
 }
+
+// #region class-body-v2bulkelementresultreverttransactionschemas
+// #endregion class-body-v2bulkelementresultreverttransactionschemas
 
 type Schemas struct {
 	LogID        int64  `json:"logID"`
@@ -199,6 +208,9 @@ func (v *V2BulkElementResultCreateTransactionSchemas) GetResponseType() string {
 	return v.ResponseType
 }
 
+// #region class-body-v2bulkelementresultcreatetransactionschemas
+// #endregion class-body-v2bulkelementresultcreatetransactionschemas
+
 type V2BulkElementResultType string
 
 const (
@@ -210,11 +222,11 @@ const (
 )
 
 type V2BulkElementResult struct {
-	V2BulkElementResultCreateTransactionSchemas *V2BulkElementResultCreateTransactionSchemas `queryParam:"inline,name=V2BulkElementResult"`
-	Schemas                                     *Schemas                                     `queryParam:"inline,name=V2BulkElementResult"`
-	V2BulkElementResultRevertTransactionSchemas *V2BulkElementResultRevertTransactionSchemas `queryParam:"inline,name=V2BulkElementResult"`
-	V2BulkElementResultDeleteMetadataSchemas    *V2BulkElementResultDeleteMetadataSchemas    `queryParam:"inline,name=V2BulkElementResult"`
-	V2BulkElementResultErrorSchemas             *V2BulkElementResultErrorSchemas             `queryParam:"inline,name=V2BulkElementResult"`
+	V2BulkElementResultCreateTransactionSchemas *V2BulkElementResultCreateTransactionSchemas `queryParam:"inline" union:"member"`
+	Schemas                                     *Schemas                                     `queryParam:"inline" union:"member"`
+	V2BulkElementResultRevertTransactionSchemas *V2BulkElementResultRevertTransactionSchemas `queryParam:"inline" union:"member"`
+	V2BulkElementResultDeleteMetadataSchemas    *V2BulkElementResultDeleteMetadataSchemas    `queryParam:"inline" union:"member"`
+	V2BulkElementResultErrorSchemas             *V2BulkElementResultErrorSchemas             `queryParam:"inline" union:"member"`
 
 	Type V2BulkElementResultType
 }

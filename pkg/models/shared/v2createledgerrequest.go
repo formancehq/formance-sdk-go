@@ -28,3 +28,6 @@ func (v *V2CreateLedgerRequest) GetMetadata() map[string]string {
 	}
 	return v.Metadata
 }
+
+// #region class-body-v2createledgerrequest
+// #endregion class-body-v2createledgerrequest

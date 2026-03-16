@@ -28,6 +28,9 @@ func (r *ResetConnectorV1Request) GetConnectorID() string {
 	return r.ConnectorID
 }
 
+// #region class-body-resetconnectorv1request
+// #endregion class-body-resetconnectorv1request
+
 type ResetConnectorV1Response struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (r *ResetConnectorV1Response) GetRawResponse() *http.Response {
 	}
 	return r.RawResponse
 }
+
+// #region class-body-resetconnectorv1response
+// #endregion class-body-resetconnectorv1response

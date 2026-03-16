@@ -45,6 +45,9 @@ func (v *V3ConnectorsCursorResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v3connectorscursorresponsecursor
+// #endregion class-body-v3connectorscursorresponsecursor
+
 type V3ConnectorsCursorResponse struct {
 	Cursor V3ConnectorsCursorResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V3ConnectorsCursorResponse) GetCursor() V3ConnectorsCursorResponseCurso
 	}
 	return v.Cursor
 }
+
+// #region class-body-v3connectorscursorresponse
+// #endregion class-body-v3connectorscursorresponse

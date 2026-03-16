@@ -18,7 +18,7 @@ func (v V3Schedule) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3Schedule) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"connectorID", "createdAt", "id"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -44,3 +44,6 @@ func (v *V3Schedule) GetID() string {
 	}
 	return v.ID
 }
+
+// #region class-body-v3schedule
+// #endregion class-body-v3schedule

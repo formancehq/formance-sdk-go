@@ -8,7 +8,6 @@ import (
 )
 
 type V3ListPaymentInitiationAdjustmentsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
@@ -16,13 +15,6 @@ type V3ListPaymentInitiationAdjustmentsRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// The payment initiation ID
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
-}
-
-func (v *V3ListPaymentInitiationAdjustmentsRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.RequestBody
 }
 
 func (v *V3ListPaymentInitiationAdjustmentsRequest) GetCursor() *string {
@@ -45,6 +37,9 @@ func (v *V3ListPaymentInitiationAdjustmentsRequest) GetPaymentInitiationID() str
 	}
 	return v.PaymentInitiationID
 }
+
+// #region class-body-v3listpaymentinitiationadjustmentsrequest
+// #endregion class-body-v3listpaymentinitiationadjustmentsrequest
 
 type V3ListPaymentInitiationAdjustmentsResponse struct {
 	// HTTP response content type for this operation
@@ -84,3 +79,6 @@ func (v *V3ListPaymentInitiationAdjustmentsResponse) GetV3PaymentInitiationAdjus
 	}
 	return v.V3PaymentInitiationAdjustmentsCursorResponse
 }
+
+// #region class-body-v3listpaymentinitiationadjustmentsresponse
+// #endregion class-body-v3listpaymentinitiationadjustmentsresponse

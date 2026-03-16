@@ -45,6 +45,9 @@ func (v *V3BalancesCursorResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v3balancescursorresponsecursor
+// #endregion class-body-v3balancescursorresponsecursor
+
 type V3BalancesCursorResponse struct {
 	Cursor V3BalancesCursorResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V3BalancesCursorResponse) GetCursor() V3BalancesCursorResponseCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v3balancescursorresponse
+// #endregion class-body-v3balancescursorresponse

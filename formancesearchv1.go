@@ -65,7 +65,7 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request shared.Query, opt
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "search",
-		OAuth2Scopes:     []string{"auth:read", "search:write"},
+		OAuth2Scopes:     []string{"search:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
@@ -266,7 +266,7 @@ func (s *FormanceSearchV1) SearchgetServerInfo(ctx context.Context, opts ...oper
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "searchgetServerInfo",
-		OAuth2Scopes:     []string{"auth:read", "search:read"},
+		OAuth2Scopes:     []string{"search:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

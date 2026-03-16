@@ -19,6 +19,9 @@ func (v *V2CreateExporterResponseBody) GetData() shared.V2Exporter {
 	return v.Data
 }
 
+// #region class-body-v2createexporterresponsebody
+// #endregion class-body-v2createexporterresponsebody
+
 type V2CreateExporterResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V2CreateExporterResponse) GetObject() *V2CreateExporterResponseBody {
 	}
 	return v.Object
 }
+
+// #region class-body-v2createexporterresponse
+// #endregion class-body-v2createexporterresponse

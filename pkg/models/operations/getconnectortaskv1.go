@@ -37,6 +37,9 @@ func (g *GetConnectorTaskV1Request) GetTaskID() string {
 	return g.TaskID
 }
 
+// #region class-body-getconnectortaskv1request
+// #endregion class-body-getconnectortaskv1request
+
 type GetConnectorTaskV1Response struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -75,3 +78,6 @@ func (g *GetConnectorTaskV1Response) GetTaskResponse() *shared.TaskResponse {
 	}
 	return g.TaskResponse
 }
+
+// #region class-body-getconnectortaskv1response
+// #endregion class-body-getconnectortaskv1response

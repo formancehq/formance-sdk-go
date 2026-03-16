@@ -43,6 +43,7 @@ func (c *CreateTransactionRequest) GetPreview() *bool {
 type CreateTransactionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -56,6 +57,13 @@ func (c *CreateTransactionResponse) GetContentType() string {
 		return ""
 	}
 	return c.ContentType
+}
+
+func (c *CreateTransactionResponse) GetHeaders() map[string][]string {
+	if c == nil {
+		return map[string][]string{}
+	}
+	return c.Headers
 }
 
 func (c *CreateTransactionResponse) GetStatusCode() int {

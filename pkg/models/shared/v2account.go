@@ -76,3 +76,6 @@ func (v *V2Account) GetVolumes() map[string]V2Volume {
 	}
 	return v.Volumes
 }
+
+// #region class-body-v2account
+// #endregion class-body-v2account

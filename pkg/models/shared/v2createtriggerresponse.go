@@ -12,3 +12,6 @@ func (v *V2CreateTriggerResponse) GetData() V2Trigger {
 	}
 	return v.Data
 }
+
+// #region class-body-v2createtriggerresponse
+// #endregion class-body-v2createtriggerresponse

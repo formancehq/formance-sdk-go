@@ -62,7 +62,7 @@ func (s *FormanceWalletsV1) ConfirmHold(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "confirmHold",
-		OAuth2Scopes:     []string{"auth:read", "wallets:write"},
+		OAuth2Scopes:     []string{"wallets:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "ConfirmHoldRequest", "json", `request:"mediaType=application/json"`)
@@ -200,6 +200,7 @@ func (s *FormanceWalletsV1) ConfirmHold(ctx context.Context, request operations.
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -258,7 +259,7 @@ func (s *FormanceWalletsV1) CreateBalance(ctx context.Context, request operation
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createBalance",
-		OAuth2Scopes:     []string{"auth:read", "wallets:write"},
+		OAuth2Scopes:     []string{"wallets:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateBalanceRequest", "json", `request:"mediaType=application/json"`)
@@ -474,7 +475,7 @@ func (s *FormanceWalletsV1) CreateWallet(ctx context.Context, request operations
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "createWallet",
-		OAuth2Scopes:     []string{"auth:read", "wallets:write"},
+		OAuth2Scopes:     []string{"wallets:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateWalletRequest", "json", `request:"mediaType=application/json"`)
@@ -690,7 +691,7 @@ func (s *FormanceWalletsV1) CreditWallet(ctx context.Context, request operations
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "creditWallet",
-		OAuth2Scopes:     []string{"auth:read", "wallets:write"},
+		OAuth2Scopes:     []string{"wallets:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreditWalletRequest", "json", `request:"mediaType=application/json"`)
@@ -828,6 +829,7 @@ func (s *FormanceWalletsV1) CreditWallet(ctx context.Context, request operations
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -886,7 +888,7 @@ func (s *FormanceWalletsV1) DebitWallet(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "debitWallet",
-		OAuth2Scopes:     []string{"auth:read", "wallets:write"},
+		OAuth2Scopes:     []string{"wallets:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "DebitWalletRequest", "json", `request:"mediaType=application/json"`)
@@ -1045,6 +1047,7 @@ func (s *FormanceWalletsV1) DebitWallet(ctx context.Context, request operations.
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1103,7 +1106,7 @@ func (s *FormanceWalletsV1) GetBalance(ctx context.Context, request operations.G
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getBalance",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1310,7 +1313,7 @@ func (s *FormanceWalletsV1) GetHold(ctx context.Context, request operations.GetH
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getHold",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1517,7 +1520,7 @@ func (s *FormanceWalletsV1) GetHolds(ctx context.Context, request operations.Get
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getHolds",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1539,7 +1542,7 @@ func (s *FormanceWalletsV1) GetHolds(ctx context.Context, request operations.Get
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1727,7 +1730,7 @@ func (s *FormanceWalletsV1) GetTransactions(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getTransactions",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1749,7 +1752,7 @@ func (s *FormanceWalletsV1) GetTransactions(ctx context.Context, request operati
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1938,7 +1941,7 @@ func (s *FormanceWalletsV1) GetWallet(ctx context.Context, request operations.Ge
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getWallet",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2074,12 +2077,12 @@ func (s *FormanceWalletsV1) GetWallet(ctx context.Context, request operations.Ge
 				return nil, err
 			}
 
-			var out shared.ActivityGetWalletOutput
+			var out shared.GetWalletResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ActivityGetWalletOutput = &out
+			res.GetWalletResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2088,6 +2091,7 @@ func (s *FormanceWalletsV1) GetWallet(ctx context.Context, request operations.Ge
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -2146,7 +2150,7 @@ func (s *FormanceWalletsV1) GetWalletSummary(ctx context.Context, request operat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "getWalletSummary",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2296,6 +2300,7 @@ func (s *FormanceWalletsV1) GetWalletSummary(ctx context.Context, request operat
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -2354,7 +2359,7 @@ func (s *FormanceWalletsV1) ListBalances(ctx context.Context, request operations
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listBalances",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2546,7 +2551,7 @@ func (s *FormanceWalletsV1) ListWallets(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "listWallets",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2568,7 +2573,7 @@ func (s *FormanceWalletsV1) ListWallets(ctx context.Context, request operations.
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2757,7 +2762,7 @@ func (s *FormanceWalletsV1) UpdateWallet(ctx context.Context, request operations
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "updateWallet",
-		OAuth2Scopes:     []string{"auth:read", "wallets:write"},
+		OAuth2Scopes:     []string{"wallets:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
@@ -2895,6 +2900,7 @@ func (s *FormanceWalletsV1) UpdateWallet(ctx context.Context, request operations
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -2953,7 +2959,7 @@ func (s *FormanceWalletsV1) VoidHold(ctx context.Context, request operations.Voi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "voidHold",
-		OAuth2Scopes:     []string{"auth:read", "wallets:write"},
+		OAuth2Scopes:     []string{"wallets:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -3084,6 +3090,7 @@ func (s *FormanceWalletsV1) VoidHold(ctx context.Context, request operations.Voi
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -3142,7 +3149,7 @@ func (s *FormanceWalletsV1) WalletsgetServerInfo(ctx context.Context, opts ...op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "walletsgetServerInfo",
-		OAuth2Scopes:     []string{"auth:read", "wallets:read"},
+		OAuth2Scopes:     []string{"wallets:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

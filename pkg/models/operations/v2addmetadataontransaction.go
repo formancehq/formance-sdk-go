@@ -19,6 +19,8 @@ type V2AddMetadataOnTransactionRequest struct {
 	ID *big.Int `pathParam:"style=simple,explode=false,name=id"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
+	// Schema version to use for validation
+	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
 }
 
 func (v V2AddMetadataOnTransactionRequest) MarshalJSON() ([]byte, error) {
@@ -26,7 +28,7 @@ func (v V2AddMetadataOnTransactionRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2AddMetadataOnTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "id", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -67,9 +69,20 @@ func (v *V2AddMetadataOnTransactionRequest) GetLedger() string {
 	return v.Ledger
 }
 
+func (v *V2AddMetadataOnTransactionRequest) GetSchemaVersion() *string {
+	if v == nil {
+		return nil
+	}
+	return v.SchemaVersion
+}
+
+// #region class-body-v2addmetadataontransactionrequest
+// #endregion class-body-v2addmetadataontransactionrequest
+
 type V2AddMetadataOnTransactionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -81,6 +94,13 @@ func (v *V2AddMetadataOnTransactionResponse) GetContentType() string {
 		return ""
 	}
 	return v.ContentType
+}
+
+func (v *V2AddMetadataOnTransactionResponse) GetHeaders() map[string][]string {
+	if v == nil {
+		return map[string][]string{}
+	}
+	return v.Headers
 }
 
 func (v *V2AddMetadataOnTransactionResponse) GetStatusCode() int {
@@ -96,3 +116,6 @@ func (v *V2AddMetadataOnTransactionResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2addmetadataontransactionresponse
+// #endregion class-body-v2addmetadataontransactionresponse

@@ -42,6 +42,9 @@ func (v *V2ListTriggersRequest) GetPageSize() *int64 {
 	return v.PageSize
 }
 
+// #region class-body-v2listtriggersrequest
+// #endregion class-body-v2listtriggersrequest
+
 type V2ListTriggersResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -80,3 +83,6 @@ func (v *V2ListTriggersResponse) GetV2ListTriggersResponse() *shared.V2ListTrigg
 	}
 	return v.V2ListTriggersResponse
 }
+
+// #region class-body-v2listtriggersresponse
+// #endregion class-body-v2listtriggersresponse

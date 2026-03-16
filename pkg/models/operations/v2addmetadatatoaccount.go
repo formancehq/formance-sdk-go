@@ -21,6 +21,8 @@ type V2AddMetadataToAccountRequest struct {
 	DryRun *bool `queryParam:"style=form,explode=true,name=dryRun"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
+	// Schema version to use for validation
+	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
 }
 
 func (v *V2AddMetadataToAccountRequest) GetIdempotencyKey() *string {
@@ -58,9 +60,20 @@ func (v *V2AddMetadataToAccountRequest) GetLedger() string {
 	return v.Ledger
 }
 
+func (v *V2AddMetadataToAccountRequest) GetSchemaVersion() *string {
+	if v == nil {
+		return nil
+	}
+	return v.SchemaVersion
+}
+
+// #region class-body-v2addmetadatatoaccountrequest
+// #endregion class-body-v2addmetadatatoaccountrequest
+
 type V2AddMetadataToAccountResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -72,6 +85,13 @@ func (v *V2AddMetadataToAccountResponse) GetContentType() string {
 		return ""
 	}
 	return v.ContentType
+}
+
+func (v *V2AddMetadataToAccountResponse) GetHeaders() map[string][]string {
+	if v == nil {
+		return map[string][]string{}
+	}
+	return v.Headers
 }
 
 func (v *V2AddMetadataToAccountResponse) GetStatusCode() int {
@@ -87,3 +107,6 @@ func (v *V2AddMetadataToAccountResponse) GetRawResponse() *http.Response {
 	}
 	return v.RawResponse
 }
+
+// #region class-body-v2addmetadatatoaccountresponse
+// #endregion class-body-v2addmetadatatoaccountresponse

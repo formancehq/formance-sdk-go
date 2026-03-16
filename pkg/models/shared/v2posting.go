@@ -52,3 +52,6 @@ func (v *V2Posting) GetSource() string {
 	}
 	return v.Source
 }
+
+// #region class-body-v2posting
+// #endregion class-body-v2posting

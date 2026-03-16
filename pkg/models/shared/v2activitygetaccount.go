@@ -20,3 +20,6 @@ func (v *V2ActivityGetAccount) GetLedger() string {
 	}
 	return v.Ledger
 }
+
+// #region class-body-v2activitygetaccount
+// #endregion class-body-v2activitygetaccount

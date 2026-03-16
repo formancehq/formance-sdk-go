@@ -45,6 +45,9 @@ func (v *V2ListWorkflowsResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v2listworkflowsresponsecursor
+// #endregion class-body-v2listworkflowsresponsecursor
+
 type V2ListWorkflowsResponse struct {
 	Cursor V2ListWorkflowsResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V2ListWorkflowsResponse) GetCursor() V2ListWorkflowsResponseCursor {
 	}
 	return v.Cursor
 }
+
+// #region class-body-v2listworkflowsresponse
+// #endregion class-body-v2listworkflowsresponse

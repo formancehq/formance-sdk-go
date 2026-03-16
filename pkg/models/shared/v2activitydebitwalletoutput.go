@@ -12,3 +12,6 @@ func (v *V2ActivityDebitWalletOutput) GetData() V2Hold {
 	}
 	return v.Data
 }
+
+// #region class-body-v2activitydebitwalletoutput
+// #endregion class-body-v2activitydebitwalletoutput

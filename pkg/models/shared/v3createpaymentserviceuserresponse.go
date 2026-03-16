@@ -13,3 +13,6 @@ func (v *V3CreatePaymentServiceUserResponse) GetData() string {
 	}
 	return v.Data
 }
+
+// #region class-body-v3createpaymentserviceuserresponse
+// #endregion class-body-v3createpaymentserviceuserresponse

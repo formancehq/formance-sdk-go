@@ -63,19 +63,13 @@ package main
 import (
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity(shared.Security{
-			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-		}),
-	)
+	s := v3.New()
 
 	res, err := s.GetVersions(ctx)
 	if err != nil {
@@ -95,10 +89,11 @@ func main() {
 <details open>
 <summary>Available methods</summary>
 
-### [Auth](docs/sdks/auth/README.md)
+### [Formance SDK](docs/sdks/formance/README.md)
 
+* [GetVersions](docs/sdks/formance/README.md#getversions) - Show stack version information
 
-#### [Auth.V1](docs/sdks/v1/README.md)
+### [Auth.V1](docs/sdks/v1/README.md)
 
 * [CreateClient](docs/sdks/v1/README.md#createclient) - Create client
 * [CreateSecret](docs/sdks/v1/README.md#createsecret) - Add a secret to a client
@@ -111,10 +106,6 @@ func main() {
 * [ReadClient](docs/sdks/v1/README.md#readclient) - Read client
 * [ReadUser](docs/sdks/v1/README.md#readuser) - Read user
 * [UpdateClient](docs/sdks/v1/README.md#updateclient) - Update client
-
-### [Formance SDK](docs/sdks/formance/README.md)
-
-* [GetVersions](docs/sdks/formance/README.md#getversions) - Show stack version information
 
 ### [Ledger](docs/sdks/ledger/README.md)
 
@@ -156,6 +147,7 @@ func main() {
 * [CreatePipeline](docs/sdks/v2/README.md#createpipeline) - Create pipeline
 * [CreateTransaction](docs/sdks/v2/README.md#createtransaction) - Create a new transaction to a ledger
 * [DeleteAccountMetadata](docs/sdks/v2/README.md#deleteaccountmetadata) - Delete metadata by key
+* [DeleteBucket](docs/sdks/v2/README.md#deletebucket) - Delete bucket
 * [DeleteExporter](docs/sdks/v2/README.md#deleteexporter) - Delete exporter
 * [DeleteLedgerMetadata](docs/sdks/v2/README.md#deleteledgermetadata) - Delete ledger metadata by key
 * [DeletePipeline](docs/sdks/v2/README.md#deletepipeline) - Delete pipeline
@@ -167,26 +159,29 @@ func main() {
 * [GetLedger](docs/sdks/v2/README.md#getledger) - Get a ledger
 * [GetLedgerInfo](docs/sdks/v2/README.md#getledgerinfo) - Get information about a ledger
 * [GetPipelineState](docs/sdks/v2/README.md#getpipelinestate) - Get pipeline state
+* [GetSchema](docs/sdks/v2/README.md#getschema) - Get a schema for a ledger by version
 * [GetTransaction](docs/sdks/v2/README.md#gettransaction) - Get transaction from a ledger by its ID
 * [GetVolumesWithBalances](docs/sdks/v2/README.md#getvolumeswithbalances) - Get list of volumes with balances for (account/asset)
 * [ImportLogs](docs/sdks/v2/README.md#importlogs)
+* [InsertSchema](docs/sdks/v2/README.md#insertschema) - Insert a schema for a ledger
 * [ListAccounts](docs/sdks/v2/README.md#listaccounts) - List accounts from a ledger
 * [ListExporters](docs/sdks/v2/README.md#listexporters) - List exporters
 * [ListLedgers](docs/sdks/v2/README.md#listledgers) - List ledgers
 * [ListLogs](docs/sdks/v2/README.md#listlogs) - List the logs from a ledger
 * [ListPipelines](docs/sdks/v2/README.md#listpipelines) - List pipelines
+* [ListSchemas](docs/sdks/v2/README.md#listschemas) - List all schemas for a ledger
 * [ListTransactions](docs/sdks/v2/README.md#listtransactions) - List transactions from a ledger
 * [ReadStats](docs/sdks/v2/README.md#readstats) - Get statistics from a ledger
 * [ResetPipeline](docs/sdks/v2/README.md#resetpipeline) - Reset pipeline
+* [RestoreBucket](docs/sdks/v2/README.md#restorebucket) - Restore bucket
 * [RevertTransaction](docs/sdks/v2/README.md#reverttransaction) - Revert a ledger transaction by its ID
+* [RunQuery](docs/sdks/v2/README.md#runquery) - Run a query template
 * [StartPipeline](docs/sdks/v2/README.md#startpipeline) - Start pipeline
 * [StopPipeline](docs/sdks/v2/README.md#stoppipeline) - Stop pipeline
+* [UpdateExporter](docs/sdks/v2/README.md#updateexporter) - Update exporter
 * [UpdateLedgerMetadata](docs/sdks/v2/README.md#updateledgermetadata) - Update ledger metadata
 
-### [Orchestration](docs/sdks/orchestration/README.md)
-
-
-#### [Orchestration.V1](docs/sdks/formanceorchestrationv1/README.md)
+### [Orchestration.V1](docs/sdks/formanceorchestrationv1/README.md)
 
 * [CancelEvent](docs/sdks/formanceorchestrationv1/README.md#cancelevent) - Cancel a running workflow
 * [CreateTrigger](docs/sdks/formanceorchestrationv1/README.md#createtrigger) - Create trigger
@@ -206,7 +201,7 @@ func main() {
 * [RunWorkflow](docs/sdks/formanceorchestrationv1/README.md#runworkflow) - Run workflow
 * [SendEvent](docs/sdks/formanceorchestrationv1/README.md#sendevent) - Send an event to a running workflow
 
-#### [Orchestration.V2](docs/sdks/formancev2/README.md)
+### [Orchestration.V2](docs/sdks/formancev2/README.md)
 
 * [CancelEvent](docs/sdks/formancev2/README.md#cancelevent) - Cancel a running workflow
 * [CreateTrigger](docs/sdks/formancev2/README.md#createtrigger) - Create trigger
@@ -227,10 +222,7 @@ func main() {
 * [SendEvent](docs/sdks/formancev2/README.md#sendevent) - Send an event to a running workflow
 * [TestTrigger](docs/sdks/formancev2/README.md#testtrigger) - Test trigger
 
-### [Payments](docs/sdks/payments/README.md)
-
-
-#### [Payments.V1](docs/sdks/formancepaymentsv1/README.md)
+### [Payments.V1](docs/sdks/formancepaymentsv1/README.md)
 
 * [AddAccountToPool](docs/sdks/formancepaymentsv1/README.md#addaccounttopool) - Add an account to a pool
 * [ConnectorsTransfer](docs/sdks/formancepaymentsv1/README.md#connectorstransfer) - Transfer funds between Connector accounts
@@ -275,9 +267,10 @@ func main() {
 * [UpdateBankAccountMetadata](docs/sdks/formancepaymentsv1/README.md#updatebankaccountmetadata) - Update metadata of a bank account
 * [UpdateConnectorConfigV1](docs/sdks/formancepaymentsv1/README.md#updateconnectorconfigv1) - Update the config of a connector
 * [UpdateMetadata](docs/sdks/formancepaymentsv1/README.md#updatemetadata) - Update metadata
+* [UpdatePoolQuery](docs/sdks/formancepaymentsv1/README.md#updatepoolquery) - Update the query of a pool
 * [UpdateTransferInitiationStatus](docs/sdks/formancepaymentsv1/README.md#updatetransferinitiationstatus) - Update the status of a transfer initiation
 
-#### [Payments.V3](docs/sdks/v3/README.md)
+### [Payments.V3](docs/sdks/v3/README.md)
 
 * [AddAccountToPool](docs/sdks/v3/README.md#addaccounttopool) - Add an account to a pool
 * [AddBankAccountToPaymentServiceUser](docs/sdks/v3/README.md#addbankaccounttopaymentserviceuser) - Add a bank account to a payment service user
@@ -286,14 +279,19 @@ func main() {
 
 * [CreateBankAccount](docs/sdks/v3/README.md#createbankaccount) - Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
 
+* [CreateLinkForPaymentServiceUser](docs/sdks/v3/README.md#createlinkforpaymentserviceuser) - Create an authentication link for a payment service user on a connector, for oauth flow
 * [CreatePayment](docs/sdks/v3/README.md#createpayment) - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
 
 * [CreatePaymentServiceUser](docs/sdks/v3/README.md#createpaymentserviceuser) - Create a formance payment service user object
 * [CreatePool](docs/sdks/v3/README.md#createpool) - Create a formance pool object
 * [DeletePaymentInitiation](docs/sdks/v3/README.md#deletepaymentinitiation) - Delete a payment initiation by ID
+* [DeletePaymentServiceUser](docs/sdks/v3/README.md#deletepaymentserviceuser) - Delete a payment service user by ID
+* [DeletePaymentServiceUserConnectionFromConnectorID](docs/sdks/v3/README.md#deletepaymentserviceuserconnectionfromconnectorid) - Delete a connection for a payment service user on a connector
+* [DeletePaymentServiceUserConnector](docs/sdks/v3/README.md#deletepaymentserviceuserconnector) - Remove a payment service user from a connector, the PSU will still exist in Formance
 * [DeletePool](docs/sdks/v3/README.md#deletepool) - Delete a pool by ID
 * [ForwardBankAccount](docs/sdks/v3/README.md#forwardbankaccount) - Forward a Bank Account to a PSP for creation
 * [ForwardPaymentServiceUserBankAccount](docs/sdks/v3/README.md#forwardpaymentserviceuserbankaccount) - Forward a payment service user's bank account to a connector
+* [ForwardPaymentServiceUserToProvider](docs/sdks/v3/README.md#forwardpaymentserviceusertoprovider) - Register/forward a payment service user on/to a connector
 * [GetAccount](docs/sdks/v3/README.md#getaccount) - Get an account by ID
 * [GetAccountBalances](docs/sdks/v3/README.md#getaccountbalances) - Get account balances
 * [GetBankAccount](docs/sdks/v3/README.md#getbankaccount) - Get a Bank Account by ID
@@ -302,6 +300,7 @@ func main() {
 * [GetPayment](docs/sdks/v3/README.md#getpayment) - Get a payment by ID
 * [GetPaymentInitiation](docs/sdks/v3/README.md#getpaymentinitiation) - Get a payment initiation by ID
 * [GetPaymentServiceUser](docs/sdks/v3/README.md#getpaymentserviceuser) - Get a payment service user by ID
+* [GetPaymentServiceUserLinkAttemptFromConnectorID](docs/sdks/v3/README.md#getpaymentserviceuserlinkattemptfromconnectorid) - Get a link attempt for a payment service user on a connector
 * [GetPool](docs/sdks/v3/README.md#getpool) - Get a pool by ID
 * [GetPoolBalances](docs/sdks/v3/README.md#getpoolbalances) - Get historical pool balances from a particular point in time
 * [GetPoolBalancesLatest](docs/sdks/v3/README.md#getpoolbalanceslatest) - Get latest pool balances
@@ -317,6 +316,11 @@ func main() {
 * [ListPaymentInitiationAdjustments](docs/sdks/v3/README.md#listpaymentinitiationadjustments) - List all payment initiation adjustments
 * [ListPaymentInitiationRelatedPayments](docs/sdks/v3/README.md#listpaymentinitiationrelatedpayments) - List all payments related to a payment initiation
 * [ListPaymentInitiations](docs/sdks/v3/README.md#listpaymentinitiations) - List all payment initiations
+* [ListPaymentServiceUserConnections](docs/sdks/v3/README.md#listpaymentserviceuserconnections) - List all connections for a payment service user
+* [ListPaymentServiceUserConnectionsFromConnectorID](docs/sdks/v3/README.md#listpaymentserviceuserconnectionsfromconnectorid) - List enabled connections for a payment service user on a connector (i.e. the various banks PSUser has enabled on the connector)
+* [ListPaymentServiceUserLinkAttemptsFromConnectorID](docs/sdks/v3/README.md#listpaymentserviceuserlinkattemptsfromconnectorid) - List all link attempts for a payment service user on a connector.
+Allows to check if users used the link and completed the oauth flow.
+
 * [ListPaymentServiceUsers](docs/sdks/v3/README.md#listpaymentserviceusers) - List all payment service users
 * [ListPayments](docs/sdks/v3/README.md#listpayments) - List all payments
 * [ListPools](docs/sdks/v3/README.md#listpools) - List all pools
@@ -327,13 +331,12 @@ func main() {
 * [ReversePaymentInitiation](docs/sdks/v3/README.md#reversepaymentinitiation) - Reverse a payment initiation
 * [UninstallConnector](docs/sdks/v3/README.md#uninstallconnector) - Uninstall a connector
 * [UpdateBankAccountMetadata](docs/sdks/v3/README.md#updatebankaccountmetadata) - Update a bank account's metadata
+* [UpdateLinkForPaymentServiceUserOnConnector](docs/sdks/v3/README.md#updatelinkforpaymentserviceuseronconnector) - Update/Regenerate a link for a payment service user on a connector
 * [UpdatePaymentMetadata](docs/sdks/v3/README.md#updatepaymentmetadata) - Update a payment's metadata
+* [UpdatePoolQuery](docs/sdks/v3/README.md#updatepoolquery) - Update the query of a pool
 * [V3UpdateConnectorConfig](docs/sdks/v3/README.md#v3updateconnectorconfig) - Update the config of a connector
 
-### [Reconciliation](docs/sdks/reconciliation/README.md)
-
-
-#### [Reconciliation.V1](docs/sdks/formancereconciliationv1/README.md)
+### [Reconciliation.V1](docs/sdks/formancereconciliationv1/README.md)
 
 * [CreatePolicy](docs/sdks/formancereconciliationv1/README.md#createpolicy) - Create a policy
 * [DeletePolicy](docs/sdks/formancereconciliationv1/README.md#deletepolicy) - Delete a policy
@@ -344,18 +347,12 @@ func main() {
 * [Reconcile](docs/sdks/formancereconciliationv1/README.md#reconcile) - Reconcile using a policy
 * [ReconciliationgetServerInfo](docs/sdks/formancereconciliationv1/README.md#reconciliationgetserverinfo) - Get server info
 
-### [~~Search~~](docs/sdks/search/README.md)
-
-
-#### [~~Search.V1~~](docs/sdks/formancesearchv1/README.md)
+### [~~Search.V1~~](docs/sdks/formancesearchv1/README.md)
 
 * [~~Search~~](docs/sdks/formancesearchv1/README.md#search) - search.v1 :warning: **Deprecated**
 * [~~SearchgetServerInfo~~](docs/sdks/formancesearchv1/README.md#searchgetserverinfo) - Get server info :warning: **Deprecated**
 
-### [Wallets](docs/sdks/wallets/README.md)
-
-
-#### [Wallets.V1](docs/sdks/formancewalletsv1/README.md)
+### [Wallets.V1](docs/sdks/formancewalletsv1/README.md)
 
 * [ConfirmHold](docs/sdks/formancewalletsv1/README.md#confirmhold) - Confirm a hold
 * [CreateBalance](docs/sdks/formancewalletsv1/README.md#createbalance) - Create a balance
@@ -374,10 +371,7 @@ func main() {
 * [VoidHold](docs/sdks/formancewalletsv1/README.md#voidhold) - Cancel a hold
 * [WalletsgetServerInfo](docs/sdks/formancewalletsv1/README.md#walletsgetserverinfo) - Get server info
 
-### [Webhooks](docs/sdks/webhooks/README.md)
-
-
-#### [Webhooks.V1](docs/sdks/formancewebhooksv1/README.md)
+### [Webhooks.V1](docs/sdks/formancewebhooksv1/README.md)
 
 * [ActivateConfig](docs/sdks/formancewebhooksv1/README.md#activateconfig) - Activate one config
 * [ChangeConfigSecret](docs/sdks/formancewebhooksv1/README.md#changeconfigsecret) - Change the signing secret of a config
@@ -463,10 +457,10 @@ You can override the default server globally using the `WithServerIndex(serverIn
 
 If the selected server has variables, you may override its default values using the associated option(s):
 
-| Variable       | Option                                           | Supported Values                                      | Default           | Description                                                   |
-| -------------- | ------------------------------------------------ | ----------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
-| `environment`  | `WithEnvironment(environment ServerEnvironment)` | - `"sandbox"`<br/>- `"eu-west-1"`<br/>- `"us-east-1"` | `"sandbox"`       | The environment name. Defaults to the production environment. |
-| `organization` | `WithOrganization(organization string)`          | string                                                | `"orgID-stackID"` | The organization name. Defaults to a generic organization.    |
+| Variable       | Option                                           | Supported Values                                         | Default           | Description                                                   |
+| -------------- | ------------------------------------------------ | -------------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
+| `environment`  | `WithEnvironment(environment ServerEnvironment)` | - `"eu.sandbox"`<br/>- `"eu-west-1"`<br/>- `"us-east-1"` | `"eu.sandbox"`    | The environment name. Defaults to the production environment. |
+| `organization` | `WithOrganization(organization string)`          | string                                                   | `"orgID-stackID"` | The organization name. Defaults to a generic organization.    |
 
 #### Example
 
@@ -476,7 +470,6 @@ package main
 import (
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
@@ -486,11 +479,7 @@ func main() {
 	s := v3.New(
 		v3.WithServerIndex(1),
 		v3.WithEnvironment("us-east-1"),
-		v3.WithOrganization("<value>"),
-		v3.WithSecurity(shared.Security{
-			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-		}),
+		v3.WithOrganization("orgID-stackID"),
 	)
 
 	res, err := s.GetVersions(ctx)
@@ -513,7 +502,6 @@ package main
 import (
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 
@@ -521,11 +509,7 @@ func main() {
 	ctx := context.Background()
 
 	s := v3.New(
-		v3.WithServerURL("https://orgID-stackID.sandbox.formance.cloud"),
-		v3.WithSecurity(shared.Security{
-			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-		}),
+		v3.WithServerURL("https://orgID-stackID.eu.sandbox.formance.cloud"),
 	)
 
 	res, err := s.GetVersions(ctx)
@@ -577,9 +561,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 This SDK supports the following security scheme globally:
 
-| Name                          | Type   | Scheme                         |
-| ----------------------------- | ------ | ------------------------------ |
-| `ClientID`<br/>`ClientSecret` | oauth2 | OAuth2 Client Credentials Flow |
+| Name                                         | Type   | Scheme                         |
+| -------------------------------------------- | ------ | ------------------------------ |
+| `ClientID`<br/>`ClientSecret`<br/>`TokenURL` | oauth2 | OAuth2 Client Credentials Flow |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go
@@ -626,7 +610,6 @@ package main
 import (
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"log"
 	"pkg/models/operations"
@@ -635,12 +618,7 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity(shared.Security{
-			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-		}),
-	)
+	s := v3.New()
 
 	res, err := s.GetVersions(ctx, operations.WithRetries(
 		retry.Config{
@@ -670,7 +648,6 @@ package main
 import (
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"log"
 )
@@ -690,10 +667,6 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		v3.WithSecurity(shared.Security{
-			ClientID:     v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-			ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-		}),
 	)
 
 	res, err := s.GetVersions(ctx)

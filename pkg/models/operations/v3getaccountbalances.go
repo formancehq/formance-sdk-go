@@ -30,7 +30,7 @@ func (v V3GetAccountBalancesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V3GetAccountBalancesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountID"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -78,6 +78,9 @@ func (v *V3GetAccountBalancesRequest) GetToTimestamp() *time.Time {
 	return v.ToTimestamp
 }
 
+// #region class-body-v3getaccountbalancesrequest
+// #endregion class-body-v3getaccountbalancesrequest
+
 type V3GetAccountBalancesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -116,3 +119,6 @@ func (v *V3GetAccountBalancesResponse) GetV3BalancesCursorResponse() *shared.V3B
 	}
 	return v.V3BalancesCursorResponse
 }
+
+// #region class-body-v3getaccountbalancesresponse
+// #endregion class-body-v3getaccountbalancesresponse

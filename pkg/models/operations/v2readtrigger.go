@@ -19,6 +19,9 @@ func (v *V2ReadTriggerRequest) GetTriggerID() string {
 	return v.TriggerID
 }
 
+// #region class-body-v2readtriggerrequest
+// #endregion class-body-v2readtriggerrequest
+
 type V2ReadTriggerResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -57,3 +60,6 @@ func (v *V2ReadTriggerResponse) GetV2ReadTriggerResponse() *shared.V2ReadTrigger
 	}
 	return v.V2ReadTriggerResponse
 }
+
+// #region class-body-v2readtriggerresponse
+// #endregion class-body-v2readtriggerresponse

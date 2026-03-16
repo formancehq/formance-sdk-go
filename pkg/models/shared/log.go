@@ -48,7 +48,7 @@ func (l Log) MarshalJSON() ([]byte, error) {
 }
 
 func (l *Log) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"data", "date", "hash", "id", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil

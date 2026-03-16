@@ -3,16 +3,16 @@
 package shared
 
 type WorkflowInstanceHistoryStageOutput struct {
-	CreateTransaction *ActivityCreateTransactionOutput  `json:"CreateTransaction,omitempty"`
+	CreateTransaction *RevertTransactionResponse        `json:"CreateTransaction,omitempty"`
 	DebitWallet       *ActivityDebitWalletOutput        `json:"DebitWallet,omitempty"`
 	GetAccount        *ActivityGetAccountOutput         `json:"GetAccount,omitempty"`
 	GetPayment        *ActivityGetPaymentOutput         `json:"GetPayment,omitempty"`
 	GetWallet         *ActivityGetWalletOutput          `json:"GetWallet,omitempty"`
 	ListWallets       *OrchestrationListWalletsResponse `json:"ListWallets,omitempty"`
-	RevertTransaction *ActivityCreateTransactionOutput  `json:"RevertTransaction,omitempty"`
+	RevertTransaction *RevertTransactionResponse        `json:"RevertTransaction,omitempty"`
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *ActivityCreateTransactionOutput {
+func (w *WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *RevertTransactionResponse {
 	if w == nil {
 		return nil
 	}
@@ -54,7 +54,7 @@ func (w *WorkflowInstanceHistoryStageOutput) GetListWallets() *OrchestrationList
 	return w.ListWallets
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *ActivityCreateTransactionOutput {
+func (w *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *RevertTransactionResponse {
 	if w == nil {
 		return nil
 	}

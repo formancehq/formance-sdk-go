@@ -45,6 +45,9 @@ func (v *V3PaymentInitiationsCursorResponseCursor) GetPrevious() *string {
 	return v.Previous
 }
 
+// #region class-body-v3paymentinitiationscursorresponsecursor
+// #endregion class-body-v3paymentinitiationscursorresponsecursor
+
 type V3PaymentInitiationsCursorResponse struct {
 	Cursor V3PaymentInitiationsCursorResponseCursor `json:"cursor"`
 }
@@ -55,3 +58,6 @@ func (v *V3PaymentInitiationsCursorResponse) GetCursor() V3PaymentInitiationsCur
 	}
 	return v.Cursor
 }
+
+// #region class-body-v3paymentinitiationscursorresponse
+// #endregion class-body-v3paymentinitiationscursorresponse

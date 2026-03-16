@@ -12,3 +12,6 @@ func (v *V3ConnectorScheduleResponse) GetData() V3Schedule {
 	}
 	return v.Data
 }
+
+// #region class-body-v3connectorscheduleresponse
+// #endregion class-body-v3connectorscheduleresponse

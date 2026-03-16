@@ -21,7 +21,7 @@ func (o OrchestrationV2Transaction) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OrchestrationV2Transaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"metadata", "postings", "timestamp", "txid"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -61,3 +61,6 @@ func (o *OrchestrationV2Transaction) GetTxid() *big.Int {
 	}
 	return o.Txid
 }
+
+// #region class-body-orchestrationv2transaction
+// #endregion class-body-orchestrationv2transaction

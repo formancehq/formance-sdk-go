@@ -11,32 +11,31 @@ import (
 	"time"
 )
 
-// Order - Deprecated: Use sort param
-type Order string
+// QueryParamOrder - Deprecated: Use sort param
+type QueryParamOrder string
 
 const (
-	OrderEffective Order = "effective"
+	QueryParamOrderEffective QueryParamOrder = "effective"
 )
 
-func (e Order) ToPointer() *Order {
+func (e QueryParamOrder) ToPointer() *QueryParamOrder {
 	return &e
 }
-func (e *Order) UnmarshalJSON(data []byte) error {
+func (e *QueryParamOrder) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "effective":
-		*e = Order(v)
+		*e = QueryParamOrder(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Order: %v", v)
+		return fmt.Errorf("invalid value for QueryParamOrder: %v", v)
 	}
 }
 
 type V2ListTransactionsRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -49,7 +48,7 @@ type V2ListTransactionsRequest struct {
 	// Deprecated: Use sort param
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	Order *Order `queryParam:"style=form,explode=true,name=order"`
+	Order *QueryParamOrder `queryParam:"style=form,explode=true,name=order"`
 	// The maximum number of results to return per page.
 	//
 	PageSize *int64     `queryParam:"style=form,explode=true,name=pageSize"`
@@ -66,17 +65,10 @@ func (v V2ListTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2ListTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"RequestBody", "ledger"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
-}
-
-func (v *V2ListTransactionsRequest) GetRequestBody() map[string]any {
-	if v == nil {
-		return map[string]any{}
-	}
-	return v.RequestBody
 }
 
 func (v *V2ListTransactionsRequest) GetCursor() *string {
@@ -100,7 +92,7 @@ func (v *V2ListTransactionsRequest) GetLedger() string {
 	return v.Ledger
 }
 
-func (v *V2ListTransactionsRequest) GetOrder() *Order {
+func (v *V2ListTransactionsRequest) GetOrder() *QueryParamOrder {
 	if v == nil {
 		return nil
 	}
@@ -134,6 +126,9 @@ func (v *V2ListTransactionsRequest) GetSort() *string {
 	}
 	return v.Sort
 }
+
+// #region class-body-v2listtransactionsrequest
+// #endregion class-body-v2listtransactionsrequest
 
 type V2ListTransactionsResponse struct {
 	// HTTP response content type for this operation
@@ -173,3 +168,6 @@ func (v *V2ListTransactionsResponse) GetV2TransactionsCursorResponse() *shared.V
 	}
 	return v.V2TransactionsCursorResponse
 }
+
+// #region class-body-v2listtransactionsresponse
+// #endregion class-body-v2listtransactionsresponse

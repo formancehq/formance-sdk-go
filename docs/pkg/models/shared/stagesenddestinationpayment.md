@@ -5,4 +5,4 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `Psp`              | *string*           | :heavy_check_mark: | N/A                |
+| `Psp`              | `string`           | :heavy_check_mark: | N/A                |

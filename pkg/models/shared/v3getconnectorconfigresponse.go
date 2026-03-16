@@ -25,6 +25,10 @@ func (v *V3GetConnectorConfigResponse) GetDataBankingcircle() *V3BankingcircleCo
 	return v.GetData().V3BankingcircleConfig
 }
 
+func (v *V3GetConnectorConfigResponse) GetDataCoinbaseprime() *V3CoinbaseprimeConfig {
+	return v.GetData().V3CoinbaseprimeConfig
+}
+
 func (v *V3GetConnectorConfigResponse) GetDataColumn() *V3ColumnConfig {
 	return v.GetData().V3ColumnConfig
 }
@@ -37,8 +41,16 @@ func (v *V3GetConnectorConfigResponse) GetDataDummypay() *V3DummypayConfig {
 	return v.GetData().V3DummypayConfig
 }
 
+func (v *V3GetConnectorConfigResponse) GetDataFireblocks() *V3FireblocksConfig {
+	return v.GetData().V3FireblocksConfig
+}
+
 func (v *V3GetConnectorConfigResponse) GetDataGeneric() *V3GenericConfig {
 	return v.GetData().V3GenericConfig
+}
+
+func (v *V3GetConnectorConfigResponse) GetDataIncrease() *V3IncreaseConfig {
+	return v.GetData().V3IncreaseConfig
 }
 
 func (v *V3GetConnectorConfigResponse) GetDataMangopay() *V3MangopayConfig {
@@ -53,6 +65,14 @@ func (v *V3GetConnectorConfigResponse) GetDataMoneycorp() *V3MoneycorpConfig {
 	return v.GetData().V3MoneycorpConfig
 }
 
+func (v *V3GetConnectorConfigResponse) GetDataPlaid() *V3PlaidConfig {
+	return v.GetData().V3PlaidConfig
+}
+
+func (v *V3GetConnectorConfigResponse) GetDataPowens() *V3PowensConfig {
+	return v.GetData().V3PowensConfig
+}
+
 func (v *V3GetConnectorConfigResponse) GetDataQonto() *V3QontoConfig {
 	return v.GetData().V3QontoConfig
 }
@@ -61,6 +81,13 @@ func (v *V3GetConnectorConfigResponse) GetDataStripe() *V3StripeConfig {
 	return v.GetData().V3StripeConfig
 }
 
+func (v *V3GetConnectorConfigResponse) GetDataTink() *V3TinkConfig {
+	return v.GetData().V3TinkConfig
+}
+
 func (v *V3GetConnectorConfigResponse) GetDataWise() *V3WiseConfig {
 	return v.GetData().V3WiseConfig
 }
+
+// #region class-body-v3getconnectorconfigresponse
+// #endregion class-body-v3getconnectorconfigresponse

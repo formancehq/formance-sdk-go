@@ -28,6 +28,9 @@ func (v *V2GetInstanceStageHistoryRequest) GetNumber() int64 {
 	return v.Number
 }
 
+// #region class-body-v2getinstancestagehistoryrequest
+// #endregion class-body-v2getinstancestagehistoryrequest
+
 type V2GetInstanceStageHistoryResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -66,3 +69,6 @@ func (v *V2GetInstanceStageHistoryResponse) GetV2GetWorkflowInstanceHistoryStage
 	}
 	return v.V2GetWorkflowInstanceHistoryStageResponse
 }
+
+// #region class-body-v2getinstancestagehistoryresponse
+// #endregion class-body-v2getinstancestagehistoryresponse

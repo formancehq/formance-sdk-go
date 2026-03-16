@@ -29,6 +29,9 @@ func (v *V3ConnectorConfigsResponseData) GetRequired() bool {
 	return v.Required
 }
 
+// #region class-body-v3connectorconfigsresponsedata
+// #endregion class-body-v3connectorconfigsresponsedata
+
 type V3ConnectorConfigsResponse struct {
 	Data map[string]map[string]V3ConnectorConfigsResponseData `json:"data"`
 }
@@ -39,3 +42,6 @@ func (v *V3ConnectorConfigsResponse) GetData() map[string]map[string]V3Connector
 	}
 	return v.Data
 }
+
+// #region class-body-v3connectorconfigsresponse
+// #endregion class-body-v3connectorconfigsresponse

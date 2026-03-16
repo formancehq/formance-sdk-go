@@ -13,6 +13,9 @@ import (
 type V2PaymentRaw struct {
 }
 
+// #region class-body-v2paymentraw
+// #endregion class-body-v2paymentraw
+
 type Scheme string
 
 const (
@@ -142,7 +145,7 @@ func (v V2Payment) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2Payment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"adjustments", "asset", "connectorID", "createdAt", "destinationAccountID", "id", "initialAmount", "reference", "scheme", "sourceAccountID", "status", "type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -252,3 +255,6 @@ func (v *V2Payment) GetType() V2PaymentType {
 	}
 	return v.Type
 }
+
+// #region class-body-v2payment
+// #endregion class-body-v2payment
