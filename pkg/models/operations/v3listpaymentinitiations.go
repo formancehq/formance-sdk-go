@@ -12,7 +12,8 @@ type V3ListPaymentInitiationsRequest struct {
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
-	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
+	Query    map[string]any `queryParam:"serialization=json,name=query"`
 }
 
 func (v *V3ListPaymentInitiationsRequest) GetCursor() *string {
@@ -27,6 +28,13 @@ func (v *V3ListPaymentInitiationsRequest) GetPageSize() *int64 {
 		return nil
 	}
 	return v.PageSize
+}
+
+func (v *V3ListPaymentInitiationsRequest) GetQuery() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Query
 }
 
 // #region class-body-v3listpaymentinitiationsrequest

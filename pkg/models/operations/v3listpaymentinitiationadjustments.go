@@ -14,7 +14,8 @@ type V3ListPaymentInitiationAdjustmentsRequest struct {
 	// The number of items to return
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// The payment initiation ID
-	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
+	PaymentInitiationID string         `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
+	Query               map[string]any `queryParam:"serialization=json,name=query"`
 }
 
 func (v *V3ListPaymentInitiationAdjustmentsRequest) GetCursor() *string {
@@ -36,6 +37,13 @@ func (v *V3ListPaymentInitiationAdjustmentsRequest) GetPaymentInitiationID() str
 		return ""
 	}
 	return v.PaymentInitiationID
+}
+
+func (v *V3ListPaymentInitiationAdjustmentsRequest) GetQuery() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Query
 }
 
 // #region class-body-v3listpaymentinitiationadjustmentsrequest

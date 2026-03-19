@@ -10,8 +10,9 @@ import (
 
 type V2CountTransactionsRequest struct {
 	// Name of the ledger.
-	Ledger string     `pathParam:"style=simple,explode=false,name=ledger"`
-	Pit    *time.Time `queryParam:"style=form,explode=true,name=pit"`
+	Ledger string         `pathParam:"style=simple,explode=false,name=ledger"`
+	Pit    *time.Time     `queryParam:"style=form,explode=true,name=pit"`
+	Query  map[string]any `queryParam:"serialization=json,name=query"`
 }
 
 func (v V2CountTransactionsRequest) MarshalJSON() ([]byte, error) {
@@ -37,6 +38,13 @@ func (v *V2CountTransactionsRequest) GetPit() *time.Time {
 		return nil
 	}
 	return v.Pit
+}
+
+func (v *V2CountTransactionsRequest) GetQuery() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Query
 }
 
 // #region class-body-v2counttransactionsrequest
