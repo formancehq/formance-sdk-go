@@ -16,7 +16,8 @@ type ListPoliciesRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
+	Query    map[string]any `queryParam:"serialization=json,name=query"`
 }
 
 func (l *ListPoliciesRequest) GetCursor() *string {
@@ -31,6 +32,13 @@ func (l *ListPoliciesRequest) GetPageSize() *int64 {
 		return nil
 	}
 	return l.PageSize
+}
+
+func (l *ListPoliciesRequest) GetQuery() map[string]any {
+	if l == nil {
+		return nil
+	}
+	return l.Query
 }
 
 type ListPoliciesResponse struct {

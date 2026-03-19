@@ -20,8 +20,9 @@ type V2ListLogsRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64     `queryParam:"style=form,explode=true,name=pageSize"`
-	Pit      *time.Time `queryParam:"style=form,explode=true,name=pit"`
+	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
+	Pit      *time.Time     `queryParam:"style=form,explode=true,name=pit"`
+	Query    map[string]any `queryParam:"serialization=json,name=query"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -65,6 +66,13 @@ func (v *V2ListLogsRequest) GetPit() *time.Time {
 		return nil
 	}
 	return v.Pit
+}
+
+func (v *V2ListLogsRequest) GetQuery() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Query
 }
 
 func (v *V2ListLogsRequest) GetSort() *string {

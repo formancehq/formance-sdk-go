@@ -51,9 +51,10 @@ type V2ListTransactionsRequest struct {
 	Order *QueryParamOrder `queryParam:"style=form,explode=true,name=order"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64     `queryParam:"style=form,explode=true,name=pageSize"`
-	Pit      *time.Time `queryParam:"style=form,explode=true,name=pit"`
-	Reverse  *bool      `queryParam:"style=form,explode=true,name=reverse"`
+	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
+	Pit      *time.Time     `queryParam:"style=form,explode=true,name=pit"`
+	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	Reverse  *bool          `queryParam:"style=form,explode=true,name=reverse"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -111,6 +112,13 @@ func (v *V2ListTransactionsRequest) GetPit() *time.Time {
 		return nil
 	}
 	return v.Pit
+}
+
+func (v *V2ListTransactionsRequest) GetQuery() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Query
 }
 
 func (v *V2ListTransactionsRequest) GetReverse() *bool {

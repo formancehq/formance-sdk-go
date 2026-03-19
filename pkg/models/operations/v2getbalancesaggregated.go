@@ -11,8 +11,9 @@ import (
 
 type V2GetBalancesAggregatedRequest struct {
 	// Name of the ledger.
-	Ledger string     `pathParam:"style=simple,explode=false,name=ledger"`
-	Pit    *time.Time `queryParam:"style=form,explode=true,name=pit"`
+	Ledger string         `pathParam:"style=simple,explode=false,name=ledger"`
+	Pit    *time.Time     `queryParam:"style=form,explode=true,name=pit"`
+	Query  map[string]any `queryParam:"serialization=json,name=query"`
 	// Use insertion date instead of effective date
 	UseInsertionDate *bool `queryParam:"style=form,explode=true,name=useInsertionDate"`
 }
@@ -40,6 +41,13 @@ func (v *V2GetBalancesAggregatedRequest) GetPit() *time.Time {
 		return nil
 	}
 	return v.Pit
+}
+
+func (v *V2GetBalancesAggregatedRequest) GetQuery() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Query
 }
 
 func (v *V2GetBalancesAggregatedRequest) GetUseInsertionDate() *bool {
