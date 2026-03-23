@@ -1,0 +1,137 @@
+overlay: 1.0.0
+info:
+  title: Go SDK overlay for Formance Stack OpenAPI spec
+  version: 0.0.1
+actions:
+  # Ledger v2: remove requestBody on GET/HEAD and add query parameter
+  - target: $["paths"]["/api/ledger/v2"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/ledger/v2/{ledger}/accounts"]["head"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2/{ledger}/accounts"]["head"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/ledger/v2/{ledger}/accounts"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2/{ledger}/accounts"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/ledger/v2/{ledger}/transactions"]["head"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2/{ledger}/transactions"]["head"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/ledger/v2/{ledger}/transactions"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2/{ledger}/transactions"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/ledger/v2/{ledger}/aggregate/balances"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2/{ledger}/aggregate/balances"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/ledger/v2/{ledger}/volumes"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2/{ledger}/volumes"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/ledger/v2/{ledger}/logs"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/ledger/v2/{ledger}/logs"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  # Payments v1: remove requestBody only (no query param replacement)
+  - target: $["paths"]["/api/payments/accounts"]["get"]["requestBody"]
+    remove: true
+
+  # Payments v3: remove requestBody and add query parameter
+  - target: $["paths"]["/api/payments/v3/accounts"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/accounts"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/bank-accounts"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/bank-accounts"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/connectors"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/connectors"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/connectors/{connectorID}/schedules"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/connectors/{connectorID}/schedules"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/payments"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/payments"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/payment-initiations"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/payment-initiations"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/payment-initiations/{paymentInitiationID}/adjustments"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/payment-initiations/{paymentInitiationID}/adjustments"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/payment-initiations/{paymentInitiationID}/payments"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/payment-initiations/{paymentInitiationID}/payments"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/payments/v3/payment-service-users"]["get"]["requestBody"]
+    remove: true
+
+  - target: $["paths"]["/api/payments/v3/payment-service-users/{paymentServiceUserID}/connections"]["get"]["requestBody"]
+    remove: true
+
+  - target: $["paths"]["/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections"]["get"]["requestBody"]
+    remove: true
+
+  - target: $["paths"]["/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/link-attempts"]["get"]["requestBody"]
+    remove: true
+
+  - target: $["paths"]["/api/payments/v3/pools"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/payments/v3/pools"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  # Reconciliation: remove requestBody and add query parameter
+  - target: $["paths"]["/api/reconciliation/policies"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/reconciliation/policies"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
+
+  - target: $["paths"]["/api/reconciliation/reconciliations"]["get"]["requestBody"]
+    remove: true
+  - target: $["paths"]["/api/reconciliation/reconciliations"]["get"]["parameters"]
+    update:
+      - { 'name': 'query', 'in': 'query', 'content': { 'application/json': { 'schema': { 'type': 'object', 'additionalProperties': true } } } }
