@@ -3,7 +3,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version SDK_VERSION and generator version 2.866.2
+// Generated from OpenAPI doc version SDK_VERSION and generator version 2.869.25
 
 import (
 	"bytes"
@@ -72,9 +72,11 @@ type Formance struct {
 	Orchestration  *Orchestration
 	Payments       *Payments
 	Reconciliation *Reconciliation
-	Search         *Search
-	Wallets        *Wallets
-	Webhooks       *Webhooks
+	// search.v1
+	// Elasticsearch.v1 query engine
+	Search   *Search
+	Wallets  *Wallets
+	Webhooks *Webhooks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -150,9 +152,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "3.9.3",
+		SDKVersion: "3.9.4",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.9.3 2.866.2 SDK_VERSION github.com/formancehq/formance-sdk-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.9.4 2.869.25 SDK_VERSION github.com/formancehq/formance-sdk-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
