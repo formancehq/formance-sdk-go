@@ -8,8 +8,6 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 )
 
-// Search - search.v1
-// Elasticsearch.v1 query engine
 type Search struct {
 	V1 *FormanceSearchV1
 
