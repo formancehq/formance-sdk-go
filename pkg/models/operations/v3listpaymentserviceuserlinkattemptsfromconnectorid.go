@@ -3,11 +3,16 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ListPaymentServiceUserLinkAttemptsFromConnectorIDServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
@@ -17,6 +22,13 @@ type V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// The payment service user ID
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
+}
+
+func (v *V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.RequestBody
 }
 
 func (v *V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest) GetConnectorID() string {
@@ -58,7 +70,7 @@ type V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3PaymentServiceUserLinkAttemptsCursorResponse *shared.V3PaymentServiceUserLinkAttemptsCursorResponse
+	V3PaymentServiceUserLinkAttemptsCursorResponse *payments.V3PaymentServiceUserLinkAttemptsCursorResponse
 }
 
 func (v *V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse) GetContentType() string {
@@ -82,7 +94,7 @@ func (v *V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse) GetRawResp
 	return v.RawResponse
 }
 
-func (v *V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse) GetV3PaymentServiceUserLinkAttemptsCursorResponse() *shared.V3PaymentServiceUserLinkAttemptsCursorResponse {
+func (v *V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse) GetV3PaymentServiceUserLinkAttemptsCursorResponse() *payments.V3PaymentServiceUserLinkAttemptsCursorResponse {
 	if v == nil {
 		return nil
 	}

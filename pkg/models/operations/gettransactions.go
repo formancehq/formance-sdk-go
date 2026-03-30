@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
+
+var GetTransactionsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetTransactionsRequest struct {
 	// Parameter used in pagination requests.
@@ -57,7 +61,7 @@ type GetTransactionsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	GetTransactionsResponse *shared.GetTransactionsResponse
+	GetTransactionsResponse *wallets.GetTransactionsResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -71,7 +75,7 @@ func (g *GetTransactionsResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetTransactionsResponse) GetGetTransactionsResponse() *shared.GetTransactionsResponse {
+func (g *GetTransactionsResponse) GetGetTransactionsResponse() *wallets.GetTransactionsResponse {
 	if g == nil {
 		return nil
 	}

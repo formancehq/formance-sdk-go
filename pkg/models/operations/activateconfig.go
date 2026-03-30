@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"net/http"
 )
+
+var ActivateConfigServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ActivateConfigRequest struct {
 	// Config ID
@@ -21,7 +25,7 @@ func (a *ActivateConfigRequest) GetID() string {
 
 type ActivateConfigResponse struct {
 	// Config successfully activated.
-	ConfigResponse *shared.ConfigResponse
+	ConfigResponse *webhooks.ConfigResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -30,7 +34,7 @@ type ActivateConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (a *ActivateConfigResponse) GetConfigResponse() *shared.ConfigResponse {
+func (a *ActivateConfigResponse) GetConfigResponse() *webhooks.ConfigResponse {
 	if a == nil {
 		return nil
 	}

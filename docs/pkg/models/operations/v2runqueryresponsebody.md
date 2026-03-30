@@ -8,25 +8,25 @@ OK
 ### V2TransactionsCursorResponse
 
 ```go
-v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2TransactionsCursorResponse(shared.V2TransactionsCursorResponse{/* values here */})
+v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2TransactionsCursorResponse(ledger.V2TransactionsCursorResponse{/* values here */})
 ```
 
 ### V2AccountsCursorResponse
 
 ```go
-v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2AccountsCursorResponse(shared.V2AccountsCursorResponse{/* values here */})
+v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2AccountsCursorResponse(ledger.V2AccountsCursorResponse{/* values here */})
 ```
 
 ### V2LogsCursorResponse
 
 ```go
-v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2LogsCursorResponse(shared.V2LogsCursorResponse{/* values here */})
+v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2LogsCursorResponse(ledger.V2LogsCursorResponse{/* values here */})
 ```
 
 ### V2VolumesWithBalanceCursorResponse
 
 ```go
-v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2VolumesWithBalanceCursorResponse(shared.V2VolumesWithBalanceCursorResponse{/* values here */})
+v2RunQueryResponseBody := operations.CreateV2RunQueryResponseBodyV2VolumesWithBalanceCursorResponse(ledger.V2VolumesWithBalanceCursorResponse{/* values here */})
 ```
 
 ## Union Discrimination

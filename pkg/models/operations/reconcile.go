@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/reconciliation"
 	"net/http"
 )
 
+var ReconcileServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ReconcileRequest struct {
-	ReconciliationRequest shared.ReconciliationRequest `request:"mediaType=application/json"`
+	ReconciliationRequest reconciliation.ReconciliationRequest `request:"mediaType=application/json"`
 	// The policy ID.
 	PolicyID string `pathParam:"style=simple,explode=false,name=policyID"`
 }
 
-func (r *ReconcileRequest) GetReconciliationRequest() shared.ReconciliationRequest {
+func (r *ReconcileRequest) GetReconciliationRequest() reconciliation.ReconciliationRequest {
 	if r == nil {
-		return shared.ReconciliationRequest{}
+		return reconciliation.ReconciliationRequest{}
 	}
 	return r.ReconciliationRequest
 }
@@ -31,7 +35,7 @@ type ReconcileResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	ReconciliationResponse *shared.ReconciliationResponse
+	ReconciliationResponse *reconciliation.ReconciliationResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -45,7 +49,7 @@ func (r *ReconcileResponse) GetContentType() string {
 	return r.ContentType
 }
 
-func (r *ReconcileResponse) GetReconciliationResponse() *shared.ReconciliationResponse {
+func (r *ReconcileResponse) GetReconciliationResponse() *reconciliation.ReconciliationResponse {
 	if r == nil {
 		return nil
 	}

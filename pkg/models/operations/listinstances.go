@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var ListInstancesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListInstancesRequest struct {
 	// Filter running instances
@@ -32,7 +36,7 @@ type ListInstancesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// List of workflow instances
-	ListRunsResponse *shared.ListRunsResponse
+	ListRunsResponse *orchestration.ListRunsResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -46,7 +50,7 @@ func (l *ListInstancesResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListInstancesResponse) GetListRunsResponse() *shared.ListRunsResponse {
+func (l *ListInstancesResponse) GetListRunsResponse() *orchestration.ListRunsResponse {
 	if l == nil {
 		return nil
 	}

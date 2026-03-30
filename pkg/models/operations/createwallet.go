@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
 
+var CreateWalletServerList = []string{
+	"http://localhost:8080/",
+}
+
 type CreateWalletRequest struct {
-	CreateWalletRequest *shared.CreateWalletRequest `request:"mediaType=application/json"`
+	CreateWalletRequest *wallets.CreateWalletRequest `request:"mediaType=application/json"`
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 }
 
-func (c *CreateWalletRequest) GetCreateWalletRequest() *shared.CreateWalletRequest {
+func (c *CreateWalletRequest) GetCreateWalletRequest() *wallets.CreateWalletRequest {
 	if c == nil {
 		return nil
 	}
@@ -31,7 +35,7 @@ type CreateWalletResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Wallet created
-	CreateWalletResponse *shared.CreateWalletResponse
+	CreateWalletResponse *wallets.CreateWalletResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -45,7 +49,7 @@ func (c *CreateWalletResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreateWalletResponse) GetCreateWalletResponse() *shared.CreateWalletResponse {
+func (c *CreateWalletResponse) GetCreateWalletResponse() *wallets.CreateWalletResponse {
 	if c == nil {
 		return nil
 	}

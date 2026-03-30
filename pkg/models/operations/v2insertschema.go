@@ -3,14 +3,18 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var V2InsertSchemaServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2InsertSchemaRequest struct {
 	// Use an idempotency key
-	IdempotencyKey *string             `header:"style=simple,explode=false,name=Idempotency-Key"`
-	V2SchemaData   shared.V2SchemaData `request:"mediaType=application/json"`
+	IdempotencyKey *string                  `header:"style=simple,explode=false,name=Idempotency-Key"`
+	V2SchemaData   ledger.V2SchemaDataInput `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Schema version.
@@ -24,9 +28,9 @@ func (v *V2InsertSchemaRequest) GetIdempotencyKey() *string {
 	return v.IdempotencyKey
 }
 
-func (v *V2InsertSchemaRequest) GetV2SchemaData() shared.V2SchemaData {
+func (v *V2InsertSchemaRequest) GetV2SchemaData() ledger.V2SchemaDataInput {
 	if v == nil {
-		return shared.V2SchemaData{}
+		return ledger.V2SchemaDataInput{}
 	}
 	return v.V2SchemaData
 }

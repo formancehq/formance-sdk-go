@@ -8,6 +8,10 @@ import (
 	"time"
 )
 
+var CountTransactionsServerList = []string{
+	"http://localhost:8080/",
+}
+
 // Metadata - Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below.
 type Metadata struct {
 }

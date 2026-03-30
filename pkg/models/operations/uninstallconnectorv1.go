@@ -3,20 +3,24 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var UninstallConnectorV1ServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UninstallConnectorV1Request struct {
 	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
 	// The connector ID.
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorId"`
 }
 
-func (u *UninstallConnectorV1Request) GetConnector() shared.Connector {
+func (u *UninstallConnectorV1Request) GetConnector() payments.Connector {
 	if u == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return u.Connector
 }

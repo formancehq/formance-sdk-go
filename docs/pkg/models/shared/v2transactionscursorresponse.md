@@ -1,9 +1,0 @@
-# V2TransactionsCursorResponse
-
-
-## Fields
-
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `Cursor`                                                                                                           | [shared.V2TransactionsCursorResponseCursor](../../../pkg/models/shared/v2transactionscursorresponsecursor.md)      | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
-| `Resource`                                                                                                         | [*shared.V2TransactionsCursorResponseResource](../../../pkg/models/shared/v2transactionscursorresponseresource.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

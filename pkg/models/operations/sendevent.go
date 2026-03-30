@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var SendEventServerList = []string{
+	"http://localhost:8080/",
+}
+
 type SendEventRequestBody struct {
 	Name string `json:"name"`
 }

@@ -3,13 +3,18 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
 
+var V2GetVolumesWithBalancesServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2GetVolumesWithBalancesRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -25,8 +30,7 @@ type V2GetVolumesWithBalancesRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -43,6 +47,13 @@ func (v *V2GetVolumesWithBalancesRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2GetVolumesWithBalancesRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return map[string]any{}
+	}
+	return v.RequestBody
 }
 
 func (v *V2GetVolumesWithBalancesRequest) GetCursor() *string {
@@ -87,13 +98,6 @@ func (v *V2GetVolumesWithBalancesRequest) GetPageSize() *int64 {
 	return v.PageSize
 }
 
-func (v *V2GetVolumesWithBalancesRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 func (v *V2GetVolumesWithBalancesRequest) GetSort() *string {
 	if v == nil {
 		return nil
@@ -119,7 +123,7 @@ type V2GetVolumesWithBalancesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2VolumesWithBalanceCursorResponse *shared.V2VolumesWithBalanceCursorResponse
+	V2VolumesWithBalanceCursorResponse *ledger.V2VolumesWithBalanceCursorResponse
 }
 
 func (v *V2GetVolumesWithBalancesResponse) GetContentType() string {
@@ -143,7 +147,7 @@ func (v *V2GetVolumesWithBalancesResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetVolumesWithBalancesResponse) GetV2VolumesWithBalanceCursorResponse() *shared.V2VolumesWithBalanceCursorResponse {
+func (v *V2GetVolumesWithBalancesResponse) GetV2VolumesWithBalanceCursorResponse() *ledger.V2VolumesWithBalanceCursorResponse {
 	if v == nil {
 		return nil
 	}

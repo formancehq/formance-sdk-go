@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var V2ReadTriggerServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2ReadTriggerRequest struct {
 	// The trigger id
@@ -30,7 +34,7 @@ type V2ReadTriggerResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// A specific trigger
-	V2ReadTriggerResponse *shared.V2ReadTriggerResponse
+	V2ReadTriggerResponse *orchestration.V2ReadTriggerResponse
 }
 
 func (v *V2ReadTriggerResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V2ReadTriggerResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ReadTriggerResponse) GetV2ReadTriggerResponse() *shared.V2ReadTriggerResponse {
+func (v *V2ReadTriggerResponse) GetV2ReadTriggerResponse() *orchestration.V2ReadTriggerResponse {
 	if v == nil {
 		return nil
 	}

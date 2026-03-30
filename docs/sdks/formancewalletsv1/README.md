@@ -12,6 +12,7 @@
 * [GetBalance](#getbalance) - Get detailed balance
 * [GetHold](#gethold) - Get a hold
 * [GetHolds](#getholds) - Get all holds for a wallet
+* [GetServerInfoWallets](#getserverinfowallets) - Get server info
 * [GetTransactions](#gettransactions)
 * [GetWallet](#getwallet) - Get a wallet
 * [GetWalletSummary](#getwalletsummary) - Get wallet summary
@@ -19,7 +20,6 @@
 * [ListWallets](#listwallets) - List all wallets
 * [UpdateWallet](#updatewallet) - Update a wallet
 * [VoidHold](#voidhold) - Cancel a hold
-* [WalletsgetServerInfo](#walletsgetserverinfo) - Get server info
 
 ## ConfirmHold
 
@@ -36,6 +36,7 @@ import(
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"math/big"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -51,7 +52,7 @@ func main() {
     )
 
     res, err := s.Wallets.V1.ConfirmHold(ctx, operations.ConfirmHoldRequest{
-        ConfirmHoldRequest: &shared.ConfirmHoldRequest{
+        ConfirmHoldRequest: &wallets.ConfirmHoldRequest{
             Amount: big.NewInt(100),
             Final: v3.Pointer(true),
         },
@@ -80,10 +81,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreateBalance
 
@@ -139,10 +140,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreateWallet
 
@@ -196,10 +197,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreditWallet
 
@@ -216,6 +217,7 @@ import(
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"math/big"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -231,15 +233,15 @@ func main() {
     )
 
     res, err := s.Wallets.V1.CreditWallet(ctx, operations.CreditWalletRequest{
-        CreditWalletRequest: &shared.CreditWalletRequest{
-            Amount: shared.Monetary{
+        CreditWalletRequest: &wallets.CreditWalletRequest{
+            Monetary: wallets.Monetary{
                 Amount: big.NewInt(100),
                 Asset: "USD/2",
             },
             Metadata: map[string]string{
                 "key": "",
             },
-            Sources: []shared.Subject{},
+            Sources: []wallets.Subject{},
         },
         ID: "<id>",
     })
@@ -266,10 +268,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## DebitWallet
 
@@ -286,6 +288,7 @@ import(
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"math/big"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -301,8 +304,8 @@ func main() {
     )
 
     res, err := s.Wallets.V1.DebitWallet(ctx, operations.DebitWalletRequest{
-        DebitWalletRequest: &shared.DebitWalletRequest{
-            Amount: shared.Monetary{
+        DebitWalletRequest: &wallets.DebitWalletRequest{
+            Monetary: wallets.Monetary{
                 Amount: big.NewInt(100),
                 Asset: "USD/2",
             },
@@ -336,10 +339,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetBalance
 
@@ -396,10 +399,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetHold
 
@@ -455,10 +458,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetHolds
 
@@ -519,10 +522,65 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
+
+## GetServerInfoWallets
+
+Get server info
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getServerInfo_wallets" method="get" path="/api/wallets/_info" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Wallets.V1.GetServerInfoWallets(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ServerInfo != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.GetServerInfoWalletsResponse](../../pkg/models/operations/getserverinfowalletsresponse.md), error**
+
+### Errors
+
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetTransactions
 
@@ -578,10 +636,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetWallet
 
@@ -637,10 +695,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetWalletSummary
 
@@ -696,10 +754,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## ListBalances
 
@@ -819,10 +877,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## UpdateWallet
 
@@ -878,10 +936,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## VoidHold
 
@@ -937,62 +995,7 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
-
-## WalletsgetServerInfo
-
-Get server info
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="walletsgetServerInfo" method="get" path="/api/wallets/_info" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Wallets.V1.WalletsgetServerInfo(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ServerInfo != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
-
-### Response
-
-**[*operations.WalletsgetServerInfoResponse](../../pkg/models/operations/walletsgetserverinforesponse.md), error**
-
-### Errors
-
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |

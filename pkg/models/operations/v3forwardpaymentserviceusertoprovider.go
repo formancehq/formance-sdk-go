@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V3ForwardPaymentServiceUserToProviderServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ForwardPaymentServiceUserToProviderRequest struct {
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`

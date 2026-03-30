@@ -3,13 +3,17 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var CreateBankAccountServerList = []string{
+	"http://localhost:8080/",
+}
+
 type CreateBankAccountResponse struct {
 	// OK
-	BankAccountResponse *shared.BankAccountResponse
+	BankAccountResponse *payments.BankAccountResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -18,7 +22,7 @@ type CreateBankAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (c *CreateBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
+func (c *CreateBankAccountResponse) GetBankAccountResponse() *payments.BankAccountResponse {
 	if c == nil {
 		return nil
 	}

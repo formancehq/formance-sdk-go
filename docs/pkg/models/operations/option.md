@@ -23,30 +23,6 @@ v3.WithTemplatedServerURL("https://{host}:{port}", map[string]string{
 })
 ```
 
-### WithServerIndex
-
-WithServerIndex allows the overriding of the default server by index.
-
-```go
-v3.WithServerIndex(1)
-```
-
-### WithEnvironment
-
-WithEnvironment allows setting the environment variable for url substitution.
-
-```go
-v3.WithEnvironment(/* ... */)
-```
-
-### WithOrganization
-
-WithOrganization allows setting the organization variable for url substitution.
-
-```go
-v3.WithOrganization(/* ... */)
-```
-
 ### WithClient
 
 WithClient allows the overriding of the default HTTP client used by the SDK.

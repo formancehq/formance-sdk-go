@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3UpdatePaymentMetadataServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3UpdatePaymentMetadataRequest struct {
-	V3UpdatePaymentMetadataRequest *shared.V3UpdatePaymentMetadataRequest `request:"mediaType=application/json"`
+	V3UpdatePaymentMetadataRequest *payments.V3UpdatePaymentMetadataRequest `request:"mediaType=application/json"`
 	// The payment ID
 	PaymentID string `pathParam:"style=simple,explode=false,name=paymentID"`
 }
 
-func (v *V3UpdatePaymentMetadataRequest) GetV3UpdatePaymentMetadataRequest() *shared.V3UpdatePaymentMetadataRequest {
+func (v *V3UpdatePaymentMetadataRequest) GetV3UpdatePaymentMetadataRequest() *payments.V3UpdatePaymentMetadataRequest {
 	if v == nil {
 		return nil
 	}

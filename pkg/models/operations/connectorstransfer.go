@@ -3,26 +3,30 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
-type ConnectorsTransferRequest struct {
-	TransferRequest shared.TransferRequest `request:"mediaType=application/json"`
-	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+var ConnectorsTransferServerList = []string{
+	"http://localhost:8080/",
 }
 
-func (c *ConnectorsTransferRequest) GetTransferRequest() shared.TransferRequest {
+type ConnectorsTransferRequest struct {
+	TransferRequest payments.TransferRequest `request:"mediaType=application/json"`
+	// The name of the connector.
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
+}
+
+func (c *ConnectorsTransferRequest) GetTransferRequest() payments.TransferRequest {
 	if c == nil {
-		return shared.TransferRequest{}
+		return payments.TransferRequest{}
 	}
 	return c.TransferRequest
 }
 
-func (c *ConnectorsTransferRequest) GetConnector() shared.Connector {
+func (c *ConnectorsTransferRequest) GetConnector() payments.Connector {
 	if c == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return c.Connector
 }
@@ -35,7 +39,7 @@ type ConnectorsTransferResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TransferResponse *shared.TransferResponse
+	TransferResponse *payments.TransferResponse
 }
 
 func (c *ConnectorsTransferResponse) GetContentType() string {
@@ -59,7 +63,7 @@ func (c *ConnectorsTransferResponse) GetRawResponse() *http.Response {
 	return c.RawResponse
 }
 
-func (c *ConnectorsTransferResponse) GetTransferResponse() *shared.TransferResponse {
+func (c *ConnectorsTransferResponse) GetTransferResponse() *payments.TransferResponse {
 	if c == nil {
 		return nil
 	}

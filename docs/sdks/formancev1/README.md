@@ -10,14 +10,14 @@
 * [CountAccounts](#countaccounts) - Count the accounts from a ledger
 * [CountTransactions](#counttransactions) - Count the transactions from a ledger
 * [CreateTransaction](#createtransaction) - Create a new transaction to a ledger
-* [GetAccount](#getaccount) - Get account by its address
+* [GetAccountLedger](#getaccountledger) - Get account by its address
 * [GetBalances](#getbalances) - Get the balances from a ledger's account
 * [GetBalancesAggregated](#getbalancesaggregated) - Get the aggregated balances from selected accounts
 * [GetInfo](#getinfo) - Show server information
 * [GetLedgerInfo](#getledgerinfo) - Get information about a ledger
 * [GetMapping](#getmapping) - Get the mapping of a ledger
 * [GetTransaction](#gettransaction) - Get transaction from a ledger by its ID
-* [ListAccounts](#listaccounts) - List accounts from a ledger
+* [ListAccountsLedger](#listaccountsledger) - List accounts from a ledger
 * [ListLogs](#listlogs) - List the logs from a ledger
 * [ListTransactions](#listtransactions) - List transactions from a ledger
 * [ReadStats](#readstats) - Get statistics from a ledger
@@ -40,6 +40,7 @@ import(
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"math/big"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -55,11 +56,11 @@ func main() {
     )
 
     res, err := s.Ledger.V1.CreateTransactions(ctx, operations.CreateTransactionsRequest{
-        Transactions: shared.Transactions{
-            Transactions: []shared.TransactionData{
-                shared.TransactionData{
-                    Postings: []shared.Posting{
-                        shared.Posting{
+        Transactions: ledger.Transactions{
+            Transactions: []ledger.TransactionData{
+                ledger.TransactionData{
+                    Postings: []ledger.Posting{
+                        ledger.Posting{
                             Amount: big.NewInt(100),
                             Asset: "COIN",
                             Destination: "users:002",
@@ -95,10 +96,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## AddMetadataOnTransaction
 
@@ -159,10 +160,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## AddMetadataToAccount
 
@@ -224,10 +225,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CountAccounts
 
@@ -336,10 +337,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CountTransactions
 
@@ -400,10 +401,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## CreateTransaction
 
@@ -420,6 +421,7 @@ import(
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"math/big"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -435,9 +437,9 @@ func main() {
     )
 
     res, err := s.Ledger.V1.CreateTransaction(ctx, operations.CreateTransactionRequest{
-        PostTransaction: shared.PostTransaction{
-            Postings: []shared.Posting{
-                shared.Posting{
+        PostTransaction: ledger.PostTransaction{
+            Postings: []ledger.Posting{
+                ledger.Posting{
                     Amount: big.NewInt(100),
                     Asset: "COIN",
                     Destination: "users:002",
@@ -445,7 +447,7 @@ func main() {
                 },
             },
             Reference: v3.Pointer("ref:001"),
-            Script: &shared.PostTransactionScript{
+            Script: &ledger.PostTransactionScript{
                 Plain: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\tdestination = $user\n)\n",
                 Vars: map[string]any{
                     "user": "users:042",
@@ -478,18 +480,18 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
-## GetAccount
+## GetAccountLedger
 
 Get account by its address
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="getAccount" method="get" path="/api/ledger/{ledger}/accounts/{address}" -->
+<!-- UsageSnippet language="go" operationID="getAccount_ledger" method="get" path="/api/ledger/{ledger}/accounts/{address}" -->
 ```go
 package main
 
@@ -511,7 +513,7 @@ func main() {
         }),
     )
 
-    res, err := s.Ledger.V1.GetAccount(ctx, operations.GetAccountRequest{
+    res, err := s.Ledger.V1.GetAccountLedger(ctx, operations.GetAccountLedgerRequest{
         Address: "users:001",
         Ledger: "ledger001",
     })
@@ -526,22 +528,22 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.GetAccountRequest](../../pkg/models/operations/getaccountrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.GetAccountLedgerRequest](../../pkg/models/operations/getaccountledgerrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
 ### Response
 
-**[*operations.GetAccountResponse](../../pkg/models/operations/getaccountresponse.md), error**
+**[*operations.GetAccountLedgerResponse](../../pkg/models/operations/getaccountledgerresponse.md), error**
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetBalances
 
@@ -600,10 +602,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetBalancesAggregated
 
@@ -660,10 +662,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetInfo
 
@@ -715,10 +717,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetLedgerInfo
 
@@ -774,10 +776,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetMapping
 
@@ -833,10 +835,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## GetTransaction
 
@@ -894,18 +896,18 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
-## ListAccounts
+## ListAccountsLedger
 
 List accounts from a ledger, sorted by address in descending order.
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="listAccounts" method="get" path="/api/ledger/{ledger}/accounts" -->
+<!-- UsageSnippet language="go" operationID="listAccounts_ledger" method="get" path="/api/ledger/{ledger}/accounts" -->
 ```go
 package main
 
@@ -927,7 +929,7 @@ func main() {
         }),
     )
 
-    res, err := s.Ledger.V1.ListAccounts(ctx, operations.ListAccountsRequest{
+    res, err := s.Ledger.V1.ListAccountsLedger(ctx, operations.ListAccountsLedgerRequest{
         Address: v3.Pointer("users:.+"),
         After: v3.Pointer("users:003"),
         Balance: v3.Pointer[int64](2400),
@@ -998,22 +1000,22 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.ListAccountsRequest](../../pkg/models/operations/listaccountsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.ListAccountsLedgerRequest](../../pkg/models/operations/listaccountsledgerrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
 ### Response
 
-**[*operations.ListAccountsResponse](../../pkg/models/operations/listaccountsresponse.md), error**
+**[*operations.ListAccountsLedgerResponse](../../pkg/models/operations/listaccountsledgerresponse.md), error**
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ListLogs
 
@@ -1072,10 +1074,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ListTransactions
 
@@ -1138,10 +1140,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ReadStats
 
@@ -1198,10 +1200,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## RevertTransaction
 
@@ -1259,10 +1261,10 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
 
 ## ~~RunScript~~
 
@@ -1281,6 +1283,7 @@ import(
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -1296,7 +1299,7 @@ func main() {
     )
 
     res, err := s.Ledger.V1.RunScript(ctx, operations.RunScriptRequest{
-        Script: shared.Script{
+        Script: ledger.Script{
             Plain: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\tdestination = $user\n)\n",
             Reference: v3.Pointer("order_1234"),
             Vars: map[string]any{
@@ -1388,7 +1391,7 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.ErrorResponse | default                 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| ledger.ErrorResponseError | default                   | application/json          |
+| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |

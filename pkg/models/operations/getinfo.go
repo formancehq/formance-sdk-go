@@ -3,13 +3,17 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var GetInfoServerList = []string{
+	"http://localhost:8080/",
+}
+
 type GetInfoResponse struct {
 	// OK
-	ConfigInfoResponse *shared.ConfigInfoResponse
+	ConfigInfoResponse *ledger.ConfigInfoResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -18,7 +22,7 @@ type GetInfoResponse struct {
 	RawResponse *http.Response
 }
 
-func (g *GetInfoResponse) GetConfigInfoResponse() *shared.ConfigInfoResponse {
+func (g *GetInfoResponse) GetConfigInfoResponse() *ledger.ConfigInfoResponse {
 	if g == nil {
 		return nil
 	}

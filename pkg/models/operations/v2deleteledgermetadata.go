@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2DeleteLedgerMetadataServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2DeleteLedgerMetadataRequest struct {
 	// Key to remove.
 	Key string `pathParam:"style=simple,explode=false,name=key"`

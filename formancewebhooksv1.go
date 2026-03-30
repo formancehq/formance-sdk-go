@@ -10,7 +10,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -46,12 +46,11 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ActivateConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/activate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -199,7 +198,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -220,7 +219,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -257,12 +256,11 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ChangeConfigSecretServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/secret/change", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -417,7 +415,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -438,7 +436,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -472,12 +470,11 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeactivateConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/deactivate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -625,7 +622,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -646,7 +643,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -680,12 +677,11 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeleteConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -835,7 +831,7 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -869,12 +865,11 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetManyConfigsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/webhooks/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1026,7 +1021,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out shared.ConfigsResponse
+			var out webhooks.ConfigsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1047,7 +1042,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1076,7 +1071,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 // The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 //
 // All eventTypes are converted to lower-case when inserted.
-func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.ConfigUser, opts ...operations.Option) (*operations.InsertConfigResponse, error) {
+func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request webhooks.ConfigUser, opts ...operations.Option) (*operations.InsertConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1089,12 +1084,11 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.InsertConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/webhooks/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1249,7 +1243,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1270,7 +1264,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1304,12 +1298,11 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.TestConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/test", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1457,7 +1450,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out shared.AttemptResponse
+			var out webhooks.AttemptResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1478,7 +1471,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1512,12 +1505,11 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1674,7 +1666,7 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

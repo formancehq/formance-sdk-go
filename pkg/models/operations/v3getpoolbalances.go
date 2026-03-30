@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var V3GetPoolBalancesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3GetPoolBalancesRequest struct {
 	// The time to filter by
@@ -52,7 +56,7 @@ type V3GetPoolBalancesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3PoolBalancesResponse *shared.V3PoolBalancesResponse
+	V3PoolBalancesResponse *payments.V3PoolBalancesResponse
 }
 
 func (v *V3GetPoolBalancesResponse) GetContentType() string {
@@ -76,7 +80,7 @@ func (v *V3GetPoolBalancesResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3GetPoolBalancesResponse) GetV3PoolBalancesResponse() *shared.V3PoolBalancesResponse {
+func (v *V3GetPoolBalancesResponse) GetV3PoolBalancesResponse() *payments.V3PoolBalancesResponse {
 	if v == nil {
 		return nil
 	}

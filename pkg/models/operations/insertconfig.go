@@ -3,13 +3,17 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"net/http"
 )
 
+var InsertConfigServerList = []string{
+	"http://localhost:8080/",
+}
+
 type InsertConfigResponse struct {
 	// Config created successfully.
-	ConfigResponse *shared.ConfigResponse
+	ConfigResponse *webhooks.ConfigResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -18,7 +22,7 @@ type InsertConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (i *InsertConfigResponse) GetConfigResponse() *shared.ConfigResponse {
+func (i *InsertConfigResponse) GetConfigResponse() *webhooks.ConfigResponse {
 	if i == nil {
 		return nil
 	}

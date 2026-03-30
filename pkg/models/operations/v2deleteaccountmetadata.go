@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2DeleteAccountMetadataServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2DeleteAccountMetadataRequest struct {
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`

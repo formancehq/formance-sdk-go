@@ -9,8 +9,8 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -45,12 +45,11 @@ func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccou
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3AddAccountToPoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/accounts/{accountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -200,7 +199,7 @@ func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccou
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -233,12 +232,11 @@ func (s *V3) AddBankAccountToPaymentServiceUser(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3AddBankAccountToPaymentServiceUserServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/bank-accounts/{bankAccountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -388,7 +386,7 @@ func (s *V3) AddBankAccountToPaymentServiceUser(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -421,12 +419,11 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ApprovePaymentInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/approve", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -574,7 +571,7 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 				return nil, err
 			}
 
-			var out shared.V3ApprovePaymentInitiationResponse
+			var out payments.V3ApprovePaymentInitiationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -595,7 +592,7 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -615,7 +612,7 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 }
 
 // CreateAccount - Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
-func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountRequest, opts ...operations.Option) (*operations.V3CreateAccountResponse, error) {
+func (s *V3) CreateAccount(ctx context.Context, request *payments.V3CreateAccountRequest, opts ...operations.Option) (*operations.V3CreateAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -628,12 +625,11 @@ func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountR
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3CreateAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -788,7 +784,7 @@ func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountR
 				return nil, err
 			}
 
-			var out shared.V3CreateAccountResponse
+			var out payments.V3CreateAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -809,7 +805,7 @@ func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountR
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -829,7 +825,7 @@ func (s *V3) CreateAccount(ctx context.Context, request *shared.V3CreateAccountR
 }
 
 // CreateBankAccount - Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
-func (s *V3) CreateBankAccount(ctx context.Context, request *shared.V3CreateBankAccountRequest, opts ...operations.Option) (*operations.V3CreateBankAccountResponse, error) {
+func (s *V3) CreateBankAccount(ctx context.Context, request *payments.V3CreateBankAccountRequest, opts ...operations.Option) (*operations.V3CreateBankAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -842,12 +838,11 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *shared.V3CreateBank
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3CreateBankAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/bank-accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1002,7 +997,7 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *shared.V3CreateBank
 				return nil, err
 			}
 
-			var out shared.V3CreateBankAccountResponse
+			var out payments.V3CreateBankAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1023,7 +1018,7 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *shared.V3CreateBank
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1056,12 +1051,11 @@ func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operat
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3CreateLinkForPaymentServiceUserServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/create-link", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1216,7 +1210,7 @@ func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserCreateLinkResponse
+			var out payments.V3PaymentServiceUserCreateLinkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1237,7 +1231,7 @@ func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1257,7 +1251,7 @@ func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operat
 }
 
 // CreatePayment - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
-func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentRequest, opts ...operations.Option) (*operations.V3CreatePaymentResponse, error) {
+func (s *V3) CreatePayment(ctx context.Context, request *payments.V3CreatePaymentRequest, opts ...operations.Option) (*operations.V3CreatePaymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1270,12 +1264,11 @@ func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentR
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3CreatePaymentServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/payments")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1430,7 +1423,7 @@ func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentR
 				return nil, err
 			}
 
-			var out shared.V3CreatePaymentResponse
+			var out payments.V3CreatePaymentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1451,7 +1444,7 @@ func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentR
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1471,7 +1464,7 @@ func (s *V3) CreatePayment(ctx context.Context, request *shared.V3CreatePaymentR
 }
 
 // CreatePaymentServiceUser - Create a formance payment service user object
-func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *shared.V3CreatePaymentServiceUserRequest, opts ...operations.Option) (*operations.V3CreatePaymentServiceUserResponse, error) {
+func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *payments.V3CreatePaymentServiceUserRequest, opts ...operations.Option) (*operations.V3CreatePaymentServiceUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1484,12 +1477,11 @@ func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *shared.V3Cre
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3CreatePaymentServiceUserServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/payment-service-users")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1644,7 +1636,7 @@ func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *shared.V3Cre
 				return nil, err
 			}
 
-			var out shared.V3CreatePaymentServiceUserResponse
+			var out payments.V3CreatePaymentServiceUserResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1665,7 +1657,7 @@ func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *shared.V3Cre
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1685,7 +1677,7 @@ func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *shared.V3Cre
 }
 
 // CreatePool - Create a formance pool object
-func (s *V3) CreatePool(ctx context.Context, request *shared.V3CreatePoolRequest, opts ...operations.Option) (*operations.V3CreatePoolResponse, error) {
+func (s *V3) CreatePool(ctx context.Context, request *payments.V3CreatePoolRequest, opts ...operations.Option) (*operations.V3CreatePoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1698,12 +1690,11 @@ func (s *V3) CreatePool(ctx context.Context, request *shared.V3CreatePoolRequest
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3CreatePoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/pools")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1858,7 +1849,7 @@ func (s *V3) CreatePool(ctx context.Context, request *shared.V3CreatePoolRequest
 				return nil, err
 			}
 
-			var out shared.V3CreatePoolResponse
+			var out payments.V3CreatePoolResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1879,7 +1870,7 @@ func (s *V3) CreatePool(ctx context.Context, request *shared.V3CreatePoolRequest
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1912,12 +1903,11 @@ func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3D
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3DeletePaymentInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2067,7 +2057,7 @@ func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3D
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2100,12 +2090,11 @@ func (s *V3) DeletePaymentServiceUser(ctx context.Context, request operations.V3
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3DeletePaymentServiceUserServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2253,7 +2242,7 @@ func (s *V3) DeletePaymentServiceUser(ctx context.Context, request operations.V3
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserDeleteResponse
+			var out payments.V3PaymentServiceUserDeleteResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2274,7 +2263,7 @@ func (s *V3) DeletePaymentServiceUser(ctx context.Context, request operations.V3
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2307,12 +2296,11 @@ func (s *V3) DeletePaymentServiceUserConnectionFromConnectorID(ctx context.Conte
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3DeletePaymentServiceUserConnectionFromConnectorIDServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections/{connectionID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2460,7 +2448,7 @@ func (s *V3) DeletePaymentServiceUserConnectionFromConnectorID(ctx context.Conte
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserDeleteConnectionResponse
+			var out payments.V3PaymentServiceUserDeleteConnectionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2481,7 +2469,7 @@ func (s *V3) DeletePaymentServiceUserConnectionFromConnectorID(ctx context.Conte
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2514,12 +2502,11 @@ func (s *V3) DeletePaymentServiceUserConnector(ctx context.Context, request oper
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3DeletePaymentServiceUserConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2667,7 +2654,7 @@ func (s *V3) DeletePaymentServiceUserConnector(ctx context.Context, request oper
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserDeleteConnectorResponse
+			var out payments.V3PaymentServiceUserDeleteConnectorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2688,7 +2675,7 @@ func (s *V3) DeletePaymentServiceUserConnector(ctx context.Context, request oper
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2721,12 +2708,11 @@ func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3DeletePoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2876,7 +2862,7 @@ func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequ
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2909,12 +2895,11 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ForwardBankAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/bank-accounts/{bankAccountID}/forward", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2926,8 +2911,8 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v3ForwardBankAccount",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3ForwardBankAccountRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2953,10 +2938,6 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -3069,7 +3050,7 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 				return nil, err
 			}
 
-			var out shared.V3ForwardBankAccountResponse
+			var out payments.V3ForwardBankAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3090,7 +3071,7 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3123,12 +3104,11 @@ func (s *V3) ForwardPaymentServiceUserBankAccount(ctx context.Context, request o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ForwardPaymentServiceUserBankAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/bank-accounts/{bankAccountID}/forward", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3283,7 +3263,7 @@ func (s *V3) ForwardPaymentServiceUserBankAccount(ctx context.Context, request o
 				return nil, err
 			}
 
-			var out shared.V3ForwardPaymentServiceUserBankAccountResponse
+			var out payments.V3ForwardPaymentServiceUserBankAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3304,7 +3284,7 @@ func (s *V3) ForwardPaymentServiceUserBankAccount(ctx context.Context, request o
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3337,12 +3317,11 @@ func (s *V3) ForwardPaymentServiceUserToProvider(ctx context.Context, request op
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ForwardPaymentServiceUserToProviderServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/forward", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3492,7 +3471,7 @@ func (s *V3) ForwardPaymentServiceUserToProvider(ctx context.Context, request op
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3525,12 +3504,11 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/accounts/{accountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3678,7 +3656,7 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 				return nil, err
 			}
 
-			var out shared.V3GetAccountResponse
+			var out payments.V3GetAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3699,7 +3677,7 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3732,12 +3710,11 @@ func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAcc
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetAccountBalancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/accounts/{accountID}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3889,7 +3866,7 @@ func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAcc
 				return nil, err
 			}
 
-			var out shared.V3BalancesCursorResponse
+			var out payments.V3BalancesCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3910,7 +3887,7 @@ func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAcc
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3943,12 +3920,11 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetBankAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/bank-accounts/{bankAccountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3960,8 +3936,8 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v3GetBankAccount",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -3981,10 +3957,6 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4096,7 +4068,7 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 				return nil, err
 			}
 
-			var out shared.V3GetBankAccountResponse
+			var out payments.V3GetBankAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4117,7 +4089,7 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4150,12 +4122,11 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetConnectorConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4303,7 +4274,7 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 				return nil, err
 			}
 
-			var out shared.V3GetConnectorConfigResponse
+			var out payments.V3GetConnectorConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4324,7 +4295,7 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4357,12 +4328,11 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetConnectorScheduleServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4510,7 +4480,7 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 				return nil, err
 			}
 
-			var out shared.V3ConnectorScheduleResponse
+			var out payments.V3ConnectorScheduleResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4531,7 +4501,7 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4564,12 +4534,11 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetPaymentServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payments/{paymentID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4717,7 +4686,7 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 				return nil, err
 			}
 
-			var out shared.V3GetPaymentResponse
+			var out payments.V3GetPaymentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4738,7 +4707,7 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4771,12 +4740,11 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetPaymentInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4924,7 +4892,7 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 				return nil, err
 			}
 
-			var out shared.V3GetPaymentInitiationResponse
+			var out payments.V3GetPaymentInitiationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4945,7 +4913,7 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4978,12 +4946,11 @@ func (s *V3) GetPaymentServiceUser(ctx context.Context, request operations.V3Get
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetPaymentServiceUserServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5131,7 +5098,7 @@ func (s *V3) GetPaymentServiceUser(ctx context.Context, request operations.V3Get
 				return nil, err
 			}
 
-			var out shared.V3GetPaymentServiceUserResponse
+			var out payments.V3GetPaymentServiceUserResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5152,7 +5119,7 @@ func (s *V3) GetPaymentServiceUser(ctx context.Context, request operations.V3Get
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5185,12 +5152,11 @@ func (s *V3) GetPaymentServiceUserLinkAttemptFromConnectorID(ctx context.Context
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/link-attempts/{attemptID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5338,7 +5304,7 @@ func (s *V3) GetPaymentServiceUserLinkAttemptFromConnectorID(ctx context.Context
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserLinkAttempt
+			var out payments.V3PaymentServiceUserLinkAttempt
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5359,7 +5325,7 @@ func (s *V3) GetPaymentServiceUserLinkAttemptFromConnectorID(ctx context.Context
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5392,12 +5358,11 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetPoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5545,7 +5510,7 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 				return nil, err
 			}
 
-			var out shared.V3GetPoolResponse
+			var out payments.V3GetPoolResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5566,7 +5531,7 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5599,12 +5564,11 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetPoolBalancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5756,7 +5720,7 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 				return nil, err
 			}
 
-			var out shared.V3PoolBalancesResponse
+			var out payments.V3PoolBalancesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5777,7 +5741,7 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5810,12 +5774,11 @@ func (s *V3) GetPoolBalancesLatest(ctx context.Context, request operations.V3Get
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetPoolBalancesLatestServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/balances/latest", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5963,7 +5926,7 @@ func (s *V3) GetPoolBalancesLatest(ctx context.Context, request operations.V3Get
 				return nil, err
 			}
 
-			var out shared.V3PoolBalancesResponse
+			var out payments.V3PoolBalancesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5984,7 +5947,7 @@ func (s *V3) GetPoolBalancesLatest(ctx context.Context, request operations.V3Get
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6017,12 +5980,11 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3GetTaskServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/tasks/{taskID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6170,7 +6132,7 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 				return nil, err
 			}
 
-			var out shared.V3GetTaskResponse
+			var out payments.V3GetTaskResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6191,7 +6153,7 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6224,12 +6186,11 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3InitiatePaymentServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/payment-initiations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6388,7 +6349,7 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 				return nil, err
 			}
 
-			var out shared.V3InitiatePaymentResponse
+			var out payments.V3InitiatePaymentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6409,7 +6370,7 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6442,12 +6403,11 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3InstallConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/install/{connector}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6462,7 +6422,7 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3InstallConnectorRequest", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3ConnectorConfig", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -6602,7 +6562,7 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 				return nil, err
 			}
 
-			var out shared.V3InstallConnectorResponse
+			var out payments.V3InstallConnectorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6623,7 +6583,7 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6656,12 +6616,11 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListAccountsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6676,6 +6635,10 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -6688,12 +6651,15 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -6813,7 +6779,7 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 				return nil, err
 			}
 
-			var out shared.V3AccountsCursorResponse
+			var out payments.V3AccountsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6834,7 +6800,7 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6867,12 +6833,11 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListBankAccountsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/bank-accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6887,6 +6852,10 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -6899,12 +6868,15 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -7024,7 +6996,7 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 				return nil, err
 			}
 
-			var out shared.V3BankAccountsCursorResponse
+			var out payments.V3BankAccountsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7045,7 +7017,7 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7078,12 +7050,11 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListConnectorConfigsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/connectors/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7231,7 +7202,7 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 				return nil, err
 			}
 
-			var out shared.V3ConnectorConfigsResponse
+			var out payments.V3ConnectorConfigsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7252,7 +7223,7 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7285,12 +7256,11 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListConnectorScheduleInstancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}/instances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7442,7 +7412,7 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out shared.V3ConnectorScheduleInstancesCursorResponse
+			var out payments.V3ConnectorScheduleInstancesCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7463,7 +7433,7 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7496,12 +7466,11 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListConnectorSchedulesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/schedules", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7516,6 +7485,10 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -7528,12 +7501,15 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -7653,7 +7629,7 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 				return nil, err
 			}
 
-			var out shared.V3ConnectorSchedulesCursorResponse
+			var out payments.V3ConnectorSchedulesCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7674,7 +7650,7 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7707,12 +7683,11 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListConnectorsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/connectors")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7727,6 +7702,10 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -7739,12 +7718,15 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -7864,7 +7846,7 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 				return nil, err
 			}
 
-			var out shared.V3ConnectorsCursorResponse
+			var out payments.V3ConnectorsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7885,7 +7867,7 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7918,12 +7900,11 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentInitiationAdjustmentsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/adjustments", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7938,6 +7919,10 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -7950,12 +7935,15 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -8075,7 +8063,7 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.V3PaymentInitiationAdjustmentsCursorResponse
+			var out payments.V3PaymentInitiationAdjustmentsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8096,7 +8084,7 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8129,12 +8117,11 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentInitiationRelatedPaymentsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/payments", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8149,6 +8136,10 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -8161,12 +8152,15 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -8286,7 +8280,7 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 				return nil, err
 			}
 
-			var out shared.V3PaymentInitiationRelatedPaymentsCursorResponse
+			var out payments.V3PaymentInitiationRelatedPaymentsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8307,7 +8301,7 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8340,12 +8334,11 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentInitiationsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/payment-initiations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8360,6 +8353,10 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -8372,12 +8369,15 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -8497,7 +8497,7 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 				return nil, err
 			}
 
-			var out shared.V3PaymentInitiationsCursorResponse
+			var out payments.V3PaymentInitiationsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8518,7 +8518,7 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8551,12 +8551,11 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentServiceUserConnectionsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connections", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8571,6 +8570,10 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -8583,12 +8586,15 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -8708,7 +8714,7 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserConnectionsCursorResponse
+			var out payments.V3PaymentServiceUserConnectionsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8729,7 +8735,7 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8762,12 +8768,11 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentServiceUserConnectionsFromConnectorIDServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8782,6 +8787,10 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -8794,12 +8803,15 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -8919,7 +8931,7 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserConnectionsCursorResponse
+			var out payments.V3PaymentServiceUserConnectionsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8940,7 +8952,7 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8974,12 +8986,11 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/link-attempts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8994,6 +9005,10 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -9006,12 +9021,15 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -9131,7 +9149,7 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserLinkAttemptsCursorResponse
+			var out payments.V3PaymentServiceUserLinkAttemptsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9152,7 +9170,7 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9185,12 +9203,11 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentServiceUsersServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/payment-service-users")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -9205,6 +9222,10 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -9217,12 +9238,15 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -9342,7 +9366,7 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUsersCursorResponse
+			var out payments.V3PaymentServiceUsersCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9363,7 +9387,7 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9396,12 +9420,11 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPaymentsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/payments")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -9416,6 +9439,10 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -9428,12 +9455,15 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -9553,7 +9583,7 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 				return nil, err
 			}
 
-			var out shared.V3PaymentsCursorResponse
+			var out payments.V3PaymentsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9574,7 +9604,7 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9607,12 +9637,11 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ListPoolsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/v3/pools")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -9627,6 +9656,10 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 		OAuth2Scopes:     []string{"payments:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -9639,12 +9672,15 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -9764,7 +9800,7 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 				return nil, err
 			}
 
-			var out shared.V3PoolsCursorResponse
+			var out payments.V3PoolsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9785,7 +9821,7 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9818,12 +9854,11 @@ func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3R
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3RejectPaymentInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/reject", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -9973,7 +10008,7 @@ func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3R
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10006,12 +10041,11 @@ func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3Rem
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3RemoveAccountFromPoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/accounts/{accountID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -10161,7 +10195,7 @@ func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3Rem
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10194,12 +10228,11 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ResetConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -10347,7 +10380,7 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 				return nil, err
 			}
 
-			var out shared.V3ResetConnectorResponse
+			var out payments.V3ResetConnectorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10368,7 +10401,7 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10401,12 +10434,11 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3RetryPaymentInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/retry", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -10554,7 +10586,7 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 				return nil, err
 			}
 
-			var out shared.V3RetryPaymentInitiationResponse
+			var out payments.V3RetryPaymentInitiationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10575,7 +10607,7 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10608,12 +10640,11 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3ReversePaymentInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-initiations/{paymentInitiationID}/reverse", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -10768,7 +10799,7 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 				return nil, err
 			}
 
-			var out shared.V3ReversePaymentInitiationResponse
+			var out payments.V3ReversePaymentInitiationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10789,7 +10820,7 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10822,12 +10853,11 @@ func (s *V3) UninstallConnector(ctx context.Context, request operations.V3Uninst
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3UninstallConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -10975,7 +11005,7 @@ func (s *V3) UninstallConnector(ctx context.Context, request operations.V3Uninst
 				return nil, err
 			}
 
-			var out shared.V3UninstallConnectorResponse
+			var out payments.V3UninstallConnectorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -10996,7 +11026,7 @@ func (s *V3) UninstallConnector(ctx context.Context, request operations.V3Uninst
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -11029,12 +11059,11 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3UpdateBankAccountMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/bank-accounts/{bankAccountID}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -11046,8 +11075,8 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v3UpdateBankAccountMetadata",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3UpdateBankAccountMetadataRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -11073,10 +11102,6 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -11191,7 +11216,7 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -11224,12 +11249,11 @@ func (s *V3) UpdateLinkForPaymentServiceUserOnConnector(ctx context.Context, req
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3UpdateLinkForPaymentServiceUserOnConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections/{connectionID}/update-link", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -11384,7 +11408,7 @@ func (s *V3) UpdateLinkForPaymentServiceUserOnConnector(ctx context.Context, req
 				return nil, err
 			}
 
-			var out shared.V3PaymentServiceUserUpdateLinkResponse
+			var out payments.V3PaymentServiceUserUpdateLinkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -11405,7 +11429,7 @@ func (s *V3) UpdateLinkForPaymentServiceUserOnConnector(ctx context.Context, req
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -11438,12 +11462,11 @@ func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3Upd
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3UpdatePaymentMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/payments/{paymentID}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -11600,7 +11623,7 @@ func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3Upd
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -11633,12 +11656,11 @@ func (s *V3) UpdatePoolQuery(ctx context.Context, request operations.V3UpdatePoo
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3UpdatePoolQueryServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/pools/{poolID}/query", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -11795,7 +11817,7 @@ func (s *V3) UpdatePoolQuery(ctx context.Context, request operations.V3UpdatePoo
 				return nil, err
 			}
 
-			var out sdkerrors.V3ErrorResponse
+			var out payments.V3ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -11829,12 +11851,11 @@ func (s *V3) V3UpdateConnectorConfig(ctx context.Context, request operations.V3U
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V3UpdateConnectorConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/v3/connectors/{connectorID}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -11849,7 +11870,7 @@ func (s *V3) V3UpdateConnectorConfig(ctx context.Context, request operations.V3U
 		OAuth2Scopes:     []string{"payments:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3InstallConnectorRequest", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V3ConnectorConfig", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -11991,7 +12012,7 @@ func (s *V3) V3UpdateConnectorConfig(ctx context.Context, request operations.V3U
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

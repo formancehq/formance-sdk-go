@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var ListTransactionsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListTransactionsRequest struct {
 	// Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $).
@@ -139,7 +143,7 @@ type ListTransactionsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TransactionsCursorResponse *shared.TransactionsCursorResponse
+	TransactionsCursorResponse *ledger.TransactionsCursorResponse
 }
 
 func (l *ListTransactionsResponse) GetContentType() string {
@@ -163,7 +167,7 @@ func (l *ListTransactionsResponse) GetRawResponse() *http.Response {
 	return l.RawResponse
 }
 
-func (l *ListTransactionsResponse) GetTransactionsCursorResponse() *shared.TransactionsCursorResponse {
+func (l *ListTransactionsResponse) GetTransactionsCursorResponse() *ledger.TransactionsCursorResponse {
 	if l == nil {
 		return nil
 	}

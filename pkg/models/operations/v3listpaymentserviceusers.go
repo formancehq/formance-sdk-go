@@ -3,16 +3,28 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ListPaymentServiceUsersServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ListPaymentServiceUsersRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (v *V3ListPaymentServiceUsersRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.RequestBody
 }
 
 func (v *V3ListPaymentServiceUsersRequest) GetCursor() *string {
@@ -40,7 +52,7 @@ type V3ListPaymentServiceUsersResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3PaymentServiceUsersCursorResponse *shared.V3PaymentServiceUsersCursorResponse
+	V3PaymentServiceUsersCursorResponse *payments.V3PaymentServiceUsersCursorResponse
 }
 
 func (v *V3ListPaymentServiceUsersResponse) GetContentType() string {
@@ -64,7 +76,7 @@ func (v *V3ListPaymentServiceUsersResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3ListPaymentServiceUsersResponse) GetV3PaymentServiceUsersCursorResponse() *shared.V3PaymentServiceUsersCursorResponse {
+func (v *V3ListPaymentServiceUsersResponse) GetV3PaymentServiceUsersCursorResponse() *payments.V3PaymentServiceUsersCursorResponse {
 	if v == nil {
 		return nil
 	}

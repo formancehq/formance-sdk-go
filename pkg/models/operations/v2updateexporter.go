@@ -3,21 +3,25 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var V2UpdateExporterServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2UpdateExporterRequest struct {
-	V2CreateExporterRequest shared.V2CreateExporterRequest `request:"mediaType=application/json"`
+	V2ExporterConfiguration ledger.V2ExporterConfiguration1 `request:"mediaType=application/json"`
 	// The exporter id
 	ExporterID string `pathParam:"style=simple,explode=false,name=exporterID"`
 }
 
-func (v *V2UpdateExporterRequest) GetV2CreateExporterRequest() shared.V2CreateExporterRequest {
+func (v *V2UpdateExporterRequest) GetV2ExporterConfiguration() ledger.V2ExporterConfiguration1 {
 	if v == nil {
-		return shared.V2CreateExporterRequest{}
+		return ledger.V2ExporterConfiguration1{}
 	}
-	return v.V2CreateExporterRequest
+	return v.V2ExporterConfiguration
 }
 
 func (v *V2UpdateExporterRequest) GetExporterID() string {

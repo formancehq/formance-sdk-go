@@ -3,19 +3,30 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ListConnectorSchedulesServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ListConnectorSchedulesRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (v *V3ListConnectorSchedulesRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.RequestBody
 }
 
 func (v *V3ListConnectorSchedulesRequest) GetConnectorID() string {
@@ -39,13 +50,6 @@ func (v *V3ListConnectorSchedulesRequest) GetPageSize() *int64 {
 	return v.PageSize
 }
 
-func (v *V3ListConnectorSchedulesRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 // #region class-body-v3listconnectorschedulesrequest
 // #endregion class-body-v3listconnectorschedulesrequest
 
@@ -57,7 +61,7 @@ type V3ListConnectorSchedulesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3ConnectorSchedulesCursorResponse *shared.V3ConnectorSchedulesCursorResponse
+	V3ConnectorSchedulesCursorResponse *payments.V3ConnectorSchedulesCursorResponse
 }
 
 func (v *V3ListConnectorSchedulesResponse) GetContentType() string {
@@ -81,7 +85,7 @@ func (v *V3ListConnectorSchedulesResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3ListConnectorSchedulesResponse) GetV3ConnectorSchedulesCursorResponse() *shared.V3ConnectorSchedulesCursorResponse {
+func (v *V3ListConnectorSchedulesResponse) GetV3ConnectorSchedulesCursorResponse() *payments.V3ConnectorSchedulesCursorResponse {
 	if v == nil {
 		return nil
 	}

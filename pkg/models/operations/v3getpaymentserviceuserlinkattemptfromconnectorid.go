@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var V3GetPaymentServiceUserLinkAttemptFromConnectorIDServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3GetPaymentServiceUserLinkAttemptFromConnectorIDRequest struct {
 	// The attempt ID
@@ -48,7 +52,7 @@ type V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3PaymentServiceUserLinkAttempt *shared.V3PaymentServiceUserLinkAttempt
+	V3PaymentServiceUserLinkAttempt *payments.V3PaymentServiceUserLinkAttempt
 }
 
 func (v *V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse) GetContentType() string {
@@ -72,7 +76,7 @@ func (v *V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse) GetRawRespon
 	return v.RawResponse
 }
 
-func (v *V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse) GetV3PaymentServiceUserLinkAttempt() *shared.V3PaymentServiceUserLinkAttempt {
+func (v *V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse) GetV3PaymentServiceUserLinkAttempt() *payments.V3PaymentServiceUserLinkAttempt {
 	if v == nil {
 		return nil
 	}

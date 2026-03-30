@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var GetAccountBalancesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetAccountBalancesRequest struct {
 	// The account ID.
@@ -108,7 +112,7 @@ func (g *GetAccountBalancesRequest) GetTo() *time.Time {
 
 type GetAccountBalancesResponse struct {
 	// OK
-	BalancesCursor *shared.BalancesCursor
+	BalancesCursor *payments.BalancesCursor
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -117,7 +121,7 @@ type GetAccountBalancesResponse struct {
 	RawResponse *http.Response
 }
 
-func (g *GetAccountBalancesResponse) GetBalancesCursor() *shared.BalancesCursor {
+func (g *GetAccountBalancesResponse) GetBalancesCursor() *payments.BalancesCursor {
 	if g == nil {
 		return nil
 	}

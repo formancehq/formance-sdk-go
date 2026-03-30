@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2CreateTransactionServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2CreateTransactionRequest struct {
 	// Use an idempotency key
@@ -14,7 +18,7 @@ type V2CreateTransactionRequest struct {
 	//   - `postings`: suitable for simple transactions
 	//   - `script`: enabling more complex transactions with Numscript
 	//
-	V2PostTransaction shared.V2PostTransaction `request:"mediaType=application/json"`
+	V2PostTransaction ledger.V2PostTransaction `request:"mediaType=application/json"`
 	// Set the dryRun mode. dry run mode doesn't add the logs to the database or publish a message to the message broker.
 	DryRun *bool `queryParam:"style=form,explode=true,name=dryRun"`
 	// Disable balance checks when passing postings
@@ -32,9 +36,9 @@ func (v *V2CreateTransactionRequest) GetIdempotencyKey() *string {
 	return v.IdempotencyKey
 }
 
-func (v *V2CreateTransactionRequest) GetV2PostTransaction() shared.V2PostTransaction {
+func (v *V2CreateTransactionRequest) GetV2PostTransaction() ledger.V2PostTransaction {
 	if v == nil {
-		return shared.V2PostTransaction{}
+		return ledger.V2PostTransaction{}
 	}
 	return v.V2PostTransaction
 }
@@ -79,7 +83,7 @@ type V2CreateTransactionResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2CreateTransactionResponse *shared.V2CreateTransactionResponse
+	V2CreateTransactionResponse *ledger.V2CreateTransactionResponse
 }
 
 func (v *V2CreateTransactionResponse) GetContentType() string {
@@ -110,7 +114,7 @@ func (v *V2CreateTransactionResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2CreateTransactionResponse) GetV2CreateTransactionResponse() *shared.V2CreateTransactionResponse {
+func (v *V2CreateTransactionResponse) GetV2CreateTransactionResponse() *ledger.V2CreateTransactionResponse {
 	if v == nil {
 		return nil
 	}

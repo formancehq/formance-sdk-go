@@ -3,21 +3,25 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var RunScriptServerList = []string{
+	"http://localhost:8080/",
+}
+
 type RunScriptRequest struct {
-	Script shared.Script `request:"mediaType=application/json"`
+	Script ledger.Script `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Set the preview mode. Preview mode doesn't add the logs to the database or publish a message to the message broker.
 	Preview *bool `queryParam:"style=form,explode=true,name=preview"`
 }
 
-func (r *RunScriptRequest) GetScript() shared.Script {
+func (r *RunScriptRequest) GetScript() ledger.Script {
 	if r == nil {
-		return shared.Script{}
+		return ledger.Script{}
 	}
 	return r.Script
 }
@@ -43,11 +47,12 @@ type RunScriptResponse struct {
 	//
 	// On failure, it will also return a 200 status code, and the following fields:
 	//
+	//
 	//   - `details`: contains a URL. When there is an error parsing Numscript, the result can be difficult to read—the provided URL will render the error in an easy-to-read format.
 	//   - `errorCode` and `error_code` (deprecated): contains the string code of the error
 	//   - `errorMessage` and `error_message` (deprecated): contains a human-readable indication of what went wrong, for example that an account had insufficient funds, or that there was an error in the provided Numscript.
 	//
-	ScriptResponse *shared.ScriptResponse
+	ScriptResponse *ledger.ScriptResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -61,7 +66,7 @@ func (r *RunScriptResponse) GetContentType() string {
 	return r.ContentType
 }
 
-func (r *RunScriptResponse) GetScriptResponse() *shared.ScriptResponse {
+func (r *RunScriptResponse) GetScriptResponse() *ledger.ScriptResponse {
 	if r == nil {
 		return nil
 	}

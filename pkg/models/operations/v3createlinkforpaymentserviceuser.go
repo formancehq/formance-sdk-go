@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3CreateLinkForPaymentServiceUserServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3CreateLinkForPaymentServiceUserRequest struct {
-	V3PaymentServiceUserCreateLinkRequest *shared.V3PaymentServiceUserCreateLinkRequest `request:"mediaType=application/json"`
+	V3PaymentServiceUserCreateLinkRequest *payments.V3PaymentServiceUserCreateLinkRequest `request:"mediaType=application/json"`
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`
 	// The payment service user ID
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
 }
 
-func (v *V3CreateLinkForPaymentServiceUserRequest) GetV3PaymentServiceUserCreateLinkRequest() *shared.V3PaymentServiceUserCreateLinkRequest {
+func (v *V3CreateLinkForPaymentServiceUserRequest) GetV3PaymentServiceUserCreateLinkRequest() *payments.V3PaymentServiceUserCreateLinkRequest {
 	if v == nil {
 		return nil
 	}
@@ -47,7 +51,7 @@ type V3CreateLinkForPaymentServiceUserResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Created
-	V3PaymentServiceUserCreateLinkResponse *shared.V3PaymentServiceUserCreateLinkResponse
+	V3PaymentServiceUserCreateLinkResponse *payments.V3PaymentServiceUserCreateLinkResponse
 }
 
 func (v *V3CreateLinkForPaymentServiceUserResponse) GetContentType() string {
@@ -71,7 +75,7 @@ func (v *V3CreateLinkForPaymentServiceUserResponse) GetRawResponse() *http.Respo
 	return v.RawResponse
 }
 
-func (v *V3CreateLinkForPaymentServiceUserResponse) GetV3PaymentServiceUserCreateLinkResponse() *shared.V3PaymentServiceUserCreateLinkResponse {
+func (v *V3CreateLinkForPaymentServiceUserResponse) GetV3PaymentServiceUserCreateLinkResponse() *payments.V3PaymentServiceUserCreateLinkResponse {
 	if v == nil {
 		return nil
 	}

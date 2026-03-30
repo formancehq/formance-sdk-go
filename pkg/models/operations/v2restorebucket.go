@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2RestoreBucketServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2RestoreBucketRequest struct {
 	// The bucket name
@@ -30,7 +34,7 @@ type V2RestoreBucketResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Bucket not found
-	V2ErrorResponse *shared.V2ErrorResponse
+	V2ErrorResponse *ledger.V2ErrorResponse
 }
 
 func (v *V2RestoreBucketResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V2RestoreBucketResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2RestoreBucketResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
+func (v *V2RestoreBucketResponse) GetV2ErrorResponse() *ledger.V2ErrorResponse {
 	if v == nil {
 		return nil
 	}

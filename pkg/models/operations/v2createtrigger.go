@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var V2CreateTriggerServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2CreateTriggerResponse struct {
 	// HTTP response content type for this operation
@@ -15,7 +19,7 @@ type V2CreateTriggerResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Created trigger
-	V2CreateTriggerResponse *shared.V2CreateTriggerResponse
+	V2CreateTriggerResponse *orchestration.V2CreateTriggerResponse
 }
 
 func (v *V2CreateTriggerResponse) GetContentType() string {
@@ -39,7 +43,7 @@ func (v *V2CreateTriggerResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2CreateTriggerResponse) GetV2CreateTriggerResponse() *shared.V2CreateTriggerResponse {
+func (v *V2CreateTriggerResponse) GetV2CreateTriggerResponse() *orchestration.V2CreateTriggerResponse {
 	if v == nil {
 		return nil
 	}

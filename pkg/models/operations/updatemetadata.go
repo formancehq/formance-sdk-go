@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var UpdateMetadataServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateMetadataRequest struct {
 	RequestBody map[string]string `request:"mediaType=application/json"`
 	// The payment ID.

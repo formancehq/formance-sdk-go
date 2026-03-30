@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2SendEventServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2SendEventRequestBody struct {
 	Name string `json:"name"`
 }

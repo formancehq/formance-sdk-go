@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2UpdateLedgerMetadataServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2UpdateLedgerMetadataRequest struct {
 	RequestBody map[string]string `request:"mediaType=application/json"`
@@ -38,7 +42,7 @@ type V2UpdateLedgerMetadataResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
-	V2ErrorResponse *shared.V2ErrorResponse
+	V2ErrorResponse *ledger.V2ErrorResponse
 }
 
 func (v *V2UpdateLedgerMetadataResponse) GetContentType() string {
@@ -62,7 +66,7 @@ func (v *V2UpdateLedgerMetadataResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
+func (v *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *ledger.V2ErrorResponse {
 	if v == nil {
 		return nil
 	}

@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
+
+var ListTransferInitiationsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListTransferInitiationsRequest struct {
 	// Parameter used in pagination requests. Maximum page size is set to 15.
@@ -72,7 +76,7 @@ type ListTransferInitiationsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TransferInitiationsCursor *shared.TransferInitiationsCursor
+	TransferInitiationsCursor *payments.TransferInitiationsCursor
 }
 
 func (l *ListTransferInitiationsResponse) GetContentType() string {
@@ -96,7 +100,7 @@ func (l *ListTransferInitiationsResponse) GetRawResponse() *http.Response {
 	return l.RawResponse
 }
 
-func (l *ListTransferInitiationsResponse) GetTransferInitiationsCursor() *shared.TransferInitiationsCursor {
+func (l *ListTransferInitiationsResponse) GetTransferInitiationsCursor() *payments.TransferInitiationsCursor {
 	if l == nil {
 		return nil
 	}

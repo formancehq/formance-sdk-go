@@ -3,89 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
-type V2ListExportersCursor struct {
-	Data     []shared.V2Exporter `json:"data"`
-	HasMore  bool                `json:"hasMore"`
-	Next     *string             `json:"next,omitempty"`
-	PageSize int64               `json:"pageSize"`
-	Previous *string             `json:"previous,omitempty"`
+var V2ListExportersServerList = []string{
+	"http://localhost:8080/",
 }
-
-func (v *V2ListExportersCursor) GetData() []shared.V2Exporter {
-	if v == nil {
-		return []shared.V2Exporter{}
-	}
-	return v.Data
-}
-
-func (v *V2ListExportersCursor) GetHasMore() bool {
-	if v == nil {
-		return false
-	}
-	return v.HasMore
-}
-
-func (v *V2ListExportersCursor) GetNext() *string {
-	if v == nil {
-		return nil
-	}
-	return v.Next
-}
-
-func (v *V2ListExportersCursor) GetPageSize() int64 {
-	if v == nil {
-		return 0
-	}
-	return v.PageSize
-}
-
-func (v *V2ListExportersCursor) GetPrevious() *string {
-	if v == nil {
-		return nil
-	}
-	return v.Previous
-}
-
-// #region class-body-v2listexporterscursor
-// #endregion class-body-v2listexporterscursor
-
-type Cursor struct {
-	Cursor V2ListExportersCursor `json:"cursor"`
-	Data   []shared.V2Exporter   `json:"data,omitempty"`
-}
-
-func (c *Cursor) GetCursor() V2ListExportersCursor {
-	if c == nil {
-		return V2ListExportersCursor{}
-	}
-	return c.Cursor
-}
-
-func (c *Cursor) GetData() []shared.V2Exporter {
-	if c == nil {
-		return nil
-	}
-	return c.Data
-}
-
-// V2ListExportersResponseBody - Exporters list
-type V2ListExportersResponseBody struct {
-	Cursor *Cursor `json:"cursor,omitempty"`
-}
-
-func (v *V2ListExportersResponseBody) GetCursor() *Cursor {
-	if v == nil {
-		return nil
-	}
-	return v.Cursor
-}
-
-// #region class-body-v2listexportersresponsebody
-// #endregion class-body-v2listexportersresponsebody
 
 type V2ListExportersResponse struct {
 	// HTTP response content type for this operation
@@ -95,7 +19,7 @@ type V2ListExportersResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Exporters list
-	Object *V2ListExportersResponseBody
+	V2ExportersCursorResponse *ledger.V2ExportersCursorResponse
 }
 
 func (v *V2ListExportersResponse) GetContentType() string {
@@ -119,11 +43,11 @@ func (v *V2ListExportersResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListExportersResponse) GetObject() *V2ListExportersResponseBody {
+func (v *V2ListExportersResponse) GetV2ExportersCursorResponse() *ledger.V2ExportersCursorResponse {
 	if v == nil {
 		return nil
 	}
-	return v.Object
+	return v.V2ExportersCursorResponse
 }
 
 // #region class-body-v2listexportersresponse

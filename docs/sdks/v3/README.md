@@ -123,10 +123,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## AddBankAccountToPaymentServiceUser
 
@@ -183,10 +183,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ApprovePaymentInitiation
 
@@ -242,10 +242,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreateAccount
 
@@ -287,11 +287,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [shared.V3CreateAccountRequest](../../pkg/models/shared/v3createaccountrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [payments.V3CreateAccountRequest](../../pkg/models/payments/v3createaccountrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
 ### Response
 
@@ -299,10 +299,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreateBankAccount
 
@@ -344,11 +344,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `request`                                                                                  | [shared.V3CreateBankAccountRequest](../../pkg/models/shared/v3createbankaccountrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
-| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [payments.V3CreateBankAccountRequest](../../pkg/models/payments/v3createbankaccountrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
@@ -356,10 +356,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreateLinkForPaymentServiceUser
 
@@ -416,10 +416,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreatePayment
 
@@ -461,11 +461,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [shared.V3CreatePaymentRequest](../../pkg/models/shared/v3createpaymentrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [payments.V3CreatePaymentRequest](../../pkg/models/payments/v3createpaymentrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
 ### Response
 
@@ -473,10 +473,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreatePaymentServiceUser
 
@@ -517,11 +517,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
-| `request`                                                                                                | [shared.V3CreatePaymentServiceUserRequest](../../pkg/models/shared/v3createpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
-| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
+| `request`                                                                                                    | [payments.V3CreatePaymentServiceUserRequest](../../pkg/models/payments/v3createpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
 ### Response
 
@@ -529,10 +529,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreatePool
 
@@ -573,11 +573,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [shared.V3CreatePoolRequest](../../pkg/models/shared/v3createpoolrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [payments.V3CreatePoolRequest](../../pkg/models/payments/v3createpoolrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 ### Response
 
@@ -585,10 +585,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentInitiation
 
@@ -644,10 +644,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentServiceUser
 
@@ -703,10 +703,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentServiceUserConnectionFromConnectorID
 
@@ -764,10 +764,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentServiceUserConnector
 
@@ -824,10 +824,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePool
 
@@ -883,10 +883,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ForwardBankAccount
 
@@ -900,7 +900,6 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -909,12 +908,7 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v3.New()
 
     res, err := s.Payments.V3.ForwardBankAccount(ctx, operations.V3ForwardBankAccountRequest{
         BankAccountID: "<id>",
@@ -942,10 +936,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ForwardPaymentServiceUserBankAccount
 
@@ -1002,10 +996,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ForwardPaymentServiceUserToProvider
 
@@ -1062,10 +1056,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetAccount
 
@@ -1121,10 +1115,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetAccountBalances
 
@@ -1182,10 +1176,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetBankAccount
 
@@ -1199,7 +1193,6 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -1208,12 +1201,7 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v3.New()
 
     res, err := s.Payments.V3.GetBankAccount(ctx, operations.V3GetBankAccountRequest{
         BankAccountID: "<id>",
@@ -1241,10 +1229,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetConnectorConfig
 
@@ -1281,45 +1269,45 @@ func main() {
         log.Fatal(err)
     }
     if res.V3GetConnectorConfigResponse != nil {
-        switch res.V3GetConnectorConfigResponse.Data.Type {
-            case shared.V3InstallConnectorRequestTypeAdyen:
-                // res.V3GetConnectorConfigResponse.Data.V3AdyenConfig is populated
-            case shared.V3InstallConnectorRequestTypeAtlar:
-                // res.V3GetConnectorConfigResponse.Data.V3AtlarConfig is populated
-            case shared.V3InstallConnectorRequestTypeBankingcircle:
-                // res.V3GetConnectorConfigResponse.Data.V3BankingcircleConfig is populated
-            case shared.V3InstallConnectorRequestTypeCoinbaseprime:
-                // res.V3GetConnectorConfigResponse.Data.V3CoinbaseprimeConfig is populated
-            case shared.V3InstallConnectorRequestTypeColumn:
-                // res.V3GetConnectorConfigResponse.Data.V3ColumnConfig is populated
-            case shared.V3InstallConnectorRequestTypeCurrencycloud:
-                // res.V3GetConnectorConfigResponse.Data.V3CurrencycloudConfig is populated
-            case shared.V3InstallConnectorRequestTypeDummypay:
-                // res.V3GetConnectorConfigResponse.Data.V3DummypayConfig is populated
-            case shared.V3InstallConnectorRequestTypeFireblocks:
-                // res.V3GetConnectorConfigResponse.Data.V3FireblocksConfig is populated
-            case shared.V3InstallConnectorRequestTypeGeneric:
-                // res.V3GetConnectorConfigResponse.Data.V3GenericConfig is populated
-            case shared.V3InstallConnectorRequestTypeIncrease:
-                // res.V3GetConnectorConfigResponse.Data.V3IncreaseConfig is populated
-            case shared.V3InstallConnectorRequestTypeMangopay:
-                // res.V3GetConnectorConfigResponse.Data.V3MangopayConfig is populated
-            case shared.V3InstallConnectorRequestTypeModulr:
-                // res.V3GetConnectorConfigResponse.Data.V3ModulrConfig is populated
-            case shared.V3InstallConnectorRequestTypeMoneycorp:
-                // res.V3GetConnectorConfigResponse.Data.V3MoneycorpConfig is populated
-            case shared.V3InstallConnectorRequestTypePlaid:
-                // res.V3GetConnectorConfigResponse.Data.V3PlaidConfig is populated
-            case shared.V3InstallConnectorRequestTypePowens:
-                // res.V3GetConnectorConfigResponse.Data.V3PowensConfig is populated
-            case shared.V3InstallConnectorRequestTypeQonto:
-                // res.V3GetConnectorConfigResponse.Data.V3QontoConfig is populated
-            case shared.V3InstallConnectorRequestTypeStripe:
-                // res.V3GetConnectorConfigResponse.Data.V3StripeConfig is populated
-            case shared.V3InstallConnectorRequestTypeTink:
-                // res.V3GetConnectorConfigResponse.Data.V3TinkConfig is populated
-            case shared.V3InstallConnectorRequestTypeWise:
-                // res.V3GetConnectorConfigResponse.Data.V3WiseConfig is populated
+        switch res.V3GetConnectorConfigResponse.V3ConnectorConfig.Type {
+            case shared.V3ConnectorConfigTypeV3AdyenConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3AdyenConfig is populated
+            case shared.V3ConnectorConfigTypeV3AtlarConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3AtlarConfig is populated
+            case shared.V3ConnectorConfigTypeV3BankingcircleConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3BankingcircleConfig is populated
+            case shared.V3ConnectorConfigTypeV3ColumnConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3ColumnConfig is populated
+            case shared.V3ConnectorConfigTypeV3CurrencycloudConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3CurrencycloudConfig is populated
+            case shared.V3ConnectorConfigTypeV3DummypayConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3DummypayConfig is populated
+            case shared.V3ConnectorConfigTypeV3GenericConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3GenericConfig is populated
+            case shared.V3ConnectorConfigTypeV3IncreaseConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3IncreaseConfig is populated
+            case shared.V3ConnectorConfigTypeV3MangopayConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3MangopayConfig is populated
+            case shared.V3ConnectorConfigTypeV3ModulrConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3ModulrConfig is populated
+            case shared.V3ConnectorConfigTypeV3MoneycorpConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3MoneycorpConfig is populated
+            case shared.V3ConnectorConfigTypeV3PlaidConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3PlaidConfig is populated
+            case shared.V3ConnectorConfigTypeV3PowensConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3PowensConfig is populated
+            case shared.V3ConnectorConfigTypeV3QontoConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3QontoConfig is populated
+            case shared.V3ConnectorConfigTypeV3StripeConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3StripeConfig is populated
+            case shared.V3ConnectorConfigTypeV3TinkConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3TinkConfig is populated
+            case shared.V3ConnectorConfigTypeV3WiseConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3WiseConfig is populated
+            case shared.V3ConnectorConfigTypeV3CoinbaseprimeConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3CoinbaseprimeConfig is populated
+            case shared.V3ConnectorConfigTypeV3FireblocksConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3FireblocksConfig is populated
         }
 
     }
@@ -1340,10 +1328,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetConnectorSchedule
 
@@ -1400,10 +1388,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPayment
 
@@ -1459,10 +1447,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPaymentInitiation
 
@@ -1518,10 +1506,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPaymentServiceUser
 
@@ -1577,10 +1565,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPaymentServiceUserLinkAttemptFromConnectorID
 
@@ -1638,10 +1626,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPool
 
@@ -1697,10 +1685,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPoolBalances
 
@@ -1756,10 +1744,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPoolBalancesLatest
 
@@ -1815,10 +1803,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetTask
 
@@ -1874,10 +1862,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## InitiatePayment
 
@@ -1931,10 +1919,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## InstallConnector
 
@@ -1990,10 +1978,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListAccounts
 
@@ -2050,10 +2038,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListBankAccounts
 
@@ -2110,10 +2098,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectorConfigs
 
@@ -2165,10 +2153,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectorScheduleInstances
 
@@ -2227,10 +2215,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectorSchedules
 
@@ -2288,10 +2276,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectors
 
@@ -2348,10 +2336,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentInitiationAdjustments
 
@@ -2409,10 +2397,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentInitiationRelatedPayments
 
@@ -2470,10 +2458,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentInitiations
 
@@ -2530,10 +2518,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUserConnections
 
@@ -2591,10 +2579,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUserConnectionsFromConnectorID
 
@@ -2653,10 +2641,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUserLinkAttemptsFromConnectorID
 
@@ -2717,10 +2705,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUsers
 
@@ -2777,10 +2765,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPayments
 
@@ -2837,10 +2825,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPools
 
@@ -2897,10 +2885,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## RejectPaymentInitiation
 
@@ -2956,10 +2944,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## RemoveAccountFromPool
 
@@ -3016,10 +3004,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ResetConnector
 
@@ -3075,10 +3063,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## RetryPaymentInitiation
 
@@ -3134,10 +3122,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ReversePaymentInitiation
 
@@ -3193,10 +3181,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UninstallConnector
 
@@ -3252,10 +3240,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdateBankAccountMetadata
 
@@ -3269,7 +3257,6 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
@@ -3278,12 +3265,7 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v3.New()
 
     res, err := s.Payments.V3.UpdateBankAccountMetadata(ctx, operations.V3UpdateBankAccountMetadataRequest{
         BankAccountID: "<id>",
@@ -3311,10 +3293,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdateLinkForPaymentServiceUserOnConnector
 
@@ -3372,10 +3354,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdatePaymentMetadata
 
@@ -3431,10 +3413,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdatePoolQuery
 
@@ -3490,10 +3472,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## V3UpdateConnectorConfig
 
@@ -3549,7 +3531,7 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| payments.PaymentsErrorResponse | default                        | application/json               |
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |

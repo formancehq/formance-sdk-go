@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ReversePaymentInitiationServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ReversePaymentInitiationRequest struct {
-	V3ReversePaymentInitiationRequest *shared.V3ReversePaymentInitiationRequest `request:"mediaType=application/json"`
+	V3ReversePaymentInitiationRequest *payments.V3ReversePaymentInitiationRequest `request:"mediaType=application/json"`
 	// The payment initiation ID
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
 }
 
-func (v *V3ReversePaymentInitiationRequest) GetV3ReversePaymentInitiationRequest() *shared.V3ReversePaymentInitiationRequest {
+func (v *V3ReversePaymentInitiationRequest) GetV3ReversePaymentInitiationRequest() *payments.V3ReversePaymentInitiationRequest {
 	if v == nil {
 		return nil
 	}
@@ -38,7 +42,7 @@ type V3ReversePaymentInitiationResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3ReversePaymentInitiationResponse *shared.V3ReversePaymentInitiationResponse
+	V3ReversePaymentInitiationResponse *payments.V3ReversePaymentInitiationResponse
 }
 
 func (v *V3ReversePaymentInitiationResponse) GetContentType() string {
@@ -62,7 +66,7 @@ func (v *V3ReversePaymentInitiationResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3ReversePaymentInitiationResponse) GetV3ReversePaymentInitiationResponse() *shared.V3ReversePaymentInitiationResponse {
+func (v *V3ReversePaymentInitiationResponse) GetV3ReversePaymentInitiationResponse() *payments.V3ReversePaymentInitiationResponse {
 	if v == nil {
 		return nil
 	}

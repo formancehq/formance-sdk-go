@@ -5,11 +5,15 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var V2ListTransactionsServerList = []string{
+	"http://localhost:8080/",
+}
 
 // QueryParamOrder - Deprecated: Use sort param
 type QueryParamOrder string
@@ -36,6 +40,7 @@ func (e *QueryParamOrder) UnmarshalJSON(data []byte) error {
 }
 
 type V2ListTransactionsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -51,10 +56,9 @@ type V2ListTransactionsRequest struct {
 	Order *QueryParamOrder `queryParam:"style=form,explode=true,name=order"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Pit      *time.Time     `queryParam:"style=form,explode=true,name=pit"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
-	Reverse  *bool          `queryParam:"style=form,explode=true,name=reverse"`
+	PageSize *int64     `queryParam:"style=form,explode=true,name=pageSize"`
+	Pit      *time.Time `queryParam:"style=form,explode=true,name=pit"`
+	Reverse  *bool      `queryParam:"style=form,explode=true,name=reverse"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -70,6 +74,13 @@ func (v *V2ListTransactionsRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2ListTransactionsRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return map[string]any{}
+	}
+	return v.RequestBody
 }
 
 func (v *V2ListTransactionsRequest) GetCursor() *string {
@@ -114,13 +125,6 @@ func (v *V2ListTransactionsRequest) GetPit() *time.Time {
 	return v.Pit
 }
 
-func (v *V2ListTransactionsRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 func (v *V2ListTransactionsRequest) GetReverse() *bool {
 	if v == nil {
 		return nil
@@ -146,7 +150,7 @@ type V2ListTransactionsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2TransactionsCursorResponse *shared.V2TransactionsCursorResponse
+	V2TransactionsCursorResponse *ledger.V2TransactionsCursorResponse
 }
 
 func (v *V2ListTransactionsResponse) GetContentType() string {
@@ -170,7 +174,7 @@ func (v *V2ListTransactionsResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListTransactionsResponse) GetV2TransactionsCursorResponse() *shared.V2TransactionsCursorResponse {
+func (v *V2ListTransactionsResponse) GetV2TransactionsCursorResponse() *ledger.V2TransactionsCursorResponse {
 	if v == nil {
 		return nil
 	}

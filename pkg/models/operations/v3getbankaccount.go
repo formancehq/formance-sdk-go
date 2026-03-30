@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var V3GetBankAccountServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3GetBankAccountRequest struct {
 	// The bank account ID
@@ -30,7 +34,7 @@ type V3GetBankAccountResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3GetBankAccountResponse *shared.V3GetBankAccountResponse
+	V3GetBankAccountResponse *payments.V3GetBankAccountResponse
 }
 
 func (v *V3GetBankAccountResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V3GetBankAccountResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3GetBankAccountResponse) GetV3GetBankAccountResponse() *shared.V3GetBankAccountResponse {
+func (v *V3GetBankAccountResponse) GetV3GetBankAccountResponse() *payments.V3GetBankAccountResponse {
 	if v == nil {
 		return nil
 	}

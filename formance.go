@@ -2,15 +2,15 @@
 
 package v3
 
-// Generated from OpenAPI doc version v0.0.0 and generator version 2.866.2
+// Generated from OpenAPI doc version SDK_VERSION and generator version 2.869.25
 
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/gateway"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
@@ -20,14 +20,6 @@ import (
 	"net/url"
 	"time"
 )
-
-// ServerList contains the list of servers available to the SDK
-var ServerList = []string{
-	// local server
-	"http://localhost",
-	// A per-organization and per-environment API
-	"https://{organization}.{environment}.formance.cloud",
-}
 
 // HTTPClient provides an interface for supplying the SDK with a custom HTTP client
 type HTTPClient interface {
@@ -74,9 +66,11 @@ type Formance struct {
 	Orchestration  *Orchestration
 	Payments       *Payments
 	Reconciliation *Reconciliation
-	Search         *Search
-	Wallets        *Wallets
-	Webhooks       *Webhooks
+	// search.v1
+	// Elasticsearch.v1 query engine
+	Search   *Search
+	Wallets  *Wallets
+	Webhooks *Webhooks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -99,73 +93,6 @@ func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOptio
 		}
 
 		sdk.sdkConfiguration.ServerURL = serverURL
-	}
-}
-
-// WithServerIndex allows the overriding of the default server by index
-func WithServerIndex(serverIndex int) SDKOption {
-	return func(sdk *Formance) {
-		if serverIndex < 0 || serverIndex >= len(ServerList) {
-			panic(fmt.Errorf("server index %d out of range", serverIndex))
-		}
-
-		sdk.sdkConfiguration.ServerIndex = serverIndex
-	}
-}
-
-// ServerEnvironment - The environment name. Defaults to the production environment.
-type ServerEnvironment string
-
-const (
-	ServerEnvironmentEuSandbox ServerEnvironment = "eu.sandbox"
-	ServerEnvironmentEuWest1   ServerEnvironment = "eu-west-1"
-	ServerEnvironmentUsEast1   ServerEnvironment = "us-east-1"
-)
-
-func (e ServerEnvironment) ToPointer() *ServerEnvironment {
-	return &e
-}
-func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "eu.sandbox":
-		fallthrough
-	case "eu-west-1":
-		fallthrough
-	case "us-east-1":
-		*e = ServerEnvironment(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ServerEnvironment: %v", v)
-	}
-}
-
-// WithEnvironment allows setting the environment variable for url substitution
-func WithEnvironment(environment ServerEnvironment) SDKOption {
-	return func(sdk *Formance) {
-		for idx := range sdk.sdkConfiguration.ServerVariables {
-			if _, ok := sdk.sdkConfiguration.ServerVariables[idx]["environment"]; !ok {
-				continue
-			}
-
-			sdk.sdkConfiguration.ServerVariables[idx]["environment"] = fmt.Sprintf("%v", environment)
-		}
-	}
-}
-
-// WithOrganization allows setting the organization variable for url substitution
-func WithOrganization(organization string) SDKOption {
-	return func(sdk *Formance) {
-		for idx := range sdk.sdkConfiguration.ServerVariables {
-			if _, ok := sdk.sdkConfiguration.ServerVariables[idx]["organization"]; !ok {
-				continue
-			}
-
-			sdk.sdkConfiguration.ServerVariables[idx]["organization"] = fmt.Sprintf("%v", organization)
-		}
 	}
 }
 
@@ -208,17 +135,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "3.8.1",
+		SDKVersion: "3.9.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.8.1 2.866.2 v0.0.0 github.com/formancehq/formance-sdk-go/v3",
-			ServerList: ServerList,
-			ServerVariables: []map[string]string{
-				{},
-				{
-					"environment":  "eu.sandbox",
-					"organization": "orgID-stackID",
-				},
-			},
+			UserAgent: "speakeasy-sdk/go 3.9.0 2.869.25 SDK_VERSION github.com/formancehq/formance-sdk-go/v3",
 		},
 		hooks: hooks.New(),
 	}
@@ -264,12 +183,11 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetVersionsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/versions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -413,7 +331,7 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 				return nil, err
 			}
 
-			var out shared.GetVersionsResponse
+			var out gateway.GetVersionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

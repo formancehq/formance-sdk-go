@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -50,12 +50,11 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetInfoServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/_/info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -203,12 +202,12 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 				return nil, err
 			}
 
-			var out shared.V2ConfigInfoResponse
+			var out ledger.V2ConfigInfo
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.V2ConfigInfoResponse = &out
+			res.V2ConfigInfo = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -224,7 +223,7 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 				return nil, err
 			}
 
-			var out shared.V2ErrorResponse
+			var out ledger.V2ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -245,7 +244,7 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -278,12 +277,11 @@ func (s *Ledger) GetMetrics(ctx context.Context, opts ...operations.Option) (*op
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetMetricsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/_/metrics")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -452,7 +450,7 @@ func (s *Ledger) GetMetrics(ctx context.Context, opts ...operations.Option) (*op
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
