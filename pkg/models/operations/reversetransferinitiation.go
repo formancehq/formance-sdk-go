@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var ReverseTransferInitiationServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ReverseTransferInitiationRequest struct {
-	ReverseTransferInitiationRequest shared.ReverseTransferInitiationRequest `request:"mediaType=application/json"`
+	ReverseTransferInitiationRequest payments.ReverseTransferInitiationRequest `request:"mediaType=application/json"`
 	// The transfer ID.
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`
 }
 
-func (r *ReverseTransferInitiationRequest) GetReverseTransferInitiationRequest() shared.ReverseTransferInitiationRequest {
+func (r *ReverseTransferInitiationRequest) GetReverseTransferInitiationRequest() payments.ReverseTransferInitiationRequest {
 	if r == nil {
-		return shared.ReverseTransferInitiationRequest{}
+		return payments.ReverseTransferInitiationRequest{}
 	}
 	return r.ReverseTransferInitiationRequest
 }

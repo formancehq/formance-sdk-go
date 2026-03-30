@@ -3,11 +3,16 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ListPaymentServiceUserConnectionsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ListPaymentServiceUserConnectionsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
@@ -15,6 +20,13 @@ type V3ListPaymentServiceUserConnectionsRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// The payment service user ID
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
+}
+
+func (v *V3ListPaymentServiceUserConnectionsRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.RequestBody
 }
 
 func (v *V3ListPaymentServiceUserConnectionsRequest) GetCursor() *string {
@@ -49,7 +61,7 @@ type V3ListPaymentServiceUserConnectionsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3PaymentServiceUserConnectionsCursorResponse *shared.V3PaymentServiceUserConnectionsCursorResponse
+	V3PaymentServiceUserConnectionsCursorResponse *payments.V3PaymentServiceUserConnectionsCursorResponse
 }
 
 func (v *V3ListPaymentServiceUserConnectionsResponse) GetContentType() string {
@@ -73,7 +85,7 @@ func (v *V3ListPaymentServiceUserConnectionsResponse) GetRawResponse() *http.Res
 	return v.RawResponse
 }
 
-func (v *V3ListPaymentServiceUserConnectionsResponse) GetV3PaymentServiceUserConnectionsCursorResponse() *shared.V3PaymentServiceUserConnectionsCursorResponse {
+func (v *V3ListPaymentServiceUserConnectionsResponse) GetV3PaymentServiceUserConnectionsCursorResponse() *payments.V3PaymentServiceUserConnectionsCursorResponse {
 	if v == nil {
 		return nil
 	}

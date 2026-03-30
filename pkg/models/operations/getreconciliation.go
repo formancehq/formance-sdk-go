@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/reconciliation"
 	"net/http"
 )
+
+var GetReconciliationServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetReconciliationRequest struct {
 	// The reconciliation ID.
@@ -23,7 +27,7 @@ type GetReconciliationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	ReconciliationResponse *shared.ReconciliationResponse
+	ReconciliationResponse *reconciliation.ReconciliationResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,7 +41,7 @@ func (g *GetReconciliationResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetReconciliationResponse) GetReconciliationResponse() *shared.ReconciliationResponse {
+func (g *GetReconciliationResponse) GetReconciliationResponse() *reconciliation.ReconciliationResponse {
 	if g == nil {
 		return nil
 	}

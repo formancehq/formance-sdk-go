@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var GetPoolBalancesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetPoolBalancesRequest struct {
 	// Filter balances by date.
@@ -46,7 +50,7 @@ type GetPoolBalancesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PoolBalancesResponse *shared.PoolBalancesResponse
+	PoolBalancesResponse *payments.PoolBalancesResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -60,7 +64,7 @@ func (g *GetPoolBalancesResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetPoolBalancesResponse) GetPoolBalancesResponse() *shared.PoolBalancesResponse {
+func (g *GetPoolBalancesResponse) GetPoolBalancesResponse() *payments.PoolBalancesResponse {
 	if g == nil {
 		return nil
 	}

@@ -3,21 +3,25 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/auth"
 	"net/http"
 )
 
+var CreateSecretServerList = []string{
+	"http://localhost:8080/",
+}
+
 type CreateSecretRequest struct {
-	CreateSecretRequest *shared.CreateSecretRequest `request:"mediaType=application/json"`
+	SecretOptions *auth.SecretOptions `request:"mediaType=application/json"`
 	// Client ID
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-func (c *CreateSecretRequest) GetCreateSecretRequest() *shared.CreateSecretRequest {
+func (c *CreateSecretRequest) GetSecretOptions() *auth.SecretOptions {
 	if c == nil {
 		return nil
 	}
-	return c.CreateSecretRequest
+	return c.SecretOptions
 }
 
 func (c *CreateSecretRequest) GetClientID() string {
@@ -31,7 +35,7 @@ type CreateSecretResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Created secret
-	CreateSecretResponse *shared.CreateSecretResponse
+	CreateSecretResponse *auth.CreateSecretResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -45,7 +49,7 @@ func (c *CreateSecretResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreateSecretResponse) GetCreateSecretResponse() *shared.CreateSecretResponse {
+func (c *CreateSecretResponse) GetCreateSecretResponse() *auth.CreateSecretResponse {
 	if c == nil {
 		return nil
 	}

@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var CreatePoolServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreatePoolResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PoolResponse *shared.PoolResponse
+	PoolResponse *payments.PoolResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (c *CreatePoolResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreatePoolResponse) GetPoolResponse() *shared.PoolResponse {
+func (c *CreatePoolResponse) GetPoolResponse() *payments.PoolResponse {
 	if c == nil {
 		return nil
 	}

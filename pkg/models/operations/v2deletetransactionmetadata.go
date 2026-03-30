@@ -8,6 +8,10 @@ import (
 	"net/http"
 )
 
+var V2DeleteTransactionMetadataServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2DeleteTransactionMetadataRequest struct {
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`

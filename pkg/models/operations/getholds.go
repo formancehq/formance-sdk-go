@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
+
+var GetHoldsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetHoldsRequest struct {
 	// Parameter used in pagination requests.
@@ -66,7 +70,7 @@ type GetHoldsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Holds
-	GetHoldsResponse *shared.GetHoldsResponse
+	GetHoldsResponse *wallets.GetHoldsResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -80,7 +84,7 @@ func (g *GetHoldsResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetHoldsResponse) GetGetHoldsResponse() *shared.GetHoldsResponse {
+func (g *GetHoldsResponse) GetGetHoldsResponse() *wallets.GetHoldsResponse {
 	if g == nil {
 		return nil
 	}

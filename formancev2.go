@@ -9,8 +9,8 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -46,12 +46,11 @@ func (s *FormanceV2) CancelEvent(ctx context.Context, request operations.V2Cance
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CancelEventServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/instances/{instanceID}/abort", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -201,7 +200,7 @@ func (s *FormanceV2) CancelEvent(ctx context.Context, request operations.V2Cance
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -222,7 +221,7 @@ func (s *FormanceV2) CancelEvent(ctx context.Context, request operations.V2Cance
 
 // CreateTrigger - Create trigger
 // Create trigger
-func (s *FormanceV2) CreateTrigger(ctx context.Context, request *shared.V2TriggerData, opts ...operations.Option) (*operations.V2CreateTriggerResponse, error) {
+func (s *FormanceV2) CreateTrigger(ctx context.Context, request *orchestration.V2TriggerData1, opts ...operations.Option) (*operations.V2CreateTriggerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -235,12 +234,11 @@ func (s *FormanceV2) CreateTrigger(ctx context.Context, request *shared.V2Trigge
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CreateTriggerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/v2/triggers")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -395,7 +393,7 @@ func (s *FormanceV2) CreateTrigger(ctx context.Context, request *shared.V2Trigge
 				return nil, err
 			}
 
-			var out shared.V2CreateTriggerResponse
+			var out orchestration.V2CreateTriggerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -416,7 +414,7 @@ func (s *FormanceV2) CreateTrigger(ctx context.Context, request *shared.V2Trigge
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -437,7 +435,7 @@ func (s *FormanceV2) CreateTrigger(ctx context.Context, request *shared.V2Trigge
 
 // CreateWorkflow - Create workflow
 // Create a workflow
-func (s *FormanceV2) CreateWorkflow(ctx context.Context, request *shared.V2CreateWorkflowRequest, opts ...operations.Option) (*operations.V2CreateWorkflowResponse, error) {
+func (s *FormanceV2) CreateWorkflow(ctx context.Context, request *orchestration.V2WorkflowConfig, opts ...operations.Option) (*operations.V2CreateWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -450,12 +448,11 @@ func (s *FormanceV2) CreateWorkflow(ctx context.Context, request *shared.V2Creat
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CreateWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/v2/workflows")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -610,7 +607,7 @@ func (s *FormanceV2) CreateWorkflow(ctx context.Context, request *shared.V2Creat
 				return nil, err
 			}
 
-			var out shared.V2CreateWorkflowResponse
+			var out orchestration.V2CreateWorkflowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -631,7 +628,7 @@ func (s *FormanceV2) CreateWorkflow(ctx context.Context, request *shared.V2Creat
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -665,12 +662,11 @@ func (s *FormanceV2) DeleteTrigger(ctx context.Context, request operations.V2Del
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeleteTriggerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/triggers/{triggerID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -820,7 +816,7 @@ func (s *FormanceV2) DeleteTrigger(ctx context.Context, request operations.V2Del
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -854,12 +850,11 @@ func (s *FormanceV2) DeleteWorkflow(ctx context.Context, request operations.V2De
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeleteWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1009,7 +1004,7 @@ func (s *FormanceV2) DeleteWorkflow(ctx context.Context, request operations.V2De
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1043,12 +1038,11 @@ func (s *FormanceV2) GetInstance(ctx context.Context, request operations.V2GetIn
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetInstanceServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/instances/{instanceID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1196,7 +1190,7 @@ func (s *FormanceV2) GetInstance(ctx context.Context, request operations.V2GetIn
 				return nil, err
 			}
 
-			var out shared.V2GetWorkflowInstanceResponse
+			var out orchestration.V2GetWorkflowInstanceResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1217,7 +1211,7 @@ func (s *FormanceV2) GetInstance(ctx context.Context, request operations.V2GetIn
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1251,12 +1245,11 @@ func (s *FormanceV2) GetInstanceHistory(ctx context.Context, request operations.
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetInstanceHistoryServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/instances/{instanceID}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1404,7 +1397,7 @@ func (s *FormanceV2) GetInstanceHistory(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out shared.V2GetWorkflowInstanceHistoryResponse
+			var out orchestration.V2GetWorkflowInstanceHistoryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1425,7 +1418,7 @@ func (s *FormanceV2) GetInstanceHistory(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1459,12 +1452,11 @@ func (s *FormanceV2) GetInstanceStageHistory(ctx context.Context, request operat
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetInstanceStageHistoryServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/instances/{instanceID}/stages/{number}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1612,7 +1604,7 @@ func (s *FormanceV2) GetInstanceStageHistory(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out shared.V2GetWorkflowInstanceHistoryStageResponse
+			var out orchestration.V2GetWorkflowInstanceHistoryStageResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1633,7 +1625,7 @@ func (s *FormanceV2) GetInstanceStageHistory(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1666,12 +1658,11 @@ func (s *FormanceV2) GetServerInfo(ctx context.Context, opts ...operations.Optio
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetServerInfoServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/v2/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1819,7 +1810,7 @@ func (s *FormanceV2) GetServerInfo(ctx context.Context, opts ...operations.Optio
 				return nil, err
 			}
 
-			var out shared.V2ServerInfo
+			var out orchestration.V2ServerInfo
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1840,7 +1831,7 @@ func (s *FormanceV2) GetServerInfo(ctx context.Context, opts ...operations.Optio
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1874,12 +1865,11 @@ func (s *FormanceV2) GetWorkflow(ctx context.Context, request operations.V2GetWo
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2027,7 +2017,7 @@ func (s *FormanceV2) GetWorkflow(ctx context.Context, request operations.V2GetWo
 				return nil, err
 			}
 
-			var out shared.V2GetWorkflowResponse
+			var out orchestration.V2GetWorkflowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2048,7 +2038,7 @@ func (s *FormanceV2) GetWorkflow(ctx context.Context, request operations.V2GetWo
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2082,12 +2072,11 @@ func (s *FormanceV2) ListInstances(ctx context.Context, request operations.V2Lis
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListInstancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/v2/instances")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2239,7 +2228,7 @@ func (s *FormanceV2) ListInstances(ctx context.Context, request operations.V2Lis
 				return nil, err
 			}
 
-			var out shared.V2ListRunsResponse
+			var out orchestration.V2ListRunsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2260,7 +2249,7 @@ func (s *FormanceV2) ListInstances(ctx context.Context, request operations.V2Lis
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2294,12 +2283,11 @@ func (s *FormanceV2) ListTriggers(ctx context.Context, request operations.V2List
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListTriggersServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/v2/triggers")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2451,7 +2439,7 @@ func (s *FormanceV2) ListTriggers(ctx context.Context, request operations.V2List
 				return nil, err
 			}
 
-			var out shared.V2ListTriggersResponse
+			var out orchestration.V2ListTriggersResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2472,7 +2460,7 @@ func (s *FormanceV2) ListTriggers(ctx context.Context, request operations.V2List
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2506,12 +2494,11 @@ func (s *FormanceV2) ListTriggersOccurrences(ctx context.Context, request operat
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListTriggersOccurrencesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/triggers/{triggerID}/occurrences", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2663,7 +2650,7 @@ func (s *FormanceV2) ListTriggersOccurrences(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out shared.V2ListTriggersOccurrencesResponse
+			var out orchestration.V2ListTriggersOccurrencesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2684,7 +2671,7 @@ func (s *FormanceV2) ListTriggersOccurrences(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2718,12 +2705,11 @@ func (s *FormanceV2) ListWorkflows(ctx context.Context, request operations.V2Lis
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListWorkflowsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/v2/workflows")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2875,7 +2861,7 @@ func (s *FormanceV2) ListWorkflows(ctx context.Context, request operations.V2Lis
 				return nil, err
 			}
 
-			var out shared.V2ListWorkflowsResponse
+			var out orchestration.V2ListWorkflowsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2896,7 +2882,7 @@ func (s *FormanceV2) ListWorkflows(ctx context.Context, request operations.V2Lis
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2930,12 +2916,11 @@ func (s *FormanceV2) ReadTrigger(ctx context.Context, request operations.V2ReadT
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ReadTriggerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/triggers/{triggerID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3083,7 +3068,7 @@ func (s *FormanceV2) ReadTrigger(ctx context.Context, request operations.V2ReadT
 				return nil, err
 			}
 
-			var out shared.V2ReadTriggerResponse
+			var out orchestration.V2ReadTriggerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3104,7 +3089,7 @@ func (s *FormanceV2) ReadTrigger(ctx context.Context, request operations.V2ReadT
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3138,12 +3123,11 @@ func (s *FormanceV2) RunWorkflow(ctx context.Context, request operations.V2RunWo
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2RunWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/workflows/{workflowID}/instances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3302,7 +3286,7 @@ func (s *FormanceV2) RunWorkflow(ctx context.Context, request operations.V2RunWo
 				return nil, err
 			}
 
-			var out shared.V2RunWorkflowResponse
+			var out orchestration.V2RunWorkflowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3323,7 +3307,7 @@ func (s *FormanceV2) RunWorkflow(ctx context.Context, request operations.V2RunWo
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3357,12 +3341,11 @@ func (s *FormanceV2) SendEvent(ctx context.Context, request operations.V2SendEve
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2SendEventServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/instances/{instanceID}/events", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3519,7 +3502,7 @@ func (s *FormanceV2) SendEvent(ctx context.Context, request operations.V2SendEve
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3553,12 +3536,11 @@ func (s *FormanceV2) TestTrigger(ctx context.Context, request operations.TestTri
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.TestTriggerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/triggers/{triggerID}/test", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3713,7 +3695,7 @@ func (s *FormanceV2) TestTrigger(ctx context.Context, request operations.TestTri
 				return nil, err
 			}
 
-			var out shared.V2TestTriggerResponse
+			var out orchestration.V2TestTriggerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3734,7 +3716,7 @@ func (s *FormanceV2) TestTrigger(ctx context.Context, request operations.TestTri
 				return nil, err
 			}
 
-			var out sdkerrors.V2Error
+			var out orchestration.V2Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

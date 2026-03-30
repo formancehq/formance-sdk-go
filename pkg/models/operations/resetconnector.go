@@ -3,18 +3,22 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
-type ResetConnectorRequest struct {
-	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+var ResetConnectorServerList = []string{
+	"http://localhost:8080/",
 }
 
-func (r *ResetConnectorRequest) GetConnector() shared.Connector {
+type ResetConnectorRequest struct {
+	// The name of the connector.
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
+}
+
+func (r *ResetConnectorRequest) GetConnector() payments.Connector {
 	if r == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return r.Connector
 }

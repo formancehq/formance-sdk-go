@@ -3,17 +3,28 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ListBankAccountsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ListBankAccountsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (v *V3ListBankAccountsRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.RequestBody
 }
 
 func (v *V3ListBankAccountsRequest) GetCursor() *string {
@@ -30,13 +41,6 @@ func (v *V3ListBankAccountsRequest) GetPageSize() *int64 {
 	return v.PageSize
 }
 
-func (v *V3ListBankAccountsRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 // #region class-body-v3listbankaccountsrequest
 // #endregion class-body-v3listbankaccountsrequest
 
@@ -48,7 +52,7 @@ type V3ListBankAccountsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3BankAccountsCursorResponse *shared.V3BankAccountsCursorResponse
+	V3BankAccountsCursorResponse *payments.V3BankAccountsCursorResponse
 }
 
 func (v *V3ListBankAccountsResponse) GetContentType() string {
@@ -72,7 +76,7 @@ func (v *V3ListBankAccountsResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3ListBankAccountsResponse) GetV3BankAccountsCursorResponse() *shared.V3BankAccountsCursorResponse {
+func (v *V3ListBankAccountsResponse) GetV3BankAccountsCursorResponse() *payments.V3BankAccountsCursorResponse {
 	if v == nil {
 		return nil
 	}

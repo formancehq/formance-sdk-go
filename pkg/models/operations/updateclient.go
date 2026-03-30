@@ -3,21 +3,25 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/auth"
 	"net/http"
 )
 
+var UpdateClientServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateClientRequest struct {
-	CreateClientRequest *shared.CreateClientRequest `request:"mediaType=application/json"`
+	ClientOptions *auth.ClientOptions1 `request:"mediaType=application/json"`
 	// Client ID
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-func (u *UpdateClientRequest) GetCreateClientRequest() *shared.CreateClientRequest {
+func (u *UpdateClientRequest) GetClientOptions() *auth.ClientOptions1 {
 	if u == nil {
 		return nil
 	}
-	return u.CreateClientRequest
+	return u.ClientOptions
 }
 
 func (u *UpdateClientRequest) GetClientID() string {
@@ -30,12 +34,12 @@ func (u *UpdateClientRequest) GetClientID() string {
 type UpdateClientResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
+	// Updated client
+	CreateClientResponse *auth.CreateClientResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Updated client
-	UpdateClientResponse *shared.UpdateClientResponse
 }
 
 func (u *UpdateClientResponse) GetContentType() string {
@@ -43,6 +47,13 @@ func (u *UpdateClientResponse) GetContentType() string {
 		return ""
 	}
 	return u.ContentType
+}
+
+func (u *UpdateClientResponse) GetCreateClientResponse() *auth.CreateClientResponse {
+	if u == nil {
+		return nil
+	}
+	return u.CreateClientResponse
 }
 
 func (u *UpdateClientResponse) GetStatusCode() int {
@@ -57,11 +68,4 @@ func (u *UpdateClientResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return u.RawResponse
-}
-
-func (u *UpdateClientResponse) GetUpdateClientResponse() *shared.UpdateClientResponse {
-	if u == nil {
-		return nil
-	}
-	return u.UpdateClientResponse
 }

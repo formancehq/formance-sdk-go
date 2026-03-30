@@ -3,16 +3,20 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"math/big"
 	"net/http"
 )
 
+var V2RevertTransactionServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2RevertTransactionRequest struct {
 	// Use an idempotency key
 	IdempotencyKey             *string                            `header:"style=simple,explode=false,name=Idempotency-Key"`
-	V2RevertTransactionRequest *shared.V2RevertTransactionRequest `request:"mediaType=application/json"`
+	V2RevertTransactionRequest *ledger.V2RevertTransactionRequest `request:"mediaType=application/json"`
 	// Revert transaction at effective date of the original tx
 	AtEffectiveDate *bool `queryParam:"style=form,explode=true,name=atEffectiveDate"`
 	// Set the dryRun mode. dry run mode doesn't add the logs to the database or publish a message to the message broker.
@@ -45,7 +49,7 @@ func (v *V2RevertTransactionRequest) GetIdempotencyKey() *string {
 	return v.IdempotencyKey
 }
 
-func (v *V2RevertTransactionRequest) GetV2RevertTransactionRequest() *shared.V2RevertTransactionRequest {
+func (v *V2RevertTransactionRequest) GetV2RevertTransactionRequest() *ledger.V2RevertTransactionRequest {
 	if v == nil {
 		return nil
 	}
@@ -106,7 +110,7 @@ type V2RevertTransactionResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2RevertTransactionResponse *shared.V2RevertTransactionResponse
+	V2CreateTransactionResponse *ledger.V2CreateTransactionResponse
 }
 
 func (v *V2RevertTransactionResponse) GetContentType() string {
@@ -137,11 +141,11 @@ func (v *V2RevertTransactionResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2RevertTransactionResponse) GetV2RevertTransactionResponse() *shared.V2RevertTransactionResponse {
+func (v *V2RevertTransactionResponse) GetV2CreateTransactionResponse() *ledger.V2CreateTransactionResponse {
 	if v == nil {
 		return nil
 	}
-	return v.V2RevertTransactionResponse
+	return v.V2CreateTransactionResponse
 }
 
 // #region class-body-v2reverttransactionresponse

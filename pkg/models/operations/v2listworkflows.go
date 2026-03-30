@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var V2ListWorkflowsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2ListWorkflowsRequest struct {
 	// Parameter used in pagination requests.
@@ -44,7 +48,7 @@ type V2ListWorkflowsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// List of workflows
-	V2ListWorkflowsResponse *shared.V2ListWorkflowsResponse
+	V2ListWorkflowsResponse *orchestration.V2ListWorkflowsResponse
 }
 
 func (v *V2ListWorkflowsResponse) GetContentType() string {
@@ -68,7 +72,7 @@ func (v *V2ListWorkflowsResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListWorkflowsResponse) GetV2ListWorkflowsResponse() *shared.V2ListWorkflowsResponse {
+func (v *V2ListWorkflowsResponse) GetV2ListWorkflowsResponse() *orchestration.V2ListWorkflowsResponse {
 	if v == nil {
 		return nil
 	}

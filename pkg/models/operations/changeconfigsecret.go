@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"net/http"
 )
 
+var ChangeConfigSecretServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ChangeConfigSecretRequest struct {
-	ConfigChangeSecret *shared.ConfigChangeSecret `request:"mediaType=application/json"`
+	ConfigChangeSecret *webhooks.ConfigChangeSecret `request:"mediaType=application/json"`
 	// Config ID
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (c *ChangeConfigSecretRequest) GetConfigChangeSecret() *shared.ConfigChangeSecret {
+func (c *ChangeConfigSecretRequest) GetConfigChangeSecret() *webhooks.ConfigChangeSecret {
 	if c == nil {
 		return nil
 	}
@@ -29,7 +33,7 @@ func (c *ChangeConfigSecretRequest) GetID() string {
 
 type ChangeConfigSecretResponse struct {
 	// Secret successfully changed.
-	ConfigResponse *shared.ConfigResponse
+	ConfigResponse *webhooks.ConfigResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -38,7 +42,7 @@ type ChangeConfigSecretResponse struct {
 	RawResponse *http.Response
 }
 
-func (c *ChangeConfigSecretResponse) GetConfigResponse() *shared.ConfigResponse {
+func (c *ChangeConfigSecretResponse) GetConfigResponse() *webhooks.ConfigResponse {
 	if c == nil {
 		return nil
 	}

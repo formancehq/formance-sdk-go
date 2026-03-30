@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var CreateTransactionsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type CreateTransactionsRequest struct {
-	Transactions shared.Transactions `request:"mediaType=application/json"`
+	Transactions ledger.Transactions `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (c *CreateTransactionsRequest) GetTransactions() shared.Transactions {
+func (c *CreateTransactionsRequest) GetTransactions() ledger.Transactions {
 	if c == nil {
-		return shared.Transactions{}
+		return ledger.Transactions{}
 	}
 	return c.Transactions
 }
@@ -35,7 +39,7 @@ type CreateTransactionsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TransactionsResponse *shared.TransactionsResponse
+	TransactionsResponse *ledger.TransactionsResponse
 }
 
 func (c *CreateTransactionsResponse) GetContentType() string {
@@ -59,7 +63,7 @@ func (c *CreateTransactionsResponse) GetRawResponse() *http.Response {
 	return c.RawResponse
 }
 
-func (c *CreateTransactionsResponse) GetTransactionsResponse() *shared.TransactionsResponse {
+func (c *CreateTransactionsResponse) GetTransactionsResponse() *ledger.TransactionsResponse {
 	if c == nil {
 		return nil
 	}

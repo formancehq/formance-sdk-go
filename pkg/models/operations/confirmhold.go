@@ -3,18 +3,22 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
 
+var ConfirmHoldServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ConfirmHoldRequest struct {
-	ConfirmHoldRequest *shared.ConfirmHoldRequest `request:"mediaType=application/json"`
+	ConfirmHoldRequest *wallets.ConfirmHoldRequest `request:"mediaType=application/json"`
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 	HoldID         string  `pathParam:"style=simple,explode=false,name=hold_id"`
 }
 
-func (c *ConfirmHoldRequest) GetConfirmHoldRequest() *shared.ConfirmHoldRequest {
+func (c *ConfirmHoldRequest) GetConfirmHoldRequest() *wallets.ConfirmHoldRequest {
 	if c == nil {
 		return nil
 	}

@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var V2RunWorkflowServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2RunWorkflowRequest struct {
 	RequestBody map[string]string `request:"mediaType=application/json"`
@@ -47,7 +51,7 @@ type V2RunWorkflowResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The workflow instance
-	V2RunWorkflowResponse *shared.V2RunWorkflowResponse
+	V2RunWorkflowResponse *orchestration.V2RunWorkflowResponse
 }
 
 func (v *V2RunWorkflowResponse) GetContentType() string {
@@ -71,7 +75,7 @@ func (v *V2RunWorkflowResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2RunWorkflowResponse) GetV2RunWorkflowResponse() *shared.V2RunWorkflowResponse {
+func (v *V2RunWorkflowResponse) GetV2RunWorkflowResponse() *orchestration.V2RunWorkflowResponse {
 	if v == nil {
 		return nil
 	}

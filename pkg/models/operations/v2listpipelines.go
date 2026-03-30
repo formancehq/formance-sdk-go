@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2ListPipelinesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2ListPipelinesRequest struct {
 	// Name of the ledger.
@@ -22,89 +26,6 @@ func (v *V2ListPipelinesRequest) GetLedger() string {
 // #region class-body-v2listpipelinesrequest
 // #endregion class-body-v2listpipelinesrequest
 
-type V2ListPipelinesLedgerV2Cursor struct {
-	Data     []shared.V2Pipeline `json:"data"`
-	HasMore  bool                `json:"hasMore"`
-	Next     *string             `json:"next,omitempty"`
-	PageSize int64               `json:"pageSize"`
-	Previous *string             `json:"previous,omitempty"`
-}
-
-func (v *V2ListPipelinesLedgerV2Cursor) GetData() []shared.V2Pipeline {
-	if v == nil {
-		return []shared.V2Pipeline{}
-	}
-	return v.Data
-}
-
-func (v *V2ListPipelinesLedgerV2Cursor) GetHasMore() bool {
-	if v == nil {
-		return false
-	}
-	return v.HasMore
-}
-
-func (v *V2ListPipelinesLedgerV2Cursor) GetNext() *string {
-	if v == nil {
-		return nil
-	}
-	return v.Next
-}
-
-func (v *V2ListPipelinesLedgerV2Cursor) GetPageSize() int64 {
-	if v == nil {
-		return 0
-	}
-	return v.PageSize
-}
-
-func (v *V2ListPipelinesLedgerV2Cursor) GetPrevious() *string {
-	if v == nil {
-		return nil
-	}
-	return v.Previous
-}
-
-// #region class-body-v2listpipelinesledgerv2cursor
-// #endregion class-body-v2listpipelinesledgerv2cursor
-
-type V2ListPipelinesCursor struct {
-	Cursor V2ListPipelinesLedgerV2Cursor `json:"cursor"`
-	Data   []shared.V2Pipeline           `json:"data,omitempty"`
-}
-
-func (v *V2ListPipelinesCursor) GetCursor() V2ListPipelinesLedgerV2Cursor {
-	if v == nil {
-		return V2ListPipelinesLedgerV2Cursor{}
-	}
-	return v.Cursor
-}
-
-func (v *V2ListPipelinesCursor) GetData() []shared.V2Pipeline {
-	if v == nil {
-		return nil
-	}
-	return v.Data
-}
-
-// #region class-body-v2listpipelinescursor
-// #endregion class-body-v2listpipelinescursor
-
-// V2ListPipelinesResponseBody - Pipelines list
-type V2ListPipelinesResponseBody struct {
-	Cursor *V2ListPipelinesCursor `json:"cursor,omitempty"`
-}
-
-func (v *V2ListPipelinesResponseBody) GetCursor() *V2ListPipelinesCursor {
-	if v == nil {
-		return nil
-	}
-	return v.Cursor
-}
-
-// #region class-body-v2listpipelinesresponsebody
-// #endregion class-body-v2listpipelinesresponsebody
-
 type V2ListPipelinesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -113,7 +34,7 @@ type V2ListPipelinesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Pipelines list
-	Object *V2ListPipelinesResponseBody
+	V2PipelinesCursorResponse *ledger.V2PipelinesCursorResponse
 }
 
 func (v *V2ListPipelinesResponse) GetContentType() string {
@@ -137,11 +58,11 @@ func (v *V2ListPipelinesResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListPipelinesResponse) GetObject() *V2ListPipelinesResponseBody {
+func (v *V2ListPipelinesResponse) GetV2PipelinesCursorResponse() *ledger.V2PipelinesCursorResponse {
 	if v == nil {
 		return nil
 	}
-	return v.Object
+	return v.V2PipelinesCursorResponse
 }
 
 // #region class-body-v2listpipelinesresponse

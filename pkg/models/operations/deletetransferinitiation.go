@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var DeleteTransferInitiationServerList = []string{
+	"http://localhost:8080/",
+}
+
 type DeleteTransferInitiationRequest struct {
 	// The transfer ID.
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`

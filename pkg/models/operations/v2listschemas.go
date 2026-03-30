@@ -5,10 +5,14 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
+
+var V2ListSchemasServerList = []string{
+	"http://localhost:8080/",
+}
 
 // Order - The sort order
 type Order string
@@ -131,7 +135,7 @@ type V2ListSchemasResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Schemas retrieved successfully
-	V2SchemasCursorResponse *shared.V2SchemasCursorResponse
+	V2SchemasCursorResponse *ledger.V2SchemasCursorResponse
 }
 
 func (v *V2ListSchemasResponse) GetContentType() string {
@@ -155,7 +159,7 @@ func (v *V2ListSchemasResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListSchemasResponse) GetV2SchemasCursorResponse() *shared.V2SchemasCursorResponse {
+func (v *V2ListSchemasResponse) GetV2SchemasCursorResponse() *ledger.V2SchemasCursorResponse {
 	if v == nil {
 		return nil
 	}

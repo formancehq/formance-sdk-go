@@ -3,11 +3,16 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/reconciliation"
 	"net/http"
 )
 
+var ListPoliciesServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ListPoliciesRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -16,8 +21,14 @@ type ListPoliciesRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (l *ListPoliciesRequest) GetRequestBody() map[string]any {
+	if l == nil {
+		return nil
+	}
+	return l.RequestBody
 }
 
 func (l *ListPoliciesRequest) GetCursor() *string {
@@ -34,18 +45,11 @@ func (l *ListPoliciesRequest) GetPageSize() *int64 {
 	return l.PageSize
 }
 
-func (l *ListPoliciesRequest) GetQuery() map[string]any {
-	if l == nil {
-		return nil
-	}
-	return l.Query
-}
-
 type ListPoliciesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PoliciesCursorResponse *shared.PoliciesCursorResponse
+	PoliciesCursorResponse *reconciliation.PoliciesCursorResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -59,7 +63,7 @@ func (l *ListPoliciesResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListPoliciesResponse) GetPoliciesCursorResponse() *shared.PoliciesCursorResponse {
+func (l *ListPoliciesResponse) GetPoliciesCursorResponse() *reconciliation.PoliciesCursorResponse {
 	if l == nil {
 		return nil
 	}

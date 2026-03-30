@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var GetMappingServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetMappingRequest struct {
 	// Name of the ledger.
@@ -23,7 +27,7 @@ type GetMappingResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	MappingResponse *shared.MappingResponse
+	MappingResponse *ledger.MappingResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,7 +41,7 @@ func (g *GetMappingResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetMappingResponse) GetMappingResponse() *shared.MappingResponse {
+func (g *GetMappingResponse) GetMappingResponse() *ledger.MappingResponse {
 	if g == nil {
 		return nil
 	}

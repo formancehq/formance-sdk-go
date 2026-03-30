@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/search"
 	"net/http"
 )
+
+var SearchServerList = []string{
+	"http://localhost:8080/",
+}
 
 type SearchResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Success
-	Response *shared.Response
+	Response *search.Response
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (s *SearchResponse) GetContentType() string {
 	return s.ContentType
 }
 
-func (s *SearchResponse) GetResponse() *shared.Response {
+func (s *SearchResponse) GetResponse() *search.Response {
 	if s == nil {
 		return nil
 	}

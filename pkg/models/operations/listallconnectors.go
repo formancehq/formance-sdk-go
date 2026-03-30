@@ -3,13 +3,17 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var ListAllConnectorsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ListAllConnectorsResponse struct {
 	// OK
-	ConnectorsResponse *shared.ConnectorsResponse
+	ConnectorsResponse *payments.ConnectorsResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -18,7 +22,7 @@ type ListAllConnectorsResponse struct {
 	RawResponse *http.Response
 }
 
-func (l *ListAllConnectorsResponse) GetConnectorsResponse() *shared.ConnectorsResponse {
+func (l *ListAllConnectorsResponse) GetConnectorsResponse() *payments.ConnectorsResponse {
 	if l == nil {
 		return nil
 	}

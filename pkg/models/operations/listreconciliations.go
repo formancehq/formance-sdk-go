@@ -3,11 +3,16 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/reconciliation"
 	"net/http"
 )
 
+var ListReconciliationsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ListReconciliationsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -16,8 +21,14 @@ type ListReconciliationsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (l *ListReconciliationsRequest) GetRequestBody() map[string]any {
+	if l == nil {
+		return nil
+	}
+	return l.RequestBody
 }
 
 func (l *ListReconciliationsRequest) GetCursor() *string {
@@ -34,18 +45,11 @@ func (l *ListReconciliationsRequest) GetPageSize() *int64 {
 	return l.PageSize
 }
 
-func (l *ListReconciliationsRequest) GetQuery() map[string]any {
-	if l == nil {
-		return nil
-	}
-	return l.Query
-}
-
 type ListReconciliationsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	ReconciliationsCursorResponse *shared.ReconciliationsCursorResponse
+	ReconciliationsCursorResponse *reconciliation.ReconciliationsCursorResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -59,7 +63,7 @@ func (l *ListReconciliationsResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListReconciliationsResponse) GetReconciliationsCursorResponse() *shared.ReconciliationsCursorResponse {
+func (l *ListReconciliationsResponse) GetReconciliationsCursorResponse() *reconciliation.ReconciliationsCursorResponse {
 	if l == nil {
 		return nil
 	}

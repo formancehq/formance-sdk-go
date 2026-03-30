@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var CreateTransferInitiationServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreateTransferInitiationResponse struct {
 	// HTTP response content type for this operation
@@ -15,7 +19,7 @@ type CreateTransferInitiationResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TransferInitiationResponse *shared.TransferInitiationResponse
+	TransferInitiationResponse *payments.TransferInitiationResponse
 }
 
 func (c *CreateTransferInitiationResponse) GetContentType() string {
@@ -39,7 +43,7 @@ func (c *CreateTransferInitiationResponse) GetRawResponse() *http.Response {
 	return c.RawResponse
 }
 
-func (c *CreateTransferInitiationResponse) GetTransferInitiationResponse() *shared.TransferInitiationResponse {
+func (c *CreateTransferInitiationResponse) GetTransferInitiationResponse() *payments.TransferInitiationResponse {
 	if c == nil {
 		return nil
 	}

@@ -6,16 +6,27 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
 
+var V2RunQueryServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2RunQueryRequestBody struct {
-	Cursor *string               `json:"cursor,omitempty"`
-	Params *shared.V2QueryParams `json:"params,omitempty"`
-	Vars   map[string]string     `json:"vars,omitempty"`
+	V2QueryParams *ledger.V2QueryParams `json:"params,omitempty"`
+	Cursor        *string               `json:"cursor,omitempty"`
+	Vars          map[string]string     `json:"vars,omitempty"`
+}
+
+func (v *V2RunQueryRequestBody) GetV2QueryParams() *ledger.V2QueryParams {
+	if v == nil {
+		return nil
+	}
+	return v.V2QueryParams
 }
 
 func (v *V2RunQueryRequestBody) GetCursor() *string {
@@ -23,13 +34,6 @@ func (v *V2RunQueryRequestBody) GetCursor() *string {
 		return nil
 	}
 	return v.Cursor
-}
-
-func (v *V2RunQueryRequestBody) GetParams() *shared.V2QueryParams {
-	if v == nil {
-		return nil
-	}
-	return v.Params
 }
 
 func (v *V2RunQueryRequestBody) GetVars() map[string]string {
@@ -198,15 +202,15 @@ const (
 
 // V2RunQueryResponseBody - OK
 type V2RunQueryResponseBody struct {
-	V2TransactionsCursorResponse       *shared.V2TransactionsCursorResponse       `queryParam:"inline" union:"member"`
-	V2AccountsCursorResponse           *shared.V2AccountsCursorResponse           `queryParam:"inline" union:"member"`
-	V2LogsCursorResponse               *shared.V2LogsCursorResponse               `queryParam:"inline" union:"member"`
-	V2VolumesWithBalanceCursorResponse *shared.V2VolumesWithBalanceCursorResponse `queryParam:"inline" union:"member"`
+	V2TransactionsCursorResponse       *ledger.V2TransactionsCursorResponse       `queryParam:"inline" union:"member"`
+	V2AccountsCursorResponse           *ledger.V2AccountsCursorResponse           `queryParam:"inline" union:"member"`
+	V2LogsCursorResponse               *ledger.V2LogsCursorResponse               `queryParam:"inline" union:"member"`
+	V2VolumesWithBalanceCursorResponse *ledger.V2VolumesWithBalanceCursorResponse `queryParam:"inline" union:"member"`
 
 	Type V2RunQueryResponseBodyType
 }
 
-func CreateV2RunQueryResponseBodyV2TransactionsCursorResponse(v2TransactionsCursorResponse shared.V2TransactionsCursorResponse) V2RunQueryResponseBody {
+func CreateV2RunQueryResponseBodyV2TransactionsCursorResponse(v2TransactionsCursorResponse ledger.V2TransactionsCursorResponse) V2RunQueryResponseBody {
 	typ := V2RunQueryResponseBodyTypeV2TransactionsCursorResponse
 
 	return V2RunQueryResponseBody{
@@ -215,7 +219,7 @@ func CreateV2RunQueryResponseBodyV2TransactionsCursorResponse(v2TransactionsCurs
 	}
 }
 
-func CreateV2RunQueryResponseBodyV2AccountsCursorResponse(v2AccountsCursorResponse shared.V2AccountsCursorResponse) V2RunQueryResponseBody {
+func CreateV2RunQueryResponseBodyV2AccountsCursorResponse(v2AccountsCursorResponse ledger.V2AccountsCursorResponse) V2RunQueryResponseBody {
 	typ := V2RunQueryResponseBodyTypeV2AccountsCursorResponse
 
 	return V2RunQueryResponseBody{
@@ -224,7 +228,7 @@ func CreateV2RunQueryResponseBodyV2AccountsCursorResponse(v2AccountsCursorRespon
 	}
 }
 
-func CreateV2RunQueryResponseBodyV2LogsCursorResponse(v2LogsCursorResponse shared.V2LogsCursorResponse) V2RunQueryResponseBody {
+func CreateV2RunQueryResponseBodyV2LogsCursorResponse(v2LogsCursorResponse ledger.V2LogsCursorResponse) V2RunQueryResponseBody {
 	typ := V2RunQueryResponseBodyTypeV2LogsCursorResponse
 
 	return V2RunQueryResponseBody{
@@ -233,7 +237,7 @@ func CreateV2RunQueryResponseBodyV2LogsCursorResponse(v2LogsCursorResponse share
 	}
 }
 
-func CreateV2RunQueryResponseBodyV2VolumesWithBalanceCursorResponse(v2VolumesWithBalanceCursorResponse shared.V2VolumesWithBalanceCursorResponse) V2RunQueryResponseBody {
+func CreateV2RunQueryResponseBodyV2VolumesWithBalanceCursorResponse(v2VolumesWithBalanceCursorResponse ledger.V2VolumesWithBalanceCursorResponse) V2RunQueryResponseBody {
 	typ := V2RunQueryResponseBodyTypeV2VolumesWithBalanceCursorResponse
 
 	return V2RunQueryResponseBody{
@@ -244,28 +248,28 @@ func CreateV2RunQueryResponseBodyV2VolumesWithBalanceCursorResponse(v2VolumesWit
 
 func (u *V2RunQueryResponseBody) UnmarshalJSON(data []byte) error {
 
-	var v2TransactionsCursorResponse shared.V2TransactionsCursorResponse = shared.V2TransactionsCursorResponse{}
+	var v2TransactionsCursorResponse ledger.V2TransactionsCursorResponse = ledger.V2TransactionsCursorResponse{}
 	if err := utils.UnmarshalJSON(data, &v2TransactionsCursorResponse, "", true, nil); err == nil {
 		u.V2TransactionsCursorResponse = &v2TransactionsCursorResponse
 		u.Type = V2RunQueryResponseBodyTypeV2TransactionsCursorResponse
 		return nil
 	}
 
-	var v2AccountsCursorResponse shared.V2AccountsCursorResponse = shared.V2AccountsCursorResponse{}
+	var v2AccountsCursorResponse ledger.V2AccountsCursorResponse = ledger.V2AccountsCursorResponse{}
 	if err := utils.UnmarshalJSON(data, &v2AccountsCursorResponse, "", true, nil); err == nil {
 		u.V2AccountsCursorResponse = &v2AccountsCursorResponse
 		u.Type = V2RunQueryResponseBodyTypeV2AccountsCursorResponse
 		return nil
 	}
 
-	var v2LogsCursorResponse shared.V2LogsCursorResponse = shared.V2LogsCursorResponse{}
+	var v2LogsCursorResponse ledger.V2LogsCursorResponse = ledger.V2LogsCursorResponse{}
 	if err := utils.UnmarshalJSON(data, &v2LogsCursorResponse, "", true, nil); err == nil {
 		u.V2LogsCursorResponse = &v2LogsCursorResponse
 		u.Type = V2RunQueryResponseBodyTypeV2LogsCursorResponse
 		return nil
 	}
 
-	var v2VolumesWithBalanceCursorResponse shared.V2VolumesWithBalanceCursorResponse = shared.V2VolumesWithBalanceCursorResponse{}
+	var v2VolumesWithBalanceCursorResponse ledger.V2VolumesWithBalanceCursorResponse = ledger.V2VolumesWithBalanceCursorResponse{}
 	if err := utils.UnmarshalJSON(data, &v2VolumesWithBalanceCursorResponse, "", true, nil); err == nil {
 		u.V2VolumesWithBalanceCursorResponse = &v2VolumesWithBalanceCursorResponse
 		u.Type = V2RunQueryResponseBodyTypeV2VolumesWithBalanceCursorResponse

@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var V3ApprovePaymentInitiationServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3ApprovePaymentInitiationRequest struct {
 	// The payment initiation ID
@@ -30,7 +34,7 @@ type V3ApprovePaymentInitiationResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3ApprovePaymentInitiationResponse *shared.V3ApprovePaymentInitiationResponse
+	V3ApprovePaymentInitiationResponse *payments.V3ApprovePaymentInitiationResponse
 }
 
 func (v *V3ApprovePaymentInitiationResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V3ApprovePaymentInitiationResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3ApprovePaymentInitiationResponse) GetV3ApprovePaymentInitiationResponse() *shared.V3ApprovePaymentInitiationResponse {
+func (v *V3ApprovePaymentInitiationResponse) GetV3ApprovePaymentInitiationResponse() *payments.V3ApprovePaymentInitiationResponse {
 	if v == nil {
 		return nil
 	}

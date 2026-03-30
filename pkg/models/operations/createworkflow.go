@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var CreateWorkflowServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreateWorkflowResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Created workflow
-	CreateWorkflowResponse *shared.CreateWorkflowResponse
+	CreateWorkflowResponse *orchestration.CreateWorkflowResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (c *CreateWorkflowResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreateWorkflowResponse) GetCreateWorkflowResponse() *shared.CreateWorkflowResponse {
+func (c *CreateWorkflowResponse) GetCreateWorkflowResponse() *orchestration.CreateWorkflowResponse {
 	if c == nil {
 		return nil
 	}

@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"math/big"
 	"net/http"
 )
+
+var RevertTransactionServerList = []string{
+	"http://localhost:8080/",
+}
 
 type RevertTransactionRequest struct {
 	// Allow to disable balances checks
@@ -59,7 +63,7 @@ type RevertTransactionResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TransactionResponse *shared.TransactionResponse
+	TransactionResponse *ledger.TransactionResponse
 }
 
 func (r *RevertTransactionResponse) GetContentType() string {
@@ -90,7 +94,7 @@ func (r *RevertTransactionResponse) GetRawResponse() *http.Response {
 	return r.RawResponse
 }
 
-func (r *RevertTransactionResponse) GetTransactionResponse() *shared.TransactionResponse {
+func (r *RevertTransactionResponse) GetTransactionResponse() *ledger.TransactionResponse {
 	if r == nil {
 		return nil
 	}

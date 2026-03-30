@@ -1,0 +1,9 @@
+# V2TransactionsCursorResponse
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `Cursor`                                                                                                           | [ledger.V2TransactionsCursorResponseCursor](../../../pkg/models/ledger/v2transactionscursorresponsecursor.md)      | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `Resource`                                                                                                         | [*ledger.V2TransactionsCursorResponseResource](../../../pkg/models/ledger/v2transactionscursorresponseresource.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

@@ -3,12 +3,16 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"math/big"
 	"net/http"
 	"time"
 )
+
+var V2GetTransactionServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2GetTransactionRequest struct {
 	Expand *string `queryParam:"style=form,explode=true,name=expand"`
@@ -69,7 +73,7 @@ type V2GetTransactionResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2GetTransactionResponse *shared.V2GetTransactionResponse
+	V2GetTransactionResponse *ledger.V2GetTransactionResponse
 }
 
 func (v *V2GetTransactionResponse) GetContentType() string {
@@ -93,7 +97,7 @@ func (v *V2GetTransactionResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetTransactionResponse) GetV2GetTransactionResponse() *shared.V2GetTransactionResponse {
+func (v *V2GetTransactionResponse) GetV2GetTransactionResponse() *ledger.V2GetTransactionResponse {
 	if v == nil {
 		return nil
 	}

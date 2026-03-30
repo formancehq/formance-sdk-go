@@ -3,25 +3,29 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var CreateTransactionServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreateTransactionRequest struct {
 	// The request body must contain at least one of the following objects:
 	//   - `postings`: suitable for simple transactions
 	//   - `script`: enabling more complex transactions with Numscript
 	//
-	PostTransaction shared.PostTransaction `request:"mediaType=application/json"`
+	PostTransaction ledger.PostTransaction `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Set the preview mode. Preview mode doesn't add the logs to the database or publish a message to the message broker.
 	Preview *bool `queryParam:"style=form,explode=true,name=preview"`
 }
 
-func (c *CreateTransactionRequest) GetPostTransaction() shared.PostTransaction {
+func (c *CreateTransactionRequest) GetPostTransaction() ledger.PostTransaction {
 	if c == nil {
-		return shared.PostTransaction{}
+		return ledger.PostTransaction{}
 	}
 	return c.PostTransaction
 }
@@ -49,7 +53,7 @@ type CreateTransactionResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TransactionsResponse *shared.TransactionsResponse
+	TransactionsResponse *ledger.TransactionsResponse
 }
 
 func (c *CreateTransactionResponse) GetContentType() string {
@@ -80,7 +84,7 @@ func (c *CreateTransactionResponse) GetRawResponse() *http.Response {
 	return c.RawResponse
 }
 
-func (c *CreateTransactionResponse) GetTransactionsResponse() *shared.TransactionsResponse {
+func (c *CreateTransactionResponse) GetTransactionsResponse() *ledger.TransactionsResponse {
 	if c == nil {
 		return nil
 	}

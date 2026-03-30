@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
+
+var ListBankAccountsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListBankAccountsRequest struct {
 	// Parameter used in pagination requests. Maximum page size is set to 15.
@@ -56,7 +60,7 @@ func (l *ListBankAccountsRequest) GetSort() []string {
 
 type ListBankAccountsResponse struct {
 	// OK
-	BankAccountsCursor *shared.BankAccountsCursor
+	BankAccountsCursor *payments.BankAccountsCursor
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -65,7 +69,7 @@ type ListBankAccountsResponse struct {
 	RawResponse *http.Response
 }
 
-func (l *ListBankAccountsResponse) GetBankAccountsCursor() *shared.BankAccountsCursor {
+func (l *ListBankAccountsResponse) GetBankAccountsCursor() *payments.BankAccountsCursor {
 	if l == nil {
 		return nil
 	}

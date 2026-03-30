@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -45,12 +45,11 @@ func (s *V2) AddMetadataOnTransaction(ctx context.Context, request operations.V2
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2AddMetadataOnTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -215,7 +214,7 @@ func (s *V2) AddMetadataOnTransaction(ctx context.Context, request operations.V2
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -248,12 +247,11 @@ func (s *V2) AddMetadataToAccount(ctx context.Context, request operations.V2AddM
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2AddMetadataToAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts/{address}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -418,7 +416,7 @@ func (s *V2) AddMetadataToAccount(ctx context.Context, request operations.V2AddM
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -451,12 +449,11 @@ func (s *V2) CountAccounts(ctx context.Context, request operations.V2CountAccoun
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CountAccountsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -471,6 +468,10 @@ func (s *V2) CountAccounts(ctx context.Context, request operations.V2CountAccoun
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -483,12 +484,15 @@ func (s *V2) CountAccounts(ctx context.Context, request operations.V2CountAccoun
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "HEAD", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "HEAD", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -612,7 +616,7 @@ func (s *V2) CountAccounts(ctx context.Context, request operations.V2CountAccoun
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -645,12 +649,11 @@ func (s *V2) CountTransactions(ctx context.Context, request operations.V2CountTr
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CountTransactionsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -665,6 +668,10 @@ func (s *V2) CountTransactions(ctx context.Context, request operations.V2CountTr
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -677,12 +684,15 @@ func (s *V2) CountTransactions(ctx context.Context, request operations.V2CountTr
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "HEAD", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "HEAD", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -806,7 +816,7 @@ func (s *V2) CountTransactions(ctx context.Context, request operations.V2CountTr
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -839,12 +849,11 @@ func (s *V2) CreateBulk(ctx context.Context, request operations.V2CreateBulkRequ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CreateBulkServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/_bulk", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1003,7 +1012,7 @@ func (s *V2) CreateBulk(ctx context.Context, request operations.V2CreateBulkRequ
 				return nil, err
 			}
 
-			var out shared.V2BulkResponse
+			var out ledger.V2BulkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1024,7 +1033,7 @@ func (s *V2) CreateBulk(ctx context.Context, request operations.V2CreateBulkRequ
 				return nil, err
 			}
 
-			var out shared.V2BulkResponse
+			var out ledger.V2BulkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1045,7 +1054,7 @@ func (s *V2) CreateBulk(ctx context.Context, request operations.V2CreateBulkRequ
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1065,7 +1074,7 @@ func (s *V2) CreateBulk(ctx context.Context, request operations.V2CreateBulkRequ
 }
 
 // CreateExporter - Create exporter
-func (s *V2) CreateExporter(ctx context.Context, request shared.V2CreateExporterRequest, opts ...operations.Option) (*operations.V2CreateExporterResponse, error) {
+func (s *V2) CreateExporter(ctx context.Context, request ledger.V2ExporterConfiguration1, opts ...operations.Option) (*operations.V2CreateExporterResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1078,12 +1087,11 @@ func (s *V2) CreateExporter(ctx context.Context, request shared.V2CreateExporter
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CreateExporterServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/v2/_/exporters")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1095,8 +1103,8 @@ func (s *V2) CreateExporter(ctx context.Context, request shared.V2CreateExporter
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2CreateExporter",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1122,10 +1130,6 @@ func (s *V2) CreateExporter(ctx context.Context, request shared.V2CreateExporter
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1238,12 +1242,12 @@ func (s *V2) CreateExporter(ctx context.Context, request shared.V2CreateExporter
 				return nil, err
 			}
 
-			var out operations.V2CreateExporterResponseBody
+			var out ledger.V2CreateExporterV2CreateExporterResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.V2CreateExporterResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1259,7 +1263,7 @@ func (s *V2) CreateExporter(ctx context.Context, request shared.V2CreateExporter
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1292,12 +1296,11 @@ func (s *V2) CreateLedger(ctx context.Context, request operations.V2CreateLedger
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CreateLedgerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1454,7 +1457,7 @@ func (s *V2) CreateLedger(ctx context.Context, request operations.V2CreateLedger
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1487,12 +1490,11 @@ func (s *V2) CreatePipeline(ctx context.Context, request operations.V2CreatePipe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CreatePipelineServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1504,8 +1506,8 @@ func (s *V2) CreatePipeline(ctx context.Context, request operations.V2CreatePipe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2CreatePipeline",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "V2CreatePipelineRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1531,10 +1533,6 @@ func (s *V2) CreatePipeline(ctx context.Context, request operations.V2CreatePipe
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1647,12 +1645,12 @@ func (s *V2) CreatePipeline(ctx context.Context, request operations.V2CreatePipe
 				return nil, err
 			}
 
-			var out operations.V2CreatePipelineResponseBody
+			var out ledger.V2CreatePipelineV2CreatePipelineResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.V2CreatePipelineResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1668,7 +1666,7 @@ func (s *V2) CreatePipeline(ctx context.Context, request operations.V2CreatePipe
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1701,12 +1699,11 @@ func (s *V2) CreateTransaction(ctx context.Context, request operations.V2CreateT
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2CreateTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1869,7 +1866,7 @@ func (s *V2) CreateTransaction(ctx context.Context, request operations.V2CreateT
 				return nil, err
 			}
 
-			var out shared.V2CreateTransactionResponse
+			var out ledger.V2CreateTransactionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1890,7 +1887,7 @@ func (s *V2) CreateTransaction(ctx context.Context, request operations.V2CreateT
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1924,12 +1921,11 @@ func (s *V2) DeleteAccountMetadata(ctx context.Context, request operations.V2Del
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeleteAccountMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts/{address}/metadata/{key}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2083,7 +2079,7 @@ func (s *V2) DeleteAccountMetadata(ctx context.Context, request operations.V2Del
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2117,12 +2113,11 @@ func (s *V2) DeleteBucket(ctx context.Context, request operations.V2DeleteBucket
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeleteBucketServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/buckets/{bucket}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2272,7 +2267,7 @@ func (s *V2) DeleteBucket(ctx context.Context, request operations.V2DeleteBucket
 				return nil, err
 			}
 
-			var out shared.V2ErrorResponse
+			var out ledger.V2ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2293,7 +2288,7 @@ func (s *V2) DeleteBucket(ctx context.Context, request operations.V2DeleteBucket
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2326,12 +2321,11 @@ func (s *V2) DeleteExporter(ctx context.Context, request operations.V2DeleteExpo
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeleteExporterServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/exporters/{exporterID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2343,8 +2337,8 @@ func (s *V2) DeleteExporter(ctx context.Context, request operations.V2DeleteExpo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2DeleteExporter",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -2364,10 +2358,6 @@ func (s *V2) DeleteExporter(ctx context.Context, request operations.V2DeleteExpo
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2481,7 +2471,7 @@ func (s *V2) DeleteExporter(ctx context.Context, request operations.V2DeleteExpo
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2514,12 +2504,11 @@ func (s *V2) DeleteLedgerMetadata(ctx context.Context, request operations.V2Dele
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeleteLedgerMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/metadata/{key}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2669,7 +2658,7 @@ func (s *V2) DeleteLedgerMetadata(ctx context.Context, request operations.V2Dele
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2702,12 +2691,11 @@ func (s *V2) DeletePipeline(ctx context.Context, request operations.V2DeletePipe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeletePipelineServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2719,8 +2707,8 @@ func (s *V2) DeletePipeline(ctx context.Context, request operations.V2DeletePipe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2DeletePipeline",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -2740,10 +2728,6 @@ func (s *V2) DeletePipeline(ctx context.Context, request operations.V2DeletePipe
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2857,7 +2841,7 @@ func (s *V2) DeletePipeline(ctx context.Context, request operations.V2DeletePipe
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2891,12 +2875,11 @@ func (s *V2) DeleteTransactionMetadata(ctx context.Context, request operations.V
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2DeleteTransactionMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}/metadata/{key}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3050,7 +3033,7 @@ func (s *V2) DeleteTransactionMetadata(ctx context.Context, request operations.V
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3083,12 +3066,11 @@ func (s *V2) ExportLogs(ctx context.Context, request operations.V2ExportLogsRequ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ExportLogsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/logs/export", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3256,12 +3238,11 @@ func (s *V2) GetAccount(ctx context.Context, request operations.V2GetAccountRequ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts/{address}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3413,7 +3394,7 @@ func (s *V2) GetAccount(ctx context.Context, request operations.V2GetAccountRequ
 				return nil, err
 			}
 
-			var out shared.V2AccountResponse
+			var out ledger.V2AccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3434,7 +3415,7 @@ func (s *V2) GetAccount(ctx context.Context, request operations.V2GetAccountRequ
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3467,12 +3448,11 @@ func (s *V2) GetBalancesAggregated(ctx context.Context, request operations.V2Get
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetBalancesAggregatedServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/aggregate/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3487,6 +3467,10 @@ func (s *V2) GetBalancesAggregated(ctx context.Context, request operations.V2Get
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -3499,12 +3483,15 @@ func (s *V2) GetBalancesAggregated(ctx context.Context, request operations.V2Get
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -3624,7 +3611,7 @@ func (s *V2) GetBalancesAggregated(ctx context.Context, request operations.V2Get
 				return nil, err
 			}
 
-			var out shared.V2AggregateBalancesResponse
+			var out ledger.V2AggregateBalancesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3645,7 +3632,7 @@ func (s *V2) GetBalancesAggregated(ctx context.Context, request operations.V2Get
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3678,12 +3665,11 @@ func (s *V2) GetExporterState(ctx context.Context, request operations.V2GetExpor
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetExporterStateServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/exporters/{exporterID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3695,8 +3681,8 @@ func (s *V2) GetExporterState(ctx context.Context, request operations.V2GetExpor
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2GetExporterState",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -3716,10 +3702,6 @@ func (s *V2) GetExporterState(ctx context.Context, request operations.V2GetExpor
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3831,12 +3813,12 @@ func (s *V2) GetExporterState(ctx context.Context, request operations.V2GetExpor
 				return nil, err
 			}
 
-			var out operations.V2GetExporterStateResponseBody
+			var out ledger.V2GetExporterStateV2GetExporterStateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.V2GetExporterStateResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -3852,7 +3834,7 @@ func (s *V2) GetExporterState(ctx context.Context, request operations.V2GetExpor
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3885,12 +3867,11 @@ func (s *V2) GetLedger(ctx context.Context, request operations.V2GetLedgerReques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetLedgerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4038,7 +4019,7 @@ func (s *V2) GetLedger(ctx context.Context, request operations.V2GetLedgerReques
 				return nil, err
 			}
 
-			var out shared.V2GetLedgerResponse
+			var out ledger.V2GetLedgerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4059,7 +4040,7 @@ func (s *V2) GetLedger(ctx context.Context, request operations.V2GetLedgerReques
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4092,12 +4073,11 @@ func (s *V2) GetLedgerInfo(ctx context.Context, request operations.V2GetLedgerIn
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetLedgerInfoServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/_info", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4245,7 +4225,7 @@ func (s *V2) GetLedgerInfo(ctx context.Context, request operations.V2GetLedgerIn
 				return nil, err
 			}
 
-			var out shared.V2LedgerInfoResponse
+			var out ledger.V2LedgerInfoResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4266,7 +4246,7 @@ func (s *V2) GetLedgerInfo(ctx context.Context, request operations.V2GetLedgerIn
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4299,12 +4279,11 @@ func (s *V2) GetPipelineState(ctx context.Context, request operations.V2GetPipel
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetPipelineStateServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4316,8 +4295,8 @@ func (s *V2) GetPipelineState(ctx context.Context, request operations.V2GetPipel
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2GetPipelineState",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -4337,10 +4316,6 @@ func (s *V2) GetPipelineState(ctx context.Context, request operations.V2GetPipel
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4452,12 +4427,12 @@ func (s *V2) GetPipelineState(ctx context.Context, request operations.V2GetPipel
 				return nil, err
 			}
 
-			var out operations.V2GetPipelineStateResponseBody
+			var out ledger.V2GetPipelineStateV2GetPipelineStateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.V2GetPipelineStateResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -4473,7 +4448,7 @@ func (s *V2) GetPipelineState(ctx context.Context, request operations.V2GetPipel
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4506,12 +4481,11 @@ func (s *V2) GetSchema(ctx context.Context, request operations.V2GetSchemaReques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetSchemaServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/schemas/{version}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4659,7 +4633,7 @@ func (s *V2) GetSchema(ctx context.Context, request operations.V2GetSchemaReques
 				return nil, err
 			}
 
-			var out shared.V2SchemaResponse
+			var out ledger.V2SchemaResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4680,7 +4654,7 @@ func (s *V2) GetSchema(ctx context.Context, request operations.V2GetSchemaReques
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4713,12 +4687,11 @@ func (s *V2) GetTransaction(ctx context.Context, request operations.V2GetTransac
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4870,7 +4843,7 @@ func (s *V2) GetTransaction(ctx context.Context, request operations.V2GetTransac
 				return nil, err
 			}
 
-			var out shared.V2GetTransactionResponse
+			var out ledger.V2GetTransactionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4891,7 +4864,7 @@ func (s *V2) GetTransaction(ctx context.Context, request operations.V2GetTransac
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4924,12 +4897,11 @@ func (s *V2) GetVolumesWithBalances(ctx context.Context, request operations.V2Ge
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2GetVolumesWithBalancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/volumes", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4944,6 +4916,10 @@ func (s *V2) GetVolumesWithBalances(ctx context.Context, request operations.V2Ge
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -4956,12 +4932,15 @@ func (s *V2) GetVolumesWithBalances(ctx context.Context, request operations.V2Ge
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -5081,7 +5060,7 @@ func (s *V2) GetVolumesWithBalances(ctx context.Context, request operations.V2Ge
 				return nil, err
 			}
 
-			var out shared.V2VolumesWithBalanceCursorResponse
+			var out ledger.V2VolumesWithBalanceCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5102,7 +5081,7 @@ func (s *V2) GetVolumesWithBalances(ctx context.Context, request operations.V2Ge
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5134,12 +5113,11 @@ func (s *V2) ImportLogs(ctx context.Context, request operations.V2ImportLogsRequ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ImportLogsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/logs/import", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5296,7 +5274,7 @@ func (s *V2) ImportLogs(ctx context.Context, request operations.V2ImportLogsRequ
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5329,12 +5307,11 @@ func (s *V2) InsertSchema(ctx context.Context, request operations.V2InsertSchema
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2InsertSchemaServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/schemas/{version}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5495,7 +5472,7 @@ func (s *V2) InsertSchema(ctx context.Context, request operations.V2InsertSchema
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5529,12 +5506,11 @@ func (s *V2) ListAccounts(ctx context.Context, request operations.V2ListAccounts
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListAccountsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5549,6 +5525,10 @@ func (s *V2) ListAccounts(ctx context.Context, request operations.V2ListAccounts
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -5561,12 +5541,15 @@ func (s *V2) ListAccounts(ctx context.Context, request operations.V2ListAccounts
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -5686,7 +5669,7 @@ func (s *V2) ListAccounts(ctx context.Context, request operations.V2ListAccounts
 				return nil, err
 			}
 
-			var out shared.V2AccountsCursorResponse
+			var out ledger.V2AccountsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5707,7 +5690,7 @@ func (s *V2) ListAccounts(ctx context.Context, request operations.V2ListAccounts
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5740,12 +5723,11 @@ func (s *V2) ListExporters(ctx context.Context, opts ...operations.Option) (*ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListExportersServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/v2/_/exporters")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5757,8 +5739,8 @@ func (s *V2) ListExporters(ctx context.Context, opts ...operations.Option) (*ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2ListExporters",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -5778,10 +5760,6 @@ func (s *V2) ListExporters(ctx context.Context, opts ...operations.Option) (*ope
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5893,12 +5871,12 @@ func (s *V2) ListExporters(ctx context.Context, opts ...operations.Option) (*ope
 				return nil, err
 			}
 
-			var out operations.V2ListExportersResponseBody
+			var out ledger.V2ExportersCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.V2ExportersCursorResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -5914,7 +5892,7 @@ func (s *V2) ListExporters(ctx context.Context, opts ...operations.Option) (*ope
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5947,12 +5925,11 @@ func (s *V2) ListLedgers(ctx context.Context, request operations.V2ListLedgersRe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListLedgersServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/v2")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5967,6 +5944,10 @@ func (s *V2) ListLedgers(ctx context.Context, request operations.V2ListLedgersRe
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -5979,12 +5960,15 @@ func (s *V2) ListLedgers(ctx context.Context, request operations.V2ListLedgersRe
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -6104,7 +6088,7 @@ func (s *V2) ListLedgers(ctx context.Context, request operations.V2ListLedgersRe
 				return nil, err
 			}
 
-			var out shared.V2LedgerListResponse
+			var out ledger.V2LedgerListResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6125,7 +6109,7 @@ func (s *V2) ListLedgers(ctx context.Context, request operations.V2ListLedgersRe
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6159,12 +6143,11 @@ func (s *V2) ListLogs(ctx context.Context, request operations.V2ListLogsRequest,
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListLogsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/logs", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6179,6 +6162,10 @@ func (s *V2) ListLogs(ctx context.Context, request operations.V2ListLogsRequest,
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -6191,12 +6178,15 @@ func (s *V2) ListLogs(ctx context.Context, request operations.V2ListLogsRequest,
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -6316,7 +6306,7 @@ func (s *V2) ListLogs(ctx context.Context, request operations.V2ListLogsRequest,
 				return nil, err
 			}
 
-			var out shared.V2LogsCursorResponse
+			var out ledger.V2LogsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6337,7 +6327,7 @@ func (s *V2) ListLogs(ctx context.Context, request operations.V2ListLogsRequest,
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6370,12 +6360,11 @@ func (s *V2) ListPipelines(ctx context.Context, request operations.V2ListPipelin
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListPipelinesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6387,8 +6376,8 @@ func (s *V2) ListPipelines(ctx context.Context, request operations.V2ListPipelin
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2ListPipelines",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -6408,10 +6397,6 @@ func (s *V2) ListPipelines(ctx context.Context, request operations.V2ListPipelin
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -6523,12 +6508,12 @@ func (s *V2) ListPipelines(ctx context.Context, request operations.V2ListPipelin
 				return nil, err
 			}
 
-			var out operations.V2ListPipelinesResponseBody
+			var out ledger.V2PipelinesCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Object = &out
+			res.V2PipelinesCursorResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -6544,7 +6529,7 @@ func (s *V2) ListPipelines(ctx context.Context, request operations.V2ListPipelin
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6577,12 +6562,11 @@ func (s *V2) ListSchemas(ctx context.Context, request operations.V2ListSchemasRe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListSchemasServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/schemas", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6734,7 +6718,7 @@ func (s *V2) ListSchemas(ctx context.Context, request operations.V2ListSchemasRe
 				return nil, err
 			}
 
-			var out shared.V2SchemasCursorResponse
+			var out ledger.V2SchemasCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6755,7 +6739,7 @@ func (s *V2) ListSchemas(ctx context.Context, request operations.V2ListSchemasRe
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6789,12 +6773,11 @@ func (s *V2) ListTransactions(ctx context.Context, request operations.V2ListTran
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ListTransactionsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6809,6 +6792,10 @@ func (s *V2) ListTransactions(ctx context.Context, request operations.V2ListTran
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -6821,12 +6808,15 @@ func (s *V2) ListTransactions(ctx context.Context, request operations.V2ListTran
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -6946,7 +6936,7 @@ func (s *V2) ListTransactions(ctx context.Context, request operations.V2ListTran
 				return nil, err
 			}
 
-			var out shared.V2TransactionsCursorResponse
+			var out ledger.V2TransactionsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6967,7 +6957,7 @@ func (s *V2) ListTransactions(ctx context.Context, request operations.V2ListTran
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7001,12 +6991,11 @@ func (s *V2) ReadStats(ctx context.Context, request operations.V2ReadStatsReques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ReadStatsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/stats", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7154,7 +7143,7 @@ func (s *V2) ReadStats(ctx context.Context, request operations.V2ReadStatsReques
 				return nil, err
 			}
 
-			var out shared.V2StatsResponse
+			var out ledger.V2StatsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7175,7 +7164,7 @@ func (s *V2) ReadStats(ctx context.Context, request operations.V2ReadStatsReques
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7208,12 +7197,11 @@ func (s *V2) ResetPipeline(ctx context.Context, request operations.V2ResetPipeli
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2ResetPipelineServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7225,8 +7213,8 @@ func (s *V2) ResetPipeline(ctx context.Context, request operations.V2ResetPipeli
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2ResetPipeline",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -7246,10 +7234,6 @@ func (s *V2) ResetPipeline(ctx context.Context, request operations.V2ResetPipeli
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -7363,7 +7347,7 @@ func (s *V2) ResetPipeline(ctx context.Context, request operations.V2ResetPipeli
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7397,12 +7381,11 @@ func (s *V2) RestoreBucket(ctx context.Context, request operations.V2RestoreBuck
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2RestoreBucketServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/buckets/{bucket}/restore", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7552,7 +7535,7 @@ func (s *V2) RestoreBucket(ctx context.Context, request operations.V2RestoreBuck
 				return nil, err
 			}
 
-			var out shared.V2ErrorResponse
+			var out ledger.V2ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7573,7 +7556,7 @@ func (s *V2) RestoreBucket(ctx context.Context, request operations.V2RestoreBuck
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7606,12 +7589,11 @@ func (s *V2) RevertTransaction(ctx context.Context, request operations.V2RevertT
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2RevertTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}/revert", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7774,12 +7756,12 @@ func (s *V2) RevertTransaction(ctx context.Context, request operations.V2RevertT
 				return nil, err
 			}
 
-			var out shared.V2RevertTransactionResponse
+			var out ledger.V2CreateTransactionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.V2RevertTransactionResponse = &out
+			res.V2CreateTransactionResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -7795,7 +7777,7 @@ func (s *V2) RevertTransaction(ctx context.Context, request operations.V2RevertT
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7829,12 +7811,11 @@ func (s *V2) RunQuery(ctx context.Context, request operations.V2RunQueryRequest,
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2RunQueryServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/queries/{id}/run", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8014,7 +7995,7 @@ func (s *V2) RunQuery(ctx context.Context, request operations.V2RunQueryRequest,
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8047,12 +8028,11 @@ func (s *V2) StartPipeline(ctx context.Context, request operations.V2StartPipeli
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2StartPipelineServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}/start", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8064,8 +8044,8 @@ func (s *V2) StartPipeline(ctx context.Context, request operations.V2StartPipeli
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2StartPipeline",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -8085,10 +8065,6 @@ func (s *V2) StartPipeline(ctx context.Context, request operations.V2StartPipeli
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -8202,7 +8178,7 @@ func (s *V2) StartPipeline(ctx context.Context, request operations.V2StartPipeli
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8235,12 +8211,11 @@ func (s *V2) StopPipeline(ctx context.Context, request operations.V2StopPipeline
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2StopPipelineServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}/stop", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8252,8 +8227,8 @@ func (s *V2) StopPipeline(ctx context.Context, request operations.V2StopPipeline
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "v2StopPipeline",
-		OAuth2Scopes:     []string{"auth:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
+		OAuth2Scopes:     nil,
+		SecuritySource:   nil,
 	}
 
 	timeout := o.Timeout
@@ -8273,10 +8248,6 @@ func (s *V2) StopPipeline(ctx context.Context, request operations.V2StopPipeline
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -8390,7 +8361,7 @@ func (s *V2) StopPipeline(ctx context.Context, request operations.V2StopPipeline
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8423,12 +8394,11 @@ func (s *V2) UpdateExporter(ctx context.Context, request operations.V2UpdateExpo
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2UpdateExporterServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/exporters/{exporterID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8443,7 +8413,7 @@ func (s *V2) UpdateExporter(ctx context.Context, request operations.V2UpdateExpo
 		OAuth2Scopes:     []string{"ledger:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "V2CreateExporterRequest", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "V2ExporterConfiguration", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -8585,7 +8555,7 @@ func (s *V2) UpdateExporter(ctx context.Context, request operations.V2UpdateExpo
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8618,12 +8588,11 @@ func (s *V2) UpdateLedgerMetadata(ctx context.Context, request operations.V2Upda
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.V2UpdateLedgerMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8780,7 +8749,7 @@ func (s *V2) UpdateLedgerMetadata(ctx context.Context, request operations.V2Upda
 				return nil, err
 			}
 
-			var out shared.V2ErrorResponse
+			var out ledger.V2ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8801,7 +8770,7 @@ func (s *V2) UpdateLedgerMetadata(ctx context.Context, request operations.V2Upda
 				return nil, err
 			}
 
-			var out sdkerrors.V2ErrorResponse
+			var out ledger.V2ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

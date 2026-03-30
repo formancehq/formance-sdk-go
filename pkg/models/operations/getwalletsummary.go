@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
+
+var GetWalletSummaryServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetWalletSummaryRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
@@ -22,7 +26,7 @@ type GetWalletSummaryResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Wallet summary
-	GetWalletSummaryResponse *shared.GetWalletSummaryResponse
+	GetWalletSummaryResponse *wallets.GetWalletSummaryResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -36,7 +40,7 @@ func (g *GetWalletSummaryResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetWalletSummaryResponse) GetGetWalletSummaryResponse() *shared.GetWalletSummaryResponse {
+func (g *GetWalletSummaryResponse) GetGetWalletSummaryResponse() *wallets.GetWalletSummaryResponse {
 	if g == nil {
 		return nil
 	}

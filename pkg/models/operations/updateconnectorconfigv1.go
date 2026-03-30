@@ -3,72 +3,32 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var UpdateConnectorConfigV1ServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateConnectorConfigV1Request struct {
-	ConnectorConfig shared.ConnectorConfig `request:"mediaType=application/json"`
+	ConnectorConfig payments.ConnectorConfig `request:"mediaType=application/json"`
 	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
 	// The connector ID.
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorId"`
 }
 
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfig() shared.ConnectorConfig {
+func (u *UpdateConnectorConfigV1Request) GetConnectorConfig() payments.ConnectorConfig {
 	if u == nil {
-		return shared.ConnectorConfig{}
+		return payments.ConnectorConfig{}
 	}
 	return u.ConnectorConfig
 }
 
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigAdyen() *shared.AdyenConfig {
-	return u.GetConnectorConfig().AdyenConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigAtlar() *shared.AtlarConfig {
-	return u.GetConnectorConfig().AtlarConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigBankingcircle() *shared.BankingCircleConfig {
-	return u.GetConnectorConfig().BankingCircleConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigCurrencycloud() *shared.CurrencyCloudConfig {
-	return u.GetConnectorConfig().CurrencyCloudConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigDummypay() *shared.DummyPayConfig {
-	return u.GetConnectorConfig().DummyPayConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigGeneric() *shared.GenericConfig {
-	return u.GetConnectorConfig().GenericConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigMangopay() *shared.MangoPayConfig {
-	return u.GetConnectorConfig().MangoPayConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigModulr() *shared.ModulrConfig {
-	return u.GetConnectorConfig().ModulrConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigMoneycorp() *shared.MoneycorpConfig {
-	return u.GetConnectorConfig().MoneycorpConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigStripe() *shared.StripeConfig {
-	return u.GetConnectorConfig().StripeConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnectorConfigWise() *shared.WiseConfig {
-	return u.GetConnectorConfig().WiseConfig
-}
-
-func (u *UpdateConnectorConfigV1Request) GetConnector() shared.Connector {
+func (u *UpdateConnectorConfigV1Request) GetConnector() payments.Connector {
 	if u == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return u.Connector
 }

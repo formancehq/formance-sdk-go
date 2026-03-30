@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2GetPipelineStateServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2GetPipelineStateRequest struct {
 	// Name of the ledger.
@@ -31,21 +35,6 @@ func (v *V2GetPipelineStateRequest) GetPipelineID() string {
 // #region class-body-v2getpipelinestaterequest
 // #endregion class-body-v2getpipelinestaterequest
 
-// V2GetPipelineStateResponseBody - Pipeline information
-type V2GetPipelineStateResponseBody struct {
-	Data shared.V2Pipeline `json:"data"`
-}
-
-func (v *V2GetPipelineStateResponseBody) GetData() shared.V2Pipeline {
-	if v == nil {
-		return shared.V2Pipeline{}
-	}
-	return v.Data
-}
-
-// #region class-body-v2getpipelinestateresponsebody
-// #endregion class-body-v2getpipelinestateresponsebody
-
 type V2GetPipelineStateResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -54,7 +43,7 @@ type V2GetPipelineStateResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Pipeline information
-	Object *V2GetPipelineStateResponseBody
+	V2GetPipelineStateResponse *ledger.V2GetPipelineStateV2GetPipelineStateResponse
 }
 
 func (v *V2GetPipelineStateResponse) GetContentType() string {
@@ -78,11 +67,11 @@ func (v *V2GetPipelineStateResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetPipelineStateResponse) GetObject() *V2GetPipelineStateResponseBody {
+func (v *V2GetPipelineStateResponse) GetV2GetPipelineStateResponse() *ledger.V2GetPipelineStateV2GetPipelineStateResponse {
 	if v == nil {
 		return nil
 	}
-	return v.Object
+	return v.V2GetPipelineStateResponse
 }
 
 // #region class-body-v2getpipelinestateresponse

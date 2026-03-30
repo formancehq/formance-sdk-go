@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var CancelEventServerList = []string{
+	"http://localhost:8080/",
+}
+
 type CancelEventRequest struct {
 	// The instance id
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`

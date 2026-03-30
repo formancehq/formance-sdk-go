@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var V3GetAccountBalancesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3GetAccountBalancesRequest struct {
 	// The account ID
@@ -89,7 +93,7 @@ type V3GetAccountBalancesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3BalancesCursorResponse *shared.V3BalancesCursorResponse
+	V3BalancesCursorResponse *payments.V3BalancesCursorResponse
 }
 
 func (v *V3GetAccountBalancesResponse) GetContentType() string {
@@ -113,7 +117,7 @@ func (v *V3GetAccountBalancesResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3GetAccountBalancesResponse) GetV3BalancesCursorResponse() *shared.V3BalancesCursorResponse {
+func (v *V3GetAccountBalancesResponse) GetV3BalancesCursorResponse() *payments.V3BalancesCursorResponse {
 	if v == nil {
 		return nil
 	}

@@ -3,12 +3,16 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3UpdateLinkForPaymentServiceUserOnConnectorServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3UpdateLinkForPaymentServiceUserOnConnectorRequest struct {
-	V3PaymentServiceUserUpdateLinkRequest *shared.V3PaymentServiceUserUpdateLinkRequest `request:"mediaType=application/json"`
+	V3PaymentServiceUserUpdateLinkRequest *payments.V3PaymentServiceUserUpdateLinkRequest `request:"mediaType=application/json"`
 	// The connection ID
 	ConnectionID string `pathParam:"style=simple,explode=false,name=connectionID"`
 	// The connector ID
@@ -17,7 +21,7 @@ type V3UpdateLinkForPaymentServiceUserOnConnectorRequest struct {
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
 }
 
-func (v *V3UpdateLinkForPaymentServiceUserOnConnectorRequest) GetV3PaymentServiceUserUpdateLinkRequest() *shared.V3PaymentServiceUserUpdateLinkRequest {
+func (v *V3UpdateLinkForPaymentServiceUserOnConnectorRequest) GetV3PaymentServiceUserUpdateLinkRequest() *payments.V3PaymentServiceUserUpdateLinkRequest {
 	if v == nil {
 		return nil
 	}
@@ -56,7 +60,7 @@ type V3UpdateLinkForPaymentServiceUserOnConnectorResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Created
-	V3PaymentServiceUserUpdateLinkResponse *shared.V3PaymentServiceUserUpdateLinkResponse
+	V3PaymentServiceUserUpdateLinkResponse *payments.V3PaymentServiceUserUpdateLinkResponse
 }
 
 func (v *V3UpdateLinkForPaymentServiceUserOnConnectorResponse) GetContentType() string {
@@ -80,7 +84,7 @@ func (v *V3UpdateLinkForPaymentServiceUserOnConnectorResponse) GetRawResponse() 
 	return v.RawResponse
 }
 
-func (v *V3UpdateLinkForPaymentServiceUserOnConnectorResponse) GetV3PaymentServiceUserUpdateLinkResponse() *shared.V3PaymentServiceUserUpdateLinkResponse {
+func (v *V3UpdateLinkForPaymentServiceUserOnConnectorResponse) GetV3PaymentServiceUserUpdateLinkResponse() *payments.V3PaymentServiceUserUpdateLinkResponse {
 	if v == nil {
 		return nil
 	}

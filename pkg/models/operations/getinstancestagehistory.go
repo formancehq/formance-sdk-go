@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var GetInstanceStageHistoryServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetInstanceStageHistoryRequest struct {
 	// The instance id
@@ -32,7 +36,7 @@ type GetInstanceStageHistoryResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// The workflow instance stage history
-	GetWorkflowInstanceHistoryStageResponse *shared.GetWorkflowInstanceHistoryStageResponse
+	GetWorkflowInstanceHistoryStageResponse *orchestration.GetWorkflowInstanceHistoryStageResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -46,7 +50,7 @@ func (g *GetInstanceStageHistoryResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetInstanceStageHistoryResponse) GetGetWorkflowInstanceHistoryStageResponse() *shared.GetWorkflowInstanceHistoryStageResponse {
+func (g *GetInstanceStageHistoryResponse) GetGetWorkflowInstanceHistoryStageResponse() *orchestration.GetWorkflowInstanceHistoryStageResponse {
 	if g == nil {
 		return nil
 	}

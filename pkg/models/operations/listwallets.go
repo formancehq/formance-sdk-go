@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
+
+var ListWalletsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListWalletsRequest struct {
 	// Parameter used in pagination requests.
@@ -74,7 +78,7 @@ type ListWalletsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	ListWalletsResponse *shared.ListWalletsResponse
+	ListWalletsResponse *wallets.ListWalletsResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -88,7 +92,7 @@ func (l *ListWalletsResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListWalletsResponse) GetListWalletsResponse() *shared.ListWalletsResponse {
+func (l *ListWalletsResponse) GetListWalletsResponse() *wallets.ListWalletsResponse {
 	if l == nil {
 		return nil
 	}

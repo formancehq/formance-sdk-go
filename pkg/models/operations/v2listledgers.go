@@ -3,12 +3,17 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
 
+var V2ListLedgersServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2ListLedgersRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -20,8 +25,7 @@ type V2ListLedgersRequest struct {
 	IncludeDeleted *bool `default:"false" queryParam:"style=form,explode=true,name=includeDeleted"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -37,6 +41,13 @@ func (v *V2ListLedgersRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2ListLedgersRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return map[string]any{}
+	}
+	return v.RequestBody
 }
 
 func (v *V2ListLedgersRequest) GetCursor() *string {
@@ -60,13 +71,6 @@ func (v *V2ListLedgersRequest) GetPageSize() *int64 {
 	return v.PageSize
 }
 
-func (v *V2ListLedgersRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 func (v *V2ListLedgersRequest) GetSort() *string {
 	if v == nil {
 		return nil
@@ -85,7 +89,7 @@ type V2ListLedgersResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2LedgerListResponse *shared.V2LedgerListResponse
+	V2LedgerListResponse *ledger.V2LedgerListResponse
 }
 
 func (v *V2ListLedgersResponse) GetContentType() string {
@@ -109,7 +113,7 @@ func (v *V2ListLedgersResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListLedgersResponse) GetV2LedgerListResponse() *shared.V2LedgerListResponse {
+func (v *V2ListLedgersResponse) GetV2LedgerListResponse() *ledger.V2LedgerListResponse {
 	if v == nil {
 		return nil
 	}

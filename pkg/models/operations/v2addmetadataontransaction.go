@@ -8,6 +8,10 @@ import (
 	"net/http"
 )
 
+var V2AddMetadataOnTransactionServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2AddMetadataOnTransactionRequest struct {
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`

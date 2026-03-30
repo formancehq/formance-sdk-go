@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2DeletePipelineServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2DeletePipelineRequest struct {
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`

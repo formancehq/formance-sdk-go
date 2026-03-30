@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var TestTriggerServerList = []string{
+	"http://localhost:8080/",
+}
 
 type TestTriggerRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
@@ -35,7 +39,7 @@ type TestTriggerResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Test a trigger
-	V2TestTriggerResponse *shared.V2TestTriggerResponse
+	V2TestTriggerResponse *orchestration.V2TestTriggerResponse
 }
 
 func (t *TestTriggerResponse) GetContentType() string {
@@ -59,7 +63,7 @@ func (t *TestTriggerResponse) GetRawResponse() *http.Response {
 	return t.RawResponse
 }
 
-func (t *TestTriggerResponse) GetV2TestTriggerResponse() *shared.V2TestTriggerResponse {
+func (t *TestTriggerResponse) GetV2TestTriggerResponse() *orchestration.V2TestTriggerResponse {
 	if t == nil {
 		return nil
 	}

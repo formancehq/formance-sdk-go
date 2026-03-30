@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var V3DeletePaymentServiceUserConnectorServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3DeletePaymentServiceUserConnectorRequest struct {
 	// The connector ID
@@ -39,7 +43,7 @@ type V3DeletePaymentServiceUserConnectorResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3PaymentServiceUserDeleteConnectorResponse *shared.V3PaymentServiceUserDeleteConnectorResponse
+	V3PaymentServiceUserDeleteConnectorResponse *payments.V3PaymentServiceUserDeleteConnectorResponse
 }
 
 func (v *V3DeletePaymentServiceUserConnectorResponse) GetContentType() string {
@@ -63,7 +67,7 @@ func (v *V3DeletePaymentServiceUserConnectorResponse) GetRawResponse() *http.Res
 	return v.RawResponse
 }
 
-func (v *V3DeletePaymentServiceUserConnectorResponse) GetV3PaymentServiceUserDeleteConnectorResponse() *shared.V3PaymentServiceUserDeleteConnectorResponse {
+func (v *V3DeletePaymentServiceUserConnectorResponse) GetV3PaymentServiceUserDeleteConnectorResponse() *payments.V3PaymentServiceUserDeleteConnectorResponse {
 	if v == nil {
 		return nil
 	}

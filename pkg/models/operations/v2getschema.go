@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2GetSchemaServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2GetSchemaRequest struct {
 	// Name of the ledger.
@@ -39,7 +43,7 @@ type V2GetSchemaResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Schema retrieved successfully
-	V2SchemaResponse *shared.V2SchemaResponse
+	V2SchemaResponse *ledger.V2SchemaResponse
 }
 
 func (v *V2GetSchemaResponse) GetContentType() string {
@@ -63,7 +67,7 @@ func (v *V2GetSchemaResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetSchemaResponse) GetV2SchemaResponse() *shared.V2SchemaResponse {
+func (v *V2GetSchemaResponse) GetV2SchemaResponse() *ledger.V2SchemaResponse {
 	if v == nil {
 		return nil
 	}
