@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2DeleteBucketServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2DeleteBucketRequest struct {
 	// The bucket name
@@ -30,7 +34,7 @@ type V2DeleteBucketResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Bucket not found
-	V2ErrorResponse *shared.V2ErrorResponse
+	V2ErrorResponse *ledger.V2ErrorResponse
 }
 
 func (v *V2DeleteBucketResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V2DeleteBucketResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2DeleteBucketResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
+func (v *V2DeleteBucketResponse) GetV2ErrorResponse() *ledger.V2ErrorResponse {
 	if v == nil {
 		return nil
 	}

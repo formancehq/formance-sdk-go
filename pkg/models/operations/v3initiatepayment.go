@@ -3,13 +3,17 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
 
+var V3InitiatePaymentServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3InitiatePaymentRequest struct {
-	V3InitiatePaymentRequest *shared.V3InitiatePaymentRequest `request:"mediaType=application/json"`
+	V3InitiatePaymentRequest *payments.V3InitiatePaymentRequest `request:"mediaType=application/json"`
 	// If set to true, the request will not have to be validated. This is useful if we want to directly forward the request to the PSP.
 	//
 	NoValidation *bool `default:"false" queryParam:"style=form,explode=true,name=noValidation"`
@@ -26,7 +30,7 @@ func (v *V3InitiatePaymentRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V3InitiatePaymentRequest) GetV3InitiatePaymentRequest() *shared.V3InitiatePaymentRequest {
+func (v *V3InitiatePaymentRequest) GetV3InitiatePaymentRequest() *payments.V3InitiatePaymentRequest {
 	if v == nil {
 		return nil
 	}
@@ -51,7 +55,7 @@ type V3InitiatePaymentResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3InitiatePaymentResponse *shared.V3InitiatePaymentResponse
+	V3InitiatePaymentResponse *payments.V3InitiatePaymentResponse
 }
 
 func (v *V3InitiatePaymentResponse) GetContentType() string {
@@ -75,7 +79,7 @@ func (v *V3InitiatePaymentResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3InitiatePaymentResponse) GetV3InitiatePaymentResponse() *shared.V3InitiatePaymentResponse {
+func (v *V3InitiatePaymentResponse) GetV3InitiatePaymentResponse() *payments.V3InitiatePaymentResponse {
 	if v == nil {
 		return nil
 	}

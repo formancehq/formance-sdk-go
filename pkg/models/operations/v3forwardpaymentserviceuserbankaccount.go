@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ForwardPaymentServiceUserBankAccountServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ForwardPaymentServiceUserBankAccountRequest struct {
-	V3ForwardPaymentServiceUserBankAccountRequest *shared.V3ForwardPaymentServiceUserBankAccountRequest `request:"mediaType=application/json"`
+	V3ForwardPaymentServiceUserBankAccountRequest *payments.V3ForwardPaymentServiceUserBankAccountRequest `request:"mediaType=application/json"`
 	// The bank account ID
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountID"`
 	// The payment service user ID
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`
 }
 
-func (v *V3ForwardPaymentServiceUserBankAccountRequest) GetV3ForwardPaymentServiceUserBankAccountRequest() *shared.V3ForwardPaymentServiceUserBankAccountRequest {
+func (v *V3ForwardPaymentServiceUserBankAccountRequest) GetV3ForwardPaymentServiceUserBankAccountRequest() *payments.V3ForwardPaymentServiceUserBankAccountRequest {
 	if v == nil {
 		return nil
 	}
@@ -47,7 +51,7 @@ type V3ForwardPaymentServiceUserBankAccountResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3ForwardPaymentServiceUserBankAccountResponse *shared.V3ForwardPaymentServiceUserBankAccountResponse
+	V3ForwardPaymentServiceUserBankAccountResponse *payments.V3ForwardPaymentServiceUserBankAccountResponse
 }
 
 func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetContentType() string {
@@ -71,7 +75,7 @@ func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetRawResponse() *http.
 	return v.RawResponse
 }
 
-func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetV3ForwardPaymentServiceUserBankAccountResponse() *shared.V3ForwardPaymentServiceUserBankAccountResponse {
+func (v *V3ForwardPaymentServiceUserBankAccountResponse) GetV3ForwardPaymentServiceUserBankAccountResponse() *payments.V3ForwardPaymentServiceUserBankAccountResponse {
 	if v == nil {
 		return nil
 	}

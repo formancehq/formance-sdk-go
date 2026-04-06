@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"net/http"
 )
+
+var DeactivateConfigServerList = []string{
+	"http://localhost:8080/",
+}
 
 type DeactivateConfigRequest struct {
 	// Config ID
@@ -21,7 +25,7 @@ func (d *DeactivateConfigRequest) GetID() string {
 
 type DeactivateConfigResponse struct {
 	// Config successfully deactivated.
-	ConfigResponse *shared.ConfigResponse
+	ConfigResponse *webhooks.ConfigResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -30,7 +34,7 @@ type DeactivateConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (d *DeactivateConfigResponse) GetConfigResponse() *shared.ConfigResponse {
+func (d *DeactivateConfigResponse) GetConfigResponse() *webhooks.ConfigResponse {
 	if d == nil {
 		return nil
 	}

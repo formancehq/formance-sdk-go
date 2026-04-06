@@ -8,10 +8,10 @@
 * [DeletePolicy](#deletepolicy) - Delete a policy
 * [GetPolicy](#getpolicy) - Get a policy
 * [GetReconciliation](#getreconciliation) - Get a reconciliation
+* [GetServerInfoReconciliation](#getserverinforeconciliation) - Get server info
 * [ListPolicies](#listpolicies) - List policies
 * [ListReconciliations](#listreconciliations) - List reconciliations
 * [Reconcile](#reconcile) - Reconcile using a policy
-* [ReconciliationgetServerInfo](#reconciliationgetserverinfo) - Get server info
 
 ## CreatePolicy
 
@@ -27,6 +27,7 @@ import(
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/reconciliation"
 	"log"
 )
 
@@ -40,7 +41,7 @@ func main() {
         }),
     )
 
-    res, err := s.Reconciliation.V1.CreatePolicy(ctx, shared.PolicyRequest{
+    res, err := s.Reconciliation.V1.CreatePolicy(ctx, reconciliation.PolicyRequest{
         LedgerName: "default",
         LedgerQuery: map[string]any{
             "key": "<value>",
@@ -59,11 +60,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
-| `request`                                                        | [shared.PolicyRequest](../../pkg/models/shared/policyrequest.md) | :heavy_check_mark:                                               | The request object to use for the request.                       |
-| `opts`                                                           | [][operations.Option](../../pkg/models/operations/option.md)     | :heavy_minus_sign:                                               | The options for this request.                                    |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [reconciliation.PolicyRequest](../../pkg/models/reconciliation/policyrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 ### Response
 
@@ -71,10 +72,10 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
 
 ## DeletePolicy
 
@@ -130,10 +131,10 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
 
 ## GetPolicy
 
@@ -189,10 +190,10 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
 
 ## GetReconciliation
 
@@ -248,10 +249,65 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+
+## GetServerInfoReconciliation
+
+Get server info
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getServerInfo_reconciliation" method="get" path="/api/reconciliation/_info" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity(shared.Security{
+            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Reconciliation.V1.GetServerInfoReconciliation(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ServerInfo != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.GetServerInfoReconciliationResponse](../../pkg/models/operations/getserverinforeconciliationresponse.md), error**
+
+### Errors
+
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
 
 ## ListPolicies
 
@@ -308,10 +364,10 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
 
 ## ListReconciliations
 
@@ -368,10 +424,10 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
 
 ## Reconcile
 
@@ -388,6 +444,7 @@ import(
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/reconciliation"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -403,7 +460,7 @@ func main() {
     )
 
     res, err := s.Reconciliation.V1.Reconcile(ctx, operations.ReconcileRequest{
-        ReconciliationRequest: shared.ReconciliationRequest{
+        ReconciliationRequest: reconciliation.ReconciliationRequest{
             ReconciledAtLedger: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
             ReconciledAtPayments: types.MustTimeFromString("2021-01-01T00:00:00.000Z"),
         },
@@ -432,62 +489,7 @@ func main() {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
-
-## ReconciliationgetServerInfo
-
-Get server info
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="reconciliationgetServerInfo" method="get" path="/api/reconciliation/_info" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Reconciliation.V1.ReconciliationgetServerInfo(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ServerInfo != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
-
-### Response
-
-**[*operations.ReconciliationgetServerInfoResponse](../../pkg/models/operations/reconciliationgetserverinforesponse.md), error**
-
-### Errors
-
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| sdkerrors.ReconciliationErrorResponse | default                               | application/json                      |
-| sdkerrors.SDKError                    | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| reconciliation.ErrorResponse | default                      | application/json             |
+| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |

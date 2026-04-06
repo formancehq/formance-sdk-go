@@ -33,7 +33,6 @@ and standard method from web, mobile and desktop applications.
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Authentication](#authentication-1)
   * [Retries](#retries)
@@ -100,7 +99,7 @@ func main() {
 * [DeleteClient](docs/sdks/v1/README.md#deleteclient) - Delete client
 * [DeleteSecret](docs/sdks/v1/README.md#deletesecret) - Delete a secret from a client
 * [GetOIDCWellKnowns](docs/sdks/v1/README.md#getoidcwellknowns) - Retrieve OpenID connect well-knowns.
-* [GetServerInfo](docs/sdks/v1/README.md#getserverinfo) - Get server info
+* [GetServerInfoAuth](docs/sdks/v1/README.md#getserverinfoauth) - Get server info
 * [ListClients](docs/sdks/v1/README.md#listclients) - List clients
 * [ListUsers](docs/sdks/v1/README.md#listusers) - List users
 * [ReadClient](docs/sdks/v1/README.md#readclient) - Read client
@@ -120,14 +119,14 @@ func main() {
 * [CountAccounts](docs/sdks/formancev1/README.md#countaccounts) - Count the accounts from a ledger
 * [CountTransactions](docs/sdks/formancev1/README.md#counttransactions) - Count the transactions from a ledger
 * [CreateTransaction](docs/sdks/formancev1/README.md#createtransaction) - Create a new transaction to a ledger
-* [GetAccount](docs/sdks/formancev1/README.md#getaccount) - Get account by its address
+* [GetAccountLedger](docs/sdks/formancev1/README.md#getaccountledger) - Get account by its address
 * [GetBalances](docs/sdks/formancev1/README.md#getbalances) - Get the balances from a ledger's account
 * [GetBalancesAggregated](docs/sdks/formancev1/README.md#getbalancesaggregated) - Get the aggregated balances from selected accounts
 * [GetInfo](docs/sdks/formancev1/README.md#getinfo) - Show server information
 * [GetLedgerInfo](docs/sdks/formancev1/README.md#getledgerinfo) - Get information about a ledger
 * [GetMapping](docs/sdks/formancev1/README.md#getmapping) - Get the mapping of a ledger
 * [GetTransaction](docs/sdks/formancev1/README.md#gettransaction) - Get transaction from a ledger by its ID
-* [ListAccounts](docs/sdks/formancev1/README.md#listaccounts) - List accounts from a ledger
+* [ListAccountsLedger](docs/sdks/formancev1/README.md#listaccountsledger) - List accounts from a ledger
 * [ListLogs](docs/sdks/formancev1/README.md#listlogs) - List the logs from a ledger
 * [ListTransactions](docs/sdks/formancev1/README.md#listtransactions) - List transactions from a ledger
 * [ReadStats](docs/sdks/formancev1/README.md#readstats) - Get statistics from a ledger
@@ -191,12 +190,12 @@ func main() {
 * [GetInstance](docs/sdks/formanceorchestrationv1/README.md#getinstance) - Get a workflow instance by id
 * [GetInstanceHistory](docs/sdks/formanceorchestrationv1/README.md#getinstancehistory) - Get a workflow instance history by id
 * [GetInstanceStageHistory](docs/sdks/formanceorchestrationv1/README.md#getinstancestagehistory) - Get a workflow instance stage history
+* [GetServerInfoOrchestration](docs/sdks/formanceorchestrationv1/README.md#getserverinfoorchestration) - Get server info
 * [GetWorkflow](docs/sdks/formanceorchestrationv1/README.md#getworkflow) - Get a flow by id
 * [ListInstances](docs/sdks/formanceorchestrationv1/README.md#listinstances) - List instances of a workflow
 * [ListTriggers](docs/sdks/formanceorchestrationv1/README.md#listtriggers) - List triggers
 * [ListTriggersOccurrences](docs/sdks/formanceorchestrationv1/README.md#listtriggersoccurrences) - List triggers occurrences
 * [ListWorkflows](docs/sdks/formanceorchestrationv1/README.md#listworkflows) - List registered workflows
-* [OrchestrationgetServerInfo](docs/sdks/formanceorchestrationv1/README.md#orchestrationgetserverinfo) - Get server info
 * [ReadTrigger](docs/sdks/formanceorchestrationv1/README.md#readtrigger) - Read trigger
 * [RunWorkflow](docs/sdks/formanceorchestrationv1/README.md#runworkflow) - Run workflow
 * [SendEvent](docs/sdks/formanceorchestrationv1/README.md#sendevent) - Send an event to a running workflow
@@ -235,6 +234,7 @@ func main() {
 * [DeleteTransferInitiation](docs/sdks/formancepaymentsv1/README.md#deletetransferinitiation) - Delete a transfer initiation
 * [ForwardBankAccount](docs/sdks/formancepaymentsv1/README.md#forwardbankaccount) - Forward a bank account to a connector
 * [GetAccountBalances](docs/sdks/formancepaymentsv1/README.md#getaccountbalances) - Get account balances
+* [GetAccountPayments](docs/sdks/formancepaymentsv1/README.md#getaccountpayments) - Get an account
 * [GetBankAccount](docs/sdks/formancepaymentsv1/README.md#getbankaccount) - Get a bank account created by user on Formance
 * [~~GetConnectorTask~~](docs/sdks/formancepaymentsv1/README.md#getconnectortask) - Read a specific task of the connector :warning: **Deprecated**
 * [GetConnectorTaskV1](docs/sdks/formancepaymentsv1/README.md#getconnectortaskv1) - Read a specific task of the connector
@@ -242,8 +242,10 @@ func main() {
 * [GetPool](docs/sdks/formancepaymentsv1/README.md#getpool) - Get a Pool
 * [GetPoolBalances](docs/sdks/formancepaymentsv1/README.md#getpoolbalances) - Get historical pool balances at a particular point in time
 * [GetPoolBalancesLatest](docs/sdks/formancepaymentsv1/README.md#getpoolbalanceslatest) - Get latest pool balances
+* [GetServerInfoPayments](docs/sdks/formancepaymentsv1/README.md#getserverinfopayments) - Get server info
 * [GetTransferInitiation](docs/sdks/formancepaymentsv1/README.md#gettransferinitiation) - Get a transfer initiation
 * [InstallConnector](docs/sdks/formancepaymentsv1/README.md#installconnector) - Install a connector
+* [ListAccountsPayments](docs/sdks/formancepaymentsv1/README.md#listaccountspayments) - List accounts
 * [ListAllConnectors](docs/sdks/formancepaymentsv1/README.md#listallconnectors) - List all installed connectors
 * [ListBankAccounts](docs/sdks/formancepaymentsv1/README.md#listbankaccounts) - List bank accounts created by user on Formance
 * [ListConfigsAvailableConnectors](docs/sdks/formancepaymentsv1/README.md#listconfigsavailableconnectors) - List the configs of each available connector
@@ -252,9 +254,6 @@ func main() {
 * [ListPayments](docs/sdks/formancepaymentsv1/README.md#listpayments) - List payments
 * [ListPools](docs/sdks/formancepaymentsv1/README.md#listpools) - List Pools
 * [ListTransferInitiations](docs/sdks/formancepaymentsv1/README.md#listtransferinitiations) - List Transfer Initiations
-* [PaymentsgetAccount](docs/sdks/formancepaymentsv1/README.md#paymentsgetaccount) - Get an account
-* [PaymentsgetServerInfo](docs/sdks/formancepaymentsv1/README.md#paymentsgetserverinfo) - Get server info
-* [PaymentslistAccounts](docs/sdks/formancepaymentsv1/README.md#paymentslistaccounts) - List accounts
 * [~~ReadConnectorConfig~~](docs/sdks/formancepaymentsv1/README.md#readconnectorconfig) - Read the config of a connector :warning: **Deprecated**
 * [ReadConnectorConfigV1](docs/sdks/formancepaymentsv1/README.md#readconnectorconfigv1) - Read the config of a connector
 * [RemoveAccountFromPool](docs/sdks/formancepaymentsv1/README.md#removeaccountfrompool) - Remove an account from a pool
@@ -342,15 +341,15 @@ Allows to check if users used the link and completed the oauth flow.
 * [DeletePolicy](docs/sdks/formancereconciliationv1/README.md#deletepolicy) - Delete a policy
 * [GetPolicy](docs/sdks/formancereconciliationv1/README.md#getpolicy) - Get a policy
 * [GetReconciliation](docs/sdks/formancereconciliationv1/README.md#getreconciliation) - Get a reconciliation
+* [GetServerInfoReconciliation](docs/sdks/formancereconciliationv1/README.md#getserverinforeconciliation) - Get server info
 * [ListPolicies](docs/sdks/formancereconciliationv1/README.md#listpolicies) - List policies
 * [ListReconciliations](docs/sdks/formancereconciliationv1/README.md#listreconciliations) - List reconciliations
 * [Reconcile](docs/sdks/formancereconciliationv1/README.md#reconcile) - Reconcile using a policy
-* [ReconciliationgetServerInfo](docs/sdks/formancereconciliationv1/README.md#reconciliationgetserverinfo) - Get server info
 
 ### [~~Search.V1~~](docs/sdks/formancesearchv1/README.md)
 
+* [~~GetServerInfoSearch~~](docs/sdks/formancesearchv1/README.md#getserverinfosearch) - Get server info :warning: **Deprecated**
 * [~~Search~~](docs/sdks/formancesearchv1/README.md#search) - search.v1 :warning: **Deprecated**
-* [~~SearchgetServerInfo~~](docs/sdks/formancesearchv1/README.md#searchgetserverinfo) - Get server info :warning: **Deprecated**
 
 ### [Wallets.V1](docs/sdks/formancewalletsv1/README.md)
 
@@ -362,6 +361,7 @@ Allows to check if users used the link and completed the oauth flow.
 * [GetBalance](docs/sdks/formancewalletsv1/README.md#getbalance) - Get detailed balance
 * [GetHold](docs/sdks/formancewalletsv1/README.md#gethold) - Get a hold
 * [GetHolds](docs/sdks/formancewalletsv1/README.md#getholds) - Get all holds for a wallet
+* [GetServerInfoWallets](docs/sdks/formancewalletsv1/README.md#getserverinfowallets) - Get server info
 * [GetTransactions](docs/sdks/formancewalletsv1/README.md#gettransactions)
 * [GetWallet](docs/sdks/formancewalletsv1/README.md#getwallet) - Get a wallet
 * [GetWalletSummary](docs/sdks/formancewalletsv1/README.md#getwalletsummary) - Get wallet summary
@@ -369,7 +369,6 @@ Allows to check if users used the link and completed the oauth flow.
 * [ListWallets](docs/sdks/formancewalletsv1/README.md#listwallets) - List all wallets
 * [UpdateWallet](docs/sdks/formancewalletsv1/README.md#updatewallet) - Update a wallet
 * [VoidHold](docs/sdks/formancewalletsv1/README.md#voidhold) - Cancel a hold
-* [WalletsgetServerInfo](docs/sdks/formancewalletsv1/README.md#walletsgetserverinfo) - Get server info
 
 ### [Webhooks.V1](docs/sdks/formancewebhooksv1/README.md)
 
@@ -394,10 +393,10 @@ By Default, an API error will return `sdkerrors.SDKError`. When custom error res
 
 For example, the `GetInfo` function may return the following errors:
 
-| Error Type                | Status Code | Content Type     |
-| ------------------------- | ----------- | ---------------- |
-| sdkerrors.V2ErrorResponse | default     | application/json |
-| sdkerrors.SDKError        | 4XX, 5XX    | \*/\*            |
+| Error Type                  | Status Code | Content Type     |
+| --------------------------- | ----------- | ---------------- |
+| ledger.V2ErrorResponseError | default     | application/json |
+| sdkerrors.SDKError          | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -408,6 +407,7 @@ import (
 	"context"
 	"errors"
 	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"log"
@@ -426,7 +426,7 @@ func main() {
 	res, err := s.Ledger.GetInfo(ctx)
 	if err != nil {
 
-		var e *sdkerrors.V2ErrorResponse
+		var e *ledger.V2ErrorResponseError
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -442,87 +442,6 @@ func main() {
 
 ```
 <!-- End Error Handling [errors] -->
-
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Select Server by Index
-
-You can override the default server globally using the `WithServerIndex(serverIndex int)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| #   | Server                                                | Variables                        | Description                                |
-| --- | ----------------------------------------------------- | -------------------------------- | ------------------------------------------ |
-| 0   | `http://localhost`                                    |                                  | local server                               |
-| 1   | `https://{organization}.{environment}.formance.cloud` | `environment`<br/>`organization` | A per-organization and per-environment API |
-
-If the selected server has variables, you may override its default values using the associated option(s):
-
-| Variable       | Option                                           | Supported Values                                         | Default           | Description                                                   |
-| -------------- | ------------------------------------------------ | -------------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
-| `environment`  | `WithEnvironment(environment ServerEnvironment)` | - `"eu.sandbox"`<br/>- `"eu-west-1"`<br/>- `"us-east-1"` | `"eu.sandbox"`    | The environment name. Defaults to the production environment. |
-| `organization` | `WithOrganization(organization string)`          | string                                                   | `"orgID-stackID"` | The organization name. Defaults to a generic organization.    |
-
-#### Example
-
-```go
-package main
-
-import (
-	"context"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"log"
-)
-
-func main() {
-	ctx := context.Background()
-
-	s := v3.New(
-		v3.WithServerIndex(1),
-		v3.WithEnvironment("us-east-1"),
-		v3.WithOrganization("orgID-stackID"),
-	)
-
-	res, err := s.GetVersions(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if res.GetVersionsResponse != nil {
-		// handle response
-	}
-}
-
-```
-
-### Override Server URL Per-Client
-
-The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
-```go
-package main
-
-import (
-	"context"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"log"
-)
-
-func main() {
-	ctx := context.Background()
-
-	s := v3.New(
-		v3.WithServerURL("https://orgID-stackID.eu.sandbox.formance.cloud"),
-	)
-
-	res, err := s.GetVersions(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if res.GetVersionsResponse != nil {
-		// handle response
-	}
-}
-
-```
-<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client

@@ -3,12 +3,16 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var V2CreateBulkServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2CreateBulkRequest struct {
-	RequestBody []shared.V2BulkElement `request:"mediaType=application/json"`
+	RequestBody []any `request:"mediaType=application/json"`
 	// Make bulk atomic
 	Atomic *bool `queryParam:"style=form,explode=true,name=atomic"`
 	// Continue on failure
@@ -21,9 +25,9 @@ type V2CreateBulkRequest struct {
 	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
 }
 
-func (v *V2CreateBulkRequest) GetRequestBody() []shared.V2BulkElement {
+func (v *V2CreateBulkRequest) GetRequestBody() []any {
 	if v == nil {
-		return []shared.V2BulkElement{}
+		return []any{}
 	}
 	return v.RequestBody
 }
@@ -74,7 +78,7 @@ type V2CreateBulkResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2BulkResponse *shared.V2BulkResponse
+	V2BulkResponse *ledger.V2BulkResponse
 }
 
 func (v *V2CreateBulkResponse) GetContentType() string {
@@ -98,7 +102,7 @@ func (v *V2CreateBulkResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2CreateBulkResponse) GetV2BulkResponse() *shared.V2BulkResponse {
+func (v *V2CreateBulkResponse) GetV2BulkResponse() *ledger.V2BulkResponse {
 	if v == nil {
 		return nil
 	}

@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/auth"
 	"net/http"
 )
+
+var CreateClientServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreateClientResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Client created
-	CreateClientResponse *shared.CreateClientResponse
+	CreateClientResponse *auth.CreateClientResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (c *CreateClientResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreateClientResponse) GetCreateClientResponse() *shared.CreateClientResponse {
+func (c *CreateClientResponse) GetCreateClientResponse() *auth.CreateClientResponse {
 	if c == nil {
 		return nil
 	}

@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var ForwardBankAccountServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ForwardBankAccountRequest struct {
-	ForwardBankAccountRequest shared.ForwardBankAccountRequest `request:"mediaType=application/json"`
+	ForwardBankAccountRequest payments.ForwardBankAccountRequest `request:"mediaType=application/json"`
 	// The bank account ID.
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountId"`
 }
 
-func (f *ForwardBankAccountRequest) GetForwardBankAccountRequest() shared.ForwardBankAccountRequest {
+func (f *ForwardBankAccountRequest) GetForwardBankAccountRequest() payments.ForwardBankAccountRequest {
 	if f == nil {
-		return shared.ForwardBankAccountRequest{}
+		return payments.ForwardBankAccountRequest{}
 	}
 	return f.ForwardBankAccountRequest
 }
@@ -29,7 +33,7 @@ func (f *ForwardBankAccountRequest) GetBankAccountID() string {
 
 type ForwardBankAccountResponse struct {
 	// OK
-	BankAccountResponse *shared.BankAccountResponse
+	BankAccountResponse *payments.BankAccountResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -38,7 +42,7 @@ type ForwardBankAccountResponse struct {
 	RawResponse *http.Response
 }
 
-func (f *ForwardBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
+func (f *ForwardBankAccountResponse) GetBankAccountResponse() *payments.BankAccountResponse {
 	if f == nil {
 		return nil
 	}

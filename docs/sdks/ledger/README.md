@@ -38,7 +38,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.V2ConfigInfoResponse != nil {
+    if res.V2ConfigInfo != nil {
         // handle response
     }
 }
@@ -57,10 +57,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| ledger.V2ErrorResponseError | default                     | application/json            |
+| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
 
 ## GetMetrics
 
@@ -112,7 +112,7 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| ledger.V2ErrorResponseError | default                     | application/json            |
+| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |

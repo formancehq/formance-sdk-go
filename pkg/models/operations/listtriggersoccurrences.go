@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var ListTriggersOccurrencesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListTriggersOccurrencesRequest struct {
 	// The trigger id
@@ -23,7 +27,7 @@ type ListTriggersOccurrencesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// List of triggers occurrences
-	ListTriggersOccurrencesResponse *shared.ListTriggersOccurrencesResponse
+	ListTriggersOccurrencesResponse *orchestration.ListTriggersOccurrencesResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,7 +41,7 @@ func (l *ListTriggersOccurrencesResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListTriggersOccurrencesResponse) GetListTriggersOccurrencesResponse() *shared.ListTriggersOccurrencesResponse {
+func (l *ListTriggersOccurrencesResponse) GetListTriggersOccurrencesResponse() *orchestration.ListTriggersOccurrencesResponse {
 	if l == nil {
 		return nil
 	}

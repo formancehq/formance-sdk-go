@@ -3,13 +3,18 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
 
+var V2ListLogsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2ListLogsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -20,9 +25,8 @@ type V2ListLogsRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Pit      *time.Time     `queryParam:"style=form,explode=true,name=pit"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64     `queryParam:"style=form,explode=true,name=pageSize"`
+	Pit      *time.Time `queryParam:"style=form,explode=true,name=pit"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -38,6 +42,13 @@ func (v *V2ListLogsRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2ListLogsRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return map[string]any{}
+	}
+	return v.RequestBody
 }
 
 func (v *V2ListLogsRequest) GetCursor() *string {
@@ -68,13 +79,6 @@ func (v *V2ListLogsRequest) GetPit() *time.Time {
 	return v.Pit
 }
 
-func (v *V2ListLogsRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 func (v *V2ListLogsRequest) GetSort() *string {
 	if v == nil {
 		return nil
@@ -93,7 +97,7 @@ type V2ListLogsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2LogsCursorResponse *shared.V2LogsCursorResponse
+	V2LogsCursorResponse *ledger.V2LogsCursorResponse
 }
 
 func (v *V2ListLogsResponse) GetContentType() string {
@@ -117,7 +121,7 @@ func (v *V2ListLogsResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListLogsResponse) GetV2LogsCursorResponse() *shared.V2LogsCursorResponse {
+func (v *V2ListLogsResponse) GetV2LogsCursorResponse() *ledger.V2LogsCursorResponse {
 	if v == nil {
 		return nil
 	}

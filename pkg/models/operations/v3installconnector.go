@@ -3,154 +3,25 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3InstallConnectorServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3InstallConnectorRequest struct {
-	V3InstallConnectorRequest *shared.V3InstallConnectorRequest `request:"mediaType=application/json"`
+	V3ConnectorConfig *payments.V3ConnectorConfig `request:"mediaType=application/json"`
 	// The connector to filter by
 	Connector string `pathParam:"style=simple,explode=false,name=connector"`
 }
 
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequest() *shared.V3InstallConnectorRequest {
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfig() *payments.V3ConnectorConfig {
 	if v == nil {
 		return nil
 	}
-	return v.V3InstallConnectorRequest
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestAdyen() *shared.V3AdyenConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3AdyenConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestAtlar() *shared.V3AtlarConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3AtlarConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestBankingcircle() *shared.V3BankingcircleConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3BankingcircleConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestCoinbaseprime() *shared.V3CoinbaseprimeConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3CoinbaseprimeConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestColumn() *shared.V3ColumnConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3ColumnConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestCurrencycloud() *shared.V3CurrencycloudConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3CurrencycloudConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestDummypay() *shared.V3DummypayConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3DummypayConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestFireblocks() *shared.V3FireblocksConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3FireblocksConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestGeneric() *shared.V3GenericConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3GenericConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestIncrease() *shared.V3IncreaseConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3IncreaseConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestMangopay() *shared.V3MangopayConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3MangopayConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestModulr() *shared.V3ModulrConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3ModulrConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestMoneycorp() *shared.V3MoneycorpConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3MoneycorpConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestPlaid() *shared.V3PlaidConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3PlaidConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestPowens() *shared.V3PowensConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3PowensConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestQonto() *shared.V3QontoConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3QontoConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestStripe() *shared.V3StripeConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3StripeConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestTink() *shared.V3TinkConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3TinkConfig
-	}
-	return nil
-}
-
-func (v *V3InstallConnectorRequest) GetV3InstallConnectorRequestWise() *shared.V3WiseConfig {
-	if v := v.GetV3InstallConnectorRequest(); v != nil {
-		return v.V3WiseConfig
-	}
-	return nil
+	return v.V3ConnectorConfig
 }
 
 func (v *V3InstallConnectorRequest) GetConnector() string {
@@ -171,7 +42,7 @@ type V3InstallConnectorResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3InstallConnectorResponse *shared.V3InstallConnectorResponse
+	V3InstallConnectorResponse *payments.V3InstallConnectorResponse
 }
 
 func (v *V3InstallConnectorResponse) GetContentType() string {
@@ -195,7 +66,7 @@ func (v *V3InstallConnectorResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3InstallConnectorResponse) GetV3InstallConnectorResponse() *shared.V3InstallConnectorResponse {
+func (v *V3InstallConnectorResponse) GetV3InstallConnectorResponse() *payments.V3InstallConnectorResponse {
 	if v == nil {
 		return nil
 	}

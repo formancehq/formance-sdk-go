@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -32,6 +32,8 @@ func newFormanceV1(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *
 }
 
 // CreateTransactions - Create a new batch of transactions to a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.CreateTransactionsRequest, opts ...operations.Option) (*operations.CreateTransactionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -45,12 +47,11 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateTransactionsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/batch", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -91,7 +92,7 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -205,7 +206,7 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out shared.TransactionsResponse
+			var out ledger.TransactionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -226,7 +227,7 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -246,6 +247,8 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 }
 
 // AddMetadataOnTransaction - Set the metadata of a transaction by its ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request operations.AddMetadataOnTransactionRequest, opts ...operations.Option) (*operations.AddMetadataOnTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -259,12 +262,11 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.AddMetadataOnTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -305,7 +307,7 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -423,7 +425,7 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -443,6 +445,8 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 }
 
 // AddMetadataToAccount - Add metadata to an account
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operations.AddMetadataToAccountRequest, opts ...operations.Option) (*operations.AddMetadataToAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -456,12 +460,11 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.AddMetadataToAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts/{address}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -502,7 +505,7 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -620,7 +623,7 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -640,6 +643,8 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 }
 
 // CountAccounts - Count the accounts from a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.CountAccountsRequest, opts ...operations.Option) (*operations.CountAccountsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -653,12 +658,11 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CountAccountsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -696,7 +700,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -814,7 +818,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -834,6 +838,8 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 }
 
 // CountTransactions - Count the transactions from a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.CountTransactionsRequest, opts ...operations.Option) (*operations.CountTransactionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -847,12 +853,11 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CountTransactionsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -890,7 +895,7 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1008,7 +1013,7 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1028,6 +1033,8 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 }
 
 // CreateTransaction - Create a new transaction to a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.CreateTransactionRequest, opts ...operations.Option) (*operations.CreateTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1041,12 +1048,11 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1091,7 +1097,7 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1207,7 +1213,7 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 				return nil, err
 			}
 
-			var out shared.TransactionsResponse
+			var out ledger.TransactionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1228,7 +1234,7 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1247,8 +1253,10 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 
 }
 
-// GetAccount - Get account by its address
-func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccountRequest, opts ...operations.Option) (*operations.GetAccountResponse, error) {
+// GetAccountLedger - Get account by its address
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceV1) GetAccountLedger(ctx context.Context, request operations.GetAccountLedgerRequest, opts ...operations.Option) (*operations.GetAccountLedgerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1261,12 +1269,11 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetAccountLedgerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts/{address}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1277,7 +1284,7 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "getAccount",
+		OperationID:      "getAccount_ledger",
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1300,7 +1307,7 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1399,7 +1406,7 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 		}
 	}
 
-	res := &operations.GetAccountResponse{
+	res := &operations.GetAccountLedgerResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
@@ -1414,7 +1421,7 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 				return nil, err
 			}
 
-			var out shared.AccountResponse
+			var out ledger.AccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1435,7 +1442,7 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1455,6 +1462,8 @@ func (s *FormanceV1) GetAccount(ctx context.Context, request operations.GetAccou
 }
 
 // GetBalances - Get the balances from a ledger's account
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBalancesRequest, opts ...operations.Option) (*operations.GetBalancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1468,12 +1477,11 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetBalancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1511,7 +1519,7 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1625,7 +1633,7 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 				return nil, err
 			}
 
-			var out shared.BalancesCursorResponse
+			var out ledger.BalancesCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1646,7 +1654,7 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1666,6 +1674,8 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 }
 
 // GetBalancesAggregated - Get the aggregated balances from selected accounts
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operations.GetBalancesAggregatedRequest, opts ...operations.Option) (*operations.GetBalancesAggregatedResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1679,12 +1689,11 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetBalancesAggregatedServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/aggregate/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1722,7 +1731,7 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1836,7 +1845,7 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 				return nil, err
 			}
 
-			var out shared.AggregateBalancesResponse
+			var out ledger.AggregateBalancesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1857,7 +1866,7 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1877,6 +1886,8 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 }
 
 // GetInfo - Show server information
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*operations.GetInfoResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1890,12 +1901,11 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetInfoServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1929,7 +1939,7 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2043,7 +2053,7 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 				return nil, err
 			}
 
-			var out shared.ConfigInfoResponse
+			var out ledger.ConfigInfoResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2064,7 +2074,7 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2084,6 +2094,8 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 }
 
 // GetLedgerInfo - Get information about a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLedgerInfoRequest, opts ...operations.Option) (*operations.GetLedgerInfoResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2097,12 +2109,11 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetLedgerInfoServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/_info", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2136,7 +2147,7 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2250,7 +2261,7 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 				return nil, err
 			}
 
-			var out shared.LedgerInfoResponse
+			var out ledger.LedgerInfoResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2271,7 +2282,7 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2291,6 +2302,8 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 }
 
 // GetMapping - Get the mapping of a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappingRequest, opts ...operations.Option) (*operations.GetMappingResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2304,12 +2317,11 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetMappingServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/mapping", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2343,7 +2355,7 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2457,7 +2469,7 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 				return nil, err
 			}
 
-			var out shared.MappingResponse
+			var out ledger.MappingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2478,7 +2490,7 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2498,6 +2510,8 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 }
 
 // GetTransaction - Get transaction from a ledger by its ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetTransactionRequest, opts ...operations.Option) (*operations.GetTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2511,12 +2525,11 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2550,7 +2563,7 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2664,7 +2677,7 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 				return nil, err
 			}
 
-			var out shared.TransactionResponse
+			var out ledger.TransactionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2685,7 +2698,7 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2704,9 +2717,11 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 
 }
 
-// ListAccounts - List accounts from a ledger
+// ListAccountsLedger - List accounts from a ledger
 // List accounts from a ledger, sorted by address in descending order.
-func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAccountsRequest, opts ...operations.Option) (*operations.ListAccountsResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceV1) ListAccountsLedger(ctx context.Context, request operations.ListAccountsLedgerRequest, opts ...operations.Option) (*operations.ListAccountsLedgerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2719,12 +2734,11 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListAccountsLedgerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2735,7 +2749,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "listAccounts",
+		OperationID:      "listAccounts_ledger",
 		OAuth2Scopes:     []string{"ledger:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -2762,7 +2776,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2861,7 +2875,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 		}
 	}
 
-	res := &operations.ListAccountsResponse{
+	res := &operations.ListAccountsLedgerResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
@@ -2876,7 +2890,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 				return nil, err
 			}
 
-			var out shared.AccountsCursorResponse
+			var out ledger.AccountsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2897,7 +2911,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 				return nil, err
 			}
 
-			var out shared.ErrorResponse
+			var out ledger.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2918,7 +2932,7 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2939,6 +2953,8 @@ func (s *FormanceV1) ListAccounts(ctx context.Context, request operations.ListAc
 
 // ListLogs - List the logs from a ledger
 // List the logs from a ledger, sorted by ID in descending order.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRequest, opts ...operations.Option) (*operations.ListLogsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2952,12 +2968,11 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListLogsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/logs", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2995,7 +3010,7 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3109,7 +3124,7 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 				return nil, err
 			}
 
-			var out shared.LogsCursorResponse
+			var out ledger.LogsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3130,7 +3145,7 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3151,6 +3166,8 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 
 // ListTransactions - List transactions from a ledger
 // List transactions from a ledger, sorted by txid in descending order.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.ListTransactionsRequest, opts ...operations.Option) (*operations.ListTransactionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3164,12 +3181,11 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListTransactionsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3207,7 +3223,7 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3321,7 +3337,7 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 				return nil, err
 			}
 
-			var out shared.TransactionsCursorResponse
+			var out ledger.TransactionsCursorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3342,7 +3358,7 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3363,6 +3379,8 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 
 // ReadStats - Get statistics from a ledger
 // Get statistics from a ledger. (aggregate metrics on accounts and transactions)
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStatsRequest, opts ...operations.Option) (*operations.ReadStatsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3376,12 +3394,11 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ReadStatsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/stats", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3415,7 +3432,7 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3529,7 +3546,7 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 				return nil, err
 			}
 
-			var out shared.StatsResponse
+			var out ledger.StatsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3550,7 +3567,7 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3570,6 +3587,8 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 }
 
 // RevertTransaction - Revert a ledger transaction by its ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.RevertTransactionRequest, opts ...operations.Option) (*operations.RevertTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3583,12 +3602,11 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.RevertTransactionServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/transactions/{txid}/revert", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3626,7 +3644,7 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3742,7 +3760,7 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 				return nil, err
 			}
 
-			var out shared.TransactionResponse
+			var out ledger.TransactionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3763,7 +3781,7 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3785,6 +3803,8 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 // RunScript - Execute a Numscript
 // This route is deprecated, and has been merged into `POST /{ledger}/transactions`.
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScriptRequest, opts ...operations.Option) (*operations.RunScriptResponse, error) {
 	o := operations.Options{}
@@ -3799,12 +3819,11 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.RunScriptServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/script", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3849,7 +3868,7 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3963,7 +3982,7 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 				return nil, err
 			}
 
-			var out shared.ScriptResponse
+			var out ledger.ScriptResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3989,6 +4008,8 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 }
 
 // UpdateMapping - Update the mapping of a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.UpdateMappingRequest, opts ...operations.Option) (*operations.UpdateMappingResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4002,12 +4023,11 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateMappingServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/{ledger}/mapping", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4048,7 +4068,7 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4162,7 +4182,7 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 				return nil, err
 			}
 
-			var out shared.MappingResponse
+			var out ledger.MappingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4183,7 +4203,7 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 				return nil, err
 			}
 
-			var out sdkerrors.ErrorResponse
+			var out ledger.ErrorResponseError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

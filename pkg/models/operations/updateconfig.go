@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"net/http"
 )
 
+var UpdateConfigServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateConfigRequest struct {
-	ConfigUser shared.ConfigUser `request:"mediaType=application/json"`
+	ConfigUser webhooks.ConfigUser `request:"mediaType=application/json"`
 	// Config ID
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (u *UpdateConfigRequest) GetConfigUser() shared.ConfigUser {
+func (u *UpdateConfigRequest) GetConfigUser() webhooks.ConfigUser {
 	if u == nil {
-		return shared.ConfigUser{}
+		return webhooks.ConfigUser{}
 	}
 	return u.ConfigUser
 }

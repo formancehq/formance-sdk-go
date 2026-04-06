@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/gateway"
 	"net/http"
 )
+
+var GetVersionsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetVersionsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	GetVersionsResponse *shared.GetVersionsResponse
+	GetVersionsResponse *gateway.GetVersionsResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (g *GetVersionsResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetVersionsResponse) GetGetVersionsResponse() *shared.GetVersionsResponse {
+func (g *GetVersionsResponse) GetGetVersionsResponse() *gateway.GetVersionsResponse {
 	if g == nil {
 		return nil
 	}

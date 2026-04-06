@@ -67,10 +67,10 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ChangeConfigSecret
 
@@ -90,6 +90,7 @@ import(
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -105,7 +106,7 @@ func main() {
     )
 
     res, err := s.Webhooks.V1.ChangeConfigSecret(ctx, operations.ChangeConfigSecretRequest{
-        ConfigChangeSecret: &shared.ConfigChangeSecret{
+        ConfigChangeSecret: &webhooks.ConfigChangeSecret{
             Secret: "V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3",
         },
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",
@@ -133,10 +134,10 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeactivateConfig
 
@@ -192,10 +193,10 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeleteConfig
 
@@ -251,10 +252,10 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetManyConfigs
 
@@ -311,10 +312,10 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## InsertConfig
 
@@ -339,6 +340,7 @@ import(
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"log"
 )
 
@@ -352,7 +354,7 @@ func main() {
         }),
     )
 
-    res, err := s.Webhooks.V1.InsertConfig(ctx, shared.ConfigUser{
+    res, err := s.Webhooks.V1.InsertConfig(ctx, webhooks.ConfigUser{
         Endpoint: "https://example.com",
         EventTypes: []string{
             "TYPE1",
@@ -372,11 +374,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `request`                                                    | [shared.ConfigUser](../../pkg/models/shared/configuser.md)   | :heavy_check_mark:                                           | The request object to use for the request.                   |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `ctx`                                                          | [context.Context](https://pkg.go.dev/context#Context)          | :heavy_check_mark:                                             | The context to use for the request.                            |
+| `request`                                                      | [webhooks.ConfigUser](../../pkg/models/webhooks/configuser.md) | :heavy_check_mark:                                             | The request object to use for the request.                     |
+| `opts`                                                         | [][operations.Option](../../pkg/models/operations/option.md)   | :heavy_minus_sign:                                             | The options for this request.                                  |
 
 ### Response
 
@@ -384,10 +386,10 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## TestConfig
 
@@ -443,10 +445,10 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## UpdateConfig
 
@@ -462,6 +464,7 @@ import(
 	"context"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -477,7 +480,7 @@ func main() {
     )
 
     res, err := s.Webhooks.V1.UpdateConfig(ctx, operations.UpdateConfigRequest{
-        ConfigUser: shared.ConfigUser{
+        ConfigUser: webhooks.ConfigUser{
             Endpoint: "https://example.com",
             EventTypes: []string{
                 "TYPE1",
@@ -511,7 +514,7 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.WebhooksErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |

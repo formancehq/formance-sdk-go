@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/auth"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -32,7 +32,9 @@ func newV1(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 }
 
 // CreateClient - Create client
-func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientRequest, opts ...operations.Option) (*operations.CreateClientResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *V1) CreateClient(ctx context.Context, request *auth.ClientOptions1, opts ...operations.Option) (*operations.CreateClientResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -45,12 +47,11 @@ func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientReque
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateClientServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/auth/clients")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -91,7 +92,7 @@ func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientReque
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -205,7 +206,7 @@ func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientReque
 				return nil, err
 			}
 
-			var out shared.CreateClientResponse
+			var out auth.CreateClientResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -231,6 +232,8 @@ func (s *V1) CreateClient(ctx context.Context, request *shared.CreateClientReque
 }
 
 // CreateSecret - Add a secret to a client
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRequest, opts ...operations.Option) (*operations.CreateSecretResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -244,12 +247,11 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateSecretServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}/secrets", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -264,7 +266,7 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 		OAuth2Scopes:     []string{"auth:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateSecretRequest", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "SecretOptions", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -290,7 +292,7 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -404,7 +406,7 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 				return nil, err
 			}
 
-			var out shared.CreateSecretResponse
+			var out auth.CreateSecretResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -430,6 +432,8 @@ func (s *V1) CreateSecret(ctx context.Context, request operations.CreateSecretRe
 }
 
 // DeleteClient - Delete client
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRequest, opts ...operations.Option) (*operations.DeleteClientResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -443,12 +447,11 @@ func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeleteClientServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -482,7 +485,7 @@ func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRe
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -603,6 +606,8 @@ func (s *V1) DeleteClient(ctx context.Context, request operations.DeleteClientRe
 }
 
 // DeleteSecret - Delete a secret from a client
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRequest, opts ...operations.Option) (*operations.DeleteSecretResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -616,12 +621,11 @@ func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeleteSecretServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}/secrets/{secretId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -655,7 +659,7 @@ func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRe
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -776,6 +780,8 @@ func (s *V1) DeleteSecret(ctx context.Context, request operations.DeleteSecretRe
 }
 
 // GetOIDCWellKnowns - Retrieve OpenID connect well-knowns.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (*operations.GetOIDCWellKnownsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -789,12 +795,11 @@ func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetOIDCWellKnownsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/auth/.well-known/openid-configuration")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -828,7 +833,7 @@ func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -948,8 +953,10 @@ func (s *V1) GetOIDCWellKnowns(ctx context.Context, opts ...operations.Option) (
 
 }
 
-// GetServerInfo - Get server info
-func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.GetServerInfoResponse, error) {
+// GetServerInfoAuth - Get server info
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *V1) GetServerInfoAuth(ctx context.Context, opts ...operations.Option) (*operations.GetServerInfoAuthResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -962,12 +969,11 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetServerInfoAuthServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/auth/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -978,7 +984,7 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "getServerInfo",
+		OperationID:      "getServerInfo_auth",
 		OAuth2Scopes:     []string{"auth:read"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
@@ -1001,7 +1007,7 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1100,7 +1106,7 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 		}
 	}
 
-	res := &operations.GetServerInfoResponse{
+	res := &operations.GetServerInfoAuthResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
@@ -1115,7 +1121,7 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 				return nil, err
 			}
 
-			var out shared.ServerInfo
+			var out auth.ServerInfo
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1141,6 +1147,8 @@ func (s *V1) GetServerInfo(ctx context.Context, opts ...operations.Option) (*ope
 }
 
 // ListClients - List clients
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*operations.ListClientsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1154,12 +1162,11 @@ func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListClientsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/auth/clients")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1193,7 +1200,7 @@ func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1307,7 +1314,7 @@ func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*opera
 				return nil, err
 			}
 
-			var out shared.ListClientsResponse
+			var out auth.ListClientsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1334,6 +1341,8 @@ func (s *V1) ListClients(ctx context.Context, opts ...operations.Option) (*opera
 
 // ListUsers - List users
 // List users
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operations.ListUsersResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1347,12 +1356,11 @@ func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListUsersServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/auth/users")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1386,7 +1394,7 @@ func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operati
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1500,7 +1508,7 @@ func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operati
 				return nil, err
 			}
 
-			var out shared.ListUsersResponse
+			var out auth.ListUsersResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1526,6 +1534,8 @@ func (s *V1) ListUsers(ctx context.Context, opts ...operations.Option) (*operati
 }
 
 // ReadClient - Read client
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientRequest, opts ...operations.Option) (*operations.ReadClientResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1539,12 +1549,11 @@ func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientReques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ReadClientServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1578,7 +1587,7 @@ func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientReques
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1692,7 +1701,7 @@ func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientReques
 				return nil, err
 			}
 
-			var out shared.ReadClientResponse
+			var out auth.ReadClientResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1719,6 +1728,8 @@ func (s *V1) ReadClient(ctx context.Context, request operations.ReadClientReques
 
 // ReadUser - Read user
 // Read user
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, opts ...operations.Option) (*operations.ReadUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1732,12 +1743,11 @@ func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ReadUserServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/users/{userId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1771,7 +1781,7 @@ func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1885,7 +1895,7 @@ func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, o
 				return nil, err
 			}
 
-			var out shared.ReadUserResponse
+			var out auth.ReadUserResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1911,6 +1921,8 @@ func (s *V1) ReadUser(ctx context.Context, request operations.ReadUserRequest, o
 }
 
 // UpdateClient - Update client
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRequest, opts ...operations.Option) (*operations.UpdateClientResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1924,12 +1936,11 @@ func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRe
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateClientServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/auth/clients/{clientId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1944,7 +1955,7 @@ func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRe
 		OAuth2Scopes:     []string{"auth:write"},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "CreateClientRequest", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "ClientOptions", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1970,7 +1981,7 @@ func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2084,12 +2095,12 @@ func (s *V1) UpdateClient(ctx context.Context, request operations.UpdateClientRe
 				return nil, err
 			}
 
-			var out shared.UpdateClientResponse
+			var out auth.CreateClientResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UpdateClientResponse = &out
+			res.CreateClientResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

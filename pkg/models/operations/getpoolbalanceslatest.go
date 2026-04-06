@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var GetPoolBalancesLatestServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetPoolBalancesLatestRequest struct {
 	// The pool ID.
@@ -23,7 +27,7 @@ type GetPoolBalancesLatestResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PoolBalancesLatestResponse *shared.PoolBalancesLatestResponse
+	PoolBalancesLatestResponse *payments.PoolBalancesLatestResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,7 +41,7 @@ func (g *GetPoolBalancesLatestResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetPoolBalancesLatestResponse) GetPoolBalancesLatestResponse() *shared.PoolBalancesLatestResponse {
+func (g *GetPoolBalancesLatestResponse) GetPoolBalancesLatestResponse() *payments.PoolBalancesLatestResponse {
 	if g == nil {
 		return nil
 	}

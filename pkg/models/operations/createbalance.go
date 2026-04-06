@@ -3,22 +3,26 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
 
+var CreateBalanceServerList = []string{
+	"http://localhost:8080/",
+}
+
 type CreateBalanceRequest struct {
-	CreateBalanceRequest *shared.CreateBalanceRequest `request:"mediaType=application/json"`
+	Balance *wallets.Balance `request:"mediaType=application/json"`
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 	ID             string  `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (c *CreateBalanceRequest) GetCreateBalanceRequest() *shared.CreateBalanceRequest {
+func (c *CreateBalanceRequest) GetBalance() *wallets.Balance {
 	if c == nil {
 		return nil
 	}
-	return c.CreateBalanceRequest
+	return c.Balance
 }
 
 func (c *CreateBalanceRequest) GetIdempotencyKey() *string {
@@ -39,7 +43,7 @@ type CreateBalanceResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Created balance
-	CreateBalanceResponse *shared.CreateBalanceResponse
+	CreateBalanceResponse *wallets.CreateBalanceResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -53,7 +57,7 @@ func (c *CreateBalanceResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreateBalanceResponse) GetCreateBalanceResponse() *shared.CreateBalanceResponse {
+func (c *CreateBalanceResponse) GetCreateBalanceResponse() *wallets.CreateBalanceResponse {
 	if c == nil {
 		return nil
 	}

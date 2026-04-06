@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var UpdateBankAccountMetadataServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateBankAccountMetadataRequest struct {
-	UpdateBankAccountMetadataRequest shared.UpdateBankAccountMetadataRequest `request:"mediaType=application/json"`
+	UpdateBankAccountMetadataRequest payments.UpdateBankAccountMetadataRequest `request:"mediaType=application/json"`
 	// The bank account ID.
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountId"`
 }
 
-func (u *UpdateBankAccountMetadataRequest) GetUpdateBankAccountMetadataRequest() shared.UpdateBankAccountMetadataRequest {
+func (u *UpdateBankAccountMetadataRequest) GetUpdateBankAccountMetadataRequest() payments.UpdateBankAccountMetadataRequest {
 	if u == nil {
-		return shared.UpdateBankAccountMetadataRequest{}
+		return payments.UpdateBankAccountMetadataRequest{}
 	}
 	return u.UpdateBankAccountMetadataRequest
 }

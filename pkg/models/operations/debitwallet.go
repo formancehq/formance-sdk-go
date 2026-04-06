@@ -3,18 +3,22 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
 
+var DebitWalletServerList = []string{
+	"http://localhost:8080/",
+}
+
 type DebitWalletRequest struct {
-	DebitWalletRequest *shared.DebitWalletRequest `request:"mediaType=application/json"`
+	DebitWalletRequest *wallets.DebitWalletRequest `request:"mediaType=application/json"`
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 	ID             string  `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (d *DebitWalletRequest) GetDebitWalletRequest() *shared.DebitWalletRequest {
+func (d *DebitWalletRequest) GetDebitWalletRequest() *wallets.DebitWalletRequest {
 	if d == nil {
 		return nil
 	}
@@ -39,7 +43,7 @@ type DebitWalletResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Wallet successfully debited as a pending hold
-	DebitWalletResponse *shared.DebitWalletResponse
+	DebitWalletResponse *wallets.DebitWalletResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -53,7 +57,7 @@ func (d *DebitWalletResponse) GetContentType() string {
 	return d.ContentType
 }
 
-func (d *DebitWalletResponse) GetDebitWalletResponse() *shared.DebitWalletResponse {
+func (d *DebitWalletResponse) GetDebitWalletResponse() *wallets.DebitWalletResponse {
 	if d == nil {
 		return nil
 	}

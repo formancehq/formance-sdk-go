@@ -3,20 +3,24 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var GetConnectorTaskServerList = []string{
+	"http://localhost:8080/",
+}
+
 type GetConnectorTaskRequest struct {
 	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
 	// The task ID.
 	TaskID string `pathParam:"style=simple,explode=false,name=taskId"`
 }
 
-func (g *GetConnectorTaskRequest) GetConnector() shared.Connector {
+func (g *GetConnectorTaskRequest) GetConnector() payments.Connector {
 	if g == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return g.Connector
 }
@@ -36,7 +40,7 @@ type GetConnectorTaskResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TaskResponse *shared.TaskResponse
+	TaskResponse *payments.TaskResponse
 }
 
 func (g *GetConnectorTaskResponse) GetContentType() string {
@@ -60,7 +64,7 @@ func (g *GetConnectorTaskResponse) GetRawResponse() *http.Response {
 	return g.RawResponse
 }
 
-func (g *GetConnectorTaskResponse) GetTaskResponse() *shared.TaskResponse {
+func (g *GetConnectorTaskResponse) GetTaskResponse() *payments.TaskResponse {
 	if g == nil {
 		return nil
 	}

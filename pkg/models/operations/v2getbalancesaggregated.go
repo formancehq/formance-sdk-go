@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
 
+var V2GetBalancesAggregatedServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2GetBalancesAggregatedRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Name of the ledger.
-	Ledger string         `pathParam:"style=simple,explode=false,name=ledger"`
-	Pit    *time.Time     `queryParam:"style=form,explode=true,name=pit"`
-	Query  map[string]any `queryParam:"serialization=json,name=query"`
+	Ledger string     `pathParam:"style=simple,explode=false,name=ledger"`
+	Pit    *time.Time `queryParam:"style=form,explode=true,name=pit"`
 	// Use insertion date instead of effective date
 	UseInsertionDate *bool `queryParam:"style=form,explode=true,name=useInsertionDate"`
 }
@@ -29,6 +33,13 @@ func (v *V2GetBalancesAggregatedRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+func (v *V2GetBalancesAggregatedRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return map[string]any{}
+	}
+	return v.RequestBody
+}
+
 func (v *V2GetBalancesAggregatedRequest) GetLedger() string {
 	if v == nil {
 		return ""
@@ -41,13 +52,6 @@ func (v *V2GetBalancesAggregatedRequest) GetPit() *time.Time {
 		return nil
 	}
 	return v.Pit
-}
-
-func (v *V2GetBalancesAggregatedRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
 }
 
 func (v *V2GetBalancesAggregatedRequest) GetUseInsertionDate() *bool {
@@ -68,7 +72,7 @@ type V2GetBalancesAggregatedResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2AggregateBalancesResponse *shared.V2AggregateBalancesResponse
+	V2AggregateBalancesResponse *ledger.V2AggregateBalancesResponse
 }
 
 func (v *V2GetBalancesAggregatedResponse) GetContentType() string {
@@ -92,7 +96,7 @@ func (v *V2GetBalancesAggregatedResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetBalancesAggregatedResponse) GetV2AggregateBalancesResponse() *shared.V2AggregateBalancesResponse {
+func (v *V2GetBalancesAggregatedResponse) GetV2AggregateBalancesResponse() *ledger.V2AggregateBalancesResponse {
 	if v == nil {
 		return nil
 	}

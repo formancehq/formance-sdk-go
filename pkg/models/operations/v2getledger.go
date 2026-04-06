@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2GetLedgerServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2GetLedgerRequest struct {
 	// Name of the ledger.
@@ -30,7 +34,7 @@ type V2GetLedgerResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2GetLedgerResponse *shared.V2GetLedgerResponse
+	V2GetLedgerResponse *ledger.V2GetLedgerResponse
 }
 
 func (v *V2GetLedgerResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V2GetLedgerResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetLedgerResponse) GetV2GetLedgerResponse() *shared.V2GetLedgerResponse {
+func (v *V2GetLedgerResponse) GetV2GetLedgerResponse() *ledger.V2GetLedgerResponse {
 	if v == nil {
 		return nil
 	}

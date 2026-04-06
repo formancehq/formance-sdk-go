@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var V2CreateLedgerServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2CreateLedgerRequest struct {
-	V2CreateLedgerRequest shared.V2CreateLedgerRequest `request:"mediaType=application/json"`
+	V2CreateLedgerRequest ledger.V2CreateLedgerRequest `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (v *V2CreateLedgerRequest) GetV2CreateLedgerRequest() shared.V2CreateLedgerRequest {
+func (v *V2CreateLedgerRequest) GetV2CreateLedgerRequest() ledger.V2CreateLedgerRequest {
 	if v == nil {
-		return shared.V2CreateLedgerRequest{}
+		return ledger.V2CreateLedgerRequest{}
 	}
 	return v.V2CreateLedgerRequest
 }
