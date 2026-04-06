@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var V2CreatePipelineServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2CreatePipelineRequest struct {
-	V2CreatePipelineRequest *shared.V2CreatePipelineRequest `request:"mediaType=application/json"`
+	V2CreatePipelineRequest *ledger.V2CreatePipelineRequest `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (v *V2CreatePipelineRequest) GetV2CreatePipelineRequest() *shared.V2CreatePipelineRequest {
+func (v *V2CreatePipelineRequest) GetV2CreatePipelineRequest() *ledger.V2CreatePipelineRequest {
 	if v == nil {
 		return nil
 	}
@@ -30,21 +34,6 @@ func (v *V2CreatePipelineRequest) GetLedger() string {
 // #region class-body-v2createpipelinerequest
 // #endregion class-body-v2createpipelinerequest
 
-// V2CreatePipelineResponseBody - Created ipeline
-type V2CreatePipelineResponseBody struct {
-	Data shared.V2Pipeline `json:"data"`
-}
-
-func (v *V2CreatePipelineResponseBody) GetData() shared.V2Pipeline {
-	if v == nil {
-		return shared.V2Pipeline{}
-	}
-	return v.Data
-}
-
-// #region class-body-v2createpipelineresponsebody
-// #endregion class-body-v2createpipelineresponsebody
-
 type V2CreatePipelineResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -53,7 +42,7 @@ type V2CreatePipelineResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Created ipeline
-	Object *V2CreatePipelineResponseBody
+	V2CreatePipelineResponse *ledger.V2CreatePipelineV2CreatePipelineResponse
 }
 
 func (v *V2CreatePipelineResponse) GetContentType() string {
@@ -77,11 +66,11 @@ func (v *V2CreatePipelineResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2CreatePipelineResponse) GetObject() *V2CreatePipelineResponseBody {
+func (v *V2CreatePipelineResponse) GetV2CreatePipelineResponse() *ledger.V2CreatePipelineV2CreatePipelineResponse {
 	if v == nil {
 		return nil
 	}
-	return v.Object
+	return v.V2CreatePipelineResponse
 }
 
 // #region class-body-v2createpipelineresponse

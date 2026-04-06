@@ -8,11 +8,15 @@ import (
 	"time"
 )
 
+var V2CountAccountsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2CountAccountsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Name of the ledger.
-	Ledger string         `pathParam:"style=simple,explode=false,name=ledger"`
-	Pit    *time.Time     `queryParam:"style=form,explode=true,name=pit"`
-	Query  map[string]any `queryParam:"serialization=json,name=query"`
+	Ledger string     `pathParam:"style=simple,explode=false,name=ledger"`
+	Pit    *time.Time `queryParam:"style=form,explode=true,name=pit"`
 }
 
 func (v V2CountAccountsRequest) MarshalJSON() ([]byte, error) {
@@ -24,6 +28,13 @@ func (v *V2CountAccountsRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2CountAccountsRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return map[string]any{}
+	}
+	return v.RequestBody
 }
 
 func (v *V2CountAccountsRequest) GetLedger() string {
@@ -38,13 +49,6 @@ func (v *V2CountAccountsRequest) GetPit() *time.Time {
 		return nil
 	}
 	return v.Pit
-}
-
-func (v *V2CountAccountsRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
 }
 
 // #region class-body-v2countaccountsrequest

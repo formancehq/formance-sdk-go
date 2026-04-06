@@ -3,14 +3,18 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
 
+var ListConnectorTasksV1ServerList = []string{
+	"http://localhost:8080/",
+}
+
 type ListConnectorTasksV1Request struct {
 	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
 	// The connector ID.
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorId"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
@@ -35,9 +39,9 @@ func (l *ListConnectorTasksV1Request) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (l *ListConnectorTasksV1Request) GetConnector() shared.Connector {
+func (l *ListConnectorTasksV1Request) GetConnector() payments.Connector {
 	if l == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return l.Connector
 }
@@ -74,7 +78,7 @@ type ListConnectorTasksV1Response struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	TasksCursor *shared.TasksCursor
+	TasksCursor *payments.TasksCursor
 }
 
 func (l *ListConnectorTasksV1Response) GetContentType() string {
@@ -98,7 +102,7 @@ func (l *ListConnectorTasksV1Response) GetRawResponse() *http.Response {
 	return l.RawResponse
 }
 
-func (l *ListConnectorTasksV1Response) GetTasksCursor() *shared.TasksCursor {
+func (l *ListConnectorTasksV1Response) GetTasksCursor() *payments.TasksCursor {
 	if l == nil {
 		return nil
 	}

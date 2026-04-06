@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var V3GetConnectorConfigServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3GetConnectorConfigRequest struct {
 	// The connector ID
@@ -30,7 +34,7 @@ type V3GetConnectorConfigResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3GetConnectorConfigResponse *shared.V3GetConnectorConfigResponse
+	V3GetConnectorConfigResponse *payments.V3GetConnectorConfigResponse
 }
 
 func (v *V3GetConnectorConfigResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V3GetConnectorConfigResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3GetConnectorConfigResponse) GetV3GetConnectorConfigResponse() *shared.V3GetConnectorConfigResponse {
+func (v *V3GetConnectorConfigResponse) GetV3GetConnectorConfigResponse() *payments.V3GetConnectorConfigResponse {
 	if v == nil {
 		return nil
 	}

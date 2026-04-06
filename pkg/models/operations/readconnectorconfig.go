@@ -3,25 +3,29 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
-type ReadConnectorConfigRequest struct {
-	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+var ReadConnectorConfigServerList = []string{
+	"http://localhost:8080/",
 }
 
-func (r *ReadConnectorConfigRequest) GetConnector() shared.Connector {
+type ReadConnectorConfigRequest struct {
+	// The name of the connector.
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
+}
+
+func (r *ReadConnectorConfigRequest) GetConnector() payments.Connector {
 	if r == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return r.Connector
 }
 
 type ReadConnectorConfigResponse struct {
 	// OK
-	ConnectorConfigResponse *shared.ConnectorConfigResponse
+	ConnectorConfigResponse *payments.ConnectorConfigResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -30,7 +34,7 @@ type ReadConnectorConfigResponse struct {
 	RawResponse *http.Response
 }
 
-func (r *ReadConnectorConfigResponse) GetConnectorConfigResponse() *shared.ConnectorConfigResponse {
+func (r *ReadConnectorConfigResponse) GetConnectorConfigResponse() *payments.ConnectorConfigResponse {
 	if r == nil {
 		return nil
 	}

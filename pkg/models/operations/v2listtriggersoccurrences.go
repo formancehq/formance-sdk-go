@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var V2ListTriggersOccurrencesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2ListTriggersOccurrencesRequest struct {
 	// Parameter used in pagination requests.
@@ -53,7 +57,7 @@ type V2ListTriggersOccurrencesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// List of triggers occurrences
-	V2ListTriggersOccurrencesResponse *shared.V2ListTriggersOccurrencesResponse
+	V2ListTriggersOccurrencesResponse *orchestration.V2ListTriggersOccurrencesResponse
 }
 
 func (v *V2ListTriggersOccurrencesResponse) GetContentType() string {
@@ -77,7 +81,7 @@ func (v *V2ListTriggersOccurrencesResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2ListTriggersOccurrencesResponse) GetV2ListTriggersOccurrencesResponse() *shared.V2ListTriggersOccurrencesResponse {
+func (v *V2ListTriggersOccurrencesResponse) GetV2ListTriggersOccurrencesResponse() *orchestration.V2ListTriggersOccurrencesResponse {
 	if v == nil {
 		return nil
 	}

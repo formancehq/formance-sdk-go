@@ -9,8 +9,8 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -33,6 +33,8 @@ func newFormancePaymentsV1(rootSDK *Formance, sdkConfig config.SDKConfiguration,
 
 // AddAccountToPool - Add an account to a pool
 // Add an account to a pool
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request operations.AddAccountToPoolRequest, opts ...operations.Option) (*operations.AddAccountToPoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -46,12 +48,11 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.AddAccountToPoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -92,7 +93,7 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -208,7 +209,7 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -229,6 +230,8 @@ func (s *FormancePaymentsV1) AddAccountToPool(ctx context.Context, request opera
 
 // ConnectorsTransfer - Transfer funds between Connector accounts
 // Execute a transfer between two accounts.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request operations.ConnectorsTransferRequest, opts ...operations.Option) (*operations.ConnectorsTransferResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -242,12 +245,11 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ConnectorsTransferServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/transfers", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -288,7 +290,7 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -402,7 +404,7 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.TransferResponse
+			var out payments.TransferResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -423,7 +425,7 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -444,7 +446,9 @@ func (s *FormancePaymentsV1) ConnectorsTransfer(ctx context.Context, request ope
 
 // CreateAccount - Create an account
 // Create an account
-func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.AccountRequest, opts ...operations.Option) (*operations.CreateAccountResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request payments.AccountRequest, opts ...operations.Option) (*operations.CreateAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -457,12 +461,11 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -503,7 +506,7 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -617,12 +620,12 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 				return nil, err
 			}
 
-			var out shared.PaymentsAccountResponse
+			var out payments.AccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.PaymentsAccountResponse = &out
+			res.AccountResponse = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -638,7 +641,7 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -659,7 +662,9 @@ func (s *FormancePaymentsV1) CreateAccount(ctx context.Context, request shared.A
 
 // CreateBankAccount - Create a BankAccount in Payments and on the PSP
 // Create a bank account in Payments and on the PSP.
-func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shared.BankAccountRequest, opts ...operations.Option) (*operations.CreateBankAccountResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request payments.BankAccountRequest, opts ...operations.Option) (*operations.CreateBankAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -672,12 +677,11 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateBankAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/bank-accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -718,7 +722,7 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -832,7 +836,7 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 				return nil, err
 			}
 
-			var out shared.BankAccountResponse
+			var out payments.BankAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -853,7 +857,7 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -874,7 +878,9 @@ func (s *FormancePaymentsV1) CreateBankAccount(ctx context.Context, request shar
 
 // CreatePayment - Create a payment
 // Create a payment
-func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.PaymentRequest, opts ...operations.Option) (*operations.CreatePaymentResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request payments.PaymentRequest, opts ...operations.Option) (*operations.CreatePaymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -887,12 +893,11 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreatePaymentServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/payments")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -933,7 +938,7 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1047,7 +1052,7 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 				return nil, err
 			}
 
-			var out shared.PaymentResponse
+			var out payments.PaymentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1068,7 +1073,7 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1089,7 +1094,9 @@ func (s *FormancePaymentsV1) CreatePayment(ctx context.Context, request shared.P
 
 // CreatePool - Create a Pool
 // Create a Pool
-func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.PoolRequest, opts ...operations.Option) (*operations.CreatePoolResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request payments.PoolRequest, opts ...operations.Option) (*operations.CreatePoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1102,12 +1109,11 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreatePoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/pools")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1148,7 +1154,7 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1262,7 +1268,7 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 				return nil, err
 			}
 
-			var out shared.PoolResponse
+			var out payments.PoolResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1283,7 +1289,7 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1304,7 +1310,9 @@ func (s *FormancePaymentsV1) CreatePool(ctx context.Context, request shared.Pool
 
 // CreateTransferInitiation - Create a TransferInitiation
 // Create a transfer initiation
-func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, request shared.TransferInitiationRequest, opts ...operations.Option) (*operations.CreateTransferInitiationResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, request payments.TransferInitiationRequest, opts ...operations.Option) (*operations.CreateTransferInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1317,12 +1325,11 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateTransferInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/transfer-initiations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1363,7 +1370,7 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1477,7 +1484,7 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 				return nil, err
 			}
 
-			var out shared.TransferInitiationResponse
+			var out payments.TransferInitiationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1498,7 +1505,7 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1519,6 +1526,8 @@ func (s *FormancePaymentsV1) CreateTransferInitiation(ctx context.Context, reque
 
 // DeletePool - Delete a Pool
 // Delete a pool by its id.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.DeletePoolRequest, opts ...operations.Option) (*operations.DeletePoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1532,12 +1541,11 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeletePoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1571,7 +1579,7 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1687,7 +1695,7 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1708,6 +1716,8 @@ func (s *FormancePaymentsV1) DeletePool(ctx context.Context, request operations.
 
 // DeleteTransferInitiation - Delete a transfer initiation
 // Delete a transfer initiation by its id.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, request operations.DeleteTransferInitiationRequest, opts ...operations.Option) (*operations.DeleteTransferInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1721,12 +1731,11 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeleteTransferInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1760,7 +1769,7 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1876,7 +1885,7 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1896,6 +1905,8 @@ func (s *FormancePaymentsV1) DeleteTransferInitiation(ctx context.Context, reque
 }
 
 // ForwardBankAccount - Forward a bank account to a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request operations.ForwardBankAccountRequest, opts ...operations.Option) (*operations.ForwardBankAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1909,12 +1920,11 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ForwardBankAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/bank-accounts/{bankAccountId}/forward", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1955,7 +1965,7 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2069,7 +2079,7 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.BankAccountResponse
+			var out payments.BankAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2090,7 +2100,7 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2110,6 +2120,8 @@ func (s *FormancePaymentsV1) ForwardBankAccount(ctx context.Context, request ope
 }
 
 // GetAccountBalances - Get account balances
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request operations.GetAccountBalancesRequest, opts ...operations.Option) (*operations.GetAccountBalancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2123,12 +2135,11 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetAccountBalancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/accounts/{accountId}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2166,7 +2177,7 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2280,7 +2291,7 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.BalancesCursor
+			var out payments.BalancesCursor
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2301,7 +2312,215 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// GetAccountPayments - Get an account
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) GetAccountPayments(ctx context.Context, request operations.GetAccountPaymentsRequest, opts ...operations.Option) (*operations.GetAccountPaymentsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	baseURL := utils.ReplaceParameters(operations.GetAccountPaymentsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
+		baseURL = *o.ServerURL
+	}
+
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/accounts/{accountId}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "getAccount_payments",
+		OAuth2Scopes:     []string{"payments:read"},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"429",
+				"500",
+				"502",
+				"503",
+				"504",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.GetAccountPaymentsResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: httpRes.Header.Get("Content-Type"),
+		RawResponse: httpRes,
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out payments.AccountResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.AccountResponse = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2321,6 +2540,8 @@ func (s *FormancePaymentsV1) GetAccountBalances(ctx context.Context, request ope
 }
 
 // GetBankAccount - Get a bank account created by user on Formance
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operations.GetBankAccountRequest, opts ...operations.Option) (*operations.GetBankAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2334,12 +2555,11 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetBankAccountServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/bank-accounts/{bankAccountId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2373,7 +2593,7 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2487,7 +2707,7 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out shared.BankAccountResponse
+			var out payments.BankAccountResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2508,7 +2728,7 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2530,6 +2750,8 @@ func (s *FormancePaymentsV1) GetBankAccount(ctx context.Context, request operati
 // GetConnectorTask - Read a specific task of the connector
 // Get a specific task associated to the connector.
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request operations.GetConnectorTaskRequest, opts ...operations.Option) (*operations.GetConnectorTaskResponse, error) {
 	o := operations.Options{}
@@ -2544,12 +2766,11 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetConnectorTaskServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/tasks/{taskId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2583,7 +2804,7 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2697,7 +2918,7 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.TaskResponse
+			var out payments.TaskResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2718,7 +2939,7 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2739,6 +2960,8 @@ func (s *FormancePaymentsV1) GetConnectorTask(ctx context.Context, request opera
 
 // GetConnectorTaskV1 - Read a specific task of the connector
 // Get a specific task associated to the connector.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request operations.GetConnectorTaskV1Request, opts ...operations.Option) (*operations.GetConnectorTaskV1Response, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2752,12 +2975,11 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetConnectorTaskV1ServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/tasks/{taskId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2791,7 +3013,7 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2905,7 +3127,7 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.TaskResponse
+			var out payments.TaskResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2926,7 +3148,7 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2946,6 +3168,8 @@ func (s *FormancePaymentsV1) GetConnectorTaskV1(ctx context.Context, request ope
 }
 
 // GetPayment - Get a payment
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.GetPaymentRequest, opts ...operations.Option) (*operations.GetPaymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2959,12 +3183,11 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetPaymentServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/payments/{paymentId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2998,7 +3221,7 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3112,7 +3335,7 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out shared.PaymentResponse
+			var out payments.PaymentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3133,7 +3356,7 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3153,6 +3376,8 @@ func (s *FormancePaymentsV1) GetPayment(ctx context.Context, request operations.
 }
 
 // GetPool - Get a Pool
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.GetPoolRequest, opts ...operations.Option) (*operations.GetPoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3166,12 +3391,11 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetPoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3205,7 +3429,7 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3319,7 +3543,7 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 				return nil, err
 			}
 
-			var out shared.PoolResponse
+			var out payments.PoolResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3340,7 +3564,7 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3360,6 +3584,8 @@ func (s *FormancePaymentsV1) GetPool(ctx context.Context, request operations.Get
 }
 
 // GetPoolBalances - Get historical pool balances at a particular point in time
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operations.GetPoolBalancesRequest, opts ...operations.Option) (*operations.GetPoolBalancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3373,12 +3599,11 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetPoolBalancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3416,7 +3641,7 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3530,7 +3755,7 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out shared.PoolBalancesResponse
+			var out payments.PoolBalancesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3551,7 +3776,7 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3571,6 +3796,8 @@ func (s *FormancePaymentsV1) GetPoolBalances(ctx context.Context, request operat
 }
 
 // GetPoolBalancesLatest - Get latest pool balances
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request operations.GetPoolBalancesLatestRequest, opts ...operations.Option) (*operations.GetPoolBalancesLatestResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3584,12 +3811,11 @@ func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request 
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetPoolBalancesLatestServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/balances/latest", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3623,7 +3849,7 @@ func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3737,7 +3963,7 @@ func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out shared.PoolBalancesLatestResponse
+			var out payments.PoolBalancesLatestResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3758,7 +3984,215 @@ func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// GetServerInfoPayments - Get server info
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) GetServerInfoPayments(ctx context.Context, opts ...operations.Option) (*operations.GetServerInfoPaymentsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	baseURL := utils.ReplaceParameters(operations.GetServerInfoPaymentsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
+		baseURL = *o.ServerURL
+	}
+
+	opURL, err := url.JoinPath(baseURL, "/api/payments/_info")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "getServerInfo_payments",
+		OAuth2Scopes:     []string{"payments:read"},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"429",
+				"500",
+				"502",
+				"503",
+				"504",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.GetServerInfoPaymentsResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: httpRes.Header.Get("Content-Type"),
+		RawResponse: httpRes,
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out payments.ServerInfo
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.ServerInfo = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3778,6 +4212,8 @@ func (s *FormancePaymentsV1) GetPoolBalancesLatest(ctx context.Context, request 
 }
 
 // GetTransferInitiation - Get a transfer initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request operations.GetTransferInitiationRequest, opts ...operations.Option) (*operations.GetTransferInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3791,12 +4227,11 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetTransferInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3830,7 +4265,7 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3944,7 +4379,7 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out shared.TransferInitiationResponse
+			var out payments.TransferInitiationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3965,7 +4400,7 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3986,6 +4421,8 @@ func (s *FormancePaymentsV1) GetTransferInitiation(ctx context.Context, request 
 
 // InstallConnector - Install a connector
 // Install a connector by its name and config.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request operations.InstallConnectorRequest, opts ...operations.Option) (*operations.InstallConnectorResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3999,12 +4436,11 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.InstallConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4045,7 +4481,7 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4159,7 +4595,7 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.ConnectorResponse
+			var out payments.ConnectorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4180,7 +4616,226 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// ListAccountsPayments - List accounts
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormancePaymentsV1) ListAccountsPayments(ctx context.Context, request operations.ListAccountsPaymentsRequest, opts ...operations.Option) (*operations.ListAccountsPaymentsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	baseURL := utils.ReplaceParameters(operations.ListAccountsPaymentsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
+		baseURL = *o.ServerURL
+	}
+
+	opURL, err := url.JoinPath(baseURL, "/api/payments/accounts")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "listAccounts_payments",
+		OAuth2Scopes:     []string{"payments:read"},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"429",
+				"500",
+				"502",
+				"503",
+				"504",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.ListAccountsPaymentsResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: httpRes.Header.Get("Content-Type"),
+		RawResponse: httpRes,
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out payments.AccountsCursor
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.AccountsCursor = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4201,6 +4856,8 @@ func (s *FormancePaymentsV1) InstallConnector(ctx context.Context, request opera
 
 // ListAllConnectors - List all installed connectors
 // List all installed connectors.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...operations.Option) (*operations.ListAllConnectorsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4214,12 +4871,11 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListAllConnectorsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/connectors")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4253,7 +4909,7 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4367,7 +5023,7 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 				return nil, err
 			}
 
-			var out shared.ConnectorsResponse
+			var out payments.ConnectorsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4388,7 +5044,7 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4409,6 +5065,8 @@ func (s *FormancePaymentsV1) ListAllConnectors(ctx context.Context, opts ...oper
 
 // ListBankAccounts - List bank accounts created by user on Formance
 // List all bank accounts created by user on Formance.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request operations.ListBankAccountsRequest, opts ...operations.Option) (*operations.ListBankAccountsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4422,12 +5080,11 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListBankAccountsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/bank-accounts")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4465,7 +5122,7 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4579,7 +5236,7 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.BankAccountsCursor
+			var out payments.BankAccountsCursor
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4600,7 +5257,7 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4621,6 +5278,8 @@ func (s *FormancePaymentsV1) ListBankAccounts(ctx context.Context, request opera
 
 // ListConfigsAvailableConnectors - List the configs of each available connector
 // List the configs of each available connector.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context, opts ...operations.Option) (*operations.ListConfigsAvailableConnectorsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4634,12 +5293,11 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListConfigsAvailableConnectorsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/connectors/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4673,7 +5331,7 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4787,7 +5445,7 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 				return nil, err
 			}
 
-			var out shared.ConnectorsConfigsResponse
+			var out payments.ConnectorsConfigsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4808,7 +5466,7 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -4830,6 +5488,8 @@ func (s *FormancePaymentsV1) ListConfigsAvailableConnectors(ctx context.Context,
 // ListConnectorTasks - List tasks from a connector
 // List all tasks associated with this connector.
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request operations.ListConnectorTasksRequest, opts ...operations.Option) (*operations.ListConnectorTasksResponse, error) {
 	o := operations.Options{}
@@ -4844,12 +5504,11 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListConnectorTasksServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/tasks", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4887,7 +5546,7 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5001,7 +5660,7 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.TasksCursor
+			var out payments.TasksCursor
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5022,7 +5681,7 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5043,6 +5702,8 @@ func (s *FormancePaymentsV1) ListConnectorTasks(ctx context.Context, request ope
 
 // ListConnectorTasksV1 - List tasks from a connector
 // List all tasks associated with this connector.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request operations.ListConnectorTasksV1Request, opts ...operations.Option) (*operations.ListConnectorTasksV1Response, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5056,12 +5717,11 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListConnectorTasksV1ServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/tasks", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5099,7 +5759,7 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5213,7 +5873,7 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 				return nil, err
 			}
 
-			var out shared.TasksCursor
+			var out payments.TasksCursor
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5234,7 +5894,7 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5254,6 +5914,8 @@ func (s *FormancePaymentsV1) ListConnectorTasksV1(ctx context.Context, request o
 }
 
 // ListPayments - List payments
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operations.ListPaymentsRequest, opts ...operations.Option) (*operations.ListPaymentsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5267,12 +5929,11 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListPaymentsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/payments")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5310,7 +5971,7 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5424,7 +6085,7 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 				return nil, err
 			}
 
-			var out shared.PaymentsCursor
+			var out payments.PaymentsCursor
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5445,7 +6106,7 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5465,6 +6126,8 @@ func (s *FormancePaymentsV1) ListPayments(ctx context.Context, request operation
 }
 
 // ListPools - List Pools
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.ListPoolsRequest, opts ...operations.Option) (*operations.ListPoolsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5478,12 +6141,11 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListPoolsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/pools")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5521,7 +6183,7 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5635,7 +6297,7 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 				return nil, err
 			}
 
-			var out shared.PoolsCursor
+			var out payments.PoolsCursor
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5656,7 +6318,7 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5676,6 +6338,8 @@ func (s *FormancePaymentsV1) ListPools(ctx context.Context, request operations.L
 }
 
 // ListTransferInitiations - List Transfer Initiations
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, request operations.ListTransferInitiationsRequest, opts ...operations.Option) (*operations.ListTransferInitiationsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5689,12 +6353,11 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListTransferInitiationsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/payments/transfer-initiations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5732,7 +6395,7 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5846,7 +6509,7 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 				return nil, err
 			}
 
-			var out shared.TransferInitiationsCursor
+			var out payments.TransferInitiationsCursor
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -5867,632 +6530,7 @@ func (s *FormancePaymentsV1) ListTransferInitiations(ctx context.Context, reques
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	}
-
-	return res, nil
-
-}
-
-// PaymentsgetAccount - Get an account
-func (s *FormancePaymentsV1) PaymentsgetAccount(ctx context.Context, request operations.PaymentsgetAccountRequest, opts ...operations.Option) (*operations.PaymentsgetAccountResponse, error) {
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionRetries,
-		operations.SupportedOptionTimeout,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/accounts/{accountId}", request, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	hookCtx := hooks.HookContext{
-		SDK:              s.rootSDK,
-		SDKConfiguration: s.sdkConfiguration,
-		BaseURL:          baseURL,
-		Context:          ctx,
-		OperationID:      "paymentsgetAccount",
-		OAuth2Scopes:     []string{"payments:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	globalRetryConfig := s.sdkConfiguration.RetryConfig
-	retryConfig := o.Retries
-	if retryConfig == nil {
-		if globalRetryConfig != nil {
-			retryConfig = globalRetryConfig
-		}
-	}
-
-	var httpRes *http.Response
-	if retryConfig != nil {
-		httpRes, err = utils.Retry(ctx, utils.Retries{
-			Config: retryConfig,
-			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
-			},
-		}, func() (*http.Response, error) {
-			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
-				copyBody, err := req.GetBody()
-
-				if err != nil {
-					return nil, err
-				}
-
-				req.Body = copyBody
-			}
-
-			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-			if err != nil {
-				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
-					return nil, err
-				}
-
-				return nil, retry.Permanent(err)
-			}
-
-			httpRes, err := s.sdkConfiguration.Client.Do(req)
-			if err != nil || httpRes == nil {
-				if err != nil {
-					err = fmt.Errorf("error sending request: %w", err)
-				} else {
-					err = fmt.Errorf("error sending request: no response")
-				}
-
-				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			}
-			return httpRes, err
-		})
-
-		if err != nil {
-			return nil, err
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	} else {
-		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-		if err != nil {
-			return nil, err
-		}
-
-		httpRes, err = s.sdkConfiguration.Client.Do(req)
-		if err != nil || httpRes == nil {
-			if err != nil {
-				err = fmt.Errorf("error sending request: %w", err)
-			} else {
-				err = fmt.Errorf("error sending request: no response")
-			}
-
-			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
-			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-			if err != nil {
-				return nil, err
-			} else if _httpRes != nil {
-				httpRes = _httpRes
-			}
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	res := &operations.PaymentsgetAccountResponse{
-		StatusCode:  httpRes.StatusCode,
-		ContentType: httpRes.Header.Get("Content-Type"),
-		RawResponse: httpRes,
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out shared.PaymentsAccountResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.PaymentsAccountResponse = &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	default:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.PaymentsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	}
-
-	return res, nil
-
-}
-
-// PaymentsgetServerInfo - Get server info
-func (s *FormancePaymentsV1) PaymentsgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.PaymentsgetServerInfoResponse, error) {
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionRetries,
-		operations.SupportedOptionTimeout,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := url.JoinPath(baseURL, "/api/payments/_info")
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	hookCtx := hooks.HookContext{
-		SDK:              s.rootSDK,
-		SDKConfiguration: s.sdkConfiguration,
-		BaseURL:          baseURL,
-		Context:          ctx,
-		OperationID:      "paymentsgetServerInfo",
-		OAuth2Scopes:     []string{"payments:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	globalRetryConfig := s.sdkConfiguration.RetryConfig
-	retryConfig := o.Retries
-	if retryConfig == nil {
-		if globalRetryConfig != nil {
-			retryConfig = globalRetryConfig
-		}
-	}
-
-	var httpRes *http.Response
-	if retryConfig != nil {
-		httpRes, err = utils.Retry(ctx, utils.Retries{
-			Config: retryConfig,
-			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
-			},
-		}, func() (*http.Response, error) {
-			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
-				copyBody, err := req.GetBody()
-
-				if err != nil {
-					return nil, err
-				}
-
-				req.Body = copyBody
-			}
-
-			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-			if err != nil {
-				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
-					return nil, err
-				}
-
-				return nil, retry.Permanent(err)
-			}
-
-			httpRes, err := s.sdkConfiguration.Client.Do(req)
-			if err != nil || httpRes == nil {
-				if err != nil {
-					err = fmt.Errorf("error sending request: %w", err)
-				} else {
-					err = fmt.Errorf("error sending request: no response")
-				}
-
-				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			}
-			return httpRes, err
-		})
-
-		if err != nil {
-			return nil, err
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	} else {
-		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-		if err != nil {
-			return nil, err
-		}
-
-		httpRes, err = s.sdkConfiguration.Client.Do(req)
-		if err != nil || httpRes == nil {
-			if err != nil {
-				err = fmt.Errorf("error sending request: %w", err)
-			} else {
-				err = fmt.Errorf("error sending request: no response")
-			}
-
-			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
-			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-			if err != nil {
-				return nil, err
-			} else if _httpRes != nil {
-				httpRes = _httpRes
-			}
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	res := &operations.PaymentsgetServerInfoResponse{
-		StatusCode:  httpRes.StatusCode,
-		ContentType: httpRes.Header.Get("Content-Type"),
-		RawResponse: httpRes,
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out shared.PaymentsServerInfo
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.PaymentsServerInfo = &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	default:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.PaymentsErrorResponse
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	}
-
-	return res, nil
-
-}
-
-// PaymentslistAccounts - List accounts
-func (s *FormancePaymentsV1) PaymentslistAccounts(ctx context.Context, request operations.PaymentslistAccountsRequest, opts ...operations.Option) (*operations.PaymentslistAccountsResponse, error) {
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionRetries,
-		operations.SupportedOptionTimeout,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := url.JoinPath(baseURL, "/api/payments/accounts")
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	hookCtx := hooks.HookContext{
-		SDK:              s.rootSDK,
-		SDKConfiguration: s.sdkConfiguration,
-		BaseURL:          baseURL,
-		Context:          ctx,
-		OperationID:      "paymentslistAccounts",
-		OAuth2Scopes:     []string{"payments:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	globalRetryConfig := s.sdkConfiguration.RetryConfig
-	retryConfig := o.Retries
-	if retryConfig == nil {
-		if globalRetryConfig != nil {
-			retryConfig = globalRetryConfig
-		}
-	}
-
-	var httpRes *http.Response
-	if retryConfig != nil {
-		httpRes, err = utils.Retry(ctx, utils.Retries{
-			Config: retryConfig,
-			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
-			},
-		}, func() (*http.Response, error) {
-			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
-				copyBody, err := req.GetBody()
-
-				if err != nil {
-					return nil, err
-				}
-
-				req.Body = copyBody
-			}
-
-			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-			if err != nil {
-				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
-					return nil, err
-				}
-
-				return nil, retry.Permanent(err)
-			}
-
-			httpRes, err := s.sdkConfiguration.Client.Do(req)
-			if err != nil || httpRes == nil {
-				if err != nil {
-					err = fmt.Errorf("error sending request: %w", err)
-				} else {
-					err = fmt.Errorf("error sending request: no response")
-				}
-
-				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			}
-			return httpRes, err
-		})
-
-		if err != nil {
-			return nil, err
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	} else {
-		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-		if err != nil {
-			return nil, err
-		}
-
-		httpRes, err = s.sdkConfiguration.Client.Do(req)
-		if err != nil || httpRes == nil {
-			if err != nil {
-				err = fmt.Errorf("error sending request: %w", err)
-			} else {
-				err = fmt.Errorf("error sending request: no response")
-			}
-
-			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
-			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-			if err != nil {
-				return nil, err
-			} else if _httpRes != nil {
-				httpRes = _httpRes
-			}
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	res := &operations.PaymentslistAccountsResponse{
-		StatusCode:  httpRes.StatusCode,
-		ContentType: httpRes.Header.Get("Content-Type"),
-		RawResponse: httpRes,
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out shared.AccountsCursor
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.AccountsCursor = &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	default:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6514,6 +6552,8 @@ func (s *FormancePaymentsV1) PaymentslistAccounts(ctx context.Context, request o
 // ReadConnectorConfig - Read the config of a connector
 // Read connector config
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request operations.ReadConnectorConfigRequest, opts ...operations.Option) (*operations.ReadConnectorConfigResponse, error) {
 	o := operations.Options{}
@@ -6528,12 +6568,11 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ReadConnectorConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6567,7 +6606,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -6681,7 +6720,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 				return nil, err
 			}
 
-			var out shared.ConnectorConfigResponse
+			var out payments.ConnectorConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6702,7 +6741,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6723,6 +6762,8 @@ func (s *FormancePaymentsV1) ReadConnectorConfig(ctx context.Context, request op
 
 // ReadConnectorConfigV1 - Read the config of a connector
 // Read connector config
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request operations.ReadConnectorConfigV1Request, opts ...operations.Option) (*operations.ReadConnectorConfigV1Response, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -6736,12 +6777,11 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ReadConnectorConfigV1ServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6775,7 +6815,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -6889,7 +6929,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out shared.ConnectorConfigResponse
+			var out payments.ConnectorConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6910,7 +6950,7 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -6931,6 +6971,8 @@ func (s *FormancePaymentsV1) ReadConnectorConfigV1(ctx context.Context, request 
 
 // RemoveAccountFromPool - Remove an account from a pool
 // Remove an account from a pool by its id.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request operations.RemoveAccountFromPoolRequest, opts ...operations.Option) (*operations.RemoveAccountFromPoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -6944,12 +6986,11 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.RemoveAccountFromPoolServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/accounts/{accountId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6983,7 +7024,7 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7099,7 +7140,7 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7122,6 +7163,8 @@ func (s *FormancePaymentsV1) RemoveAccountFromPool(ctx context.Context, request 
 // Reset a connector by its name.
 // It will remove the connector and ALL PAYMENTS generated with it.
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operations.ResetConnectorRequest, opts ...operations.Option) (*operations.ResetConnectorResponse, error) {
 	o := operations.Options{}
@@ -7136,12 +7179,11 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ResetConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7175,7 +7217,7 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7291,7 +7333,7 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7313,6 +7355,8 @@ func (s *FormancePaymentsV1) ResetConnector(ctx context.Context, request operati
 // ResetConnectorV1 - Reset a connector
 // Reset a connector by its name.
 // It will remove the connector and ALL PAYMENTS generated with it.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request operations.ResetConnectorV1Request, opts ...operations.Option) (*operations.ResetConnectorV1Response, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7326,12 +7370,11 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ResetConnectorV1ServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7365,7 +7408,7 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7481,7 +7524,7 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7502,6 +7545,8 @@ func (s *FormancePaymentsV1) ResetConnectorV1(ctx context.Context, request opera
 
 // RetryTransferInitiation - Retry a failed transfer initiation
 // Retry a failed transfer initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, request operations.RetryTransferInitiationRequest, opts ...operations.Option) (*operations.RetryTransferInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7515,12 +7560,11 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.RetryTransferInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}/retry", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7554,7 +7598,7 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7670,7 +7714,7 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7691,6 +7735,8 @@ func (s *FormancePaymentsV1) RetryTransferInitiation(ctx context.Context, reques
 
 // ReverseTransferInitiation - Reverse a transfer initiation
 // Reverse transfer initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, request operations.ReverseTransferInitiationRequest, opts ...operations.Option) (*operations.ReverseTransferInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7704,12 +7750,11 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ReverseTransferInitiationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}/reverse", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7750,7 +7795,7 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7866,7 +7911,7 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -7888,6 +7933,8 @@ func (s *FormancePaymentsV1) ReverseTransferInitiation(ctx context.Context, requ
 // UninstallConnector - Uninstall a connector
 // Uninstall a connector by its name.
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request operations.UninstallConnectorRequest, opts ...operations.Option) (*operations.UninstallConnectorResponse, error) {
 	o := operations.Options{}
@@ -7902,12 +7949,11 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UninstallConnectorServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7941,7 +7987,7 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8057,7 +8103,7 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8078,6 +8124,8 @@ func (s *FormancePaymentsV1) UninstallConnector(ctx context.Context, request ope
 
 // UninstallConnectorV1 - Uninstall a connector
 // Uninstall a connector by its name.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request operations.UninstallConnectorV1Request, opts ...operations.Option) (*operations.UninstallConnectorV1Response, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8091,12 +8139,11 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UninstallConnectorV1ServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8130,7 +8177,7 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8246,7 +8293,7 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8266,6 +8313,8 @@ func (s *FormancePaymentsV1) UninstallConnectorV1(ctx context.Context, request o
 }
 
 // UpdateBankAccountMetadata - Update metadata of a bank account
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, request operations.UpdateBankAccountMetadataRequest, opts ...operations.Option) (*operations.UpdateBankAccountMetadataResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8279,12 +8328,11 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateBankAccountMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/bank-accounts/{bankAccountId}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8325,7 +8373,7 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8441,7 +8489,7 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8462,6 +8510,8 @@ func (s *FormancePaymentsV1) UpdateBankAccountMetadata(ctx context.Context, requ
 
 // UpdateConnectorConfigV1 - Update the config of a connector
 // Update connector config
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, request operations.UpdateConnectorConfigV1Request, opts ...operations.Option) (*operations.UpdateConnectorConfigV1Response, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8475,12 +8525,11 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateConnectorConfigV1ServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/connectors/{connector}/{connectorId}/config", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8521,7 +8570,7 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8637,7 +8686,7 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8657,6 +8706,8 @@ func (s *FormancePaymentsV1) UpdateConnectorConfigV1(ctx context.Context, reques
 }
 
 // UpdateMetadata - Update metadata
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operations.UpdateMetadataRequest, opts ...operations.Option) (*operations.UpdateMetadataResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8670,12 +8721,11 @@ func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateMetadataServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/payments/{paymentId}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8716,7 +8766,7 @@ func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operati
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8832,7 +8882,7 @@ func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -8852,6 +8902,8 @@ func (s *FormancePaymentsV1) UpdateMetadata(ctx context.Context, request operati
 }
 
 // UpdatePoolQuery - Update the query of a pool
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) UpdatePoolQuery(ctx context.Context, request operations.UpdatePoolQueryRequest, opts ...operations.Option) (*operations.UpdatePoolQueryResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8865,12 +8917,11 @@ func (s *FormancePaymentsV1) UpdatePoolQuery(ctx context.Context, request operat
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdatePoolQueryServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/pools/{poolId}/query", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8911,7 +8962,7 @@ func (s *FormancePaymentsV1) UpdatePoolQuery(ctx context.Context, request operat
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -9027,7 +9078,7 @@ func (s *FormancePaymentsV1) UpdatePoolQuery(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -9048,6 +9099,8 @@ func (s *FormancePaymentsV1) UpdatePoolQuery(ctx context.Context, request operat
 
 // UpdateTransferInitiationStatus - Update the status of a transfer initiation
 // Update a transfer initiation status
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormancePaymentsV1) UpdateTransferInitiationStatus(ctx context.Context, request operations.UpdateTransferInitiationStatusRequest, opts ...operations.Option) (*operations.UpdateTransferInitiationStatusResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -9061,12 +9114,11 @@ func (s *FormancePaymentsV1) UpdateTransferInitiationStatus(ctx context.Context,
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateTransferInitiationStatusServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/payments/transfer-initiations/{transferId}/status", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -9107,7 +9159,7 @@ func (s *FormancePaymentsV1) UpdateTransferInitiationStatus(ctx context.Context,
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -9223,7 +9275,7 @@ func (s *FormancePaymentsV1) UpdateTransferInitiationStatus(ctx context.Context,
 				return nil, err
 			}
 
-			var out sdkerrors.PaymentsErrorResponse
+			var out payments.PaymentsErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

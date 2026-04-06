@@ -3,19 +3,30 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ListPaymentInitiationRelatedPaymentsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ListPaymentInitiationRelatedPaymentsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
 	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
 	// The payment initiation ID
-	PaymentInitiationID string         `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
-	Query               map[string]any `queryParam:"serialization=json,name=query"`
+	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`
+}
+
+func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.RequestBody
 }
 
 func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetCursor() *string {
@@ -39,13 +50,6 @@ func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetPaymentInitiationID()
 	return v.PaymentInitiationID
 }
 
-func (v *V3ListPaymentInitiationRelatedPaymentsRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 // #region class-body-v3listpaymentinitiationrelatedpaymentsrequest
 // #endregion class-body-v3listpaymentinitiationrelatedpaymentsrequest
 
@@ -57,7 +61,7 @@ type V3ListPaymentInitiationRelatedPaymentsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3PaymentInitiationRelatedPaymentsCursorResponse *shared.V3PaymentInitiationRelatedPaymentsCursorResponse
+	V3PaymentInitiationRelatedPaymentsCursorResponse *payments.V3PaymentInitiationRelatedPaymentsCursorResponse
 }
 
 func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetContentType() string {
@@ -81,7 +85,7 @@ func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetRawResponse() *http.
 	return v.RawResponse
 }
 
-func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetV3PaymentInitiationRelatedPaymentsCursorResponse() *shared.V3PaymentInitiationRelatedPaymentsCursorResponse {
+func (v *V3ListPaymentInitiationRelatedPaymentsResponse) GetV3PaymentInitiationRelatedPaymentsCursorResponse() *payments.V3PaymentInitiationRelatedPaymentsCursorResponse {
 	if v == nil {
 		return nil
 	}

@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var V3GetPoolServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3GetPoolRequest struct {
 	// The pool ID
@@ -30,7 +34,7 @@ type V3GetPoolResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3GetPoolResponse *shared.V3GetPoolResponse
+	V3GetPoolResponse *payments.V3GetPoolResponse
 }
 
 func (v *V3GetPoolResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V3GetPoolResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3GetPoolResponse) GetV3GetPoolResponse() *shared.V3GetPoolResponse {
+func (v *V3GetPoolResponse) GetV3GetPoolResponse() *payments.V3GetPoolResponse {
 	if v == nil {
 		return nil
 	}

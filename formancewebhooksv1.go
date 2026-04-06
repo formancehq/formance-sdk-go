@@ -10,7 +10,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -33,6 +33,8 @@ func newFormanceWebhooksV1(rootSDK *Formance, sdkConfig config.SDKConfiguration,
 
 // ActivateConfig - Activate one config
 // Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operations.ActivateConfigRequest, opts ...operations.Option) (*operations.ActivateConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -46,12 +48,11 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ActivateConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/activate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -85,7 +86,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -199,7 +200,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -220,7 +221,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -244,6 +245,8 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 //
 // If not passed or empty, a secret is automatically generated.
 // The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request operations.ChangeConfigSecretRequest, opts ...operations.Option) (*operations.ChangeConfigSecretResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -257,12 +260,11 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ChangeConfigSecretServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/secret/change", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -303,7 +305,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -417,7 +419,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -438,7 +440,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -459,6 +461,8 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 
 // DeactivateConfig - Deactivate one config
 // Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request operations.DeactivateConfigRequest, opts ...operations.Option) (*operations.DeactivateConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -472,12 +476,11 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeactivateConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/deactivate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -511,7 +514,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -625,7 +628,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -646,7 +649,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -667,6 +670,8 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 
 // DeleteConfig - Delete one config
 // Delete a webhooks config by ID.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operations.DeleteConfigRequest, opts ...operations.Option) (*operations.DeleteConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -680,12 +685,11 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeleteConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -719,7 +723,7 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -835,7 +839,7 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -856,6 +860,8 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 
 // GetManyConfigs - Get many configs
 // Sorted by updated date descending
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operations.GetManyConfigsRequest, opts ...operations.Option) (*operations.GetManyConfigsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -869,12 +875,11 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetManyConfigsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/webhooks/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -912,7 +917,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1026,7 +1031,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out shared.ConfigsResponse
+			var out webhooks.ConfigsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1047,7 +1052,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1076,7 +1081,9 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 // The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 //
 // All eventTypes are converted to lower-case when inserted.
-func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.ConfigUser, opts ...operations.Option) (*operations.InsertConfigResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request webhooks.ConfigUser, opts ...operations.Option) (*operations.InsertConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1089,12 +1096,11 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.InsertConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/webhooks/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1135,7 +1141,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1249,7 +1255,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 				return nil, err
 			}
 
-			var out shared.ConfigResponse
+			var out webhooks.ConfigResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1270,7 +1276,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1291,6 +1297,8 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request shared.Co
 
 // TestConfig - Test one config
 // Test a config by sending a webhook to its endpoint.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.TestConfigRequest, opts ...operations.Option) (*operations.TestConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1304,12 +1312,11 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.TestConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/test", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1343,7 +1350,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1457,7 +1464,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out shared.AttemptResponse
+			var out webhooks.AttemptResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1478,7 +1485,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1499,6 +1506,8 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 
 // UpdateConfig - Update one config
 // Update a webhooks config by ID.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operations.UpdateConfigRequest, opts ...operations.Option) (*operations.UpdateConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1512,12 +1521,11 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.UpdateConfigServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1558,7 +1566,7 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1674,7 +1682,7 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 				return nil, err
 			}
 
-			var out sdkerrors.WebhooksErrorResponse
+			var out webhooks.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

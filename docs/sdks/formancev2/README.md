@@ -77,10 +77,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreateTrigger
 
@@ -121,11 +121,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
-| `request`                                                        | [shared.V2TriggerData](../../pkg/models/shared/v2triggerdata.md) | :heavy_check_mark:                                               | The request object to use for the request.                       |
-| `opts`                                                           | [][operations.Option](../../pkg/models/operations/option.md)     | :heavy_minus_sign:                                               | The options for this request.                                    |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [orchestration.V2TriggerData1](../../pkg/models/orchestration/v2triggerdata1.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 ### Response
 
@@ -133,10 +133,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreateWorkflow
 
@@ -180,7 +180,7 @@ func main() {
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [shared.V2CreateWorkflowRequest](../../pkg/models/shared/v2createworkflowrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `request`                                                                            | [orchestration.V2WorkflowConfig](../../pkg/models/orchestration/v2workflowconfig.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
@@ -189,10 +189,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## DeleteTrigger
 
@@ -248,10 +248,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## DeleteWorkflow
 
@@ -307,10 +307,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetInstance
 
@@ -366,10 +366,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetInstanceHistory
 
@@ -425,10 +425,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetInstanceStageHistory
 
@@ -485,10 +485,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetServerInfo
 
@@ -540,10 +540,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetWorkflow
 
@@ -599,10 +599,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## ListInstances
 
@@ -661,10 +661,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## ListTriggers
 
@@ -721,10 +721,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## ListTriggersOccurrences
 
@@ -782,10 +782,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## ListWorkflows
 
@@ -842,10 +842,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## ReadTrigger
 
@@ -901,10 +901,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## RunWorkflow
 
@@ -960,10 +960,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## SendEvent
 
@@ -1019,10 +1019,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## TestTrigger
 
@@ -1078,7 +1078,7 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.V2Error  | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| orchestration.V2Error | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |

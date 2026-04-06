@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var CreateTriggerServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreateTriggerResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Created trigger
-	CreateTriggerResponse *shared.CreateTriggerResponse
+	CreateTriggerResponse *orchestration.CreateTriggerResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (c *CreateTriggerResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreateTriggerResponse) GetCreateTriggerResponse() *shared.CreateTriggerResponse {
+func (c *CreateTriggerResponse) GetCreateTriggerResponse() *orchestration.CreateTriggerResponse {
 	if c == nil {
 		return nil
 	}

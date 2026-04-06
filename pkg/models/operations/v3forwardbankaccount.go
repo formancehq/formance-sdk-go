@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ForwardBankAccountServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ForwardBankAccountRequest struct {
-	V3ForwardBankAccountRequest *shared.V3ForwardBankAccountRequest `request:"mediaType=application/json"`
+	V3ForwardBankAccountRequest *payments.V3ForwardBankAccountRequest `request:"mediaType=application/json"`
 	// The bank account ID
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountID"`
 }
 
-func (v *V3ForwardBankAccountRequest) GetV3ForwardBankAccountRequest() *shared.V3ForwardBankAccountRequest {
+func (v *V3ForwardBankAccountRequest) GetV3ForwardBankAccountRequest() *payments.V3ForwardBankAccountRequest {
 	if v == nil {
 		return nil
 	}
@@ -38,7 +42,7 @@ type V3ForwardBankAccountResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3ForwardBankAccountResponse *shared.V3ForwardBankAccountResponse
+	V3ForwardBankAccountResponse *payments.V3ForwardBankAccountResponse
 }
 
 func (v *V3ForwardBankAccountResponse) GetContentType() string {
@@ -62,7 +66,7 @@ func (v *V3ForwardBankAccountResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3ForwardBankAccountResponse) GetV3ForwardBankAccountResponse() *shared.V3ForwardBankAccountResponse {
+func (v *V3ForwardBankAccountResponse) GetV3ForwardBankAccountResponse() *payments.V3ForwardBankAccountResponse {
 	if v == nil {
 		return nil
 	}

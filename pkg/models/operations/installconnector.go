@@ -3,77 +3,37 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
-type InstallConnectorRequest struct {
-	ConnectorConfig shared.ConnectorConfig `request:"mediaType=application/json"`
-	// The name of the connector.
-	Connector shared.Connector `pathParam:"style=simple,explode=false,name=connector"`
+var InstallConnectorServerList = []string{
+	"http://localhost:8080/",
 }
 
-func (i *InstallConnectorRequest) GetConnectorConfig() shared.ConnectorConfig {
+type InstallConnectorRequest struct {
+	ConnectorConfig payments.ConnectorConfig `request:"mediaType=application/json"`
+	// The name of the connector.
+	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfig() payments.ConnectorConfig {
 	if i == nil {
-		return shared.ConnectorConfig{}
+		return payments.ConnectorConfig{}
 	}
 	return i.ConnectorConfig
 }
 
-func (i *InstallConnectorRequest) GetConnectorConfigAdyen() *shared.AdyenConfig {
-	return i.GetConnectorConfig().AdyenConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigAtlar() *shared.AtlarConfig {
-	return i.GetConnectorConfig().AtlarConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigBankingcircle() *shared.BankingCircleConfig {
-	return i.GetConnectorConfig().BankingCircleConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigCurrencycloud() *shared.CurrencyCloudConfig {
-	return i.GetConnectorConfig().CurrencyCloudConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigDummypay() *shared.DummyPayConfig {
-	return i.GetConnectorConfig().DummyPayConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigGeneric() *shared.GenericConfig {
-	return i.GetConnectorConfig().GenericConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigMangopay() *shared.MangoPayConfig {
-	return i.GetConnectorConfig().MangoPayConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigModulr() *shared.ModulrConfig {
-	return i.GetConnectorConfig().ModulrConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigMoneycorp() *shared.MoneycorpConfig {
-	return i.GetConnectorConfig().MoneycorpConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigStripe() *shared.StripeConfig {
-	return i.GetConnectorConfig().StripeConfig
-}
-
-func (i *InstallConnectorRequest) GetConnectorConfigWise() *shared.WiseConfig {
-	return i.GetConnectorConfig().WiseConfig
-}
-
-func (i *InstallConnectorRequest) GetConnector() shared.Connector {
+func (i *InstallConnectorRequest) GetConnector() payments.Connector {
 	if i == nil {
-		return shared.Connector("")
+		return payments.Connector("")
 	}
 	return i.Connector
 }
 
 type InstallConnectorResponse struct {
 	// OK
-	ConnectorResponse *shared.ConnectorResponse
+	ConnectorResponse *payments.ConnectorResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -82,7 +42,7 @@ type InstallConnectorResponse struct {
 	RawResponse *http.Response
 }
 
-func (i *InstallConnectorResponse) GetConnectorResponse() *shared.ConnectorResponse {
+func (i *InstallConnectorResponse) GetConnectorResponse() *payments.ConnectorResponse {
 	if i == nil {
 		return nil
 	}

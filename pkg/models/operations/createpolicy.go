@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/reconciliation"
 	"net/http"
 )
+
+var CreatePolicyServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreatePolicyResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PolicyResponse *shared.PolicyResponse
+	PolicyResponse *reconciliation.PolicyResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (c *CreatePolicyResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreatePolicyResponse) GetPolicyResponse() *shared.PolicyResponse {
+func (c *CreatePolicyResponse) GetPolicyResponse() *reconciliation.PolicyResponse {
 	if c == nil {
 		return nil
 	}

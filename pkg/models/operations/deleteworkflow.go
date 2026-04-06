@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var DeleteWorkflowServerList = []string{
+	"http://localhost:8080/",
+}
+
 type DeleteWorkflowRequest struct {
 	// The flow id
 	FlowID string `pathParam:"style=simple,explode=false,name=flowId"`

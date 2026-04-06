@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var UpdatePoolQueryServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdatePoolQueryRequest struct {
-	UpdatePoolQueryRequest shared.UpdatePoolQueryRequest `request:"mediaType=application/json"`
+	UpdatePoolQueryRequest payments.UpdatePoolQueryRequest `request:"mediaType=application/json"`
 	// The pool ID.
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
-func (u *UpdatePoolQueryRequest) GetUpdatePoolQueryRequest() shared.UpdatePoolQueryRequest {
+func (u *UpdatePoolQueryRequest) GetUpdatePoolQueryRequest() payments.UpdatePoolQueryRequest {
 	if u == nil {
-		return shared.UpdatePoolQueryRequest{}
+		return payments.UpdatePoolQueryRequest{}
 	}
 	return u.UpdatePoolQueryRequest
 }

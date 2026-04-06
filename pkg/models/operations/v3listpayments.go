@@ -3,17 +3,28 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var V3ListPaymentsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3ListPaymentsRequest struct {
+	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.
 	//
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The number of items to return
-	PageSize *int64         `queryParam:"style=form,explode=true,name=pageSize"`
-	Query    map[string]any `queryParam:"serialization=json,name=query"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+}
+
+func (v *V3ListPaymentsRequest) GetRequestBody() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.RequestBody
 }
 
 func (v *V3ListPaymentsRequest) GetCursor() *string {
@@ -30,13 +41,6 @@ func (v *V3ListPaymentsRequest) GetPageSize() *int64 {
 	return v.PageSize
 }
 
-func (v *V3ListPaymentsRequest) GetQuery() map[string]any {
-	if v == nil {
-		return nil
-	}
-	return v.Query
-}
-
 // #region class-body-v3listpaymentsrequest
 // #endregion class-body-v3listpaymentsrequest
 
@@ -48,7 +52,7 @@ type V3ListPaymentsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V3PaymentsCursorResponse *shared.V3PaymentsCursorResponse
+	V3PaymentsCursorResponse *payments.V3PaymentsCursorResponse
 }
 
 func (v *V3ListPaymentsResponse) GetContentType() string {
@@ -72,7 +76,7 @@ func (v *V3ListPaymentsResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3ListPaymentsResponse) GetV3PaymentsCursorResponse() *shared.V3PaymentsCursorResponse {
+func (v *V3ListPaymentsResponse) GetV3PaymentsCursorResponse() *payments.V3PaymentsCursorResponse {
 	if v == nil {
 		return nil
 	}

@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var GetBalancesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetBalancesRequest struct {
 	// Filter balances involving given account, either as source or destination.
@@ -62,7 +66,7 @@ func (g *GetBalancesRequest) GetPageSize() *int64 {
 
 type GetBalancesResponse struct {
 	// OK
-	BalancesCursorResponse *shared.BalancesCursorResponse
+	BalancesCursorResponse *ledger.BalancesCursorResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -71,7 +75,7 @@ type GetBalancesResponse struct {
 	RawResponse *http.Response
 }
 
-func (g *GetBalancesResponse) GetBalancesCursorResponse() *shared.BalancesCursorResponse {
+func (g *GetBalancesResponse) GetBalancesCursorResponse() *ledger.BalancesCursorResponse {
 	if g == nil {
 		return nil
 	}

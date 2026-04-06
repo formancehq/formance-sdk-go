@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 )
+
+var ListPoolsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListPoolsRequest struct {
 	// Parameter used in pagination requests. Maximum page size is set to 15.
@@ -68,7 +72,7 @@ type ListPoolsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PoolsCursor *shared.PoolsCursor
+	PoolsCursor *payments.PoolsCursor
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -82,7 +86,7 @@ func (l *ListPoolsResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListPoolsResponse) GetPoolsCursor() *shared.PoolsCursor {
+func (l *ListPoolsResponse) GetPoolsCursor() *payments.PoolsCursor {
 	if l == nil {
 		return nil
 	}

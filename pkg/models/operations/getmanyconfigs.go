@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/webhooks"
 	"net/http"
 )
+
+var GetManyConfigsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetManyConfigsRequest struct {
 	// Optional filter by endpoint URL
@@ -30,7 +34,7 @@ func (g *GetManyConfigsRequest) GetID() *string {
 
 type GetManyConfigsResponse struct {
 	// OK
-	ConfigsResponse *shared.ConfigsResponse
+	ConfigsResponse *webhooks.ConfigsResponse
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -39,7 +43,7 @@ type GetManyConfigsResponse struct {
 	RawResponse *http.Response
 }
 
-func (g *GetManyConfigsResponse) GetConfigsResponse() *shared.ConfigsResponse {
+func (g *GetManyConfigsResponse) GetConfigsResponse() *webhooks.ConfigsResponse {
 	if g == nil {
 		return nil
 	}

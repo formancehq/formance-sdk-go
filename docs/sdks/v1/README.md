@@ -9,7 +9,7 @@
 * [DeleteClient](#deleteclient) - Delete client
 * [DeleteSecret](#deletesecret) - Delete a secret from a client
 * [GetOIDCWellKnowns](#getoidcwellknowns) - Retrieve OpenID connect well-knowns.
-* [GetServerInfo](#getserverinfo) - Get server info
+* [GetServerInfoAuth](#getserverinfoauth) - Get server info
 * [ListClients](#listclients) - List clients
 * [ListUsers](#listusers) - List users
 * [ReadClient](#readclient) - Read client
@@ -55,11 +55,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [shared.CreateClientRequest](../../pkg/models/shared/createclientrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
+| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `ctx`                                                          | [context.Context](https://pkg.go.dev/context#Context)          | :heavy_check_mark:                                             | The context to use for the request.                            |
+| `request`                                                      | [auth.ClientOptions1](../../pkg/models/auth/clientoptions1.md) | :heavy_check_mark:                                             | The request object to use for the request.                     |
+| `opts`                                                         | [][operations.Option](../../pkg/models/operations/option.md)   | :heavy_minus_sign:                                             | The options for this request.                                  |
 
 ### Response
 
@@ -300,13 +300,13 @@ func main() {
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## GetServerInfo
+## GetServerInfoAuth
 
 Get server info
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="getServerInfo" method="get" path="/api/auth/_info" -->
+<!-- UsageSnippet language="go" operationID="getServerInfo_auth" method="get" path="/api/auth/_info" -->
 ```go
 package main
 
@@ -327,7 +327,7 @@ func main() {
         }),
     )
 
-    res, err := s.Auth.V1.GetServerInfo(ctx)
+    res, err := s.Auth.V1.GetServerInfoAuth(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -346,7 +346,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetServerInfoResponse](../../pkg/models/operations/getserverinforesponse.md), error**
+**[*operations.GetServerInfoAuthResponse](../../pkg/models/operations/getserverinfoauthresponse.md), error**
 
 ### Errors
 
@@ -612,7 +612,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.UpdateClientResponse != nil {
+    if res.CreateClientResponse != nil {
         // handle response
     }
 }

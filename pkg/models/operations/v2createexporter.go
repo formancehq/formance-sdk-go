@@ -3,24 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
-// V2CreateExporterResponseBody - Created exporter
-type V2CreateExporterResponseBody struct {
-	Data shared.V2Exporter `json:"data"`
+var V2CreateExporterServerList = []string{
+	"http://localhost:8080/",
 }
-
-func (v *V2CreateExporterResponseBody) GetData() shared.V2Exporter {
-	if v == nil {
-		return shared.V2Exporter{}
-	}
-	return v.Data
-}
-
-// #region class-body-v2createexporterresponsebody
-// #endregion class-body-v2createexporterresponsebody
 
 type V2CreateExporterResponse struct {
 	// HTTP response content type for this operation
@@ -30,7 +19,7 @@ type V2CreateExporterResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Created exporter
-	Object *V2CreateExporterResponseBody
+	V2CreateExporterResponse *ledger.V2CreateExporterV2CreateExporterResponse
 }
 
 func (v *V2CreateExporterResponse) GetContentType() string {
@@ -54,11 +43,11 @@ func (v *V2CreateExporterResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2CreateExporterResponse) GetObject() *V2CreateExporterResponseBody {
+func (v *V2CreateExporterResponse) GetV2CreateExporterResponse() *ledger.V2CreateExporterV2CreateExporterResponse {
 	if v == nil {
 		return nil
 	}
-	return v.Object
+	return v.V2CreateExporterResponse
 }
 
 // #region class-body-v2createexporterresponse

@@ -3,19 +3,23 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
 
+var UpdateTransferInitiationStatusServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateTransferInitiationStatusRequest struct {
-	UpdateTransferInitiationStatusRequest shared.UpdateTransferInitiationStatusRequest `request:"mediaType=application/json"`
+	UpdateTransferInitiationStatusRequest payments.UpdateTransferInitiationStatusRequest `request:"mediaType=application/json"`
 	// The transfer ID.
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`
 }
 
-func (u *UpdateTransferInitiationStatusRequest) GetUpdateTransferInitiationStatusRequest() shared.UpdateTransferInitiationStatusRequest {
+func (u *UpdateTransferInitiationStatusRequest) GetUpdateTransferInitiationStatusRequest() payments.UpdateTransferInitiationStatusRequest {
 	if u == nil {
-		return shared.UpdateTransferInitiationStatusRequest{}
+		return payments.UpdateTransferInitiationStatusRequest{}
 	}
 	return u.UpdateTransferInitiationStatusRequest
 }

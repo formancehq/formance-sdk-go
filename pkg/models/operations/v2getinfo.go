@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
+
+var V2GetInfoServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2GetInfoResponse struct {
 	// HTTP response content type for this operation
@@ -15,9 +19,9 @@ type V2GetInfoResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2ConfigInfoResponse *shared.V2ConfigInfoResponse
+	V2ConfigInfo *ledger.V2ConfigInfo
 	// Error
-	V2ErrorResponse *shared.V2ErrorResponse
+	V2ErrorResponse *ledger.V2ErrorResponse
 }
 
 func (v *V2GetInfoResponse) GetContentType() string {
@@ -41,14 +45,14 @@ func (v *V2GetInfoResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetInfoResponse) GetV2ConfigInfoResponse() *shared.V2ConfigInfoResponse {
+func (v *V2GetInfoResponse) GetV2ConfigInfo() *ledger.V2ConfigInfo {
 	if v == nil {
 		return nil
 	}
-	return v.V2ConfigInfoResponse
+	return v.V2ConfigInfo
 }
 
-func (v *V2GetInfoResponse) GetV2ErrorResponse() *shared.V2ErrorResponse {
+func (v *V2GetInfoResponse) GetV2ErrorResponse() *ledger.V2ErrorResponse {
 	if v == nil {
 		return nil
 	}

@@ -3,18 +3,22 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
 
+var CreditWalletServerList = []string{
+	"http://localhost:8080/",
+}
+
 type CreditWalletRequest struct {
-	CreditWalletRequest *shared.CreditWalletRequest `request:"mediaType=application/json"`
+	CreditWalletRequest *wallets.CreditWalletRequest `request:"mediaType=application/json"`
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 	ID             string  `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (c *CreditWalletRequest) GetCreditWalletRequest() *shared.CreditWalletRequest {
+func (c *CreditWalletRequest) GetCreditWalletRequest() *wallets.CreditWalletRequest {
 	if c == nil {
 		return nil
 	}

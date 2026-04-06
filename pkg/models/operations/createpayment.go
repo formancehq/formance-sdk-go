@@ -3,15 +3,19 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var CreatePaymentServerList = []string{
+	"http://localhost:8080/",
+}
 
 type CreatePaymentResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	PaymentResponse *shared.PaymentResponse
+	PaymentResponse *payments.PaymentResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -25,7 +29,7 @@ func (c *CreatePaymentResponse) GetContentType() string {
 	return c.ContentType
 }
 
-func (c *CreatePaymentResponse) GetPaymentResponse() *shared.PaymentResponse {
+func (c *CreatePaymentResponse) GetPaymentResponse() *payments.PaymentResponse {
 	if c == nil {
 		return nil
 	}

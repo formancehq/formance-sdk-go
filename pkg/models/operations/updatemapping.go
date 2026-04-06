@@ -3,17 +3,21 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"net/http"
 )
 
+var UpdateMappingServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateMappingRequest struct {
-	Mapping *shared.Mapping `request:"mediaType=application/json"`
+	Mapping *ledger.Mapping `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 }
 
-func (u *UpdateMappingRequest) GetMapping() *shared.Mapping {
+func (u *UpdateMappingRequest) GetMapping() *ledger.Mapping {
 	if u == nil {
 		return nil
 	}
@@ -31,7 +35,7 @@ type UpdateMappingResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	MappingResponse *shared.MappingResponse
+	MappingResponse *ledger.MappingResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -45,7 +49,7 @@ func (u *UpdateMappingResponse) GetContentType() string {
 	return u.ContentType
 }
 
-func (u *UpdateMappingResponse) GetMappingResponse() *shared.MappingResponse {
+func (u *UpdateMappingResponse) GetMappingResponse() *ledger.MappingResponse {
 	if u == nil {
 		return nil
 	}

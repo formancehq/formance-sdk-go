@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var ListLogsServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListLogsRequest struct {
 	// Pagination cursor, will return the logs after a given ID. (in descending order).
@@ -90,7 +94,7 @@ type ListLogsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	LogsCursorResponse *shared.LogsCursorResponse
+	LogsCursorResponse *ledger.LogsCursorResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -104,7 +108,7 @@ func (l *ListLogsResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListLogsResponse) GetLogsCursorResponse() *shared.LogsCursorResponse {
+func (l *ListLogsResponse) GetLogsCursorResponse() *ledger.LogsCursorResponse {
 	if l == nil {
 		return nil
 	}

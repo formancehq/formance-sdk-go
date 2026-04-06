@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"net/http"
 )
+
+var V2GetServerInfoServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2GetServerInfoResponse struct {
 	// HTTP response content type for this operation
@@ -15,7 +19,7 @@ type V2GetServerInfoResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Server information
-	V2ServerInfo *shared.V2ServerInfo
+	V2ServerInfo *orchestration.V2ServerInfo
 }
 
 func (v *V2GetServerInfoResponse) GetContentType() string {
@@ -39,7 +43,7 @@ func (v *V2GetServerInfoResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetServerInfoResponse) GetV2ServerInfo() *shared.V2ServerInfo {
+func (v *V2GetServerInfoResponse) GetV2ServerInfo() *orchestration.V2ServerInfo {
 	if v == nil {
 		return nil
 	}

@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/auth"
 	"net/http"
 )
+
+var ReadClientServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ReadClientRequest struct {
 	// Client ID
@@ -23,7 +27,7 @@ type ReadClientResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Retrieved client
-	ReadClientResponse *shared.ReadClientResponse
+	ReadClientResponse *auth.ReadClientResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,7 +41,7 @@ func (r *ReadClientResponse) GetContentType() string {
 	return r.ContentType
 }
 
-func (r *ReadClientResponse) GetReadClientResponse() *shared.ReadClientResponse {
+func (r *ReadClientResponse) GetReadClientResponse() *auth.ReadClientResponse {
 	if r == nil {
 		return nil
 	}

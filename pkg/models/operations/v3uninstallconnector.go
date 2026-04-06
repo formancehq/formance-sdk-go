@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/payments"
 	"net/http"
 )
+
+var V3UninstallConnectorServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V3UninstallConnectorRequest struct {
 	// The connector ID
@@ -30,7 +34,7 @@ type V3UninstallConnectorResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Accepted
-	V3UninstallConnectorResponse *shared.V3UninstallConnectorResponse
+	V3UninstallConnectorResponse *payments.V3UninstallConnectorResponse
 }
 
 func (v *V3UninstallConnectorResponse) GetContentType() string {
@@ -54,7 +58,7 @@ func (v *V3UninstallConnectorResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V3UninstallConnectorResponse) GetV3UninstallConnectorResponse() *shared.V3UninstallConnectorResponse {
+func (v *V3UninstallConnectorResponse) GetV3UninstallConnectorResponse() *payments.V3UninstallConnectorResponse {
 	if v == nil {
 		return nil
 	}

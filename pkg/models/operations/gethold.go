@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
+
+var GetHoldServerList = []string{
+	"http://localhost:8080/",
+}
 
 type GetHoldRequest struct {
 	// The hold ID
@@ -23,7 +27,7 @@ type GetHoldResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Holds
-	GetHoldResponse *shared.GetHoldResponse
+	GetHoldResponse *wallets.GetHoldResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,7 +41,7 @@ func (g *GetHoldResponse) GetContentType() string {
 	return g.ContentType
 }
 
-func (g *GetHoldResponse) GetGetHoldResponse() *shared.GetHoldResponse {
+func (g *GetHoldResponse) GetGetHoldResponse() *wallets.GetHoldResponse {
 	if g == nil {
 		return nil
 	}

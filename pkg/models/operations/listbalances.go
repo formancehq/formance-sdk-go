@@ -3,9 +3,13 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/wallets"
 	"net/http"
 )
+
+var ListBalancesServerList = []string{
+	"http://localhost:8080/",
+}
 
 type ListBalancesRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
@@ -22,7 +26,7 @@ type ListBalancesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Balances list
-	ListBalancesResponse *shared.ListBalancesResponse
+	ListBalancesResponse *wallets.ListBalancesResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -36,7 +40,7 @@ func (l *ListBalancesResponse) GetContentType() string {
 	return l.ContentType
 }
 
-func (l *ListBalancesResponse) GetListBalancesResponse() *shared.ListBalancesResponse {
+func (l *ListBalancesResponse) GetListBalancesResponse() *wallets.ListBalancesResponse {
 	if l == nil {
 		return nil
 	}

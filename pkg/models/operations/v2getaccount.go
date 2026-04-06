@@ -3,11 +3,15 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var V2GetAccountServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2GetAccountRequest struct {
 	// Exact address of the account. It must match the following regular expressions pattern:
@@ -72,7 +76,7 @@ type V2GetAccountResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	V2AccountResponse *shared.V2AccountResponse
+	V2AccountResponse *ledger.V2AccountResponse
 }
 
 func (v *V2GetAccountResponse) GetContentType() string {
@@ -96,7 +100,7 @@ func (v *V2GetAccountResponse) GetRawResponse() *http.Response {
 	return v.RawResponse
 }
 
-func (v *V2GetAccountResponse) GetV2AccountResponse() *shared.V2AccountResponse {
+func (v *V2GetAccountResponse) GetV2AccountResponse() *ledger.V2AccountResponse {
 	if v == nil {
 		return nil
 	}

@@ -9,8 +9,8 @@ import (
 	"github.com/formancehq/formance-sdk-go/v3/internal/config"
 	"github.com/formancehq/formance-sdk-go/v3/internal/hooks"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v3/pkg/models/orchestration"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
 	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
 	"net/http"
@@ -33,6 +33,8 @@ func newFormanceOrchestrationV1(rootSDK *Formance, sdkConfig config.SDKConfigura
 
 // CancelEvent - Cancel a running workflow
 // Cancel a running workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request operations.CancelEventRequest, opts ...operations.Option) (*operations.CancelEventResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -46,12 +48,11 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CancelEventServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/abort", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -85,7 +86,7 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -201,7 +202,7 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -222,7 +223,9 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 
 // CreateTrigger - Create trigger
 // Create trigger
-func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *shared.TriggerData, opts ...operations.Option) (*operations.CreateTriggerResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *orchestration.TriggerData1, opts ...operations.Option) (*operations.CreateTriggerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -235,12 +238,11 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateTriggerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/triggers")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -281,7 +283,7 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -395,7 +397,7 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 				return nil, err
 			}
 
-			var out shared.CreateTriggerResponse
+			var out orchestration.CreateTriggerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -416,7 +418,7 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -437,7 +439,9 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *sh
 
 // CreateWorkflow - Create workflow
 // Create a workflow
-func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *shared.CreateWorkflowRequest, opts ...operations.Option) (*operations.CreateWorkflowResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *orchestration.WorkflowConfig, opts ...operations.Option) (*operations.CreateWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -450,12 +454,11 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.CreateWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/workflows")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -496,7 +499,7 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -610,7 +613,7 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 				return nil, err
 			}
 
-			var out shared.CreateWorkflowResponse
+			var out orchestration.CreateWorkflowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -631,7 +634,7 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -652,6 +655,8 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *s
 
 // DeleteTrigger - Delete trigger
 // Read trigger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request operations.DeleteTriggerRequest, opts ...operations.Option) (*operations.DeleteTriggerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -665,12 +670,11 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeleteTriggerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/triggers/{triggerID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -704,7 +708,7 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -820,7 +824,7 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -841,6 +845,8 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 
 // DeleteWorkflow - Delete a flow by id
 // Delete a flow by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request operations.DeleteWorkflowRequest, opts ...operations.Option) (*operations.DeleteWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -854,12 +860,11 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.DeleteWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -893,7 +898,7 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1009,7 +1014,7 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1030,6 +1035,8 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 
 // GetInstance - Get a workflow instance by id
 // Get a workflow instance by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request operations.GetInstanceRequest, opts ...operations.Option) (*operations.GetInstanceResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1043,12 +1050,11 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetInstanceServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1082,7 +1088,7 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1196,7 +1202,7 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.GetWorkflowInstanceResponse
+			var out orchestration.GetWorkflowInstanceResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1217,7 +1223,7 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1238,6 +1244,8 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 
 // GetInstanceHistory - Get a workflow instance history by id
 // Get a workflow instance history by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, request operations.GetInstanceHistoryRequest, opts ...operations.Option) (*operations.GetInstanceHistoryResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1251,12 +1259,11 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetInstanceHistoryServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1290,7 +1297,7 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1404,7 +1411,7 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 				return nil, err
 			}
 
-			var out shared.GetWorkflowInstanceHistoryResponse
+			var out orchestration.GetWorkflowInstanceHistoryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1425,7 +1432,7 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1446,6 +1453,8 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 
 // GetInstanceStageHistory - Get a workflow instance stage history
 // Get a workflow instance stage history
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, request operations.GetInstanceStageHistoryRequest, opts ...operations.Option) (*operations.GetInstanceStageHistoryResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1459,12 +1468,11 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetInstanceStageHistoryServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/stages/{number}/history", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1498,7 +1506,7 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1612,7 +1620,7 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 				return nil, err
 			}
 
-			var out shared.GetWorkflowInstanceHistoryStageResponse
+			var out orchestration.GetWorkflowInstanceHistoryStageResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1633,7 +1641,215 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// GetServerInfoOrchestration - Get server info
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceOrchestrationV1) GetServerInfoOrchestration(ctx context.Context, opts ...operations.Option) (*operations.GetServerInfoOrchestrationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	baseURL := utils.ReplaceParameters(operations.GetServerInfoOrchestrationServerList[0], map[string]string{})
+	if o.ServerURL != nil {
+		baseURL = *o.ServerURL
+	}
+
+	opURL, err := url.JoinPath(baseURL, "/api/orchestration/_info")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "getServerInfo_orchestration",
+		OAuth2Scopes:     []string{"orchestration:read"},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"429",
+				"500",
+				"502",
+				"503",
+				"504",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.GetServerInfoOrchestrationResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: httpRes.Header.Get("Content-Type"),
+		RawResponse: httpRes,
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out orchestration.ServerInfo
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.ServerInfo = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1654,6 +1870,8 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 
 // GetWorkflow - Get a flow by id
 // Get a flow by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request operations.GetWorkflowRequest, opts ...operations.Option) (*operations.GetWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1667,12 +1885,11 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.GetWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{flowId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1706,7 +1923,7 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1820,7 +2037,7 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.GetWorkflowResponse
+			var out orchestration.GetWorkflowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1841,7 +2058,7 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1862,6 +2079,8 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 
 // ListInstances - List instances of a workflow
 // List instances of a workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request operations.ListInstancesRequest, opts ...operations.Option) (*operations.ListInstancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1875,12 +2094,11 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListInstancesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/instances")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1918,7 +2136,7 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2032,7 +2250,7 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out shared.ListRunsResponse
+			var out orchestration.ListRunsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2053,7 +2271,7 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2074,6 +2292,8 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 
 // ListTriggers - List triggers
 // List triggers
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request operations.ListTriggersRequest, opts ...operations.Option) (*operations.ListTriggersResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2087,12 +2307,11 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListTriggersServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/triggers")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2130,7 +2349,7 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2244,7 +2463,7 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 				return nil, err
 			}
 
-			var out shared.ListTriggersResponse
+			var out orchestration.ListTriggersResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2265,7 +2484,7 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2286,6 +2505,8 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 
 // ListTriggersOccurrences - List triggers occurrences
 // List triggers occurrences
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, request operations.ListTriggersOccurrencesRequest, opts ...operations.Option) (*operations.ListTriggersOccurrencesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2299,12 +2520,11 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListTriggersOccurrencesServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/triggers/{triggerID}/occurrences", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2338,7 +2558,7 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2452,7 +2672,7 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 				return nil, err
 			}
 
-			var out shared.ListTriggersOccurrencesResponse
+			var out orchestration.ListTriggersOccurrencesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2473,7 +2693,7 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2494,6 +2714,8 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 
 // ListWorkflows - List registered workflows
 // List registered workflows
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...operations.Option) (*operations.ListWorkflowsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2507,12 +2729,11 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ListWorkflowsServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := url.JoinPath(baseURL, "/api/orchestration/workflows")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2546,7 +2767,7 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2660,7 +2881,7 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 				return nil, err
 			}
 
-			var out shared.ListWorkflowsResponse
+			var out orchestration.ListWorkflowsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2681,214 +2902,7 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 				return nil, err
 			}
 
-			var out sdkerrors.Error
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	}
-
-	return res, nil
-
-}
-
-// OrchestrationgetServerInfo - Get server info
-func (s *FormanceOrchestrationV1) OrchestrationgetServerInfo(ctx context.Context, opts ...operations.Option) (*operations.OrchestrationgetServerInfoResponse, error) {
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionRetries,
-		operations.SupportedOptionTimeout,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := url.JoinPath(baseURL, "/api/orchestration/_info")
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	hookCtx := hooks.HookContext{
-		SDK:              s.rootSDK,
-		SDKConfiguration: s.sdkConfiguration,
-		BaseURL:          baseURL,
-		Context:          ctx,
-		OperationID:      "orchestrationgetServerInfo",
-		OAuth2Scopes:     []string{"orchestration:read"},
-		SecuritySource:   s.sdkConfiguration.Security,
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	globalRetryConfig := s.sdkConfiguration.RetryConfig
-	retryConfig := o.Retries
-	if retryConfig == nil {
-		if globalRetryConfig != nil {
-			retryConfig = globalRetryConfig
-		}
-	}
-
-	var httpRes *http.Response
-	if retryConfig != nil {
-		httpRes, err = utils.Retry(ctx, utils.Retries{
-			Config: retryConfig,
-			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
-			},
-		}, func() (*http.Response, error) {
-			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
-				copyBody, err := req.GetBody()
-
-				if err != nil {
-					return nil, err
-				}
-
-				req.Body = copyBody
-			}
-
-			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-			if err != nil {
-				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
-					return nil, err
-				}
-
-				return nil, retry.Permanent(err)
-			}
-
-			httpRes, err := s.sdkConfiguration.Client.Do(req)
-			if err != nil || httpRes == nil {
-				if err != nil {
-					err = fmt.Errorf("error sending request: %w", err)
-				} else {
-					err = fmt.Errorf("error sending request: no response")
-				}
-
-				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			}
-			return httpRes, err
-		})
-
-		if err != nil {
-			return nil, err
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	} else {
-		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-		if err != nil {
-			return nil, err
-		}
-
-		httpRes, err = s.sdkConfiguration.Client.Do(req)
-		if err != nil || httpRes == nil {
-			if err != nil {
-				err = fmt.Errorf("error sending request: %w", err)
-			} else {
-				err = fmt.Errorf("error sending request: no response")
-			}
-
-			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
-			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-			if err != nil {
-				return nil, err
-			} else if _httpRes != nil {
-				httpRes = _httpRes
-			}
-		} else {
-			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	res := &operations.OrchestrationgetServerInfoResponse{
-		StatusCode:  httpRes.StatusCode,
-		ContentType: httpRes.Header.Get("Content-Type"),
-		RawResponse: httpRes,
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out shared.ServerInfo
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.ServerInfo = &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	default:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2909,6 +2923,8 @@ func (s *FormanceOrchestrationV1) OrchestrationgetServerInfo(ctx context.Context
 
 // ReadTrigger - Read trigger
 // Read trigger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request operations.ReadTriggerRequest, opts ...operations.Option) (*operations.ReadTriggerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2922,12 +2938,11 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.ReadTriggerServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/triggers/{triggerID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2961,7 +2976,7 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3075,7 +3090,7 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.ReadTriggerResponse
+			var out orchestration.ReadTriggerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3096,7 +3111,7 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3117,6 +3132,8 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 
 // RunWorkflow - Run workflow
 // Run workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request operations.RunWorkflowRequest, opts ...operations.Option) (*operations.RunWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3130,12 +3147,11 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.RunWorkflowServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/workflows/{workflowID}/instances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3180,7 +3196,7 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3294,7 +3310,7 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out shared.RunWorkflowResponse
+			var out orchestration.RunWorkflowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3315,7 +3331,7 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3336,6 +3352,8 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 
 // SendEvent - Send an event to a running workflow
 // Send an event to a running workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operations.SendEventRequest, opts ...operations.Option) (*operations.SendEventResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3349,12 +3367,11 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 		}
 	}
 
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
+	baseURL := utils.ReplaceParameters(operations.SendEventServerList[0], map[string]string{})
+	if o.ServerURL != nil {
 		baseURL = *o.ServerURL
 	}
+
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/instances/{instanceID}/events", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3395,7 +3412,7 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3511,7 +3528,7 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out orchestration.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
