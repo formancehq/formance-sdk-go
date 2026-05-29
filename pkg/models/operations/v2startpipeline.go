@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2StartPipelineServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2StartPipelineRequest struct {
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`

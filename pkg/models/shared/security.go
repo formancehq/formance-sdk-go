@@ -3,7 +3,7 @@
 package shared
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
 )
 
 type Security struct {

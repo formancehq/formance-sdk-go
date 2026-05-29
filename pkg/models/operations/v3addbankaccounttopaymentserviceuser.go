@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V3AddBankAccountToPaymentServiceUserServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3AddBankAccountToPaymentServiceUserRequest struct {
 	// The bank account ID
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountID"`

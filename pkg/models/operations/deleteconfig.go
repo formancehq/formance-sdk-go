@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var DeleteConfigServerList = []string{
+	"http://localhost:8080/",
+}
+
 type DeleteConfigRequest struct {
 	// Config ID
 	ID string `pathParam:"style=simple,explode=false,name=id"`

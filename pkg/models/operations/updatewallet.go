@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var UpdateWalletServerList = []string{
+	"http://localhost:8080/",
+}
+
 type UpdateWalletRequestBody struct {
 	// Custom metadata to attach to this wallet.
 	Metadata map[string]string `json:"metadata"`

@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2DeleteTriggerServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2DeleteTriggerRequest struct {
 	// The trigger id
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`

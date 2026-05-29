@@ -4,8 +4,8 @@ package operations
 
 import (
 	"errors"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/retry"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/retry"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
 	"time"
 )
 

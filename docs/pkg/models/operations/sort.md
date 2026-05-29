@@ -6,7 +6,7 @@ The field to sort by
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 )
 
 value := operations.SortCreatedAt

@@ -6,7 +6,7 @@ Deprecated: Use sort param
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 )
 
 value := operations.V2RunQueryQueryParamOrderEffective

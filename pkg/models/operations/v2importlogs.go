@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2ImportLogsServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2ImportLogsRequest struct {
 	// This field accepts []byte data or io.Reader implementations, such as *os.File.
 	V2ImportLogsRequest any `request:"mediaType=application/octet-stream"`

@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V3RemoveAccountFromPoolServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3RemoveAccountFromPoolRequest struct {
 	// The account ID
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`

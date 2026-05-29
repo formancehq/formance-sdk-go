@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var AddMetadataToAccountServerList = []string{
+	"http://localhost:8080/",
+}
+
 type AddMetadataToAccountRequest struct {
 	// metadata
 	RequestBody map[string]any `request:"mediaType=application/json"`

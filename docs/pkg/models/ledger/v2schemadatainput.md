@@ -1,0 +1,12 @@
+# V2SchemaDataInput
+
+Schema data structure for ledger schemas
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    | Example                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `V2ChartOfAccounts`                                                                            | map[string][ledger.V2ChartSegment](../../../pkg/models/ledger/v2chartsegment.md)               | :heavy_check_mark:                                                                             | Chart of account                                                                               | {<br/>"users": {<br/>"$userID": {<br/>".pattern": "^[0-9]{16}$"<br/>}<br/>}<br/>}              |
+| `V2QueryTemplates`                                                                             | map[string][ledger.V2QueryTemplate](../../../pkg/models/ledger/v2querytemplate.md)             | :heavy_minus_sign:                                                                             | Query templates                                                                                |                                                                                                |
+| `V2TransactionTemplates`                                                                       | map[string][ledger.V2TransactionTemplate](../../../pkg/models/ledger/v2transactiontemplate.md) | :heavy_minus_sign:                                                                             | Transaction templates                                                                          |                                                                                                |

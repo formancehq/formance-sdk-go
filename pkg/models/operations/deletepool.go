@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var DeletePoolServerList = []string{
+	"http://localhost:8080/",
+}
+
 type DeletePoolRequest struct {
 	// The pool ID.
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`
