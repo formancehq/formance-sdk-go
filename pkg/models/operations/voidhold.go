@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var VoidHoldServerList = []string{
+	"http://localhost:8080/",
+}
+
 type VoidHoldRequest struct {
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`

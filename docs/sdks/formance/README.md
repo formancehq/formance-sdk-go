@@ -14,7 +14,6 @@ OAuth2 - an open protocol to allow secure authorization in a simple
 and standard method from web, mobile and desktop applications.
 <SecurityDefinitions />
 
-
 ### Available Operations
 
 * [GetVersions](#getversions) - Show stack version information
@@ -31,14 +30,14 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New()
+    s := v4.New()
 
     res, err := s.GetVersions(ctx)
     if err != nil {

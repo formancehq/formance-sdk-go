@@ -4,14 +4,14 @@ package main
 
 import (
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New()
+	s := v4.New()
 
 	res, err := s.GetVersions(ctx)
 	if err != nil {

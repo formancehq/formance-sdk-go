@@ -12,12 +12,12 @@
 * [GetInstance](#getinstance) - Get a workflow instance by id
 * [GetInstanceHistory](#getinstancehistory) - Get a workflow instance history by id
 * [GetInstanceStageHistory](#getinstancestagehistory) - Get a workflow instance stage history
+* [GetServerInfoOrchestration](#getserverinfoorchestration) - Get server info
 * [GetWorkflow](#getworkflow) - Get a flow by id
 * [ListInstances](#listinstances) - List instances of a workflow
 * [ListTriggers](#listtriggers) - List triggers
 * [ListTriggersOccurrences](#listtriggersoccurrences) - List triggers occurrences
 * [ListWorkflows](#listworkflows) - List registered workflows
-* [OrchestrationgetServerInfo](#orchestrationgetserverinfo) - Get server info
 * [ReadTrigger](#readtrigger) - Read trigger
 * [RunWorkflow](#runworkflow) - Run workflow
 * [SendEvent](#sendevent) - Send an event to a running workflow
@@ -34,19 +34,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -76,10 +76,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## CreateTrigger
 
@@ -93,18 +93,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -120,11 +120,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `request`                                                    | [shared.TriggerData](../../pkg/models/shared/triggerdata.md) | :heavy_check_mark:                                           | The request object to use for the request.                   |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
+| `request`                                                                    | [orchestration.TriggerData1](../../pkg/models/orchestration/triggerdata1.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
 ### Response
 
@@ -132,10 +132,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## CreateWorkflow
 
@@ -149,18 +149,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -179,7 +179,7 @@ func main() {
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [shared.CreateWorkflowRequest](../../pkg/models/shared/createworkflowrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `request`                                                                        | [orchestration.WorkflowConfig](../../pkg/models/orchestration/workflowconfig.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 ### Response
@@ -188,10 +188,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## DeleteTrigger
 
@@ -205,19 +205,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -247,10 +247,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## DeleteWorkflow
 
@@ -264,19 +264,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -306,10 +306,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## GetInstance
 
@@ -323,19 +323,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -365,10 +365,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## GetInstanceHistory
 
@@ -382,19 +382,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -424,10 +424,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## GetInstanceStageHistory
 
@@ -441,19 +441,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -484,10 +484,65 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+
+## GetServerInfoOrchestration
+
+Get server info
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getServerInfo_orchestration" method="get" path="/api/orchestration/_info" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Orchestration.V1.GetServerInfoOrchestration(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ServerInfo != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.GetServerInfoOrchestrationResponse](../../pkg/models/operations/getserverinfoorchestrationresponse.md), error**
+
+### Errors
+
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## GetWorkflow
 
@@ -501,19 +556,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -543,10 +598,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## ListInstances
 
@@ -560,25 +615,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Orchestration.V1.ListInstances(ctx, operations.ListInstancesRequest{
-        Running: v3.Pointer(true),
-        WorkflowID: v3.Pointer("xxx"),
+        Running: v4.Pointer(true),
+        WorkflowID: v4.Pointer("xxx"),
     })
     if err != nil {
         log.Fatal(err)
@@ -603,10 +658,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## ListTriggers
 
@@ -620,19 +675,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -660,10 +715,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## ListTriggersOccurrences
 
@@ -677,19 +732,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -719,10 +774,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## ListWorkflows
 
@@ -736,18 +791,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -774,65 +829,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
-
-## OrchestrationgetServerInfo
-
-Get server info
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="orchestrationgetServerInfo" method="get" path="/api/orchestration/_info" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Orchestration.V1.OrchestrationgetServerInfo(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ServerInfo != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
-
-### Response
-
-**[*operations.OrchestrationgetServerInfoResponse](../../pkg/models/operations/orchestrationgetserverinforesponse.md), error**
-
-### Errors
-
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## ReadTrigger
 
@@ -846,19 +846,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -888,10 +888,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## RunWorkflow
 
@@ -905,19 +905,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -947,10 +947,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
 
 ## SendEvent
 
@@ -964,19 +964,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1006,7 +1006,7 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | default            | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| orchestration.Error | default             | application/json    |
+| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |

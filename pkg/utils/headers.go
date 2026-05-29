@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/formancehq/formance-sdk-go/v3/pkg/optionalnullable"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/optionalnullable"
 )
 
 func PopulateHeaders(_ context.Context, req *http.Request, headers interface{}, globals interface{}) {

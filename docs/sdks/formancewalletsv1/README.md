@@ -12,6 +12,7 @@
 * [GetBalance](#getbalance) - Get detailed balance
 * [GetHold](#gethold) - Get a hold
 * [GetHolds](#getholds) - Get all holds for a wallet
+* [GetServerInfoWallets](#getserverinfowallets) - Get server info
 * [GetTransactions](#gettransactions)
 * [GetWallet](#getwallet) - Get a wallet
 * [GetWalletSummary](#getwalletsummary) - Get wallet summary
@@ -19,7 +20,6 @@
 * [ListWallets](#listwallets) - List all wallets
 * [UpdateWallet](#updatewallet) - Update a wallet
 * [VoidHold](#voidhold) - Cancel a hold
-* [WalletsgetServerInfo](#walletsgetserverinfo) - Get server info
 
 ## ConfirmHold
 
@@ -33,27 +33,28 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/wallets"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.ConfirmHold(ctx, operations.ConfirmHoldRequest{
-        ConfirmHoldRequest: &shared.ConfirmHoldRequest{
+        ConfirmHoldRequest: &wallets.ConfirmHoldRequest{
             Amount: big.NewInt(100),
-            Final: v3.Pointer(true),
+            Final: v4.Pointer(true),
         },
         HoldID: "<id>",
     })
@@ -80,10 +81,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreateBalance
 
@@ -97,19 +98,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -139,10 +140,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreateWallet
 
@@ -156,19 +157,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -196,10 +197,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## CreditWallet
 
@@ -213,33 +214,34 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/wallets"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.CreditWallet(ctx, operations.CreditWalletRequest{
-        CreditWalletRequest: &shared.CreditWalletRequest{
-            Amount: shared.Monetary{
+        CreditWalletRequest: &wallets.CreditWalletRequest{
+            Monetary: wallets.Monetary{
                 Amount: big.NewInt(100),
                 Asset: "USD/2",
             },
             Metadata: map[string]string{
                 "key": "",
             },
-            Sources: []shared.Subject{},
+            Sources: []wallets.Subject{},
         },
         ID: "<id>",
     })
@@ -266,10 +268,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## DebitWallet
 
@@ -283,33 +285,34 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"math/big"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/wallets"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.DebitWallet(ctx, operations.DebitWalletRequest{
-        DebitWalletRequest: &shared.DebitWalletRequest{
-            Amount: shared.Monetary{
+        DebitWalletRequest: &wallets.DebitWalletRequest{
+            Monetary: wallets.Monetary{
                 Amount: big.NewInt(100),
                 Asset: "USD/2",
             },
             Metadata: map[string]string{
                 "key": "",
             },
-            Pending: v3.Pointer(true),
+            Pending: v4.Pointer(true),
         },
         ID: "<id>",
     })
@@ -336,10 +339,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetBalance
 
@@ -353,19 +356,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -396,10 +399,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetHold
 
@@ -413,19 +416,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -455,10 +458,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetHolds
 
@@ -472,29 +475,29 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.GetHolds(ctx, operations.GetHoldsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         Metadata: map[string]string{
             "admin": "true",
         },
-        PageSize: v3.Pointer[int64](100),
-        WalletID: v3.Pointer("wallet1"),
+        PageSize: v4.Pointer[int64](100),
+        WalletID: v4.Pointer("wallet1"),
     })
     if err != nil {
         log.Fatal(err)
@@ -519,10 +522,65 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
+
+## GetServerInfoWallets
+
+Get server info
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getServerInfo_wallets" method="get" path="/api/wallets/_info" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Wallets.V1.GetServerInfoWallets(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ServerInfo != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.GetServerInfoWalletsResponse](../../pkg/models/operations/getserverinfowalletsresponse.md), error**
+
+### Errors
+
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetTransactions
 
@@ -534,26 +592,26 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.GetTransactions(ctx, operations.GetTransactionsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
-        WalletID: v3.Pointer("wallet1"),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
+        WalletID: v4.Pointer("wallet1"),
     })
     if err != nil {
         log.Fatal(err)
@@ -578,10 +636,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetWallet
 
@@ -595,19 +653,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -637,10 +695,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## GetWalletSummary
 
@@ -654,19 +712,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -696,10 +754,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## ListBalances
 
@@ -713,19 +771,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -771,30 +829,30 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Wallets.V1.ListWallets(ctx, operations.ListWalletsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Expand: v3.Pointer("balances"),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        Expand: v4.Pointer("balances"),
         Metadata: map[string]string{
             "admin": "true",
         },
-        Name: v3.Pointer("wallet1"),
-        PageSize: v3.Pointer[int64](100),
+        Name: v4.Pointer("wallet1"),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -819,10 +877,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## UpdateWallet
 
@@ -836,19 +894,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -878,10 +936,10 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |
 
 ## VoidHold
 
@@ -895,19 +953,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -937,62 +995,7 @@ func main() {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
-
-## WalletsgetServerInfo
-
-Get server info
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="walletsgetServerInfo" method="get" path="/api/wallets/_info" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Wallets.V1.WalletsgetServerInfo(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ServerInfo != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
-
-### Response
-
-**[*operations.WalletsgetServerInfoResponse](../../pkg/models/operations/walletsgetserverinforesponse.md), error**
-
-### Errors
-
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| sdkerrors.WalletsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type            | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| wallets.ErrorResponse | default               | application/json      |
+| sdkerrors.SDKError    | 4XX, 5XX              | \*/\*                 |

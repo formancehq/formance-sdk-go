@@ -12,8 +12,8 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/formancehq/formance-sdk-go/v3/pkg/optionalnullable"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/optionalnullable"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
 )
 
 func PopulateQueryParams(_ context.Context, req *http.Request, queryParams interface{}, globals interface{}, allowEmptyValue map[string]struct{}) error {

@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2DeleteExporterServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2DeleteExporterRequest struct {
 	// The exporter id
 	ExporterID string `pathParam:"style=simple,explode=false,name=exporterID"`

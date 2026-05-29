@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
 	"net/http"
 	"time"
 )
+
+var CountTransactionsServerList = []string{
+	"http://localhost:8080/",
+}
 
 // Metadata - Filter transactions by metadata key value pairs. Nested objects can be used as seen in the example below.
 type Metadata struct {

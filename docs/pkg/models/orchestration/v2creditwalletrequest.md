@@ -1,0 +1,13 @@
+# V2CreditWalletRequest
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `V2Monetary`                                                                | [orchestration.V2Monetary](../../../pkg/models/orchestration/v2monetary.md) | :heavy_check_mark:                                                          | N/A                                                                         |
+| `Balance`                                                                   | `*string`                                                                   | :heavy_minus_sign:                                                          | The balance to credit                                                       |
+| `Metadata`                                                                  | map[string]`string`                                                         | :heavy_check_mark:                                                          | Metadata associated with the wallet.                                        |
+| `Reference`                                                                 | `*string`                                                                   | :heavy_minus_sign:                                                          | N/A                                                                         |
+| `Sources`                                                                   | [][orchestration.V2Subject](../../../pkg/models/orchestration/v2subject.md) | :heavy_check_mark:                                                          | N/A                                                                         |
+| `Timestamp`                                                                 | [*time.Time](https://pkg.go.dev/time#Time)                                  | :heavy_minus_sign:                                                          | N/A                                                                         |

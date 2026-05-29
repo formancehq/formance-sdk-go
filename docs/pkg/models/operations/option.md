@@ -9,7 +9,7 @@ Global options are passed when initializing the SDK client and apply to all oper
 WithServerURL allows providing an alternative server URL.
 
 ```go
-v3.WithServerURL("https://api.example.com")
+v4.WithServerURL("https://api.example.com")
 ```
 
 ### WithTemplatedServerURL
@@ -17,34 +17,10 @@ v3.WithServerURL("https://api.example.com")
 WithTemplatedServerURL allows providing an alternative server URL with templated parameters.
 
 ```go
-v3.WithTemplatedServerURL("https://{host}:{port}", map[string]string{
+v4.WithTemplatedServerURL("https://{host}:{port}", map[string]string{
     "host": "api.example.com",
     "port": "8080",
 })
-```
-
-### WithServerIndex
-
-WithServerIndex allows the overriding of the default server by index.
-
-```go
-v3.WithServerIndex(1)
-```
-
-### WithEnvironment
-
-WithEnvironment allows setting the environment variable for url substitution.
-
-```go
-v3.WithEnvironment(/* ... */)
-```
-
-### WithOrganization
-
-WithOrganization allows setting the organization variable for url substitution.
-
-```go
-v3.WithOrganization(/* ... */)
 ```
 
 ### WithClient
@@ -52,7 +28,7 @@ v3.WithOrganization(/* ... */)
 WithClient allows the overriding of the default HTTP client used by the SDK.
 
 ```go
-v3.WithClient(httpClient)
+v4.WithClient(httpClient)
 ```
 
 ### WithSecurity
@@ -60,7 +36,7 @@ v3.WithClient(httpClient)
 WithSecurity configures the SDK to use the provided security details.
 
 ```go
-v3.WithSecurity(/* ... */)
+v4.WithSecurity(/* ... */)
 ```
 
 ### WithSecuritySource
@@ -68,7 +44,7 @@ v3.WithSecurity(/* ... */)
 WithSecuritySource configures the SDK to invoke the provided function on each method call to determine authentication.
 
 ```go
-v3.WithSecuritySource(/* ... */)
+v4.WithSecuritySource(/* ... */)
 ```
 
 ### WithRetryConfig
@@ -76,7 +52,7 @@ v3.WithSecuritySource(/* ... */)
 WithRetryConfig allows setting the default retry configuration used by the SDK for all supported operations.
 
 ```go
-v3.WithRetryConfig(retry.Config{
+v4.WithRetryConfig(retry.Config{
     Strategy: "backoff",
     Backoff: retry.BackoffStrategy{
         InitialInterval: 500 * time.Millisecond,
@@ -93,7 +69,7 @@ v3.WithRetryConfig(retry.Config{
 WithTimeout sets the default request timeout for all operations.
 
 ```go
-v3.WithTimeout(30 * time.Second)
+v4.WithTimeout(30 * time.Second)
 ```
 
 ## Per-Method Options

@@ -1,0 +1,11 @@
+# V2Workflow
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `V2WorkflowConfig`                                                                      | [orchestration.V2WorkflowConfig](../../../pkg/models/orchestration/v2workflowconfig.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `CreatedAt`                                                                             | [time.Time](https://pkg.go.dev/time#Time)                                               | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `ID`                                                                                    | `string`                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `UpdatedAt`                                                                             | [time.Time](https://pkg.go.dev/time#Time)                                               | :heavy_check_mark:                                                                      | N/A                                                                                     |

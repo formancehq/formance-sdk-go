@@ -29,6 +29,8 @@
 * [GetBankAccount](#getbankaccount) - Get a Bank Account by ID
 * [GetConnectorConfig](#getconnectorconfig) - Get a connector configuration by ID
 * [GetConnectorSchedule](#getconnectorschedule) - Get a connector schedule by ID
+* [GetConversion](#getconversion) - Get a single conversion by its Formance ID
+* [GetOrder](#getorder) - Get a single order by its Formance ID
 * [GetPayment](#getpayment) - Get a payment by ID
 * [GetPaymentInitiation](#getpaymentinitiation) - Get a payment initiation by ID
 * [GetPaymentServiceUser](#getpaymentserviceuser) - Get a payment service user by ID
@@ -45,6 +47,8 @@
 * [ListConnectorScheduleInstances](#listconnectorscheduleinstances) - List all connector schedule instances
 * [ListConnectorSchedules](#listconnectorschedules) - List all connector schedules
 * [ListConnectors](#listconnectors) - List all connectors
+* [ListConversions](#listconversions) - List currency and asset conversions ingested from connectors
+* [ListOrders](#listorders) - List orders ingested from exchange-style connectors
 * [ListPaymentInitiationAdjustments](#listpaymentinitiationadjustments) - List all payment initiation adjustments
 * [ListPaymentInitiationRelatedPayments](#listpaymentinitiationrelatedpayments) - List all payments related to a payment initiation
 * [ListPaymentInitiations](#listpaymentinitiations) - List all payment initiations
@@ -80,19 +84,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -123,10 +127,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## AddBankAccountToPaymentServiceUser
 
@@ -140,19 +144,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -183,10 +187,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ApprovePaymentInitiation
 
@@ -200,19 +204,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -242,10 +246,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreateAccount
 
@@ -260,18 +264,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -287,11 +291,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [shared.V3CreateAccountRequest](../../pkg/models/shared/v3createaccountrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [payments.V3CreateAccountRequest](../../pkg/models/payments/v3createaccountrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
 ### Response
 
@@ -299,10 +303,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreateBankAccount
 
@@ -317,18 +321,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -344,11 +348,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `request`                                                                                  | [shared.V3CreateBankAccountRequest](../../pkg/models/shared/v3createbankaccountrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
-| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [payments.V3CreateBankAccountRequest](../../pkg/models/payments/v3createbankaccountrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
@@ -356,10 +360,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreateLinkForPaymentServiceUser
 
@@ -373,19 +377,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -416,10 +420,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreatePayment
 
@@ -434,18 +438,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -461,11 +465,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [shared.V3CreatePaymentRequest](../../pkg/models/shared/v3createpaymentrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [payments.V3CreatePaymentRequest](../../pkg/models/payments/v3createpaymentrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
 ### Response
 
@@ -473,10 +477,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreatePaymentServiceUser
 
@@ -490,18 +494,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -517,11 +521,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
-| `request`                                                                                                | [shared.V3CreatePaymentServiceUserRequest](../../pkg/models/shared/v3createpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
-| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
+| `request`                                                                                                    | [payments.V3CreatePaymentServiceUserRequest](../../pkg/models/payments/v3createpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
 ### Response
 
@@ -529,10 +533,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## CreatePool
 
@@ -546,18 +550,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -573,11 +577,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [shared.V3CreatePoolRequest](../../pkg/models/shared/v3createpoolrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [payments.V3CreatePoolRequest](../../pkg/models/payments/v3createpoolrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 ### Response
 
@@ -585,10 +589,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentInitiation
 
@@ -602,19 +606,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -644,10 +648,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentServiceUser
 
@@ -661,19 +665,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -703,10 +707,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentServiceUserConnectionFromConnectorID
 
@@ -720,19 +724,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -764,10 +768,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePaymentServiceUserConnector
 
@@ -781,19 +785,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -824,10 +828,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## DeletePool
 
@@ -841,19 +845,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -883,10 +887,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ForwardBankAccount
 
@@ -900,21 +904,15 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v4.New()
 
     res, err := s.Payments.V3.ForwardBankAccount(ctx, operations.V3ForwardBankAccountRequest{
         BankAccountID: "<id>",
@@ -942,10 +940,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ForwardPaymentServiceUserBankAccount
 
@@ -959,19 +957,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1002,10 +1000,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ForwardPaymentServiceUserToProvider
 
@@ -1019,19 +1017,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1062,10 +1060,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetAccount
 
@@ -1079,19 +1077,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1121,10 +1119,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetAccountBalances
 
@@ -1138,26 +1136,26 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.GetAccountBalances(ctx, operations.V3GetAccountBalancesRequest{
         AccountID: "<id>",
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -1182,10 +1180,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetBankAccount
 
@@ -1199,21 +1197,15 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v4.New()
 
     res, err := s.Payments.V3.GetBankAccount(ctx, operations.V3GetBankAccountRequest{
         BankAccountID: "<id>",
@@ -1241,10 +1233,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetConnectorConfig
 
@@ -1258,19 +1250,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1281,45 +1273,51 @@ func main() {
         log.Fatal(err)
     }
     if res.V3GetConnectorConfigResponse != nil {
-        switch res.V3GetConnectorConfigResponse.Data.Type {
-            case shared.V3InstallConnectorRequestTypeAdyen:
-                // res.V3GetConnectorConfigResponse.Data.V3AdyenConfig is populated
-            case shared.V3InstallConnectorRequestTypeAtlar:
-                // res.V3GetConnectorConfigResponse.Data.V3AtlarConfig is populated
-            case shared.V3InstallConnectorRequestTypeBankingcircle:
-                // res.V3GetConnectorConfigResponse.Data.V3BankingcircleConfig is populated
-            case shared.V3InstallConnectorRequestTypeCoinbaseprime:
-                // res.V3GetConnectorConfigResponse.Data.V3CoinbaseprimeConfig is populated
-            case shared.V3InstallConnectorRequestTypeColumn:
-                // res.V3GetConnectorConfigResponse.Data.V3ColumnConfig is populated
-            case shared.V3InstallConnectorRequestTypeCurrencycloud:
-                // res.V3GetConnectorConfigResponse.Data.V3CurrencycloudConfig is populated
-            case shared.V3InstallConnectorRequestTypeDummypay:
-                // res.V3GetConnectorConfigResponse.Data.V3DummypayConfig is populated
-            case shared.V3InstallConnectorRequestTypeFireblocks:
-                // res.V3GetConnectorConfigResponse.Data.V3FireblocksConfig is populated
-            case shared.V3InstallConnectorRequestTypeGeneric:
-                // res.V3GetConnectorConfigResponse.Data.V3GenericConfig is populated
-            case shared.V3InstallConnectorRequestTypeIncrease:
-                // res.V3GetConnectorConfigResponse.Data.V3IncreaseConfig is populated
-            case shared.V3InstallConnectorRequestTypeMangopay:
-                // res.V3GetConnectorConfigResponse.Data.V3MangopayConfig is populated
-            case shared.V3InstallConnectorRequestTypeModulr:
-                // res.V3GetConnectorConfigResponse.Data.V3ModulrConfig is populated
-            case shared.V3InstallConnectorRequestTypeMoneycorp:
-                // res.V3GetConnectorConfigResponse.Data.V3MoneycorpConfig is populated
-            case shared.V3InstallConnectorRequestTypePlaid:
-                // res.V3GetConnectorConfigResponse.Data.V3PlaidConfig is populated
-            case shared.V3InstallConnectorRequestTypePowens:
-                // res.V3GetConnectorConfigResponse.Data.V3PowensConfig is populated
-            case shared.V3InstallConnectorRequestTypeQonto:
-                // res.V3GetConnectorConfigResponse.Data.V3QontoConfig is populated
-            case shared.V3InstallConnectorRequestTypeStripe:
-                // res.V3GetConnectorConfigResponse.Data.V3StripeConfig is populated
-            case shared.V3InstallConnectorRequestTypeTink:
-                // res.V3GetConnectorConfigResponse.Data.V3TinkConfig is populated
-            case shared.V3InstallConnectorRequestTypeWise:
-                // res.V3GetConnectorConfigResponse.Data.V3WiseConfig is populated
+        switch res.V3GetConnectorConfigResponse.V3ConnectorConfig.Type {
+            case shared.V3ConnectorConfigTypeV3AdyenConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3AdyenConfig is populated
+            case shared.V3ConnectorConfigTypeV3AtlarConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3AtlarConfig is populated
+            case shared.V3ConnectorConfigTypeV3BankingcircleConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3BankingcircleConfig is populated
+            case shared.V3ConnectorConfigTypeV3ColumnConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3ColumnConfig is populated
+            case shared.V3ConnectorConfigTypeV3CurrencycloudConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3CurrencycloudConfig is populated
+            case shared.V3ConnectorConfigTypeV3DummypayConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3DummypayConfig is populated
+            case shared.V3ConnectorConfigTypeV3GenericConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3GenericConfig is populated
+            case shared.V3ConnectorConfigTypeV3IncreaseConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3IncreaseConfig is populated
+            case shared.V3ConnectorConfigTypeV3MangopayConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3MangopayConfig is populated
+            case shared.V3ConnectorConfigTypeV3ModulrConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3ModulrConfig is populated
+            case shared.V3ConnectorConfigTypeV3MoneycorpConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3MoneycorpConfig is populated
+            case shared.V3ConnectorConfigTypeV3PlaidConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3PlaidConfig is populated
+            case shared.V3ConnectorConfigTypeV3PowensConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3PowensConfig is populated
+            case shared.V3ConnectorConfigTypeV3QontoConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3QontoConfig is populated
+            case shared.V3ConnectorConfigTypeV3StripeConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3StripeConfig is populated
+            case shared.V3ConnectorConfigTypeV3TinkConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3TinkConfig is populated
+            case shared.V3ConnectorConfigTypeV3WiseConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3WiseConfig is populated
+            case shared.V3ConnectorConfigTypeV3BankingbridgeConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3BankingbridgeConfig is populated
+            case shared.V3ConnectorConfigTypeV3BitstampConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3BitstampConfig is populated
+            case shared.V3ConnectorConfigTypeV3CoinbaseprimeConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3CoinbaseprimeConfig is populated
+            case shared.V3ConnectorConfigTypeV3FireblocksConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3FireblocksConfig is populated
+            case shared.V3ConnectorConfigTypeV3RoutableConfig:
+                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3RoutableConfig is populated
         }
 
     }
@@ -1340,10 +1338,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetConnectorSchedule
 
@@ -1357,19 +1355,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1400,10 +1398,144 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+
+## GetConversion
+
+Returns one conversion identified by its Formance-assigned `id`
+(**not** the PSP's native `reference`). See `V3Conversion` for the
+response shape — on `COMPLETED` status the `destinationAmount` and
+`fee` fields reflect the settled values; on `FAILED` the `error`
+field carries the PSP's rejection reason.
+
+Returns an error via `V3ErrorResponse` when no conversion exists
+for the given ID.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetConversion" method="get" path="/api/payments/v3/conversions/{conversionID}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.GetConversion(ctx, operations.V3GetConversionRequest{
+        ConversionID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3GetConversionResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.V3GetConversionRequest](../../pkg/models/operations/v3getconversionrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.V3GetConversionResponse](../../pkg/models/operations/v3getconversionresponse.md), error**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+
+## GetOrder
+
+Returns one order identified by its Formance-assigned `id` (composed
+from the PSP `reference` and the connector ID — **not** the PSP's
+native reference). The response includes the full `adjustments`
+history ordered from oldest to most recent; the last adjustment
+reflects the order's current top-level `status`.
+
+Returns an error via `V3ErrorResponse` when no order exists for the
+given ID, or when the ID cannot be decoded.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetOrder" method="get" path="/api/payments/v3/orders/{orderID}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.GetOrder(ctx, operations.V3GetOrderRequest{
+        OrderID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3GetOrderResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [operations.V3GetOrderRequest](../../pkg/models/operations/v3getorderrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
+
+### Response
+
+**[*operations.V3GetOrderResponse](../../pkg/models/operations/v3getorderresponse.md), error**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPayment
 
@@ -1417,19 +1549,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1459,10 +1591,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPaymentInitiation
 
@@ -1476,19 +1608,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1518,10 +1650,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPaymentServiceUser
 
@@ -1535,19 +1667,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1577,10 +1709,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPaymentServiceUserLinkAttemptFromConnectorID
 
@@ -1594,19 +1726,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1638,10 +1770,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPool
 
@@ -1655,19 +1787,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1697,10 +1829,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPoolBalances
 
@@ -1714,19 +1846,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1756,10 +1888,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetPoolBalancesLatest
 
@@ -1773,19 +1905,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1815,10 +1947,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## GetTask
 
@@ -1832,19 +1964,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1874,10 +2006,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## InitiatePayment
 
@@ -1891,19 +2023,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1931,10 +2063,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## InstallConnector
 
@@ -1948,19 +2080,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -1990,10 +2122,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListAccounts
 
@@ -2007,25 +2139,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListAccounts(ctx, operations.V3ListAccountsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2050,10 +2182,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListBankAccounts
 
@@ -2067,25 +2199,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListBankAccounts(ctx, operations.V3ListBankAccountsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2110,10 +2242,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectorConfigs
 
@@ -2127,18 +2259,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2165,10 +2297,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectorScheduleInstances
 
@@ -2182,26 +2314,26 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListConnectorScheduleInstances(ctx, operations.V3ListConnectorScheduleInstancesRequest{
         ConnectorID: "<id>",
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
         ScheduleID: "<id>",
     })
     if err != nil {
@@ -2227,10 +2359,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectorSchedules
 
@@ -2244,26 +2376,26 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListConnectorSchedules(ctx, operations.V3ListConnectorSchedulesRequest{
         ConnectorID: "<id>",
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2288,10 +2420,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListConnectors
 
@@ -2305,25 +2437,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListConnectors(ctx, operations.V3ListConnectorsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2348,10 +2480,158 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+
+## ListConversions
+
+Returns the full list of conversions ingested by Formance from
+connectors that implement the conversions capability. A conversion
+is a direct swap between two assets on a PSP (e.g. USD → USDC on
+Coinbase Prime). Conversions are **read-only** through the Formance
+API.
+
+Unlike orders, conversions do not carry an adjustment history —
+Formance records only the final observed state (`status`,
+`destinationAmount`, and `fee` when settled).
+
+Results are cursor-paginated. The optional request body accepts a
+query builder for filtering over top-level `V3Conversion` fields
+such as `connectorID`, `reference`, `status`, `sourceAsset`,
+`destinationAsset`, and `createdAt`.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListConversions" method="get" path="/api/payments/v3/conversions" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ListConversions(ctx, operations.V3ListConversionsRequest{
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3ConversionsCursorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3ListConversionsRequest](../../pkg/models/operations/v3listconversionsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3ListConversionsResponse](../../pkg/models/operations/v3listconversionsresponse.md), error**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+
+## ListOrders
+
+Returns the full list of orders ingested by Formance from connectors
+that implement the orders capability (e.g. `coinbaseprime`). Orders
+represent trade placements on an exchange-style PSP and are
+**read-only** through the Formance API — submission, cancellation,
+and lifecycle transitions are owned by the underlying connector.
+
+Results are cursor-paginated. The optional request body accepts a
+query builder for filtering over top-level `V3Order` fields such as
+`connectorID`, `reference`, `direction`, `status`, `type`,
+`sourceAsset`, `destinationAsset`, and `createdAt`.
+
+See `V3Order` for the full response shape, including the
+`adjustments` array that captures each observed state transition on
+the exchange.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListOrders" method="get" path="/api/payments/v3/orders" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ListOrders(ctx, operations.V3ListOrdersRequest{
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3OrdersCursorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.V3ListOrdersRequest](../../pkg/models/operations/v3listordersrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
+
+### Response
+
+**[*operations.V3ListOrdersResponse](../../pkg/models/operations/v3listordersresponse.md), error**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentInitiationAdjustments
 
@@ -2365,25 +2645,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentInitiationAdjustments(ctx, operations.V3ListPaymentInitiationAdjustmentsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
         PaymentInitiationID: "<id>",
     })
     if err != nil {
@@ -2409,10 +2689,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentInitiationRelatedPayments
 
@@ -2426,25 +2706,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentInitiationRelatedPayments(ctx, operations.V3ListPaymentInitiationRelatedPaymentsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
         PaymentInitiationID: "<id>",
     })
     if err != nil {
@@ -2470,10 +2750,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentInitiations
 
@@ -2487,25 +2767,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentInitiations(ctx, operations.V3ListPaymentInitiationsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2530,10 +2810,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUserConnections
 
@@ -2547,25 +2827,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentServiceUserConnections(ctx, operations.V3ListPaymentServiceUserConnectionsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
         PaymentServiceUserID: "<id>",
     })
     if err != nil {
@@ -2591,10 +2871,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUserConnectionsFromConnectorID
 
@@ -2608,26 +2888,26 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentServiceUserConnectionsFromConnectorID(ctx, operations.V3ListPaymentServiceUserConnectionsFromConnectorIDRequest{
         ConnectorID: "<id>",
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
         PaymentServiceUserID: "<id>",
     })
     if err != nil {
@@ -2653,10 +2933,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUserLinkAttemptsFromConnectorID
 
@@ -2672,26 +2952,26 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx, operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest{
         ConnectorID: "<id>",
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
         PaymentServiceUserID: "<id>",
     })
     if err != nil {
@@ -2717,10 +2997,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPaymentServiceUsers
 
@@ -2734,25 +3014,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPaymentServiceUsers(ctx, operations.V3ListPaymentServiceUsersRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2777,10 +3057,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPayments
 
@@ -2794,25 +3074,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPayments(ctx, operations.V3ListPaymentsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2837,10 +3117,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ListPools
 
@@ -2854,25 +3134,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Payments.V3.ListPools(ctx, operations.V3ListPoolsRequest{
-        Cursor: v3.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v3.Pointer[int64](100),
+        Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
+        PageSize: v4.Pointer[int64](100),
     })
     if err != nil {
         log.Fatal(err)
@@ -2897,10 +3177,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## RejectPaymentInitiation
 
@@ -2914,19 +3194,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -2956,10 +3236,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## RemoveAccountFromPool
 
@@ -2973,19 +3253,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3016,10 +3296,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ResetConnector
 
@@ -3033,19 +3313,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3075,10 +3355,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## RetryPaymentInitiation
 
@@ -3092,19 +3372,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3134,10 +3414,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## ReversePaymentInitiation
 
@@ -3151,19 +3431,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3193,10 +3473,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UninstallConnector
 
@@ -3210,19 +3490,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3252,10 +3532,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdateBankAccountMetadata
 
@@ -3269,21 +3549,15 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v4.New()
 
     res, err := s.Payments.V3.UpdateBankAccountMetadata(ctx, operations.V3UpdateBankAccountMetadataRequest{
         BankAccountID: "<id>",
@@ -3311,10 +3585,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdateLinkForPaymentServiceUserOnConnector
 
@@ -3328,19 +3602,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3372,10 +3646,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdatePaymentMetadata
 
@@ -3389,19 +3663,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3431,10 +3705,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## UpdatePoolQuery
 
@@ -3448,19 +3722,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3490,10 +3764,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V3ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
 ## V3UpdateConnectorConfig
 
@@ -3507,19 +3781,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -3549,7 +3823,7 @@ func main() {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| sdkerrors.PaymentsErrorResponse | default                         | application/json                |
-| sdkerrors.SDKError              | 4XX, 5XX                        | \*/\*                           |
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| payments.PaymentsErrorResponse | default                        | application/json               |
+| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |

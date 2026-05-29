@@ -1,0 +1,10 @@
+# StageSendSource
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `StageSendSourceAccount`                                                                             | [*orchestration.StageSendSourceAccount](../../../pkg/models/orchestration/stagesendsourceaccount.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `StageSendSourcePayment`                                                                             | [*orchestration.StageSendSourcePayment](../../../pkg/models/orchestration/stagesendsourcepayment.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `StageSendSourceWallet`                                                                              | [*orchestration.StageSendSourceWallet](../../../pkg/models/orchestration/stagesendsourcewallet.md)   | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

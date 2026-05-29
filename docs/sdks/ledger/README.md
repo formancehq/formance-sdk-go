@@ -19,18 +19,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -38,7 +38,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.V2ConfigInfoResponse != nil {
+    if res.V2ConfigInfo != nil {
         // handle response
     }
 }
@@ -57,10 +57,10 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| ledger.V2ErrorResponseError | default                     | application/json            |
+| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
 
 ## GetMetrics
 
@@ -74,18 +74,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v3"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity(shared.Security{
-            ClientID: v3.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v3.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -112,7 +112,7 @@ func main() {
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| sdkerrors.V2ErrorResponse | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| ledger.V2ErrorResponseError | default                     | application/json            |
+| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |

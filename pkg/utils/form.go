@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/formancehq/formance-sdk-go/v3/pkg/optionalnullable"
-	"github.com/formancehq/formance-sdk-go/v3/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/optionalnullable"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
 )
 
 func populateForm(paramName string, explode bool, objType reflect.Type, objValue reflect.Value, delimiter string, defaultValue *string, allowEmptyValue map[string]struct{}, getFieldName func(reflect.StructField) string) url.Values {

@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var RemoveAccountFromPoolServerList = []string{
+	"http://localhost:8080/",
+}
+
 type RemoveAccountFromPoolRequest struct {
 	// The account ID.
 	AccountID string `pathParam:"style=simple,explode=false,name=accountId"`

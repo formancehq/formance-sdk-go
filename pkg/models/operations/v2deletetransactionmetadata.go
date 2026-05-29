@@ -3,10 +3,14 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v3/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
 	"math/big"
 	"net/http"
 )
+
+var V2DeleteTransactionMetadataServerList = []string{
+	"http://localhost:8080/",
+}
 
 type V2DeleteTransactionMetadataRequest struct {
 	// Use an idempotency key

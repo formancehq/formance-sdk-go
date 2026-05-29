@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V3AddAccountToPoolServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V3AddAccountToPoolRequest struct {
 	// The account ID
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`

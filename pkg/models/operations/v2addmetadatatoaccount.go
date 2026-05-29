@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var V2AddMetadataToAccountServerList = []string{
+	"http://localhost:8080/",
+}
+
 type V2AddMetadataToAccountRequest struct {
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`

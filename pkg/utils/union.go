@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/formancehq/formance-sdk-go/v3/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
 )
 
 // UnionCandidate represents a candidate type during union deserialization

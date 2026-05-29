@@ -1,9 +1,0 @@
-# V2LogsCursorResponse
-
-
-## Fields
-
-| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `Cursor`                                                                                           | [shared.V2LogsCursorResponseCursor](../../../pkg/models/shared/v2logscursorresponsecursor.md)      | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `Resource`                                                                                         | [*shared.V2LogsCursorResponseResource](../../../pkg/models/shared/v2logscursorresponseresource.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

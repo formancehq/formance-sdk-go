@@ -1,0 +1,9 @@
+# V2AccountsCursorResponse
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Cursor`                                                                                              | [ledger.V2AccountsCursorResponseCursor](../../../pkg/models/ledger/v2accountscursorresponsecursor.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `Resource`                                                                                            | [*ledger.Resource](../../../pkg/models/ledger/resource.md)                                            | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
