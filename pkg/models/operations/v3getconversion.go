@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetConversionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetConversionRequest struct {
 	// The conversion ID
 	ConversionID string `pathParam:"style=simple,explode=false,name=conversionID"`

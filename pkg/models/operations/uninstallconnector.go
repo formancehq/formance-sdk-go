@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UninstallConnectorServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UninstallConnectorRequest struct {
 	// The name of the connector.
 	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`

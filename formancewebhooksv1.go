@@ -46,11 +46,12 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ActivateConfigServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/activate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -256,11 +257,12 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ChangeConfigSecretServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/secret/change", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -470,11 +472,12 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.DeactivateConfigServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/deactivate", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -677,11 +680,12 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.DeleteConfigServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -865,11 +869,12 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetManyConfigsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/webhooks/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1084,11 +1089,12 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request webhooks.
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.InsertConfigServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/webhooks/configs")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1298,11 +1304,12 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.TestConfigServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}/test", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1505,11 +1512,12 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.UpdateConfigServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/webhooks/configs/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)

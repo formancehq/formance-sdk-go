@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3CreateAccountServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3CreateAccountResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

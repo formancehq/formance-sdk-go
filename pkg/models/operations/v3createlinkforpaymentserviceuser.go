@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3CreateLinkForPaymentServiceUserServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3CreateLinkForPaymentServiceUserRequest struct {
 	V3PaymentServiceUserCreateLinkRequest *payments.V3PaymentServiceUserCreateLinkRequest `request:"mediaType=application/json"`
 	// The connector ID

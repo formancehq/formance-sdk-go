@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2CreateTransactionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2CreateTransactionRequest struct {
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`

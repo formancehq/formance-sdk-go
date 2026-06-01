@@ -45,11 +45,12 @@ func (s *V2) AddMetadataOnTransaction(ctx context.Context, request operations.V2
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2AddMetadataOnTransactionServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -247,11 +248,12 @@ func (s *V2) AddMetadataToAccount(ctx context.Context, request operations.V2AddM
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2AddMetadataToAccountServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts/{address}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -449,11 +451,12 @@ func (s *V2) CountAccounts(ctx context.Context, request operations.V2CountAccoun
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2CountAccountsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -649,11 +652,12 @@ func (s *V2) CountTransactions(ctx context.Context, request operations.V2CountTr
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2CountTransactionsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -849,11 +853,12 @@ func (s *V2) CreateBulk(ctx context.Context, request operations.V2CreateBulkRequ
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2CreateBulkServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/_bulk", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1087,11 +1092,12 @@ func (s *V2) CreateExporter(ctx context.Context, request ledger.V2ExporterConfig
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2CreateExporterServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/v2/_/exporters")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1296,11 +1302,12 @@ func (s *V2) CreateLedger(ctx context.Context, request operations.V2CreateLedger
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2CreateLedgerServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1490,11 +1497,12 @@ func (s *V2) CreatePipeline(ctx context.Context, request operations.V2CreatePipe
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2CreatePipelineServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1699,11 +1707,12 @@ func (s *V2) CreateTransaction(ctx context.Context, request operations.V2CreateT
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2CreateTransactionServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1921,11 +1930,12 @@ func (s *V2) DeleteAccountMetadata(ctx context.Context, request operations.V2Del
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2DeleteAccountMetadataServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts/{address}/metadata/{key}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2113,11 +2123,12 @@ func (s *V2) DeleteBucket(ctx context.Context, request operations.V2DeleteBucket
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2DeleteBucketServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/buckets/{bucket}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2321,11 +2332,12 @@ func (s *V2) DeleteExporter(ctx context.Context, request operations.V2DeleteExpo
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2DeleteExporterServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/exporters/{exporterID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2504,11 +2516,12 @@ func (s *V2) DeleteLedgerMetadata(ctx context.Context, request operations.V2Dele
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2DeleteLedgerMetadataServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/metadata/{key}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2691,11 +2704,12 @@ func (s *V2) DeletePipeline(ctx context.Context, request operations.V2DeletePipe
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2DeletePipelineServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2875,11 +2889,12 @@ func (s *V2) DeleteTransactionMetadata(ctx context.Context, request operations.V
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2DeleteTransactionMetadataServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}/metadata/{key}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3066,11 +3081,12 @@ func (s *V2) ExportLogs(ctx context.Context, request operations.V2ExportLogsRequ
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ExportLogsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/logs/export", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3238,11 +3254,12 @@ func (s *V2) GetAccount(ctx context.Context, request operations.V2GetAccountRequ
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetAccountServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts/{address}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3448,11 +3465,12 @@ func (s *V2) GetBalancesAggregated(ctx context.Context, request operations.V2Get
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetBalancesAggregatedServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/aggregate/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3665,11 +3683,12 @@ func (s *V2) GetExporterState(ctx context.Context, request operations.V2GetExpor
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetExporterStateServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/exporters/{exporterID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3867,11 +3886,12 @@ func (s *V2) GetLedger(ctx context.Context, request operations.V2GetLedgerReques
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetLedgerServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4073,11 +4093,12 @@ func (s *V2) GetLedgerInfo(ctx context.Context, request operations.V2GetLedgerIn
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetLedgerInfoServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/_info", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4279,11 +4300,12 @@ func (s *V2) GetPipelineState(ctx context.Context, request operations.V2GetPipel
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetPipelineStateServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4481,11 +4503,12 @@ func (s *V2) GetSchema(ctx context.Context, request operations.V2GetSchemaReques
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetSchemaServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/schemas/{version}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4687,11 +4710,12 @@ func (s *V2) GetTransaction(ctx context.Context, request operations.V2GetTransac
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetTransactionServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -4897,11 +4921,12 @@ func (s *V2) GetVolumesWithBalances(ctx context.Context, request operations.V2Ge
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetVolumesWithBalancesServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/volumes", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5113,11 +5138,12 @@ func (s *V2) ImportLogs(ctx context.Context, request operations.V2ImportLogsRequ
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ImportLogsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/logs/import", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5307,11 +5333,12 @@ func (s *V2) InsertSchema(ctx context.Context, request operations.V2InsertSchema
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2InsertSchemaServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/schemas/{version}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5506,11 +5533,12 @@ func (s *V2) ListAccounts(ctx context.Context, request operations.V2ListAccounts
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ListAccountsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/accounts", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5723,11 +5751,12 @@ func (s *V2) ListExporters(ctx context.Context, opts ...operations.Option) (*ope
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ListExportersServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/v2/_/exporters")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -5925,11 +5954,12 @@ func (s *V2) ListLedgers(ctx context.Context, request operations.V2ListLedgersRe
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ListLedgersServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/v2")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6143,11 +6173,12 @@ func (s *V2) ListLogs(ctx context.Context, request operations.V2ListLogsRequest,
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ListLogsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/logs", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6360,11 +6391,12 @@ func (s *V2) ListPipelines(ctx context.Context, request operations.V2ListPipelin
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ListPipelinesServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6562,11 +6594,12 @@ func (s *V2) ListSchemas(ctx context.Context, request operations.V2ListSchemasRe
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ListSchemasServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/schemas", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6773,11 +6806,12 @@ func (s *V2) ListTransactions(ctx context.Context, request operations.V2ListTran
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ListTransactionsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -6991,11 +7025,12 @@ func (s *V2) ReadStats(ctx context.Context, request operations.V2ReadStatsReques
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ReadStatsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/stats", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7197,11 +7232,12 @@ func (s *V2) ResetPipeline(ctx context.Context, request operations.V2ResetPipeli
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2ResetPipelineServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}/reset", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7381,11 +7417,12 @@ func (s *V2) RestoreBucket(ctx context.Context, request operations.V2RestoreBuck
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2RestoreBucketServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/buckets/{bucket}/restore", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7589,11 +7626,12 @@ func (s *V2) RevertTransaction(ctx context.Context, request operations.V2RevertT
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2RevertTransactionServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/transactions/{id}/revert", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -7811,11 +7849,12 @@ func (s *V2) RunQuery(ctx context.Context, request operations.V2RunQueryRequest,
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2RunQueryServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/queries/{id}/run", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8028,11 +8067,12 @@ func (s *V2) StartPipeline(ctx context.Context, request operations.V2StartPipeli
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2StartPipelineServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}/start", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8211,11 +8251,12 @@ func (s *V2) StopPipeline(ctx context.Context, request operations.V2StopPipeline
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2StopPipelineServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/pipelines/{pipelineID}/stop", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8394,11 +8435,12 @@ func (s *V2) UpdateExporter(ctx context.Context, request operations.V2UpdateExpo
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2UpdateExporterServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/_/exporters/{exporterID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -8588,11 +8630,12 @@ func (s *V2) UpdateLedgerMetadata(ctx context.Context, request operations.V2Upda
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2UpdateLedgerMetadataServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/ledger/v2/{ledger}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)

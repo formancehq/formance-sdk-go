@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetBalanceServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetBalanceRequest struct {
 	BalanceName string `pathParam:"style=simple,explode=false,name=balanceName"`
 	ID          string `pathParam:"style=simple,explode=false,name=id"`

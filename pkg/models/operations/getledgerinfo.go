@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetLedgerInfoServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetLedgerInfoRequest struct {
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`

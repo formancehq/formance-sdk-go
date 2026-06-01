@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3InstallConnectorServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3InstallConnectorRequest struct {
 	V3ConnectorConfig *payments.V3ConnectorConfig `request:"mediaType=application/json"`
 	// The connector to filter by

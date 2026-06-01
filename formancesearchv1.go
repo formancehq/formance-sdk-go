@@ -47,11 +47,12 @@ func (s *FormanceSearchV1) GetServerInfoSearch(ctx context.Context, opts ...oper
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetServerInfoSearchServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/search/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -241,11 +242,12 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request search.Query, opt
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.SearchServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/search/")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)

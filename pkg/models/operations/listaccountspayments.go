@@ -8,10 +8,6 @@ import (
 	"net/http"
 )
 
-var ListAccountsPaymentsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListAccountsPaymentsRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.

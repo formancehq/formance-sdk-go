@@ -8,10 +8,6 @@ import (
 	"time"
 )
 
-var V2CountAccountsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2CountAccountsRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Name of the ledger.

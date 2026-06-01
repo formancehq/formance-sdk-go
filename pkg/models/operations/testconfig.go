@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var TestConfigServerList = []string{
-	"http://localhost:8080/",
-}
-
 type TestConfigRequest struct {
 	// Config ID
 	ID string `pathParam:"style=simple,explode=false,name=id"`

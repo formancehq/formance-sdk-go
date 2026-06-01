@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UpdatePoolQueryServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UpdatePoolQueryRequest struct {
 	UpdatePoolQueryRequest payments.UpdatePoolQueryRequest `request:"mediaType=application/json"`
 	// The pool ID.

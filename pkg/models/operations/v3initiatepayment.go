@@ -8,10 +8,6 @@ import (
 	"net/http"
 )
 
-var V3InitiatePaymentServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3InitiatePaymentRequest struct {
 	V3InitiatePaymentRequest *payments.V3InitiatePaymentRequest `request:"mediaType=application/json"`
 	// If set to true, the request will not have to be validated. This is useful if we want to directly forward the request to the PSP.

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3ForwardBankAccountServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3ForwardBankAccountRequest struct {
 	V3ForwardBankAccountRequest *payments.V3ForwardBankAccountRequest `request:"mediaType=application/json"`
 	// The bank account ID

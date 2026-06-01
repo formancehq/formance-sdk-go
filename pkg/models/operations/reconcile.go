@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ReconcileServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ReconcileRequest struct {
 	ReconciliationRequest reconciliation.ReconciliationRequest `request:"mediaType=application/json"`
 	// The policy ID.

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListAccountsLedgerServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListAccountsLedgerRequest struct {
 	// Filter accounts by address pattern (regular expression placed between ^ and $).
 	Address *string `queryParam:"style=form,explode=true,name=address"`

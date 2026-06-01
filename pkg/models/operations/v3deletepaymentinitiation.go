@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var V3DeletePaymentInitiationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3DeletePaymentInitiationRequest struct {
 	// The payment initiation ID
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`

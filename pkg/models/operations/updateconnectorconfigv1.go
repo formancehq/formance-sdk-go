@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UpdateConnectorConfigV1ServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UpdateConnectorConfigV1Request struct {
 	ConnectorConfig payments.ConnectorConfig `request:"mediaType=application/json"`
 	// The name of the connector.

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetPolicyServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetPolicyRequest struct {
 	// The policy ID.
 	PolicyID string `pathParam:"style=simple,explode=false,name=policyID"`

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetServerInfoReconciliationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetServerInfoReconciliationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

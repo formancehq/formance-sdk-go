@@ -45,11 +45,12 @@ func (s *FormanceWalletsV1) ConfirmHold(ctx context.Context, request operations.
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ConfirmHoldServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{hold_id}/confirm", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -241,11 +242,12 @@ func (s *FormanceWalletsV1) CreateBalance(ctx context.Context, request operation
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.CreateBalanceServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -456,11 +458,12 @@ func (s *FormanceWalletsV1) CreateWallet(ctx context.Context, request operations
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.CreateWalletServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/wallets")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -671,11 +674,12 @@ func (s *FormanceWalletsV1) CreditWallet(ctx context.Context, request operations
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.CreditWalletServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/credit", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -867,11 +871,12 @@ func (s *FormanceWalletsV1) DebitWallet(ctx context.Context, request operations.
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.DebitWalletServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/debit", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1084,11 +1089,12 @@ func (s *FormanceWalletsV1) GetBalance(ctx context.Context, request operations.G
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetBalanceServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances/{balanceName}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1290,11 +1296,12 @@ func (s *FormanceWalletsV1) GetHold(ctx context.Context, request operations.GetH
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetHoldServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{holdID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1496,11 +1503,12 @@ func (s *FormanceWalletsV1) GetHolds(ctx context.Context, request operations.Get
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetHoldsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/holds")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1706,11 +1714,12 @@ func (s *FormanceWalletsV1) GetServerInfoWallets(ctx context.Context, opts ...op
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetServerInfoWalletsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1911,11 +1920,12 @@ func (s *FormanceWalletsV1) GetTransactions(ctx context.Context, request operati
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetTransactionsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/transactions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2121,11 +2131,12 @@ func (s *FormanceWalletsV1) GetWallet(ctx context.Context, request operations.Ge
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetWalletServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2329,11 +2340,12 @@ func (s *FormanceWalletsV1) GetWalletSummary(ctx context.Context, request operat
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetWalletSummaryServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/summary", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2537,11 +2549,12 @@ func (s *FormanceWalletsV1) ListBalances(ctx context.Context, request operations
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ListBalancesServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}/balances", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2728,11 +2741,12 @@ func (s *FormanceWalletsV1) ListWallets(ctx context.Context, request operations.
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ListWalletsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/wallets/wallets")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -2938,11 +2952,12 @@ func (s *FormanceWalletsV1) UpdateWallet(ctx context.Context, request operations
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.UpdateWalletServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/wallets/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -3134,11 +3149,12 @@ func (s *FormanceWalletsV1) VoidHold(ctx context.Context, request operations.Voi
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.VoidHoldServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/wallets/holds/{hold_id}/void", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)

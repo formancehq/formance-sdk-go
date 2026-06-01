@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetServerInfoPaymentsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetServerInfoPaymentsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

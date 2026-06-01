@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetTransferInitiationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetTransferInitiationRequest struct {
 	// The transfer ID.
 	TransferID string `pathParam:"style=simple,explode=false,name=transferId"`

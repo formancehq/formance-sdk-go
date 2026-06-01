@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var AddAccountToPoolServerList = []string{
-	"http://localhost:8080/",
-}
-
 type AddAccountToPoolRequest struct {
 	AddAccountToPoolRequest payments.AddAccountToPoolRequest `request:"mediaType=application/json"`
 	// The pool ID.

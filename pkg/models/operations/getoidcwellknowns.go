@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var GetOIDCWellKnownsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetOIDCWellKnownsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

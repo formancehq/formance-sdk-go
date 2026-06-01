@@ -50,11 +50,12 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.V2GetInfoServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/_/info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -277,11 +278,12 @@ func (s *Ledger) GetMetrics(ctx context.Context, opts ...operations.Option) (*op
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetMetricsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/ledger/_/metrics")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)

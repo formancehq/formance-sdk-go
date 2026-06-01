@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var V2CancelEventServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2CancelEventRequest struct {
 	// The instance id
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`

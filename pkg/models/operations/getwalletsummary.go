@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetWalletSummaryServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetWalletSummaryRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }

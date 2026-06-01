@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetInfoServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetInfoResponse struct {
 	// OK
 	ConfigInfoResponse *ledger.ConfigInfoResponse

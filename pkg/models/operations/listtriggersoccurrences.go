@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListTriggersOccurrencesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListTriggersOccurrencesRequest struct {
 	// The trigger id
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`

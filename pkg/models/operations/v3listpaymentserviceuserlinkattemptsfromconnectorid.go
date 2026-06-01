@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3ListPaymentServiceUserLinkAttemptsFromConnectorIDServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// The connector ID

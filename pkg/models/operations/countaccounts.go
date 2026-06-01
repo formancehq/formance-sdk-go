@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var CountAccountsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CountAccountsRequest struct {
 	// Filter accounts by address pattern (regular expression placed between ^ and $).
 	Address *string `queryParam:"style=form,explode=true,name=address"`

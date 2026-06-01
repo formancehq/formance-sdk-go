@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2CreateBulkServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2CreateBulkRequest struct {
 	RequestBody []any `request:"mediaType=application/json"`
 	// Make bulk atomic

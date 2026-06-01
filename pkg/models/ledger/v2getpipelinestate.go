@@ -2,10 +2,6 @@
 
 package ledger
 
-var V2GetPipelineStateServerList = []string{
-	"http://localhost:8080/",
-}
-
 // V2GetPipelineStateV2GetPipelineStateResponse - Pipeline information
 type V2GetPipelineStateV2GetPipelineStateResponse struct {
 	V2PipelineConfiguration V2PipelineConfiguration `json:"data"`

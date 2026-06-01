@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateSecretServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateSecretRequest struct {
 	SecretOptions *auth.SecretOptions `request:"mediaType=application/json"`
 	// Client ID

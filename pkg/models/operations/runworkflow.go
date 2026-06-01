@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var RunWorkflowServerList = []string{
-	"http://localhost:8080/",
-}
-
 type RunWorkflowRequest struct {
 	RequestBody map[string]string `request:"mediaType=application/json"`
 	// Wait end of the workflow before return

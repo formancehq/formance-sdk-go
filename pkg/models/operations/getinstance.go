@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetInstanceServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetInstanceRequest struct {
 	// The instance id
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`

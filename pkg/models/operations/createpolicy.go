@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreatePolicyServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreatePolicyResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

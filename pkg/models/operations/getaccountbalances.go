@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var GetAccountBalancesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetAccountBalancesRequest struct {
 	// The account ID.
 	AccountID string `pathParam:"style=simple,explode=false,name=accountId"`

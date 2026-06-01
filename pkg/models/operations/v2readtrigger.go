@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2ReadTriggerServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2ReadTriggerRequest struct {
 	// The trigger id
 	TriggerID string `pathParam:"style=simple,explode=false,name=triggerID"`

@@ -10,10 +10,6 @@ import (
 	"net/http"
 )
 
-var V2ListSchemasServerList = []string{
-	"http://localhost:8080/",
-}
-
 // Order - The sort order
 type Order string
 

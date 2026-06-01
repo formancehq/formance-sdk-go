@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateBankAccountServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateBankAccountResponse struct {
 	// OK
 	BankAccountResponse *payments.BankAccountResponse

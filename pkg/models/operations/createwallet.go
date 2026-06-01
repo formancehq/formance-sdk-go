@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateWalletServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateWalletRequest struct {
 	CreateWalletRequest *wallets.CreateWalletRequest `request:"mediaType=application/json"`
 	// Use an idempotency key

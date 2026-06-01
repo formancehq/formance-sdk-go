@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var DeleteSecretServerList = []string{
-	"http://localhost:8080/",
-}
-
 type DeleteSecretRequest struct {
 	// Client ID
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`

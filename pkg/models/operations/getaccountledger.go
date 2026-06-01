@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetAccountLedgerServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetAccountLedgerRequest struct {
 	// Exact address of the account. It must match the following regular expressions pattern:
 	// ```

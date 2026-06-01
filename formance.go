@@ -7,6 +7,7 @@ package v4
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v4/internal/config"
 	"github.com/formancehq/formance-sdk-go/v4/internal/hooks"
@@ -20,6 +21,14 @@ import (
 	"net/url"
 	"time"
 )
+
+// ServerList contains the list of servers available to the SDK
+var ServerList = []string{
+	// local server
+	"http://localhost",
+	// A per-organization and per-environment API
+	"https://{organization}.{environment}.formance.cloud",
+}
 
 // HTTPClient provides an interface for supplying the SDK with a custom HTTP client
 type HTTPClient interface {
@@ -66,9 +75,11 @@ type Formance struct {
 	Orchestration  *Orchestration
 	Payments       *Payments
 	Reconciliation *Reconciliation
-	Search         *Search
-	Wallets        *Wallets
-	Webhooks       *Webhooks
+	// search.v1
+	// Elasticsearch.v1 query engine
+	Search   *Search
+	Wallets  *Wallets
+	Webhooks *Webhooks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -91,6 +102,73 @@ func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOptio
 		}
 
 		sdk.sdkConfiguration.ServerURL = serverURL
+	}
+}
+
+// WithServerIndex allows the overriding of the default server by index
+func WithServerIndex(serverIndex int) SDKOption {
+	return func(sdk *Formance) {
+		if serverIndex < 0 || serverIndex >= len(ServerList) {
+			panic(fmt.Errorf("server index %d out of range", serverIndex))
+		}
+
+		sdk.sdkConfiguration.ServerIndex = serverIndex
+	}
+}
+
+// ServerEnvironment - The environment name. Defaults to the production environment.
+type ServerEnvironment string
+
+const (
+	ServerEnvironmentEuSandbox ServerEnvironment = "eu.sandbox"
+	ServerEnvironmentEuWest1   ServerEnvironment = "eu-west-1"
+	ServerEnvironmentUsEast1   ServerEnvironment = "us-east-1"
+)
+
+func (e ServerEnvironment) ToPointer() *ServerEnvironment {
+	return &e
+}
+func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "eu.sandbox":
+		fallthrough
+	case "eu-west-1":
+		fallthrough
+	case "us-east-1":
+		*e = ServerEnvironment(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ServerEnvironment: %v", v)
+	}
+}
+
+// WithEnvironment allows setting the environment variable for url substitution
+func WithEnvironment(environment ServerEnvironment) SDKOption {
+	return func(sdk *Formance) {
+		for idx := range sdk.sdkConfiguration.ServerVariables {
+			if _, ok := sdk.sdkConfiguration.ServerVariables[idx]["environment"]; !ok {
+				continue
+			}
+
+			sdk.sdkConfiguration.ServerVariables[idx]["environment"] = fmt.Sprintf("%v", environment)
+		}
+	}
+}
+
+// WithOrganization allows setting the organization variable for url substitution
+func WithOrganization(organization string) SDKOption {
+	return func(sdk *Formance) {
+		for idx := range sdk.sdkConfiguration.ServerVariables {
+			if _, ok := sdk.sdkConfiguration.ServerVariables[idx]["organization"]; !ok {
+				continue
+			}
+
+			sdk.sdkConfiguration.ServerVariables[idx]["organization"] = fmt.Sprintf("%v", organization)
+		}
 	}
 }
 
@@ -133,9 +211,17 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "4.0.0",
+		SDKVersion: "4.1.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent: "speakeasy-sdk/go 4.0.0 2.866.2 SDK_VERSION github.com/formancehq/formance-sdk-go/v4",
+			UserAgent:  "speakeasy-sdk/go 4.1.0 2.866.2 SDK_VERSION github.com/formancehq/formance-sdk-go/v4",
+			ServerList: ServerList,
+			ServerVariables: []map[string]string{
+				{},
+				{
+					"environment":  "eu.sandbox",
+					"organization": "orgID-stackID",
+				},
+			},
 		},
 		hooks: hooks.New(),
 	}
@@ -181,11 +267,12 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetVersionsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/versions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2CreatePipelineServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2CreatePipelineRequest struct {
 	V2CreatePipelineRequest *ledger.V2CreatePipelineRequest `request:"mediaType=application/json"`
 	// Name of the ledger.

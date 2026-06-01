@@ -10,10 +10,6 @@ import (
 	"time"
 )
 
-var V2GetTransactionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2GetTransactionRequest struct {
 	Expand *string `queryParam:"style=form,explode=true,name=expand"`
 	// Transaction ID.

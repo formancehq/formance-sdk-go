@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ReadClientServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ReadClientRequest struct {
 	// Client ID
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var InsertConfigServerList = []string{
-	"http://localhost:8080/",
-}
-
 type InsertConfigResponse struct {
 	// Config created successfully.
 	ConfigResponse *webhooks.ConfigResponse

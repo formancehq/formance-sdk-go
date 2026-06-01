@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetPoolBalancesLatestServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetPoolBalancesLatestRequest struct {
 	// The pool ID
 	PoolID string `pathParam:"style=simple,explode=false,name=poolID"`

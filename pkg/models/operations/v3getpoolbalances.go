@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var V3GetPoolBalancesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetPoolBalancesRequest struct {
 	// The time to filter by
 	At *time.Time `queryParam:"style=form,explode=true,name=at"`

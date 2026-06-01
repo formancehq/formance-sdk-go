@@ -2,10 +2,6 @@
 
 package ledger
 
-var V2CreateExporterServerList = []string{
-	"http://localhost:8080/",
-}
-
 // V2CreateExporterV2CreateExporterResponse - Created exporter
 type V2CreateExporterV2CreateExporterResponse struct {
 	V2ExporterConfiguration V2ExporterConfiguration `json:"data"`

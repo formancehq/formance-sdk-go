@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ForwardBankAccountServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ForwardBankAccountRequest struct {
 	ForwardBankAccountRequest payments.ForwardBankAccountRequest `request:"mediaType=application/json"`
 	// The bank account ID.

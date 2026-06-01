@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ReadStatsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ReadStatsRequest struct {
 	// name of the ledger
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`

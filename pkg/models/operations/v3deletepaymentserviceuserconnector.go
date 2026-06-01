@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3DeletePaymentServiceUserConnectorServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3DeletePaymentServiceUserConnectorRequest struct {
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3UpdateBankAccountMetadataServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3UpdateBankAccountMetadataRequest struct {
 	V3UpdateBankAccountMetadataRequest *payments.V3UpdateBankAccountMetadataRequest `request:"mediaType=application/json"`
 	// The bank account ID

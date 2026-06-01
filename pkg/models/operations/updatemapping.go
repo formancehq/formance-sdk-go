@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UpdateMappingServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UpdateMappingRequest struct {
 	Mapping *ledger.Mapping `request:"mediaType=application/json"`
 	// Name of the ledger.

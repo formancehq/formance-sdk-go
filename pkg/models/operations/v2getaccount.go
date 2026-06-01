@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var V2GetAccountServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2GetAccountRequest struct {
 	// Exact address of the account. It must match the following regular expressions pattern:
 	// ```

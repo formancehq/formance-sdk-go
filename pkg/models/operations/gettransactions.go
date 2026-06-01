@@ -8,10 +8,6 @@ import (
 	"net/http"
 )
 
-var GetTransactionsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetTransactionsRequest struct {
 	// Parameter used in pagination requests.
 	// Set to the value of next for the next page of results.

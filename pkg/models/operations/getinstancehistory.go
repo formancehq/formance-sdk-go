@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetInstanceHistoryServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetInstanceHistoryRequest struct {
 	// The instance id
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`

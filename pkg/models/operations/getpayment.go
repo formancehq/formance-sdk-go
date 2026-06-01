@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetPaymentServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetPaymentRequest struct {
 	// The payment ID.
 	PaymentID string `pathParam:"style=simple,explode=false,name=paymentId"`

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ConfirmHoldServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ConfirmHoldRequest struct {
 	ConfirmHoldRequest *wallets.ConfirmHoldRequest `request:"mediaType=application/json"`
 	// Use an idempotency key

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListInstancesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListInstancesRequest struct {
 	// Filter running instances
 	Running *bool `queryParam:"style=form,explode=true,name=running"`

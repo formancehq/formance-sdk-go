@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreatePoolServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreatePoolResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

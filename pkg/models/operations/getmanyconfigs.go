@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetManyConfigsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetManyConfigsRequest struct {
 	// Optional filter by endpoint URL
 	Endpoint *string `queryParam:"style=form,explode=true,name=endpoint"`

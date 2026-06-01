@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var GetPoolBalancesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetPoolBalancesRequest struct {
 	// Filter balances by date.
 	//

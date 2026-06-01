@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var InstallConnectorServerList = []string{
-	"http://localhost:8080/",
-}
-
 type InstallConnectorRequest struct {
 	ConnectorConfig payments.ConnectorConfig `request:"mediaType=application/json"`
 	// The name of the connector.

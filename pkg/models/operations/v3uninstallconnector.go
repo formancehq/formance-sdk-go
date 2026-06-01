@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3UninstallConnectorServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3UninstallConnectorRequest struct {
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`

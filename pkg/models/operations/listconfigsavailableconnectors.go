@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListConfigsAvailableConnectorsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListConfigsAvailableConnectorsResponse struct {
 	// OK
 	ConnectorsConfigsResponse *payments.ConnectorsConfigsResponse

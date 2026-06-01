@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var V2ListAccountsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2ListAccountsRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.

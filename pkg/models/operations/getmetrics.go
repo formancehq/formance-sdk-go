@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var GetMetricsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetMetricsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

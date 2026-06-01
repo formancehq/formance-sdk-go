@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetPoolBalancesLatestServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetPoolBalancesLatestRequest struct {
 	// The pool ID.
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`

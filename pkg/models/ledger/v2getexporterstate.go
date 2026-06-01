@@ -2,10 +2,6 @@
 
 package ledger
 
-var V2GetExporterStateServerList = []string{
-	"http://localhost:8080/",
-}
-
 // V2GetExporterStateV2GetExporterStateResponse - Exporter information
 type V2GetExporterStateV2GetExporterStateResponse struct {
 	V2ExporterConfiguration V2ExporterConfiguration `json:"data"`

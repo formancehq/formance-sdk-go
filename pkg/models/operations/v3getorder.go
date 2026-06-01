@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetOrderServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetOrderRequest struct {
 	// The order ID
 	OrderID string `pathParam:"style=simple,explode=false,name=orderID"`

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetPoolServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetPoolRequest struct {
 	// The pool ID.
 	PoolID string `pathParam:"style=simple,explode=false,name=poolId"`

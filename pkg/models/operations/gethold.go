@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetHoldServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetHoldRequest struct {
 	// The hold ID
 	HoldID string `pathParam:"style=simple,explode=false,name=holdID"`

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetBalancesAggregatedServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetBalancesAggregatedRequest struct {
 	// Filter balances involving given account, either as source or destination.
 	Address *string `queryParam:"style=form,explode=true,name=address"`

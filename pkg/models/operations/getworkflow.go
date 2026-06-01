@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetWorkflowServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetWorkflowRequest struct {
 	// The flow id
 	FlowID string `pathParam:"style=simple,explode=false,name=flowId"`
