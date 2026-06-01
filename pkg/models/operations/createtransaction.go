@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateTransactionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateTransactionRequest struct {
 	// The request body must contain at least one of the following objects:
 	//   - `postings`: suitable for simple transactions

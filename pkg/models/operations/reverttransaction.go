@@ -9,10 +9,6 @@ import (
 	"net/http"
 )
 
-var RevertTransactionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type RevertTransactionRequest struct {
 	// Allow to disable balances checks
 	DisableChecks *bool `queryParam:"style=form,explode=true,name=disableChecks"`

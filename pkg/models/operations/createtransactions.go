@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateTransactionsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateTransactionsRequest struct {
 	Transactions ledger.Transactions `request:"mediaType=application/json"`
 	// Name of the ledger.

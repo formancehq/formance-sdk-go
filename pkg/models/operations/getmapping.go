@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetMappingServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetMappingRequest struct {
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`

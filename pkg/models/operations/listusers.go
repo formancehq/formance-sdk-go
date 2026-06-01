@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListUsersServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListUsersResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

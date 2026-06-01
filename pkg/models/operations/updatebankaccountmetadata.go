@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UpdateBankAccountMetadataServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UpdateBankAccountMetadataRequest struct {
 	UpdateBankAccountMetadataRequest payments.UpdateBankAccountMetadataRequest `request:"mediaType=application/json"`
 	// The bank account ID.

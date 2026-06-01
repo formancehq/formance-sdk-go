@@ -8,10 +8,6 @@ import (
 	"net/http"
 )
 
-var ListPoolsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListPoolsRequest struct {
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.

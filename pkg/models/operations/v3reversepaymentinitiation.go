@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3ReversePaymentInitiationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3ReversePaymentInitiationRequest struct {
 	V3ReversePaymentInitiationRequest *payments.V3ReversePaymentInitiationRequest `request:"mediaType=application/json"`
 	// The payment initiation ID

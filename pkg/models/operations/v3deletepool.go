@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var V3DeletePoolServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3DeletePoolRequest struct {
 	// The pool ID
 	PoolID string `pathParam:"style=simple,explode=false,name=poolID"`

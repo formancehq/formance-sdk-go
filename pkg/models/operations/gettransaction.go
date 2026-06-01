@@ -9,10 +9,6 @@ import (
 	"net/http"
 )
 
-var GetTransactionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetTransactionRequest struct {
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`

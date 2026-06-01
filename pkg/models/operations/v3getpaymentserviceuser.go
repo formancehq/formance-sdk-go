@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetPaymentServiceUserServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetPaymentServiceUserRequest struct {
 	// The payment service user ID
 	PaymentServiceUserID string `pathParam:"style=simple,explode=false,name=paymentServiceUserID"`

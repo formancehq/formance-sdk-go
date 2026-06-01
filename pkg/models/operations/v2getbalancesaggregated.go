@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var V2GetBalancesAggregatedServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2GetBalancesAggregatedRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Name of the ledger.

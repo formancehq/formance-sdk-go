@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetAccountServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetAccountRequest struct {
 	// The account ID
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`

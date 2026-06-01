@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2RestoreBucketServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2RestoreBucketRequest struct {
 	// The bucket name
 	Bucket string `pathParam:"style=simple,explode=false,name=bucket"`

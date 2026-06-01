@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2CreateLedgerServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2CreateLedgerRequest struct {
 	V2CreateLedgerRequest ledger.V2CreateLedgerRequest `request:"mediaType=application/json"`
 	// Name of the ledger.

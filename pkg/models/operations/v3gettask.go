@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetTaskServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetTaskRequest struct {
 	// The task ID
 	TaskID string `pathParam:"style=simple,explode=false,name=taskID"`

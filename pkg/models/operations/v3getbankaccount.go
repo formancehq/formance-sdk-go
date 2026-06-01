@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetBankAccountServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetBankAccountRequest struct {
 	// The bank account ID
 	BankAccountID string `pathParam:"style=simple,explode=false,name=bankAccountID"`

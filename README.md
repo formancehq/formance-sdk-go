@@ -33,6 +33,7 @@ and standard method from web, mobile and desktop applications.
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Authentication](#authentication-1)
   * [Retries](#retries)
@@ -446,6 +447,87 @@ func main() {
 
 ```
 <!-- End Error Handling [errors] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Select Server by Index
+
+You can override the default server globally using the `WithServerIndex(serverIndex int)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+
+| #   | Server                                                | Variables                        | Description                                |
+| --- | ----------------------------------------------------- | -------------------------------- | ------------------------------------------ |
+| 0   | `http://localhost`                                    |                                  | local server                               |
+| 1   | `https://{organization}.{environment}.formance.cloud` | `environment`<br/>`organization` | A per-organization and per-environment API |
+
+If the selected server has variables, you may override its default values using the associated option(s):
+
+| Variable       | Option                                           | Supported Values                                         | Default           | Description                                                   |
+| -------------- | ------------------------------------------------ | -------------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
+| `environment`  | `WithEnvironment(environment ServerEnvironment)` | - `"eu.sandbox"`<br/>- `"eu-west-1"`<br/>- `"us-east-1"` | `"eu.sandbox"`    | The environment name. Defaults to the production environment. |
+| `organization` | `WithOrganization(organization string)`          | string                                                   | `"orgID-stackID"` | The organization name. Defaults to a generic organization.    |
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"log"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := v4.New(
+		v4.WithServerIndex(1),
+		v4.WithEnvironment("us-east-1"),
+		v4.WithOrganization("orgID-stackID"),
+	)
+
+	res, err := s.GetVersions(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.GetVersionsResponse != nil {
+		// handle response
+	}
+}
+
+```
+
+### Override Server URL Per-Client
+
+The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
+```go
+package main
+
+import (
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"log"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := v4.New(
+		v4.WithServerURL("https://orgID-stackID.eu.sandbox.formance.cloud"),
+	)
+
+	res, err := s.GetVersions(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.GetVersionsResponse != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ConnectorsTransferServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ConnectorsTransferRequest struct {
 	TransferRequest payments.TransferRequest `request:"mediaType=application/json"`
 	// The name of the connector.

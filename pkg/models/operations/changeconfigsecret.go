@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ChangeConfigSecretServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ChangeConfigSecretRequest struct {
 	ConfigChangeSecret *webhooks.ConfigChangeSecret `request:"mediaType=application/json"`
 	// Config ID

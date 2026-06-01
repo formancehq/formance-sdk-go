@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateBalanceServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateBalanceRequest struct {
 	Balance *wallets.Balance `request:"mediaType=application/json"`
 	// Use an idempotency key

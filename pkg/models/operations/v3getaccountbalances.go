@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var V3GetAccountBalancesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetAccountBalancesRequest struct {
 	// The account ID
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`

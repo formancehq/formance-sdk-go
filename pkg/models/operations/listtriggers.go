@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListTriggersServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListTriggersRequest struct {
 	// search by name
 	Name *string `queryParam:"style=form,explode=true,name=name"`

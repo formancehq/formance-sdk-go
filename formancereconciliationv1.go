@@ -46,11 +46,12 @@ func (s *FormanceReconciliationV1) CreatePolicy(ctx context.Context, request rec
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.CreatePolicyServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/reconciliation/policies")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -260,11 +261,12 @@ func (s *FormanceReconciliationV1) DeletePolicy(ctx context.Context, request ope
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.DeletePolicyServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/reconciliation/policies/{policyID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -447,11 +449,12 @@ func (s *FormanceReconciliationV1) GetPolicy(ctx context.Context, request operat
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetPolicyServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/reconciliation/policies/{policyID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -653,11 +656,12 @@ func (s *FormanceReconciliationV1) GetReconciliation(ctx context.Context, reques
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetReconciliationServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/reconciliation/reconciliations/{reconciliationID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -859,11 +863,12 @@ func (s *FormanceReconciliationV1) GetServerInfoReconciliation(ctx context.Conte
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.GetServerInfoReconciliationServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/reconciliation/_info")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1065,11 +1070,12 @@ func (s *FormanceReconciliationV1) ListPolicies(ctx context.Context, request ope
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ListPoliciesServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/reconciliation/policies")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1282,11 +1288,12 @@ func (s *FormanceReconciliationV1) ListReconciliations(ctx context.Context, requ
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ListReconciliationsServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := url.JoinPath(baseURL, "/api/reconciliation/reconciliations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1500,11 +1507,12 @@ func (s *FormanceReconciliationV1) Reconcile(ctx context.Context, request operat
 		}
 	}
 
-	baseURL := utils.ReplaceParameters(operations.ReconcileServerList[0], map[string]string{})
-	if o.ServerURL != nil {
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
 		baseURL = *o.ServerURL
 	}
-
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/reconciliation/policies/{policyID}/reconciliation", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3UpdateConnectorConfigServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3UpdateConnectorConfigRequest struct {
 	V3ConnectorConfig *payments.V3ConnectorConfig `request:"mediaType=application/json"`
 	// The connector ID

@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var ListTransactionsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListTransactionsRequest struct {
 	// Filter transactions with postings involving given account, either as source or destination (regular expression placed between ^ and $).
 	Account *string `queryParam:"style=form,explode=true,name=account"`

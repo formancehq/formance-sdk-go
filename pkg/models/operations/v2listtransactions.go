@@ -11,10 +11,6 @@ import (
 	"time"
 )
 
-var V2ListTransactionsServerList = []string{
-	"http://localhost:8080/",
-}
-
 // QueryParamOrder - Deprecated: Use sort param
 type QueryParamOrder string
 

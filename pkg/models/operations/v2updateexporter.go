@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2UpdateExporterServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2UpdateExporterRequest struct {
 	V2ExporterConfiguration ledger.V2ExporterConfiguration1 `request:"mediaType=application/json"`
 	// The exporter id

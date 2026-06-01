@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetPoolServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetPoolRequest struct {
 	// The pool ID
 	PoolID string `pathParam:"style=simple,explode=false,name=poolID"`

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2CreateTriggerServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2CreateTriggerResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

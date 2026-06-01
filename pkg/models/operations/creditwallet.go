@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreditWalletServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreditWalletRequest struct {
 	CreditWalletRequest *wallets.CreditWalletRequest `request:"mediaType=application/json"`
 	// Use an idempotency key

@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetServerInfoSearchServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetServerInfoSearchResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

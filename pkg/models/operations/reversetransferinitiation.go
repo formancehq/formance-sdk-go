@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ReverseTransferInitiationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ReverseTransferInitiationRequest struct {
 	ReverseTransferInitiationRequest payments.ReverseTransferInitiationRequest `request:"mediaType=application/json"`
 	// The transfer ID.

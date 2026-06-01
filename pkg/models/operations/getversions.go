@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetVersionsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetVersionsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

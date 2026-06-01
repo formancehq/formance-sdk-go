@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var TestTriggerServerList = []string{
-	"http://localhost:8080/",
-}
-
 type TestTriggerRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// The trigger id

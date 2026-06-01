@@ -8,10 +8,6 @@ import (
 	"net/http"
 )
 
-var GetHoldsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetHoldsRequest struct {
 	// Parameter used in pagination requests.
 	// Set to the value of next for the next page of results.

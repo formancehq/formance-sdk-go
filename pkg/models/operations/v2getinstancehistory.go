@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2GetInstanceHistoryServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2GetInstanceHistoryRequest struct {
 	// The instance id
 	InstanceID string `pathParam:"style=simple,explode=false,name=instanceID"`

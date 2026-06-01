@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ActivateConfigServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ActivateConfigRequest struct {
 	// Config ID
 	ID string `pathParam:"style=simple,explode=false,name=id"`

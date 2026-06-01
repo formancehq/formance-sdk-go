@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ResetConnectorServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ResetConnectorRequest struct {
 	// The name of the connector.
 	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`

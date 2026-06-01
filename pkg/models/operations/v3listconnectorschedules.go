@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3ListConnectorSchedulesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3ListConnectorSchedulesRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// The connector ID

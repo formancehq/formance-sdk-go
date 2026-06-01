@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UpdateTransferInitiationStatusServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UpdateTransferInitiationStatusRequest struct {
 	UpdateTransferInitiationStatusRequest payments.UpdateTransferInitiationStatusRequest `request:"mediaType=application/json"`
 	// The transfer ID.

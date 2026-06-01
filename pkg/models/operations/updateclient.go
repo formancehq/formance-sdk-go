@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UpdateClientServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UpdateClientRequest struct {
 	ClientOptions *auth.ClientOptions1 `request:"mediaType=application/json"`
 	// Client ID

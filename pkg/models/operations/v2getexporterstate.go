@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2GetExporterStateServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2GetExporterStateRequest struct {
 	// The exporter id
 	ExporterID string `pathParam:"style=simple,explode=false,name=exporterID"`

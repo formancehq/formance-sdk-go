@@ -8,10 +8,6 @@ import (
 	"net/http"
 )
 
-var ListConnectorTasksServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListConnectorTasksRequest struct {
 	// The name of the connector.
 	Connector payments.Connector `pathParam:"style=simple,explode=false,name=connector"`

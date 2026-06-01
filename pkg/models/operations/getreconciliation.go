@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var GetReconciliationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type GetReconciliationRequest struct {
 	// The reconciliation ID.
 	ReconciliationID string `pathParam:"style=simple,explode=false,name=reconciliationID"`

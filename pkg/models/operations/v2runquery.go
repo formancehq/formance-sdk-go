@@ -12,10 +12,6 @@ import (
 	"time"
 )
 
-var V2RunQueryServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2RunQueryRequestBody struct {
 	V2QueryParams *ledger.V2QueryParams `json:"params,omitempty"`
 	Cursor        *string               `json:"cursor,omitempty"`

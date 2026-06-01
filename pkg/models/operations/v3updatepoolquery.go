@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3UpdatePoolQueryServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3UpdatePoolQueryRequest struct {
 	V3UpdatePoolQueryRequest *payments.V3UpdatePoolQueryRequest `request:"mediaType=application/json"`
 	// The pool ID

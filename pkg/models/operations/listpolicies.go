@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListPoliciesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListPoliciesRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.

@@ -9,10 +9,6 @@ import (
 	"net/http"
 )
 
-var V2RevertTransactionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2RevertTransactionRequest struct {
 	// Use an idempotency key
 	IdempotencyKey             *string                            `header:"style=simple,explode=false,name=Idempotency-Key"`

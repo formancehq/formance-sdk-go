@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2UpdateLedgerMetadataServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2UpdateLedgerMetadataRequest struct {
 	RequestBody map[string]string `request:"mediaType=application/json"`
 	// Name of the ledger.

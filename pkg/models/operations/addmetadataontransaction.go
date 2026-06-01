@@ -8,10 +8,6 @@ import (
 	"net/http"
 )
 
-var AddMetadataOnTransactionServerList = []string{
-	"http://localhost:8080/",
-}
-
 type AddMetadataOnTransactionRequest struct {
 	// metadata
 	RequestBody map[string]any `request:"mediaType=application/json"`

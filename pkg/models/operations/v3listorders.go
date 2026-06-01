@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3ListOrdersServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3ListOrdersRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Set to the value of next for the next page of results. Set to the value of previous for the previous page of results. No other parameters can be set when this parameter is set.

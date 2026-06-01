@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetConnectorConfigServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetConnectorConfigRequest struct {
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`

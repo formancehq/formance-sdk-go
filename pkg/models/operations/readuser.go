@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ReadUserServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ReadUserRequest struct {
 	// User ID
 	UserID string `pathParam:"style=simple,explode=false,name=userId"`

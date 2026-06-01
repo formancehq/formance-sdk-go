@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2GetWorkflowServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2GetWorkflowRequest struct {
 	// The flow id
 	FlowID string `pathParam:"style=simple,explode=false,name=flowId"`

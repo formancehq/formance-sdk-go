@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateTransferInitiationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateTransferInitiationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

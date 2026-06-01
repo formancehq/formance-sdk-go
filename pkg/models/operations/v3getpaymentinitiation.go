@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetPaymentInitiationServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetPaymentInitiationRequest struct {
 	// The payment initiation ID
 	PaymentInitiationID string `pathParam:"style=simple,explode=false,name=paymentInitiationID"`

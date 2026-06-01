@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var UpdateConfigServerList = []string{
-	"http://localhost:8080/",
-}
-
 type UpdateConfigRequest struct {
 	ConfigUser webhooks.ConfigUser `request:"mediaType=application/json"`
 	// Config ID

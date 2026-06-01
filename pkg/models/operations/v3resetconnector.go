@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3ResetConnectorServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3ResetConnectorRequest struct {
 	// The connector ID
 	ConnectorID string `pathParam:"style=simple,explode=false,name=connectorID"`

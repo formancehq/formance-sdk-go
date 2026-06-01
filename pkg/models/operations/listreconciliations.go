@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var ListReconciliationsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListReconciliationsRequest struct {
 	RequestBody map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.

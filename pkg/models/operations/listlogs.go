@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-var ListLogsServerList = []string{
-	"http://localhost:8080/",
-}
-
 type ListLogsRequest struct {
 	// Pagination cursor, will return the logs after a given ID. (in descending order).
 	After *string `queryParam:"style=form,explode=true,name=after"`

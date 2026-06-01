@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-var DeletePolicyServerList = []string{
-	"http://localhost:8080/",
-}
-
 type DeletePolicyRequest struct {
 	// The policy ID.
 	PolicyID string `pathParam:"style=simple,explode=false,name=policyID"`

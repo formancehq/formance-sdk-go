@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3GetPaymentServiceUserLinkAttemptFromConnectorIDServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3GetPaymentServiceUserLinkAttemptFromConnectorIDRequest struct {
 	// The attempt ID
 	AttemptID string `pathParam:"style=simple,explode=false,name=attemptID"`

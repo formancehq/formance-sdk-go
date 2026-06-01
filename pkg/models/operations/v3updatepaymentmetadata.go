@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V3UpdatePaymentMetadataServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V3UpdatePaymentMetadataRequest struct {
 	V3UpdatePaymentMetadataRequest *payments.V3UpdatePaymentMetadataRequest `request:"mediaType=application/json"`
 	// The payment ID

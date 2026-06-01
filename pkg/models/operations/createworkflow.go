@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateWorkflowServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateWorkflowResponse struct {
 	// HTTP response content type for this operation
 	ContentType string

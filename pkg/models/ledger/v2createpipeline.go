@@ -2,10 +2,6 @@
 
 package ledger
 
-var V2CreatePipelineServerList = []string{
-	"http://localhost:8080/",
-}
-
 // V2CreatePipelineV2CreatePipelineResponse - Created ipeline
 type V2CreatePipelineV2CreatePipelineResponse struct {
 	V2PipelineConfiguration V2PipelineConfiguration `json:"data"`

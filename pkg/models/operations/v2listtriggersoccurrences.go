@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var V2ListTriggersOccurrencesServerList = []string{
-	"http://localhost:8080/",
-}
-
 type V2ListTriggersOccurrencesRequest struct {
 	// Parameter used in pagination requests.
 	// Set to the value of next for the next page of results.

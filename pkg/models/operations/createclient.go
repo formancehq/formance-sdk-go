@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-var CreateClientServerList = []string{
-	"http://localhost:8080/",
-}
-
 type CreateClientResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
