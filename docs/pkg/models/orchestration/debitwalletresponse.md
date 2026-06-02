@@ -5,4 +5,4 @@
 
 | Field                                                           | Type                                                            | Required                                                        | Description                                                     |
 | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `Hold`                                                          | [orchestration.Hold](../../../pkg/models/orchestration/hold.md) | :heavy_check_mark:                                              | N/A                                                             |
+| `Data`                                                          | [orchestration.Hold](../../../pkg/models/orchestration/hold.md) | :heavy_check_mark:                                              | N/A                                                             |

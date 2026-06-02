@@ -3,14 +3,14 @@
 package orchestration
 
 type V2DebitWalletResponse struct {
-	V2Hold V2Hold `json:"data"`
+	Data V2Hold `json:"data"`
 }
 
-func (v *V2DebitWalletResponse) GetV2Hold() V2Hold {
+func (v *V2DebitWalletResponse) GetData() V2Hold {
 	if v == nil {
 		return V2Hold{}
 	}
-	return v.V2Hold
+	return v.Data
 }
 
 // #region class-body-v2debitwalletresponse

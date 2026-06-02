@@ -9,21 +9,21 @@ import (
 )
 
 type V3PaymentInitiation struct {
-	V3Metadata                    map[string]string             `json:"metadata,omitempty"`
-	V3PaymentInitiationStatusEnum V3PaymentInitiationStatusEnum `json:"status"`
-	V3PaymentInitiationTypeEnum   V3PaymentInitiationTypeEnum   `json:"type"`
-	Amount                        *big.Int                      `json:"amount"`
-	Asset                         string                        `json:"asset"`
-	ConnectorID                   string                        `json:"connectorID"`
-	CreatedAt                     time.Time                     `json:"createdAt"`
-	Description                   string                        `json:"description"`
-	DestinationAccountID          *string                       `json:"destinationAccountID,omitempty"`
-	Error                         *string                       `json:"error,omitempty"`
-	ID                            string                        `json:"id"`
-	Provider                      string                        `json:"provider"`
-	Reference                     string                        `json:"reference"`
-	ScheduledAt                   time.Time                     `json:"scheduledAt"`
-	SourceAccountID               *string                       `json:"sourceAccountID,omitempty"`
+	Amount               *big.Int                      `json:"amount"`
+	Asset                string                        `json:"asset"`
+	ConnectorID          string                        `json:"connectorID"`
+	CreatedAt            time.Time                     `json:"createdAt"`
+	Description          string                        `json:"description"`
+	DestinationAccountID *string                       `json:"destinationAccountID,omitempty"`
+	Error                *string                       `json:"error,omitempty"`
+	ID                   string                        `json:"id"`
+	Metadata             map[string]string             `json:"metadata,omitempty"`
+	Provider             string                        `json:"provider"`
+	Reference            string                        `json:"reference"`
+	ScheduledAt          time.Time                     `json:"scheduledAt"`
+	SourceAccountID      *string                       `json:"sourceAccountID,omitempty"`
+	Status               V3PaymentInitiationStatusEnum `json:"status"`
+	Type                 V3PaymentInitiationTypeEnum   `json:"type"`
 }
 
 func (v V3PaymentInitiation) MarshalJSON() ([]byte, error) {
@@ -35,27 +35,6 @@ func (v *V3PaymentInitiation) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3PaymentInitiation) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
-}
-
-func (v *V3PaymentInitiation) GetV3PaymentInitiationStatusEnum() V3PaymentInitiationStatusEnum {
-	if v == nil {
-		return V3PaymentInitiationStatusEnum("")
-	}
-	return v.V3PaymentInitiationStatusEnum
-}
-
-func (v *V3PaymentInitiation) GetV3PaymentInitiationTypeEnum() V3PaymentInitiationTypeEnum {
-	if v == nil {
-		return V3PaymentInitiationTypeEnum("")
-	}
-	return v.V3PaymentInitiationTypeEnum
 }
 
 func (v *V3PaymentInitiation) GetAmount() *big.Int {
@@ -114,6 +93,13 @@ func (v *V3PaymentInitiation) GetID() string {
 	return v.ID
 }
 
+func (v *V3PaymentInitiation) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
 func (v *V3PaymentInitiation) GetProvider() string {
 	if v == nil {
 		return ""
@@ -140,6 +126,20 @@ func (v *V3PaymentInitiation) GetSourceAccountID() *string {
 		return nil
 	}
 	return v.SourceAccountID
+}
+
+func (v *V3PaymentInitiation) GetStatus() V3PaymentInitiationStatusEnum {
+	if v == nil {
+		return V3PaymentInitiationStatusEnum("")
+	}
+	return v.Status
+}
+
+func (v *V3PaymentInitiation) GetType() V3PaymentInitiationTypeEnum {
+	if v == nil {
+		return V3PaymentInitiationTypeEnum("")
+	}
+	return v.Type
 }
 
 // #region class-body-v3paymentinitiation

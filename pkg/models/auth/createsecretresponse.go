@@ -3,12 +3,12 @@
 package auth
 
 type CreateSecretResponse struct {
-	SecretOptions *SecretOptions1 `json:"data,omitempty"`
+	Data *Secret `json:"data,omitempty"`
 }
 
-func (c *CreateSecretResponse) GetSecretOptions() *SecretOptions1 {
+func (c *CreateSecretResponse) GetData() *Secret {
 	if c == nil {
 		return nil
 	}
-	return c.SecretOptions
+	return c.Data
 }

@@ -9,13 +9,13 @@ import (
 )
 
 type V3PaymentInitiationAdjustment struct {
-	V3Metadata                    map[string]string             `json:"metadata,omitempty"`
-	V3PaymentInitiationStatusEnum V3PaymentInitiationStatusEnum `json:"status"`
-	Amount                        *big.Int                      `json:"amount,omitempty"`
-	Asset                         *string                       `json:"asset,omitempty"`
-	CreatedAt                     time.Time                     `json:"createdAt"`
-	Error                         *string                       `json:"error,omitempty"`
-	ID                            string                        `json:"id"`
+	Amount    *big.Int                      `json:"amount,omitempty"`
+	Asset     *string                       `json:"asset,omitempty"`
+	CreatedAt time.Time                     `json:"createdAt"`
+	Error     *string                       `json:"error,omitempty"`
+	ID        string                        `json:"id"`
+	Metadata  map[string]string             `json:"metadata,omitempty"`
+	Status    V3PaymentInitiationStatusEnum `json:"status"`
 }
 
 func (v V3PaymentInitiationAdjustment) MarshalJSON() ([]byte, error) {
@@ -27,20 +27,6 @@ func (v *V3PaymentInitiationAdjustment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3PaymentInitiationAdjustment) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
-}
-
-func (v *V3PaymentInitiationAdjustment) GetV3PaymentInitiationStatusEnum() V3PaymentInitiationStatusEnum {
-	if v == nil {
-		return V3PaymentInitiationStatusEnum("")
-	}
-	return v.V3PaymentInitiationStatusEnum
 }
 
 func (v *V3PaymentInitiationAdjustment) GetAmount() *big.Int {
@@ -76,6 +62,20 @@ func (v *V3PaymentInitiationAdjustment) GetID() string {
 		return ""
 	}
 	return v.ID
+}
+
+func (v *V3PaymentInitiationAdjustment) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
+func (v *V3PaymentInitiationAdjustment) GetStatus() V3PaymentInitiationStatusEnum {
+	if v == nil {
+		return V3PaymentInitiationStatusEnum("")
+	}
+	return v.Status
 }
 
 // #region class-body-v3paymentinitiationadjustment

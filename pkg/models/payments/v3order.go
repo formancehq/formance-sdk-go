@@ -13,31 +13,6 @@ import (
 // Status transitions are captured via the `adjustments` array; each
 // adjustment is a point-in-time snapshot from the PSP.
 type V3Order struct {
-	V3Metadata map[string]string `json:"metadata,omitempty"`
-	// Whether an order buys or sells the base asset.
-	V3OrderDirectionEnum V3OrderDirectionEnum `json:"direction"`
-	// Lifecycle of an order on the exchange.
-	// `PENDING` — accepted by the exchange, not yet working.
-	// `OPEN` — live on the book, no fills yet.
-	// `PARTIALLY_FILLED` — live on the book, some base quantity filled.
-	// `FILLED` — fully filled, terminal.
-	// `CANCELLED` — cancelled by the user or system, terminal.
-	// `FAILED` — rejected by the exchange, terminal. See `error` for details.
-	// `EXPIRED` — `timeInForce` elapsed before full fill, terminal.
-	//
-	V3OrderStatusEnum V3OrderStatusEnum `json:"status"`
-	// Exchange order type. Determines which price fields are meaningful on
-	// `V3Order`: LIMIT-family types use `limitPrice`; STOP-family types use
-	// `stopPrice`; TWAP/VWAP are time-weighted execution algorithms.
-	//
-	V3OrderTypeEnum V3OrderTypeEnum `json:"type"`
-	// How long an order is valid on the exchange.
-	// `GOOD_UNTIL_CANCELLED` — rests until explicitly cancelled.
-	// `GOOD_UNTIL_DATE_TIME` — rests until `expiresAt`.
-	// `IMMEDIATE_OR_CANCEL` — fill immediately, cancel any unfilled portion.
-	// `FILL_OR_KILL` — fill fully and immediately, or cancel entirely.
-	//
-	V3TimeInForceEnum V3TimeInForceEnum `json:"timeInForce"`
 	// Ordered history of state snapshots for this order. The most recent element reflects the current `status`.
 	Adjustments []V3OrderAdjustment `json:"adjustments,omitempty"`
 	// Volume-weighted average price across all fills so far, in `priceAsset` precision. Analytics field — may be absent if the PSP does not report it.
@@ -62,6 +37,8 @@ type V3Order struct {
 	// For BUY: the base currency. For SELL: the quote currency.
 	//
 	DestinationAsset string `json:"destinationAsset"`
+	// Whether an order buys or sells the base asset.
+	Direction V3OrderDirectionEnum `json:"direction"`
 	// Human-readable error from the PSP (e.g. rejection reason) when `status` is `FAILED`. Null otherwise.
 	Error *string `json:"error,omitempty"`
 	// Expiration instant for `GOOD_UNTIL_DATE_TIME` orders. Null for other time-in-force values.
@@ -73,7 +50,8 @@ type V3Order struct {
 	// Formance-assigned unique order ID (composed from the PSP reference and connector ID).
 	ID string `json:"id"`
 	// Maximum price (for BUY) or minimum price (for SELL) at which the order may execute, in `priceAsset` precision. Required for LIMIT-family order types; null otherwise.
-	LimitPrice *big.Int `json:"limitPrice,omitempty"`
+	LimitPrice *big.Int          `json:"limitPrice,omitempty"`
+	Metadata   map[string]string `json:"metadata,omitempty"`
 	// Currency + precision under which `limitPrice`, `stopPrice`, and
 	// `averageFillPrice` should be interpreted. Separate from
 	// `quoteAsset` because some PSPs return price strings with more
@@ -101,8 +79,30 @@ type V3Order struct {
 	// currency.
 	//
 	SourceAsset string `json:"sourceAsset"`
+	// Lifecycle of an order on the exchange.
+	// `PENDING` — accepted by the exchange, not yet working.
+	// `OPEN` — live on the book, no fills yet.
+	// `PARTIALLY_FILLED` — live on the book, some base quantity filled.
+	// `FILLED` — fully filled, terminal.
+	// `CANCELLED` — cancelled by the user or system, terminal.
+	// `FAILED` — rejected by the exchange, terminal. See `error` for details.
+	// `EXPIRED` — `timeInForce` elapsed before full fill, terminal.
+	//
+	Status V3OrderStatusEnum `json:"status"`
 	// Trigger price at which a STOP / STOP_LIMIT order activates, in `priceAsset` precision. Null for non-stop order types.
 	StopPrice *big.Int `json:"stopPrice,omitempty"`
+	// How long an order is valid on the exchange.
+	// `GOOD_UNTIL_CANCELLED` — rests until explicitly cancelled.
+	// `GOOD_UNTIL_DATE_TIME` — rests until `expiresAt`.
+	// `IMMEDIATE_OR_CANCEL` — fill immediately, cancel any unfilled portion.
+	// `FILL_OR_KILL` — fill fully and immediately, or cancel entirely.
+	//
+	TimeInForce V3TimeInForceEnum `json:"timeInForce"`
+	// Exchange order type. Determines which price fields are meaningful on
+	// `V3Order`: LIMIT-family types use `limitPrice`; STOP-family types use
+	// `stopPrice`; TWAP/VWAP are time-weighted execution algorithms.
+	//
+	Type V3OrderTypeEnum `json:"type"`
 	// When Formance last observed a state change on the order. Equivalent to the latest adjustment's `createdAt`.
 	UpdatedAt time.Time `json:"updatedAt"`
 }
@@ -116,41 +116,6 @@ func (v *V3Order) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3Order) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
-}
-
-func (v *V3Order) GetV3OrderDirectionEnum() V3OrderDirectionEnum {
-	if v == nil {
-		return V3OrderDirectionEnum("")
-	}
-	return v.V3OrderDirectionEnum
-}
-
-func (v *V3Order) GetV3OrderStatusEnum() V3OrderStatusEnum {
-	if v == nil {
-		return V3OrderStatusEnum("")
-	}
-	return v.V3OrderStatusEnum
-}
-
-func (v *V3Order) GetV3OrderTypeEnum() V3OrderTypeEnum {
-	if v == nil {
-		return V3OrderTypeEnum("")
-	}
-	return v.V3OrderTypeEnum
-}
-
-func (v *V3Order) GetV3TimeInForceEnum() V3TimeInForceEnum {
-	if v == nil {
-		return V3TimeInForceEnum("")
-	}
-	return v.V3TimeInForceEnum
 }
 
 func (v *V3Order) GetAdjustments() []V3OrderAdjustment {
@@ -216,6 +181,13 @@ func (v *V3Order) GetDestinationAsset() string {
 	return v.DestinationAsset
 }
 
+func (v *V3Order) GetDirection() V3OrderDirectionEnum {
+	if v == nil {
+		return V3OrderDirectionEnum("")
+	}
+	return v.Direction
+}
+
 func (v *V3Order) GetError() *string {
 	if v == nil {
 		return nil
@@ -256,6 +228,13 @@ func (v *V3Order) GetLimitPrice() *big.Int {
 		return nil
 	}
 	return v.LimitPrice
+}
+
+func (v *V3Order) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
 }
 
 func (v *V3Order) GetPriceAsset() *string {
@@ -307,11 +286,32 @@ func (v *V3Order) GetSourceAsset() string {
 	return v.SourceAsset
 }
 
+func (v *V3Order) GetStatus() V3OrderStatusEnum {
+	if v == nil {
+		return V3OrderStatusEnum("")
+	}
+	return v.Status
+}
+
 func (v *V3Order) GetStopPrice() *big.Int {
 	if v == nil {
 		return nil
 	}
 	return v.StopPrice
+}
+
+func (v *V3Order) GetTimeInForce() V3TimeInForceEnum {
+	if v == nil {
+		return V3TimeInForceEnum("")
+	}
+	return v.TimeInForce
+}
+
+func (v *V3Order) GetType() V3OrderTypeEnum {
+	if v == nil {
+		return V3OrderTypeEnum("")
+	}
+	return v.Type
 }
 
 func (v *V3Order) GetUpdatedAt() time.Time {

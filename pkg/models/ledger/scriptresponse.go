@@ -3,24 +3,10 @@
 package ledger
 
 type ScriptResponse struct {
-	ErrorsEnum   *ErrorsEnum  `json:"errorCode,omitempty"`
-	Transaction  *Transaction `json:"transaction,omitempty"`
 	Details      *string      `json:"details,omitempty"`
+	ErrorCode    *ErrorsEnum  `json:"errorCode,omitempty"`
 	ErrorMessage *string      `json:"errorMessage,omitempty"`
-}
-
-func (s *ScriptResponse) GetErrorsEnum() *ErrorsEnum {
-	if s == nil {
-		return nil
-	}
-	return s.ErrorsEnum
-}
-
-func (s *ScriptResponse) GetTransaction() *Transaction {
-	if s == nil {
-		return nil
-	}
-	return s.Transaction
+	Transaction  *Transaction `json:"transaction,omitempty"`
 }
 
 func (s *ScriptResponse) GetDetails() *string {
@@ -30,9 +16,23 @@ func (s *ScriptResponse) GetDetails() *string {
 	return s.Details
 }
 
+func (s *ScriptResponse) GetErrorCode() *ErrorsEnum {
+	if s == nil {
+		return nil
+	}
+	return s.ErrorCode
+}
+
 func (s *ScriptResponse) GetErrorMessage() *string {
 	if s == nil {
 		return nil
 	}
 	return s.ErrorMessage
+}
+
+func (s *ScriptResponse) GetTransaction() *Transaction {
+	if s == nil {
+		return nil
+	}
+	return s.Transaction
 }

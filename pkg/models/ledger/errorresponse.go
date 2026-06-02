@@ -3,16 +3,9 @@
 package ledger
 
 type ErrorResponse struct {
-	ErrorsEnum   ErrorsEnum `json:"errorCode"`
 	Details      *string    `json:"details,omitempty"`
+	ErrorCode    ErrorsEnum `json:"errorCode"`
 	ErrorMessage string     `json:"errorMessage"`
-}
-
-func (e *ErrorResponse) GetErrorsEnum() ErrorsEnum {
-	if e == nil {
-		return ErrorsEnum("")
-	}
-	return e.ErrorsEnum
 }
 
 func (e *ErrorResponse) GetDetails() *string {
@@ -20,6 +13,13 @@ func (e *ErrorResponse) GetDetails() *string {
 		return nil
 	}
 	return e.Details
+}
+
+func (e *ErrorResponse) GetErrorCode() ErrorsEnum {
+	if e == nil {
+		return ErrorsEnum("")
+	}
+	return e.ErrorCode
 }
 
 func (e *ErrorResponse) GetErrorMessage() string {

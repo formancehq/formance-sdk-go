@@ -3,8 +3,8 @@
 package orchestration
 
 type Hold struct {
-	Subject     *Subject `json:"destination,omitempty"`
 	Description string   `json:"description"`
+	Destination *Subject `json:"destination,omitempty"`
 	// The unique ID of the hold.
 	ID string `json:"id"`
 	// Metadata associated with the hold.
@@ -13,18 +13,18 @@ type Hold struct {
 	WalletID string `json:"walletID"`
 }
 
-func (h *Hold) GetSubject() *Subject {
-	if h == nil {
-		return nil
-	}
-	return h.Subject
-}
-
 func (h *Hold) GetDescription() string {
 	if h == nil {
 		return ""
 	}
 	return h.Description
+}
+
+func (h *Hold) GetDestination() *Subject {
+	if h == nil {
+		return nil
+	}
+	return h.Destination
 }
 
 func (h *Hold) GetID() string {

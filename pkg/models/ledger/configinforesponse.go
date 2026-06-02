@@ -3,12 +3,12 @@
 package ledger
 
 type ConfigInfoResponse struct {
-	ConfigInfo ConfigInfo `json:"data"`
+	Data ConfigInfo `json:"data"`
 }
 
-func (c *ConfigInfoResponse) GetConfigInfo() ConfigInfo {
+func (c *ConfigInfoResponse) GetData() ConfigInfo {
 	if c == nil {
 		return ConfigInfo{}
 	}
-	return c.ConfigInfo
+	return c.Data
 }

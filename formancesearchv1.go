@@ -33,6 +33,8 @@ func newFormanceSearchV1(rootSDK *Formance, sdkConfig config.SDKConfiguration, h
 
 // GetServerInfoSearch - Get server info
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) GetServerInfoSearch(ctx context.Context, opts ...operations.Option) (*operations.GetServerInfoSearchResponse, error) {
 	o := operations.Options{}
@@ -86,7 +88,7 @@ func (s *FormanceSearchV1) GetServerInfoSearch(ctx context.Context, opts ...oper
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -170,7 +172,7 @@ func (s *FormanceSearchV1) GetServerInfoSearch(ctx context.Context, opts ...oper
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -227,6 +229,8 @@ func (s *FormanceSearchV1) GetServerInfoSearch(ctx context.Context, opts ...oper
 
 // Search - search.v1
 // Elasticsearch.v1 query engine
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceSearchV1) Search(ctx context.Context, request search.Query, opts ...operations.Option) (*operations.SearchResponse, error) {
@@ -288,7 +292,7 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request search.Query, opt
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -372,7 +376,7 @@ func (s *FormanceSearchV1) Search(ctx context.Context, request search.Query, opt
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

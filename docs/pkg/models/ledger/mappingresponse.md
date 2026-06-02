@@ -5,4 +5,4 @@
 
 | Field                                                    | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `Mapping`                                                | [*ledger.Mapping](../../../pkg/models/ledger/mapping.md) | :heavy_minus_sign:                                       | N/A                                                      |
+| `Data`                                                   | [*ledger.Mapping](../../../pkg/models/ledger/mapping.md) | :heavy_minus_sign:                                       | N/A                                                      |

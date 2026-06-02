@@ -123,9 +123,6 @@ func (e *V2PaymentType) UnmarshalJSON(data []byte) error {
 }
 
 type V2Payment struct {
-	V2Connector          *V2Connector          `json:"provider,omitempty"`
-	V2PaymentMetadata    *V2PaymentMetadata    `json:"metadata"`
-	V2PaymentStatus      V2PaymentStatus       `json:"status"`
 	Adjustments          []V2PaymentAdjustment `json:"adjustments"`
 	Asset                string                `json:"asset"`
 	ConnectorID          string                `json:"connectorID"`
@@ -133,10 +130,13 @@ type V2Payment struct {
 	DestinationAccountID string                `json:"destinationAccountID"`
 	ID                   string                `json:"id"`
 	InitialAmount        *big.Int              `json:"initialAmount"`
+	Metadata             *V2PaymentMetadata    `json:"metadata"`
+	Provider             *V2Connector          `json:"provider,omitempty"`
 	Raw                  *V2PaymentRaw         `json:"raw"`
 	Reference            string                `json:"reference"`
 	Scheme               V2PaymentScheme       `json:"scheme"`
 	SourceAccountID      string                `json:"sourceAccountID"`
+	Status               V2PaymentStatus       `json:"status"`
 	Type                 V2PaymentType         `json:"type"`
 }
 
@@ -149,27 +149,6 @@ func (v *V2Payment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V2Payment) GetV2Connector() *V2Connector {
-	if v == nil {
-		return nil
-	}
-	return v.V2Connector
-}
-
-func (v *V2Payment) GetV2PaymentMetadata() *V2PaymentMetadata {
-	if v == nil {
-		return nil
-	}
-	return v.V2PaymentMetadata
-}
-
-func (v *V2Payment) GetV2PaymentStatus() V2PaymentStatus {
-	if v == nil {
-		return V2PaymentStatus("")
-	}
-	return v.V2PaymentStatus
 }
 
 func (v *V2Payment) GetAdjustments() []V2PaymentAdjustment {
@@ -221,6 +200,20 @@ func (v *V2Payment) GetInitialAmount() *big.Int {
 	return v.InitialAmount
 }
 
+func (v *V2Payment) GetMetadata() *V2PaymentMetadata {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
+func (v *V2Payment) GetProvider() *V2Connector {
+	if v == nil {
+		return nil
+	}
+	return v.Provider
+}
+
 func (v *V2Payment) GetRaw() *V2PaymentRaw {
 	if v == nil {
 		return nil
@@ -247,6 +240,13 @@ func (v *V2Payment) GetSourceAccountID() string {
 		return ""
 	}
 	return v.SourceAccountID
+}
+
+func (v *V2Payment) GetStatus() V2PaymentStatus {
+	if v == nil {
+		return V2PaymentStatus("")
+	}
+	return v.Status
 }
 
 func (v *V2Payment) GetType() V2PaymentType {

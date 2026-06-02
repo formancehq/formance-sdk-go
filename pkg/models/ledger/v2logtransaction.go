@@ -10,15 +10,15 @@ import (
 
 // V2LogTransaction - Transaction structure as it appears in log payloads
 type V2LogTransaction struct {
-	V2AggregatedVolumes  map[string]map[string]V2Volume `json:"postCommitVolumes,omitempty"`
-	V2AggregatedVolumes1 map[string]map[string]V2Volume `json:"postCommitEffectiveVolumes,omitempty"`
-	V2AggregatedVolumes2 map[string]map[string]V2Volume `json:"preCommitVolumes,omitempty"`
-	V2AggregatedVolumes3 map[string]map[string]V2Volume `json:"preCommitEffectiveVolumes,omitempty"`
-	V2Metadata           map[string]string              `json:"metadata"`
-	ID                   *big.Int                       `json:"id"`
-	InsertedAt           *time.Time                     `json:"insertedAt,omitempty"`
-	Postings             []V2Posting                    `json:"postings"`
-	Reference            *string                        `json:"reference,omitempty"`
+	ID                         *big.Int                       `json:"id"`
+	InsertedAt                 *time.Time                     `json:"insertedAt,omitempty"`
+	Metadata                   map[string]string              `json:"metadata"`
+	PostCommitEffectiveVolumes map[string]map[string]V2Volume `json:"postCommitEffectiveVolumes,omitempty"`
+	PostCommitVolumes          map[string]map[string]V2Volume `json:"postCommitVolumes,omitempty"`
+	Postings                   []V2Posting                    `json:"postings"`
+	PreCommitEffectiveVolumes  map[string]map[string]V2Volume `json:"preCommitEffectiveVolumes,omitempty"`
+	PreCommitVolumes           map[string]map[string]V2Volume `json:"preCommitVolumes,omitempty"`
+	Reference                  *string                        `json:"reference,omitempty"`
 	// Indicates if the transaction has been reverted
 	Reverted   bool       `json:"reverted"`
 	RevertedAt *time.Time `json:"revertedAt,omitempty"`
@@ -33,45 +33,10 @@ func (v V2LogTransaction) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2LogTransaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"metadata", "id", "postings", "reverted", "timestamp"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id", "metadata", "postings", "reverted", "timestamp"}); err != nil {
 		return err
 	}
 	return nil
-}
-
-func (v *V2LogTransaction) GetV2AggregatedVolumes() map[string]map[string]V2Volume {
-	if v == nil {
-		return nil
-	}
-	return v.V2AggregatedVolumes
-}
-
-func (v *V2LogTransaction) GetV2AggregatedVolumes1() map[string]map[string]V2Volume {
-	if v == nil {
-		return nil
-	}
-	return v.V2AggregatedVolumes1
-}
-
-func (v *V2LogTransaction) GetV2AggregatedVolumes2() map[string]map[string]V2Volume {
-	if v == nil {
-		return nil
-	}
-	return v.V2AggregatedVolumes2
-}
-
-func (v *V2LogTransaction) GetV2AggregatedVolumes3() map[string]map[string]V2Volume {
-	if v == nil {
-		return nil
-	}
-	return v.V2AggregatedVolumes3
-}
-
-func (v *V2LogTransaction) GetV2Metadata() map[string]string {
-	if v == nil {
-		return map[string]string{}
-	}
-	return v.V2Metadata
 }
 
 func (v *V2LogTransaction) GetID() *big.Int {
@@ -88,11 +53,46 @@ func (v *V2LogTransaction) GetInsertedAt() *time.Time {
 	return v.InsertedAt
 }
 
+func (v *V2LogTransaction) GetMetadata() map[string]string {
+	if v == nil {
+		return map[string]string{}
+	}
+	return v.Metadata
+}
+
+func (v *V2LogTransaction) GetPostCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PostCommitEffectiveVolumes
+}
+
+func (v *V2LogTransaction) GetPostCommitVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PostCommitVolumes
+}
+
 func (v *V2LogTransaction) GetPostings() []V2Posting {
 	if v == nil {
 		return []V2Posting{}
 	}
 	return v.Postings
+}
+
+func (v *V2LogTransaction) GetPreCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PreCommitEffectiveVolumes
+}
+
+func (v *V2LogTransaction) GetPreCommitVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PreCommitVolumes
 }
 
 func (v *V2LogTransaction) GetReference() *string {

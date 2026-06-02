@@ -3,14 +3,14 @@
 package ledger
 
 type V2SchemasCursorResponse struct {
-	V2SchemasCursor V2SchemasCursor `json:"cursor"`
+	Cursor V2SchemasCursor `json:"cursor"`
 }
 
-func (v *V2SchemasCursorResponse) GetV2SchemasCursor() V2SchemasCursor {
+func (v *V2SchemasCursorResponse) GetCursor() V2SchemasCursor {
 	if v == nil {
 		return V2SchemasCursor{}
 	}
-	return v.V2SchemasCursor
+	return v.Cursor
 }
 
 // #region class-body-v2schemascursorresponse

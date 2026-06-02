@@ -5,4 +5,4 @@
 
 | Field                                                          | Type                                                           | Required                                                       | Description                                                    |
 | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| `LedgerInfo`                                                   | [*ledger.LedgerInfo](../../../pkg/models/ledger/ledgerinfo.md) | :heavy_minus_sign:                                             | N/A                                                            |
+| `Data`                                                         | [*ledger.LedgerInfo](../../../pkg/models/ledger/ledgerinfo.md) | :heavy_minus_sign:                                             | N/A                                                            |

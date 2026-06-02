@@ -8,10 +8,10 @@ import (
 
 // V2LogDataNewTransaction - Payload for NEW_TRANSACTION log entries. Contains the created transaction and any account metadata set during creation.
 type V2LogDataNewTransaction struct {
-	// Transaction structure as it appears in log payloads
-	V2LogTransaction V2LogTransaction `json:"transaction"`
 	// Metadata applied to accounts involved in the transaction
 	AccountMetadata map[string]map[string]string `json:"accountMetadata"`
+	// Transaction structure as it appears in log payloads
+	Transaction V2LogTransaction `json:"transaction"`
 }
 
 func (v V2LogDataNewTransaction) MarshalJSON() ([]byte, error) {
@@ -19,17 +19,10 @@ func (v V2LogDataNewTransaction) MarshalJSON() ([]byte, error) {
 }
 
 func (v *V2LogDataNewTransaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"transaction", "accountMetadata"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"accountMetadata", "transaction"}); err != nil {
 		return err
 	}
 	return nil
-}
-
-func (v *V2LogDataNewTransaction) GetV2LogTransaction() V2LogTransaction {
-	if v == nil {
-		return V2LogTransaction{}
-	}
-	return v.V2LogTransaction
 }
 
 func (v *V2LogDataNewTransaction) GetAccountMetadata() map[string]map[string]string {
@@ -37,6 +30,13 @@ func (v *V2LogDataNewTransaction) GetAccountMetadata() map[string]map[string]str
 		return map[string]map[string]string{}
 	}
 	return v.AccountMetadata
+}
+
+func (v *V2LogDataNewTransaction) GetTransaction() V2LogTransaction {
+	if v == nil {
+		return V2LogTransaction{}
+	}
+	return v.Transaction
 }
 
 // #region class-body-v2logdatanewtransaction

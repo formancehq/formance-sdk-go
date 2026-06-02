@@ -5,4 +5,4 @@
 
 | Field                                                               | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `LedgerStorage`                                                     | [ledger.LedgerStorage](../../../pkg/models/ledger/ledgerstorage.md) | :heavy_check_mark:                                                  | N/A                                                                 |
+| `Storage`                                                           | [ledger.LedgerStorage](../../../pkg/models/ledger/ledgerstorage.md) | :heavy_check_mark:                                                  | N/A                                                                 |

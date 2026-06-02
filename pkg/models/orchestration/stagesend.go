@@ -8,11 +8,11 @@ import (
 )
 
 type StageSend struct {
-	Monetary             *Monetary             `json:"amount,omitempty"`
-	StageSendDestination *StageSendDestination `json:"destination,omitempty"`
-	StageSendSource      *StageSendSource      `json:"source,omitempty"`
-	Metadata             map[string]string     `json:"metadata,omitempty"`
-	Timestamp            *time.Time            `json:"timestamp,omitempty"`
+	Amount      *Monetary             `json:"amount,omitempty"`
+	Destination *StageSendDestination `json:"destination,omitempty"`
+	Metadata    map[string]string     `json:"metadata,omitempty"`
+	Source      *StageSendSource      `json:"source,omitempty"`
+	Timestamp   *time.Time            `json:"timestamp,omitempty"`
 }
 
 func (s StageSend) MarshalJSON() ([]byte, error) {
@@ -26,25 +26,18 @@ func (s *StageSend) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *StageSend) GetMonetary() *Monetary {
+func (s *StageSend) GetAmount() *Monetary {
 	if s == nil {
 		return nil
 	}
-	return s.Monetary
+	return s.Amount
 }
 
-func (s *StageSend) GetStageSendDestination() *StageSendDestination {
+func (s *StageSend) GetDestination() *StageSendDestination {
 	if s == nil {
 		return nil
 	}
-	return s.StageSendDestination
-}
-
-func (s *StageSend) GetStageSendSource() *StageSendSource {
-	if s == nil {
-		return nil
-	}
-	return s.StageSendSource
+	return s.Destination
 }
 
 func (s *StageSend) GetMetadata() map[string]string {
@@ -52,6 +45,13 @@ func (s *StageSend) GetMetadata() map[string]string {
 		return nil
 	}
 	return s.Metadata
+}
+
+func (s *StageSend) GetSource() *StageSendSource {
+	if s == nil {
+		return nil
+	}
+	return s.Source
 }
 
 func (s *StageSend) GetTimestamp() *time.Time {

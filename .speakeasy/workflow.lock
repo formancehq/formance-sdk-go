@@ -1,4 +1,4 @@
-speakeasyVersion: 1.757.1
+speakeasyVersion: 1.770.0
 sources:
     stacks-source:
         sourceNamespace: stacks-source
@@ -13,7 +13,7 @@ targets:
         sourceRevisionDigest: sha256:c85e21f1f000f0409f58d4ace7aaac0d708f4577a19b638347b41dd37e19f317
         sourceBlobDigest: sha256:24159a4c5e03fd9ebc0727cecb2bff5ed6695d519aeb3fe80346af6ce1fabcfa
         codeSamplesNamespace: stacks-source-go-code-samples
-        codeSamplesRevisionDigest: sha256:0e06f94c5c77e79d88807f54eb47f3704bb1011c8251c34c835acd82d9c67e4e
+        codeSamplesRevisionDigest: sha256:19cf448d38f1813123f921d25801fbe71f6f97957e8ffba9451be766db31eb7e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

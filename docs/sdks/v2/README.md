@@ -334,10 +334,12 @@ func main() {
     )
 
     res, err := s.Ledger.V2.CreateBulk(ctx, operations.V2CreateBulkRequest{
-        RequestBody: []any{
-            ledger.V2BaseBulkElement{
-                Action: "REVERT_TRANSACTION",
-            },
+        RequestBody: []ledger.V2BulkElement{
+            ledger.CreateV2BulkElementV2BulkElementCreateTransaction(
+                ledger.V2BulkElementCreateTransaction{
+                    Action: "REVERT_TRANSACTION",
+                },
+            ),
         },
         Atomic: v4.Pointer(true),
         ContinueOnFailure: v4.Pointer(true),
@@ -395,7 +397,7 @@ func main() {
 
     s := v4.New()
 
-    res, err := s.Ledger.V2.CreateExporter(ctx, ledger.V2ExporterConfiguration1{
+    res, err := s.Ledger.V2.CreateExporter(ctx, ledger.V2ExporterConfiguration{
         Config: map[string]any{
             "key": "<value>",
         },
@@ -412,11 +414,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [ledger.V2ExporterConfiguration1](../../pkg/models/ledger/v2exporterconfiguration1.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [ledger.V2ExporterConfiguration](../../pkg/models/ledger/v2exporterconfiguration.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
 
@@ -460,7 +462,7 @@ func main() {
 
     res, err := s.Ledger.V2.CreateLedger(ctx, operations.V2CreateLedgerRequest{
         V2CreateLedgerRequest: ledger.V2CreateLedgerRequest{
-            V2Metadata: map[string]string{
+            Metadata: map[string]string{
                 "admin": "true",
             },
         },
@@ -579,9 +581,6 @@ func main() {
 
     res, err := s.Ledger.V2.CreateTransaction(ctx, operations.V2CreateTransactionRequest{
         V2PostTransaction: ledger.V2PostTransaction{
-            V2Metadata: map[string]string{
-                "admin": "true",
-            },
             AccountMetadata: map[string]map[string]string{
                 "key": map[string]string{
                     "admin": "true",
@@ -592,6 +591,9 @@ func main() {
                 "key2": map[string]string{
                     "admin": "true",
                 },
+            },
+            Metadata: map[string]string{
+                "admin": "true",
             },
             Postings: []ledger.V2Posting{
                 ledger.V2Posting{
@@ -1680,8 +1682,8 @@ func main() {
     )
 
     res, err := s.Ledger.V2.InsertSchema(ctx, operations.V2InsertSchemaRequest{
-        V2SchemaData: ledger.V2SchemaDataInput{
-            V2ChartOfAccounts: map[string]ledger.V2ChartSegment{
+        V2SchemaData: ledger.V2SchemaData{
+            Chart: map[string]ledger.V2ChartSegment{
                 "users": ledger.V2ChartSegment{
                     AdditionalProperties: map[string]ledger.V2ChartSegment{
                         "$userID": ledger.V2ChartSegment{
@@ -1690,9 +1692,9 @@ func main() {
                     },
                 },
             },
-            V2QueryTemplates: map[string]ledger.V2QueryTemplate{
+            Queries: map[string]ledger.V2QueryTemplate{
                 "key": ledger.V2QueryTemplate{
-                    V2QueryParams: v4.Pointer(ledger.CreateV2QueryParamsQueryTemplateAccountParams(
+                    Params: v4.Pointer(ledger.CreateV2QueryParamsQueryTemplateAccountParams(
                         ledger.QueryTemplateAccountParams{
                             Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
                             PageSize: v4.Pointer[int64](100),
@@ -2422,7 +2424,7 @@ func main() {
 
     res, err := s.Ledger.V2.RunQuery(ctx, operations.V2RunQueryRequest{
         RequestBody: operations.V2RunQueryRequestBody{
-            V2QueryParams: v4.Pointer(ledger.CreateV2QueryParamsQueryTemplateAccountParams(
+            Params: v4.Pointer(ledger.CreateV2QueryParamsQueryTemplateAccountParams(
                 ledger.QueryTemplateAccountParams{
                     Cursor: v4.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
                     PageSize: v4.Pointer[int64](100),
@@ -2613,7 +2615,7 @@ func main() {
     )
 
     res, err := s.Ledger.V2.UpdateExporter(ctx, operations.V2UpdateExporterRequest{
-        V2ExporterConfiguration: ledger.V2ExporterConfiguration1{
+        V2ExporterConfiguration: ledger.V2ExporterConfiguration{
             Config: map[string]any{
                 "key": "<value>",
                 "key1": "<value>",

@@ -3,16 +3,9 @@
 package ledger
 
 type V2CreateLedgerRequest struct {
-	V2Metadata map[string]string `json:"metadata,omitempty"`
-	Bucket     *string           `json:"bucket,omitempty"`
-	Features   map[string]string `json:"features,omitempty"`
-}
-
-func (v *V2CreateLedgerRequest) GetV2Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V2Metadata
+	Bucket   *string           `json:"bucket,omitempty"`
+	Features map[string]string `json:"features,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
 func (v *V2CreateLedgerRequest) GetBucket() *string {
@@ -27,6 +20,13 @@ func (v *V2CreateLedgerRequest) GetFeatures() map[string]string {
 		return nil
 	}
 	return v.Features
+}
+
+func (v *V2CreateLedgerRequest) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
 }
 
 // #region class-body-v2createledgerrequest

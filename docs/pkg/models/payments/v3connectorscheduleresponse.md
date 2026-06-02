@@ -5,4 +5,4 @@
 
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `V3Schedule`                                                      | [payments.V3Schedule](../../../pkg/models/payments/v3schedule.md) | :heavy_check_mark:                                                | N/A                                                               |
+| `Data`                                                            | [payments.V3Schedule](../../../pkg/models/payments/v3schedule.md) | :heavy_check_mark:                                                | N/A                                                               |

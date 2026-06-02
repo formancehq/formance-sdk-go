@@ -3,12 +3,12 @@
 package ledger
 
 type Config struct {
-	LedgerStorage LedgerStorage `json:"storage"`
+	Storage LedgerStorage `json:"storage"`
 }
 
-func (c *Config) GetLedgerStorage() LedgerStorage {
+func (c *Config) GetStorage() LedgerStorage {
 	if c == nil {
 		return LedgerStorage{}
 	}
-	return c.LedgerStorage
+	return c.Storage
 }

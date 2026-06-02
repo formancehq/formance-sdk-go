@@ -4,14 +4,14 @@ package ledger
 
 // V2GetPipelineStateV2GetPipelineStateResponse - Pipeline information
 type V2GetPipelineStateV2GetPipelineStateResponse struct {
-	V2PipelineConfiguration V2PipelineConfiguration `json:"data"`
+	Data V2Pipeline `json:"data"`
 }
 
-func (v *V2GetPipelineStateV2GetPipelineStateResponse) GetV2PipelineConfiguration() V2PipelineConfiguration {
+func (v *V2GetPipelineStateV2GetPipelineStateResponse) GetData() V2Pipeline {
 	if v == nil {
-		return V2PipelineConfiguration{}
+		return V2Pipeline{}
 	}
-	return v.V2PipelineConfiguration
+	return v.Data
 }
 
 // #region class-body-v2getpipelinestatev2getpipelinestateresponse

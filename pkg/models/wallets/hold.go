@@ -3,22 +3,15 @@
 package wallets
 
 type Hold struct {
-	Subject     *Subject `json:"destination,omitempty"`
 	Asset       string   `json:"asset"`
 	Description string   `json:"description"`
+	Destination *Subject `json:"destination,omitempty"`
 	// The unique ID of the hold.
 	ID string `json:"id"`
 	// Metadata associated with the hold.
 	Metadata map[string]string `json:"metadata"`
 	// The ID of the wallet the hold is associated with.
 	WalletID string `json:"walletID"`
-}
-
-func (h *Hold) GetSubject() *Subject {
-	if h == nil {
-		return nil
-	}
-	return h.Subject
 }
 
 func (h *Hold) GetAsset() string {
@@ -33,6 +26,13 @@ func (h *Hold) GetDescription() string {
 		return ""
 	}
 	return h.Description
+}
+
+func (h *Hold) GetDestination() *Subject {
+	if h == nil {
+		return nil
+	}
+	return h.Destination
 }
 
 func (h *Hold) GetID() string {

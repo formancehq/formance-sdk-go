@@ -7,9 +7,9 @@ import (
 )
 
 type V2StageSendSource struct {
-	V2StageSendSourceAccount *V2StageSendSourceAccount `json:"account,omitempty"`
-	V2StageSendSourcePayment *V2StageSendSourcePayment `json:"payment,omitempty"`
-	V2StageSendSourceWallet  *V2StageSendSourceWallet  `json:"wallet,omitempty"`
+	Account *V2StageSendSourceAccount `json:"account,omitempty"`
+	Payment *V2StageSendSourcePayment `json:"payment,omitempty"`
+	Wallet  *V2StageSendSourceWallet  `json:"wallet,omitempty"`
 }
 
 func (v V2StageSendSource) MarshalJSON() ([]byte, error) {
@@ -23,25 +23,25 @@ func (v *V2StageSendSource) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2StageSendSource) GetV2StageSendSourceAccount() *V2StageSendSourceAccount {
+func (v *V2StageSendSource) GetAccount() *V2StageSendSourceAccount {
 	if v == nil {
 		return nil
 	}
-	return v.V2StageSendSourceAccount
+	return v.Account
 }
 
-func (v *V2StageSendSource) GetV2StageSendSourcePayment() *V2StageSendSourcePayment {
+func (v *V2StageSendSource) GetPayment() *V2StageSendSourcePayment {
 	if v == nil {
 		return nil
 	}
-	return v.V2StageSendSourcePayment
+	return v.Payment
 }
 
-func (v *V2StageSendSource) GetV2StageSendSourceWallet() *V2StageSendSourceWallet {
+func (v *V2StageSendSource) GetWallet() *V2StageSendSourceWallet {
 	if v == nil {
 		return nil
 	}
-	return v.V2StageSendSourceWallet
+	return v.Wallet
 }
 
 // #region class-body-v2stagesendsource

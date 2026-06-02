@@ -5,4 +5,4 @@
 
 | Field                                                       | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `V2Account`                                                 | [ledger.V2Account](../../../pkg/models/ledger/v2account.md) | :heavy_check_mark:                                          | N/A                                                         |
+| `Data`                                                      | [ledger.V2Account](../../../pkg/models/ledger/v2account.md) | :heavy_check_mark:                                          | N/A                                                         |

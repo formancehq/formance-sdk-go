@@ -3,12 +3,12 @@
 package wallets
 
 type CreateWalletResponse struct {
-	Wallet Wallet `json:"data"`
+	Data Wallet `json:"data"`
 }
 
-func (c *CreateWalletResponse) GetWallet() Wallet {
+func (c *CreateWalletResponse) GetData() Wallet {
 	if c == nil {
 		return Wallet{}
 	}
-	return c.Wallet
+	return c.Data
 }

@@ -3,12 +3,12 @@
 package auth
 
 type ReadUserResponse struct {
-	User *User `json:"data,omitempty"`
+	Data *User `json:"data,omitempty"`
 }
 
-func (r *ReadUserResponse) GetUser() *User {
+func (r *ReadUserResponse) GetData() *User {
 	if r == nil {
 		return nil
 	}
-	return r.User
+	return r.Data
 }

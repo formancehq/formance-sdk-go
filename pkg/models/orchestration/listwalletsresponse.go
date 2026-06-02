@@ -2,7 +2,7 @@
 
 package orchestration
 
-type ListWalletsResponseCursor struct {
+type Cursor struct {
 	Data     []Wallet `json:"data"`
 	HasMore  *bool    `json:"hasMore,omitempty"`
 	Next     *string  `json:"next,omitempty"`
@@ -10,48 +10,48 @@ type ListWalletsResponseCursor struct {
 	Previous *string  `json:"previous,omitempty"`
 }
 
-func (l *ListWalletsResponseCursor) GetData() []Wallet {
-	if l == nil {
+func (c *Cursor) GetData() []Wallet {
+	if c == nil {
 		return []Wallet{}
 	}
-	return l.Data
+	return c.Data
 }
 
-func (l *ListWalletsResponseCursor) GetHasMore() *bool {
-	if l == nil {
+func (c *Cursor) GetHasMore() *bool {
+	if c == nil {
 		return nil
 	}
-	return l.HasMore
+	return c.HasMore
 }
 
-func (l *ListWalletsResponseCursor) GetNext() *string {
-	if l == nil {
+func (c *Cursor) GetNext() *string {
+	if c == nil {
 		return nil
 	}
-	return l.Next
+	return c.Next
 }
 
-func (l *ListWalletsResponseCursor) GetPageSize() int64 {
-	if l == nil {
+func (c *Cursor) GetPageSize() int64 {
+	if c == nil {
 		return 0
 	}
-	return l.PageSize
+	return c.PageSize
 }
 
-func (l *ListWalletsResponseCursor) GetPrevious() *string {
-	if l == nil {
+func (c *Cursor) GetPrevious() *string {
+	if c == nil {
 		return nil
 	}
-	return l.Previous
+	return c.Previous
 }
 
 type ListWalletsResponse struct {
-	Cursor ListWalletsResponseCursor `json:"cursor"`
+	Cursor Cursor `json:"cursor"`
 }
 
-func (l *ListWalletsResponse) GetCursor() ListWalletsResponseCursor {
+func (l *ListWalletsResponse) GetCursor() Cursor {
 	if l == nil {
-		return ListWalletsResponseCursor{}
+		return Cursor{}
 	}
 	return l.Cursor
 }

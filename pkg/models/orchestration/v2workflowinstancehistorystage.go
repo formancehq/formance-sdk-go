@@ -8,16 +8,16 @@ import (
 )
 
 type V2WorkflowInstanceHistoryStage struct {
-	V2WorkflowInstanceHistoryStageInput  V2WorkflowInstanceHistoryStageInput   `json:"input"`
-	V2WorkflowInstanceHistoryStageOutput *V2WorkflowInstanceHistoryStageOutput `json:"output,omitempty"`
-	Attempt                              int64                                 `json:"attempt"`
-	Error                                *string                               `json:"error,omitempty"`
-	LastFailure                          *string                               `json:"lastFailure,omitempty"`
-	Name                                 string                                `json:"name"`
-	NextExecution                        *time.Time                            `json:"nextExecution,omitempty"`
-	StartedAt                            time.Time                             `json:"startedAt"`
-	Terminated                           bool                                  `json:"terminated"`
-	TerminatedAt                         *time.Time                            `json:"terminatedAt,omitempty"`
+	Attempt       int64                                 `json:"attempt"`
+	Error         *string                               `json:"error,omitempty"`
+	Input         V2WorkflowInstanceHistoryStageInput   `json:"input"`
+	LastFailure   *string                               `json:"lastFailure,omitempty"`
+	Name          string                                `json:"name"`
+	NextExecution *time.Time                            `json:"nextExecution,omitempty"`
+	Output        *V2WorkflowInstanceHistoryStageOutput `json:"output,omitempty"`
+	StartedAt     time.Time                             `json:"startedAt"`
+	Terminated    bool                                  `json:"terminated"`
+	TerminatedAt  *time.Time                            `json:"terminatedAt,omitempty"`
 }
 
 func (v V2WorkflowInstanceHistoryStage) MarshalJSON() ([]byte, error) {
@@ -29,20 +29,6 @@ func (v *V2WorkflowInstanceHistoryStage) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V2WorkflowInstanceHistoryStage) GetV2WorkflowInstanceHistoryStageInput() V2WorkflowInstanceHistoryStageInput {
-	if v == nil {
-		return V2WorkflowInstanceHistoryStageInput{}
-	}
-	return v.V2WorkflowInstanceHistoryStageInput
-}
-
-func (v *V2WorkflowInstanceHistoryStage) GetV2WorkflowInstanceHistoryStageOutput() *V2WorkflowInstanceHistoryStageOutput {
-	if v == nil {
-		return nil
-	}
-	return v.V2WorkflowInstanceHistoryStageOutput
 }
 
 func (v *V2WorkflowInstanceHistoryStage) GetAttempt() int64 {
@@ -57,6 +43,13 @@ func (v *V2WorkflowInstanceHistoryStage) GetError() *string {
 		return nil
 	}
 	return v.Error
+}
+
+func (v *V2WorkflowInstanceHistoryStage) GetInput() V2WorkflowInstanceHistoryStageInput {
+	if v == nil {
+		return V2WorkflowInstanceHistoryStageInput{}
+	}
+	return v.Input
 }
 
 func (v *V2WorkflowInstanceHistoryStage) GetLastFailure() *string {
@@ -78,6 +71,13 @@ func (v *V2WorkflowInstanceHistoryStage) GetNextExecution() *time.Time {
 		return nil
 	}
 	return v.NextExecution
+}
+
+func (v *V2WorkflowInstanceHistoryStage) GetOutput() *V2WorkflowInstanceHistoryStageOutput {
+	if v == nil {
+		return nil
+	}
+	return v.Output
 }
 
 func (v *V2WorkflowInstanceHistoryStage) GetStartedAt() time.Time {

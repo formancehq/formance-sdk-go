@@ -3,12 +3,12 @@
 package orchestration
 
 type ReadTriggerResponse struct {
-	TriggerData TriggerData `json:"data"`
+	Data Trigger `json:"data"`
 }
 
-func (r *ReadTriggerResponse) GetTriggerData() TriggerData {
+func (r *ReadTriggerResponse) GetData() Trigger {
 	if r == nil {
-		return TriggerData{}
+		return Trigger{}
 	}
-	return r.TriggerData
+	return r.Data
 }

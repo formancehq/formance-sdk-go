@@ -4,12 +4,12 @@ package payments
 
 // BankAccountResponse - OK
 type BankAccountResponse struct {
-	BankAccount BankAccount `json:"data"`
+	Data BankAccount `json:"data"`
 }
 
-func (b *BankAccountResponse) GetBankAccount() BankAccount {
+func (b *BankAccountResponse) GetData() BankAccount {
 	if b == nil {
 		return BankAccount{}
 	}
-	return b.BankAccount
+	return b.Data
 }

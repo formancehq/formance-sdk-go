@@ -8,11 +8,11 @@ import (
 )
 
 type V2StageSend struct {
-	V2Monetary             *V2Monetary             `json:"amount,omitempty"`
-	V2StageSendDestination *V2StageSendDestination `json:"destination,omitempty"`
-	V2StageSendSource      *V2StageSendSource      `json:"source,omitempty"`
-	Metadata               map[string]string       `json:"metadata,omitempty"`
-	Timestamp              *time.Time              `json:"timestamp,omitempty"`
+	Amount      *V2Monetary             `json:"amount,omitempty"`
+	Destination *V2StageSendDestination `json:"destination,omitempty"`
+	Metadata    map[string]string       `json:"metadata,omitempty"`
+	Source      *V2StageSendSource      `json:"source,omitempty"`
+	Timestamp   *time.Time              `json:"timestamp,omitempty"`
 }
 
 func (v V2StageSend) MarshalJSON() ([]byte, error) {
@@ -26,25 +26,18 @@ func (v *V2StageSend) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2StageSend) GetV2Monetary() *V2Monetary {
+func (v *V2StageSend) GetAmount() *V2Monetary {
 	if v == nil {
 		return nil
 	}
-	return v.V2Monetary
+	return v.Amount
 }
 
-func (v *V2StageSend) GetV2StageSendDestination() *V2StageSendDestination {
+func (v *V2StageSend) GetDestination() *V2StageSendDestination {
 	if v == nil {
 		return nil
 	}
-	return v.V2StageSendDestination
-}
-
-func (v *V2StageSend) GetV2StageSendSource() *V2StageSendSource {
-	if v == nil {
-		return nil
-	}
-	return v.V2StageSendSource
+	return v.Destination
 }
 
 func (v *V2StageSend) GetMetadata() map[string]string {
@@ -52,6 +45,13 @@ func (v *V2StageSend) GetMetadata() map[string]string {
 		return nil
 	}
 	return v.Metadata
+}
+
+func (v *V2StageSend) GetSource() *V2StageSendSource {
+	if v == nil {
+		return nil
+	}
+	return v.Source
 }
 
 func (v *V2StageSend) GetTimestamp() *time.Time {

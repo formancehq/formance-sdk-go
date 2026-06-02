@@ -5,4 +5,4 @@
 
 | Field                                                               | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `V2Hold`                                                            | [orchestration.V2Hold](../../../pkg/models/orchestration/v2hold.md) | :heavy_check_mark:                                                  | N/A                                                                 |
+| `Data`                                                              | [orchestration.V2Hold](../../../pkg/models/orchestration/v2hold.md) | :heavy_check_mark:                                                  | N/A                                                                 |

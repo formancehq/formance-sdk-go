@@ -30,11 +30,11 @@ func (v *V2PostTransactionScript) GetVars() map[string]any {
 // #endregion class-body-v2posttransactionscript
 
 type V2PostTransaction struct {
-	V2Metadata map[string]string        `json:"metadata"`
-	Postings   []V2Posting              `json:"postings,omitempty"`
-	Reference  *string                  `json:"reference,omitempty"`
-	Script     *V2PostTransactionScript `json:"script,omitempty"`
-	Timestamp  *time.Time               `json:"timestamp,omitempty"`
+	Metadata  map[string]string        `json:"metadata"`
+	Postings  []V2Posting              `json:"postings,omitempty"`
+	Reference *string                  `json:"reference,omitempty"`
+	Script    *V2PostTransactionScript `json:"script,omitempty"`
+	Timestamp *time.Time               `json:"timestamp,omitempty"`
 }
 
 func (v V2PostTransaction) MarshalJSON() ([]byte, error) {
@@ -48,11 +48,11 @@ func (v *V2PostTransaction) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2PostTransaction) GetV2Metadata() map[string]string {
+func (v *V2PostTransaction) GetMetadata() map[string]string {
 	if v == nil {
 		return map[string]string{}
 	}
-	return v.V2Metadata
+	return v.Metadata
 }
 
 func (v *V2PostTransaction) GetPostings() []V2Posting {

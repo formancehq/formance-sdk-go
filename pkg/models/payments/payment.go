@@ -12,11 +12,6 @@ type PaymentRaw struct {
 }
 
 type Payment struct {
-	Connector            *Connector          `json:"provider,omitempty"`
-	PaymentMetadata      map[string]string   `json:"metadata"`
-	PaymentScheme        PaymentScheme       `json:"scheme"`
-	PaymentStatus        PaymentStatus       `json:"status"`
-	PaymentType          PaymentType         `json:"type"`
 	Adjustments          []PaymentAdjustment `json:"adjustments"`
 	Amount               *big.Int            `json:"amount"`
 	Asset                string              `json:"asset"`
@@ -25,9 +20,14 @@ type Payment struct {
 	DestinationAccountID string              `json:"destinationAccountID"`
 	ID                   string              `json:"id"`
 	InitialAmount        *big.Int            `json:"initialAmount"`
+	Metadata             map[string]string   `json:"metadata"`
+	Provider             *Connector          `json:"provider,omitempty"`
 	Raw                  *PaymentRaw         `json:"raw"`
 	Reference            string              `json:"reference"`
+	Scheme               PaymentScheme       `json:"scheme"`
 	SourceAccountID      string              `json:"sourceAccountID"`
+	Status               PaymentStatus       `json:"status"`
+	Type                 PaymentType         `json:"type"`
 }
 
 func (p Payment) MarshalJSON() ([]byte, error) {
@@ -39,41 +39,6 @@ func (p *Payment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (p *Payment) GetConnector() *Connector {
-	if p == nil {
-		return nil
-	}
-	return p.Connector
-}
-
-func (p *Payment) GetPaymentMetadata() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.PaymentMetadata
-}
-
-func (p *Payment) GetPaymentScheme() PaymentScheme {
-	if p == nil {
-		return PaymentScheme("")
-	}
-	return p.PaymentScheme
-}
-
-func (p *Payment) GetPaymentStatus() PaymentStatus {
-	if p == nil {
-		return PaymentStatus("")
-	}
-	return p.PaymentStatus
-}
-
-func (p *Payment) GetPaymentType() PaymentType {
-	if p == nil {
-		return PaymentType("")
-	}
-	return p.PaymentType
 }
 
 func (p *Payment) GetAdjustments() []PaymentAdjustment {
@@ -132,6 +97,20 @@ func (p *Payment) GetInitialAmount() *big.Int {
 	return p.InitialAmount
 }
 
+func (p *Payment) GetMetadata() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Metadata
+}
+
+func (p *Payment) GetProvider() *Connector {
+	if p == nil {
+		return nil
+	}
+	return p.Provider
+}
+
 func (p *Payment) GetRaw() *PaymentRaw {
 	if p == nil {
 		return nil
@@ -146,9 +125,30 @@ func (p *Payment) GetReference() string {
 	return p.Reference
 }
 
+func (p *Payment) GetScheme() PaymentScheme {
+	if p == nil {
+		return PaymentScheme("")
+	}
+	return p.Scheme
+}
+
 func (p *Payment) GetSourceAccountID() string {
 	if p == nil {
 		return ""
 	}
 	return p.SourceAccountID
+}
+
+func (p *Payment) GetStatus() PaymentStatus {
+	if p == nil {
+		return PaymentStatus("")
+	}
+	return p.Status
+}
+
+func (p *Payment) GetType() PaymentType {
+	if p == nil {
+		return PaymentType("")
+	}
+	return p.Type
 }

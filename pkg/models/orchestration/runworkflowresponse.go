@@ -3,12 +3,12 @@
 package orchestration
 
 type RunWorkflowResponse struct {
-	WorkflowInstance WorkflowInstance `json:"data"`
+	Data WorkflowInstance `json:"data"`
 }
 
-func (r *RunWorkflowResponse) GetWorkflowInstance() WorkflowInstance {
+func (r *RunWorkflowResponse) GetData() WorkflowInstance {
 	if r == nil {
 		return WorkflowInstance{}
 	}
-	return r.WorkflowInstance
+	return r.Data
 }

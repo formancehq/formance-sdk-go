@@ -2,27 +2,9 @@
 
 package ledger
 
-import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
-	"time"
-)
-
 type V2ExporterConfiguration struct {
-	Config    map[string]any `json:"config"`
-	CreatedAt time.Time      `json:"createdAt"`
-	Driver    string         `json:"driver"`
-	ID        string         `json:"id"`
-}
-
-func (v V2ExporterConfiguration) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(v, "", false)
-}
-
-func (v *V2ExporterConfiguration) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
-		return err
-	}
-	return nil
+	Config map[string]any `json:"config"`
+	Driver string         `json:"driver"`
 }
 
 func (v *V2ExporterConfiguration) GetConfig() map[string]any {
@@ -32,25 +14,11 @@ func (v *V2ExporterConfiguration) GetConfig() map[string]any {
 	return v.Config
 }
 
-func (v *V2ExporterConfiguration) GetCreatedAt() time.Time {
-	if v == nil {
-		return time.Time{}
-	}
-	return v.CreatedAt
-}
-
 func (v *V2ExporterConfiguration) GetDriver() string {
 	if v == nil {
 		return ""
 	}
 	return v.Driver
-}
-
-func (v *V2ExporterConfiguration) GetID() string {
-	if v == nil {
-		return ""
-	}
-	return v.ID
 }
 
 // #region class-body-v2exporterconfiguration

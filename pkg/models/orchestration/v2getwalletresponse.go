@@ -3,14 +3,14 @@
 package orchestration
 
 type V2GetWalletResponse struct {
-	V2WalletWithBalances V2WalletWithBalances `json:"data"`
+	Data V2WalletWithBalances `json:"data"`
 }
 
-func (v *V2GetWalletResponse) GetV2WalletWithBalances() V2WalletWithBalances {
+func (v *V2GetWalletResponse) GetData() V2WalletWithBalances {
 	if v == nil {
 		return V2WalletWithBalances{}
 	}
-	return v.V2WalletWithBalances
+	return v.Data
 }
 
 // #region class-body-v2getwalletresponse

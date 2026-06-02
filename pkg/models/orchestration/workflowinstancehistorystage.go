@@ -8,16 +8,16 @@ import (
 )
 
 type WorkflowInstanceHistoryStage struct {
-	WorkflowInstanceHistoryStageInput  WorkflowInstanceHistoryStageInput   `json:"input"`
-	WorkflowInstanceHistoryStageOutput *WorkflowInstanceHistoryStageOutput `json:"output,omitempty"`
-	Attempt                            int64                               `json:"attempt"`
-	Error                              *string                             `json:"error,omitempty"`
-	LastFailure                        *string                             `json:"lastFailure,omitempty"`
-	Name                               string                              `json:"name"`
-	NextExecution                      *time.Time                          `json:"nextExecution,omitempty"`
-	StartedAt                          time.Time                           `json:"startedAt"`
-	Terminated                         bool                                `json:"terminated"`
-	TerminatedAt                       *time.Time                          `json:"terminatedAt,omitempty"`
+	Attempt       int64                               `json:"attempt"`
+	Error         *string                             `json:"error,omitempty"`
+	Input         WorkflowInstanceHistoryStageInput   `json:"input"`
+	LastFailure   *string                             `json:"lastFailure,omitempty"`
+	Name          string                              `json:"name"`
+	NextExecution *time.Time                          `json:"nextExecution,omitempty"`
+	Output        *WorkflowInstanceHistoryStageOutput `json:"output,omitempty"`
+	StartedAt     time.Time                           `json:"startedAt"`
+	Terminated    bool                                `json:"terminated"`
+	TerminatedAt  *time.Time                          `json:"terminatedAt,omitempty"`
 }
 
 func (w WorkflowInstanceHistoryStage) MarshalJSON() ([]byte, error) {
@@ -29,20 +29,6 @@ func (w *WorkflowInstanceHistoryStage) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (w *WorkflowInstanceHistoryStage) GetWorkflowInstanceHistoryStageInput() WorkflowInstanceHistoryStageInput {
-	if w == nil {
-		return WorkflowInstanceHistoryStageInput{}
-	}
-	return w.WorkflowInstanceHistoryStageInput
-}
-
-func (w *WorkflowInstanceHistoryStage) GetWorkflowInstanceHistoryStageOutput() *WorkflowInstanceHistoryStageOutput {
-	if w == nil {
-		return nil
-	}
-	return w.WorkflowInstanceHistoryStageOutput
 }
 
 func (w *WorkflowInstanceHistoryStage) GetAttempt() int64 {
@@ -57,6 +43,13 @@ func (w *WorkflowInstanceHistoryStage) GetError() *string {
 		return nil
 	}
 	return w.Error
+}
+
+func (w *WorkflowInstanceHistoryStage) GetInput() WorkflowInstanceHistoryStageInput {
+	if w == nil {
+		return WorkflowInstanceHistoryStageInput{}
+	}
+	return w.Input
 }
 
 func (w *WorkflowInstanceHistoryStage) GetLastFailure() *string {
@@ -78,6 +71,13 @@ func (w *WorkflowInstanceHistoryStage) GetNextExecution() *time.Time {
 		return nil
 	}
 	return w.NextExecution
+}
+
+func (w *WorkflowInstanceHistoryStage) GetOutput() *WorkflowInstanceHistoryStageOutput {
+	if w == nil {
+		return nil
+	}
+	return w.Output
 }
 
 func (w *WorkflowInstanceHistoryStage) GetStartedAt() time.Time {

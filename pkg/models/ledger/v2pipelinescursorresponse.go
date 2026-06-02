@@ -3,16 +3,16 @@
 package ledger
 
 type V2PipelinesCursorResponseCursor struct {
-	Data     []V2PipelineConfiguration `json:"data"`
-	HasMore  bool                      `json:"hasMore"`
-	Next     *string                   `json:"next,omitempty"`
-	PageSize int64                     `json:"pageSize"`
-	Previous *string                   `json:"previous,omitempty"`
+	Data     []V2Pipeline `json:"data"`
+	HasMore  bool         `json:"hasMore"`
+	Next     *string      `json:"next,omitempty"`
+	PageSize int64        `json:"pageSize"`
+	Previous *string      `json:"previous,omitempty"`
 }
 
-func (v *V2PipelinesCursorResponseCursor) GetData() []V2PipelineConfiguration {
+func (v *V2PipelinesCursorResponseCursor) GetData() []V2Pipeline {
 	if v == nil {
-		return []V2PipelineConfiguration{}
+		return []V2Pipeline{}
 	}
 	return v.Data
 }

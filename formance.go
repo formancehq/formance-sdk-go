@@ -2,7 +2,7 @@
 
 package v4
 
-// Generated from OpenAPI doc version SDK_VERSION and generator version 2.866.2
+// Generated from OpenAPI doc version SDK_VERSION and generator version 2.893.0
 
 import (
 	"bytes"
@@ -75,11 +75,9 @@ type Formance struct {
 	Orchestration  *Orchestration
 	Payments       *Payments
 	Reconciliation *Reconciliation
-	// search.v1
-	// Elasticsearch.v1 query engine
-	Search   *Search
-	Wallets  *Wallets
-	Webhooks *Webhooks
+	Search         *Search
+	Wallets        *Wallets
+	Webhooks       *Webhooks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -211,9 +209,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "4.1.0",
+		SDKVersion: "4.1.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 4.1.0 2.866.2 SDK_VERSION github.com/formancehq/formance-sdk-go/v4",
+			UserAgent:  "speakeasy-sdk/go 4.1.1 2.893.0 SDK_VERSION github.com/formancehq/formance-sdk-go/v4",
 			ServerList: ServerList,
 			ServerVariables: []map[string]string{
 				{},
@@ -386,7 +384,7 @@ func (s *Formance) GetVersions(ctx context.Context, opts ...operations.Option) (
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

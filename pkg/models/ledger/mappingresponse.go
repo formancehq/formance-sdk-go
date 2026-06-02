@@ -3,12 +3,12 @@
 package ledger
 
 type MappingResponse struct {
-	Mapping *Mapping `json:"data,omitempty"`
+	Data *Mapping `json:"data,omitempty"`
 }
 
-func (m *MappingResponse) GetMapping() *Mapping {
+func (m *MappingResponse) GetData() *Mapping {
 	if m == nil {
 		return nil
 	}
-	return m.Mapping
+	return m.Data
 }

@@ -8,8 +8,8 @@ import (
 
 // PaymentsErrorResponse - Error
 type PaymentsErrorResponse struct {
-	PaymentsErrorsEnum PaymentsErrorsEnum `json:"errorCode"`
-	ErrorMessage       string             `json:"errorMessage"`
+	ErrorCode    PaymentsErrorsEnum `json:"errorCode"`
+	ErrorMessage string             `json:"errorMessage"`
 }
 
 var _ error = &PaymentsErrorResponse{}

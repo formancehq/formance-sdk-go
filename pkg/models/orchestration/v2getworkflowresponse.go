@@ -3,14 +3,14 @@
 package orchestration
 
 type V2GetWorkflowResponse struct {
-	V2Workflow V2Workflow `json:"data"`
+	Data V2Workflow `json:"data"`
 }
 
-func (v *V2GetWorkflowResponse) GetV2Workflow() V2Workflow {
+func (v *V2GetWorkflowResponse) GetData() V2Workflow {
 	if v == nil {
 		return V2Workflow{}
 	}
-	return v.V2Workflow
+	return v.Data
 }
 
 // #region class-body-v2getworkflowresponse

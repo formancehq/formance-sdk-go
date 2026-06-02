@@ -3,12 +3,12 @@
 package orchestration
 
 type CreateTransactionResponse struct {
-	Transaction Transaction `json:"data"`
+	Data Transaction `json:"data"`
 }
 
-func (c *CreateTransactionResponse) GetTransaction() Transaction {
+func (c *CreateTransactionResponse) GetData() Transaction {
 	if c == nil {
 		return Transaction{}
 	}
-	return c.Transaction
+	return c.Data
 }

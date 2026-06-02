@@ -7,8 +7,8 @@ import (
 )
 
 type ErrorResponse struct {
-	ErrorsEnum   ErrorsEnum `json:"errorCode"`
 	Details      *string    `json:"details,omitempty"`
+	ErrorCode    ErrorsEnum `json:"errorCode"`
 	ErrorMessage string     `json:"errorMessage"`
 }
 

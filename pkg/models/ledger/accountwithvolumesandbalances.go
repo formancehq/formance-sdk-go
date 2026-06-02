@@ -8,11 +8,11 @@ import (
 )
 
 type AccountWithVolumesAndBalances struct {
-	Volumes  map[string]Volume   `json:"volumes,omitempty"`
 	Address  string              `json:"address"`
 	Balances map[string]*big.Int `json:"balances,omitempty"`
 	Metadata map[string]any      `json:"metadata,omitempty"`
 	Type     *string             `json:"type,omitempty"`
+	Volumes  map[string]Volume   `json:"volumes,omitempty"`
 }
 
 func (a AccountWithVolumesAndBalances) MarshalJSON() ([]byte, error) {
@@ -24,13 +24,6 @@ func (a *AccountWithVolumesAndBalances) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (a *AccountWithVolumesAndBalances) GetVolumes() map[string]Volume {
-	if a == nil {
-		return nil
-	}
-	return a.Volumes
 }
 
 func (a *AccountWithVolumesAndBalances) GetAddress() string {
@@ -59,4 +52,11 @@ func (a *AccountWithVolumesAndBalances) GetType() *string {
 		return nil
 	}
 	return a.Type
+}
+
+func (a *AccountWithVolumesAndBalances) GetVolumes() map[string]Volume {
+	if a == nil {
+		return nil
+	}
+	return a.Volumes
 }

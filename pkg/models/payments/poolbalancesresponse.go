@@ -4,12 +4,12 @@ package payments
 
 // PoolBalancesResponse - OK
 type PoolBalancesResponse struct {
-	PoolBalances PoolBalances `json:"data"`
+	Data PoolBalances `json:"data"`
 }
 
-func (p *PoolBalancesResponse) GetPoolBalances() PoolBalances {
+func (p *PoolBalancesResponse) GetData() PoolBalances {
 	if p == nil {
 		return PoolBalances{}
 	}
-	return p.PoolBalances
+	return p.Data
 }

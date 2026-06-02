@@ -4,12 +4,12 @@ package payments
 
 // ConnectorConfigResponse - OK
 type ConnectorConfigResponse struct {
-	ConnectorConfig ConnectorConfig `json:"data"`
+	Data ConnectorConfig `json:"data"`
 }
 
-func (c *ConnectorConfigResponse) GetConnectorConfig() ConnectorConfig {
+func (c *ConnectorConfigResponse) GetData() ConnectorConfig {
 	if c == nil {
 		return ConnectorConfig{}
 	}
-	return c.ConnectorConfig
+	return c.Data
 }

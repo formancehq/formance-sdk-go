@@ -2,7 +2,7 @@
 
 package payments
 
-type BalancesCursorCursorBase struct {
+type BalancesCursorCursor struct {
 	Data     []AccountBalance `json:"data"`
 	HasMore  bool             `json:"hasMore"`
 	Next     *string          `json:"next,omitempty"`
@@ -10,35 +10,35 @@ type BalancesCursorCursorBase struct {
 	Previous *string          `json:"previous,omitempty"`
 }
 
-func (b *BalancesCursorCursorBase) GetData() []AccountBalance {
+func (b *BalancesCursorCursor) GetData() []AccountBalance {
 	if b == nil {
 		return []AccountBalance{}
 	}
 	return b.Data
 }
 
-func (b *BalancesCursorCursorBase) GetHasMore() bool {
+func (b *BalancesCursorCursor) GetHasMore() bool {
 	if b == nil {
 		return false
 	}
 	return b.HasMore
 }
 
-func (b *BalancesCursorCursorBase) GetNext() *string {
+func (b *BalancesCursorCursor) GetNext() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Next
 }
 
-func (b *BalancesCursorCursorBase) GetPageSize() int64 {
+func (b *BalancesCursorCursor) GetPageSize() int64 {
 	if b == nil {
 		return 0
 	}
 	return b.PageSize
 }
 
-func (b *BalancesCursorCursorBase) GetPrevious() *string {
+func (b *BalancesCursorCursor) GetPrevious() *string {
 	if b == nil {
 		return nil
 	}
@@ -47,12 +47,12 @@ func (b *BalancesCursorCursorBase) GetPrevious() *string {
 
 // BalancesCursor - OK
 type BalancesCursor struct {
-	CursorBase BalancesCursorCursorBase `json:"cursor"`
+	Cursor BalancesCursorCursor `json:"cursor"`
 }
 
-func (b *BalancesCursor) GetCursorBase() BalancesCursorCursorBase {
+func (b *BalancesCursor) GetCursor() BalancesCursorCursor {
 	if b == nil {
-		return BalancesCursorCursorBase{}
+		return BalancesCursorCursor{}
 	}
-	return b.CursorBase
+	return b.Cursor
 }

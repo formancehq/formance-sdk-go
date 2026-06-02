@@ -7,7 +7,7 @@ import (
 )
 
 type Update struct {
-	UpdateAccount *UpdateAccount `json:"account,omitempty"`
+	Account *UpdateAccount `json:"account,omitempty"`
 }
 
 func (u Update) MarshalJSON() ([]byte, error) {
@@ -21,9 +21,9 @@ func (u *Update) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (u *Update) GetUpdateAccount() *UpdateAccount {
+func (u *Update) GetAccount() *UpdateAccount {
 	if u == nil {
 		return nil
 	}
-	return u.UpdateAccount
+	return u.Account
 }

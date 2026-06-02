@@ -5,4 +5,4 @@
 
 | Field                                                   | Type                                                    | Required                                                | Description                                             |
 | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `V2Stats`                                               | [ledger.V2Stats](../../../pkg/models/ledger/v2stats.md) | :heavy_check_mark:                                      | N/A                                                     |
+| `Data`                                                  | [ledger.V2Stats](../../../pkg/models/ledger/v2stats.md) | :heavy_check_mark:                                      | N/A                                                     |

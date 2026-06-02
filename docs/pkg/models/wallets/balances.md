@@ -5,4 +5,4 @@
 
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `AssetHolder`                                                     | [wallets.AssetHolder](../../../pkg/models/wallets/assetholder.md) | :heavy_check_mark:                                                | N/A                                                               |
+| `Main`                                                            | [wallets.AssetHolder](../../../pkg/models/wallets/assetholder.md) | :heavy_check_mark:                                                | N/A                                                               |

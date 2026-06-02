@@ -3,14 +3,14 @@
 package payments
 
 type V3ConnectorScheduleResponse struct {
-	V3Schedule V3Schedule `json:"data"`
+	Data V3Schedule `json:"data"`
 }
 
-func (v *V3ConnectorScheduleResponse) GetV3Schedule() V3Schedule {
+func (v *V3ConnectorScheduleResponse) GetData() V3Schedule {
 	if v == nil {
 		return V3Schedule{}
 	}
-	return v.V3Schedule
+	return v.Data
 }
 
 // #region class-body-v3connectorscheduleresponse

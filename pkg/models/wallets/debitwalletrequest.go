@@ -8,10 +8,10 @@ import (
 )
 
 type DebitWalletRequest struct {
-	Monetary    Monetary `json:"amount"`
-	Subject     *Subject `json:"destination,omitempty"`
+	Amount      Monetary `json:"amount"`
 	Balances    []string `json:"balances,omitempty"`
 	Description *string  `json:"description,omitempty"`
+	Destination *Subject `json:"destination,omitempty"`
 	// Metadata associated with the wallet.
 	Metadata map[string]string `json:"metadata"`
 	// Set to true to create a pending hold. If false, the wallet will be debited immediately.
@@ -31,18 +31,11 @@ func (d *DebitWalletRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (d *DebitWalletRequest) GetMonetary() Monetary {
+func (d *DebitWalletRequest) GetAmount() Monetary {
 	if d == nil {
 		return Monetary{}
 	}
-	return d.Monetary
-}
-
-func (d *DebitWalletRequest) GetSubject() *Subject {
-	if d == nil {
-		return nil
-	}
-	return d.Subject
+	return d.Amount
 }
 
 func (d *DebitWalletRequest) GetBalances() []string {
@@ -57,6 +50,13 @@ func (d *DebitWalletRequest) GetDescription() *string {
 		return nil
 	}
 	return d.Description
+}
+
+func (d *DebitWalletRequest) GetDestination() *Subject {
+	if d == nil {
+		return nil
+	}
+	return d.Destination
 }
 
 func (d *DebitWalletRequest) GetMetadata() map[string]string {

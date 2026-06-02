@@ -32,6 +32,8 @@ func newFormanceV1(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *
 }
 
 // CreateTransactions - Create a new batch of transactions to a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.CreateTransactionsRequest, opts ...operations.Option) (*operations.CreateTransactionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -91,7 +93,7 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -175,7 +177,7 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -246,6 +248,8 @@ func (s *FormanceV1) CreateTransactions(ctx context.Context, request operations.
 }
 
 // AddMetadataOnTransaction - Set the metadata of a transaction by its ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request operations.AddMetadataOnTransactionRequest, opts ...operations.Option) (*operations.AddMetadataOnTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -305,7 +309,7 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -389,7 +393,7 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -443,6 +447,8 @@ func (s *FormanceV1) AddMetadataOnTransaction(ctx context.Context, request opera
 }
 
 // AddMetadataToAccount - Add metadata to an account
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operations.AddMetadataToAccountRequest, opts ...operations.Option) (*operations.AddMetadataToAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -502,7 +508,7 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -586,7 +592,7 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -640,6 +646,8 @@ func (s *FormanceV1) AddMetadataToAccount(ctx context.Context, request operation
 }
 
 // CountAccounts - Count the accounts from a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.CountAccountsRequest, opts ...operations.Option) (*operations.CountAccountsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -696,7 +704,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -780,7 +788,7 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -834,6 +842,8 @@ func (s *FormanceV1) CountAccounts(ctx context.Context, request operations.Count
 }
 
 // CountTransactions - Count the transactions from a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.CountTransactionsRequest, opts ...operations.Option) (*operations.CountTransactionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -890,7 +900,7 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -974,7 +984,7 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1028,6 +1038,8 @@ func (s *FormanceV1) CountTransactions(ctx context.Context, request operations.C
 }
 
 // CreateTransaction - Create a new transaction to a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.CreateTransactionRequest, opts ...operations.Option) (*operations.CreateTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1091,7 +1103,7 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1175,7 +1187,7 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1248,6 +1260,8 @@ func (s *FormanceV1) CreateTransaction(ctx context.Context, request operations.C
 }
 
 // GetAccountLedger - Get account by its address
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetAccountLedger(ctx context.Context, request operations.GetAccountLedgerRequest, opts ...operations.Option) (*operations.GetAccountLedgerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1300,7 +1314,7 @@ func (s *FormanceV1) GetAccountLedger(ctx context.Context, request operations.Ge
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1384,7 +1398,7 @@ func (s *FormanceV1) GetAccountLedger(ctx context.Context, request operations.Ge
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1455,6 +1469,8 @@ func (s *FormanceV1) GetAccountLedger(ctx context.Context, request operations.Ge
 }
 
 // GetBalances - Get the balances from a ledger's account
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBalancesRequest, opts ...operations.Option) (*operations.GetBalancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1511,7 +1527,7 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1595,7 +1611,7 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1666,6 +1682,8 @@ func (s *FormanceV1) GetBalances(ctx context.Context, request operations.GetBala
 }
 
 // GetBalancesAggregated - Get the aggregated balances from selected accounts
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operations.GetBalancesAggregatedRequest, opts ...operations.Option) (*operations.GetBalancesAggregatedResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1722,7 +1740,7 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1806,7 +1824,7 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1877,6 +1895,8 @@ func (s *FormanceV1) GetBalancesAggregated(ctx context.Context, request operatio
 }
 
 // GetInfo - Show server information
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*operations.GetInfoResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1929,7 +1949,7 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2013,7 +2033,7 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2084,6 +2104,8 @@ func (s *FormanceV1) GetInfo(ctx context.Context, opts ...operations.Option) (*o
 }
 
 // GetLedgerInfo - Get information about a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLedgerInfoRequest, opts ...operations.Option) (*operations.GetLedgerInfoResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2136,7 +2158,7 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2220,7 +2242,7 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2291,6 +2313,8 @@ func (s *FormanceV1) GetLedgerInfo(ctx context.Context, request operations.GetLe
 }
 
 // GetMapping - Get the mapping of a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappingRequest, opts ...operations.Option) (*operations.GetMappingResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2343,7 +2367,7 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2427,7 +2451,7 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2498,6 +2522,8 @@ func (s *FormanceV1) GetMapping(ctx context.Context, request operations.GetMappi
 }
 
 // GetTransaction - Get transaction from a ledger by its ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetTransactionRequest, opts ...operations.Option) (*operations.GetTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2550,7 +2576,7 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2634,7 +2660,7 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2706,6 +2732,8 @@ func (s *FormanceV1) GetTransaction(ctx context.Context, request operations.GetT
 
 // ListAccountsLedger - List accounts from a ledger
 // List accounts from a ledger, sorted by address in descending order.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) ListAccountsLedger(ctx context.Context, request operations.ListAccountsLedgerRequest, opts ...operations.Option) (*operations.ListAccountsLedgerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2762,7 +2790,7 @@ func (s *FormanceV1) ListAccountsLedger(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2846,7 +2874,7 @@ func (s *FormanceV1) ListAccountsLedger(ctx context.Context, request operations.
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200", "404"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2939,6 +2967,8 @@ func (s *FormanceV1) ListAccountsLedger(ctx context.Context, request operations.
 
 // ListLogs - List the logs from a ledger
 // List the logs from a ledger, sorted by ID in descending order.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRequest, opts ...operations.Option) (*operations.ListLogsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2995,7 +3025,7 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3079,7 +3109,7 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3151,6 +3181,8 @@ func (s *FormanceV1) ListLogs(ctx context.Context, request operations.ListLogsRe
 
 // ListTransactions - List transactions from a ledger
 // List transactions from a ledger, sorted by txid in descending order.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.ListTransactionsRequest, opts ...operations.Option) (*operations.ListTransactionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3207,7 +3239,7 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3291,7 +3323,7 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3363,6 +3395,8 @@ func (s *FormanceV1) ListTransactions(ctx context.Context, request operations.Li
 
 // ReadStats - Get statistics from a ledger
 // Get statistics from a ledger. (aggregate metrics on accounts and transactions)
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStatsRequest, opts ...operations.Option) (*operations.ReadStatsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3415,7 +3449,7 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3499,7 +3533,7 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3570,6 +3604,8 @@ func (s *FormanceV1) ReadStats(ctx context.Context, request operations.ReadStats
 }
 
 // RevertTransaction - Revert a ledger transaction by its ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.RevertTransactionRequest, opts ...operations.Option) (*operations.RevertTransactionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3626,7 +3662,7 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3710,7 +3746,7 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3785,6 +3821,8 @@ func (s *FormanceV1) RevertTransaction(ctx context.Context, request operations.R
 // RunScript - Execute a Numscript
 // This route is deprecated, and has been merged into `POST /{ledger}/transactions`.
 //
+// If set, this operation will use [Security.ClientID] from the global security.
+//
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScriptRequest, opts ...operations.Option) (*operations.RunScriptResponse, error) {
 	o := operations.Options{}
@@ -3849,7 +3887,7 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3933,7 +3971,7 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3989,6 +4027,8 @@ func (s *FormanceV1) RunScript(ctx context.Context, request operations.RunScript
 }
 
 // UpdateMapping - Update the mapping of a ledger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.UpdateMappingRequest, opts ...operations.Option) (*operations.UpdateMappingResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4048,7 +4088,7 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4132,7 +4172,7 @@ func (s *FormanceV1) UpdateMapping(ctx context.Context, request operations.Updat
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

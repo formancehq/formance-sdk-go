@@ -3,15 +3,15 @@
 package orchestration
 
 type ActivityDebitWallet struct {
-	DebitWalletRequest *DebitWalletRequest `json:"data,omitempty"`
-	ID                 *string             `json:"id,omitempty"`
+	Data *DebitWalletRequest `json:"data,omitempty"`
+	ID   *string             `json:"id,omitempty"`
 }
 
-func (a *ActivityDebitWallet) GetDebitWalletRequest() *DebitWalletRequest {
+func (a *ActivityDebitWallet) GetData() *DebitWalletRequest {
 	if a == nil {
 		return nil
 	}
-	return a.DebitWalletRequest
+	return a.Data
 }
 
 func (a *ActivityDebitWallet) GetID() *string {

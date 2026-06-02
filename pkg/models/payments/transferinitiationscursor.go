@@ -2,7 +2,7 @@
 
 package payments
 
-type TransferInitiationsCursorCursorBase struct {
+type TransferInitiationsCursorCursor struct {
 	Data     []TransferInitiation `json:"data"`
 	HasMore  bool                 `json:"hasMore"`
 	Next     *string              `json:"next,omitempty"`
@@ -10,35 +10,35 @@ type TransferInitiationsCursorCursorBase struct {
 	Previous *string              `json:"previous,omitempty"`
 }
 
-func (t *TransferInitiationsCursorCursorBase) GetData() []TransferInitiation {
+func (t *TransferInitiationsCursorCursor) GetData() []TransferInitiation {
 	if t == nil {
 		return []TransferInitiation{}
 	}
 	return t.Data
 }
 
-func (t *TransferInitiationsCursorCursorBase) GetHasMore() bool {
+func (t *TransferInitiationsCursorCursor) GetHasMore() bool {
 	if t == nil {
 		return false
 	}
 	return t.HasMore
 }
 
-func (t *TransferInitiationsCursorCursorBase) GetNext() *string {
+func (t *TransferInitiationsCursorCursor) GetNext() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Next
 }
 
-func (t *TransferInitiationsCursorCursorBase) GetPageSize() int64 {
+func (t *TransferInitiationsCursorCursor) GetPageSize() int64 {
 	if t == nil {
 		return 0
 	}
 	return t.PageSize
 }
 
-func (t *TransferInitiationsCursorCursorBase) GetPrevious() *string {
+func (t *TransferInitiationsCursorCursor) GetPrevious() *string {
 	if t == nil {
 		return nil
 	}
@@ -47,12 +47,12 @@ func (t *TransferInitiationsCursorCursorBase) GetPrevious() *string {
 
 // TransferInitiationsCursor - OK
 type TransferInitiationsCursor struct {
-	CursorBase TransferInitiationsCursorCursorBase `json:"cursor"`
+	Cursor TransferInitiationsCursorCursor `json:"cursor"`
 }
 
-func (t *TransferInitiationsCursor) GetCursorBase() TransferInitiationsCursorCursorBase {
+func (t *TransferInitiationsCursor) GetCursor() TransferInitiationsCursorCursor {
 	if t == nil {
-		return TransferInitiationsCursorCursorBase{}
+		return TransferInitiationsCursorCursor{}
 	}
-	return t.CursorBase
+	return t.Cursor
 }

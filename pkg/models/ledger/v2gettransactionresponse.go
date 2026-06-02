@@ -3,14 +3,14 @@
 package ledger
 
 type V2GetTransactionResponse struct {
-	V2Transaction V2Transaction `json:"data"`
+	Data V2Transaction `json:"data"`
 }
 
-func (v *V2GetTransactionResponse) GetV2Transaction() V2Transaction {
+func (v *V2GetTransactionResponse) GetData() V2Transaction {
 	if v == nil {
 		return V2Transaction{}
 	}
-	return v.V2Transaction
+	return v.Data
 }
 
 // #region class-body-v2gettransactionresponse

@@ -8,7 +8,7 @@ import (
 )
 
 type V2CreditWalletRequest struct {
-	V2Monetary V2Monetary `json:"amount"`
+	Amount V2Monetary `json:"amount"`
 	// The balance to credit
 	Balance *string `json:"balance,omitempty"`
 	// Metadata associated with the wallet.
@@ -29,11 +29,11 @@ func (v *V2CreditWalletRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2CreditWalletRequest) GetV2Monetary() V2Monetary {
+func (v *V2CreditWalletRequest) GetAmount() V2Monetary {
 	if v == nil {
 		return V2Monetary{}
 	}
-	return v.V2Monetary
+	return v.Amount
 }
 
 func (v *V2CreditWalletRequest) GetBalance() *string {

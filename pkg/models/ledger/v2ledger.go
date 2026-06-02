@@ -8,13 +8,13 @@ import (
 )
 
 type V2Ledger struct {
-	V2Metadata map[string]string `json:"metadata,omitempty"`
-	AddedAt    time.Time         `json:"addedAt"`
-	Bucket     string            `json:"bucket"`
-	DeletedAt  *time.Time        `json:"deletedAt,omitempty"`
-	Features   map[string]string `json:"features,omitempty"`
-	ID         *int64            `json:"id,omitempty"`
-	Name       string            `json:"name"`
+	AddedAt   time.Time         `json:"addedAt"`
+	Bucket    string            `json:"bucket"`
+	DeletedAt *time.Time        `json:"deletedAt,omitempty"`
+	Features  map[string]string `json:"features,omitempty"`
+	ID        *int64            `json:"id,omitempty"`
+	Metadata  map[string]string `json:"metadata,omitempty"`
+	Name      string            `json:"name"`
 }
 
 func (v V2Ledger) MarshalJSON() ([]byte, error) {
@@ -26,13 +26,6 @@ func (v *V2Ledger) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V2Ledger) GetV2Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V2Metadata
 }
 
 func (v *V2Ledger) GetAddedAt() time.Time {
@@ -68,6 +61,13 @@ func (v *V2Ledger) GetID() *int64 {
 		return nil
 	}
 	return v.ID
+}
+
+func (v *V2Ledger) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
 }
 
 func (v *V2Ledger) GetName() string {

@@ -8,13 +8,13 @@ import (
 )
 
 type V3CreateAccountRequest struct {
-	V3AccountTypeEnum V3AccountTypeEnum `json:"type"`
-	V3Metadata        map[string]string `json:"metadata,omitempty"`
-	AccountName       string            `json:"accountName"`
-	ConnectorID       string            `json:"connectorID"`
-	CreatedAt         time.Time         `json:"createdAt"`
-	DefaultAsset      *string           `json:"defaultAsset,omitempty"`
-	Reference         string            `json:"reference"`
+	AccountName  string            `json:"accountName"`
+	ConnectorID  string            `json:"connectorID"`
+	CreatedAt    time.Time         `json:"createdAt"`
+	DefaultAsset *string           `json:"defaultAsset,omitempty"`
+	Metadata     map[string]string `json:"metadata,omitempty"`
+	Reference    string            `json:"reference"`
+	Type         V3AccountTypeEnum `json:"type"`
 }
 
 func (v V3CreateAccountRequest) MarshalJSON() ([]byte, error) {
@@ -26,20 +26,6 @@ func (v *V3CreateAccountRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3CreateAccountRequest) GetV3AccountTypeEnum() V3AccountTypeEnum {
-	if v == nil {
-		return V3AccountTypeEnum("")
-	}
-	return v.V3AccountTypeEnum
-}
-
-func (v *V3CreateAccountRequest) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
 }
 
 func (v *V3CreateAccountRequest) GetAccountName() string {
@@ -70,11 +56,25 @@ func (v *V3CreateAccountRequest) GetDefaultAsset() *string {
 	return v.DefaultAsset
 }
 
+func (v *V3CreateAccountRequest) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
 func (v *V3CreateAccountRequest) GetReference() string {
 	if v == nil {
 		return ""
 	}
 	return v.Reference
+}
+
+func (v *V3CreateAccountRequest) GetType() V3AccountTypeEnum {
+	if v == nil {
+		return V3AccountTypeEnum("")
+	}
+	return v.Type
 }
 
 // #region class-body-v3createaccountrequest

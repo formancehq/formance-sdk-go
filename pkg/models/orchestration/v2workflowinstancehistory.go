@@ -8,8 +8,8 @@ import (
 )
 
 type V2WorkflowInstanceHistory struct {
-	V2Stage      V2Stage    `json:"input"`
 	Error        *string    `json:"error,omitempty"`
+	Input        V2Stage    `json:"input"`
 	Name         string     `json:"name"`
 	StartedAt    time.Time  `json:"startedAt"`
 	Terminated   bool       `json:"terminated"`
@@ -27,18 +27,18 @@ func (v *V2WorkflowInstanceHistory) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2WorkflowInstanceHistory) GetV2Stage() V2Stage {
-	if v == nil {
-		return V2Stage{}
-	}
-	return v.V2Stage
-}
-
 func (v *V2WorkflowInstanceHistory) GetError() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Error
+}
+
+func (v *V2WorkflowInstanceHistory) GetInput() V2Stage {
+	if v == nil {
+		return V2Stage{}
+	}
+	return v.Input
 }
 
 func (v *V2WorkflowInstanceHistory) GetName() string {

@@ -3,102 +3,102 @@
 package orchestration
 
 type V2WorkflowInstanceHistoryStageInput struct {
-	V2ActivityAddAccountMetadata      *V2ActivityAddAccountMetadata      `json:"AddAccountMetadata,omitempty"`
-	V2ActivityConfirmHold             *V2ActivityConfirmHold             `json:"ConfirmHold,omitempty"`
-	V2ActivityCreateTransaction       *V2ActivityCreateTransaction       `json:"CreateTransaction,omitempty"`
-	V2ActivityCreditWallet            *V2ActivityCreditWallet            `json:"CreditWallet,omitempty"`
-	V2ActivityDebitWallet             *V2ActivityDebitWallet             `json:"DebitWallet,omitempty"`
-	V2ActivityGetAccount              *V2ActivityGetAccount              `json:"GetAccount,omitempty"`
-	V2ActivityGetPayment              *V2ActivityGetPayment              `json:"GetPayment,omitempty"`
-	V2ActivityGetWallet               *V2ActivityGetWallet               `json:"GetWallet,omitempty"`
-	V2ActivityListWallets             *V2ActivityListWallets             `json:"ListWallets,omitempty"`
-	V2ActivityVoidHold                *V2ActivityVoidHold                `json:"VoidHold,omitempty"`
-	V2CreateTransferInitiationRequest *V2CreateTransferInitiationRequest `json:"CreateTransferInitiation,omitempty"`
-	V2StripeTransferRequest           *V2StripeTransferRequest           `json:"StripeTransfer,omitempty"`
+	AddAccountMetadata       *V2ActivityAddAccountMetadata      `json:"AddAccountMetadata,omitempty"`
+	ConfirmHold              *V2ActivityConfirmHold             `json:"ConfirmHold,omitempty"`
+	CreateTransaction        *V2ActivityCreateTransaction       `json:"CreateTransaction,omitempty"`
+	CreateTransferInitiation *V2CreateTransferInitiationRequest `json:"CreateTransferInitiation,omitempty"`
+	CreditWallet             *V2ActivityCreditWallet            `json:"CreditWallet,omitempty"`
+	DebitWallet              *V2ActivityDebitWallet             `json:"DebitWallet,omitempty"`
+	GetAccount               *V2ActivityGetAccount              `json:"GetAccount,omitempty"`
+	GetPayment               *V2ActivityGetPayment              `json:"GetPayment,omitempty"`
+	GetWallet                *V2ActivityGetWallet               `json:"GetWallet,omitempty"`
+	ListWallets              *V2ActivityListWallets             `json:"ListWallets,omitempty"`
+	StripeTransfer           *V2StripeTransferRequest           `json:"StripeTransfer,omitempty"`
+	VoidHold                 *V2ActivityVoidHold                `json:"VoidHold,omitempty"`
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityAddAccountMetadata() *V2ActivityAddAccountMetadata {
+func (v *V2WorkflowInstanceHistoryStageInput) GetAddAccountMetadata() *V2ActivityAddAccountMetadata {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityAddAccountMetadata
+	return v.AddAccountMetadata
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityConfirmHold() *V2ActivityConfirmHold {
+func (v *V2WorkflowInstanceHistoryStageInput) GetConfirmHold() *V2ActivityConfirmHold {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityConfirmHold
+	return v.ConfirmHold
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityCreateTransaction() *V2ActivityCreateTransaction {
+func (v *V2WorkflowInstanceHistoryStageInput) GetCreateTransaction() *V2ActivityCreateTransaction {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityCreateTransaction
+	return v.CreateTransaction
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityCreditWallet() *V2ActivityCreditWallet {
+func (v *V2WorkflowInstanceHistoryStageInput) GetCreateTransferInitiation() *V2CreateTransferInitiationRequest {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityCreditWallet
+	return v.CreateTransferInitiation
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityDebitWallet() *V2ActivityDebitWallet {
+func (v *V2WorkflowInstanceHistoryStageInput) GetCreditWallet() *V2ActivityCreditWallet {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityDebitWallet
+	return v.CreditWallet
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityGetAccount() *V2ActivityGetAccount {
+func (v *V2WorkflowInstanceHistoryStageInput) GetDebitWallet() *V2ActivityDebitWallet {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityGetAccount
+	return v.DebitWallet
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityGetPayment() *V2ActivityGetPayment {
+func (v *V2WorkflowInstanceHistoryStageInput) GetGetAccount() *V2ActivityGetAccount {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityGetPayment
+	return v.GetAccount
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityGetWallet() *V2ActivityGetWallet {
+func (v *V2WorkflowInstanceHistoryStageInput) GetGetPayment() *V2ActivityGetPayment {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityGetWallet
+	return v.GetPayment
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityListWallets() *V2ActivityListWallets {
+func (v *V2WorkflowInstanceHistoryStageInput) GetGetWallet() *V2ActivityGetWallet {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityListWallets
+	return v.GetWallet
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2ActivityVoidHold() *V2ActivityVoidHold {
+func (v *V2WorkflowInstanceHistoryStageInput) GetListWallets() *V2ActivityListWallets {
 	if v == nil {
 		return nil
 	}
-	return v.V2ActivityVoidHold
+	return v.ListWallets
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2CreateTransferInitiationRequest() *V2CreateTransferInitiationRequest {
+func (v *V2WorkflowInstanceHistoryStageInput) GetStripeTransfer() *V2StripeTransferRequest {
 	if v == nil {
 		return nil
 	}
-	return v.V2CreateTransferInitiationRequest
+	return v.StripeTransfer
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetV2StripeTransferRequest() *V2StripeTransferRequest {
+func (v *V2WorkflowInstanceHistoryStageInput) GetVoidHold() *V2ActivityVoidHold {
 	if v == nil {
 		return nil
 	}
-	return v.V2StripeTransferRequest
+	return v.VoidHold
 }
 
 // #region class-body-v2workflowinstancehistorystageinput

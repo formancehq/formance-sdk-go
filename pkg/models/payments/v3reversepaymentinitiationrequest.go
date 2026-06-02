@@ -8,10 +8,10 @@ import (
 )
 
 type V3ReversePaymentInitiationRequest struct {
-	V3Metadata  map[string]string `json:"metadata,omitempty"`
 	Amount      *big.Int          `json:"amount"`
 	Asset       string            `json:"asset"`
 	Description string            `json:"description"`
+	Metadata    map[string]string `json:"metadata,omitempty"`
 	Reference   string            `json:"reference"`
 }
 
@@ -24,13 +24,6 @@ func (v *V3ReversePaymentInitiationRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3ReversePaymentInitiationRequest) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
 }
 
 func (v *V3ReversePaymentInitiationRequest) GetAmount() *big.Int {
@@ -52,6 +45,13 @@ func (v *V3ReversePaymentInitiationRequest) GetDescription() string {
 		return ""
 	}
 	return v.Description
+}
+
+func (v *V3ReversePaymentInitiationRequest) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
 }
 
 func (v *V3ReversePaymentInitiationRequest) GetReference() string {

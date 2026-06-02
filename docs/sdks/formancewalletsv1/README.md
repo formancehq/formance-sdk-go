@@ -234,7 +234,7 @@ func main() {
 
     res, err := s.Wallets.V1.CreditWallet(ctx, operations.CreditWalletRequest{
         CreditWalletRequest: &wallets.CreditWalletRequest{
-            Monetary: wallets.Monetary{
+            Amount: wallets.Monetary{
                 Amount: big.NewInt(100),
                 Asset: "USD/2",
             },
@@ -305,7 +305,7 @@ func main() {
 
     res, err := s.Wallets.V1.DebitWallet(ctx, operations.DebitWalletRequest{
         DebitWalletRequest: &wallets.DebitWalletRequest{
-            Monetary: wallets.Monetary{
+            Amount: wallets.Monetary{
                 Amount: big.NewInt(100),
                 Asset: "USD/2",
             },

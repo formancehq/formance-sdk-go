@@ -3,20 +3,13 @@
 package payments
 
 type BankAccountRequest struct {
-	BankAccountMetadata map[string]string `json:"metadata,omitempty"`
-	AccountNumber       *string           `json:"accountNumber,omitempty"`
-	ConnectorID         *string           `json:"connectorID,omitempty"`
-	Country             string            `json:"country"`
-	Iban                *string           `json:"iban,omitempty"`
-	Name                string            `json:"name"`
-	SwiftBicCode        *string           `json:"swiftBicCode,omitempty"`
-}
-
-func (b *BankAccountRequest) GetBankAccountMetadata() map[string]string {
-	if b == nil {
-		return nil
-	}
-	return b.BankAccountMetadata
+	AccountNumber *string           `json:"accountNumber,omitempty"`
+	ConnectorID   *string           `json:"connectorID,omitempty"`
+	Country       string            `json:"country"`
+	Iban          *string           `json:"iban,omitempty"`
+	Metadata      map[string]string `json:"metadata,omitempty"`
+	Name          string            `json:"name"`
+	SwiftBicCode  *string           `json:"swiftBicCode,omitempty"`
 }
 
 func (b *BankAccountRequest) GetAccountNumber() *string {
@@ -45,6 +38,13 @@ func (b *BankAccountRequest) GetIban() *string {
 		return nil
 	}
 	return b.Iban
+}
+
+func (b *BankAccountRequest) GetMetadata() map[string]string {
+	if b == nil {
+		return nil
+	}
+	return b.Metadata
 }
 
 func (b *BankAccountRequest) GetName() string {

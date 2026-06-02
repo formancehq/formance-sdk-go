@@ -9,7 +9,7 @@ import (
 
 type WalletSummary struct {
 	AvailableFunds map[string]*big.Int `json:"availableFunds"`
-	Balances       []AssetHolder1      `json:"balances"`
+	Balances       []BalanceWithAssets `json:"balances"`
 	ExpirableFunds map[string]*big.Int `json:"expirableFunds"`
 	ExpiredFunds   map[string]*big.Int `json:"expiredFunds"`
 	HoldFunds      map[string]*big.Int `json:"holdFunds"`
@@ -33,9 +33,9 @@ func (w *WalletSummary) GetAvailableFunds() map[string]*big.Int {
 	return w.AvailableFunds
 }
 
-func (w *WalletSummary) GetBalances() []AssetHolder1 {
+func (w *WalletSummary) GetBalances() []BalanceWithAssets {
 	if w == nil {
-		return []AssetHolder1{}
+		return []BalanceWithAssets{}
 	}
 	return w.Balances
 }

@@ -9,14 +9,14 @@ type V3GetConversionResponse struct {
 	// Unlike orders, conversions do not carry an adjustment history —
 	// Formance records the final state only.
 	//
-	V3Conversion V3Conversion `json:"data"`
+	Data V3Conversion `json:"data"`
 }
 
-func (v *V3GetConversionResponse) GetV3Conversion() V3Conversion {
+func (v *V3GetConversionResponse) GetData() V3Conversion {
 	if v == nil {
 		return V3Conversion{}
 	}
-	return v.V3Conversion
+	return v.Data
 }
 
 // #region class-body-v3getconversionresponse

@@ -5,4 +5,4 @@
 
 | Field                                                     | Type                                                      | Required                                                  | Description                                               |
 | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `V2Ledger`                                                | [ledger.V2Ledger](../../../pkg/models/ledger/v2ledger.md) | :heavy_check_mark:                                        | N/A                                                       |
+| `Data`                                                    | [ledger.V2Ledger](../../../pkg/models/ledger/v2ledger.md) | :heavy_check_mark:                                        | N/A                                                       |

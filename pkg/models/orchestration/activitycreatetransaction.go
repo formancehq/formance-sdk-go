@@ -3,15 +3,15 @@
 package orchestration
 
 type ActivityCreateTransaction struct {
-	PostTransaction *PostTransaction `json:"data,omitempty"`
-	Ledger          *string          `json:"ledger,omitempty"`
+	Data   *PostTransaction `json:"data,omitempty"`
+	Ledger *string          `json:"ledger,omitempty"`
 }
 
-func (a *ActivityCreateTransaction) GetPostTransaction() *PostTransaction {
+func (a *ActivityCreateTransaction) GetData() *PostTransaction {
 	if a == nil {
 		return nil
 	}
-	return a.PostTransaction
+	return a.Data
 }
 
 func (a *ActivityCreateTransaction) GetLedger() *string {

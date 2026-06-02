@@ -3,14 +3,14 @@
 package payments
 
 type V3GetTaskResponse struct {
-	V3Task V3Task `json:"data"`
+	Data V3Task `json:"data"`
 }
 
-func (v *V3GetTaskResponse) GetV3Task() V3Task {
+func (v *V3GetTaskResponse) GetData() V3Task {
 	if v == nil {
 		return V3Task{}
 	}
-	return v.V3Task
+	return v.Data
 }
 
 // #region class-body-v3gettaskresponse
