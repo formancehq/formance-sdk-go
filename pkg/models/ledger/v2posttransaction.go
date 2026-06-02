@@ -49,15 +49,15 @@ func (v *V2PostTransactionScript) GetVars() map[string]string {
 // #endregion class-body-v2posttransactionscript
 
 type V2PostTransaction struct {
-	// The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
-	Runtime         *Runtime                     `json:"runtime,omitempty"`
-	V2Metadata      map[string]string            `json:"metadata"`
 	AccountMetadata map[string]map[string]string `json:"accountMetadata,omitempty"`
 	Force           *bool                        `json:"force,omitempty"`
+	Metadata        map[string]string            `json:"metadata"`
 	Postings        []V2Posting                  `json:"postings,omitempty"`
 	Reference       *string                      `json:"reference,omitempty"`
-	Script          *V2PostTransactionScript     `json:"script,omitempty"`
-	Timestamp       *time.Time                   `json:"timestamp,omitempty"`
+	// The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
+	Runtime   *Runtime                 `json:"runtime,omitempty"`
+	Script    *V2PostTransactionScript `json:"script,omitempty"`
+	Timestamp *time.Time               `json:"timestamp,omitempty"`
 }
 
 func (v V2PostTransaction) MarshalJSON() ([]byte, error) {
@@ -69,20 +69,6 @@ func (v *V2PostTransaction) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V2PostTransaction) GetRuntime() *Runtime {
-	if v == nil {
-		return nil
-	}
-	return v.Runtime
-}
-
-func (v *V2PostTransaction) GetV2Metadata() map[string]string {
-	if v == nil {
-		return map[string]string{}
-	}
-	return v.V2Metadata
 }
 
 func (v *V2PostTransaction) GetAccountMetadata() map[string]map[string]string {
@@ -99,6 +85,13 @@ func (v *V2PostTransaction) GetForce() *bool {
 	return v.Force
 }
 
+func (v *V2PostTransaction) GetMetadata() map[string]string {
+	if v == nil {
+		return map[string]string{}
+	}
+	return v.Metadata
+}
+
 func (v *V2PostTransaction) GetPostings() []V2Posting {
 	if v == nil {
 		return nil
@@ -111,6 +104,13 @@ func (v *V2PostTransaction) GetReference() *string {
 		return nil
 	}
 	return v.Reference
+}
+
+func (v *V2PostTransaction) GetRuntime() *Runtime {
+	if v == nil {
+		return nil
+	}
+	return v.Runtime
 }
 
 func (v *V2PostTransaction) GetScript() *V2PostTransactionScript {

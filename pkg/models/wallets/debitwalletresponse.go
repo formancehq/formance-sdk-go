@@ -3,12 +3,12 @@
 package wallets
 
 type DebitWalletResponse struct {
-	Hold Hold `json:"data"`
+	Data Hold `json:"data"`
 }
 
-func (d *DebitWalletResponse) GetHold() Hold {
+func (d *DebitWalletResponse) GetData() Hold {
 	if d == nil {
 		return Hold{}
 	}
-	return d.Hold
+	return d.Data
 }

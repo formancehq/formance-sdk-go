@@ -3,12 +3,12 @@
 package auth
 
 type CreateClientResponse struct {
-	ClientOptions *ClientOptions `json:"data,omitempty"`
+	Data *Client `json:"data,omitempty"`
 }
 
-func (c *CreateClientResponse) GetClientOptions() *ClientOptions {
+func (c *CreateClientResponse) GetData() *Client {
 	if c == nil {
 		return nil
 	}
-	return c.ClientOptions
+	return c.Data
 }

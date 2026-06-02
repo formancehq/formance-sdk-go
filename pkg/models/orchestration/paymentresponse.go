@@ -3,12 +3,12 @@
 package orchestration
 
 type PaymentResponse struct {
-	Payment Payment `json:"data"`
+	Data Payment `json:"data"`
 }
 
-func (p *PaymentResponse) GetPayment() Payment {
+func (p *PaymentResponse) GetData() Payment {
 	if p == nil {
 		return Payment{}
 	}
-	return p.Payment
+	return p.Data
 }

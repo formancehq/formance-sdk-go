@@ -9,11 +9,11 @@ import (
 )
 
 type V2Transaction struct {
-	V2Metadata map[string]string `json:"metadata"`
-	Postings   []V2Posting       `json:"postings"`
-	Reference  *string           `json:"reference,omitempty"`
-	Timestamp  time.Time         `json:"timestamp"`
-	Txid       *big.Int          `json:"txid"`
+	Metadata  map[string]string `json:"metadata"`
+	Postings  []V2Posting       `json:"postings"`
+	Reference *string           `json:"reference,omitempty"`
+	Timestamp time.Time         `json:"timestamp"`
+	Txid      *big.Int          `json:"txid"`
 }
 
 func (v V2Transaction) MarshalJSON() ([]byte, error) {
@@ -27,11 +27,11 @@ func (v *V2Transaction) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2Transaction) GetV2Metadata() map[string]string {
+func (v *V2Transaction) GetMetadata() map[string]string {
 	if v == nil {
 		return map[string]string{}
 	}
-	return v.V2Metadata
+	return v.Metadata
 }
 
 func (v *V2Transaction) GetPostings() []V2Posting {

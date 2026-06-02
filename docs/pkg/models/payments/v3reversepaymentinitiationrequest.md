@@ -5,8 +5,8 @@
 
 | Field                                       | Type                                        | Required                                    | Description                                 |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `V3Metadata`                                | map[string]`string`                         | :heavy_minus_sign:                          | N/A                                         |
 | `Amount`                                    | [*big.Int](https://pkg.go.dev/math/big#Int) | :heavy_check_mark:                          | N/A                                         |
 | `Asset`                                     | `string`                                    | :heavy_check_mark:                          | N/A                                         |
 | `Description`                               | `string`                                    | :heavy_check_mark:                          | N/A                                         |
+| `Metadata`                                  | map[string]`string`                         | :heavy_minus_sign:                          | N/A                                         |
 | `Reference`                                 | `string`                                    | :heavy_check_mark:                          | N/A                                         |

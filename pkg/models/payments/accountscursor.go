@@ -2,7 +2,7 @@
 
 package payments
 
-type CursorBase struct {
+type Cursor struct {
 	Data     []Account `json:"data"`
 	HasMore  bool      `json:"hasMore"`
 	Next     *string   `json:"next,omitempty"`
@@ -10,35 +10,35 @@ type CursorBase struct {
 	Previous *string   `json:"previous,omitempty"`
 }
 
-func (c *CursorBase) GetData() []Account {
+func (c *Cursor) GetData() []Account {
 	if c == nil {
 		return []Account{}
 	}
 	return c.Data
 }
 
-func (c *CursorBase) GetHasMore() bool {
+func (c *Cursor) GetHasMore() bool {
 	if c == nil {
 		return false
 	}
 	return c.HasMore
 }
 
-func (c *CursorBase) GetNext() *string {
+func (c *Cursor) GetNext() *string {
 	if c == nil {
 		return nil
 	}
 	return c.Next
 }
 
-func (c *CursorBase) GetPageSize() int64 {
+func (c *Cursor) GetPageSize() int64 {
 	if c == nil {
 		return 0
 	}
 	return c.PageSize
 }
 
-func (c *CursorBase) GetPrevious() *string {
+func (c *Cursor) GetPrevious() *string {
 	if c == nil {
 		return nil
 	}
@@ -47,12 +47,12 @@ func (c *CursorBase) GetPrevious() *string {
 
 // AccountsCursor - OK
 type AccountsCursor struct {
-	CursorBase CursorBase `json:"cursor"`
+	Cursor Cursor `json:"cursor"`
 }
 
-func (a *AccountsCursor) GetCursorBase() CursorBase {
+func (a *AccountsCursor) GetCursor() Cursor {
 	if a == nil {
-		return CursorBase{}
+		return Cursor{}
 	}
-	return a.CursorBase
+	return a.Cursor
 }

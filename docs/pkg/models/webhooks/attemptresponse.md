@@ -5,4 +5,4 @@
 
 | Field                                                       | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `Attempt`                                                   | [webhooks.Attempt](../../../pkg/models/webhooks/attempt.md) | :heavy_check_mark:                                          | N/A                                                         |
+| `Data`                                                      | [webhooks.Attempt](../../../pkg/models/webhooks/attempt.md) | :heavy_check_mark:                                          | N/A                                                         |

@@ -3,17 +3,10 @@
 package auth
 
 type ClientSecret struct {
-	Metadata   map[string]string `json:"metadata,omitempty"`
 	ID         string            `json:"id"`
 	LastDigits string            `json:"lastDigits"`
+	Metadata   map[string]string `json:"metadata,omitempty"`
 	Name       string            `json:"name"`
-}
-
-func (c *ClientSecret) GetMetadata() map[string]string {
-	if c == nil {
-		return nil
-	}
-	return c.Metadata
 }
 
 func (c *ClientSecret) GetID() string {
@@ -28,6 +21,13 @@ func (c *ClientSecret) GetLastDigits() string {
 		return ""
 	}
 	return c.LastDigits
+}
+
+func (c *ClientSecret) GetMetadata() map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.Metadata
 }
 
 func (c *ClientSecret) GetName() string {

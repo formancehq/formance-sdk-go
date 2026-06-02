@@ -3,12 +3,12 @@
 package wallets
 
 type GetWalletSummaryResponse struct {
-	WalletSummary WalletSummary `json:"data"`
+	Data WalletSummary `json:"data"`
 }
 
-func (g *GetWalletSummaryResponse) GetWalletSummary() WalletSummary {
+func (g *GetWalletSummaryResponse) GetData() WalletSummary {
 	if g == nil {
 		return WalletSummary{}
 	}
-	return g.WalletSummary
+	return g.Data
 }

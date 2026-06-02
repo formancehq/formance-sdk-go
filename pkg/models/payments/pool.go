@@ -3,18 +3,11 @@
 package payments
 
 type Pool struct {
-	PoolTypeEnum *PoolTypeEnum  `json:"type,omitempty"`
-	Accounts     []string       `json:"accounts"`
-	ID           string         `json:"id"`
-	Name         string         `json:"name"`
-	Query        map[string]any `json:"query,omitempty"`
-}
-
-func (p *Pool) GetPoolTypeEnum() *PoolTypeEnum {
-	if p == nil {
-		return nil
-	}
-	return p.PoolTypeEnum
+	Accounts []string       `json:"accounts"`
+	ID       string         `json:"id"`
+	Name     string         `json:"name"`
+	Query    map[string]any `json:"query,omitempty"`
+	Type     *PoolTypeEnum  `json:"type,omitempty"`
 }
 
 func (p *Pool) GetAccounts() []string {
@@ -43,4 +36,11 @@ func (p *Pool) GetQuery() map[string]any {
 		return nil
 	}
 	return p.Query
+}
+
+func (p *Pool) GetType() *PoolTypeEnum {
+	if p == nil {
+		return nil
+	}
+	return p.Type
 }

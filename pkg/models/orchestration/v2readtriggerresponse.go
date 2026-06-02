@@ -3,14 +3,14 @@
 package orchestration
 
 type V2ReadTriggerResponse struct {
-	V2TriggerData V2TriggerData `json:"data"`
+	Data V2Trigger `json:"data"`
 }
 
-func (v *V2ReadTriggerResponse) GetV2TriggerData() V2TriggerData {
+func (v *V2ReadTriggerResponse) GetData() V2Trigger {
 	if v == nil {
-		return V2TriggerData{}
+		return V2Trigger{}
 	}
-	return v.V2TriggerData
+	return v.Data
 }
 
 // #region class-body-v2readtriggerresponse

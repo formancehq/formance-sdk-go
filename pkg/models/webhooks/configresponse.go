@@ -3,12 +3,12 @@
 package webhooks
 
 type ConfigResponse struct {
-	WebhooksConfig WebhooksConfig `json:"data"`
+	Data WebhooksConfig `json:"data"`
 }
 
-func (c *ConfigResponse) GetWebhooksConfig() WebhooksConfig {
+func (c *ConfigResponse) GetData() WebhooksConfig {
 	if c == nil {
 		return WebhooksConfig{}
 	}
-	return c.WebhooksConfig
+	return c.Data
 }

@@ -5,4 +5,4 @@
 
 | Field                                          | Type                                           | Required                                       | Description                                    |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `User`                                         | [*auth.User](../../../pkg/models/auth/user.md) | :heavy_minus_sign:                             | N/A                                            |
+| `Data`                                         | [*auth.User](../../../pkg/models/auth/user.md) | :heavy_minus_sign:                             | N/A                                            |

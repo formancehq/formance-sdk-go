@@ -37,6 +37,8 @@ func newLedger(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hook
 }
 
 // GetInfo - Show server information
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*operations.V2GetInfoResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -89,7 +91,7 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -173,7 +175,7 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -265,6 +267,8 @@ func (s *Ledger) GetInfo(ctx context.Context, opts ...operations.Option) (*opera
 }
 
 // GetMetrics - Read in memory metrics
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *Ledger) GetMetrics(ctx context.Context, opts ...operations.Option) (*operations.GetMetricsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -317,7 +321,7 @@ func (s *Ledger) GetMetrics(ctx context.Context, opts ...operations.Option) (*op
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -401,7 +405,7 @@ func (s *Ledger) GetMetrics(ctx context.Context, opts ...operations.Option) (*op
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

@@ -7,10 +7,10 @@ import (
 )
 
 type V2TransactionTemplate struct {
+	Description *string `json:"description,omitempty"`
 	// The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
-	Runtime     *Runtime `json:"runtime,omitempty"`
-	Description *string  `json:"description,omitempty"`
-	Script      string   `json:"script"`
+	Runtime *Runtime `json:"runtime,omitempty"`
+	Script  string   `json:"script"`
 }
 
 func (v V2TransactionTemplate) MarshalJSON() ([]byte, error) {
@@ -24,18 +24,18 @@ func (v *V2TransactionTemplate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2TransactionTemplate) GetRuntime() *Runtime {
-	if v == nil {
-		return nil
-	}
-	return v.Runtime
-}
-
 func (v *V2TransactionTemplate) GetDescription() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Description
+}
+
+func (v *V2TransactionTemplate) GetRuntime() *Runtime {
+	if v == nil {
+		return nil
+	}
+	return v.Runtime
 }
 
 func (v *V2TransactionTemplate) GetScript() string {

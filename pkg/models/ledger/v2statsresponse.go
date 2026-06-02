@@ -3,14 +3,14 @@
 package ledger
 
 type V2StatsResponse struct {
-	V2Stats V2Stats `json:"data"`
+	Data V2Stats `json:"data"`
 }
 
-func (v *V2StatsResponse) GetV2Stats() V2Stats {
+func (v *V2StatsResponse) GetData() V2Stats {
 	if v == nil {
 		return V2Stats{}
 	}
-	return v.V2Stats
+	return v.Data
 }
 
 // #region class-body-v2statsresponse

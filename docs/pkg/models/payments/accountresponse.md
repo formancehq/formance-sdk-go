@@ -7,4 +7,4 @@ OK
 
 | Field                                                       | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `Account`                                                   | [payments.Account](../../../pkg/models/payments/account.md) | :heavy_check_mark:                                          | N/A                                                         |
+| `Data`                                                      | [payments.Account](../../../pkg/models/payments/account.md) | :heavy_check_mark:                                          | N/A                                                         |

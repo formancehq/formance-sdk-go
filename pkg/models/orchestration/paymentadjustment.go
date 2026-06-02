@@ -12,11 +12,11 @@ type PaymentAdjustmentRaw struct {
 }
 
 type PaymentAdjustment struct {
-	PaymentStatus PaymentStatus        `json:"status"`
-	Absolute      bool                 `json:"absolute"`
-	Amount        *big.Int             `json:"amount"`
-	Date          time.Time            `json:"date"`
-	Raw           PaymentAdjustmentRaw `json:"raw"`
+	Absolute bool                 `json:"absolute"`
+	Amount   *big.Int             `json:"amount"`
+	Date     time.Time            `json:"date"`
+	Raw      PaymentAdjustmentRaw `json:"raw"`
+	Status   PaymentStatus        `json:"status"`
 }
 
 func (p PaymentAdjustment) MarshalJSON() ([]byte, error) {
@@ -28,13 +28,6 @@ func (p *PaymentAdjustment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (p *PaymentAdjustment) GetPaymentStatus() PaymentStatus {
-	if p == nil {
-		return PaymentStatus("")
-	}
-	return p.PaymentStatus
 }
 
 func (p *PaymentAdjustment) GetAbsolute() bool {
@@ -63,4 +56,11 @@ func (p *PaymentAdjustment) GetRaw() PaymentAdjustmentRaw {
 		return PaymentAdjustmentRaw{}
 	}
 	return p.Raw
+}
+
+func (p *PaymentAdjustment) GetStatus() PaymentStatus {
+	if p == nil {
+		return PaymentStatus("")
+	}
+	return p.Status
 }

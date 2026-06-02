@@ -8,13 +8,13 @@ import (
 )
 
 type V3Task struct {
-	V3TaskStatusEnum V3TaskStatusEnum `json:"status"`
-	ConnectorID      *string          `json:"connectorID,omitempty"`
-	CreatedAt        time.Time        `json:"createdAt"`
-	CreatedObjectID  *string          `json:"createdObjectID,omitempty"`
-	Error            *string          `json:"error,omitempty"`
-	ID               string           `json:"id"`
-	UpdatedAt        time.Time        `json:"updatedAt"`
+	ConnectorID     *string          `json:"connectorID,omitempty"`
+	CreatedAt       time.Time        `json:"createdAt"`
+	CreatedObjectID *string          `json:"createdObjectID,omitempty"`
+	Error           *string          `json:"error,omitempty"`
+	ID              string           `json:"id"`
+	Status          V3TaskStatusEnum `json:"status"`
+	UpdatedAt       time.Time        `json:"updatedAt"`
 }
 
 func (v V3Task) MarshalJSON() ([]byte, error) {
@@ -26,13 +26,6 @@ func (v *V3Task) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3Task) GetV3TaskStatusEnum() V3TaskStatusEnum {
-	if v == nil {
-		return V3TaskStatusEnum("")
-	}
-	return v.V3TaskStatusEnum
 }
 
 func (v *V3Task) GetConnectorID() *string {
@@ -68,6 +61,13 @@ func (v *V3Task) GetID() string {
 		return ""
 	}
 	return v.ID
+}
+
+func (v *V3Task) GetStatus() V3TaskStatusEnum {
+	if v == nil {
+		return V3TaskStatusEnum("")
+	}
+	return v.Status
 }
 
 func (v *V3Task) GetUpdatedAt() time.Time {

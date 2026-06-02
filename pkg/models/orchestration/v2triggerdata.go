@@ -2,38 +2,13 @@
 
 package orchestration
 
-import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
-	"time"
-)
-
 type V2TriggerData struct {
-	CreatedAt  time.Time      `json:"createdAt"`
 	Event      string         `json:"event"`
 	Filter     *string        `json:"filter,omitempty"`
-	ID         string         `json:"id"`
 	Name       *string        `json:"name,omitempty"`
 	Vars       map[string]any `json:"vars,omitempty"`
 	Version    *string        `json:"version,omitempty"`
 	WorkflowID string         `json:"workflowID"`
-}
-
-func (v V2TriggerData) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(v, "", false)
-}
-
-func (v *V2TriggerData) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (v *V2TriggerData) GetCreatedAt() time.Time {
-	if v == nil {
-		return time.Time{}
-	}
-	return v.CreatedAt
 }
 
 func (v *V2TriggerData) GetEvent() string {
@@ -48,13 +23,6 @@ func (v *V2TriggerData) GetFilter() *string {
 		return nil
 	}
 	return v.Filter
-}
-
-func (v *V2TriggerData) GetID() string {
-	if v == nil {
-		return ""
-	}
-	return v.ID
 }
 
 func (v *V2TriggerData) GetName() *string {

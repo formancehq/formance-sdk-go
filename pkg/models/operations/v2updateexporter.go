@@ -8,14 +8,14 @@ import (
 )
 
 type V2UpdateExporterRequest struct {
-	V2ExporterConfiguration ledger.V2ExporterConfiguration1 `request:"mediaType=application/json"`
+	V2ExporterConfiguration ledger.V2ExporterConfiguration `request:"mediaType=application/json"`
 	// The exporter id
 	ExporterID string `pathParam:"style=simple,explode=false,name=exporterID"`
 }
 
-func (v *V2UpdateExporterRequest) GetV2ExporterConfiguration() ledger.V2ExporterConfiguration1 {
+func (v *V2UpdateExporterRequest) GetV2ExporterConfiguration() ledger.V2ExporterConfiguration {
 	if v == nil {
-		return ledger.V2ExporterConfiguration1{}
+		return ledger.V2ExporterConfiguration{}
 	}
 	return v.V2ExporterConfiguration
 }

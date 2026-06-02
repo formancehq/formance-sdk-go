@@ -3,14 +3,14 @@
 package orchestration
 
 type V2GetWorkflowInstanceHistoryResponse struct {
-	V2WorkflowInstanceHistoryList []V2WorkflowInstanceHistory `json:"data"`
+	Data []V2WorkflowInstanceHistory `json:"data"`
 }
 
-func (v *V2GetWorkflowInstanceHistoryResponse) GetV2WorkflowInstanceHistoryList() []V2WorkflowInstanceHistory {
+func (v *V2GetWorkflowInstanceHistoryResponse) GetData() []V2WorkflowInstanceHistory {
 	if v == nil {
 		return []V2WorkflowInstanceHistory{}
 	}
-	return v.V2WorkflowInstanceHistoryList
+	return v.Data
 }
 
 // #region class-body-v2getworkflowinstancehistoryresponse

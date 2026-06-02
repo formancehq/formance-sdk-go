@@ -33,6 +33,8 @@ func newFormanceWebhooksV1(rootSDK *Formance, sdkConfig config.SDKConfiguration,
 
 // ActivateConfig - Activate one config
 // Activate a webhooks config by ID, to start receiving webhooks to its endpoint.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operations.ActivateConfigRequest, opts ...operations.Option) (*operations.ActivateConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -85,7 +87,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -169,7 +171,7 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -244,6 +246,8 @@ func (s *FormanceWebhooksV1) ActivateConfig(ctx context.Context, request operati
 //
 // If not passed or empty, a secret is automatically generated.
 // The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request operations.ChangeConfigSecretRequest, opts ...operations.Option) (*operations.ChangeConfigSecretResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -303,7 +307,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -387,7 +391,7 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -459,6 +463,8 @@ func (s *FormanceWebhooksV1) ChangeConfigSecret(ctx context.Context, request ope
 
 // DeactivateConfig - Deactivate one config
 // Deactivate a webhooks config by ID, to stop receiving webhooks to its endpoint.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request operations.DeactivateConfigRequest, opts ...operations.Option) (*operations.DeactivateConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -511,7 +517,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -595,7 +601,7 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -667,6 +673,8 @@ func (s *FormanceWebhooksV1) DeactivateConfig(ctx context.Context, request opera
 
 // DeleteConfig - Delete one config
 // Delete a webhooks config by ID.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operations.DeleteConfigRequest, opts ...operations.Option) (*operations.DeleteConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -719,7 +727,7 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -803,7 +811,7 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -856,6 +864,8 @@ func (s *FormanceWebhooksV1) DeleteConfig(ctx context.Context, request operation
 
 // GetManyConfigs - Get many configs
 // Sorted by updated date descending
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operations.GetManyConfigsRequest, opts ...operations.Option) (*operations.GetManyConfigsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -912,7 +922,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -996,7 +1006,7 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1076,6 +1086,8 @@ func (s *FormanceWebhooksV1) GetManyConfigs(ctx context.Context, request operati
 // The format is a random string of bytes of size 24, base64 encoded. (larger size after encoding)
 //
 // All eventTypes are converted to lower-case when inserted.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request webhooks.ConfigUser, opts ...operations.Option) (*operations.InsertConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1135,7 +1147,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request webhooks.
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1219,7 +1231,7 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request webhooks.
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1291,6 +1303,8 @@ func (s *FormanceWebhooksV1) InsertConfig(ctx context.Context, request webhooks.
 
 // TestConfig - Test one config
 // Test a config by sending a webhook to its endpoint.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.TestConfigRequest, opts ...operations.Option) (*operations.TestConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1343,7 +1357,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1427,7 +1441,7 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1499,6 +1513,8 @@ func (s *FormanceWebhooksV1) TestConfig(ctx context.Context, request operations.
 
 // UpdateConfig - Update one config
 // Update a webhooks config by ID.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operations.UpdateConfigRequest, opts ...operations.Option) (*operations.UpdateConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1558,7 +1574,7 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1642,7 +1658,7 @@ func (s *FormanceWebhooksV1) UpdateConfig(ctx context.Context, request operation
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

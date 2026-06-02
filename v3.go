@@ -32,6 +32,8 @@ func newV3(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 }
 
 // AddAccountToPool - Add an account to a pool
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccountToPoolRequest, opts ...operations.Option) (*operations.V3AddAccountToPoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -84,7 +86,7 @@ func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccou
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -168,7 +170,7 @@ func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccou
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -220,6 +222,8 @@ func (s *V3) AddAccountToPool(ctx context.Context, request operations.V3AddAccou
 }
 
 // AddBankAccountToPaymentServiceUser - Add a bank account to a payment service user
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) AddBankAccountToPaymentServiceUser(ctx context.Context, request operations.V3AddBankAccountToPaymentServiceUserRequest, opts ...operations.Option) (*operations.V3AddBankAccountToPaymentServiceUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -272,7 +276,7 @@ func (s *V3) AddBankAccountToPaymentServiceUser(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -356,7 +360,7 @@ func (s *V3) AddBankAccountToPaymentServiceUser(ctx context.Context, request ope
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -408,6 +412,8 @@ func (s *V3) AddBankAccountToPaymentServiceUser(ctx context.Context, request ope
 }
 
 // ApprovePaymentInitiation - Approve a payment initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3ApprovePaymentInitiationRequest, opts ...operations.Option) (*operations.V3ApprovePaymentInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -460,7 +466,7 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -544,7 +550,7 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -615,6 +621,8 @@ func (s *V3) ApprovePaymentInitiation(ctx context.Context, request operations.V3
 }
 
 // CreateAccount - Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) CreateAccount(ctx context.Context, request *payments.V3CreateAccountRequest, opts ...operations.Option) (*operations.V3CreateAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -674,7 +682,7 @@ func (s *V3) CreateAccount(ctx context.Context, request *payments.V3CreateAccoun
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -758,7 +766,7 @@ func (s *V3) CreateAccount(ctx context.Context, request *payments.V3CreateAccoun
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -829,6 +837,8 @@ func (s *V3) CreateAccount(ctx context.Context, request *payments.V3CreateAccoun
 }
 
 // CreateBankAccount - Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) CreateBankAccount(ctx context.Context, request *payments.V3CreateBankAccountRequest, opts ...operations.Option) (*operations.V3CreateBankAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -888,7 +898,7 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *payments.V3CreateBa
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -972,7 +982,7 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *payments.V3CreateBa
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1043,6 +1053,8 @@ func (s *V3) CreateBankAccount(ctx context.Context, request *payments.V3CreateBa
 }
 
 // CreateLinkForPaymentServiceUser - Create an authentication link for a payment service user on a connector, for oauth flow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operations.V3CreateLinkForPaymentServiceUserRequest, opts ...operations.Option) (*operations.V3CreateLinkForPaymentServiceUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1102,7 +1114,7 @@ func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operat
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1186,7 +1198,7 @@ func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operat
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1257,6 +1269,8 @@ func (s *V3) CreateLinkForPaymentServiceUser(ctx context.Context, request operat
 }
 
 // CreatePayment - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) CreatePayment(ctx context.Context, request *payments.V3CreatePaymentRequest, opts ...operations.Option) (*operations.V3CreatePaymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1316,7 +1330,7 @@ func (s *V3) CreatePayment(ctx context.Context, request *payments.V3CreatePaymen
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1400,7 +1414,7 @@ func (s *V3) CreatePayment(ctx context.Context, request *payments.V3CreatePaymen
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1471,6 +1485,8 @@ func (s *V3) CreatePayment(ctx context.Context, request *payments.V3CreatePaymen
 }
 
 // CreatePaymentServiceUser - Create a formance payment service user object
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *payments.V3CreatePaymentServiceUserRequest, opts ...operations.Option) (*operations.V3CreatePaymentServiceUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1530,7 +1546,7 @@ func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *payments.V3C
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1614,7 +1630,7 @@ func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *payments.V3C
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1685,6 +1701,8 @@ func (s *V3) CreatePaymentServiceUser(ctx context.Context, request *payments.V3C
 }
 
 // CreatePool - Create a formance pool object
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) CreatePool(ctx context.Context, request *payments.V3CreatePoolRequest, opts ...operations.Option) (*operations.V3CreatePoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1744,7 +1762,7 @@ func (s *V3) CreatePool(ctx context.Context, request *payments.V3CreatePoolReque
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1828,7 +1846,7 @@ func (s *V3) CreatePool(ctx context.Context, request *payments.V3CreatePoolReque
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1899,6 +1917,8 @@ func (s *V3) CreatePool(ctx context.Context, request *payments.V3CreatePoolReque
 }
 
 // DeletePaymentInitiation - Delete a payment initiation by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3DeletePaymentInitiationRequest, opts ...operations.Option) (*operations.V3DeletePaymentInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1951,7 +1971,7 @@ func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3D
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2035,7 +2055,7 @@ func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3D
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2087,6 +2107,8 @@ func (s *V3) DeletePaymentInitiation(ctx context.Context, request operations.V3D
 }
 
 // DeletePaymentServiceUser - Delete a payment service user by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) DeletePaymentServiceUser(ctx context.Context, request operations.V3DeletePaymentServiceUserRequest, opts ...operations.Option) (*operations.V3DeletePaymentServiceUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2139,7 +2161,7 @@ func (s *V3) DeletePaymentServiceUser(ctx context.Context, request operations.V3
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2223,7 +2245,7 @@ func (s *V3) DeletePaymentServiceUser(ctx context.Context, request operations.V3
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2294,6 +2316,8 @@ func (s *V3) DeletePaymentServiceUser(ctx context.Context, request operations.V3
 }
 
 // DeletePaymentServiceUserConnectionFromConnectorID - Delete a connection for a payment service user on a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) DeletePaymentServiceUserConnectionFromConnectorID(ctx context.Context, request operations.V3DeletePaymentServiceUserConnectionFromConnectorIDRequest, opts ...operations.Option) (*operations.V3DeletePaymentServiceUserConnectionFromConnectorIDResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2346,7 +2370,7 @@ func (s *V3) DeletePaymentServiceUserConnectionFromConnectorID(ctx context.Conte
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2430,7 +2454,7 @@ func (s *V3) DeletePaymentServiceUserConnectionFromConnectorID(ctx context.Conte
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2501,6 +2525,8 @@ func (s *V3) DeletePaymentServiceUserConnectionFromConnectorID(ctx context.Conte
 }
 
 // DeletePaymentServiceUserConnector - Remove a payment service user from a connector, the PSU will still exist in Formance
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) DeletePaymentServiceUserConnector(ctx context.Context, request operations.V3DeletePaymentServiceUserConnectorRequest, opts ...operations.Option) (*operations.V3DeletePaymentServiceUserConnectorResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2553,7 +2579,7 @@ func (s *V3) DeletePaymentServiceUserConnector(ctx context.Context, request oper
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2637,7 +2663,7 @@ func (s *V3) DeletePaymentServiceUserConnector(ctx context.Context, request oper
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2708,6 +2734,8 @@ func (s *V3) DeletePaymentServiceUserConnector(ctx context.Context, request oper
 }
 
 // DeletePool - Delete a pool by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequest, opts ...operations.Option) (*operations.V3DeletePoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2760,7 +2788,7 @@ func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequ
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2844,7 +2872,7 @@ func (s *V3) DeletePool(ctx context.Context, request operations.V3DeletePoolRequ
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3035,7 +3063,7 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3106,6 +3134,8 @@ func (s *V3) ForwardBankAccount(ctx context.Context, request operations.V3Forwar
 }
 
 // ForwardPaymentServiceUserBankAccount - Forward a payment service user's bank account to a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ForwardPaymentServiceUserBankAccount(ctx context.Context, request operations.V3ForwardPaymentServiceUserBankAccountRequest, opts ...operations.Option) (*operations.V3ForwardPaymentServiceUserBankAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3165,7 +3195,7 @@ func (s *V3) ForwardPaymentServiceUserBankAccount(ctx context.Context, request o
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3249,7 +3279,7 @@ func (s *V3) ForwardPaymentServiceUserBankAccount(ctx context.Context, request o
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3320,6 +3350,8 @@ func (s *V3) ForwardPaymentServiceUserBankAccount(ctx context.Context, request o
 }
 
 // ForwardPaymentServiceUserToProvider - Register/forward a payment service user on/to a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ForwardPaymentServiceUserToProvider(ctx context.Context, request operations.V3ForwardPaymentServiceUserToProviderRequest, opts ...operations.Option) (*operations.V3ForwardPaymentServiceUserToProviderResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3372,7 +3404,7 @@ func (s *V3) ForwardPaymentServiceUserToProvider(ctx context.Context, request op
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3456,7 +3488,7 @@ func (s *V3) ForwardPaymentServiceUserToProvider(ctx context.Context, request op
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3508,6 +3540,8 @@ func (s *V3) ForwardPaymentServiceUserToProvider(ctx context.Context, request op
 }
 
 // GetAccount - Get an account by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequest, opts ...operations.Option) (*operations.V3GetAccountResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3560,7 +3594,7 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3644,7 +3678,7 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3715,6 +3749,8 @@ func (s *V3) GetAccount(ctx context.Context, request operations.V3GetAccountRequ
 }
 
 // GetAccountBalances - Get account balances
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAccountBalancesRequest, opts ...operations.Option) (*operations.V3GetAccountBalancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3771,7 +3807,7 @@ func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAcc
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3855,7 +3891,7 @@ func (s *V3) GetAccountBalances(ctx context.Context, request operations.V3GetAcc
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4058,7 +4094,7 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4129,6 +4165,8 @@ func (s *V3) GetBankAccount(ctx context.Context, request operations.V3GetBankAcc
 }
 
 // GetConnectorConfig - Get a connector configuration by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetConnectorConfigRequest, opts ...operations.Option) (*operations.V3GetConnectorConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4181,7 +4219,7 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4265,7 +4303,7 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4336,6 +4374,8 @@ func (s *V3) GetConnectorConfig(ctx context.Context, request operations.V3GetCon
 }
 
 // GetConnectorSchedule - Get a connector schedule by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetConnectorScheduleRequest, opts ...operations.Option) (*operations.V3GetConnectorScheduleResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4388,7 +4428,7 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4472,7 +4512,7 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4551,6 +4591,8 @@ func (s *V3) GetConnectorSchedule(ctx context.Context, request operations.V3GetC
 //
 // Returns an error via `V3ErrorResponse` when no conversion exists
 // for the given ID.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetConversion(ctx context.Context, request operations.V3GetConversionRequest, opts ...operations.Option) (*operations.V3GetConversionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4603,7 +4645,7 @@ func (s *V3) GetConversion(ctx context.Context, request operations.V3GetConversi
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4687,7 +4729,7 @@ func (s *V3) GetConversion(ctx context.Context, request operations.V3GetConversi
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4766,6 +4808,8 @@ func (s *V3) GetConversion(ctx context.Context, request operations.V3GetConversi
 //
 // Returns an error via `V3ErrorResponse` when no order exists for the
 // given ID, or when the ID cannot be decoded.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetOrder(ctx context.Context, request operations.V3GetOrderRequest, opts ...operations.Option) (*operations.V3GetOrderResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -4818,7 +4862,7 @@ func (s *V3) GetOrder(ctx context.Context, request operations.V3GetOrderRequest,
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -4902,7 +4946,7 @@ func (s *V3) GetOrder(ctx context.Context, request operations.V3GetOrderRequest,
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4973,6 +5017,8 @@ func (s *V3) GetOrder(ctx context.Context, request operations.V3GetOrderRequest,
 }
 
 // GetPayment - Get a payment by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequest, opts ...operations.Option) (*operations.V3GetPaymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5025,7 +5071,7 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5109,7 +5155,7 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -5180,6 +5226,8 @@ func (s *V3) GetPayment(ctx context.Context, request operations.V3GetPaymentRequ
 }
 
 // GetPaymentInitiation - Get a payment initiation by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetPaymentInitiationRequest, opts ...operations.Option) (*operations.V3GetPaymentInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5232,7 +5280,7 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5316,7 +5364,7 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -5387,6 +5435,8 @@ func (s *V3) GetPaymentInitiation(ctx context.Context, request operations.V3GetP
 }
 
 // GetPaymentServiceUser - Get a payment service user by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetPaymentServiceUser(ctx context.Context, request operations.V3GetPaymentServiceUserRequest, opts ...operations.Option) (*operations.V3GetPaymentServiceUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5439,7 +5489,7 @@ func (s *V3) GetPaymentServiceUser(ctx context.Context, request operations.V3Get
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5523,7 +5573,7 @@ func (s *V3) GetPaymentServiceUser(ctx context.Context, request operations.V3Get
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -5594,6 +5644,8 @@ func (s *V3) GetPaymentServiceUser(ctx context.Context, request operations.V3Get
 }
 
 // GetPaymentServiceUserLinkAttemptFromConnectorID - Get a link attempt for a payment service user on a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetPaymentServiceUserLinkAttemptFromConnectorID(ctx context.Context, request operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDRequest, opts ...operations.Option) (*operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5646,7 +5698,7 @@ func (s *V3) GetPaymentServiceUserLinkAttemptFromConnectorID(ctx context.Context
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5730,7 +5782,7 @@ func (s *V3) GetPaymentServiceUserLinkAttemptFromConnectorID(ctx context.Context
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -5801,6 +5853,8 @@ func (s *V3) GetPaymentServiceUserLinkAttemptFromConnectorID(ctx context.Context
 }
 
 // GetPool - Get a pool by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, opts ...operations.Option) (*operations.V3GetPoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5853,7 +5907,7 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -5937,7 +5991,7 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -6008,6 +6062,8 @@ func (s *V3) GetPool(ctx context.Context, request operations.V3GetPoolRequest, o
 }
 
 // GetPoolBalances - Get historical pool balances from a particular point in time
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBalancesRequest, opts ...operations.Option) (*operations.V3GetPoolBalancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -6064,7 +6120,7 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -6148,7 +6204,7 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -6219,6 +6275,8 @@ func (s *V3) GetPoolBalances(ctx context.Context, request operations.V3GetPoolBa
 }
 
 // GetPoolBalancesLatest - Get latest pool balances
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetPoolBalancesLatest(ctx context.Context, request operations.V3GetPoolBalancesLatestRequest, opts ...operations.Option) (*operations.V3GetPoolBalancesLatestResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -6271,7 +6329,7 @@ func (s *V3) GetPoolBalancesLatest(ctx context.Context, request operations.V3Get
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -6355,7 +6413,7 @@ func (s *V3) GetPoolBalancesLatest(ctx context.Context, request operations.V3Get
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -6426,6 +6484,8 @@ func (s *V3) GetPoolBalancesLatest(ctx context.Context, request operations.V3Get
 }
 
 // GetTask - Get a task and its result by ID
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, opts ...operations.Option) (*operations.V3GetTaskResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -6478,7 +6538,7 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -6562,7 +6622,7 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -6633,6 +6693,8 @@ func (s *V3) GetTask(ctx context.Context, request operations.V3GetTaskRequest, o
 }
 
 // InitiatePayment - Initiate a payment
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiatePaymentRequest, opts ...operations.Option) (*operations.V3InitiatePaymentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -6696,7 +6758,7 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -6780,7 +6842,7 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -6851,6 +6913,8 @@ func (s *V3) InitiatePayment(ctx context.Context, request operations.V3InitiateP
 }
 
 // InstallConnector - Install a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallConnectorRequest, opts ...operations.Option) (*operations.V3InstallConnectorResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -6910,7 +6974,7 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -6994,7 +7058,7 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -7065,6 +7129,8 @@ func (s *V3) InstallConnector(ctx context.Context, request operations.V3InstallC
 }
 
 // ListAccounts - List all accounts
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccountsRequest, opts ...operations.Option) (*operations.V3ListAccountsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7128,7 +7194,7 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7212,7 +7278,7 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -7283,6 +7349,8 @@ func (s *V3) ListAccounts(ctx context.Context, request operations.V3ListAccounts
 }
 
 // ListBankAccounts - List all bank accounts
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBankAccountsRequest, opts ...operations.Option) (*operations.V3ListBankAccountsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7346,7 +7414,7 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7430,7 +7498,7 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -7501,6 +7569,8 @@ func (s *V3) ListBankAccounts(ctx context.Context, request operations.V3ListBank
 }
 
 // ListConnectorConfigs - List all connector configurations
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option) (*operations.V3ListConnectorConfigsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7553,7 +7623,7 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7637,7 +7707,7 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -7708,6 +7778,8 @@ func (s *V3) ListConnectorConfigs(ctx context.Context, opts ...operations.Option
 }
 
 // ListConnectorScheduleInstances - List all connector schedule instances
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operations.V3ListConnectorScheduleInstancesRequest, opts ...operations.Option) (*operations.V3ListConnectorScheduleInstancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7764,7 +7836,7 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -7848,7 +7920,7 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -7919,6 +7991,8 @@ func (s *V3) ListConnectorScheduleInstances(ctx context.Context, request operati
 }
 
 // ListConnectorSchedules - List all connector schedules
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3ListConnectorSchedulesRequest, opts ...operations.Option) (*operations.V3ListConnectorSchedulesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -7982,7 +8056,7 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8066,7 +8140,7 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -8137,6 +8211,8 @@ func (s *V3) ListConnectorSchedules(ctx context.Context, request operations.V3Li
 }
 
 // ListConnectors - List all connectors
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnectorsRequest, opts ...operations.Option) (*operations.V3ListConnectorsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8200,7 +8276,7 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8284,7 +8360,7 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -8369,6 +8445,8 @@ func (s *V3) ListConnectors(ctx context.Context, request operations.V3ListConnec
 // query builder for filtering over top-level `V3Conversion` fields
 // such as `connectorID`, `reference`, `status`, `sourceAsset`,
 // `destinationAsset`, and `createdAt`.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListConversions(ctx context.Context, request operations.V3ListConversionsRequest, opts ...operations.Option) (*operations.V3ListConversionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8432,7 +8510,7 @@ func (s *V3) ListConversions(ctx context.Context, request operations.V3ListConve
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8516,7 +8594,7 @@ func (s *V3) ListConversions(ctx context.Context, request operations.V3ListConve
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -8601,6 +8679,8 @@ func (s *V3) ListConversions(ctx context.Context, request operations.V3ListConve
 // See `V3Order` for the full response shape, including the
 // `adjustments` array that captures each observed state transition on
 // the exchange.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListOrders(ctx context.Context, request operations.V3ListOrdersRequest, opts ...operations.Option) (*operations.V3ListOrdersResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8664,7 +8744,7 @@ func (s *V3) ListOrders(ctx context.Context, request operations.V3ListOrdersRequ
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8748,7 +8828,7 @@ func (s *V3) ListOrders(ctx context.Context, request operations.V3ListOrdersRequ
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -8819,6 +8899,8 @@ func (s *V3) ListOrders(ctx context.Context, request operations.V3ListOrdersRequ
 }
 
 // ListPaymentInitiationAdjustments - List all payment initiation adjustments
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request operations.V3ListPaymentInitiationAdjustmentsRequest, opts ...operations.Option) (*operations.V3ListPaymentInitiationAdjustmentsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -8882,7 +8964,7 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -8966,7 +9048,7 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -9037,6 +9119,8 @@ func (s *V3) ListPaymentInitiationAdjustments(ctx context.Context, request opera
 }
 
 // ListPaymentInitiationRelatedPayments - List all payments related to a payment initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request operations.V3ListPaymentInitiationRelatedPaymentsRequest, opts ...operations.Option) (*operations.V3ListPaymentInitiationRelatedPaymentsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -9100,7 +9184,7 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -9184,7 +9268,7 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -9255,6 +9339,8 @@ func (s *V3) ListPaymentInitiationRelatedPayments(ctx context.Context, request o
 }
 
 // ListPaymentInitiations - List all payment initiations
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3ListPaymentInitiationsRequest, opts ...operations.Option) (*operations.V3ListPaymentInitiationsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -9318,7 +9404,7 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -9402,7 +9488,7 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -9473,6 +9559,8 @@ func (s *V3) ListPaymentInitiations(ctx context.Context, request operations.V3Li
 }
 
 // ListPaymentServiceUserConnections - List all connections for a payment service user
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request operations.V3ListPaymentServiceUserConnectionsRequest, opts ...operations.Option) (*operations.V3ListPaymentServiceUserConnectionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -9536,7 +9624,7 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -9620,7 +9708,7 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -9691,6 +9779,8 @@ func (s *V3) ListPaymentServiceUserConnections(ctx context.Context, request oper
 }
 
 // ListPaymentServiceUserConnectionsFromConnectorID - List enabled connections for a payment service user on a connector (i.e. the various banks PSUser has enabled on the connector)
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Context, request operations.V3ListPaymentServiceUserConnectionsFromConnectorIDRequest, opts ...operations.Option) (*operations.V3ListPaymentServiceUserConnectionsFromConnectorIDResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -9754,7 +9844,7 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -9838,7 +9928,7 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -9910,6 +10000,8 @@ func (s *V3) ListPaymentServiceUserConnectionsFromConnectorID(ctx context.Contex
 
 // ListPaymentServiceUserLinkAttemptsFromConnectorID - List all link attempts for a payment service user on a connector.
 // Allows to check if users used the link and completed the oauth flow.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Context, request operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest, opts ...operations.Option) (*operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -9973,7 +10065,7 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -10057,7 +10149,7 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -10128,6 +10220,8 @@ func (s *V3) ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx context.Conte
 }
 
 // ListPaymentServiceUsers - List all payment service users
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3ListPaymentServiceUsersRequest, opts ...operations.Option) (*operations.V3ListPaymentServiceUsersResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -10191,7 +10285,7 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -10275,7 +10369,7 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -10346,6 +10440,8 @@ func (s *V3) ListPaymentServiceUsers(ctx context.Context, request operations.V3L
 }
 
 // ListPayments - List all payments
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPaymentsRequest, opts ...operations.Option) (*operations.V3ListPaymentsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -10409,7 +10505,7 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -10493,7 +10589,7 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -10564,6 +10660,8 @@ func (s *V3) ListPayments(ctx context.Context, request operations.V3ListPayments
 }
 
 // ListPools - List all pools
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsRequest, opts ...operations.Option) (*operations.V3ListPoolsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -10627,7 +10725,7 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -10711,7 +10809,7 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -10782,6 +10880,8 @@ func (s *V3) ListPools(ctx context.Context, request operations.V3ListPoolsReques
 }
 
 // RejectPaymentInitiation - Reject a payment initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3RejectPaymentInitiationRequest, opts ...operations.Option) (*operations.V3RejectPaymentInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -10834,7 +10934,7 @@ func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3R
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -10918,7 +11018,7 @@ func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3R
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -10970,6 +11070,8 @@ func (s *V3) RejectPaymentInitiation(ctx context.Context, request operations.V3R
 }
 
 // RemoveAccountFromPool - Remove an account from a pool
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3RemoveAccountFromPoolRequest, opts ...operations.Option) (*operations.V3RemoveAccountFromPoolResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -11022,7 +11124,7 @@ func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3Rem
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -11106,7 +11208,7 @@ func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3Rem
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -11158,6 +11260,8 @@ func (s *V3) RemoveAccountFromPool(ctx context.Context, request operations.V3Rem
 }
 
 // ResetConnector - Reset a connector. Be aware that this will delete all data and stop all existing tasks like payment initiations and bank account creations.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConnectorRequest, opts ...operations.Option) (*operations.V3ResetConnectorResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -11210,7 +11314,7 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -11294,7 +11398,7 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -11365,6 +11469,8 @@ func (s *V3) ResetConnector(ctx context.Context, request operations.V3ResetConne
 }
 
 // RetryPaymentInitiation - Retry a payment initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3RetryPaymentInitiationRequest, opts ...operations.Option) (*operations.V3RetryPaymentInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -11417,7 +11523,7 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -11501,7 +11607,7 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -11572,6 +11678,8 @@ func (s *V3) RetryPaymentInitiation(ctx context.Context, request operations.V3Re
 }
 
 // ReversePaymentInitiation - Reverse a payment initiation
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3ReversePaymentInitiationRequest, opts ...operations.Option) (*operations.V3ReversePaymentInitiationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -11631,7 +11739,7 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -11715,7 +11823,7 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -11786,6 +11894,8 @@ func (s *V3) ReversePaymentInitiation(ctx context.Context, request operations.V3
 }
 
 // UninstallConnector - Uninstall a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) UninstallConnector(ctx context.Context, request operations.V3UninstallConnectorRequest, opts ...operations.Option) (*operations.V3UninstallConnectorResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -11838,7 +11948,7 @@ func (s *V3) UninstallConnector(ctx context.Context, request operations.V3Uninst
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -11922,7 +12032,7 @@ func (s *V3) UninstallConnector(ctx context.Context, request operations.V3Uninst
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"202"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -12132,7 +12242,7 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -12184,6 +12294,8 @@ func (s *V3) UpdateBankAccountMetadata(ctx context.Context, request operations.V
 }
 
 // UpdateLinkForPaymentServiceUserOnConnector - Update/Regenerate a link for a payment service user on a connector
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) UpdateLinkForPaymentServiceUserOnConnector(ctx context.Context, request operations.V3UpdateLinkForPaymentServiceUserOnConnectorRequest, opts ...operations.Option) (*operations.V3UpdateLinkForPaymentServiceUserOnConnectorResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -12243,7 +12355,7 @@ func (s *V3) UpdateLinkForPaymentServiceUserOnConnector(ctx context.Context, req
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -12327,7 +12439,7 @@ func (s *V3) UpdateLinkForPaymentServiceUserOnConnector(ctx context.Context, req
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -12398,6 +12510,8 @@ func (s *V3) UpdateLinkForPaymentServiceUserOnConnector(ctx context.Context, req
 }
 
 // UpdatePaymentMetadata - Update a payment's metadata
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3UpdatePaymentMetadataRequest, opts ...operations.Option) (*operations.V3UpdatePaymentMetadataResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -12457,7 +12571,7 @@ func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3Upd
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -12541,7 +12655,7 @@ func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3Upd
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -12593,6 +12707,8 @@ func (s *V3) UpdatePaymentMetadata(ctx context.Context, request operations.V3Upd
 }
 
 // UpdatePoolQuery - Update the query of a pool
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) UpdatePoolQuery(ctx context.Context, request operations.V3UpdatePoolQueryRequest, opts ...operations.Option) (*operations.V3UpdatePoolQueryResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -12652,7 +12768,7 @@ func (s *V3) UpdatePoolQuery(ctx context.Context, request operations.V3UpdatePoo
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -12736,7 +12852,7 @@ func (s *V3) UpdatePoolQuery(ctx context.Context, request operations.V3UpdatePoo
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -12789,6 +12905,8 @@ func (s *V3) UpdatePoolQuery(ctx context.Context, request operations.V3UpdatePoo
 
 // V3UpdateConnectorConfig - Update the config of a connector
 // Update connector config
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *V3) V3UpdateConnectorConfig(ctx context.Context, request operations.V3UpdateConnectorConfigRequest, opts ...operations.Option) (*operations.V3UpdateConnectorConfigResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -12848,7 +12966,7 @@ func (s *V3) V3UpdateConnectorConfig(ctx context.Context, request operations.V3U
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -12932,7 +13050,7 @@ func (s *V3) V3UpdateConnectorConfig(ctx context.Context, request operations.V3U
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

@@ -8,13 +8,13 @@ import (
 )
 
 type AccountRequest struct {
-	AccountMetadata map[string]string `json:"metadata,omitempty"`
-	AccountType     AccountType       `json:"type"`
-	AccountName     *string           `json:"accountName,omitempty"`
-	ConnectorID     string            `json:"connectorID"`
-	CreatedAt       time.Time         `json:"createdAt"`
-	DefaultAsset    *string           `json:"defaultAsset,omitempty"`
-	Reference       string            `json:"reference"`
+	AccountName  *string           `json:"accountName,omitempty"`
+	ConnectorID  string            `json:"connectorID"`
+	CreatedAt    time.Time         `json:"createdAt"`
+	DefaultAsset *string           `json:"defaultAsset,omitempty"`
+	Metadata     map[string]string `json:"metadata,omitempty"`
+	Reference    string            `json:"reference"`
+	Type         AccountType       `json:"type"`
 }
 
 func (a AccountRequest) MarshalJSON() ([]byte, error) {
@@ -26,20 +26,6 @@ func (a *AccountRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (a *AccountRequest) GetAccountMetadata() map[string]string {
-	if a == nil {
-		return nil
-	}
-	return a.AccountMetadata
-}
-
-func (a *AccountRequest) GetAccountType() AccountType {
-	if a == nil {
-		return AccountType("")
-	}
-	return a.AccountType
 }
 
 func (a *AccountRequest) GetAccountName() *string {
@@ -70,9 +56,23 @@ func (a *AccountRequest) GetDefaultAsset() *string {
 	return a.DefaultAsset
 }
 
+func (a *AccountRequest) GetMetadata() map[string]string {
+	if a == nil {
+		return nil
+	}
+	return a.Metadata
+}
+
 func (a *AccountRequest) GetReference() string {
 	if a == nil {
 		return ""
 	}
 	return a.Reference
+}
+
+func (a *AccountRequest) GetType() AccountType {
+	if a == nil {
+		return AccountType("")
+	}
+	return a.Type
 }

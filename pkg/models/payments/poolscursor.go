@@ -2,7 +2,7 @@
 
 package payments
 
-type PoolsCursorCursorBase struct {
+type PoolsCursorCursor struct {
 	Data     []Pool  `json:"data"`
 	HasMore  bool    `json:"hasMore"`
 	Next     *string `json:"next,omitempty"`
@@ -10,35 +10,35 @@ type PoolsCursorCursorBase struct {
 	Previous *string `json:"previous,omitempty"`
 }
 
-func (p *PoolsCursorCursorBase) GetData() []Pool {
+func (p *PoolsCursorCursor) GetData() []Pool {
 	if p == nil {
 		return []Pool{}
 	}
 	return p.Data
 }
 
-func (p *PoolsCursorCursorBase) GetHasMore() bool {
+func (p *PoolsCursorCursor) GetHasMore() bool {
 	if p == nil {
 		return false
 	}
 	return p.HasMore
 }
 
-func (p *PoolsCursorCursorBase) GetNext() *string {
+func (p *PoolsCursorCursor) GetNext() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Next
 }
 
-func (p *PoolsCursorCursorBase) GetPageSize() int64 {
+func (p *PoolsCursorCursor) GetPageSize() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.PageSize
 }
 
-func (p *PoolsCursorCursorBase) GetPrevious() *string {
+func (p *PoolsCursorCursor) GetPrevious() *string {
 	if p == nil {
 		return nil
 	}
@@ -47,12 +47,12 @@ func (p *PoolsCursorCursorBase) GetPrevious() *string {
 
 // PoolsCursor - OK
 type PoolsCursor struct {
-	CursorBase PoolsCursorCursorBase `json:"cursor"`
+	Cursor PoolsCursorCursor `json:"cursor"`
 }
 
-func (p *PoolsCursor) GetCursorBase() PoolsCursorCursorBase {
+func (p *PoolsCursor) GetCursor() PoolsCursorCursor {
 	if p == nil {
-		return PoolsCursorCursorBase{}
+		return PoolsCursorCursor{}
 	}
-	return p.CursorBase
+	return p.Cursor
 }

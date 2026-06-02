@@ -8,10 +8,10 @@ import (
 )
 
 type V2DebitWalletRequest struct {
-	V2Monetary  V2Monetary `json:"amount"`
-	V2Subject   *V2Subject `json:"destination,omitempty"`
+	Amount      V2Monetary `json:"amount"`
 	Balances    []string   `json:"balances,omitempty"`
 	Description *string    `json:"description,omitempty"`
+	Destination *V2Subject `json:"destination,omitempty"`
 	// Metadata associated with the wallet.
 	Metadata map[string]string `json:"metadata"`
 	// Set to true to create a pending hold. If false, the wallet will be debited immediately.
@@ -31,18 +31,11 @@ func (v *V2DebitWalletRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2DebitWalletRequest) GetV2Monetary() V2Monetary {
+func (v *V2DebitWalletRequest) GetAmount() V2Monetary {
 	if v == nil {
 		return V2Monetary{}
 	}
-	return v.V2Monetary
-}
-
-func (v *V2DebitWalletRequest) GetV2Subject() *V2Subject {
-	if v == nil {
-		return nil
-	}
-	return v.V2Subject
+	return v.Amount
 }
 
 func (v *V2DebitWalletRequest) GetBalances() []string {
@@ -57,6 +50,13 @@ func (v *V2DebitWalletRequest) GetDescription() *string {
 		return nil
 	}
 	return v.Description
+}
+
+func (v *V2DebitWalletRequest) GetDestination() *V2Subject {
+	if v == nil {
+		return nil
+	}
+	return v.Destination
 }
 
 func (v *V2DebitWalletRequest) GetMetadata() map[string]string {

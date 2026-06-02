@@ -102,8 +102,8 @@ func (e *V2LogDataSetMetadataTargetType) UnmarshalJSON(data []byte) error {
 
 // V2LogDataSetMetadata - Payload for SET_METADATA log entries. Contains the target entity and the metadata that was set.
 type V2LogDataSetMetadata struct {
-	V2Metadata map[string]string            `json:"metadata"`
-	TargetID   V2LogDataSetMetadataTargetID `json:"targetId"`
+	Metadata map[string]string            `json:"metadata"`
+	TargetID V2LogDataSetMetadataTargetID `json:"targetId"`
 	// Type of the target entity
 	TargetType V2LogDataSetMetadataTargetType `json:"targetType"`
 }
@@ -119,11 +119,11 @@ func (v *V2LogDataSetMetadata) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2LogDataSetMetadata) GetV2Metadata() map[string]string {
+func (v *V2LogDataSetMetadata) GetMetadata() map[string]string {
 	if v == nil {
 		return map[string]string{}
 	}
-	return v.V2Metadata
+	return v.Metadata
 }
 
 func (v *V2LogDataSetMetadata) GetTargetID() V2LogDataSetMetadataTargetID {

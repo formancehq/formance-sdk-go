@@ -7,9 +7,9 @@ import (
 )
 
 type StageSendSource struct {
-	StageSendSourceAccount *StageSendSourceAccount `json:"account,omitempty"`
-	StageSendSourcePayment *StageSendSourcePayment `json:"payment,omitempty"`
-	StageSendSourceWallet  *StageSendSourceWallet  `json:"wallet,omitempty"`
+	Account *StageSendSourceAccount `json:"account,omitempty"`
+	Payment *StageSendSourcePayment `json:"payment,omitempty"`
+	Wallet  *StageSendSourceWallet  `json:"wallet,omitempty"`
 }
 
 func (s StageSendSource) MarshalJSON() ([]byte, error) {
@@ -23,23 +23,23 @@ func (s *StageSendSource) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *StageSendSource) GetStageSendSourceAccount() *StageSendSourceAccount {
+func (s *StageSendSource) GetAccount() *StageSendSourceAccount {
 	if s == nil {
 		return nil
 	}
-	return s.StageSendSourceAccount
+	return s.Account
 }
 
-func (s *StageSendSource) GetStageSendSourcePayment() *StageSendSourcePayment {
+func (s *StageSendSource) GetPayment() *StageSendSourcePayment {
 	if s == nil {
 		return nil
 	}
-	return s.StageSendSourcePayment
+	return s.Payment
 }
 
-func (s *StageSendSource) GetStageSendSourceWallet() *StageSendSourceWallet {
+func (s *StageSendSource) GetWallet() *StageSendSourceWallet {
 	if s == nil {
 		return nil
 	}
-	return s.StageSendSourceWallet
+	return s.Wallet
 }

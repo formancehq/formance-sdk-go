@@ -8,7 +8,7 @@ import (
 )
 
 type Attempt struct {
-	WebhooksConfig WebhooksConfig `json:"config"`
+	Config         WebhooksConfig `json:"config"`
 	CreatedAt      time.Time      `json:"createdAt"`
 	ID             string         `json:"id"`
 	NextRetryAfter *time.Time     `json:"nextRetryAfter,omitempty"`
@@ -31,11 +31,11 @@ func (a *Attempt) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *Attempt) GetWebhooksConfig() WebhooksConfig {
+func (a *Attempt) GetConfig() WebhooksConfig {
 	if a == nil {
 		return WebhooksConfig{}
 	}
-	return a.WebhooksConfig
+	return a.Config
 }
 
 func (a *Attempt) GetCreatedAt() time.Time {

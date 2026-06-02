@@ -3,12 +3,12 @@
 package orchestration
 
 type ListTriggersResponse struct {
-	Data []TriggerData `json:"data"`
+	Data []Trigger `json:"data"`
 }
 
-func (l *ListTriggersResponse) GetData() []TriggerData {
+func (l *ListTriggersResponse) GetData() []Trigger {
 	if l == nil {
-		return []TriggerData{}
+		return []Trigger{}
 	}
 	return l.Data
 }

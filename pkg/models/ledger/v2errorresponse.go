@@ -3,16 +3,9 @@
 package ledger
 
 type V2ErrorResponse struct {
-	V2ErrorsEnum V2ErrorsEnum `json:"errorCode"`
 	Details      *string      `json:"details,omitempty"`
+	ErrorCode    V2ErrorsEnum `json:"errorCode"`
 	ErrorMessage string       `json:"errorMessage"`
-}
-
-func (v *V2ErrorResponse) GetV2ErrorsEnum() V2ErrorsEnum {
-	if v == nil {
-		return V2ErrorsEnum("")
-	}
-	return v.V2ErrorsEnum
 }
 
 func (v *V2ErrorResponse) GetDetails() *string {
@@ -20,6 +13,13 @@ func (v *V2ErrorResponse) GetDetails() *string {
 		return nil
 	}
 	return v.Details
+}
+
+func (v *V2ErrorResponse) GetErrorCode() V2ErrorsEnum {
+	if v == nil {
+		return V2ErrorsEnum("")
+	}
+	return v.ErrorCode
 }
 
 func (v *V2ErrorResponse) GetErrorMessage() string {

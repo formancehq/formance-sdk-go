@@ -3,23 +3,14 @@
 package auth
 
 type ClientOptions struct {
-	Metadata               map[string]string `json:"metadata,omitempty"`
 	Description            *string           `json:"description,omitempty"`
-	ID                     string            `json:"id"`
+	Metadata               map[string]string `json:"metadata,omitempty"`
 	Name                   string            `json:"name"`
 	PostLogoutRedirectUris []string          `json:"postLogoutRedirectUris,omitempty"`
 	Public                 *bool             `json:"public,omitempty"`
 	RedirectUris           []string          `json:"redirectUris,omitempty"`
 	Scopes                 []string          `json:"scopes,omitempty"`
-	Secrets                []ClientSecret    `json:"secrets,omitempty"`
 	Trusted                *bool             `json:"trusted,omitempty"`
-}
-
-func (c *ClientOptions) GetMetadata() map[string]string {
-	if c == nil {
-		return nil
-	}
-	return c.Metadata
 }
 
 func (c *ClientOptions) GetDescription() *string {
@@ -29,11 +20,11 @@ func (c *ClientOptions) GetDescription() *string {
 	return c.Description
 }
 
-func (c *ClientOptions) GetID() string {
+func (c *ClientOptions) GetMetadata() map[string]string {
 	if c == nil {
-		return ""
+		return nil
 	}
-	return c.ID
+	return c.Metadata
 }
 
 func (c *ClientOptions) GetName() string {
@@ -69,13 +60,6 @@ func (c *ClientOptions) GetScopes() []string {
 		return nil
 	}
 	return c.Scopes
-}
-
-func (c *ClientOptions) GetSecrets() []ClientSecret {
-	if c == nil {
-		return nil
-	}
-	return c.Secrets
 }
 
 func (c *ClientOptions) GetTrusted() *bool {

@@ -3,14 +3,14 @@
 package orchestration
 
 type V2TestTriggerResponse struct {
-	V2TriggerTest V2TriggerTest `json:"data"`
+	Data V2TriggerTest `json:"data"`
 }
 
-func (v *V2TestTriggerResponse) GetV2TriggerTest() V2TriggerTest {
+func (v *V2TestTriggerResponse) GetData() V2TriggerTest {
 	if v == nil {
 		return V2TriggerTest{}
 	}
-	return v.V2TriggerTest
+	return v.Data
 }
 
 // #region class-body-v2testtriggerresponse

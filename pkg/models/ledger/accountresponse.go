@@ -3,12 +3,12 @@
 package ledger
 
 type AccountResponse struct {
-	AccountWithVolumesAndBalances AccountWithVolumesAndBalances `json:"data"`
+	Data AccountWithVolumesAndBalances `json:"data"`
 }
 
-func (a *AccountResponse) GetAccountWithVolumesAndBalances() AccountWithVolumesAndBalances {
+func (a *AccountResponse) GetData() AccountWithVolumesAndBalances {
 	if a == nil {
 		return AccountWithVolumesAndBalances{}
 	}
-	return a.AccountWithVolumesAndBalances
+	return a.Data
 }

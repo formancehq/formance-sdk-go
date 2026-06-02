@@ -3,16 +3,16 @@
 package ledger
 
 type V2SchemasCursor struct {
-	Data     []V2SchemaData `json:"data"`
-	HasMore  bool           `json:"hasMore"`
-	Next     *string        `json:"next,omitempty"`
-	PageSize int64          `json:"pageSize"`
-	Previous *string        `json:"previous,omitempty"`
+	Data     []V2Schema `json:"data"`
+	HasMore  bool       `json:"hasMore"`
+	Next     *string    `json:"next,omitempty"`
+	PageSize int64      `json:"pageSize"`
+	Previous *string    `json:"previous,omitempty"`
 }
 
-func (v *V2SchemasCursor) GetData() []V2SchemaData {
+func (v *V2SchemasCursor) GetData() []V2Schema {
 	if v == nil {
-		return []V2SchemaData{}
+		return []V2Schema{}
 	}
 	return v.Data
 }

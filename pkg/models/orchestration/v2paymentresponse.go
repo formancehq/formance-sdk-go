@@ -3,14 +3,14 @@
 package orchestration
 
 type V2PaymentResponse struct {
-	V2Payment V2Payment `json:"data"`
+	Data V2Payment `json:"data"`
 }
 
-func (v *V2PaymentResponse) GetV2Payment() V2Payment {
+func (v *V2PaymentResponse) GetData() V2Payment {
 	if v == nil {
 		return V2Payment{}
 	}
-	return v.V2Payment
+	return v.Data
 }
 
 // #region class-body-v2paymentresponse

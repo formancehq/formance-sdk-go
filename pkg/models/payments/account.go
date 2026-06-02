@@ -11,19 +11,19 @@ type Raw struct {
 }
 
 type Account struct {
-	AccountMetadata map[string]string `json:"metadata"`
-	AccountType     AccountType       `json:"type"`
-	AccountName     string            `json:"accountName"`
-	ConnectorID     string            `json:"connectorID"`
-	CreatedAt       time.Time         `json:"createdAt"`
-	DefaultAsset    string            `json:"defaultAsset"`
+	AccountName  string    `json:"accountName"`
+	ConnectorID  string    `json:"connectorID"`
+	CreatedAt    time.Time `json:"createdAt"`
+	DefaultAsset string    `json:"defaultAsset"`
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	DefaultCurrency string   `json:"defaultCurrency"`
-	ID              string   `json:"id"`
-	Pools           []string `json:"pools,omitempty"`
-	Provider        *string  `json:"provider,omitempty"`
-	Raw             *Raw     `json:"raw"`
-	Reference       string   `json:"reference"`
+	DefaultCurrency string            `json:"defaultCurrency"`
+	ID              string            `json:"id"`
+	Metadata        map[string]string `json:"metadata"`
+	Pools           []string          `json:"pools,omitempty"`
+	Provider        *string           `json:"provider,omitempty"`
+	Raw             *Raw              `json:"raw"`
+	Reference       string            `json:"reference"`
+	Type            AccountType       `json:"type"`
 }
 
 func (a Account) MarshalJSON() ([]byte, error) {
@@ -35,20 +35,6 @@ func (a *Account) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (a *Account) GetAccountMetadata() map[string]string {
-	if a == nil {
-		return nil
-	}
-	return a.AccountMetadata
-}
-
-func (a *Account) GetAccountType() AccountType {
-	if a == nil {
-		return AccountType("")
-	}
-	return a.AccountType
 }
 
 func (a *Account) GetAccountName() string {
@@ -93,6 +79,13 @@ func (a *Account) GetID() string {
 	return a.ID
 }
 
+func (a *Account) GetMetadata() map[string]string {
+	if a == nil {
+		return nil
+	}
+	return a.Metadata
+}
+
 func (a *Account) GetPools() []string {
 	if a == nil {
 		return nil
@@ -119,4 +112,11 @@ func (a *Account) GetReference() string {
 		return ""
 	}
 	return a.Reference
+}
+
+func (a *Account) GetType() AccountType {
+	if a == nil {
+		return AccountType("")
+	}
+	return a.Type
 }

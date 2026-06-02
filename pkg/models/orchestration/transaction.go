@@ -9,8 +9,8 @@ import (
 )
 
 type Transaction struct {
-	Metadata  map[string]string `json:"metadata"`
 	ID        *big.Int          `json:"id"`
+	Metadata  map[string]string `json:"metadata"`
 	Postings  []Posting         `json:"postings"`
 	Reference *string           `json:"reference,omitempty"`
 	Reverted  bool              `json:"reverted"`
@@ -28,18 +28,18 @@ func (t *Transaction) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (t *Transaction) GetMetadata() map[string]string {
-	if t == nil {
-		return map[string]string{}
-	}
-	return t.Metadata
-}
-
 func (t *Transaction) GetID() *big.Int {
 	if t == nil {
 		return big.NewInt(0)
 	}
 	return t.ID
+}
+
+func (t *Transaction) GetMetadata() map[string]string {
+	if t == nil {
+		return map[string]string{}
+	}
+	return t.Metadata
 }
 
 func (t *Transaction) GetPostings() []Posting {

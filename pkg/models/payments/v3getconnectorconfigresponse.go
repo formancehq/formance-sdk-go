@@ -3,14 +3,14 @@
 package payments
 
 type V3GetConnectorConfigResponse struct {
-	V3ConnectorConfig V3ConnectorConfig `json:"data"`
+	Data V3ConnectorConfig `json:"data"`
 }
 
-func (v *V3GetConnectorConfigResponse) GetV3ConnectorConfig() V3ConnectorConfig {
+func (v *V3GetConnectorConfigResponse) GetData() V3ConnectorConfig {
 	if v == nil {
 		return V3ConnectorConfig{}
 	}
-	return v.V3ConnectorConfig
+	return v.Data
 }
 
 // #region class-body-v3getconnectorconfigresponse

@@ -8,13 +8,13 @@ import (
 )
 
 type V2Account struct {
-	V2Volumes     map[string]V2Volume `json:"volumes,omitempty"`
-	V2Volumes1    map[string]V2Volume `json:"effectiveVolumes,omitempty"`
-	Address       string              `json:"address"`
-	FirstUsage    *time.Time          `json:"firstUsage,omitempty"`
-	InsertionDate *time.Time          `json:"insertionDate,omitempty"`
-	Metadata      map[string]string   `json:"metadata"`
-	UpdatedAt     *time.Time          `json:"updatedAt,omitempty"`
+	Address          string              `json:"address"`
+	EffectiveVolumes map[string]V2Volume `json:"effectiveVolumes,omitempty"`
+	FirstUsage       *time.Time          `json:"firstUsage,omitempty"`
+	InsertionDate    *time.Time          `json:"insertionDate,omitempty"`
+	Metadata         map[string]string   `json:"metadata"`
+	UpdatedAt        *time.Time          `json:"updatedAt,omitempty"`
+	Volumes          map[string]V2Volume `json:"volumes,omitempty"`
 }
 
 func (v V2Account) MarshalJSON() ([]byte, error) {
@@ -28,25 +28,18 @@ func (v *V2Account) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2Account) GetV2Volumes() map[string]V2Volume {
-	if v == nil {
-		return nil
-	}
-	return v.V2Volumes
-}
-
-func (v *V2Account) GetV2Volumes1() map[string]V2Volume {
-	if v == nil {
-		return nil
-	}
-	return v.V2Volumes1
-}
-
 func (v *V2Account) GetAddress() string {
 	if v == nil {
 		return ""
 	}
 	return v.Address
+}
+
+func (v *V2Account) GetEffectiveVolumes() map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.EffectiveVolumes
 }
 
 func (v *V2Account) GetFirstUsage() *time.Time {
@@ -75,6 +68,13 @@ func (v *V2Account) GetUpdatedAt() *time.Time {
 		return nil
 	}
 	return v.UpdatedAt
+}
+
+func (v *V2Account) GetVolumes() map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.Volumes
 }
 
 // #region class-body-v2account

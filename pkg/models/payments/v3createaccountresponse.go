@@ -3,14 +3,14 @@
 package payments
 
 type V3CreateAccountResponse struct {
-	V3Account V3Account `json:"data"`
+	Data V3Account `json:"data"`
 }
 
-func (v *V3CreateAccountResponse) GetV3Account() V3Account {
+func (v *V3CreateAccountResponse) GetData() V3Account {
 	if v == nil {
 		return V3Account{}
 	}
-	return v.V3Account
+	return v.Data
 }
 
 // #region class-body-v3createaccountresponse

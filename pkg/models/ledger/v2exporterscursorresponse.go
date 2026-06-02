@@ -3,16 +3,16 @@
 package ledger
 
 type V2ExportersCursorResponseCursor struct {
-	Data     []V2ExporterConfiguration `json:"data"`
-	HasMore  bool                      `json:"hasMore"`
-	Next     *string                   `json:"next,omitempty"`
-	PageSize int64                     `json:"pageSize"`
-	Previous *string                   `json:"previous,omitempty"`
+	Data     []V2Exporter `json:"data"`
+	HasMore  bool         `json:"hasMore"`
+	Next     *string      `json:"next,omitempty"`
+	PageSize int64        `json:"pageSize"`
+	Previous *string      `json:"previous,omitempty"`
 }
 
-func (v *V2ExportersCursorResponseCursor) GetData() []V2ExporterConfiguration {
+func (v *V2ExportersCursorResponseCursor) GetData() []V2Exporter {
 	if v == nil {
-		return []V2ExporterConfiguration{}
+		return []V2Exporter{}
 	}
 	return v.Data
 }

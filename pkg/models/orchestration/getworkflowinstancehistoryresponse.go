@@ -3,12 +3,12 @@
 package orchestration
 
 type GetWorkflowInstanceHistoryResponse struct {
-	WorkflowInstanceHistoryList []WorkflowInstanceHistory `json:"data"`
+	Data []WorkflowInstanceHistory `json:"data"`
 }
 
-func (g *GetWorkflowInstanceHistoryResponse) GetWorkflowInstanceHistoryList() []WorkflowInstanceHistory {
+func (g *GetWorkflowInstanceHistoryResponse) GetData() []WorkflowInstanceHistory {
 	if g == nil {
 		return []WorkflowInstanceHistory{}
 	}
-	return g.WorkflowInstanceHistoryList
+	return g.Data
 }

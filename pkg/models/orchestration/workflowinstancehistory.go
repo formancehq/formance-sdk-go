@@ -8,8 +8,8 @@ import (
 )
 
 type WorkflowInstanceHistory struct {
-	Stage        Stage      `json:"input"`
 	Error        *string    `json:"error,omitempty"`
+	Input        Stage      `json:"input"`
 	Name         string     `json:"name"`
 	StartedAt    time.Time  `json:"startedAt"`
 	Terminated   bool       `json:"terminated"`
@@ -27,18 +27,18 @@ func (w *WorkflowInstanceHistory) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WorkflowInstanceHistory) GetStage() Stage {
-	if w == nil {
-		return Stage{}
-	}
-	return w.Stage
-}
-
 func (w *WorkflowInstanceHistory) GetError() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Error
+}
+
+func (w *WorkflowInstanceHistory) GetInput() Stage {
+	if w == nil {
+		return Stage{}
+	}
+	return w.Input
 }
 
 func (w *WorkflowInstanceHistory) GetName() string {

@@ -3,14 +3,14 @@
 package payments
 
 type V3GetPoolResponse struct {
-	V3Pool V3Pool `json:"data"`
+	Data V3Pool `json:"data"`
 }
 
-func (v *V3GetPoolResponse) GetV3Pool() V3Pool {
+func (v *V3GetPoolResponse) GetData() V3Pool {
 	if v == nil {
 		return V3Pool{}
 	}
-	return v.V3Pool
+	return v.Data
 }
 
 // #region class-body-v3getpoolresponse

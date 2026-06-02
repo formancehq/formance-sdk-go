@@ -3,14 +3,14 @@
 package payments
 
 type V3GetPaymentServiceUserResponse struct {
-	V3PaymentServiceUser V3PaymentServiceUser `json:"data"`
+	Data V3PaymentServiceUser `json:"data"`
 }
 
-func (v *V3GetPaymentServiceUserResponse) GetV3PaymentServiceUser() V3PaymentServiceUser {
+func (v *V3GetPaymentServiceUserResponse) GetData() V3PaymentServiceUser {
 	if v == nil {
 		return V3PaymentServiceUser{}
 	}
-	return v.V3PaymentServiceUser
+	return v.Data
 }
 
 // #region class-body-v3getpaymentserviceuserresponse

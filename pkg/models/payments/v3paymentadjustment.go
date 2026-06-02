@@ -15,14 +15,14 @@ type V3PaymentAdjustmentRaw struct {
 // #endregion class-body-v3paymentadjustmentraw
 
 type V3PaymentAdjustment struct {
-	V3Metadata          map[string]string      `json:"metadata,omitempty"`
-	V3PaymentStatusEnum V3PaymentStatusEnum    `json:"status"`
-	Amount              *big.Int               `json:"amount,omitempty"`
-	Asset               *string                `json:"asset,omitempty"`
-	CreatedAt           time.Time              `json:"createdAt"`
-	ID                  string                 `json:"id"`
-	Raw                 V3PaymentAdjustmentRaw `json:"raw"`
-	Reference           string                 `json:"reference"`
+	Amount    *big.Int               `json:"amount,omitempty"`
+	Asset     *string                `json:"asset,omitempty"`
+	CreatedAt time.Time              `json:"createdAt"`
+	ID        string                 `json:"id"`
+	Metadata  map[string]string      `json:"metadata,omitempty"`
+	Raw       V3PaymentAdjustmentRaw `json:"raw"`
+	Reference string                 `json:"reference"`
+	Status    V3PaymentStatusEnum    `json:"status"`
 }
 
 func (v V3PaymentAdjustment) MarshalJSON() ([]byte, error) {
@@ -34,20 +34,6 @@ func (v *V3PaymentAdjustment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3PaymentAdjustment) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
-}
-
-func (v *V3PaymentAdjustment) GetV3PaymentStatusEnum() V3PaymentStatusEnum {
-	if v == nil {
-		return V3PaymentStatusEnum("")
-	}
-	return v.V3PaymentStatusEnum
 }
 
 func (v *V3PaymentAdjustment) GetAmount() *big.Int {
@@ -78,6 +64,13 @@ func (v *V3PaymentAdjustment) GetID() string {
 	return v.ID
 }
 
+func (v *V3PaymentAdjustment) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
 func (v *V3PaymentAdjustment) GetRaw() V3PaymentAdjustmentRaw {
 	if v == nil {
 		return V3PaymentAdjustmentRaw{}
@@ -90,6 +83,13 @@ func (v *V3PaymentAdjustment) GetReference() string {
 		return ""
 	}
 	return v.Reference
+}
+
+func (v *V3PaymentAdjustment) GetStatus() V3PaymentStatusEnum {
+	if v == nil {
+		return V3PaymentStatusEnum("")
+	}
+	return v.Status
 }
 
 // #region class-body-v3paymentadjustment

@@ -1273,51 +1273,51 @@ func main() {
         log.Fatal(err)
     }
     if res.V3GetConnectorConfigResponse != nil {
-        switch res.V3GetConnectorConfigResponse.V3ConnectorConfig.Type {
+        switch res.V3GetConnectorConfigResponse.Data.Type {
             case shared.V3ConnectorConfigTypeV3AdyenConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3AdyenConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3AdyenConfig is populated
             case shared.V3ConnectorConfigTypeV3AtlarConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3AtlarConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3AtlarConfig is populated
             case shared.V3ConnectorConfigTypeV3BankingcircleConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3BankingcircleConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3BankingcircleConfig is populated
             case shared.V3ConnectorConfigTypeV3ColumnConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3ColumnConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3ColumnConfig is populated
             case shared.V3ConnectorConfigTypeV3CurrencycloudConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3CurrencycloudConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3CurrencycloudConfig is populated
             case shared.V3ConnectorConfigTypeV3DummypayConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3DummypayConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3DummypayConfig is populated
             case shared.V3ConnectorConfigTypeV3GenericConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3GenericConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3GenericConfig is populated
             case shared.V3ConnectorConfigTypeV3IncreaseConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3IncreaseConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3IncreaseConfig is populated
             case shared.V3ConnectorConfigTypeV3MangopayConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3MangopayConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3MangopayConfig is populated
             case shared.V3ConnectorConfigTypeV3ModulrConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3ModulrConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3ModulrConfig is populated
             case shared.V3ConnectorConfigTypeV3MoneycorpConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3MoneycorpConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3MoneycorpConfig is populated
             case shared.V3ConnectorConfigTypeV3PlaidConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3PlaidConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3PlaidConfig is populated
             case shared.V3ConnectorConfigTypeV3PowensConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3PowensConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3PowensConfig is populated
             case shared.V3ConnectorConfigTypeV3QontoConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3QontoConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3QontoConfig is populated
             case shared.V3ConnectorConfigTypeV3StripeConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3StripeConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3StripeConfig is populated
             case shared.V3ConnectorConfigTypeV3TinkConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3TinkConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3TinkConfig is populated
             case shared.V3ConnectorConfigTypeV3WiseConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3WiseConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3WiseConfig is populated
             case shared.V3ConnectorConfigTypeV3BankingbridgeConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3BankingbridgeConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3BankingbridgeConfig is populated
             case shared.V3ConnectorConfigTypeV3BitstampConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3BitstampConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3BitstampConfig is populated
             case shared.V3ConnectorConfigTypeV3CoinbaseprimeConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3CoinbaseprimeConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3CoinbaseprimeConfig is populated
             case shared.V3ConnectorConfigTypeV3FireblocksConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3FireblocksConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3FireblocksConfig is populated
             case shared.V3ConnectorConfigTypeV3RoutableConfig:
-                // res.V3GetConnectorConfigResponse.V3ConnectorConfig.V3RoutableConfig is populated
+                // res.V3GetConnectorConfigResponse.Data.V3RoutableConfig is populated
         }
 
     }

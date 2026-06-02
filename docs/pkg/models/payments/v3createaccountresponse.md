@@ -5,4 +5,4 @@
 
 | Field                                                           | Type                                                            | Required                                                        | Description                                                     |
 | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `V3Account`                                                     | [payments.V3Account](../../../pkg/models/payments/v3account.md) | :heavy_check_mark:                                              | N/A                                                             |
+| `Data`                                                          | [payments.V3Account](../../../pkg/models/payments/v3account.md) | :heavy_check_mark:                                              | N/A                                                             |

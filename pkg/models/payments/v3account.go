@@ -14,17 +14,17 @@ type V3AccountRaw struct {
 // #endregion class-body-v3accountraw
 
 type V3Account struct {
-	V3AccountTypeEnum V3AccountTypeEnum `json:"type"`
-	V3ConnectorBase   *V3ConnectorBase  `json:"connector,omitempty"`
-	V3Metadata        map[string]string `json:"metadata,omitempty"`
-	ConnectorID       string            `json:"connectorID"`
-	CreatedAt         time.Time         `json:"createdAt"`
-	DefaultAsset      *string           `json:"defaultAsset,omitempty"`
-	ID                string            `json:"id"`
-	Name              *string           `json:"name,omitempty"`
-	Provider          string            `json:"provider"`
-	Raw               V3AccountRaw      `json:"raw"`
-	Reference         string            `json:"reference"`
+	Connector    *V3ConnectorBase  `json:"connector,omitempty"`
+	ConnectorID  string            `json:"connectorID"`
+	CreatedAt    time.Time         `json:"createdAt"`
+	DefaultAsset *string           `json:"defaultAsset,omitempty"`
+	ID           string            `json:"id"`
+	Metadata     map[string]string `json:"metadata,omitempty"`
+	Name         *string           `json:"name,omitempty"`
+	Provider     string            `json:"provider"`
+	Raw          V3AccountRaw      `json:"raw"`
+	Reference    string            `json:"reference"`
+	Type         V3AccountTypeEnum `json:"type"`
 }
 
 func (v V3Account) MarshalJSON() ([]byte, error) {
@@ -38,25 +38,11 @@ func (v *V3Account) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V3Account) GetV3AccountTypeEnum() V3AccountTypeEnum {
-	if v == nil {
-		return V3AccountTypeEnum("")
-	}
-	return v.V3AccountTypeEnum
-}
-
-func (v *V3Account) GetV3ConnectorBase() *V3ConnectorBase {
+func (v *V3Account) GetConnector() *V3ConnectorBase {
 	if v == nil {
 		return nil
 	}
-	return v.V3ConnectorBase
-}
-
-func (v *V3Account) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
+	return v.Connector
 }
 
 func (v *V3Account) GetConnectorID() string {
@@ -87,6 +73,13 @@ func (v *V3Account) GetID() string {
 	return v.ID
 }
 
+func (v *V3Account) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
 func (v *V3Account) GetName() *string {
 	if v == nil {
 		return nil
@@ -113,6 +106,13 @@ func (v *V3Account) GetReference() string {
 		return ""
 	}
 	return v.Reference
+}
+
+func (v *V3Account) GetType() V3AccountTypeEnum {
+	if v == nil {
+		return V3AccountTypeEnum("")
+	}
+	return v.Type
 }
 
 // #region class-body-v3account

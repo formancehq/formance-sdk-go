@@ -3,12 +3,12 @@
 package payments
 
 type UpdateBankAccountMetadataRequest struct {
-	BankAccountMetadata map[string]string `json:"metadata"`
+	Metadata map[string]string `json:"metadata"`
 }
 
-func (u *UpdateBankAccountMetadataRequest) GetBankAccountMetadata() map[string]string {
+func (u *UpdateBankAccountMetadataRequest) GetMetadata() map[string]string {
 	if u == nil {
 		return nil
 	}
-	return u.BankAccountMetadata
+	return u.Metadata
 }

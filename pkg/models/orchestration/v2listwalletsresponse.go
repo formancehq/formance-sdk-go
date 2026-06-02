@@ -2,7 +2,7 @@
 
 package orchestration
 
-type V2Cursor struct {
+type V2ListWalletsResponseCursor struct {
 	Data     []V2Wallet `json:"data"`
 	HasMore  *bool      `json:"hasMore,omitempty"`
 	Next     *string    `json:"next,omitempty"`
@@ -10,53 +10,53 @@ type V2Cursor struct {
 	Previous *string    `json:"previous,omitempty"`
 }
 
-func (v *V2Cursor) GetData() []V2Wallet {
+func (v *V2ListWalletsResponseCursor) GetData() []V2Wallet {
 	if v == nil {
 		return []V2Wallet{}
 	}
 	return v.Data
 }
 
-func (v *V2Cursor) GetHasMore() *bool {
+func (v *V2ListWalletsResponseCursor) GetHasMore() *bool {
 	if v == nil {
 		return nil
 	}
 	return v.HasMore
 }
 
-func (v *V2Cursor) GetNext() *string {
+func (v *V2ListWalletsResponseCursor) GetNext() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Next
 }
 
-func (v *V2Cursor) GetPageSize() int64 {
+func (v *V2ListWalletsResponseCursor) GetPageSize() int64 {
 	if v == nil {
 		return 0
 	}
 	return v.PageSize
 }
 
-func (v *V2Cursor) GetPrevious() *string {
+func (v *V2ListWalletsResponseCursor) GetPrevious() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Previous
 }
 
-// #region class-body-v2cursor
-// #endregion class-body-v2cursor
+// #region class-body-v2listwalletsresponsecursor
+// #endregion class-body-v2listwalletsresponsecursor
 
 type V2ListWalletsResponse struct {
-	V2Cursor V2Cursor `json:"cursor"`
+	Cursor V2ListWalletsResponseCursor `json:"cursor"`
 }
 
-func (v *V2ListWalletsResponse) GetV2Cursor() V2Cursor {
+func (v *V2ListWalletsResponse) GetCursor() V2ListWalletsResponseCursor {
 	if v == nil {
-		return V2Cursor{}
+		return V2ListWalletsResponseCursor{}
 	}
-	return v.V2Cursor
+	return v.Cursor
 }
 
 // #region class-body-v2listwalletsresponse

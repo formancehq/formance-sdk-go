@@ -7,7 +7,7 @@ import (
 )
 
 type V2Update struct {
-	V2UpdateAccount *V2UpdateAccount `json:"account,omitempty"`
+	Account *V2UpdateAccount `json:"account,omitempty"`
 }
 
 func (v V2Update) MarshalJSON() ([]byte, error) {
@@ -21,11 +21,11 @@ func (v *V2Update) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2Update) GetV2UpdateAccount() *V2UpdateAccount {
+func (v *V2Update) GetAccount() *V2UpdateAccount {
 	if v == nil {
 		return nil
 	}
-	return v.V2UpdateAccount
+	return v.Account
 }
 
 // #region class-body-v2update

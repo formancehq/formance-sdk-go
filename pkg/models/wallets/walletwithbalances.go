@@ -8,14 +8,14 @@ import (
 )
 
 type WalletWithBalancesBalances struct {
-	AssetHolder AssetHolder `json:"main"`
+	Main AssetHolder `json:"main"`
 }
 
-func (w *WalletWithBalancesBalances) GetAssetHolder() AssetHolder {
+func (w *WalletWithBalancesBalances) GetMain() AssetHolder {
 	if w == nil {
 		return AssetHolder{}
 	}
-	return w.AssetHolder
+	return w.Main
 }
 
 type WalletWithBalances struct {

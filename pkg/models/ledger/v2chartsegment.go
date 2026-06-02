@@ -24,9 +24,9 @@ func (d *DotSelf) UnmarshalJSON(data []byte) error {
 type V2ChartSegment struct {
 	DotMetadata          map[string]V2ChartAccountMetadata `json:".metadata,omitempty"`
 	DotPattern           *string                           `json:".pattern,omitempty"`
+	DotRules             *V2ChartAccountRules              `json:".rules,omitempty"`
 	DotSelf              *DotSelf                          `json:".self,omitempty"`
 	AdditionalProperties map[string]V2ChartSegment         `additionalProperties:"true" json:"-"`
-	V2ChartAccountRules  *V2ChartAccountRules              `json:".rules,omitempty"`
 }
 
 func (v V2ChartSegment) MarshalJSON() ([]byte, error) {
@@ -54,6 +54,13 @@ func (v *V2ChartSegment) GetDotPattern() *string {
 	return v.DotPattern
 }
 
+func (v *V2ChartSegment) GetDotRules() *V2ChartAccountRules {
+	if v == nil {
+		return nil
+	}
+	return v.DotRules
+}
+
 func (v *V2ChartSegment) GetDotSelf() *DotSelf {
 	if v == nil {
 		return nil
@@ -66,13 +73,6 @@ func (v *V2ChartSegment) GetAdditionalProperties() map[string]V2ChartSegment {
 		return nil
 	}
 	return v.AdditionalProperties
-}
-
-func (v *V2ChartSegment) GetV2ChartAccountRules() *V2ChartAccountRules {
-	if v == nil {
-		return nil
-	}
-	return v.V2ChartAccountRules
 }
 
 // #region class-body-v2chartsegment

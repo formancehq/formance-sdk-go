@@ -3,12 +3,12 @@
 package ledger
 
 type TransactionResponse struct {
-	Transaction Transaction `json:"data"`
+	Data Transaction `json:"data"`
 }
 
-func (t *TransactionResponse) GetTransaction() Transaction {
+func (t *TransactionResponse) GetData() Transaction {
 	if t == nil {
 		return Transaction{}
 	}
-	return t.Transaction
+	return t.Data
 }

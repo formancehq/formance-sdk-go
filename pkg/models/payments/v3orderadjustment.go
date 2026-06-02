@@ -21,17 +21,6 @@ type V3OrderAdjustmentRaw struct {
 // per-adjustment, not per-order — so a single order can produce many
 // events over its lifetime.
 type V3OrderAdjustment struct {
-	V3Metadata map[string]string `json:"metadata,omitempty"`
-	// Lifecycle of an order on the exchange.
-	// `PENDING` — accepted by the exchange, not yet working.
-	// `OPEN` — live on the book, no fills yet.
-	// `PARTIALLY_FILLED` — live on the book, some base quantity filled.
-	// `FILLED` — fully filled, terminal.
-	// `CANCELLED` — cancelled by the user or system, terminal.
-	// `FAILED` — rejected by the exchange, terminal. See `error` for details.
-	// `EXPIRED` — `timeInForce` elapsed before full fill, terminal.
-	//
-	V3OrderStatusEnum V3OrderStatusEnum `json:"status"`
 	// Base asset filled at this observation, at the base asset's precision.
 	BaseQuantityFilled *big.Int `json:"baseQuantityFilled,omitempty"`
 	// When Formance observed this state. Not the PSP's own timestamp — reflects ingestion time.
@@ -41,11 +30,22 @@ type V3OrderAdjustment struct {
 	// Currency the fee is denominated in, in `SYMBOL/precision` form.
 	FeeAsset *string `json:"feeAsset,omitempty"`
 	// Adjustment ID, composed from the order ID plus the state fields that define uniqueness (status, filled quantity, fee). Idempotent — replaying the same observation produces the same ID.
-	ID string `json:"id"`
+	ID       string            `json:"id"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 	// Untransformed PSP response payload that produced this adjustment. Retained for debugging and replay.
 	Raw *V3OrderAdjustmentRaw `json:"raw,omitempty"`
 	// PSP reference the adjustment belongs to (equal to the parent order's `reference`).
 	Reference string `json:"reference"`
+	// Lifecycle of an order on the exchange.
+	// `PENDING` — accepted by the exchange, not yet working.
+	// `OPEN` — live on the book, no fills yet.
+	// `PARTIALLY_FILLED` — live on the book, some base quantity filled.
+	// `FILLED` — fully filled, terminal.
+	// `CANCELLED` — cancelled by the user or system, terminal.
+	// `FAILED` — rejected by the exchange, terminal. See `error` for details.
+	// `EXPIRED` — `timeInForce` elapsed before full fill, terminal.
+	//
+	Status V3OrderStatusEnum `json:"status"`
 }
 
 func (v V3OrderAdjustment) MarshalJSON() ([]byte, error) {
@@ -57,20 +57,6 @@ func (v *V3OrderAdjustment) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3OrderAdjustment) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
-}
-
-func (v *V3OrderAdjustment) GetV3OrderStatusEnum() V3OrderStatusEnum {
-	if v == nil {
-		return V3OrderStatusEnum("")
-	}
-	return v.V3OrderStatusEnum
 }
 
 func (v *V3OrderAdjustment) GetBaseQuantityFilled() *big.Int {
@@ -108,6 +94,13 @@ func (v *V3OrderAdjustment) GetID() string {
 	return v.ID
 }
 
+func (v *V3OrderAdjustment) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
+}
+
 func (v *V3OrderAdjustment) GetRaw() *V3OrderAdjustmentRaw {
 	if v == nil {
 		return nil
@@ -120,6 +113,13 @@ func (v *V3OrderAdjustment) GetReference() string {
 		return ""
 	}
 	return v.Reference
+}
+
+func (v *V3OrderAdjustment) GetStatus() V3OrderStatusEnum {
+	if v == nil {
+		return V3OrderStatusEnum("")
+	}
+	return v.Status
 }
 
 // #region class-body-v3orderadjustment

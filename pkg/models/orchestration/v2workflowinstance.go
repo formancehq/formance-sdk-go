@@ -8,7 +8,6 @@ import (
 )
 
 type V2WorkflowInstance struct {
-	V2Workflow   *V2Workflow     `json:"workflow,omitempty"`
 	CreatedAt    time.Time       `json:"createdAt"`
 	Error        *string         `json:"error,omitempty"`
 	ID           string          `json:"id"`
@@ -16,6 +15,7 @@ type V2WorkflowInstance struct {
 	Terminated   bool            `json:"terminated"`
 	TerminatedAt *time.Time      `json:"terminatedAt,omitempty"`
 	UpdatedAt    time.Time       `json:"updatedAt"`
+	Workflow     *V2Workflow     `json:"workflow,omitempty"`
 	WorkflowID   string          `json:"workflowID"`
 }
 
@@ -28,13 +28,6 @@ func (v *V2WorkflowInstance) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V2WorkflowInstance) GetV2Workflow() *V2Workflow {
-	if v == nil {
-		return nil
-	}
-	return v.V2Workflow
 }
 
 func (v *V2WorkflowInstance) GetCreatedAt() time.Time {
@@ -84,6 +77,13 @@ func (v *V2WorkflowInstance) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return v.UpdatedAt
+}
+
+func (v *V2WorkflowInstance) GetWorkflow() *V2Workflow {
+	if v == nil {
+		return nil
+	}
+	return v.Workflow
 }
 
 func (v *V2WorkflowInstance) GetWorkflowID() string {

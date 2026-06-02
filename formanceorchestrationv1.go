@@ -33,6 +33,8 @@ func newFormanceOrchestrationV1(rootSDK *Formance, sdkConfig config.SDKConfigura
 
 // CancelEvent - Cancel a running workflow
 // Cancel a running workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request operations.CancelEventRequest, opts ...operations.Option) (*operations.CancelEventResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -85,7 +87,7 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -169,7 +171,7 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -222,7 +224,9 @@ func (s *FormanceOrchestrationV1) CancelEvent(ctx context.Context, request opera
 
 // CreateTrigger - Create trigger
 // Create trigger
-func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *orchestration.TriggerData1, opts ...operations.Option) (*operations.CreateTriggerResponse, error) {
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *orchestration.TriggerData, opts ...operations.Option) (*operations.CreateTriggerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -281,7 +285,7 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *or
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -365,7 +369,7 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *or
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -437,6 +441,8 @@ func (s *FormanceOrchestrationV1) CreateTrigger(ctx context.Context, request *or
 
 // CreateWorkflow - Create workflow
 // Create a workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *orchestration.WorkflowConfig, opts ...operations.Option) (*operations.CreateWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -496,7 +502,7 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *o
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -580,7 +586,7 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *o
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -652,6 +658,8 @@ func (s *FormanceOrchestrationV1) CreateWorkflow(ctx context.Context, request *o
 
 // DeleteTrigger - Delete trigger
 // Read trigger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request operations.DeleteTriggerRequest, opts ...operations.Option) (*operations.DeleteTriggerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -704,7 +712,7 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -788,7 +796,7 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -841,6 +849,8 @@ func (s *FormanceOrchestrationV1) DeleteTrigger(ctx context.Context, request ope
 
 // DeleteWorkflow - Delete a flow by id
 // Delete a flow by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request operations.DeleteWorkflowRequest, opts ...operations.Option) (*operations.DeleteWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -893,7 +903,7 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -977,7 +987,7 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1030,6 +1040,8 @@ func (s *FormanceOrchestrationV1) DeleteWorkflow(ctx context.Context, request op
 
 // GetInstance - Get a workflow instance by id
 // Get a workflow instance by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request operations.GetInstanceRequest, opts ...operations.Option) (*operations.GetInstanceResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1082,7 +1094,7 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1166,7 +1178,7 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1238,6 +1250,8 @@ func (s *FormanceOrchestrationV1) GetInstance(ctx context.Context, request opera
 
 // GetInstanceHistory - Get a workflow instance history by id
 // Get a workflow instance history by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, request operations.GetInstanceHistoryRequest, opts ...operations.Option) (*operations.GetInstanceHistoryResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1290,7 +1304,7 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1374,7 +1388,7 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1446,6 +1460,8 @@ func (s *FormanceOrchestrationV1) GetInstanceHistory(ctx context.Context, reques
 
 // GetInstanceStageHistory - Get a workflow instance stage history
 // Get a workflow instance stage history
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, request operations.GetInstanceStageHistoryRequest, opts ...operations.Option) (*operations.GetInstanceStageHistoryResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1498,7 +1514,7 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1582,7 +1598,7 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1653,6 +1669,8 @@ func (s *FormanceOrchestrationV1) GetInstanceStageHistory(ctx context.Context, r
 }
 
 // GetServerInfoOrchestration - Get server info
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetServerInfoOrchestration(ctx context.Context, opts ...operations.Option) (*operations.GetServerInfoOrchestrationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1705,7 +1723,7 @@ func (s *FormanceOrchestrationV1) GetServerInfoOrchestration(ctx context.Context
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1789,7 +1807,7 @@ func (s *FormanceOrchestrationV1) GetServerInfoOrchestration(ctx context.Context
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1861,6 +1879,8 @@ func (s *FormanceOrchestrationV1) GetServerInfoOrchestration(ctx context.Context
 
 // GetWorkflow - Get a flow by id
 // Get a flow by id
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request operations.GetWorkflowRequest, opts ...operations.Option) (*operations.GetWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -1913,7 +1933,7 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -1997,7 +2017,7 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2069,6 +2089,8 @@ func (s *FormanceOrchestrationV1) GetWorkflow(ctx context.Context, request opera
 
 // ListInstances - List instances of a workflow
 // List instances of a workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request operations.ListInstancesRequest, opts ...operations.Option) (*operations.ListInstancesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2125,7 +2147,7 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2209,7 +2231,7 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2281,6 +2303,8 @@ func (s *FormanceOrchestrationV1) ListInstances(ctx context.Context, request ope
 
 // ListTriggers - List triggers
 // List triggers
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request operations.ListTriggersRequest, opts ...operations.Option) (*operations.ListTriggersResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2337,7 +2361,7 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2421,7 +2445,7 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2493,6 +2517,8 @@ func (s *FormanceOrchestrationV1) ListTriggers(ctx context.Context, request oper
 
 // ListTriggersOccurrences - List triggers occurrences
 // List triggers occurrences
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, request operations.ListTriggersOccurrencesRequest, opts ...operations.Option) (*operations.ListTriggersOccurrencesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2545,7 +2571,7 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2629,7 +2655,7 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2701,6 +2727,8 @@ func (s *FormanceOrchestrationV1) ListTriggersOccurrences(ctx context.Context, r
 
 // ListWorkflows - List registered workflows
 // List registered workflows
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...operations.Option) (*operations.ListWorkflowsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2753,7 +2781,7 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -2837,7 +2865,7 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2909,6 +2937,8 @@ func (s *FormanceOrchestrationV1) ListWorkflows(ctx context.Context, opts ...ope
 
 // ReadTrigger - Read trigger
 // Read trigger
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request operations.ReadTriggerRequest, opts ...operations.Option) (*operations.ReadTriggerResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -2961,7 +2991,7 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3045,7 +3075,7 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"200"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3117,6 +3147,8 @@ func (s *FormanceOrchestrationV1) ReadTrigger(ctx context.Context, request opera
 
 // RunWorkflow - Run workflow
 // Run workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request operations.RunWorkflowRequest, opts ...operations.Option) (*operations.RunWorkflowResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3180,7 +3212,7 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3264,7 +3296,7 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"201"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3336,6 +3368,8 @@ func (s *FormanceOrchestrationV1) RunWorkflow(ctx context.Context, request opera
 
 // SendEvent - Send an event to a running workflow
 // Send an event to a running workflow
+//
+// If set, this operation will use [Security.ClientID] from the global security.
 func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operations.SendEventRequest, opts ...operations.Option) (*operations.SendEventResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -3395,7 +3429,7 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
 		return nil, err
 	}
 
@@ -3479,7 +3513,7 @@ func (s *FormanceOrchestrationV1) SendEvent(ctx context.Context, request operati
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"default"}, httpRes.StatusCode) {
+		} else if !utils.MatchStatusCodes([]string{"204"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

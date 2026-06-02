@@ -194,8 +194,8 @@ import(
 	"context"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
 	"log"
 )
 
@@ -210,10 +210,10 @@ func main() {
     )
 
     res, err := s.Payments.V1.CreateAccount(ctx, payments.AccountRequest{
-        AccountType: payments.AccountTypeUnknown,
         ConnectorID: "<id>",
         CreatedAt: types.MustTimeFromString("2025-07-27T08:57:17.388Z"),
         Reference: "<value>",
+        Type: payments.AccountTypeUnknown,
     })
     if err != nil {
         log.Fatal(err)
@@ -317,9 +317,9 @@ import(
 	"context"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
 	"math/big"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
 	"log"
 )
 
@@ -334,14 +334,14 @@ func main() {
     )
 
     res, err := s.Payments.V1.CreatePayment(ctx, payments.PaymentRequest{
-        PaymentScheme: payments.PaymentSchemeRtp,
-        PaymentStatus: payments.PaymentStatusRefundedFailure,
-        PaymentType: payments.PaymentTypePayout,
         Amount: big.NewInt(100),
         Asset: "USD",
         ConnectorID: "<id>",
         CreatedAt: types.MustTimeFromString("2025-08-26T06:29:11.777Z"),
         Reference: "<value>",
+        Scheme: payments.PaymentSchemeRtp,
+        Status: payments.PaymentStatusRefundedFailure,
+        Type: payments.PaymentTypePayout,
     })
     if err != nil {
         log.Fatal(err)
@@ -902,7 +902,25 @@ func main() {
         log.Fatal(err)
     }
     if res.TaskResponse != nil {
-        // handle response
+        switch res.TaskResponse.Data.Type {
+            case shared.TaskResponseDataTypeTaskStripe:
+                // res.TaskResponse.Data.TaskStripe is populated
+            case shared.TaskResponseDataTypeTaskWise:
+                // res.TaskResponse.Data.TaskWise is populated
+            case shared.TaskResponseDataTypeTaskCurrencyCloud:
+                // res.TaskResponse.Data.TaskCurrencyCloud is populated
+            case shared.TaskResponseDataTypeTaskDummyPay:
+                // res.TaskResponse.Data.TaskDummyPay is populated
+            case shared.TaskResponseDataTypeTaskModulr:
+                // res.TaskResponse.Data.TaskModulr is populated
+            case shared.TaskResponseDataTypeTaskBankingCircle:
+                // res.TaskResponse.Data.TaskBankingCircle is populated
+            case shared.TaskResponseDataTypeTaskMangoPay:
+                // res.TaskResponse.Data.TaskMangoPay is populated
+            case shared.TaskResponseDataTypeTaskMoneycorp:
+                // res.TaskResponse.Data.TaskMoneycorp is populated
+        }
+
     }
 }
 ```
@@ -964,7 +982,25 @@ func main() {
         log.Fatal(err)
     }
     if res.TaskResponse != nil {
-        // handle response
+        switch res.TaskResponse.Data.Type {
+            case shared.TaskResponseDataTypeTaskStripe:
+                // res.TaskResponse.Data.TaskStripe is populated
+            case shared.TaskResponseDataTypeTaskWise:
+                // res.TaskResponse.Data.TaskWise is populated
+            case shared.TaskResponseDataTypeTaskCurrencyCloud:
+                // res.TaskResponse.Data.TaskCurrencyCloud is populated
+            case shared.TaskResponseDataTypeTaskDummyPay:
+                // res.TaskResponse.Data.TaskDummyPay is populated
+            case shared.TaskResponseDataTypeTaskModulr:
+                // res.TaskResponse.Data.TaskModulr is populated
+            case shared.TaskResponseDataTypeTaskBankingCircle:
+                // res.TaskResponse.Data.TaskBankingCircle is populated
+            case shared.TaskResponseDataTypeTaskMangoPay:
+                // res.TaskResponse.Data.TaskMangoPay is populated
+            case shared.TaskResponseDataTypeTaskMoneycorp:
+                // res.TaskResponse.Data.TaskMoneycorp is populated
+        }
+
     }
 }
 ```
@@ -2003,29 +2039,29 @@ func main() {
         log.Fatal(err)
     }
     if res.ConnectorConfigResponse != nil {
-        switch res.ConnectorConfigResponse.ConnectorConfig.Type {
+        switch res.ConnectorConfigResponse.Data.Type {
             case shared.ConnectorConfigTypeStripeConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.StripeConfig is populated
+                // res.ConnectorConfigResponse.Data.StripeConfig is populated
             case shared.ConnectorConfigTypeDummyPayConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.DummyPayConfig is populated
+                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
             case shared.ConnectorConfigTypeWiseConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.WiseConfig is populated
+                // res.ConnectorConfigResponse.Data.WiseConfig is populated
             case shared.ConnectorConfigTypeModulrConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.ModulrConfig is populated
+                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
             case shared.ConnectorConfigTypeCurrencyCloudConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.CurrencyCloudConfig is populated
+                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
             case shared.ConnectorConfigTypeBankingCircleConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.BankingCircleConfig is populated
+                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
             case shared.ConnectorConfigTypeMangoPayConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.MangoPayConfig is populated
+                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
             case shared.ConnectorConfigTypeMoneycorpConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.MoneycorpConfig is populated
+                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
             case shared.ConnectorConfigTypeAtlarConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.AtlarConfig is populated
+                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
             case shared.ConnectorConfigTypeAdyenConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.AdyenConfig is populated
+                // res.ConnectorConfigResponse.Data.AdyenConfig is populated
             case shared.ConnectorConfigTypeGenericConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.GenericConfig is populated
+                // res.ConnectorConfigResponse.Data.GenericConfig is populated
         }
 
     }
@@ -2088,29 +2124,29 @@ func main() {
         log.Fatal(err)
     }
     if res.ConnectorConfigResponse != nil {
-        switch res.ConnectorConfigResponse.ConnectorConfig.Type {
+        switch res.ConnectorConfigResponse.Data.Type {
             case shared.ConnectorConfigTypeStripeConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.StripeConfig is populated
+                // res.ConnectorConfigResponse.Data.StripeConfig is populated
             case shared.ConnectorConfigTypeDummyPayConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.DummyPayConfig is populated
+                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
             case shared.ConnectorConfigTypeWiseConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.WiseConfig is populated
+                // res.ConnectorConfigResponse.Data.WiseConfig is populated
             case shared.ConnectorConfigTypeModulrConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.ModulrConfig is populated
+                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
             case shared.ConnectorConfigTypeCurrencyCloudConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.CurrencyCloudConfig is populated
+                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
             case shared.ConnectorConfigTypeBankingCircleConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.BankingCircleConfig is populated
+                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
             case shared.ConnectorConfigTypeMangoPayConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.MangoPayConfig is populated
+                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
             case shared.ConnectorConfigTypeMoneycorpConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.MoneycorpConfig is populated
+                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
             case shared.ConnectorConfigTypeAtlarConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.AtlarConfig is populated
+                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
             case shared.ConnectorConfigTypeAdyenConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.AdyenConfig is populated
+                // res.ConnectorConfigResponse.Data.AdyenConfig is populated
             case shared.ConnectorConfigTypeGenericConfig:
-                // res.ConnectorConfigResponse.ConnectorConfig.GenericConfig is populated
+                // res.ConnectorConfigResponse.Data.GenericConfig is populated
         }
 
     }
@@ -2606,7 +2642,7 @@ func main() {
 
     res, err := s.Payments.V1.UpdateBankAccountMetadata(ctx, operations.UpdateBankAccountMetadataRequest{
         UpdateBankAccountMetadataRequest: payments.UpdateBankAccountMetadataRequest{
-            BankAccountMetadata: map[string]string{
+            Metadata: map[string]string{
                 "key": "<value>",
                 "key1": "<value>",
                 "key2": "<value>",

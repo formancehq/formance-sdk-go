@@ -3,16 +3,16 @@
 package orchestration
 
 type V2ListTriggersResponseCursor struct {
-	Data     []V2TriggerData `json:"data"`
-	HasMore  bool            `json:"hasMore"`
-	Next     *string         `json:"next,omitempty"`
-	PageSize int64           `json:"pageSize"`
-	Previous *string         `json:"previous,omitempty"`
+	Data     []V2Trigger `json:"data"`
+	HasMore  bool        `json:"hasMore"`
+	Next     *string     `json:"next,omitempty"`
+	PageSize int64       `json:"pageSize"`
+	Previous *string     `json:"previous,omitempty"`
 }
 
-func (v *V2ListTriggersResponseCursor) GetData() []V2TriggerData {
+func (v *V2ListTriggersResponseCursor) GetData() []V2Trigger {
 	if v == nil {
-		return []V2TriggerData{}
+		return []V2Trigger{}
 	}
 	return v.Data
 }

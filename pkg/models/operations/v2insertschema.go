@@ -9,8 +9,8 @@ import (
 
 type V2InsertSchemaRequest struct {
 	// Use an idempotency key
-	IdempotencyKey *string                  `header:"style=simple,explode=false,name=Idempotency-Key"`
-	V2SchemaData   ledger.V2SchemaDataInput `request:"mediaType=application/json"`
+	IdempotencyKey *string             `header:"style=simple,explode=false,name=Idempotency-Key"`
+	V2SchemaData   ledger.V2SchemaData `request:"mediaType=application/json"`
 	// Name of the ledger.
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Schema version.
@@ -24,9 +24,9 @@ func (v *V2InsertSchemaRequest) GetIdempotencyKey() *string {
 	return v.IdempotencyKey
 }
 
-func (v *V2InsertSchemaRequest) GetV2SchemaData() ledger.V2SchemaDataInput {
+func (v *V2InsertSchemaRequest) GetV2SchemaData() ledger.V2SchemaData {
 	if v == nil {
-		return ledger.V2SchemaDataInput{}
+		return ledger.V2SchemaData{}
 	}
 	return v.V2SchemaData
 }

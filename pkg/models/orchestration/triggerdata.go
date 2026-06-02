@@ -2,38 +2,13 @@
 
 package orchestration
 
-import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
-	"time"
-)
-
 type TriggerData struct {
-	CreatedAt  time.Time      `json:"createdAt"`
 	Event      string         `json:"event"`
 	Filter     *string        `json:"filter,omitempty"`
-	ID         string         `json:"id"`
 	Name       *string        `json:"name,omitempty"`
 	Vars       map[string]any `json:"vars,omitempty"`
 	Version    *string        `json:"version,omitempty"`
 	WorkflowID string         `json:"workflowID"`
-}
-
-func (t TriggerData) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *TriggerData) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (t *TriggerData) GetCreatedAt() time.Time {
-	if t == nil {
-		return time.Time{}
-	}
-	return t.CreatedAt
 }
 
 func (t *TriggerData) GetEvent() string {
@@ -48,13 +23,6 @@ func (t *TriggerData) GetFilter() *string {
 		return nil
 	}
 	return t.Filter
-}
-
-func (t *TriggerData) GetID() string {
-	if t == nil {
-		return ""
-	}
-	return t.ID
 }
 
 func (t *TriggerData) GetName() *string {

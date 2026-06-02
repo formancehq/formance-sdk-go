@@ -8,12 +8,12 @@ import (
 )
 
 type V3BankAccount struct {
-	V3Metadata      map[string]string             `json:"metadata,omitempty"`
 	AccountNumber   *string                       `json:"accountNumber,omitempty"`
 	Country         *string                       `json:"country,omitempty"`
 	CreatedAt       time.Time                     `json:"createdAt"`
 	Iban            *string                       `json:"iban,omitempty"`
 	ID              string                        `json:"id"`
+	Metadata        map[string]string             `json:"metadata,omitempty"`
 	Name            string                        `json:"name"`
 	RelatedAccounts []V3BankAccountRelatedAccount `json:"relatedAccounts,omitempty"`
 	SwiftBicCode    *string                       `json:"swiftBicCode,omitempty"`
@@ -28,13 +28,6 @@ func (v *V3BankAccount) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (v *V3BankAccount) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
 }
 
 func (v *V3BankAccount) GetAccountNumber() *string {
@@ -70,6 +63,13 @@ func (v *V3BankAccount) GetID() string {
 		return ""
 	}
 	return v.ID
+}
+
+func (v *V3BankAccount) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
 }
 
 func (v *V3BankAccount) GetName() string {

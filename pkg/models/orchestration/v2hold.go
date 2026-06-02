@@ -3,8 +3,8 @@
 package orchestration
 
 type V2Hold struct {
-	V2Subject   *V2Subject `json:"destination,omitempty"`
 	Description string     `json:"description"`
+	Destination *V2Subject `json:"destination,omitempty"`
 	// The unique ID of the hold.
 	ID string `json:"id"`
 	// Metadata associated with the hold.
@@ -13,18 +13,18 @@ type V2Hold struct {
 	WalletID string `json:"walletID"`
 }
 
-func (v *V2Hold) GetV2Subject() *V2Subject {
-	if v == nil {
-		return nil
-	}
-	return v.V2Subject
-}
-
 func (v *V2Hold) GetDescription() string {
 	if v == nil {
 		return ""
 	}
 	return v.Description
+}
+
+func (v *V2Hold) GetDestination() *V2Subject {
+	if v == nil {
+		return nil
+	}
+	return v.Destination
 }
 
 func (v *V2Hold) GetID() string {

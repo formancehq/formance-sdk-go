@@ -5,4 +5,4 @@
 
 | Field                                                   | Type                                                    | Required                                                | Description                                             |
 | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `Wallet`                                                | [wallets.Wallet](../../../pkg/models/wallets/wallet.md) | :heavy_check_mark:                                      | N/A                                                     |
+| `Data`                                                  | [wallets.Wallet](../../../pkg/models/wallets/wallet.md) | :heavy_check_mark:                                      | N/A                                                     |

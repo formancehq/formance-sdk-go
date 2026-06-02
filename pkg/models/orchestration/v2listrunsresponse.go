@@ -2,7 +2,7 @@
 
 package orchestration
 
-type Cursor struct {
+type V2ListRunsResponseCursor struct {
 	Data     []V2WorkflowInstance `json:"data"`
 	HasMore  bool                 `json:"hasMore"`
 	Next     *string              `json:"next,omitempty"`
@@ -10,48 +10,51 @@ type Cursor struct {
 	Previous *string              `json:"previous,omitempty"`
 }
 
-func (c *Cursor) GetData() []V2WorkflowInstance {
-	if c == nil {
+func (v *V2ListRunsResponseCursor) GetData() []V2WorkflowInstance {
+	if v == nil {
 		return []V2WorkflowInstance{}
 	}
-	return c.Data
+	return v.Data
 }
 
-func (c *Cursor) GetHasMore() bool {
-	if c == nil {
+func (v *V2ListRunsResponseCursor) GetHasMore() bool {
+	if v == nil {
 		return false
 	}
-	return c.HasMore
+	return v.HasMore
 }
 
-func (c *Cursor) GetNext() *string {
-	if c == nil {
+func (v *V2ListRunsResponseCursor) GetNext() *string {
+	if v == nil {
 		return nil
 	}
-	return c.Next
+	return v.Next
 }
 
-func (c *Cursor) GetPageSize() int64 {
-	if c == nil {
+func (v *V2ListRunsResponseCursor) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return c.PageSize
+	return v.PageSize
 }
 
-func (c *Cursor) GetPrevious() *string {
-	if c == nil {
+func (v *V2ListRunsResponseCursor) GetPrevious() *string {
+	if v == nil {
 		return nil
 	}
-	return c.Previous
+	return v.Previous
 }
+
+// #region class-body-v2listrunsresponsecursor
+// #endregion class-body-v2listrunsresponsecursor
 
 type V2ListRunsResponse struct {
-	Cursor Cursor `json:"cursor"`
+	Cursor V2ListRunsResponseCursor `json:"cursor"`
 }
 
-func (v *V2ListRunsResponse) GetCursor() Cursor {
+func (v *V2ListRunsResponse) GetCursor() V2ListRunsResponseCursor {
 	if v == nil {
-		return Cursor{}
+		return V2ListRunsResponseCursor{}
 	}
 	return v.Cursor
 }

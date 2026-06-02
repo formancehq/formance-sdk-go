@@ -3,14 +3,14 @@
 package ledger
 
 type V2AccountResponse struct {
-	V2Account V2Account `json:"data"`
+	Data V2Account `json:"data"`
 }
 
-func (v *V2AccountResponse) GetV2Account() V2Account {
+func (v *V2AccountResponse) GetData() V2Account {
 	if v == nil {
 		return V2Account{}
 	}
-	return v.V2Account
+	return v.Data
 }
 
 // #region class-body-v2accountresponse

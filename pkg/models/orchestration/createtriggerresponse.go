@@ -3,12 +3,12 @@
 package orchestration
 
 type CreateTriggerResponse struct {
-	TriggerData TriggerData `json:"data"`
+	Data Trigger `json:"data"`
 }
 
-func (c *CreateTriggerResponse) GetTriggerData() TriggerData {
+func (c *CreateTriggerResponse) GetData() Trigger {
 	if c == nil {
-		return TriggerData{}
+		return Trigger{}
 	}
-	return c.TriggerData
+	return c.Data
 }

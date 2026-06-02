@@ -8,18 +8,18 @@ import (
 )
 
 type BankAccount struct {
-	BankAccountMetadata map[string]string            `json:"metadata,omitempty"`
-	AccountID           *string                      `json:"accountID,omitempty"`
-	AccountNumber       *string                      `json:"accountNumber,omitempty"`
-	ConnectorID         *string                      `json:"connectorID,omitempty"`
-	Country             string                       `json:"country"`
-	CreatedAt           time.Time                    `json:"createdAt"`
-	Iban                *string                      `json:"iban,omitempty"`
-	ID                  string                       `json:"id"`
-	Name                string                       `json:"name"`
-	Provider            *string                      `json:"provider,omitempty"`
-	RelatedAccounts     []BankAccountRelatedAccounts `json:"relatedAccounts,omitempty"`
-	SwiftBicCode        *string                      `json:"swiftBicCode,omitempty"`
+	AccountID       *string                      `json:"accountID,omitempty"`
+	AccountNumber   *string                      `json:"accountNumber,omitempty"`
+	ConnectorID     *string                      `json:"connectorID,omitempty"`
+	Country         string                       `json:"country"`
+	CreatedAt       time.Time                    `json:"createdAt"`
+	Iban            *string                      `json:"iban,omitempty"`
+	ID              string                       `json:"id"`
+	Metadata        map[string]string            `json:"metadata,omitempty"`
+	Name            string                       `json:"name"`
+	Provider        *string                      `json:"provider,omitempty"`
+	RelatedAccounts []BankAccountRelatedAccounts `json:"relatedAccounts,omitempty"`
+	SwiftBicCode    *string                      `json:"swiftBicCode,omitempty"`
 }
 
 func (b BankAccount) MarshalJSON() ([]byte, error) {
@@ -31,13 +31,6 @@ func (b *BankAccount) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (b *BankAccount) GetBankAccountMetadata() map[string]string {
-	if b == nil {
-		return nil
-	}
-	return b.BankAccountMetadata
 }
 
 func (b *BankAccount) GetAccountID() *string {
@@ -87,6 +80,13 @@ func (b *BankAccount) GetID() string {
 		return ""
 	}
 	return b.ID
+}
+
+func (b *BankAccount) GetMetadata() map[string]string {
+	if b == nil {
+		return nil
+	}
+	return b.Metadata
 }
 
 func (b *BankAccount) GetName() string {

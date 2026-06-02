@@ -9,9 +9,9 @@ import (
 // V2LogDataRevertedTransaction - Payload for REVERTED_TRANSACTION log entries. Contains both the original reverted transaction and the new reverting transaction.
 type V2LogDataRevertedTransaction struct {
 	// Transaction structure as it appears in log payloads
-	V2LogTransaction V2LogTransaction `json:"revertedTransaction"`
+	RevertedTransaction V2LogTransaction `json:"revertedTransaction"`
 	// Transaction structure as it appears in log payloads
-	V2LogTransaction1 V2LogTransaction `json:"transaction"`
+	Transaction V2LogTransaction `json:"transaction"`
 }
 
 func (v V2LogDataRevertedTransaction) MarshalJSON() ([]byte, error) {
@@ -25,18 +25,18 @@ func (v *V2LogDataRevertedTransaction) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2LogDataRevertedTransaction) GetV2LogTransaction() V2LogTransaction {
+func (v *V2LogDataRevertedTransaction) GetRevertedTransaction() V2LogTransaction {
 	if v == nil {
 		return V2LogTransaction{}
 	}
-	return v.V2LogTransaction
+	return v.RevertedTransaction
 }
 
-func (v *V2LogDataRevertedTransaction) GetV2LogTransaction1() V2LogTransaction {
+func (v *V2LogDataRevertedTransaction) GetTransaction() V2LogTransaction {
 	if v == nil {
 		return V2LogTransaction{}
 	}
-	return v.V2LogTransaction1
+	return v.Transaction
 }
 
 // #region class-body-v2logdatarevertedtransaction

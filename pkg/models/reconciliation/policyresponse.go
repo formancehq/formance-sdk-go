@@ -4,12 +4,12 @@ package reconciliation
 
 // PolicyResponse - OK
 type PolicyResponse struct {
-	Policy Policy `json:"data"`
+	Data Policy `json:"data"`
 }
 
-func (p *PolicyResponse) GetPolicy() Policy {
+func (p *PolicyResponse) GetData() Policy {
 	if p == nil {
 		return Policy{}
 	}
-	return p.Policy
+	return p.Data
 }

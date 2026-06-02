@@ -3,24 +3,10 @@
 package orchestration
 
 type Account struct {
-	Volumes  map[string]Volume `json:"volumes,omitempty"`
-	Volumes1 map[string]Volume `json:"effectiveVolumes,omitempty"`
-	Address  string            `json:"address"`
-	Metadata map[string]string `json:"metadata"`
-}
-
-func (a *Account) GetVolumes() map[string]Volume {
-	if a == nil {
-		return nil
-	}
-	return a.Volumes
-}
-
-func (a *Account) GetVolumes1() map[string]Volume {
-	if a == nil {
-		return nil
-	}
-	return a.Volumes1
+	Address          string            `json:"address"`
+	EffectiveVolumes map[string]Volume `json:"effectiveVolumes,omitempty"`
+	Metadata         map[string]string `json:"metadata"`
+	Volumes          map[string]Volume `json:"volumes,omitempty"`
 }
 
 func (a *Account) GetAddress() string {
@@ -30,9 +16,23 @@ func (a *Account) GetAddress() string {
 	return a.Address
 }
 
+func (a *Account) GetEffectiveVolumes() map[string]Volume {
+	if a == nil {
+		return nil
+	}
+	return a.EffectiveVolumes
+}
+
 func (a *Account) GetMetadata() map[string]string {
 	if a == nil {
 		return map[string]string{}
 	}
 	return a.Metadata
+}
+
+func (a *Account) GetVolumes() map[string]Volume {
+	if a == nil {
+		return nil
+	}
+	return a.Volumes
 }

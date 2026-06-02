@@ -3,14 +3,14 @@
 package payments
 
 type V3UpdateBankAccountMetadataRequest struct {
-	V3Metadata map[string]string `json:"metadata"`
+	Metadata map[string]string `json:"metadata"`
 }
 
-func (v *V3UpdateBankAccountMetadataRequest) GetV3Metadata() map[string]string {
+func (v *V3UpdateBankAccountMetadataRequest) GetMetadata() map[string]string {
 	if v == nil {
 		return nil
 	}
-	return v.V3Metadata
+	return v.Metadata
 }
 
 // #region class-body-v3updatebankaccountmetadatarequest

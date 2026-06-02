@@ -8,14 +8,14 @@ type V3GetOrderResponse struct {
 	// Status transitions are captured via the `adjustments` array; each
 	// adjustment is a point-in-time snapshot from the PSP.
 	//
-	V3Order V3Order `json:"data"`
+	Data V3Order `json:"data"`
 }
 
-func (v *V3GetOrderResponse) GetV3Order() V3Order {
+func (v *V3GetOrderResponse) GetData() V3Order {
 	if v == nil {
 		return V3Order{}
 	}
-	return v.V3Order
+	return v.Data
 }
 
 // #region class-body-v3getorderresponse

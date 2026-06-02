@@ -3,15 +3,15 @@
 package orchestration
 
 type ActivityCreditWallet struct {
-	CreditWalletRequest *CreditWalletRequest `json:"data,omitempty"`
-	ID                  *string              `json:"id,omitempty"`
+	Data *CreditWalletRequest `json:"data,omitempty"`
+	ID   *string              `json:"id,omitempty"`
 }
 
-func (a *ActivityCreditWallet) GetCreditWalletRequest() *CreditWalletRequest {
+func (a *ActivityCreditWallet) GetData() *CreditWalletRequest {
 	if a == nil {
 		return nil
 	}
-	return a.CreditWalletRequest
+	return a.Data
 }
 
 func (a *ActivityCreditWallet) GetID() *string {

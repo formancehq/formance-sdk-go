@@ -3,12 +3,12 @@
 package wallets
 
 type GetHoldResponse struct {
-	Hold Hold1 `json:"data"`
+	Data ExpandedDebitHold `json:"data"`
 }
 
-func (g *GetHoldResponse) GetHold() Hold1 {
+func (g *GetHoldResponse) GetData() ExpandedDebitHold {
 	if g == nil {
-		return Hold1{}
+		return ExpandedDebitHold{}
 	}
-	return g.Hold
+	return g.Data
 }

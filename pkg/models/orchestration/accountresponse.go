@@ -3,12 +3,12 @@
 package orchestration
 
 type AccountResponse struct {
-	Account Account `json:"data"`
+	Data Account `json:"data"`
 }
 
-func (a *AccountResponse) GetAccount() Account {
+func (a *AccountResponse) GetData() Account {
 	if a == nil {
 		return Account{}
 	}
-	return a.Account
+	return a.Data
 }

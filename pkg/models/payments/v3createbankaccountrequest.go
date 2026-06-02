@@ -3,19 +3,12 @@
 package payments
 
 type V3CreateBankAccountRequest struct {
-	V3Metadata    map[string]string `json:"metadata,omitempty"`
 	AccountNumber *string           `json:"accountNumber,omitempty"`
 	Country       *string           `json:"country,omitempty"`
 	Iban          *string           `json:"iban,omitempty"`
+	Metadata      map[string]string `json:"metadata,omitempty"`
 	Name          string            `json:"name"`
 	SwiftBicCode  *string           `json:"swiftBicCode,omitempty"`
-}
-
-func (v *V3CreateBankAccountRequest) GetV3Metadata() map[string]string {
-	if v == nil {
-		return nil
-	}
-	return v.V3Metadata
 }
 
 func (v *V3CreateBankAccountRequest) GetAccountNumber() *string {
@@ -37,6 +30,13 @@ func (v *V3CreateBankAccountRequest) GetIban() *string {
 		return nil
 	}
 	return v.Iban
+}
+
+func (v *V3CreateBankAccountRequest) GetMetadata() map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.Metadata
 }
 
 func (v *V3CreateBankAccountRequest) GetName() string {

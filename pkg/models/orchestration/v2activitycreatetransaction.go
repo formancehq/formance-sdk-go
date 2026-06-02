@@ -3,15 +3,15 @@
 package orchestration
 
 type V2ActivityCreateTransaction struct {
-	V2PostTransaction *V2PostTransaction `json:"data,omitempty"`
-	Ledger            *string            `json:"ledger,omitempty"`
+	Data   *V2PostTransaction `json:"data,omitempty"`
+	Ledger *string            `json:"ledger,omitempty"`
 }
 
-func (v *V2ActivityCreateTransaction) GetV2PostTransaction() *V2PostTransaction {
+func (v *V2ActivityCreateTransaction) GetData() *V2PostTransaction {
 	if v == nil {
 		return nil
 	}
-	return v.V2PostTransaction
+	return v.Data
 }
 
 func (v *V2ActivityCreateTransaction) GetLedger() *string {

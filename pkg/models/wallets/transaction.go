@@ -8,15 +8,15 @@ import (
 )
 
 type Transaction struct {
-	AggregatedVolumes  map[string]map[string]Volume `json:"preCommitVolumes,omitempty"`
-	AggregatedVolumes1 map[string]map[string]Volume `json:"postCommitVolumes,omitempty"`
-	ID                 int64                        `json:"id"`
-	Ledger             *string                      `json:"ledger,omitempty"`
+	ID     int64   `json:"id"`
+	Ledger *string `json:"ledger,omitempty"`
 	// Metadata associated with the wallet.
-	Metadata  map[string]string `json:"metadata"`
-	Postings  []Posting         `json:"postings"`
-	Reference *string           `json:"reference,omitempty"`
-	Timestamp time.Time         `json:"timestamp"`
+	Metadata          map[string]string            `json:"metadata"`
+	PostCommitVolumes map[string]map[string]Volume `json:"postCommitVolumes,omitempty"`
+	Postings          []Posting                    `json:"postings"`
+	PreCommitVolumes  map[string]map[string]Volume `json:"preCommitVolumes,omitempty"`
+	Reference         *string                      `json:"reference,omitempty"`
+	Timestamp         time.Time                    `json:"timestamp"`
 }
 
 func (t Transaction) MarshalJSON() ([]byte, error) {
@@ -28,20 +28,6 @@ func (t *Transaction) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (t *Transaction) GetAggregatedVolumes() map[string]map[string]Volume {
-	if t == nil {
-		return nil
-	}
-	return t.AggregatedVolumes
-}
-
-func (t *Transaction) GetAggregatedVolumes1() map[string]map[string]Volume {
-	if t == nil {
-		return nil
-	}
-	return t.AggregatedVolumes1
 }
 
 func (t *Transaction) GetID() int64 {
@@ -65,11 +51,25 @@ func (t *Transaction) GetMetadata() map[string]string {
 	return t.Metadata
 }
 
+func (t *Transaction) GetPostCommitVolumes() map[string]map[string]Volume {
+	if t == nil {
+		return nil
+	}
+	return t.PostCommitVolumes
+}
+
 func (t *Transaction) GetPostings() []Posting {
 	if t == nil {
 		return []Posting{}
 	}
 	return t.Postings
+}
+
+func (t *Transaction) GetPreCommitVolumes() map[string]map[string]Volume {
+	if t == nil {
+		return nil
+	}
+	return t.PreCommitVolumes
 }
 
 func (t *Transaction) GetReference() *string {

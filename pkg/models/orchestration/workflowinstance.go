@@ -8,7 +8,6 @@ import (
 )
 
 type WorkflowInstance struct {
-	Workflow     *Workflow     `json:"workflow,omitempty"`
 	CreatedAt    time.Time     `json:"createdAt"`
 	Error        *string       `json:"error,omitempty"`
 	ID           string        `json:"id"`
@@ -16,6 +15,7 @@ type WorkflowInstance struct {
 	Terminated   bool          `json:"terminated"`
 	TerminatedAt *time.Time    `json:"terminatedAt,omitempty"`
 	UpdatedAt    time.Time     `json:"updatedAt"`
+	Workflow     *Workflow     `json:"workflow,omitempty"`
 	WorkflowID   string        `json:"workflowID"`
 }
 
@@ -28,13 +28,6 @@ func (w *WorkflowInstance) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (w *WorkflowInstance) GetWorkflow() *Workflow {
-	if w == nil {
-		return nil
-	}
-	return w.Workflow
 }
 
 func (w *WorkflowInstance) GetCreatedAt() time.Time {
@@ -84,6 +77,13 @@ func (w *WorkflowInstance) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return w.UpdatedAt
+}
+
+func (w *WorkflowInstance) GetWorkflow() *Workflow {
+	if w == nil {
+		return nil
+	}
+	return w.Workflow
 }
 
 func (w *WorkflowInstance) GetWorkflowID() string {

@@ -4,14 +4,14 @@ package ledger
 
 // V2GetExporterStateV2GetExporterStateResponse - Exporter information
 type V2GetExporterStateV2GetExporterStateResponse struct {
-	V2ExporterConfiguration V2ExporterConfiguration `json:"data"`
+	Data V2Exporter `json:"data"`
 }
 
-func (v *V2GetExporterStateV2GetExporterStateResponse) GetV2ExporterConfiguration() V2ExporterConfiguration {
+func (v *V2GetExporterStateV2GetExporterStateResponse) GetData() V2Exporter {
 	if v == nil {
-		return V2ExporterConfiguration{}
+		return V2Exporter{}
 	}
-	return v.V2ExporterConfiguration
+	return v.Data
 }
 
 // #region class-body-v2getexporterstatev2getexporterstateresponse

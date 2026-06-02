@@ -4,12 +4,12 @@ package reconciliation
 
 // ReconciliationResponse - OK
 type ReconciliationResponse struct {
-	Reconciliation Reconciliation `json:"data"`
+	Data Reconciliation `json:"data"`
 }
 
-func (r *ReconciliationResponse) GetReconciliation() Reconciliation {
+func (r *ReconciliationResponse) GetData() Reconciliation {
 	if r == nil {
 		return Reconciliation{}
 	}
-	return r.Reconciliation
+	return r.Data
 }
