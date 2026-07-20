@@ -27,7 +27,7 @@ generation:
     skipResponseBodyAssertions: false
   telemetryEnabled: false
 go:
-  version: 4.1.1
+  version: 4.1.2
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
   author: Formance

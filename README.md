@@ -295,6 +295,7 @@ func main() {
 * [GetAccount](docs/sdks/v3/README.md#getaccount) - Get an account by ID
 * [GetAccountBalances](docs/sdks/v3/README.md#getaccountbalances) - Get account balances
 * [GetBankAccount](docs/sdks/v3/README.md#getbankaccount) - Get a Bank Account by ID
+* [GetConnectorCapabilities](docs/sdks/v3/README.md#getconnectorcapabilities) - Get the plugin capabilities of an installed connector
 * [GetConnectorConfig](docs/sdks/v3/README.md#getconnectorconfig) - Get a connector configuration by ID
 * [GetConnectorSchedule](docs/sdks/v3/README.md#getconnectorschedule) - Get a connector schedule by ID
 * [GetConversion](docs/sdks/v3/README.md#getconversion) - Get a single conversion by its Formance ID
@@ -311,6 +312,7 @@ func main() {
 * [InstallConnector](docs/sdks/v3/README.md#installconnector) - Install a connector
 * [ListAccounts](docs/sdks/v3/README.md#listaccounts) - List all accounts
 * [ListBankAccounts](docs/sdks/v3/README.md#listbankaccounts) - List all bank accounts
+* [ListConnectorCapabilities](docs/sdks/v3/README.md#listconnectorcapabilities) - List the plugin capabilities advertised by every supported provider
 * [ListConnectorConfigs](docs/sdks/v3/README.md#listconnectorconfigs) - List all connector configurations
 * [ListConnectorScheduleInstances](docs/sdks/v3/README.md#listconnectorscheduleinstances) - List all connector schedule instances
 * [ListConnectorSchedules](docs/sdks/v3/README.md#listconnectorschedules) - List all connector schedules

@@ -32,6 +32,7 @@ const (
 	V3ConnectorConfigTypeV3BitstampConfig      V3ConnectorConfigType = "V3BitstampConfig"
 	V3ConnectorConfigTypeV3CoinbaseprimeConfig V3ConnectorConfigType = "V3CoinbaseprimeConfig"
 	V3ConnectorConfigTypeV3FireblocksConfig    V3ConnectorConfigType = "V3FireblocksConfig"
+	V3ConnectorConfigTypeV3KrakenproConfig     V3ConnectorConfigType = "V3KrakenproConfig"
 	V3ConnectorConfigTypeV3RoutableConfig      V3ConnectorConfigType = "V3RoutableConfig"
 )
 
@@ -57,6 +58,7 @@ type V3ConnectorConfig struct {
 	V3BitstampConfig      *V3BitstampConfig      `queryParam:"inline" union:"member"`
 	V3CoinbaseprimeConfig *V3CoinbaseprimeConfig `queryParam:"inline" union:"member"`
 	V3FireblocksConfig    *V3FireblocksConfig    `queryParam:"inline" union:"member"`
+	V3KrakenproConfig     *V3KrakenproConfig     `queryParam:"inline" union:"member"`
 	V3RoutableConfig      *V3RoutableConfig      `queryParam:"inline" union:"member"`
 
 	Type V3ConnectorConfigType
@@ -251,6 +253,15 @@ func CreateV3ConnectorConfigV3FireblocksConfig(v3FireblocksConfig V3FireblocksCo
 	}
 }
 
+func CreateV3ConnectorConfigV3KrakenproConfig(v3KrakenproConfig V3KrakenproConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeV3KrakenproConfig
+
+	return V3ConnectorConfig{
+		V3KrakenproConfig: &v3KrakenproConfig,
+		Type:              typ,
+	}
+}
+
 func CreateV3ConnectorConfigV3RoutableConfig(v3RoutableConfig V3RoutableConfig) V3ConnectorConfig {
 	typ := V3ConnectorConfigTypeV3RoutableConfig
 
@@ -343,6 +354,13 @@ func (u *V3ConnectorConfig) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &v3TinkConfig, "", true, nil); err == nil {
 		u.V3TinkConfig = &v3TinkConfig
 		u.Type = V3ConnectorConfigTypeV3TinkConfig
+		return nil
+	}
+
+	var v3KrakenproConfig V3KrakenproConfig = V3KrakenproConfig{}
+	if err := utils.UnmarshalJSON(data, &v3KrakenproConfig, "", true, nil); err == nil {
+		u.V3KrakenproConfig = &v3KrakenproConfig
+		u.Type = V3ConnectorConfigTypeV3KrakenproConfig
 		return nil
 	}
 
@@ -502,6 +520,10 @@ func (u V3ConnectorConfig) MarshalJSON() ([]byte, error) {
 
 	if u.V3FireblocksConfig != nil {
 		return utils.MarshalJSON(u.V3FireblocksConfig, "", true)
+	}
+
+	if u.V3KrakenproConfig != nil {
+		return utils.MarshalJSON(u.V3KrakenproConfig, "", true)
 	}
 
 	if u.V3RoutableConfig != nil {

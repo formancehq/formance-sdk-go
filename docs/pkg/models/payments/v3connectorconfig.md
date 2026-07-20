@@ -129,6 +129,12 @@ v3ConnectorConfig := shared.CreateV3ConnectorConfigV3CoinbaseprimeConfig(payment
 v3ConnectorConfig := shared.CreateV3ConnectorConfigV3FireblocksConfig(payments.V3FireblocksConfig{/* values here */})
 ```
 
+### V3KrakenproConfig
+
+```go
+v3ConnectorConfig := shared.CreateV3ConnectorConfigV3KrakenproConfig(payments.V3KrakenproConfig{/* values here */})
+```
+
 ### V3RoutableConfig
 
 ```go
@@ -183,6 +189,8 @@ switch v3ConnectorConfig.Type {
 		// v3ConnectorConfig.V3CoinbaseprimeConfig is populated
 	case shared.V3ConnectorConfigTypeV3FireblocksConfig:
 		// v3ConnectorConfig.V3FireblocksConfig is populated
+	case shared.V3ConnectorConfigTypeV3KrakenproConfig:
+		// v3ConnectorConfig.V3KrakenproConfig is populated
 	case shared.V3ConnectorConfigTypeV3RoutableConfig:
 		// v3ConnectorConfig.V3RoutableConfig is populated
 }
