@@ -13,6 +13,7 @@ const (
 	ErrorsEnumInternal   ErrorsEnum = "INTERNAL"
 	ErrorsEnumValidation ErrorsEnum = "VALIDATION"
 	ErrorsEnumNotFound   ErrorsEnum = "NOT_FOUND"
+	ErrorsEnumConflict   ErrorsEnum = "CONFLICT"
 )
 
 func (e ErrorsEnum) ToPointer() *ErrorsEnum {
@@ -29,6 +30,8 @@ func (e *ErrorsEnum) UnmarshalJSON(data []byte) error {
 	case "VALIDATION":
 		fallthrough
 	case "NOT_FOUND":
+		fallthrough
+	case "CONFLICT":
 		*e = ErrorsEnum(v)
 		return nil
 	default:

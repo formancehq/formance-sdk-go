@@ -107,12 +107,7 @@ func main() {
 * [ReadUser](docs/sdks/v1/README.md#readuser) - Read user
 * [UpdateClient](docs/sdks/v1/README.md#updateclient) - Update client
 
-### [Ledger](docs/sdks/ledger/README.md)
-
-* [GetInfo](docs/sdks/ledger/README.md#getinfo) - Show server information
-* [GetMetrics](docs/sdks/ledger/README.md#getmetrics) - Read in memory metrics
-
-#### [Ledger.V1](docs/sdks/formancev1/README.md)
+### [Ledger.V1](docs/sdks/formancev1/README.md)
 
 * [CreateTransactions](docs/sdks/formancev1/README.md#createtransactions) - Create a new batch of transactions to a ledger
 * [AddMetadataOnTransaction](docs/sdks/formancev1/README.md#addmetadataontransaction) - Set the metadata of a transaction by its ID
@@ -135,7 +130,7 @@ func main() {
 * [~~RunScript~~](docs/sdks/formancev1/README.md#runscript) - Execute a Numscript :warning: **Deprecated**
 * [UpdateMapping](docs/sdks/formancev1/README.md#updatemapping) - Update the mapping of a ledger
 
-#### [Ledger.V2](docs/sdks/v2/README.md)
+### [Ledger.V2](docs/sdks/v2/README.md)
 
 * [AddMetadataOnTransaction](docs/sdks/v2/README.md#addmetadataontransaction) - Set the metadata of a transaction by its ID
 * [AddMetadataToAccount](docs/sdks/v2/README.md#addmetadatatoaccount) - Add metadata to an account
@@ -156,8 +151,10 @@ func main() {
 * [GetAccount](docs/sdks/v2/README.md#getaccount) - Get account by its address
 * [GetBalancesAggregated](docs/sdks/v2/README.md#getbalancesaggregated) - Get the aggregated balances from selected accounts
 * [GetExporterState](docs/sdks/v2/README.md#getexporterstate) - Get exporter state
+* [GetInfo](docs/sdks/v2/README.md#getinfo) - Show server information
 * [GetLedger](docs/sdks/v2/README.md#getledger) - Get a ledger
 * [GetLedgerInfo](docs/sdks/v2/README.md#getledgerinfo) - Get information about a ledger
+* [GetMetrics](docs/sdks/v2/README.md#getmetrics) - Read in memory metrics
 * [GetPipelineState](docs/sdks/v2/README.md#getpipelinestate) - Get pipeline state
 * [GetSchema](docs/sdks/v2/README.md#getschema) - Get a schema for a ledger by version
 * [GetTransaction](docs/sdks/v2/README.md#gettransaction) - Get transaction from a ledger by its ID
@@ -295,6 +292,7 @@ func main() {
 * [GetAccount](docs/sdks/v3/README.md#getaccount) - Get an account by ID
 * [GetAccountBalances](docs/sdks/v3/README.md#getaccountbalances) - Get account balances
 * [GetBankAccount](docs/sdks/v3/README.md#getbankaccount) - Get a Bank Account by ID
+* [GetConnectorCapabilities](docs/sdks/v3/README.md#getconnectorcapabilities) - Get the plugin capabilities of an installed connector
 * [GetConnectorConfig](docs/sdks/v3/README.md#getconnectorconfig) - Get a connector configuration by ID
 * [GetConnectorSchedule](docs/sdks/v3/README.md#getconnectorschedule) - Get a connector schedule by ID
 * [GetConversion](docs/sdks/v3/README.md#getconversion) - Get a single conversion by its Formance ID
@@ -311,6 +309,7 @@ func main() {
 * [InstallConnector](docs/sdks/v3/README.md#installconnector) - Install a connector
 * [ListAccounts](docs/sdks/v3/README.md#listaccounts) - List all accounts
 * [ListBankAccounts](docs/sdks/v3/README.md#listbankaccounts) - List all bank accounts
+* [ListConnectorCapabilities](docs/sdks/v3/README.md#listconnectorcapabilities) - List the plugin capabilities advertised by every supported provider
 * [ListConnectorConfigs](docs/sdks/v3/README.md#listconnectorconfigs) - List all connector configurations
 * [ListConnectorScheduleInstances](docs/sdks/v3/README.md#listconnectorscheduleinstances) - List all connector schedule instances
 * [ListConnectorSchedules](docs/sdks/v3/README.md#listconnectorschedules) - List all connector schedules
@@ -342,14 +341,30 @@ Allows to check if users used the link and completed the oauth flow.
 
 ### [Reconciliation.V1](docs/sdks/formancereconciliationv1/README.md)
 
+* [AcceptAlert](docs/sdks/formancereconciliationv1/README.md#acceptalert) - Accept an alert (accepted_by_business)
+* [AckAlert](docs/sdks/formancereconciliationv1/README.md#ackalert) - Acknowledge an alert
 * [CreatePolicy](docs/sdks/formancereconciliationv1/README.md#createpolicy) - Create a policy
+* [CreateRule](docs/sdks/formancereconciliationv1/README.md#createrule) - Create a rule
 * [DeletePolicy](docs/sdks/formancereconciliationv1/README.md#deletepolicy) - Delete a policy
+* [DeleteRule](docs/sdks/formancereconciliationv1/README.md#deleterule) - Delete a rule (cascades to evaluations + alerts + alert events)
+* [EvaluateRule](docs/sdks/formancereconciliationv1/README.md#evaluaterule) - Evaluate a rule now
+* [GetAlert](docs/sdks/formancereconciliationv1/README.md#getalert) - Get an alert
+* [GetEvaluation](docs/sdks/formancereconciliationv1/README.md#getevaluation) - Get an evaluation
 * [GetPolicy](docs/sdks/formancereconciliationv1/README.md#getpolicy) - Get a policy
 * [GetReconciliation](docs/sdks/formancereconciliationv1/README.md#getreconciliation) - Get a reconciliation
+* [GetRule](docs/sdks/formancereconciliationv1/README.md#getrule) - Get a rule
 * [GetServerInfoReconciliation](docs/sdks/formancereconciliationv1/README.md#getserverinforeconciliation) - Get server info
+* [ListAlertEvents](docs/sdks/formancereconciliationv1/README.md#listalertevents) - List alert events (append-only timeline)
+* [ListAlerts](docs/sdks/formancereconciliationv1/README.md#listalerts) - List alerts
+* [ListEvaluations](docs/sdks/formancereconciliationv1/README.md#listevaluations) - List evaluations
 * [ListPolicies](docs/sdks/formancereconciliationv1/README.md#listpolicies) - List policies
 * [ListReconciliations](docs/sdks/formancereconciliationv1/README.md#listreconciliations) - List reconciliations
+* [ListRules](docs/sdks/formancereconciliationv1/README.md#listrules) - List rules
+* [PatchRule](docs/sdks/formancereconciliationv1/README.md#patchrule) - Patch a rule (partial update)
 * [Reconcile](docs/sdks/formancereconciliationv1/README.md#reconcile) - Reconcile using a policy
+* [ResolveAlert](docs/sdks/formancereconciliationv1/README.md#resolvealert) - Resolve an alert (fixed_by_booking)
+* [SnoozeAlert](docs/sdks/formancereconciliationv1/README.md#snoozealert) - Snooze an alert's notifications until a future instant
+* [UnsnoozeAlert](docs/sdks/formancereconciliationv1/README.md#unsnoozealert) - Lift a snooze early
 
 ### [~~Search.V1~~](docs/sdks/formancesearchv1/README.md)
 
@@ -381,8 +396,13 @@ Allows to check if users used the link and completed the oauth flow.
 * [ChangeConfigSecret](docs/sdks/formancewebhooksv1/README.md#changeconfigsecret) - Change the signing secret of a config
 * [DeactivateConfig](docs/sdks/formancewebhooksv1/README.md#deactivateconfig) - Deactivate one config
 * [DeleteConfig](docs/sdks/formancewebhooksv1/README.md#deleteconfig) - Delete one config
+* [GetDeliveries](docs/sdks/formancewebhooksv1/README.md#getdeliveries) - List webhook deliveries
+* [GetDelivery](docs/sdks/formancewebhooksv1/README.md#getdelivery) - Get a webhook delivery
+* [GetDeliveryAttempts](docs/sdks/formancewebhooksv1/README.md#getdeliveryattempts) - List attempts for a webhook delivery
 * [GetManyConfigs](docs/sdks/formancewebhooksv1/README.md#getmanyconfigs) - Get many configs
 * [InsertConfig](docs/sdks/formancewebhooksv1/README.md#insertconfig) - Insert a new config
+* [ReplayDeliveries](docs/sdks/formancewebhooksv1/README.md#replaydeliveries) - Replay a page of failed or pending deliveries
+* [ReplayDelivery](docs/sdks/formancewebhooksv1/README.md#replaydelivery) - Replay one failed or pending delivery
 * [TestConfig](docs/sdks/formancewebhooksv1/README.md#testconfig) - Test one config
 * [UpdateConfig](docs/sdks/formancewebhooksv1/README.md#updateconfig) - Update one config
 
@@ -396,12 +416,12 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `sdkerrors.SDKError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `GetInfo` function may return the following errors:
+For example, the `AddMetadataOnTransaction` function may return the following errors:
 
-| Error Type                  | Status Code | Content Type     |
-| --------------------------- | ----------- | ---------------- |
-| ledger.V2ErrorResponseError | default     | application/json |
-| sdkerrors.SDKError          | 4XX, 5XX    | \*/\*            |
+| Error Type             | Status Code | Content Type     |
+| ---------------------- | ----------- | ---------------- |
+| ledger.V2ErrorResponse | default     | application/json |
+| sdkerrors.SDKError     | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -413,9 +433,11 @@ import (
 	"errors"
 	"github.com/formancehq/formance-sdk-go/v4"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/models/ledger"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/models/sdkerrors"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
 	"log"
+	"math/big"
 )
 
 func main() {
@@ -428,10 +450,18 @@ func main() {
 		}),
 	)
 
-	res, err := s.Ledger.GetInfo(ctx)
+	res, err := s.Ledger.V2.AddMetadataOnTransaction(ctx, operations.V2AddMetadataOnTransactionRequest{
+		RequestBody: map[string]string{
+			"admin": "true",
+		},
+		DryRun:        v4.Pointer(true),
+		ID:            big.NewInt(1234),
+		Ledger:        "ledger001",
+		SchemaVersion: v4.Pointer("v1.0.0"),
+	})
 	if err != nil {
 
-		var e *ledger.V2ErrorResponseError
+		var e *ledger.V2ErrorResponse
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())

@@ -2,29 +2,19 @@
 
 package ledger
 
+import (
+	"encoding/json"
+)
+
 type ErrorResponse struct {
 	Details      *string    `json:"details,omitempty"`
 	ErrorCode    ErrorsEnum `json:"errorCode"`
 	ErrorMessage string     `json:"errorMessage"`
 }
 
-func (e *ErrorResponse) GetDetails() *string {
-	if e == nil {
-		return nil
-	}
-	return e.Details
-}
+var _ error = &ErrorResponse{}
 
-func (e *ErrorResponse) GetErrorCode() ErrorsEnum {
-	if e == nil {
-		return ErrorsEnum("")
-	}
-	return e.ErrorCode
-}
-
-func (e *ErrorResponse) GetErrorMessage() string {
-	if e == nil {
-		return ""
-	}
-	return e.ErrorMessage
+func (e *ErrorResponse) Error() string {
+	data, _ := json.Marshal(e)
+	return string(data)
 }

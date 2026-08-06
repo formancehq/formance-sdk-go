@@ -3,35 +3,11 @@
 package ledger
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
 	"time"
 )
-
-type V2QueryParamsSchemasTrueLedgerResource string
-
-const (
-	V2QueryParamsSchemasTrueLedgerResourceVolumes V2QueryParamsSchemasTrueLedgerResource = "volumes"
-)
-
-func (e V2QueryParamsSchemasTrueLedgerResource) ToPointer() *V2QueryParamsSchemasTrueLedgerResource {
-	return &e
-}
-func (e *V2QueryParamsSchemasTrueLedgerResource) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "volumes":
-		*e = V2QueryParamsSchemasTrueLedgerResource(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for V2QueryParamsSchemasTrueLedgerResource: %v", v)
-	}
-}
 
 type QueryTemplateVolumeParams struct {
 	// Parameter used in pagination requests. Maximum page size is set to 15.
@@ -45,9 +21,10 @@ type QueryTemplateVolumeParams struct {
 	InsertionDate *bool   `json:"insertionDate,omitempty"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64                                  `json:"pageSize,omitempty"`
-	Pit      *time.Time                              `json:"pit,omitempty"`
-	Resource *V2QueryParamsSchemasTrueLedgerResource `json:"resource,omitempty"`
+	PageSize *int64     `json:"pageSize,omitempty"`
+	Pit      *time.Time `json:"pit,omitempty"`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
+	resource string `const:"volumes" json:"resource"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -59,7 +36,7 @@ func (q QueryTemplateVolumeParams) MarshalJSON() ([]byte, error) {
 }
 
 func (q *QueryTemplateVolumeParams) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &q, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &q, "", false, []string{"resource"}); err != nil {
 		return err
 	}
 	return nil
@@ -107,11 +84,8 @@ func (q *QueryTemplateVolumeParams) GetPit() *time.Time {
 	return q.Pit
 }
 
-func (q *QueryTemplateVolumeParams) GetResource() *V2QueryParamsSchemasTrueLedgerResource {
-	if q == nil {
-		return nil
-	}
-	return q.Resource
+func (q *QueryTemplateVolumeParams) GetResource() string {
+	return "volumes"
 }
 
 func (q *QueryTemplateVolumeParams) GetSort() *string {
@@ -119,29 +93,6 @@ func (q *QueryTemplateVolumeParams) GetSort() *string {
 		return nil
 	}
 	return q.Sort
-}
-
-type V2QueryParamsSchemasTrueResource string
-
-const (
-	V2QueryParamsSchemasTrueResourceLogs V2QueryParamsSchemasTrueResource = "logs"
-)
-
-func (e V2QueryParamsSchemasTrueResource) ToPointer() *V2QueryParamsSchemasTrueResource {
-	return &e
-}
-func (e *V2QueryParamsSchemasTrueResource) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "logs":
-		*e = V2QueryParamsSchemasTrueResource(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for V2QueryParamsSchemasTrueResource: %v", v)
-	}
 }
 
 type QueryTemplateLogParams struct {
@@ -154,9 +105,10 @@ type QueryTemplateLogParams struct {
 	Expand *string `json:"expand,omitempty"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64                            `json:"pageSize,omitempty"`
-	Pit      *time.Time                        `json:"pit,omitempty"`
-	Resource *V2QueryParamsSchemasTrueResource `json:"resource,omitempty"`
+	PageSize *int64     `json:"pageSize,omitempty"`
+	Pit      *time.Time `json:"pit,omitempty"`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
+	resource string `const:"logs" json:"resource"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -168,7 +120,7 @@ func (q QueryTemplateLogParams) MarshalJSON() ([]byte, error) {
 }
 
 func (q *QueryTemplateLogParams) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &q, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &q, "", false, []string{"resource"}); err != nil {
 		return err
 	}
 	return nil
@@ -202,11 +154,8 @@ func (q *QueryTemplateLogParams) GetPit() *time.Time {
 	return q.Pit
 }
 
-func (q *QueryTemplateLogParams) GetResource() *V2QueryParamsSchemasTrueResource {
-	if q == nil {
-		return nil
-	}
-	return q.Resource
+func (q *QueryTemplateLogParams) GetResource() string {
+	return "logs"
 }
 
 func (q *QueryTemplateLogParams) GetSort() *string {
@@ -214,29 +163,6 @@ func (q *QueryTemplateLogParams) GetSort() *string {
 		return nil
 	}
 	return q.Sort
-}
-
-type V2QueryParamsSchemasResource string
-
-const (
-	V2QueryParamsSchemasResourceTransactions V2QueryParamsSchemasResource = "transactions"
-)
-
-func (e V2QueryParamsSchemasResource) ToPointer() *V2QueryParamsSchemasResource {
-	return &e
-}
-func (e *V2QueryParamsSchemasResource) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "transactions":
-		*e = V2QueryParamsSchemasResource(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for V2QueryParamsSchemasResource: %v", v)
-	}
 }
 
 type QueryTemplateTransactionParams struct {
@@ -249,9 +175,10 @@ type QueryTemplateTransactionParams struct {
 	Expand *string `json:"expand,omitempty"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64                        `json:"pageSize,omitempty"`
-	Pit      *time.Time                    `json:"pit,omitempty"`
-	Resource *V2QueryParamsSchemasResource `json:"resource,omitempty"`
+	PageSize *int64     `json:"pageSize,omitempty"`
+	Pit      *time.Time `json:"pit,omitempty"`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
+	resource string `const:"transactions" json:"resource"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -263,7 +190,7 @@ func (q QueryTemplateTransactionParams) MarshalJSON() ([]byte, error) {
 }
 
 func (q *QueryTemplateTransactionParams) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &q, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &q, "", false, []string{"resource"}); err != nil {
 		return err
 	}
 	return nil
@@ -297,11 +224,8 @@ func (q *QueryTemplateTransactionParams) GetPit() *time.Time {
 	return q.Pit
 }
 
-func (q *QueryTemplateTransactionParams) GetResource() *V2QueryParamsSchemasResource {
-	if q == nil {
-		return nil
-	}
-	return q.Resource
+func (q *QueryTemplateTransactionParams) GetResource() string {
+	return "transactions"
 }
 
 func (q *QueryTemplateTransactionParams) GetSort() *string {
@@ -309,29 +233,6 @@ func (q *QueryTemplateTransactionParams) GetSort() *string {
 		return nil
 	}
 	return q.Sort
-}
-
-type V2QueryParamsResource string
-
-const (
-	V2QueryParamsResourceAccounts V2QueryParamsResource = "accounts"
-)
-
-func (e V2QueryParamsResource) ToPointer() *V2QueryParamsResource {
-	return &e
-}
-func (e *V2QueryParamsResource) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "accounts":
-		*e = V2QueryParamsResource(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for V2QueryParamsResource: %v", v)
-	}
 }
 
 type QueryTemplateAccountParams struct {
@@ -344,9 +245,10 @@ type QueryTemplateAccountParams struct {
 	Expand *string `json:"expand,omitempty"`
 	// The maximum number of results to return per page.
 	//
-	PageSize *int64                 `json:"pageSize,omitempty"`
-	Pit      *time.Time             `json:"pit,omitempty"`
-	Resource *V2QueryParamsResource `json:"resource,omitempty"`
+	PageSize *int64     `json:"pageSize,omitempty"`
+	Pit      *time.Time `json:"pit,omitempty"`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
+	resource string `const:"accounts" json:"resource"`
 	// Sort results using a field name and order (ascending or descending).
 	// Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.
 	//
@@ -358,7 +260,7 @@ func (q QueryTemplateAccountParams) MarshalJSON() ([]byte, error) {
 }
 
 func (q *QueryTemplateAccountParams) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &q, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &q, "", false, []string{"resource"}); err != nil {
 		return err
 	}
 	return nil
@@ -392,11 +294,8 @@ func (q *QueryTemplateAccountParams) GetPit() *time.Time {
 	return q.Pit
 }
 
-func (q *QueryTemplateAccountParams) GetResource() *V2QueryParamsResource {
-	if q == nil {
-		return nil
-	}
-	return q.Resource
+func (q *QueryTemplateAccountParams) GetResource() string {
+	return "accounts"
 }
 
 func (q *QueryTemplateAccountParams) GetSort() *string {

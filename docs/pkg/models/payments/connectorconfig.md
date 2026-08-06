@@ -3,70 +3,70 @@
 
 ## Supported Types
 
-### StripeConfig
+### AdyenConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigStripeConfig(payments.StripeConfig{/* values here */})
-```
-
-### DummyPayConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigDummyPayConfig(payments.DummyPayConfig{/* values here */})
-```
-
-### WiseConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigWiseConfig(payments.WiseConfig{/* values here */})
-```
-
-### ModulrConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigModulrConfig(payments.ModulrConfig{/* values here */})
-```
-
-### CurrencyCloudConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigCurrencyCloudConfig(payments.CurrencyCloudConfig{/* values here */})
-```
-
-### BankingCircleConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigBankingCircleConfig(payments.BankingCircleConfig{/* values here */})
-```
-
-### MangoPayConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigMangoPayConfig(payments.MangoPayConfig{/* values here */})
-```
-
-### MoneycorpConfig
-
-```go
-connectorConfig := shared.CreateConnectorConfigMoneycorpConfig(payments.MoneycorpConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigAdyen(payments.AdyenConfig{/* values here */})
 ```
 
 ### AtlarConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigAtlarConfig(payments.AtlarConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigAtlar(payments.AtlarConfig{/* values here */})
 ```
 
-### AdyenConfig
+### BankingCircleConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigAdyenConfig(payments.AdyenConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigBankingcircle(payments.BankingCircleConfig{/* values here */})
+```
+
+### CurrencyCloudConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigCurrencycloud(payments.CurrencyCloudConfig{/* values here */})
+```
+
+### DummyPayConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigDummypay(payments.DummyPayConfig{/* values here */})
 ```
 
 ### GenericConfig
 
 ```go
-connectorConfig := shared.CreateConnectorConfigGenericConfig(payments.GenericConfig{/* values here */})
+connectorConfig := shared.CreateConnectorConfigGeneric(payments.GenericConfig{/* values here */})
+```
+
+### MangoPayConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigMangopay(payments.MangoPayConfig{/* values here */})
+```
+
+### ModulrConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigModulr(payments.ModulrConfig{/* values here */})
+```
+
+### MoneycorpConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigMoneycorp(payments.MoneycorpConfig{/* values here */})
+```
+
+### StripeConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigStripe(payments.StripeConfig{/* values here */})
+```
+
+### WiseConfig
+
+```go
+connectorConfig := shared.CreateConnectorConfigWise(payments.WiseConfig{/* values here */})
 ```
 
 ## Union Discrimination
@@ -75,27 +75,27 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch connectorConfig.Type {
-	case shared.ConnectorConfigTypeStripeConfig:
-		// connectorConfig.StripeConfig is populated
-	case shared.ConnectorConfigTypeDummyPayConfig:
-		// connectorConfig.DummyPayConfig is populated
-	case shared.ConnectorConfigTypeWiseConfig:
-		// connectorConfig.WiseConfig is populated
-	case shared.ConnectorConfigTypeModulrConfig:
-		// connectorConfig.ModulrConfig is populated
-	case shared.ConnectorConfigTypeCurrencyCloudConfig:
-		// connectorConfig.CurrencyCloudConfig is populated
-	case shared.ConnectorConfigTypeBankingCircleConfig:
-		// connectorConfig.BankingCircleConfig is populated
-	case shared.ConnectorConfigTypeMangoPayConfig:
-		// connectorConfig.MangoPayConfig is populated
-	case shared.ConnectorConfigTypeMoneycorpConfig:
-		// connectorConfig.MoneycorpConfig is populated
-	case shared.ConnectorConfigTypeAtlarConfig:
-		// connectorConfig.AtlarConfig is populated
-	case shared.ConnectorConfigTypeAdyenConfig:
+	case shared.ConnectorConfigTypeAdyen:
 		// connectorConfig.AdyenConfig is populated
-	case shared.ConnectorConfigTypeGenericConfig:
+	case shared.ConnectorConfigTypeAtlar:
+		// connectorConfig.AtlarConfig is populated
+	case shared.ConnectorConfigTypeBankingcircle:
+		// connectorConfig.BankingCircleConfig is populated
+	case shared.ConnectorConfigTypeCurrencycloud:
+		// connectorConfig.CurrencyCloudConfig is populated
+	case shared.ConnectorConfigTypeDummypay:
+		// connectorConfig.DummyPayConfig is populated
+	case shared.ConnectorConfigTypeGeneric:
 		// connectorConfig.GenericConfig is populated
+	case shared.ConnectorConfigTypeMangopay:
+		// connectorConfig.MangoPayConfig is populated
+	case shared.ConnectorConfigTypeModulr:
+		// connectorConfig.ModulrConfig is populated
+	case shared.ConnectorConfigTypeMoneycorp:
+		// connectorConfig.MoneycorpConfig is populated
+	case shared.ConnectorConfigTypeStripe:
+		// connectorConfig.StripeConfig is populated
+	case shared.ConnectorConfigTypeWise:
+		// connectorConfig.WiseConfig is populated
 }
 ```

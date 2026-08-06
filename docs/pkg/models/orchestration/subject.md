@@ -6,13 +6,13 @@
 ### LedgerAccountSubject
 
 ```go
-subject := shared.CreateSubjectLedgerAccountSubject(orchestration.LedgerAccountSubject{/* values here */})
+subject := shared.CreateSubjectAccount(orchestration.LedgerAccountSubject{/* values here */})
 ```
 
 ### WalletSubject
 
 ```go
-subject := shared.CreateSubjectWalletSubject(orchestration.WalletSubject{/* values here */})
+subject := shared.CreateSubjectWallet(orchestration.WalletSubject{/* values here */})
 ```
 
 ## Union Discrimination
@@ -21,9 +21,9 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch subject.Type {
-	case shared.SubjectTypeLedgerAccountSubject:
+	case shared.SubjectTypeAccount:
 		// subject.LedgerAccountSubject is populated
-	case shared.SubjectTypeWalletSubject:
+	case shared.SubjectTypeWallet:
 		// subject.WalletSubject is populated
 }
 ```

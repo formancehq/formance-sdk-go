@@ -3,6 +3,7 @@
 package payments
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
@@ -11,28 +12,29 @@ import (
 type V3ConnectorConfigType string
 
 const (
-	V3ConnectorConfigTypeV3AdyenConfig         V3ConnectorConfigType = "V3AdyenConfig"
-	V3ConnectorConfigTypeV3AtlarConfig         V3ConnectorConfigType = "V3AtlarConfig"
-	V3ConnectorConfigTypeV3BankingcircleConfig V3ConnectorConfigType = "V3BankingcircleConfig"
-	V3ConnectorConfigTypeV3ColumnConfig        V3ConnectorConfigType = "V3ColumnConfig"
-	V3ConnectorConfigTypeV3CurrencycloudConfig V3ConnectorConfigType = "V3CurrencycloudConfig"
-	V3ConnectorConfigTypeV3DummypayConfig      V3ConnectorConfigType = "V3DummypayConfig"
-	V3ConnectorConfigTypeV3GenericConfig       V3ConnectorConfigType = "V3GenericConfig"
-	V3ConnectorConfigTypeV3IncreaseConfig      V3ConnectorConfigType = "V3IncreaseConfig"
-	V3ConnectorConfigTypeV3MangopayConfig      V3ConnectorConfigType = "V3MangopayConfig"
-	V3ConnectorConfigTypeV3ModulrConfig        V3ConnectorConfigType = "V3ModulrConfig"
-	V3ConnectorConfigTypeV3MoneycorpConfig     V3ConnectorConfigType = "V3MoneycorpConfig"
-	V3ConnectorConfigTypeV3PlaidConfig         V3ConnectorConfigType = "V3PlaidConfig"
-	V3ConnectorConfigTypeV3PowensConfig        V3ConnectorConfigType = "V3PowensConfig"
-	V3ConnectorConfigTypeV3QontoConfig         V3ConnectorConfigType = "V3QontoConfig"
-	V3ConnectorConfigTypeV3StripeConfig        V3ConnectorConfigType = "V3StripeConfig"
-	V3ConnectorConfigTypeV3TinkConfig          V3ConnectorConfigType = "V3TinkConfig"
-	V3ConnectorConfigTypeV3WiseConfig          V3ConnectorConfigType = "V3WiseConfig"
-	V3ConnectorConfigTypeV3BankingbridgeConfig V3ConnectorConfigType = "V3BankingbridgeConfig"
-	V3ConnectorConfigTypeV3BitstampConfig      V3ConnectorConfigType = "V3BitstampConfig"
-	V3ConnectorConfigTypeV3CoinbaseprimeConfig V3ConnectorConfigType = "V3CoinbaseprimeConfig"
-	V3ConnectorConfigTypeV3FireblocksConfig    V3ConnectorConfigType = "V3FireblocksConfig"
-	V3ConnectorConfigTypeV3RoutableConfig      V3ConnectorConfigType = "V3RoutableConfig"
+	V3ConnectorConfigTypeAdyen         V3ConnectorConfigType = "Adyen"
+	V3ConnectorConfigTypeAtlar         V3ConnectorConfigType = "Atlar"
+	V3ConnectorConfigTypeBankingbridge V3ConnectorConfigType = "Bankingbridge"
+	V3ConnectorConfigTypeBankingcircle V3ConnectorConfigType = "Bankingcircle"
+	V3ConnectorConfigTypeBitstamp      V3ConnectorConfigType = "Bitstamp"
+	V3ConnectorConfigTypeCoinbaseprime V3ConnectorConfigType = "Coinbaseprime"
+	V3ConnectorConfigTypeColumn        V3ConnectorConfigType = "Column"
+	V3ConnectorConfigTypeCurrencycloud V3ConnectorConfigType = "Currencycloud"
+	V3ConnectorConfigTypeDummypay      V3ConnectorConfigType = "Dummypay"
+	V3ConnectorConfigTypeFireblocks    V3ConnectorConfigType = "Fireblocks"
+	V3ConnectorConfigTypeGeneric       V3ConnectorConfigType = "Generic"
+	V3ConnectorConfigTypeIncrease      V3ConnectorConfigType = "Increase"
+	V3ConnectorConfigTypeKrakenpro     V3ConnectorConfigType = "Krakenpro"
+	V3ConnectorConfigTypeMangopay      V3ConnectorConfigType = "Mangopay"
+	V3ConnectorConfigTypeModulr        V3ConnectorConfigType = "Modulr"
+	V3ConnectorConfigTypeMoneycorp     V3ConnectorConfigType = "Moneycorp"
+	V3ConnectorConfigTypePlaid         V3ConnectorConfigType = "Plaid"
+	V3ConnectorConfigTypePowens        V3ConnectorConfigType = "Powens"
+	V3ConnectorConfigTypeQonto         V3ConnectorConfigType = "Qonto"
+	V3ConnectorConfigTypeRoutable      V3ConnectorConfigType = "Routable"
+	V3ConnectorConfigTypeStripe        V3ConnectorConfigType = "Stripe"
+	V3ConnectorConfigTypeTink          V3ConnectorConfigType = "Tink"
+	V3ConnectorConfigTypeWise          V3ConnectorConfigType = "Wise"
 )
 
 type V3ConnectorConfig struct {
@@ -57,362 +59,506 @@ type V3ConnectorConfig struct {
 	V3BitstampConfig      *V3BitstampConfig      `queryParam:"inline" union:"member"`
 	V3CoinbaseprimeConfig *V3CoinbaseprimeConfig `queryParam:"inline" union:"member"`
 	V3FireblocksConfig    *V3FireblocksConfig    `queryParam:"inline" union:"member"`
+	V3KrakenproConfig     *V3KrakenproConfig     `queryParam:"inline" union:"member"`
 	V3RoutableConfig      *V3RoutableConfig      `queryParam:"inline" union:"member"`
 
 	Type V3ConnectorConfigType
 }
 
-func CreateV3ConnectorConfigV3AdyenConfig(v3AdyenConfig V3AdyenConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3AdyenConfig
+func CreateV3ConnectorConfigAdyen(adyen V3AdyenConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeAdyen
+
+	typStr := string(typ)
+	adyen.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3AdyenConfig: &v3AdyenConfig,
+		V3AdyenConfig: &adyen,
 		Type:          typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3AtlarConfig(v3AtlarConfig V3AtlarConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3AtlarConfig
+func CreateV3ConnectorConfigAtlar(atlar V3AtlarConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeAtlar
+
+	typStr := string(typ)
+	atlar.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3AtlarConfig: &v3AtlarConfig,
+		V3AtlarConfig: &atlar,
 		Type:          typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3BankingcircleConfig(v3BankingcircleConfig V3BankingcircleConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3BankingcircleConfig
+func CreateV3ConnectorConfigBankingbridge(bankingbridge V3BankingbridgeConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeBankingbridge
+
+	typStr := string(typ)
+	bankingbridge.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3BankingcircleConfig: &v3BankingcircleConfig,
+		V3BankingbridgeConfig: &bankingbridge,
 		Type:                  typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3ColumnConfig(v3ColumnConfig V3ColumnConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3ColumnConfig
+func CreateV3ConnectorConfigBankingcircle(bankingcircle V3BankingcircleConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeBankingcircle
+
+	typStr := string(typ)
+	bankingcircle.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3ColumnConfig: &v3ColumnConfig,
-		Type:           typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3CurrencycloudConfig(v3CurrencycloudConfig V3CurrencycloudConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3CurrencycloudConfig
-
-	return V3ConnectorConfig{
-		V3CurrencycloudConfig: &v3CurrencycloudConfig,
+		V3BankingcircleConfig: &bankingcircle,
 		Type:                  typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3DummypayConfig(v3DummypayConfig V3DummypayConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3DummypayConfig
+func CreateV3ConnectorConfigBitstamp(bitstamp V3BitstampConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeBitstamp
+
+	typStr := string(typ)
+	bitstamp.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3DummypayConfig: &v3DummypayConfig,
+		V3BitstampConfig: &bitstamp,
 		Type:             typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3GenericConfig(v3GenericConfig V3GenericConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3GenericConfig
+func CreateV3ConnectorConfigCoinbaseprime(coinbaseprime V3CoinbaseprimeConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeCoinbaseprime
+
+	typStr := string(typ)
+	coinbaseprime.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3GenericConfig: &v3GenericConfig,
-		Type:            typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3IncreaseConfig(v3IncreaseConfig V3IncreaseConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3IncreaseConfig
-
-	return V3ConnectorConfig{
-		V3IncreaseConfig: &v3IncreaseConfig,
-		Type:             typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3MangopayConfig(v3MangopayConfig V3MangopayConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3MangopayConfig
-
-	return V3ConnectorConfig{
-		V3MangopayConfig: &v3MangopayConfig,
-		Type:             typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3ModulrConfig(v3ModulrConfig V3ModulrConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3ModulrConfig
-
-	return V3ConnectorConfig{
-		V3ModulrConfig: &v3ModulrConfig,
-		Type:           typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3MoneycorpConfig(v3MoneycorpConfig V3MoneycorpConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3MoneycorpConfig
-
-	return V3ConnectorConfig{
-		V3MoneycorpConfig: &v3MoneycorpConfig,
-		Type:              typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3PlaidConfig(v3PlaidConfig V3PlaidConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3PlaidConfig
-
-	return V3ConnectorConfig{
-		V3PlaidConfig: &v3PlaidConfig,
-		Type:          typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3PowensConfig(v3PowensConfig V3PowensConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3PowensConfig
-
-	return V3ConnectorConfig{
-		V3PowensConfig: &v3PowensConfig,
-		Type:           typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3QontoConfig(v3QontoConfig V3QontoConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3QontoConfig
-
-	return V3ConnectorConfig{
-		V3QontoConfig: &v3QontoConfig,
-		Type:          typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3StripeConfig(v3StripeConfig V3StripeConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3StripeConfig
-
-	return V3ConnectorConfig{
-		V3StripeConfig: &v3StripeConfig,
-		Type:           typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3TinkConfig(v3TinkConfig V3TinkConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3TinkConfig
-
-	return V3ConnectorConfig{
-		V3TinkConfig: &v3TinkConfig,
-		Type:         typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3WiseConfig(v3WiseConfig V3WiseConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3WiseConfig
-
-	return V3ConnectorConfig{
-		V3WiseConfig: &v3WiseConfig,
-		Type:         typ,
-	}
-}
-
-func CreateV3ConnectorConfigV3BankingbridgeConfig(v3BankingbridgeConfig V3BankingbridgeConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3BankingbridgeConfig
-
-	return V3ConnectorConfig{
-		V3BankingbridgeConfig: &v3BankingbridgeConfig,
+		V3CoinbaseprimeConfig: &coinbaseprime,
 		Type:                  typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3BitstampConfig(v3BitstampConfig V3BitstampConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3BitstampConfig
+func CreateV3ConnectorConfigColumn(column V3ColumnConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeColumn
+
+	typStr := string(typ)
+	column.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3BitstampConfig: &v3BitstampConfig,
-		Type:             typ,
+		V3ColumnConfig: &column,
+		Type:           typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3CoinbaseprimeConfig(v3CoinbaseprimeConfig V3CoinbaseprimeConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3CoinbaseprimeConfig
+func CreateV3ConnectorConfigCurrencycloud(currencycloud V3CurrencycloudConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeCurrencycloud
+
+	typStr := string(typ)
+	currencycloud.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3CoinbaseprimeConfig: &v3CoinbaseprimeConfig,
+		V3CurrencycloudConfig: &currencycloud,
 		Type:                  typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3FireblocksConfig(v3FireblocksConfig V3FireblocksConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3FireblocksConfig
+func CreateV3ConnectorConfigDummypay(dummypay V3DummypayConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeDummypay
+
+	typStr := string(typ)
+	dummypay.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3FireblocksConfig: &v3FireblocksConfig,
+		V3DummypayConfig: &dummypay,
+		Type:             typ,
+	}
+}
+
+func CreateV3ConnectorConfigFireblocks(fireblocks V3FireblocksConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeFireblocks
+
+	typStr := string(typ)
+	fireblocks.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3FireblocksConfig: &fireblocks,
 		Type:               typ,
 	}
 }
 
-func CreateV3ConnectorConfigV3RoutableConfig(v3RoutableConfig V3RoutableConfig) V3ConnectorConfig {
-	typ := V3ConnectorConfigTypeV3RoutableConfig
+func CreateV3ConnectorConfigGeneric(generic V3GenericConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeGeneric
+
+	typStr := string(typ)
+	generic.Provider = &typStr
 
 	return V3ConnectorConfig{
-		V3RoutableConfig: &v3RoutableConfig,
+		V3GenericConfig: &generic,
+		Type:            typ,
+	}
+}
+
+func CreateV3ConnectorConfigIncrease(increase V3IncreaseConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeIncrease
+
+	typStr := string(typ)
+	increase.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3IncreaseConfig: &increase,
 		Type:             typ,
+	}
+}
+
+func CreateV3ConnectorConfigKrakenpro(krakenpro V3KrakenproConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeKrakenpro
+
+	typStr := string(typ)
+	krakenpro.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3KrakenproConfig: &krakenpro,
+		Type:              typ,
+	}
+}
+
+func CreateV3ConnectorConfigMangopay(mangopay V3MangopayConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeMangopay
+
+	typStr := string(typ)
+	mangopay.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3MangopayConfig: &mangopay,
+		Type:             typ,
+	}
+}
+
+func CreateV3ConnectorConfigModulr(modulr V3ModulrConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeModulr
+
+	typStr := string(typ)
+	modulr.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3ModulrConfig: &modulr,
+		Type:           typ,
+	}
+}
+
+func CreateV3ConnectorConfigMoneycorp(moneycorp V3MoneycorpConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeMoneycorp
+
+	typStr := string(typ)
+	moneycorp.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3MoneycorpConfig: &moneycorp,
+		Type:              typ,
+	}
+}
+
+func CreateV3ConnectorConfigPlaid(plaid V3PlaidConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypePlaid
+
+	typStr := string(typ)
+	plaid.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3PlaidConfig: &plaid,
+		Type:          typ,
+	}
+}
+
+func CreateV3ConnectorConfigPowens(powens V3PowensConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypePowens
+
+	typStr := string(typ)
+	powens.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3PowensConfig: &powens,
+		Type:           typ,
+	}
+}
+
+func CreateV3ConnectorConfigQonto(qonto V3QontoConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeQonto
+
+	typStr := string(typ)
+	qonto.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3QontoConfig: &qonto,
+		Type:          typ,
+	}
+}
+
+func CreateV3ConnectorConfigRoutable(routable V3RoutableConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeRoutable
+
+	typStr := string(typ)
+	routable.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3RoutableConfig: &routable,
+		Type:             typ,
+	}
+}
+
+func CreateV3ConnectorConfigStripe(stripe V3StripeConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeStripe
+
+	typStr := string(typ)
+	stripe.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3StripeConfig: &stripe,
+		Type:           typ,
+	}
+}
+
+func CreateV3ConnectorConfigTink(tink V3TinkConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeTink
+
+	typStr := string(typ)
+	tink.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3TinkConfig: &tink,
+		Type:         typ,
+	}
+}
+
+func CreateV3ConnectorConfigWise(wise V3WiseConfig) V3ConnectorConfig {
+	typ := V3ConnectorConfigTypeWise
+
+	typStr := string(typ)
+	wise.Provider = &typStr
+
+	return V3ConnectorConfig{
+		V3WiseConfig: &wise,
+		Type:         typ,
 	}
 }
 
 func (u *V3ConnectorConfig) UnmarshalJSON(data []byte) error {
 
-	var v3BankingcircleConfig V3BankingcircleConfig = V3BankingcircleConfig{}
-	if err := utils.UnmarshalJSON(data, &v3BankingcircleConfig, "", true, nil); err == nil {
-		u.V3BankingcircleConfig = &v3BankingcircleConfig
-		u.Type = V3ConnectorConfigTypeV3BankingcircleConfig
-		return nil
+	type discriminator struct {
+		Provider string `json:"provider"`
 	}
 
-	var v3PowensConfig V3PowensConfig = V3PowensConfig{}
-	if err := utils.UnmarshalJSON(data, &v3PowensConfig, "", true, nil); err == nil {
-		u.V3PowensConfig = &v3PowensConfig
-		u.Type = V3ConnectorConfigTypeV3PowensConfig
-		return nil
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
-	var v3BankingbridgeConfig V3BankingbridgeConfig = V3BankingbridgeConfig{}
-	if err := utils.UnmarshalJSON(data, &v3BankingbridgeConfig, "", true, nil); err == nil {
-		u.V3BankingbridgeConfig = &v3BankingbridgeConfig
-		u.Type = V3ConnectorConfigTypeV3BankingbridgeConfig
-		return nil
-	}
+	switch dis.Provider {
+	case "Adyen":
+		v3AdyenConfig := new(V3AdyenConfig)
+		if err := utils.UnmarshalJSON(data, &v3AdyenConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Adyen) type V3AdyenConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3CoinbaseprimeConfig V3CoinbaseprimeConfig = V3CoinbaseprimeConfig{}
-	if err := utils.UnmarshalJSON(data, &v3CoinbaseprimeConfig, "", true, nil); err == nil {
-		u.V3CoinbaseprimeConfig = &v3CoinbaseprimeConfig
-		u.Type = V3ConnectorConfigTypeV3CoinbaseprimeConfig
+		u.V3AdyenConfig = v3AdyenConfig
+		u.Type = V3ConnectorConfigTypeAdyen
 		return nil
-	}
+	case "Atlar":
+		v3AtlarConfig := new(V3AtlarConfig)
+		if err := utils.UnmarshalJSON(data, &v3AtlarConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Atlar) type V3AtlarConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3AtlarConfig V3AtlarConfig = V3AtlarConfig{}
-	if err := utils.UnmarshalJSON(data, &v3AtlarConfig, "", true, nil); err == nil {
-		u.V3AtlarConfig = &v3AtlarConfig
-		u.Type = V3ConnectorConfigTypeV3AtlarConfig
+		u.V3AtlarConfig = v3AtlarConfig
+		u.Type = V3ConnectorConfigTypeAtlar
 		return nil
-	}
+	case "Bankingbridge":
+		v3BankingbridgeConfig := new(V3BankingbridgeConfig)
+		if err := utils.UnmarshalJSON(data, &v3BankingbridgeConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Bankingbridge) type V3BankingbridgeConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3CurrencycloudConfig V3CurrencycloudConfig = V3CurrencycloudConfig{}
-	if err := utils.UnmarshalJSON(data, &v3CurrencycloudConfig, "", true, nil); err == nil {
-		u.V3CurrencycloudConfig = &v3CurrencycloudConfig
-		u.Type = V3ConnectorConfigTypeV3CurrencycloudConfig
+		u.V3BankingbridgeConfig = v3BankingbridgeConfig
+		u.Type = V3ConnectorConfigTypeBankingbridge
 		return nil
-	}
+	case "Bankingcircle":
+		v3BankingcircleConfig := new(V3BankingcircleConfig)
+		if err := utils.UnmarshalJSON(data, &v3BankingcircleConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Bankingcircle) type V3BankingcircleConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3IncreaseConfig V3IncreaseConfig = V3IncreaseConfig{}
-	if err := utils.UnmarshalJSON(data, &v3IncreaseConfig, "", true, nil); err == nil {
-		u.V3IncreaseConfig = &v3IncreaseConfig
-		u.Type = V3ConnectorConfigTypeV3IncreaseConfig
+		u.V3BankingcircleConfig = v3BankingcircleConfig
+		u.Type = V3ConnectorConfigTypeBankingcircle
 		return nil
-	}
+	case "Bitstamp":
+		v3BitstampConfig := new(V3BitstampConfig)
+		if err := utils.UnmarshalJSON(data, &v3BitstampConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Bitstamp) type V3BitstampConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3MangopayConfig V3MangopayConfig = V3MangopayConfig{}
-	if err := utils.UnmarshalJSON(data, &v3MangopayConfig, "", true, nil); err == nil {
-		u.V3MangopayConfig = &v3MangopayConfig
-		u.Type = V3ConnectorConfigTypeV3MangopayConfig
+		u.V3BitstampConfig = v3BitstampConfig
+		u.Type = V3ConnectorConfigTypeBitstamp
 		return nil
-	}
+	case "Coinbaseprime":
+		v3CoinbaseprimeConfig := new(V3CoinbaseprimeConfig)
+		if err := utils.UnmarshalJSON(data, &v3CoinbaseprimeConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Coinbaseprime) type V3CoinbaseprimeConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3ModulrConfig V3ModulrConfig = V3ModulrConfig{}
-	if err := utils.UnmarshalJSON(data, &v3ModulrConfig, "", true, nil); err == nil {
-		u.V3ModulrConfig = &v3ModulrConfig
-		u.Type = V3ConnectorConfigTypeV3ModulrConfig
+		u.V3CoinbaseprimeConfig = v3CoinbaseprimeConfig
+		u.Type = V3ConnectorConfigTypeCoinbaseprime
 		return nil
-	}
+	case "Column":
+		v3ColumnConfig := new(V3ColumnConfig)
+		if err := utils.UnmarshalJSON(data, &v3ColumnConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Column) type V3ColumnConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3MoneycorpConfig V3MoneycorpConfig = V3MoneycorpConfig{}
-	if err := utils.UnmarshalJSON(data, &v3MoneycorpConfig, "", true, nil); err == nil {
-		u.V3MoneycorpConfig = &v3MoneycorpConfig
-		u.Type = V3ConnectorConfigTypeV3MoneycorpConfig
+		u.V3ColumnConfig = v3ColumnConfig
+		u.Type = V3ConnectorConfigTypeColumn
 		return nil
-	}
+	case "Currencycloud":
+		v3CurrencycloudConfig := new(V3CurrencycloudConfig)
+		if err := utils.UnmarshalJSON(data, &v3CurrencycloudConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Currencycloud) type V3CurrencycloudConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3QontoConfig V3QontoConfig = V3QontoConfig{}
-	if err := utils.UnmarshalJSON(data, &v3QontoConfig, "", true, nil); err == nil {
-		u.V3QontoConfig = &v3QontoConfig
-		u.Type = V3ConnectorConfigTypeV3QontoConfig
+		u.V3CurrencycloudConfig = v3CurrencycloudConfig
+		u.Type = V3ConnectorConfigTypeCurrencycloud
 		return nil
-	}
+	case "Dummypay":
+		v3DummypayConfig := new(V3DummypayConfig)
+		if err := utils.UnmarshalJSON(data, &v3DummypayConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Dummypay) type V3DummypayConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3TinkConfig V3TinkConfig = V3TinkConfig{}
-	if err := utils.UnmarshalJSON(data, &v3TinkConfig, "", true, nil); err == nil {
-		u.V3TinkConfig = &v3TinkConfig
-		u.Type = V3ConnectorConfigTypeV3TinkConfig
+		u.V3DummypayConfig = v3DummypayConfig
+		u.Type = V3ConnectorConfigTypeDummypay
 		return nil
-	}
+	case "Fireblocks":
+		v3FireblocksConfig := new(V3FireblocksConfig)
+		if err := utils.UnmarshalJSON(data, &v3FireblocksConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Fireblocks) type V3FireblocksConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3AdyenConfig V3AdyenConfig = V3AdyenConfig{}
-	if err := utils.UnmarshalJSON(data, &v3AdyenConfig, "", true, nil); err == nil {
-		u.V3AdyenConfig = &v3AdyenConfig
-		u.Type = V3ConnectorConfigTypeV3AdyenConfig
+		u.V3FireblocksConfig = v3FireblocksConfig
+		u.Type = V3ConnectorConfigTypeFireblocks
 		return nil
-	}
+	case "Generic":
+		v3GenericConfig := new(V3GenericConfig)
+		if err := utils.UnmarshalJSON(data, &v3GenericConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Generic) type V3GenericConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3ColumnConfig V3ColumnConfig = V3ColumnConfig{}
-	if err := utils.UnmarshalJSON(data, &v3ColumnConfig, "", true, nil); err == nil {
-		u.V3ColumnConfig = &v3ColumnConfig
-		u.Type = V3ConnectorConfigTypeV3ColumnConfig
+		u.V3GenericConfig = v3GenericConfig
+		u.Type = V3ConnectorConfigTypeGeneric
 		return nil
-	}
+	case "Increase":
+		v3IncreaseConfig := new(V3IncreaseConfig)
+		if err := utils.UnmarshalJSON(data, &v3IncreaseConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Increase) type V3IncreaseConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3GenericConfig V3GenericConfig = V3GenericConfig{}
-	if err := utils.UnmarshalJSON(data, &v3GenericConfig, "", true, nil); err == nil {
-		u.V3GenericConfig = &v3GenericConfig
-		u.Type = V3ConnectorConfigTypeV3GenericConfig
+		u.V3IncreaseConfig = v3IncreaseConfig
+		u.Type = V3ConnectorConfigTypeIncrease
 		return nil
-	}
+	case "Krakenpro":
+		v3KrakenproConfig := new(V3KrakenproConfig)
+		if err := utils.UnmarshalJSON(data, &v3KrakenproConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Krakenpro) type V3KrakenproConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3PlaidConfig V3PlaidConfig = V3PlaidConfig{}
-	if err := utils.UnmarshalJSON(data, &v3PlaidConfig, "", true, nil); err == nil {
-		u.V3PlaidConfig = &v3PlaidConfig
-		u.Type = V3ConnectorConfigTypeV3PlaidConfig
+		u.V3KrakenproConfig = v3KrakenproConfig
+		u.Type = V3ConnectorConfigTypeKrakenpro
 		return nil
-	}
+	case "Mangopay":
+		v3MangopayConfig := new(V3MangopayConfig)
+		if err := utils.UnmarshalJSON(data, &v3MangopayConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Mangopay) type V3MangopayConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3WiseConfig V3WiseConfig = V3WiseConfig{}
-	if err := utils.UnmarshalJSON(data, &v3WiseConfig, "", true, nil); err == nil {
-		u.V3WiseConfig = &v3WiseConfig
-		u.Type = V3ConnectorConfigTypeV3WiseConfig
+		u.V3MangopayConfig = v3MangopayConfig
+		u.Type = V3ConnectorConfigTypeMangopay
 		return nil
-	}
+	case "Modulr":
+		v3ModulrConfig := new(V3ModulrConfig)
+		if err := utils.UnmarshalJSON(data, &v3ModulrConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Modulr) type V3ModulrConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3BitstampConfig V3BitstampConfig = V3BitstampConfig{}
-	if err := utils.UnmarshalJSON(data, &v3BitstampConfig, "", true, nil); err == nil {
-		u.V3BitstampConfig = &v3BitstampConfig
-		u.Type = V3ConnectorConfigTypeV3BitstampConfig
+		u.V3ModulrConfig = v3ModulrConfig
+		u.Type = V3ConnectorConfigTypeModulr
 		return nil
-	}
+	case "Moneycorp":
+		v3MoneycorpConfig := new(V3MoneycorpConfig)
+		if err := utils.UnmarshalJSON(data, &v3MoneycorpConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Moneycorp) type V3MoneycorpConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3FireblocksConfig V3FireblocksConfig = V3FireblocksConfig{}
-	if err := utils.UnmarshalJSON(data, &v3FireblocksConfig, "", true, nil); err == nil {
-		u.V3FireblocksConfig = &v3FireblocksConfig
-		u.Type = V3ConnectorConfigTypeV3FireblocksConfig
+		u.V3MoneycorpConfig = v3MoneycorpConfig
+		u.Type = V3ConnectorConfigTypeMoneycorp
 		return nil
-	}
+	case "Plaid":
+		v3PlaidConfig := new(V3PlaidConfig)
+		if err := utils.UnmarshalJSON(data, &v3PlaidConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Plaid) type V3PlaidConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3DummypayConfig V3DummypayConfig = V3DummypayConfig{}
-	if err := utils.UnmarshalJSON(data, &v3DummypayConfig, "", true, nil); err == nil {
-		u.V3DummypayConfig = &v3DummypayConfig
-		u.Type = V3ConnectorConfigTypeV3DummypayConfig
+		u.V3PlaidConfig = v3PlaidConfig
+		u.Type = V3ConnectorConfigTypePlaid
 		return nil
-	}
+	case "Powens":
+		v3PowensConfig := new(V3PowensConfig)
+		if err := utils.UnmarshalJSON(data, &v3PowensConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Powens) type V3PowensConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3StripeConfig V3StripeConfig = V3StripeConfig{}
-	if err := utils.UnmarshalJSON(data, &v3StripeConfig, "", true, nil); err == nil {
-		u.V3StripeConfig = &v3StripeConfig
-		u.Type = V3ConnectorConfigTypeV3StripeConfig
+		u.V3PowensConfig = v3PowensConfig
+		u.Type = V3ConnectorConfigTypePowens
 		return nil
-	}
+	case "Qonto":
+		v3QontoConfig := new(V3QontoConfig)
+		if err := utils.UnmarshalJSON(data, &v3QontoConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Qonto) type V3QontoConfig within V3ConnectorConfig: %w", string(data), err)
+		}
 
-	var v3RoutableConfig V3RoutableConfig = V3RoutableConfig{}
-	if err := utils.UnmarshalJSON(data, &v3RoutableConfig, "", true, nil); err == nil {
-		u.V3RoutableConfig = &v3RoutableConfig
-		u.Type = V3ConnectorConfigTypeV3RoutableConfig
+		u.V3QontoConfig = v3QontoConfig
+		u.Type = V3ConnectorConfigTypeQonto
+		return nil
+	case "Routable":
+		v3RoutableConfig := new(V3RoutableConfig)
+		if err := utils.UnmarshalJSON(data, &v3RoutableConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Routable) type V3RoutableConfig within V3ConnectorConfig: %w", string(data), err)
+		}
+
+		u.V3RoutableConfig = v3RoutableConfig
+		u.Type = V3ConnectorConfigTypeRoutable
+		return nil
+	case "Stripe":
+		v3StripeConfig := new(V3StripeConfig)
+		if err := utils.UnmarshalJSON(data, &v3StripeConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Stripe) type V3StripeConfig within V3ConnectorConfig: %w", string(data), err)
+		}
+
+		u.V3StripeConfig = v3StripeConfig
+		u.Type = V3ConnectorConfigTypeStripe
+		return nil
+	case "Tink":
+		v3TinkConfig := new(V3TinkConfig)
+		if err := utils.UnmarshalJSON(data, &v3TinkConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Tink) type V3TinkConfig within V3ConnectorConfig: %w", string(data), err)
+		}
+
+		u.V3TinkConfig = v3TinkConfig
+		u.Type = V3ConnectorConfigTypeTink
+		return nil
+	case "Wise":
+		v3WiseConfig := new(V3WiseConfig)
+		if err := utils.UnmarshalJSON(data, &v3WiseConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == Wise) type V3WiseConfig within V3ConnectorConfig: %w", string(data), err)
+		}
+
+		u.V3WiseConfig = v3WiseConfig
+		u.Type = V3ConnectorConfigTypeWise
 		return nil
 	}
 
@@ -502,6 +648,10 @@ func (u V3ConnectorConfig) MarshalJSON() ([]byte, error) {
 
 	if u.V3FireblocksConfig != nil {
 		return utils.MarshalJSON(u.V3FireblocksConfig, "", true)
+	}
+
+	if u.V3KrakenproConfig != nil {
+		return utils.MarshalJSON(u.V3KrakenproConfig, "", true)
 	}
 
 	if u.V3RoutableConfig != nil {

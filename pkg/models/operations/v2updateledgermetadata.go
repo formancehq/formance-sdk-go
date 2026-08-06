@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/ledger"
 	"net/http"
 )
 
@@ -37,8 +36,6 @@ type V2UpdateLedgerMetadataResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Error
-	V2ErrorResponse *ledger.V2ErrorResponse
 }
 
 func (v *V2UpdateLedgerMetadataResponse) GetContentType() string {
@@ -60,13 +57,6 @@ func (v *V2UpdateLedgerMetadataResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return v.RawResponse
-}
-
-func (v *V2UpdateLedgerMetadataResponse) GetV2ErrorResponse() *ledger.V2ErrorResponse {
-	if v == nil {
-		return nil
-	}
-	return v.V2ErrorResponse
 }
 
 // #region class-body-v2updateledgermetadataresponse

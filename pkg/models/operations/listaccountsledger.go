@@ -99,8 +99,6 @@ type ListAccountsLedgerResponse struct {
 	AccountsCursorResponse *ledger.AccountsCursorResponse
 	// HTTP response content type for this operation
 	ContentType string
-	// Not found
-	ErrorResponse *ledger.ErrorResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -119,13 +117,6 @@ func (l *ListAccountsLedgerResponse) GetContentType() string {
 		return ""
 	}
 	return l.ContentType
-}
-
-func (l *ListAccountsLedgerResponse) GetErrorResponse() *ledger.ErrorResponse {
-	if l == nil {
-		return nil
-	}
-	return l.ErrorResponse
 }
 
 func (l *ListAccountsLedgerResponse) GetStatusCode() int {
