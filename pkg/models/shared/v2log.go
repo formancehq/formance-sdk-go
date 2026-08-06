@@ -200,6 +200,8 @@ type V2Log struct {
 	Hash string `json:"hash"`
 	// Unique sequential identifier for this log entry within the ledger
 	ID *big.Int `json:"id"`
+	// The idempotency key supplied on the request that produced this log, if one was set
+	IdempotencyKey *string `json:"idempotencyKey,omitempty"`
 	// Schema version used for validation when the log was created
 	SchemaVersion *string `json:"schemaVersion,omitempty"`
 	// The type of operation this log represents
@@ -243,6 +245,13 @@ func (v *V2Log) GetID() *big.Int {
 		return big.NewInt(0)
 	}
 	return v.ID
+}
+
+func (v *V2Log) GetIdempotencyKey() *string {
+	if v == nil {
+		return nil
+	}
+	return v.IdempotencyKey
 }
 
 func (v *V2Log) GetSchemaVersion() *string {
