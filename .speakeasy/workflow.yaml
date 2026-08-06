@@ -1,9 +1,9 @@
 workflowVersion: 1.0.0
-speakeasyVersion: latest
+speakeasyVersion: 1.770.0
 sources:
     stacks-source:
         inputs:
-            - location: registry.speakeasyapi.dev/formance/formance/stacks-source@LATEST_RELEASE
+            - location: registry.speakeasyapi.dev/formance/formance/stacks-source@sha256:c85e21f1f000f0409f58d4ace7aaac0d708f4577a19b638347b41dd37e19f317
         registry:
             location: registry.speakeasyapi.dev/formance/formance/stacks-source
 targets:
