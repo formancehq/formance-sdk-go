@@ -1406,7 +1406,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.InstallConnector(ctx, operations.InstallConnectorRequest{
-        ConnectorConfig: payments.CreateConnectorConfigCurrencyCloudConfig(
+        ConnectorConfig: payments.CreateConnectorConfigCurrencycloud(
             payments.CurrencyCloudConfig{
                 APIKey: "XXX",
                 LoginID: "XXX",
@@ -2040,28 +2040,28 @@ func main() {
     }
     if res.ConnectorConfigResponse != nil {
         switch res.ConnectorConfigResponse.Data.Type {
-            case shared.ConnectorConfigTypeStripeConfig:
-                // res.ConnectorConfigResponse.Data.StripeConfig is populated
-            case shared.ConnectorConfigTypeDummyPayConfig:
-                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
-            case shared.ConnectorConfigTypeWiseConfig:
-                // res.ConnectorConfigResponse.Data.WiseConfig is populated
-            case shared.ConnectorConfigTypeModulrConfig:
-                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
-            case shared.ConnectorConfigTypeCurrencyCloudConfig:
-                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
-            case shared.ConnectorConfigTypeBankingCircleConfig:
-                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
-            case shared.ConnectorConfigTypeMangoPayConfig:
-                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
-            case shared.ConnectorConfigTypeMoneycorpConfig:
-                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
-            case shared.ConnectorConfigTypeAtlarConfig:
-                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
-            case shared.ConnectorConfigTypeAdyenConfig:
+            case shared.ConnectorConfigTypeAdyen:
                 // res.ConnectorConfigResponse.Data.AdyenConfig is populated
-            case shared.ConnectorConfigTypeGenericConfig:
+            case shared.ConnectorConfigTypeAtlar:
+                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
+            case shared.ConnectorConfigTypeBankingcircle:
+                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
+            case shared.ConnectorConfigTypeCurrencycloud:
+                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
+            case shared.ConnectorConfigTypeDummypay:
+                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
+            case shared.ConnectorConfigTypeGeneric:
                 // res.ConnectorConfigResponse.Data.GenericConfig is populated
+            case shared.ConnectorConfigTypeMangopay:
+                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
+            case shared.ConnectorConfigTypeModulr:
+                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
+            case shared.ConnectorConfigTypeMoneycorp:
+                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
+            case shared.ConnectorConfigTypeStripe:
+                // res.ConnectorConfigResponse.Data.StripeConfig is populated
+            case shared.ConnectorConfigTypeWise:
+                // res.ConnectorConfigResponse.Data.WiseConfig is populated
         }
 
     }
@@ -2125,28 +2125,28 @@ func main() {
     }
     if res.ConnectorConfigResponse != nil {
         switch res.ConnectorConfigResponse.Data.Type {
-            case shared.ConnectorConfigTypeStripeConfig:
-                // res.ConnectorConfigResponse.Data.StripeConfig is populated
-            case shared.ConnectorConfigTypeDummyPayConfig:
-                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
-            case shared.ConnectorConfigTypeWiseConfig:
-                // res.ConnectorConfigResponse.Data.WiseConfig is populated
-            case shared.ConnectorConfigTypeModulrConfig:
-                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
-            case shared.ConnectorConfigTypeCurrencyCloudConfig:
-                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
-            case shared.ConnectorConfigTypeBankingCircleConfig:
-                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
-            case shared.ConnectorConfigTypeMangoPayConfig:
-                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
-            case shared.ConnectorConfigTypeMoneycorpConfig:
-                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
-            case shared.ConnectorConfigTypeAtlarConfig:
-                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
-            case shared.ConnectorConfigTypeAdyenConfig:
+            case shared.ConnectorConfigTypeAdyen:
                 // res.ConnectorConfigResponse.Data.AdyenConfig is populated
-            case shared.ConnectorConfigTypeGenericConfig:
+            case shared.ConnectorConfigTypeAtlar:
+                // res.ConnectorConfigResponse.Data.AtlarConfig is populated
+            case shared.ConnectorConfigTypeBankingcircle:
+                // res.ConnectorConfigResponse.Data.BankingCircleConfig is populated
+            case shared.ConnectorConfigTypeCurrencycloud:
+                // res.ConnectorConfigResponse.Data.CurrencyCloudConfig is populated
+            case shared.ConnectorConfigTypeDummypay:
+                // res.ConnectorConfigResponse.Data.DummyPayConfig is populated
+            case shared.ConnectorConfigTypeGeneric:
                 // res.ConnectorConfigResponse.Data.GenericConfig is populated
+            case shared.ConnectorConfigTypeMangopay:
+                // res.ConnectorConfigResponse.Data.MangoPayConfig is populated
+            case shared.ConnectorConfigTypeModulr:
+                // res.ConnectorConfigResponse.Data.ModulrConfig is populated
+            case shared.ConnectorConfigTypeMoneycorp:
+                // res.ConnectorConfigResponse.Data.MoneycorpConfig is populated
+            case shared.ConnectorConfigTypeStripe:
+                // res.ConnectorConfigResponse.Data.StripeConfig is populated
+            case shared.ConnectorConfigTypeWise:
+                // res.ConnectorConfigResponse.Data.WiseConfig is populated
         }
 
     }
@@ -2708,7 +2708,7 @@ func main() {
     )
 
     res, err := s.Payments.V1.UpdateConnectorConfigV1(ctx, operations.UpdateConnectorConfigV1Request{
-        ConnectorConfig: payments.CreateConnectorConfigModulrConfig(
+        ConnectorConfig: payments.CreateConnectorConfigModulr(
             payments.ModulrConfig{
                 APIKey: "XXX",
                 APISecret: "XXX",

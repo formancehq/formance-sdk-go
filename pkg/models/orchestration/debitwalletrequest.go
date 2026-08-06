@@ -59,6 +59,20 @@ func (d *DebitWalletRequest) GetDestination() *Subject {
 	return d.Destination
 }
 
+func (d *DebitWalletRequest) GetDestinationAccount() *LedgerAccountSubject {
+	if v := d.GetDestination(); v != nil {
+		return v.LedgerAccountSubject
+	}
+	return nil
+}
+
+func (d *DebitWalletRequest) GetDestinationWallet() *WalletSubject {
+	if v := d.GetDestination(); v != nil {
+		return v.WalletSubject
+	}
+	return nil
+}
+
 func (d *DebitWalletRequest) GetMetadata() map[string]string {
 	if d == nil {
 		return map[string]string{}

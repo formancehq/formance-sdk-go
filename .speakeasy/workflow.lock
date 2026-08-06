@@ -2,25 +2,25 @@ speakeasyVersion: 1.770.0
 sources:
     stacks-source:
         sourceNamespace: stacks-source
-        sourceRevisionDigest: sha256:c85e21f1f000f0409f58d4ace7aaac0d708f4577a19b638347b41dd37e19f317
-        sourceBlobDigest: sha256:24159a4c5e03fd9ebc0727cecb2bff5ed6695d519aeb3fe80346af6ce1fabcfa
+        sourceRevisionDigest: sha256:1d9e07120ee16749020c103aba5ef1de0601f8ee52ff065d000a1e651521898e
+        sourceBlobDigest: sha256:29450b93df4a9523bbe1b02552a402098ed562fe9fae90ccacfa55994fee806f
         tags:
             - latest
 targets:
     formance-sdk-go:
         source: stacks-source
         sourceNamespace: stacks-source
-        sourceRevisionDigest: sha256:c85e21f1f000f0409f58d4ace7aaac0d708f4577a19b638347b41dd37e19f317
-        sourceBlobDigest: sha256:24159a4c5e03fd9ebc0727cecb2bff5ed6695d519aeb3fe80346af6ce1fabcfa
+        sourceRevisionDigest: sha256:1d9e07120ee16749020c103aba5ef1de0601f8ee52ff065d000a1e651521898e
+        sourceBlobDigest: sha256:29450b93df4a9523bbe1b02552a402098ed562fe9fae90ccacfa55994fee806f
         codeSamplesNamespace: stacks-source-go-code-samples
-        codeSamplesRevisionDigest: sha256:19cf448d38f1813123f921d25801fbe71f6f97957e8ffba9451be766db31eb7e
+        codeSamplesRevisionDigest: sha256:5d8d9bce00fd0b75044de336668608441d0961feced27720d1e7de8ddd5ae8d4
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: latest
+    speakeasyVersion: 1.770.0
     sources:
         stacks-source:
             inputs:
-                - location: registry.speakeasyapi.dev/formance/formance/stacks-source@LATEST_RELEASE
+                - location: registry.speakeasyapi.dev/formance/formance/stacks-source@sha256:1d9e07120ee16749020c103aba5ef1de0601f8ee52ff065d000a1e651521898e
             registry:
                 location: registry.speakeasyapi.dev/formance/formance/stacks-source
     targets:

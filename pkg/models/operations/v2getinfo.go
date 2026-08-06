@@ -16,8 +16,6 @@ type V2GetInfoResponse struct {
 	RawResponse *http.Response
 	// OK
 	V2ConfigInfo *ledger.V2ConfigInfo
-	// Error
-	V2ErrorResponse *ledger.V2ErrorResponse
 }
 
 func (v *V2GetInfoResponse) GetContentType() string {
@@ -46,13 +44,6 @@ func (v *V2GetInfoResponse) GetV2ConfigInfo() *ledger.V2ConfigInfo {
 		return nil
 	}
 	return v.V2ConfigInfo
-}
-
-func (v *V2GetInfoResponse) GetV2ErrorResponse() *ledger.V2ErrorResponse {
-	if v == nil {
-		return nil
-	}
-	return v.V2ErrorResponse
 }
 
 // #region class-body-v2getinforesponse

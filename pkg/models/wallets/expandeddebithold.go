@@ -55,6 +55,20 @@ func (e *ExpandedDebitHold) GetDestination() *Subject {
 	return e.Destination
 }
 
+func (e *ExpandedDebitHold) GetDestinationAccount() *LedgerAccountSubject {
+	if v := e.GetDestination(); v != nil {
+		return v.LedgerAccountSubject
+	}
+	return nil
+}
+
+func (e *ExpandedDebitHold) GetDestinationWallet() *WalletSubject {
+	if v := e.GetDestination(); v != nil {
+		return v.WalletSubject
+	}
+	return nil
+}
+
 func (e *ExpandedDebitHold) GetID() string {
 	if e == nil {
 		return ""

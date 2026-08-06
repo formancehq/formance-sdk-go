@@ -8,13 +8,6 @@ import (
 	"time"
 )
 
-// V3OrderAdjustmentRaw - Untransformed PSP response payload that produced this adjustment. Retained for debugging and replay.
-type V3OrderAdjustmentRaw struct {
-}
-
-// #region class-body-v3orderadjustmentraw
-// #endregion class-body-v3orderadjustmentraw
-
 // V3OrderAdjustment - Immutable snapshot of an order's state at a single observation.
 // Formance records one adjustment per distinct state the PSP reports
 // (status change, fill progress, fee update). Events are emitted
@@ -33,7 +26,7 @@ type V3OrderAdjustment struct {
 	ID       string            `json:"id"`
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Untransformed PSP response payload that produced this adjustment. Retained for debugging and replay.
-	Raw *V3OrderAdjustmentRaw `json:"raw,omitempty"`
+	Raw map[string]any `json:"raw,omitempty"`
 	// PSP reference the adjustment belongs to (equal to the parent order's `reference`).
 	Reference string `json:"reference"`
 	// Lifecycle of an order on the exchange.
@@ -101,7 +94,7 @@ func (v *V3OrderAdjustment) GetMetadata() map[string]string {
 	return v.Metadata
 }
 
-func (v *V3OrderAdjustment) GetRaw() *V3OrderAdjustmentRaw {
+func (v *V3OrderAdjustment) GetRaw() map[string]any {
 	if v == nil {
 		return nil
 	}

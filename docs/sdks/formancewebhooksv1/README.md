@@ -8,8 +8,13 @@
 * [ChangeConfigSecret](#changeconfigsecret) - Change the signing secret of a config
 * [DeactivateConfig](#deactivateconfig) - Deactivate one config
 * [DeleteConfig](#deleteconfig) - Delete one config
+* [GetDeliveries](#getdeliveries) - List webhook deliveries
+* [GetDelivery](#getdelivery) - Get a webhook delivery
+* [GetDeliveryAttempts](#getdeliveryattempts) - List attempts for a webhook delivery
 * [GetManyConfigs](#getmanyconfigs) - Get many configs
 * [InsertConfig](#insertconfig) - Insert a new config
+* [ReplayDeliveries](#replaydeliveries) - Replay a page of failed or pending deliveries
+* [ReplayDelivery](#replaydelivery) - Replay one failed or pending delivery
 * [TestConfig](#testconfig) - Test one config
 * [UpdateConfig](#updateconfig) - Update one config
 
@@ -257,6 +262,181 @@ func main() {
 | webhooks.ErrorResponse | default                | application/json       |
 | sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
+## GetDeliveries
+
+List webhook deliveries
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getDeliveries" method="get" path="/api/webhooks/deliveries" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Webhooks.V1.GetDeliveries(ctx, operations.GetDeliveriesRequest{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.DeliveriesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [operations.GetDeliveriesRequest](../../pkg/models/operations/getdeliveriesrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
+
+### Response
+
+**[*operations.GetDeliveriesResponse](../../pkg/models/operations/getdeliveriesresponse.md), error**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
+
+## GetDelivery
+
+Get a webhook delivery
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getDelivery" method="get" path="/api/webhooks/deliveries/{id}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Webhooks.V1.GetDelivery(ctx, operations.GetDeliveryRequest{
+        ID: "01e5cac6-75f1-4720-81ca-5563ce22d2e0",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.DeliveryResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `request`                                                                          | [operations.GetDeliveryRequest](../../pkg/models/operations/getdeliveryrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+
+### Response
+
+**[*operations.GetDeliveryResponse](../../pkg/models/operations/getdeliveryresponse.md), error**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
+
+## GetDeliveryAttempts
+
+List attempts for a webhook delivery
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getDeliveryAttempts" method="get" path="/api/webhooks/deliveries/{id}/attempts" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Webhooks.V1.GetDeliveryAttempts(ctx, operations.GetDeliveryAttemptsRequest{
+        ID: "967e7a38-b11b-4809-92cf-6789e24dbe13",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.DeliveryAttemptsResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.GetDeliveryAttemptsRequest](../../pkg/models/operations/getdeliveryattemptsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.GetDeliveryAttemptsResponse](../../pkg/models/operations/getdeliveryattemptsresponse.md), error**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
+
 ## GetManyConfigs
 
 Sorted by updated date descending
@@ -360,7 +540,6 @@ func main() {
             "TYPE1",
             "TYPE2",
         },
-        Name: v4.Pointer("customer_payment"),
         Secret: v4.Pointer("V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3"),
     })
     if err != nil {
@@ -383,6 +562,130 @@ func main() {
 ### Response
 
 **[*operations.InsertConfigResponse](../../pkg/models/operations/insertconfigresponse.md), error**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
+
+## ReplayDeliveries
+
+Replay a page of failed or pending deliveries
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="replayDeliveries" method="post" path="/api/webhooks/deliveries/replay" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/webhooks"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Webhooks.V1.ReplayDeliveries(ctx, operations.ReplayDeliveriesRequest{
+        IdempotencyKey: "<value>",
+        ReplayDeliveriesRequest: webhooks.ReplayDeliveriesRequest{
+            CreatedAtFrom: types.MustTimeFromString("2026-10-16T11:02:44.647Z"),
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ReplayDeliveriesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.ReplayDeliveriesRequest](../../pkg/models/operations/replaydeliveriesrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.ReplayDeliveriesResponse](../../pkg/models/operations/replaydeliveriesresponse.md), error**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| webhooks.ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
+
+## ReplayDelivery
+
+Replay one failed or pending delivery
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="replayDelivery" method="post" path="/api/webhooks/deliveries/{id}/replay" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Webhooks.V1.ReplayDelivery(ctx, operations.ReplayDeliveryRequest{
+        IdempotencyKey: "<value>",
+        ID: "06a0d0bb-48de-45f0-b12f-6458a3a41bbe",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.DeliveryResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.ReplayDeliveryRequest](../../pkg/models/operations/replaydeliveryrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.ReplayDeliveryResponse](../../pkg/models/operations/replaydeliveryresponse.md), error**
 
 ### Errors
 
@@ -486,7 +789,6 @@ func main() {
                 "TYPE1",
                 "TYPE2",
             },
-            Name: v4.Pointer("customer_payment"),
             Secret: v4.Pointer("V0bivxRWveaoz08afqjU6Ko/jwO0Cb+3"),
         },
         ID: "4997257d-dfb6-445b-929c-cbe2ab182818",

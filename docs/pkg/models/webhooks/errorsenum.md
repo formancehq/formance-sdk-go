@@ -18,3 +18,4 @@ value := webhooks.ErrorsEnumInternal
 | `ErrorsEnumInternal`   | INTERNAL               |
 | `ErrorsEnumValidation` | VALIDATION             |
 | `ErrorsEnumNotFound`   | NOT_FOUND              |
+| `ErrorsEnumConflict`   | CONFLICT               |

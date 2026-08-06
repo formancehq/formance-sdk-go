@@ -23,8 +23,10 @@
 * [GetAccount](#getaccount) - Get account by its address
 * [GetBalancesAggregated](#getbalancesaggregated) - Get the aggregated balances from selected accounts
 * [GetExporterState](#getexporterstate) - Get exporter state
+* [GetInfo](#getinfo) - Show server information
 * [GetLedger](#getledger) - Get a ledger
 * [GetLedgerInfo](#getledgerinfo) - Get information about a ledger
+* [GetMetrics](#getmetrics) - Read in memory metrics
 * [GetPipelineState](#getpipelinestate) - Get pipeline state
 * [GetSchema](#getschema) - Get a schema for a ledger by version
 * [GetTransaction](#gettransaction) - Get transaction from a ledger by its ID
@@ -109,10 +111,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## AddMetadataToAccount
 
@@ -174,10 +176,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## CountAccounts
 
@@ -237,10 +239,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## CountTransactions
 
@@ -299,10 +301,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## CreateBulk
 
@@ -335,8 +337,8 @@ func main() {
 
     res, err := s.Ledger.V2.CreateBulk(ctx, operations.V2CreateBulkRequest{
         RequestBody: []ledger.V2BulkElement{
-            ledger.CreateV2BulkElementV2BulkElementCreateTransaction(
-                ledger.V2BulkElementCreateTransaction{
+            ledger.CreateV2BulkElementRevertTransaction(
+                ledger.V2BulkElementRevertTransaction{
                     Action: "REVERT_TRANSACTION",
                 },
             ),
@@ -370,10 +372,11 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| ledger.V2BulkResponseError | 400                        | application/json           |
+| ledger.V2ErrorResponse     | default                    | application/json           |
+| sdkerrors.SDKError         | 4XX, 5XX                   | \*/\*                      |
 
 ## CreateExporter
 
@@ -426,10 +429,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## CreateLedger
 
@@ -491,10 +494,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## CreatePipeline
 
@@ -544,10 +547,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## CreateTransaction
 
@@ -640,10 +643,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeleteAccountMetadata
 
@@ -701,10 +704,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeleteBucket
 
@@ -740,7 +743,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.V2ErrorResponse != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -760,10 +763,11 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | 404                    | application/json       |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeleteExporter
 
@@ -813,10 +817,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeleteLedgerMetadata
 
@@ -873,10 +877,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeletePipeline
 
@@ -927,10 +931,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## DeleteTransactionMetadata
 
@@ -989,10 +993,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ExportLogs
 
@@ -1107,10 +1111,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetBalancesAggregated
 
@@ -1171,10 +1175,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetExporterState
 
@@ -1224,10 +1228,66 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
+
+## GetInfo
+
+Show server information
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v2GetInfo" method="get" path="/api/ledger/_/info" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.GetInfo(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V2ConfigInfo != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.V2GetInfoResponse](../../pkg/models/operations/v2getinforesponse.md), error**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | 5XX                    | application/json       |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX                    | \*/\*                  |
 
 ## GetLedger
 
@@ -1283,10 +1343,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetLedgerInfo
 
@@ -1342,10 +1402,65 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
+
+## GetMetrics
+
+Read in memory metrics
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getMetrics" method="get" path="/api/ledger/_/metrics" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Ledger.V2.GetMetrics(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.GetMetricsResponse](../../pkg/models/operations/getmetricsresponse.md), error**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetPipelineState
 
@@ -1396,10 +1511,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetSchema
 
@@ -1456,10 +1571,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetTransaction
 
@@ -1517,10 +1632,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## GetVolumesWithBalances
 
@@ -1583,10 +1698,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ImportLogs
 
@@ -1647,10 +1762,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## InsertSchema
 
@@ -1730,10 +1845,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ListAccounts
 
@@ -1795,10 +1910,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ListExporters
 
@@ -1844,10 +1959,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ListLedgers
 
@@ -1910,10 +2025,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ListLogs
 
@@ -1975,10 +2090,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ListPipelines
 
@@ -2028,10 +2143,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ListSchemas
 
@@ -2087,10 +2202,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ListTransactions
 
@@ -2152,10 +2267,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ReadStats
 
@@ -2212,10 +2327,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## ResetPipeline
 
@@ -2266,10 +2381,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## RestoreBucket
 
@@ -2305,7 +2420,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.V2ErrorResponse != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -2325,10 +2440,11 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | 404                    | application/json       |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## RevertTransaction
 
@@ -2388,10 +2504,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## RunQuery
 
@@ -2472,10 +2588,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## StartPipeline
 
@@ -2526,10 +2642,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## StopPipeline
 
@@ -2580,10 +2696,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## UpdateExporter
 
@@ -2648,10 +2764,10 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX, 5XX               | \*/\*                  |
 
 ## UpdateLedgerMetadata
 
@@ -2690,7 +2806,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.V2ErrorResponse != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -2710,7 +2826,8 @@ func main() {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| ledger.V2ErrorResponseError | default                     | application/json            |
-| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| ledger.V2ErrorResponse | 5XX                    | application/json       |
+| ledger.V2ErrorResponse | default                | application/json       |
+| sdkerrors.SDKError     | 4XX                    | \*/\*                  |

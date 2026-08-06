@@ -27,6 +27,7 @@
 * [GetAccount](#getaccount) - Get an account by ID
 * [GetAccountBalances](#getaccountbalances) - Get account balances
 * [GetBankAccount](#getbankaccount) - Get a Bank Account by ID
+* [GetConnectorCapabilities](#getconnectorcapabilities) - Get the plugin capabilities of an installed connector
 * [GetConnectorConfig](#getconnectorconfig) - Get a connector configuration by ID
 * [GetConnectorSchedule](#getconnectorschedule) - Get a connector schedule by ID
 * [GetConversion](#getconversion) - Get a single conversion by its Formance ID
@@ -43,6 +44,7 @@
 * [InstallConnector](#installconnector) - Install a connector
 * [ListAccounts](#listaccounts) - List all accounts
 * [ListBankAccounts](#listbankaccounts) - List all bank accounts
+* [ListConnectorCapabilities](#listconnectorcapabilities) - List the plugin capabilities advertised by every supported provider
 * [ListConnectorConfigs](#listconnectorconfigs) - List all connector configurations
 * [ListConnectorScheduleInstances](#listconnectorscheduleinstances) - List all connector schedule instances
 * [ListConnectorSchedules](#listconnectorschedules) - List all connector schedules
@@ -1238,6 +1240,66 @@ func main() {
 | payments.V3ErrorResponse | default                  | application/json         |
 | sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
 
+## GetConnectorCapabilities
+
+Returns the list of plugin capabilities advertised by the provider backing this installed connector (`FETCH_ACCOUNTS`, `CREATE_TRANSFER`, ...). The same values are also inlined on each row of `v3ListConnectors`; prefer that endpoint when listing multiple connectors.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetConnectorCapabilities" method="get" path="/api/payments/v3/connectors/{connectorID}/capabilities" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.GetConnectorCapabilities(ctx, operations.V3GetConnectorCapabilitiesRequest{
+        ConnectorID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3ConnectorCapabilityResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
+| `request`                                                                                                        | [operations.V3GetConnectorCapabilitiesRequest](../../pkg/models/operations/v3getconnectorcapabilitiesrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
+
+### Response
+
+**[*operations.V3GetConnectorCapabilitiesResponse](../../pkg/models/operations/v3getconnectorcapabilitiesresponse.md), error**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+
 ## GetConnectorConfig
 
 Get a connector configuration by ID
@@ -1274,50 +1336,52 @@ func main() {
     }
     if res.V3GetConnectorConfigResponse != nil {
         switch res.V3GetConnectorConfigResponse.Data.Type {
-            case shared.V3ConnectorConfigTypeV3AdyenConfig:
+            case shared.V3ConnectorConfigTypeAdyen:
                 // res.V3GetConnectorConfigResponse.Data.V3AdyenConfig is populated
-            case shared.V3ConnectorConfigTypeV3AtlarConfig:
+            case shared.V3ConnectorConfigTypeAtlar:
                 // res.V3GetConnectorConfigResponse.Data.V3AtlarConfig is populated
-            case shared.V3ConnectorConfigTypeV3BankingcircleConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3BankingcircleConfig is populated
-            case shared.V3ConnectorConfigTypeV3ColumnConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3ColumnConfig is populated
-            case shared.V3ConnectorConfigTypeV3CurrencycloudConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3CurrencycloudConfig is populated
-            case shared.V3ConnectorConfigTypeV3DummypayConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3DummypayConfig is populated
-            case shared.V3ConnectorConfigTypeV3GenericConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3GenericConfig is populated
-            case shared.V3ConnectorConfigTypeV3IncreaseConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3IncreaseConfig is populated
-            case shared.V3ConnectorConfigTypeV3MangopayConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3MangopayConfig is populated
-            case shared.V3ConnectorConfigTypeV3ModulrConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3ModulrConfig is populated
-            case shared.V3ConnectorConfigTypeV3MoneycorpConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3MoneycorpConfig is populated
-            case shared.V3ConnectorConfigTypeV3PlaidConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3PlaidConfig is populated
-            case shared.V3ConnectorConfigTypeV3PowensConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3PowensConfig is populated
-            case shared.V3ConnectorConfigTypeV3QontoConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3QontoConfig is populated
-            case shared.V3ConnectorConfigTypeV3StripeConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3StripeConfig is populated
-            case shared.V3ConnectorConfigTypeV3TinkConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3TinkConfig is populated
-            case shared.V3ConnectorConfigTypeV3WiseConfig:
-                // res.V3GetConnectorConfigResponse.Data.V3WiseConfig is populated
-            case shared.V3ConnectorConfigTypeV3BankingbridgeConfig:
+            case shared.V3ConnectorConfigTypeBankingbridge:
                 // res.V3GetConnectorConfigResponse.Data.V3BankingbridgeConfig is populated
-            case shared.V3ConnectorConfigTypeV3BitstampConfig:
+            case shared.V3ConnectorConfigTypeBankingcircle:
+                // res.V3GetConnectorConfigResponse.Data.V3BankingcircleConfig is populated
+            case shared.V3ConnectorConfigTypeBitstamp:
                 // res.V3GetConnectorConfigResponse.Data.V3BitstampConfig is populated
-            case shared.V3ConnectorConfigTypeV3CoinbaseprimeConfig:
+            case shared.V3ConnectorConfigTypeCoinbaseprime:
                 // res.V3GetConnectorConfigResponse.Data.V3CoinbaseprimeConfig is populated
-            case shared.V3ConnectorConfigTypeV3FireblocksConfig:
+            case shared.V3ConnectorConfigTypeColumn:
+                // res.V3GetConnectorConfigResponse.Data.V3ColumnConfig is populated
+            case shared.V3ConnectorConfigTypeCurrencycloud:
+                // res.V3GetConnectorConfigResponse.Data.V3CurrencycloudConfig is populated
+            case shared.V3ConnectorConfigTypeDummypay:
+                // res.V3GetConnectorConfigResponse.Data.V3DummypayConfig is populated
+            case shared.V3ConnectorConfigTypeFireblocks:
                 // res.V3GetConnectorConfigResponse.Data.V3FireblocksConfig is populated
-            case shared.V3ConnectorConfigTypeV3RoutableConfig:
+            case shared.V3ConnectorConfigTypeGeneric:
+                // res.V3GetConnectorConfigResponse.Data.V3GenericConfig is populated
+            case shared.V3ConnectorConfigTypeIncrease:
+                // res.V3GetConnectorConfigResponse.Data.V3IncreaseConfig is populated
+            case shared.V3ConnectorConfigTypeKrakenpro:
+                // res.V3GetConnectorConfigResponse.Data.V3KrakenproConfig is populated
+            case shared.V3ConnectorConfigTypeMangopay:
+                // res.V3GetConnectorConfigResponse.Data.V3MangopayConfig is populated
+            case shared.V3ConnectorConfigTypeModulr:
+                // res.V3GetConnectorConfigResponse.Data.V3ModulrConfig is populated
+            case shared.V3ConnectorConfigTypeMoneycorp:
+                // res.V3GetConnectorConfigResponse.Data.V3MoneycorpConfig is populated
+            case shared.V3ConnectorConfigTypePlaid:
+                // res.V3GetConnectorConfigResponse.Data.V3PlaidConfig is populated
+            case shared.V3ConnectorConfigTypePowens:
+                // res.V3GetConnectorConfigResponse.Data.V3PowensConfig is populated
+            case shared.V3ConnectorConfigTypeQonto:
+                // res.V3GetConnectorConfigResponse.Data.V3QontoConfig is populated
+            case shared.V3ConnectorConfigTypeRoutable:
                 // res.V3GetConnectorConfigResponse.Data.V3RoutableConfig is populated
+            case shared.V3ConnectorConfigTypeStripe:
+                // res.V3GetConnectorConfigResponse.Data.V3StripeConfig is populated
+            case shared.V3ConnectorConfigTypeTink:
+                // res.V3GetConnectorConfigResponse.Data.V3TinkConfig is populated
+            case shared.V3ConnectorConfigTypeWise:
+                // res.V3GetConnectorConfigResponse.Data.V3WiseConfig is populated
         }
 
     }
@@ -2239,6 +2303,64 @@ func main() {
 ### Response
 
 **[*operations.V3ListBankAccountsResponse](../../pkg/models/operations/v3listbankaccountsresponse.md), error**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| payments.V3ErrorResponse | default                  | application/json         |
+| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+
+## ListConnectorCapabilities
+
+Returns the static map of provider name to the list of plugin capabilities (`FETCH_ACCOUNTS`, `CREATE_TRANSFER`, ...) compiled into this binary. The catalog is immutable for the lifetime of the process and is therefore safe to cache: the response carries a strong ETag and a `Cache-Control: public, max-age=3600, must-revalidate` directive. Stateless consumers (e.g. console) should set `If-None-Match` on subsequent requests to receive a `304 Not Modified`.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListConnectorCapabilities" method="get" path="/api/payments/v3/connectors/capabilities" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity(shared.Security{
+            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Payments.V3.ListConnectorCapabilities(ctx, operations.V3ListConnectorCapabilitiesRequest{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.V3ConnectorCapabilitiesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
+| `request`                                                                                                          | [operations.V3ListConnectorCapabilitiesRequest](../../pkg/models/operations/v3listconnectorcapabilitiesrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| `opts`                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
+
+### Response
+
+**[*operations.V3ListConnectorCapabilitiesResponse](../../pkg/models/operations/v3listconnectorcapabilitiesresponse.md), error**
 
 ### Errors
 

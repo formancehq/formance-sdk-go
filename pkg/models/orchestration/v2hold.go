@@ -27,6 +27,20 @@ func (v *V2Hold) GetDestination() *V2Subject {
 	return v.Destination
 }
 
+func (v *V2Hold) GetDestinationAccount() *V2LedgerAccountSubject {
+	if v := v.GetDestination(); v != nil {
+		return v.V2LedgerAccountSubject
+	}
+	return nil
+}
+
+func (v *V2Hold) GetDestinationWallet() *V2WalletSubject {
+	if v := v.GetDestination(); v != nil {
+		return v.V2WalletSubject
+	}
+	return nil
+}
+
 func (v *V2Hold) GetID() string {
 	if v == nil {
 		return ""
