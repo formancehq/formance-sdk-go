@@ -3,7 +3,7 @@ speakeasyVersion: 1.770.0
 sources:
     stacks-source:
         inputs:
-            - location: registry.speakeasyapi.dev/formance/formance/stacks-source@sha256:c85e21f1f000f0409f58d4ace7aaac0d708f4577a19b638347b41dd37e19f317
+            - location: registry.speakeasyapi.dev/formance/formance/stacks-source@sha256:1d9e07120ee16749020c103aba5ef1de0601f8ee52ff065d000a1e651521898e
         registry:
             location: registry.speakeasyapi.dev/formance/formance/stacks-source
 targets:
