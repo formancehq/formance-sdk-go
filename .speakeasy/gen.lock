@@ -12,9 +12,9 @@ management:
   installationURL: https://github.com/formancehq/formance-sdk-go
   published: true
 persistentEdits:
-  generation_id: 21933c41-89a8-48bf-8674-b1ed33f5f83b
-  pristine_commit_hash: 77cf6d2002a86dbbbc4a21fd0f2f78539abbeb96
-  pristine_tree_hash: 38de22d6cbd3060f210f7a1094c65ecff265a679
+  generation_id: da2bb264-554e-4785-a6c7-a48f368f547f
+  pristine_commit_hash: defb7984a9c7b44c865b301f14fa7cbf83fcff90
+  pristine_tree_hash: 8051f1921d1a38127369a6328cab29a117ca09e8
 features:
   go:
     additionalDependencies: 0.1.0
@@ -4789,8 +4789,8 @@ trackedFiles:
     pristine_git_object: ec90bb1f12ccbb0374e6d592038366fd25147445
   go.mod:
     id: c47645c391ad
-    last_write_checksum: sha1:b31e092bcae6980c2a8d55af06125d7e76d2d6c1
-    pristine_git_object: f3c738575a902c5bf2ce2ce731d7a9dc23a8bc28
+    last_write_checksum: sha1:d86eaec2833b1131a2f613cca7ab69092b49d0ad
+    pristine_git_object: 04b4702c6c818e01215f179c5cd68441514968fb
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:c267f5fdf007f51e6aac63189ee7ad88908f6fe9
@@ -8041,8 +8041,8 @@ trackedFiles:
     pristine_git_object: f146d4f95055e11ba38cae7d8f526f9bedac13dc
   search.go:
     id: 4c057402d2bf
-    last_write_checksum: sha1:e8c7af665e899bafb95821cdeae8023649551337
-    pristine_git_object: 0ef705d846ef1ad844cab874efc87fa253e8bf44
+    last_write_checksum: sha1:68b6d0bc4b03b8ccf9b938fec2ad240150f0bfec
+    pristine_git_object: 3000ee5d2e7718522c3f948dc784e12cf397a73c
   v1.go:
     id: 0a7712000d5c
     last_write_checksum: sha1:aabc9b7678069eb246ebac0f6b3b196da3c67839
