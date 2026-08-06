@@ -4,7 +4,7 @@
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/webhooks"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/webhooks"
 )
 
 value := webhooks.ErrorsEnumInternal
@@ -18,3 +18,4 @@ value := webhooks.ErrorsEnumInternal
 | `ErrorsEnumInternal`   | INTERNAL               |
 | `ErrorsEnumValidation` | VALIDATION             |
 | `ErrorsEnumNotFound`   | NOT_FOUND              |
+| `ErrorsEnumConflict`   | CONFLICT               |

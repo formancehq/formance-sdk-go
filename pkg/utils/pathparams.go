@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/formancehq/formance-sdk-go/v4/pkg/optionalnullable"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/optionalnullable"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/types"
 )
 
 func GenerateURL(_ context.Context, serverURL, path string, pathParams interface{}, globals interface{}) (string, error) {

@@ -34,19 +34,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -93,18 +93,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -149,18 +149,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -205,19 +205,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -264,19 +264,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -323,19 +323,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -382,19 +382,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -441,19 +441,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -501,18 +501,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -556,19 +556,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -615,25 +615,25 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
     res, err := s.Orchestration.V1.ListInstances(ctx, operations.ListInstancesRequest{
-        Running: v4.Pointer(true),
-        WorkflowID: v4.Pointer("xxx"),
+        Running: v5.Pointer(true),
+        WorkflowID: v5.Pointer("xxx"),
     })
     if err != nil {
         log.Fatal(err)
@@ -675,19 +675,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -732,19 +732,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -791,18 +791,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -846,19 +846,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -905,19 +905,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -964,19 +964,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 

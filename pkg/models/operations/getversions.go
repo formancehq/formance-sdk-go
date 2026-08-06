@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/gateway"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/gateway"
 	"net/http"
 )
 

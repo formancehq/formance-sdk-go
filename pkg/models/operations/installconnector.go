@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/payments"
 	"net/http"
 )
 
@@ -18,6 +18,50 @@ func (i *InstallConnectorRequest) GetConnectorConfig() payments.ConnectorConfig 
 		return payments.ConnectorConfig{}
 	}
 	return i.ConnectorConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigAdyen() *payments.AdyenConfig {
+	return i.GetConnectorConfig().AdyenConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigAtlar() *payments.AtlarConfig {
+	return i.GetConnectorConfig().AtlarConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigBankingcircle() *payments.BankingCircleConfig {
+	return i.GetConnectorConfig().BankingCircleConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigCurrencycloud() *payments.CurrencyCloudConfig {
+	return i.GetConnectorConfig().CurrencyCloudConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigDummypay() *payments.DummyPayConfig {
+	return i.GetConnectorConfig().DummyPayConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigGeneric() *payments.GenericConfig {
+	return i.GetConnectorConfig().GenericConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigMangopay() *payments.MangoPayConfig {
+	return i.GetConnectorConfig().MangoPayConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigModulr() *payments.ModulrConfig {
+	return i.GetConnectorConfig().ModulrConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigMoneycorp() *payments.MoneycorpConfig {
+	return i.GetConnectorConfig().MoneycorpConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigStripe() *payments.StripeConfig {
+	return i.GetConnectorConfig().StripeConfig
+}
+
+func (i *InstallConnectorRequest) GetConnectorConfigWise() *payments.WiseConfig {
+	return i.GetConnectorConfig().WiseConfig
 }
 
 func (i *InstallConnectorRequest) GetConnector() payments.Connector {

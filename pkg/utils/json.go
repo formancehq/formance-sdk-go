@@ -14,7 +14,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/formancehq/formance-sdk-go/v4/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/types"
 )
 
 func MarshalJSON(v interface{}, tag reflect.StructTag, topLevel bool) ([]byte, error) {

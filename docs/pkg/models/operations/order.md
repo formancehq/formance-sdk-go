@@ -6,7 +6,7 @@ The sort order
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 )
 
 value := operations.OrderAsc

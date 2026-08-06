@@ -2,10 +2,6 @@
 
 package reconciliation
 
-import (
-	"encoding/json"
-)
-
 // ErrorResponse - Error response
 type ErrorResponse struct {
 	Details      *string `json:"details,omitempty"`
@@ -13,9 +9,23 @@ type ErrorResponse struct {
 	ErrorMessage string  `json:"errorMessage"`
 }
 
-var _ error = &ErrorResponse{}
+func (e *ErrorResponse) GetDetails() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Details
+}
 
-func (e *ErrorResponse) Error() string {
-	data, _ := json.Marshal(e)
-	return string(data)
+func (e *ErrorResponse) GetErrorCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.ErrorCode
+}
+
+func (e *ErrorResponse) GetErrorMessage() string {
+	if e == nil {
+		return ""
+	}
+	return e.ErrorMessage
 }

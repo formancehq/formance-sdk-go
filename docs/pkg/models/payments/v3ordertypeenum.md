@@ -9,7 +9,7 @@ Exchange order type. Determines which price fields are meaningful on
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/payments"
 )
 
 value := payments.V3OrderTypeEnumUnknown

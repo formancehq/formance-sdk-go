@@ -9,7 +9,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"golang.org/x/sync/singleflight"
 	"io"
 	"net/http"

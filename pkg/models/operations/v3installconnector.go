@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/payments"
 	"net/http"
 )
 
@@ -18,6 +18,167 @@ func (v *V3InstallConnectorRequest) GetV3ConnectorConfig() *payments.V3Connector
 		return nil
 	}
 	return v.V3ConnectorConfig
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigAdyen() *payments.V3AdyenConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3AdyenConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigAtlar() *payments.V3AtlarConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3AtlarConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigBankingbridge() *payments.V3BankingbridgeConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3BankingbridgeConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigBankingcircle() *payments.V3BankingcircleConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3BankingcircleConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigBitstamp() *payments.V3BitstampConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3BitstampConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigCoinbaseprime() *payments.V3CoinbaseprimeConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3CoinbaseprimeConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigColumn() *payments.V3ColumnConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3ColumnConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigCurrencycloud() *payments.V3CurrencycloudConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3CurrencycloudConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigDummypay() *payments.V3DummypayConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3DummypayConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigFireblocks() *payments.V3FireblocksConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3FireblocksConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigGeneric() *payments.V3GenericConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3GenericConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigIncrease() *payments.V3IncreaseConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3IncreaseConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigKrakenpro() *payments.V3KrakenproConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3KrakenproConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigMangopay() *payments.V3MangopayConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3MangopayConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigModulr() *payments.V3ModulrConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3ModulrConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigMoneycorp() *payments.V3MoneycorpConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3MoneycorpConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigPlaid() *payments.V3PlaidConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3PlaidConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigPowens() *payments.V3PowensConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3PowensConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigQonto() *payments.V3QontoConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3QontoConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigRoutable() *payments.V3RoutableConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3RoutableConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigStripe() *payments.V3StripeConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3StripeConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigTink() *payments.V3TinkConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3TinkConfig
+	}
+	return nil
+}
+
+func (v *V3InstallConnectorRequest) GetV3ConnectorConfigWise() *payments.V3WiseConfig {
+	if v := v.GetV3ConnectorConfig(); v != nil {
+		return v.V3WiseConfig
+	}
+	return nil
 }
 
 func (v *V3InstallConnectorRequest) GetConnector() string {

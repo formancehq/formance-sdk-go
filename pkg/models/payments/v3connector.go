@@ -3,7 +3,7 @@
 package payments
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"time"
 )
 
@@ -11,14 +11,16 @@ type Config struct {
 }
 
 type V3Connector struct {
-	Config               Config     `json:"config"`
-	CreatedAt            time.Time  `json:"createdAt"`
-	ID                   string     `json:"id"`
-	Name                 string     `json:"name"`
-	Provider             string     `json:"provider"`
-	Reference            string     `json:"reference"`
-	ScheduledForDeletion bool       `json:"scheduledForDeletion"`
-	UpdatedAt            *time.Time `json:"updatedAt,omitempty"`
+	// Plugin capabilities advertised by the connector's provider.
+	Capabilities         []V3Capability `json:"capabilities,omitempty"`
+	Config               Config         `json:"config"`
+	CreatedAt            time.Time      `json:"createdAt"`
+	ID                   string         `json:"id"`
+	Name                 string         `json:"name"`
+	Provider             string         `json:"provider"`
+	Reference            string         `json:"reference"`
+	ScheduledForDeletion bool           `json:"scheduledForDeletion"`
+	UpdatedAt            *time.Time     `json:"updatedAt,omitempty"`
 }
 
 func (v V3Connector) MarshalJSON() ([]byte, error) {
@@ -30,6 +32,13 @@ func (v *V3Connector) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V3Connector) GetCapabilities() []V3Capability {
+	if v == nil {
+		return nil
+	}
+	return v.Capabilities
 }
 
 func (v *V3Connector) GetConfig() Config {

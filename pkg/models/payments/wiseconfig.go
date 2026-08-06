@@ -3,7 +3,7 @@
 package payments
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
 type WiseConfig struct {

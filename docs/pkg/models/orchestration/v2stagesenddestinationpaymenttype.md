@@ -9,7 +9,7 @@ Type of transfer initiation:
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/orchestration"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/orchestration"
 )
 
 value := orchestration.V2StageSendDestinationPaymentTypeTransfer

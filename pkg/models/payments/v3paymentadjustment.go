@@ -3,26 +3,20 @@
 package payments
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"math/big"
 	"time"
 )
 
-type V3PaymentAdjustmentRaw struct {
-}
-
-// #region class-body-v3paymentadjustmentraw
-// #endregion class-body-v3paymentadjustmentraw
-
 type V3PaymentAdjustment struct {
-	Amount    *big.Int               `json:"amount,omitempty"`
-	Asset     *string                `json:"asset,omitempty"`
-	CreatedAt time.Time              `json:"createdAt"`
-	ID        string                 `json:"id"`
-	Metadata  map[string]string      `json:"metadata,omitempty"`
-	Raw       V3PaymentAdjustmentRaw `json:"raw"`
-	Reference string                 `json:"reference"`
-	Status    V3PaymentStatusEnum    `json:"status"`
+	Amount    *big.Int            `json:"amount,omitempty"`
+	Asset     *string             `json:"asset,omitempty"`
+	CreatedAt time.Time           `json:"createdAt"`
+	ID        string              `json:"id"`
+	Metadata  map[string]string   `json:"metadata,omitempty"`
+	Raw       map[string]any      `json:"raw"`
+	Reference string              `json:"reference"`
+	Status    V3PaymentStatusEnum `json:"status"`
 }
 
 func (v V3PaymentAdjustment) MarshalJSON() ([]byte, error) {
@@ -71,9 +65,9 @@ func (v *V3PaymentAdjustment) GetMetadata() map[string]string {
 	return v.Metadata
 }
 
-func (v *V3PaymentAdjustment) GetRaw() V3PaymentAdjustmentRaw {
+func (v *V3PaymentAdjustment) GetRaw() map[string]any {
 	if v == nil {
-		return V3PaymentAdjustmentRaw{}
+		return map[string]any{}
 	}
 	return v.Raw
 }

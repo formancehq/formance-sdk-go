@@ -1,4 +1,4 @@
-module github.com/formancehq/formance-sdk-go/v4
+module github.com/formancehq/formance-sdk-go/v5
 
 go 1.25.10
 

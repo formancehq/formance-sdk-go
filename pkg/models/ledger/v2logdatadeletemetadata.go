@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"math/big"
 )
 

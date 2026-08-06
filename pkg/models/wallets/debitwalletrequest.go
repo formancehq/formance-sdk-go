@@ -3,7 +3,7 @@
 package wallets
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"time"
 )
 
@@ -57,6 +57,20 @@ func (d *DebitWalletRequest) GetDestination() *Subject {
 		return nil
 	}
 	return d.Destination
+}
+
+func (d *DebitWalletRequest) GetDestinationAccount() *LedgerAccountSubject {
+	if v := d.GetDestination(); v != nil {
+		return v.LedgerAccountSubject
+	}
+	return nil
+}
+
+func (d *DebitWalletRequest) GetDestinationWallet() *WalletSubject {
+	if v := d.GetDestination(); v != nil {
+		return v.WalletSubject
+	}
+	return nil
 }
 
 func (d *DebitWalletRequest) GetMetadata() map[string]string {
