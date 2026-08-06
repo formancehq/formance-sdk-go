@@ -15,7 +15,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/formancehq/formance-sdk-go/v4/pkg/optionalnullable"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/optionalnullable"
 )
 
 const (

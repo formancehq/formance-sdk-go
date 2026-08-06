@@ -3,7 +3,7 @@
 package orchestration
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"time"
 )
 
@@ -57,6 +57,20 @@ func (v *V2DebitWalletRequest) GetDestination() *V2Subject {
 		return nil
 	}
 	return v.Destination
+}
+
+func (v *V2DebitWalletRequest) GetDestinationAccount() *V2LedgerAccountSubject {
+	if v := v.GetDestination(); v != nil {
+		return v.V2LedgerAccountSubject
+	}
+	return nil
+}
+
+func (v *V2DebitWalletRequest) GetDestinationWallet() *V2WalletSubject {
+	if v := v.GetDestination(); v != nil {
+		return v.V2WalletSubject
+	}
+	return nil
 }
 
 func (v *V2DebitWalletRequest) GetMetadata() map[string]string {

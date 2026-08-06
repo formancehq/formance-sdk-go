@@ -5,7 +5,7 @@ package orchestration
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
 // StageSendDestinationPaymentType - Type of transfer initiation:

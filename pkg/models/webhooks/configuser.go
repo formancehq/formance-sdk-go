@@ -5,7 +5,6 @@ package webhooks
 type ConfigUser struct {
 	Endpoint   string   `json:"endpoint"`
 	EventTypes []string `json:"eventTypes"`
-	Name       *string  `json:"name,omitempty"`
 	Secret     *string  `json:"secret,omitempty"`
 }
 
@@ -21,13 +20,6 @@ func (c *ConfigUser) GetEventTypes() []string {
 		return []string{}
 	}
 	return c.EventTypes
-}
-
-func (c *ConfigUser) GetName() *string {
-	if c == nil {
-		return nil
-	}
-	return c.Name
 }
 
 func (c *ConfigUser) GetSecret() *string {

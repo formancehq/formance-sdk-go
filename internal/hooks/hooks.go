@@ -5,7 +5,7 @@ package hooks
 import (
 	"context"
 	"errors"
-	"github.com/formancehq/formance-sdk-go/v4/internal/config"
+	"github.com/formancehq/formance-sdk-go/v5/internal/config"
 	"net/http"
 )
 

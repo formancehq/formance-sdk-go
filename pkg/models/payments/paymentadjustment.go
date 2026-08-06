@@ -3,20 +3,17 @@
 package payments
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"math/big"
 	"time"
 )
 
-type PaymentAdjustmentRaw struct {
-}
-
 type PaymentAdjustment struct {
-	Amount    *big.Int             `json:"amount"`
-	CreatedAt time.Time            `json:"createdAt"`
-	Raw       PaymentAdjustmentRaw `json:"raw"`
-	Reference string               `json:"reference"`
-	Status    PaymentStatus        `json:"status"`
+	Amount    *big.Int       `json:"amount"`
+	CreatedAt time.Time      `json:"createdAt"`
+	Raw       map[string]any `json:"raw"`
+	Reference string         `json:"reference"`
+	Status    PaymentStatus  `json:"status"`
 }
 
 func (p PaymentAdjustment) MarshalJSON() ([]byte, error) {
@@ -44,9 +41,9 @@ func (p *PaymentAdjustment) GetCreatedAt() time.Time {
 	return p.CreatedAt
 }
 
-func (p *PaymentAdjustment) GetRaw() PaymentAdjustmentRaw {
+func (p *PaymentAdjustment) GetRaw() map[string]any {
 	if p == nil {
-		return PaymentAdjustmentRaw{}
+		return map[string]any{}
 	}
 	return p.Raw
 }

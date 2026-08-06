@@ -14,7 +14,7 @@ Lifecycle of an order on the exchange.
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/payments"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/payments"
 )
 
 value := payments.V3OrderStatusEnumUnknown

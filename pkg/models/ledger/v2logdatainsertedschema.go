@@ -3,7 +3,7 @@
 package ledger
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
 // V2LogDataInsertedSchema - Payload for INSERTED_SCHEMA log entries. Contains the schema that was inserted into the ledger.

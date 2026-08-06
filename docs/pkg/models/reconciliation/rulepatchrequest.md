@@ -1,0 +1,17 @@
+# RulePatchRequest
+
+Partial update — only fields supplied are applied.
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `Enabled`                                                                          | `*bool`                                                                            | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Labels`                                                                           | map[string]`string`                                                                | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Name`                                                                             | `*string`                                                                          | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Notifications`                                                                    | []`string`                                                                         | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Schedule`                                                                         | [*reconciliation.Schedule](../../../pkg/models/reconciliation/schedule.md)         | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Severity`                                                                         | [*reconciliation.Severity](../../../pkg/models/reconciliation/severity.md)         | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `TemplateKind`                                                                     | [*reconciliation.TemplateKind](../../../pkg/models/reconciliation/templatekind.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `TemplateSpec`                                                                     | map[string]`any`                                                                   | :heavy_minus_sign:                                                                 | N/A                                                                                |

@@ -24,18 +24,18 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -80,19 +80,19 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v4"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/search"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/search"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New(
-        v4.WithSecurity(shared.Security{
-            ClientID: v4.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v4.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
         }),
     )
 
@@ -100,13 +100,13 @@ func main() {
         After: []string{
             "users:002",
         },
-        Cursor: v4.Pointer("YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="),
+        Cursor: v5.Pointer("YXVsdCBhbmQgYSBtYXhpbXVtIG1heF9yZXN1bHRzLol="),
         Ledgers: []string{
             "quickstart",
         },
-        Policy: v4.Pointer("OR"),
+        Policy: v5.Pointer("OR"),
         Raw: &search.Raw{},
-        Sort: v4.Pointer("id:asc"),
+        Sort: v5.Pointer("id:asc"),
         Terms: []string{
             "destination=central_bank1",
         },

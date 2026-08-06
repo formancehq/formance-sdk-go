@@ -3,12 +3,12 @@
 package operations
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/ledger"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledger"
 	"net/http"
 )
 
 type V2CreateBulkRequest struct {
-	RequestBody []any `request:"mediaType=application/json"`
+	RequestBody []ledger.V2BulkElement `request:"mediaType=application/json"`
 	// Make bulk atomic
 	Atomic *bool `queryParam:"style=form,explode=true,name=atomic"`
 	// Continue on failure
@@ -21,9 +21,9 @@ type V2CreateBulkRequest struct {
 	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
 }
 
-func (v *V2CreateBulkRequest) GetRequestBody() []any {
+func (v *V2CreateBulkRequest) GetRequestBody() []ledger.V2BulkElement {
 	if v == nil {
-		return []any{}
+		return []ledger.V2BulkElement{}
 	}
 	return v.RequestBody
 }

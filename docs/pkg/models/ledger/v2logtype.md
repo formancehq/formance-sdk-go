@@ -6,7 +6,7 @@ The type of operation this log represents
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/ledger"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledger"
 )
 
 value := ledger.V2LogTypeNewTransaction

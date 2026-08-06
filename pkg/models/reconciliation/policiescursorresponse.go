@@ -2,7 +2,7 @@
 
 package reconciliation
 
-type Cursor struct {
+type PoliciesCursorResponseCursor struct {
 	Data     []Policy `json:"data"`
 	HasMore  bool     `json:"hasMore"`
 	Next     *string  `json:"next,omitempty"`
@@ -10,49 +10,49 @@ type Cursor struct {
 	Previous *string  `json:"previous,omitempty"`
 }
 
-func (c *Cursor) GetData() []Policy {
-	if c == nil {
+func (p *PoliciesCursorResponseCursor) GetData() []Policy {
+	if p == nil {
 		return []Policy{}
 	}
-	return c.Data
+	return p.Data
 }
 
-func (c *Cursor) GetHasMore() bool {
-	if c == nil {
+func (p *PoliciesCursorResponseCursor) GetHasMore() bool {
+	if p == nil {
 		return false
 	}
-	return c.HasMore
+	return p.HasMore
 }
 
-func (c *Cursor) GetNext() *string {
-	if c == nil {
+func (p *PoliciesCursorResponseCursor) GetNext() *string {
+	if p == nil {
 		return nil
 	}
-	return c.Next
+	return p.Next
 }
 
-func (c *Cursor) GetPageSize() int64 {
-	if c == nil {
+func (p *PoliciesCursorResponseCursor) GetPageSize() int64 {
+	if p == nil {
 		return 0
 	}
-	return c.PageSize
+	return p.PageSize
 }
 
-func (c *Cursor) GetPrevious() *string {
-	if c == nil {
+func (p *PoliciesCursorResponseCursor) GetPrevious() *string {
+	if p == nil {
 		return nil
 	}
-	return c.Previous
+	return p.Previous
 }
 
 // PoliciesCursorResponse - OK
 type PoliciesCursorResponse struct {
-	Cursor Cursor `json:"cursor"`
+	Cursor PoliciesCursorResponseCursor `json:"cursor"`
 }
 
-func (p *PoliciesCursorResponse) GetCursor() Cursor {
+func (p *PoliciesCursorResponse) GetCursor() PoliciesCursorResponseCursor {
 	if p == nil {
-		return Cursor{}
+		return PoliciesCursorResponseCursor{}
 	}
 	return p.Cursor
 }

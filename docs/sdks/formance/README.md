@@ -30,14 +30,14 @@ package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4"
+	"github.com/formancehq/formance-sdk-go/v5"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v4.New()
+    s := v5.New()
 
     res, err := s.GetVersions(ctx)
     if err != nil {

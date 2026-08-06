@@ -9,7 +9,7 @@ Global options are passed when initializing the SDK client and apply to all oper
 WithServerURL allows providing an alternative server URL.
 
 ```go
-v4.WithServerURL("https://api.example.com")
+v5.WithServerURL("https://api.example.com")
 ```
 
 ### WithTemplatedServerURL
@@ -17,7 +17,7 @@ v4.WithServerURL("https://api.example.com")
 WithTemplatedServerURL allows providing an alternative server URL with templated parameters.
 
 ```go
-v4.WithTemplatedServerURL("https://{host}:{port}", map[string]string{
+v5.WithTemplatedServerURL("https://{host}:{port}", map[string]string{
     "host": "api.example.com",
     "port": "8080",
 })
@@ -28,7 +28,7 @@ v4.WithTemplatedServerURL("https://{host}:{port}", map[string]string{
 WithServerIndex allows the overriding of the default server by index.
 
 ```go
-v4.WithServerIndex(1)
+v5.WithServerIndex(1)
 ```
 
 ### WithEnvironment
@@ -36,7 +36,7 @@ v4.WithServerIndex(1)
 WithEnvironment allows setting the environment variable for url substitution.
 
 ```go
-v4.WithEnvironment(/* ... */)
+v5.WithEnvironment(/* ... */)
 ```
 
 ### WithOrganization
@@ -44,7 +44,7 @@ v4.WithEnvironment(/* ... */)
 WithOrganization allows setting the organization variable for url substitution.
 
 ```go
-v4.WithOrganization(/* ... */)
+v5.WithOrganization(/* ... */)
 ```
 
 ### WithClient
@@ -52,7 +52,7 @@ v4.WithOrganization(/* ... */)
 WithClient allows the overriding of the default HTTP client used by the SDK.
 
 ```go
-v4.WithClient(httpClient)
+v5.WithClient(httpClient)
 ```
 
 ### WithSecurity
@@ -60,7 +60,7 @@ v4.WithClient(httpClient)
 WithSecurity configures the SDK to use the provided security details.
 
 ```go
-v4.WithSecurity(/* ... */)
+v5.WithSecurity(/* ... */)
 ```
 
 ### WithSecuritySource
@@ -68,7 +68,7 @@ v4.WithSecurity(/* ... */)
 WithSecuritySource configures the SDK to invoke the provided function on each method call to determine authentication.
 
 ```go
-v4.WithSecuritySource(/* ... */)
+v5.WithSecuritySource(/* ... */)
 ```
 
 ### WithRetryConfig
@@ -76,7 +76,7 @@ v4.WithSecuritySource(/* ... */)
 WithRetryConfig allows setting the default retry configuration used by the SDK for all supported operations.
 
 ```go
-v4.WithRetryConfig(retry.Config{
+v5.WithRetryConfig(retry.Config{
     Strategy: "backoff",
     Backoff: retry.BackoffStrategy{
         InitialInterval: 500 * time.Millisecond,
@@ -93,7 +93,7 @@ v4.WithRetryConfig(retry.Config{
 WithTimeout sets the default request timeout for all operations.
 
 ```go
-v4.WithTimeout(30 * time.Second)
+v5.WithTimeout(30 * time.Second)
 ```
 
 ## Per-Method Options

@@ -3,15 +3,9 @@
 package payments
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"time"
 )
-
-type V3AccountRaw struct {
-}
-
-// #region class-body-v3accountraw
-// #endregion class-body-v3accountraw
 
 type V3Account struct {
 	Connector    *V3ConnectorBase  `json:"connector,omitempty"`
@@ -22,7 +16,7 @@ type V3Account struct {
 	Metadata     map[string]string `json:"metadata,omitempty"`
 	Name         *string           `json:"name,omitempty"`
 	Provider     string            `json:"provider"`
-	Raw          V3AccountRaw      `json:"raw"`
+	Raw          map[string]any    `json:"raw"`
 	Reference    string            `json:"reference"`
 	Type         V3AccountTypeEnum `json:"type"`
 }
@@ -94,9 +88,9 @@ func (v *V3Account) GetProvider() string {
 	return v.Provider
 }
 
-func (v *V3Account) GetRaw() V3AccountRaw {
+func (v *V3Account) GetRaw() map[string]any {
 	if v == nil {
-		return V3AccountRaw{}
+		return map[string]any{}
 	}
 	return v.Raw
 }

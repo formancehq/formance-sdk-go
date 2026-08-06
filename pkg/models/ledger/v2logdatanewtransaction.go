@@ -3,7 +3,7 @@
 package ledger
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
 // V2LogDataNewTransaction - Payload for NEW_TRANSACTION log entries. Contains the created transaction and any account metadata set during creation.

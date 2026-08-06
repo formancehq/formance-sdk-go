@@ -3,7 +3,7 @@
 package wallets
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"math/big"
 )
 
@@ -53,6 +53,20 @@ func (e *ExpandedDebitHold) GetDestination() *Subject {
 		return nil
 	}
 	return e.Destination
+}
+
+func (e *ExpandedDebitHold) GetDestinationAccount() *LedgerAccountSubject {
+	if v := e.GetDestination(); v != nil {
+		return v.LedgerAccountSubject
+	}
+	return nil
+}
+
+func (e *ExpandedDebitHold) GetDestinationWallet() *WalletSubject {
+	if v := e.GetDestination(); v != nil {
+		return v.WalletSubject
+	}
+	return nil
 }
 
 func (e *ExpandedDebitHold) GetID() string {

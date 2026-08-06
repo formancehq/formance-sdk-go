@@ -6,7 +6,7 @@ The numscript runtime used to execute the script. Uses "machine" by default, unl
 
 ```go
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/models/ledger"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledger"
 )
 
 value := ledger.RuntimeExperimentalInterpreter

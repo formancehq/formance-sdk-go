@@ -3,16 +3,17 @@
 package wallets
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
 type SubjectType string
 
 const (
-	SubjectTypeLedgerAccountSubject SubjectType = "LedgerAccountSubject"
-	SubjectTypeWalletSubject        SubjectType = "WalletSubject"
+	SubjectTypeAccount SubjectType = "ACCOUNT"
+	SubjectTypeWallet  SubjectType = "WALLET"
 )
 
 type Subject struct {
@@ -22,37 +23,59 @@ type Subject struct {
 	Type SubjectType
 }
 
-func CreateSubjectLedgerAccountSubject(ledgerAccountSubject LedgerAccountSubject) Subject {
-	typ := SubjectTypeLedgerAccountSubject
+func CreateSubjectAccount(account LedgerAccountSubject) Subject {
+	typ := SubjectTypeAccount
+
+	typStr := string(typ)
+	account.Type = typStr
 
 	return Subject{
-		LedgerAccountSubject: &ledgerAccountSubject,
+		LedgerAccountSubject: &account,
 		Type:                 typ,
 	}
 }
 
-func CreateSubjectWalletSubject(walletSubject WalletSubject) Subject {
-	typ := SubjectTypeWalletSubject
+func CreateSubjectWallet(wallet WalletSubject) Subject {
+	typ := SubjectTypeWallet
+
+	typStr := string(typ)
+	wallet.Type = typStr
 
 	return Subject{
-		WalletSubject: &walletSubject,
+		WalletSubject: &wallet,
 		Type:          typ,
 	}
 }
 
 func (u *Subject) UnmarshalJSON(data []byte) error {
 
-	var ledgerAccountSubject LedgerAccountSubject = LedgerAccountSubject{}
-	if err := utils.UnmarshalJSON(data, &ledgerAccountSubject, "", true, nil); err == nil {
-		u.LedgerAccountSubject = &ledgerAccountSubject
-		u.Type = SubjectTypeLedgerAccountSubject
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var walletSubject WalletSubject = WalletSubject{}
-	if err := utils.UnmarshalJSON(data, &walletSubject, "", true, nil); err == nil {
-		u.WalletSubject = &walletSubject
-		u.Type = SubjectTypeWalletSubject
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "ACCOUNT":
+		ledgerAccountSubject := new(LedgerAccountSubject)
+		if err := utils.UnmarshalJSON(data, &ledgerAccountSubject, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == ACCOUNT) type LedgerAccountSubject within Subject: %w", string(data), err)
+		}
+
+		u.LedgerAccountSubject = ledgerAccountSubject
+		u.Type = SubjectTypeAccount
+		return nil
+	case "WALLET":
+		walletSubject := new(WalletSubject)
+		if err := utils.UnmarshalJSON(data, &walletSubject, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == WALLET) type WalletSubject within Subject: %w", string(data), err)
+		}
+
+		u.WalletSubject = walletSubject
+		u.Type = SubjectTypeWallet
 		return nil
 	}
 

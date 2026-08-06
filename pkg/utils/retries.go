@@ -6,7 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/retry"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/retry"
 	"io"
 	"math"
 	"math/rand"

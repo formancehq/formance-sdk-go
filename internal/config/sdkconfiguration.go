@@ -4,7 +4,7 @@ package config
 
 import (
 	"context"
-	"github.com/formancehq/formance-sdk-go/v4/pkg/retry"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/retry"
 	"net/http"
 	"time"
 )

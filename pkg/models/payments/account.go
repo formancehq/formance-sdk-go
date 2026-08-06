@@ -3,12 +3,9 @@
 package payments
 
 import (
-	"github.com/formancehq/formance-sdk-go/v4/pkg/utils"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"time"
 )
-
-type Raw struct {
-}
 
 type Account struct {
 	AccountName  string    `json:"accountName"`
@@ -21,7 +18,7 @@ type Account struct {
 	Metadata        map[string]string `json:"metadata"`
 	Pools           []string          `json:"pools,omitempty"`
 	Provider        *string           `json:"provider,omitempty"`
-	Raw             *Raw              `json:"raw"`
+	Raw             map[string]any    `json:"raw"`
 	Reference       string            `json:"reference"`
 	Type            AccountType       `json:"type"`
 }
@@ -100,7 +97,7 @@ func (a *Account) GetProvider() *string {
 	return a.Provider
 }
 
-func (a *Account) GetRaw() *Raw {
+func (a *Account) GetRaw() map[string]any {
 	if a == nil {
 		return nil
 	}
