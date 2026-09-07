@@ -14,14 +14,16 @@ type AtlarConfig struct {
 	// The base URL the client uses for making requests towards the Atlar API.
 	//
 	BaseURL *string `default:"https://api.atlar.com" json:"baseUrl"`
-	Name    string  `json:"name"`
+	// Human-readable name identifying this connector instance
+	Name string `json:"name"`
 	// Number of items to fetch when querying paginated APIs.
 	//
 	PageSize *int64 `default:"25" json:"pageSize"`
 	// The frequency at which the connector tries to fetch new Transaction objects from the Atlar API.
 	//
 	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
-	Provider      *string `default:"Atlar" json:"provider"`
+	// Identifies the payment provider this configuration targets
+	Provider *string `default:"Atlar" json:"provider"`
 	// The secret used by the connector for authorizing requests to the Atlar API.
 	// You can obtain it along with the associated access key from the Atlar dashboard.
 	//

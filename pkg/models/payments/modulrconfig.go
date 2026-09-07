@@ -7,14 +7,19 @@ import (
 )
 
 type ModulrConfig struct {
-	APIKey    string  `json:"apiKey"`
-	APISecret string  `json:"apiSecret"`
-	Endpoint  *string `json:"endpoint,omitempty"`
-	Name      string  `json:"name"`
+	// API key issued by Modulr, used to authenticate the connector's requests
+	APIKey string `json:"apiKey"`
+	// API secret issued by Modulr, paired with the API key to sign requests
+	APISecret string `json:"apiSecret"`
+	// Base URL of the Modulr API the connector calls
+	Endpoint *string `json:"endpoint,omitempty"`
+	// Human-readable name identifying this connector instance
+	Name string `json:"name"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Modulr API.
 	//
 	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
-	Provider      *string `default:"Modulr" json:"provider"`
+	// Identifies the payment provider this configuration targets
+	Provider *string `default:"Modulr" json:"provider"`
 }
 
 func (m ModulrConfig) MarshalJSON() ([]byte, error) {

@@ -2,6 +2,7 @@
 
 package payments
 
+// V3BalancesCursorResponseCursor - Paginated cursor wrapping the list of balances
 type V3BalancesCursorResponseCursor struct {
 	Data     []V3Balance `json:"data"`
 	HasMore  bool        `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V3BalancesCursorResponseCursor) GetPrevious() *string {
 // #endregion class-body-v3balancescursorresponsecursor
 
 type V3BalancesCursorResponse struct {
+	// Paginated cursor wrapping the list of balances
 	Cursor V3BalancesCursorResponseCursor `json:"cursor"`
 }
 

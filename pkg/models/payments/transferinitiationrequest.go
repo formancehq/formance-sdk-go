@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// TransferInitiationRequestType - Whether the funds move between your accounts or out to a third party
 type TransferInitiationRequestType string
 
 const (
@@ -37,17 +38,28 @@ func (e *TransferInitiationRequestType) UnmarshalJSON(data []byte) error {
 }
 
 type TransferInitiationRequest struct {
-	Amount               *big.Int                      `json:"amount"`
-	Asset                string                        `json:"asset"`
-	ConnectorID          *string                       `json:"connectorID,omitempty"`
-	Description          string                        `json:"description"`
-	DestinationAccountID string                        `json:"destinationAccountID"`
-	Metadata             map[string]string             `json:"metadata,omitempty"`
-	Reference            string                        `json:"reference"`
-	ScheduledAt          time.Time                     `json:"scheduledAt"`
-	SourceAccountID      string                        `json:"sourceAccountID"`
-	Type                 TransferInitiationRequestType `json:"type"`
-	Validated            bool                          `json:"validated"`
+	// Amount to move, in the asset's smallest unit
+	Amount *big.Int `json:"amount"`
+	// Asset the transfer is denominated in
+	Asset string `json:"asset"`
+	// Identifier of the connector to execute the transfer through
+	ConnectorID *string `json:"connectorID,omitempty"`
+	// Human-readable description carried with the transfer
+	Description string `json:"description"`
+	// Identifier of the account the funds reach
+	DestinationAccountID string `json:"destinationAccountID"`
+	// Arbitrary key/value pairs to attach to the initiation
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Caller-supplied identifier for the initiation, used to deduplicate retries
+	Reference string `json:"reference"`
+	// When the transfer should be executed
+	ScheduledAt time.Time `json:"scheduledAt"`
+	// Identifier of the account the funds leave
+	SourceAccountID string `json:"sourceAccountID"`
+	// Whether the funds move between your accounts or out to a third party
+	Type TransferInitiationRequestType `json:"type"`
+	// When true, the transfer executes immediately instead of waiting for approval
+	Validated bool `json:"validated"`
 }
 
 func (t TransferInitiationRequest) MarshalJSON() ([]byte, error) {

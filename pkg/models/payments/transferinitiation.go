@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// Type - Whether the funds move between your accounts or out to a third party
 type Type string
 
 const (
@@ -36,25 +37,44 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// TransferInitiation - A transfer Formance asked a connector to execute
 type TransferInitiation struct {
-	Amount               *big.Int                        `json:"amount"`
-	Asset                string                          `json:"asset"`
-	ConnectorID          string                          `json:"connectorID"`
-	CreatedAt            time.Time                       `json:"createdAt"`
-	Description          string                          `json:"description"`
-	DestinationAccountID string                          `json:"destinationAccountID"`
-	Error                *string                         `json:"error,omitempty"`
-	ID                   string                          `json:"id"`
-	InitialAmount        *big.Int                        `json:"initialAmount"`
-	Metadata             map[string]string               `json:"metadata,omitempty"`
-	Provider             *string                         `json:"provider"`
-	Reference            string                          `json:"reference"`
-	RelatedAdjustments   []TransferInitiationAdjustments `json:"relatedAdjustments,omitempty"`
-	RelatedPayments      []TransferInitiationPayments    `json:"relatedPayments,omitempty"`
-	ScheduledAt          time.Time                       `json:"scheduledAt"`
-	SourceAccountID      string                          `json:"sourceAccountID"`
-	Status               TransferInitiationStatus        `json:"status"`
-	Type                 Type                            `json:"type"`
+	// Amount to move, in the asset's smallest unit
+	Amount *big.Int `json:"amount"`
+	// Asset the transfer is denominated in
+	Asset string `json:"asset"`
+	// Identifier of the connector executing the transfer
+	ConnectorID string `json:"connectorID"`
+	// When the initiation was created
+	CreatedAt time.Time `json:"createdAt"`
+	// Human-readable description carried with the transfer
+	Description string `json:"description"`
+	// Identifier of the account the funds reach
+	DestinationAccountID string `json:"destinationAccountID"`
+	// Why the initiation failed, absent when it succeeded
+	Error *string `json:"error,omitempty"`
+	// Unique identifier of the transfer initiation
+	ID string `json:"id"`
+	// Amount the initiation was created with, before any adjustment
+	InitialAmount *big.Int `json:"initialAmount"`
+	// Arbitrary key/value pairs attached to the initiation
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Name of the payment provider behind the connector
+	Provider *string `json:"provider"`
+	// Caller-supplied identifier for the initiation
+	Reference string `json:"reference"`
+	// Successive status changes recorded against the initiation
+	RelatedAdjustments []TransferInitiationAdjustments `json:"relatedAdjustments,omitempty"`
+	// Payments produced by this initiation
+	RelatedPayments []TransferInitiationPayments `json:"relatedPayments,omitempty"`
+	// When the transfer is scheduled to execute
+	ScheduledAt time.Time `json:"scheduledAt"`
+	// Identifier of the account the funds leave
+	SourceAccountID string `json:"sourceAccountID"`
+	// Where a transfer initiation stands in its lifecycle
+	Status TransferInitiationStatus `json:"status"`
+	// Whether the funds move between your accounts or out to a third party
+	Type Type `json:"type"`
 }
 
 func (t TransferInitiation) MarshalJSON() ([]byte, error) {

@@ -8,13 +8,20 @@ import (
 )
 
 type AccountRequest struct {
-	AccountName  *string           `json:"accountName,omitempty"`
-	ConnectorID  string            `json:"connectorID"`
-	CreatedAt    time.Time         `json:"createdAt"`
-	DefaultAsset *string           `json:"defaultAsset,omitempty"`
-	Metadata     map[string]string `json:"metadata,omitempty"`
-	Reference    string            `json:"reference"`
-	Type         AccountType       `json:"type"`
+	// Human-readable name of the account
+	AccountName *string `json:"accountName,omitempty"`
+	// Identifier of the connector the account belongs to
+	ConnectorID string `json:"connectorID"`
+	// When the account was created at the provider
+	CreatedAt time.Time `json:"createdAt"`
+	// Asset the account is denominated in by default
+	DefaultAsset *string `json:"defaultAsset,omitempty"`
+	// Arbitrary key/value pairs attached to the account
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Identifier the account carries at the provider
+	Reference string `json:"reference"`
+	// Whether an account is internal to the provider or belongs to an external party
+	Type AccountType `json:"type"`
 }
 
 func (a AccountRequest) MarshalJSON() ([]byte, error) {

@@ -2,6 +2,7 @@
 
 package payments
 
+// V3ForwardBankAccountResponseData - The task tracking the forwarding, which completes asynchronously
 type V3ForwardBankAccountResponseData struct {
 	// Since this call is asynchronous, the response will contain the ID of the task that was created to forward the bank account to the PSP. You can use the task API to check the status of the task and get the resulting bank account ID.
 	//
@@ -19,6 +20,7 @@ func (v *V3ForwardBankAccountResponseData) GetTaskID() string {
 // #endregion class-body-v3forwardbankaccountresponsedata
 
 type V3ForwardBankAccountResponse struct {
+	// The task tracking the forwarding, which completes asynchronously
 	Data V3ForwardBankAccountResponseData `json:"data"`
 }
 

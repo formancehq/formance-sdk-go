@@ -1,5 +1,7 @@
 # PaymentType
 
+Direction of a payment
+
 ## Example Usage
 
 ```go

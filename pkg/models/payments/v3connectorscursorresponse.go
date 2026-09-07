@@ -2,6 +2,7 @@
 
 package payments
 
+// V3ConnectorsCursorResponseCursor - Paginated cursor wrapping the list of connectors
 type V3ConnectorsCursorResponseCursor struct {
 	Data     []V3Connector `json:"data"`
 	HasMore  bool          `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V3ConnectorsCursorResponseCursor) GetPrevious() *string {
 // #endregion class-body-v3connectorscursorresponsecursor
 
 type V3ConnectorsCursorResponse struct {
+	// Paginated cursor wrapping the list of connectors
 	Cursor V3ConnectorsCursorResponseCursor `json:"cursor"`
 }
 

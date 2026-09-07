@@ -33,6 +33,7 @@ func (v *V3ConnectorConfigsResponseData) GetRequired() bool {
 // #endregion class-body-v3connectorconfigsresponsedata
 
 type V3ConnectorConfigsResponse struct {
+	// Configuration schema of every available connector, keyed by provider
 	Data map[string]map[string]V3ConnectorConfigsResponseData `json:"data"`
 }
 

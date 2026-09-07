@@ -25,6 +25,7 @@ const (
 	ConnectorConfigTypeWise          ConnectorConfigType = "Wise"
 )
 
+// ConnectorConfig - A connector's configuration, whose shape depends on the provider
 type ConnectorConfig struct {
 	StripeConfig        *StripeConfig        `queryParam:"inline" union:"member"`
 	DummyPayConfig      *DummyPayConfig      `queryParam:"inline" union:"member"`

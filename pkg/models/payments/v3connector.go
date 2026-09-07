@@ -7,20 +7,29 @@ import (
 	"time"
 )
 
+// Config - The connector's configuration, whose shape depends on the provider
 type Config struct {
 }
 
 type V3Connector struct {
 	// Plugin capabilities advertised by the connector's provider.
-	Capabilities         []V3Capability `json:"capabilities,omitempty"`
-	Config               Config         `json:"config"`
-	CreatedAt            time.Time      `json:"createdAt"`
-	ID                   string         `json:"id"`
-	Name                 string         `json:"name"`
-	Provider             string         `json:"provider"`
-	Reference            string         `json:"reference"`
-	ScheduledForDeletion bool           `json:"scheduledForDeletion"`
-	UpdatedAt            *time.Time     `json:"updatedAt,omitempty"`
+	Capabilities []V3Capability `json:"capabilities,omitempty"`
+	// The connector's configuration, whose shape depends on the provider
+	Config Config `json:"config"`
+	// When the connector was installed
+	CreatedAt time.Time `json:"createdAt"`
+	// Unique identifier of the connector
+	ID string `json:"id"`
+	// Human-readable name of the connector instance
+	Name string `json:"name"`
+	// Name of the payment provider behind the connector
+	Provider string `json:"provider"`
+	// Stable reference identifying the connector
+	Reference string `json:"reference"`
+	// Whether the connector is being uninstalled
+	ScheduledForDeletion bool `json:"scheduledForDeletion"`
+	// When the connector's configuration was last changed
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 
 func (v V3Connector) MarshalJSON() ([]byte, error) {

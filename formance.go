@@ -75,9 +75,11 @@ type Formance struct {
 	Orchestration  *Orchestration
 	Payments       *Payments
 	Reconciliation *Reconciliation
-	Search         *Search
-	Wallets        *Wallets
-	Webhooks       *Webhooks
+	// search.v1
+	// Elasticsearch.v1 query engine
+	Search   *Search
+	Wallets  *Wallets
+	Webhooks *Webhooks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -209,9 +211,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "5.0.0",
+		SDKVersion: "5.0.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 5.0.0 2.893.0 SDK_VERSION github.com/formancehq/formance-sdk-go/v5",
+			UserAgent:  "speakeasy-sdk/go 5.0.1 2.893.0 SDK_VERSION github.com/formancehq/formance-sdk-go/v5",
 			ServerList: ServerList,
 			ServerVariables: []map[string]string{
 				{},

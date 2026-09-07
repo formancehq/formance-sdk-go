@@ -3,6 +3,7 @@
 package payments
 
 type UpdatePoolQueryRequest struct {
+	// Filter selecting the accounts a dynamic pool contains
 	Query map[string]any `json:"query"`
 }
 

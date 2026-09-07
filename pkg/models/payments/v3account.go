@@ -7,18 +7,30 @@ import (
 	"time"
 )
 
+// V3Account - An account held at a payment provider, surfaced through a connector
 type V3Account struct {
-	Connector    *V3ConnectorBase  `json:"connector,omitempty"`
-	ConnectorID  string            `json:"connectorID"`
-	CreatedAt    time.Time         `json:"createdAt"`
-	DefaultAsset *string           `json:"defaultAsset,omitempty"`
-	ID           string            `json:"id"`
-	Metadata     map[string]string `json:"metadata,omitempty"`
-	Name         *string           `json:"name,omitempty"`
-	Provider     string            `json:"provider"`
-	Raw          map[string]any    `json:"raw"`
-	Reference    string            `json:"reference"`
-	Type         V3AccountTypeEnum `json:"type"`
+	// Summary of a connector, without its configuration
+	Connector *V3ConnectorBase `json:"connector,omitempty"`
+	// Identifier of the connector the account belongs to
+	ConnectorID string `json:"connectorID"`
+	// When the account was created at the provider
+	CreatedAt time.Time `json:"createdAt"`
+	// Asset the account is denominated in by default
+	DefaultAsset *string `json:"defaultAsset,omitempty"`
+	// Unique identifier of the account within Formance
+	ID string `json:"id"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Human-readable name of the account
+	Name *string `json:"name,omitempty"`
+	// Name of the payment provider behind the connector
+	Provider string `json:"provider"`
+	// The provider's original payload, passed through untouched
+	Raw map[string]any `json:"raw"`
+	// Identifier the account carries at the provider
+	Reference string `json:"reference"`
+	// Whether an account is internal to the provider or belongs to an external party
+	Type V3AccountTypeEnum `json:"type"`
 }
 
 func (v V3Account) MarshalJSON() ([]byte, error) {

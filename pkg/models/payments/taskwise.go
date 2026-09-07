@@ -45,6 +45,7 @@ func (t *TaskWiseDescriptor) GetProfileID() *int64 {
 	return t.ProfileID
 }
 
+// TaskWiseState - Internal progress state the task resumes from
 type TaskWiseState struct {
 }
 
@@ -60,14 +61,21 @@ func (t *TaskWiseState) UnmarshalJSON(data []byte) error {
 }
 
 type TaskWise struct {
-	ConnectorID string             `json:"connectorID"`
-	CreatedAt   time.Time          `json:"createdAt"`
-	Descriptor  TaskWiseDescriptor `json:"descriptor"`
-	Error       *string            `json:"error,omitempty"`
-	ID          string             `json:"id"`
-	State       *TaskWiseState     `json:"state,omitempty"`
-	Status      TaskStatus         `json:"status"`
-	UpdatedAt   time.Time          `json:"updatedAt"`
+	// Identifier of the connector the task runs against
+	ConnectorID string `json:"connectorID"`
+	// When the task was created
+	CreatedAt  time.Time          `json:"createdAt"`
+	Descriptor TaskWiseDescriptor `json:"descriptor"`
+	// Why the task failed, absent when it succeeded
+	Error *string `json:"error,omitempty"`
+	// Unique identifier of the task
+	ID string `json:"id"`
+	// Internal progress state the task resumes from
+	State *TaskWiseState `json:"state,omitempty"`
+	// Where a task stands, from pending or active through to stopped, terminated or failed
+	Status TaskStatus `json:"status"`
+	// When the task was last updated
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 func (t TaskWise) MarshalJSON() ([]byte, error) {

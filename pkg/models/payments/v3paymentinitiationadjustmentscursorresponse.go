@@ -2,6 +2,7 @@
 
 package payments
 
+// V3PaymentInitiationAdjustmentsCursorResponseCursor - Paginated cursor wrapping the initiation's adjustments
 type V3PaymentInitiationAdjustmentsCursorResponseCursor struct {
 	Data     []V3PaymentInitiationAdjustment `json:"data"`
 	HasMore  bool                            `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V3PaymentInitiationAdjustmentsCursorResponseCursor) GetPrevious() *stri
 // #endregion class-body-v3paymentinitiationadjustmentscursorresponsecursor
 
 type V3PaymentInitiationAdjustmentsCursorResponse struct {
+	// Paginated cursor wrapping the initiation's adjustments
 	Cursor V3PaymentInitiationAdjustmentsCursorResponseCursor `json:"cursor"`
 }
 

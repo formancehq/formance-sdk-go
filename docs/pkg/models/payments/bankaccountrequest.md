@@ -3,12 +3,12 @@
 
 ## Fields
 
-| Field               | Type                | Required            | Description         | Example             |
-| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `AccountNumber`     | `*string`           | :heavy_minus_sign:  | N/A                 |                     |
-| `ConnectorID`       | `*string`           | :heavy_minus_sign:  | N/A                 |                     |
-| `Country`           | `string`            | :heavy_check_mark:  | N/A                 | GB                  |
-| `Iban`              | `*string`           | :heavy_minus_sign:  | N/A                 |                     |
-| `Metadata`          | map[string]`string` | :heavy_minus_sign:  | N/A                 |                     |
-| `Name`              | `string`            | :heavy_check_mark:  | N/A                 | My account          |
-| `SwiftBicCode`      | `*string`           | :heavy_minus_sign:  | N/A                 |                     |
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `AccountNumber`                                                     | `*string`                                                           | :heavy_minus_sign:                                                  | Domestic account number. Supply this or an IBAN                     |                                                                     |
+| `ConnectorID`                                                       | `*string`                                                           | :heavy_minus_sign:                                                  | Connector to forward the bank account to on creation                |                                                                     |
+| `Country`                                                           | `string`                                                            | :heavy_check_mark:                                                  | Country the account is held in, as an ISO 3166-1 alpha-2 code       | GB                                                                  |
+| `Iban`                                                              | `*string`                                                           | :heavy_minus_sign:                                                  | International bank account number. Supply this or an account number |                                                                     |
+| `Metadata`                                                          | map[string]`string`                                                 | :heavy_minus_sign:                                                  | Arbitrary key/value pairs attached to the bank account              |                                                                     |
+| `Name`                                                              | `string`                                                            | :heavy_check_mark:                                                  | Human-readable name for the bank account                            | My account                                                          |
+| `SwiftBicCode`                                                      | `*string`                                                           | :heavy_minus_sign:                                                  | SWIFT/BIC code identifying the bank                                 |                                                                     |

@@ -7,15 +7,18 @@ import (
 )
 
 type CurrencyCloudConfig struct {
+	// API key issued by Currencycloud, used to authenticate the connector's requests
 	APIKey string `json:"apiKey"`
 	// The endpoint to use for the API. Defaults to https://devapi.currencycloud.com
 	Endpoint *string `json:"endpoint,omitempty"`
 	// Username of the API Key holder
 	LoginID string `json:"loginID"`
-	Name    string `json:"name"`
+	// Human-readable name identifying this connector instance
+	Name string `json:"name"`
 	// The frequency at which the connector will fetch transactions
 	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
-	Provider      *string `default:"Currencycloud" json:"provider"`
+	// Identifies the payment provider this configuration targets
+	Provider *string `default:"Currencycloud" json:"provider"`
 }
 
 func (c CurrencyCloudConfig) MarshalJSON() ([]byte, error) {

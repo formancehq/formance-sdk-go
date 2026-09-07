@@ -4,6 +4,7 @@ package payments
 
 // TransferResponse - OK
 type TransferResponse struct {
+	// Identifier of the transfer created at the provider
 	ID *string `json:"id,omitempty"`
 }
 

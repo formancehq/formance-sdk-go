@@ -23,7 +23,8 @@ type V3OrderAdjustment struct {
 	// Currency the fee is denominated in, in `SYMBOL/precision` form.
 	FeeAsset *string `json:"feeAsset,omitempty"`
 	// Adjustment ID, composed from the order ID plus the state fields that define uniqueness (status, filled quantity, fee). Idempotent — replaying the same observation produces the same ID.
-	ID       string            `json:"id"`
+	ID string `json:"id"`
+	// Arbitrary key/value pairs attached to the resource
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Untransformed PSP response payload that produced this adjustment. Retained for debugging and replay.
 	Raw map[string]any `json:"raw,omitempty"`

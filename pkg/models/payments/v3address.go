@@ -2,12 +2,19 @@
 
 package payments
 
+// V3Address - A postal address
 type V3Address struct {
-	City         *string `json:"city,omitempty"`
-	Country      *string `json:"country,omitempty"`
-	PostalCode   *string `json:"postalCode,omitempty"`
-	Region       *string `json:"region,omitempty"`
-	StreetName   *string `json:"streetName,omitempty"`
+	// City of the address
+	City *string `json:"city,omitempty"`
+	// Country of the address, as an ISO 3166-1 alpha-2 code
+	Country *string `json:"country,omitempty"`
+	// Postal or ZIP code of the address
+	PostalCode *string `json:"postalCode,omitempty"`
+	// Region, state or province of the address
+	Region *string `json:"region,omitempty"`
+	// Street name of the address
+	StreetName *string `json:"streetName,omitempty"`
+	// Street number of the address
 	StreetNumber *string `json:"streetNumber,omitempty"`
 }
 

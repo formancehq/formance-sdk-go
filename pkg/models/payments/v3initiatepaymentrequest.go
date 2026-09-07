@@ -9,16 +9,26 @@ import (
 )
 
 type V3InitiatePaymentRequest struct {
-	Amount               *big.Int                    `json:"amount"`
-	Asset                string                      `json:"asset"`
-	ConnectorID          string                      `json:"connectorID"`
-	Description          string                      `json:"description"`
-	DestinationAccountID *string                     `json:"destinationAccountID,omitempty"`
-	Metadata             map[string]string           `json:"metadata,omitempty"`
-	Reference            string                      `json:"reference"`
-	ScheduledAt          time.Time                   `json:"scheduledAt"`
-	SourceAccountID      *string                     `json:"sourceAccountID,omitempty"`
-	Type                 V3PaymentInitiationTypeEnum `json:"type"`
+	// Amount to move, in the asset's smallest unit
+	Amount *big.Int `json:"amount"`
+	// Asset the payment is denominated in
+	Asset string `json:"asset"`
+	// Identifier of the connector to execute the payment through
+	ConnectorID string `json:"connectorID"`
+	// Human-readable description carried with the payment
+	Description string `json:"description"`
+	// Identifier of the account the funds reach
+	DestinationAccountID *string `json:"destinationAccountID,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Caller-supplied identifier for the initiation, used to deduplicate retries
+	Reference string `json:"reference"`
+	// When the payment should be executed
+	ScheduledAt time.Time `json:"scheduledAt"`
+	// Identifier of the account the funds leave
+	SourceAccountID *string `json:"sourceAccountID,omitempty"`
+	// Kind of movement a payment initiation performs, such as a transfer or a payout
+	Type V3PaymentInitiationTypeEnum `json:"type"`
 }
 
 func (v V3InitiatePaymentRequest) MarshalJSON() ([]byte, error) {

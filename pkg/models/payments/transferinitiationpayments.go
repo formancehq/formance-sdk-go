@@ -8,10 +8,14 @@ import (
 )
 
 type TransferInitiationPayments struct {
-	CreatedAt time.Time           `json:"createdAt"`
-	Error     *string             `json:"error,omitempty"`
-	PaymentID string              `json:"paymentID"`
-	Status    LegacyPaymentStatus `json:"status"`
+	// When the payment was produced
+	CreatedAt time.Time `json:"createdAt"`
+	// Why the payment failed, absent when it succeeded
+	Error *string `json:"error,omitempty"`
+	// Identifier of the payment produced by the initiation
+	PaymentID string `json:"paymentID"`
+	// Status of a payment as reported by the legacy payments API
+	Status LegacyPaymentStatus `json:"status"`
 }
 
 func (t TransferInitiationPayments) MarshalJSON() ([]byte, error) {

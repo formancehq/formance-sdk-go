@@ -3,8 +3,10 @@
 package payments
 
 type V3PaymentServiceUserUpdateLinkResponse struct {
+	// Identifier of the link attempt this URL belongs to
 	AttemptID string `json:"attemptID"`
-	Link      string `json:"link"`
+	// URL to send the user to so they can renew the connection
+	Link string `json:"link"`
 }
 
 func (v *V3PaymentServiceUserUpdateLinkResponse) GetAttemptID() string {

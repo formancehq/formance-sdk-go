@@ -8,22 +8,38 @@ import (
 	"time"
 )
 
+// V3Payment - A payment observed at a provider and surfaced through a connector
 type V3Payment struct {
-	Adjustments          []V3PaymentAdjustment `json:"adjustments,omitempty"`
-	Amount               *big.Int              `json:"amount"`
-	Asset                string                `json:"asset"`
-	ConnectorID          string                `json:"connectorID"`
-	CreatedAt            time.Time             `json:"createdAt"`
-	DestinationAccountID *string               `json:"destinationAccountID,omitempty"`
-	ID                   string                `json:"id"`
-	InitialAmount        *big.Int              `json:"initialAmount"`
-	Metadata             map[string]string     `json:"metadata,omitempty"`
-	Provider             string                `json:"provider"`
-	Reference            string                `json:"reference"`
-	Scheme               string                `json:"scheme"`
-	SourceAccountID      *string               `json:"sourceAccountID,omitempty"`
-	Status               V3PaymentStatusEnum   `json:"status"`
-	Type                 V3PaymentTypeEnum     `json:"type"`
+	// Successive changes to the payment's amount and status, newest first
+	Adjustments []V3PaymentAdjustment `json:"adjustments,omitempty"`
+	// Current amount of the payment after applying its adjustments
+	Amount *big.Int `json:"amount"`
+	// Asset the payment is denominated in
+	Asset string `json:"asset"`
+	// Identifier of the connector the payment belongs to
+	ConnectorID string `json:"connectorID"`
+	// When the payment was created at the provider
+	CreatedAt time.Time `json:"createdAt"`
+	// Identifier of the account the funds reached
+	DestinationAccountID *string `json:"destinationAccountID,omitempty"`
+	// Unique identifier of the payment within Formance
+	ID string `json:"id"`
+	// Amount the payment was created with, before any adjustment
+	InitialAmount *big.Int `json:"initialAmount"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Name of the payment provider behind the connector
+	Provider string `json:"provider"`
+	// Identifier the payment carries at the provider
+	Reference string `json:"reference"`
+	// Payment scheme or rail the payment travelled over
+	Scheme string `json:"scheme"`
+	// Identifier of the account the funds left
+	SourceAccountID *string `json:"sourceAccountID,omitempty"`
+	// Where a payment stands in its lifecycle
+	Status V3PaymentStatusEnum `json:"status"`
+	// Direction of a payment
+	Type V3PaymentTypeEnum `json:"type"`
 }
 
 func (v V3Payment) MarshalJSON() ([]byte, error) {

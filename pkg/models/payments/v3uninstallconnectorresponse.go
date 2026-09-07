@@ -2,6 +2,7 @@
 
 package payments
 
+// V3UninstallConnectorResponseData - The task tracking the uninstall, which completes asynchronously
 type V3UninstallConnectorResponseData struct {
 	// Since this call is asynchronous, the response will contain the ID of the task that was created to uninstall the connector. You can use the task API to check the status of the task and get the results.
 	//
@@ -19,6 +20,7 @@ func (v *V3UninstallConnectorResponseData) GetTaskID() string {
 // #endregion class-body-v3uninstallconnectorresponsedata
 
 type V3UninstallConnectorResponse struct {
+	// The task tracking the uninstall, which completes asynchronously
 	Data V3UninstallConnectorResponseData `json:"data"`
 }
 

@@ -9,16 +9,26 @@ import (
 )
 
 type PaymentRequest struct {
-	Amount               *big.Int      `json:"amount"`
-	Asset                string        `json:"asset"`
-	ConnectorID          string        `json:"connectorID"`
-	CreatedAt            time.Time     `json:"createdAt"`
-	DestinationAccountID *string       `json:"destinationAccountID,omitempty"`
-	Reference            string        `json:"reference"`
-	Scheme               PaymentScheme `json:"scheme"`
-	SourceAccountID      *string       `json:"sourceAccountID,omitempty"`
-	Status               PaymentStatus `json:"status"`
-	Type                 PaymentType   `json:"type"`
+	// Amount of the payment, in the asset's smallest unit
+	Amount *big.Int `json:"amount"`
+	// Asset the payment is denominated in
+	Asset string `json:"asset"`
+	// Identifier of the connector the payment belongs to
+	ConnectorID string `json:"connectorID"`
+	// When the payment was created at the provider
+	CreatedAt time.Time `json:"createdAt"`
+	// Identifier of the account the funds reach
+	DestinationAccountID *string `json:"destinationAccountID,omitempty"`
+	// Identifier the payment carries at the provider
+	Reference string `json:"reference"`
+	// Payment scheme or rail a payment travels over
+	Scheme PaymentScheme `json:"scheme"`
+	// Identifier of the account the funds leave
+	SourceAccountID *string `json:"sourceAccountID,omitempty"`
+	// Where a payment stands in its lifecycle
+	Status PaymentStatus `json:"status"`
+	// Direction of a payment
+	Type PaymentType `json:"type"`
 }
 
 func (p PaymentRequest) MarshalJSON() ([]byte, error) {

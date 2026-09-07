@@ -2,12 +2,17 @@
 
 package payments
 
+// PaymentsCursorCursor - Paginated cursor wrapping the list of payments
 type PaymentsCursorCursor struct {
-	Data     []Payment `json:"data"`
-	HasMore  bool      `json:"hasMore"`
-	Next     *string   `json:"next,omitempty"`
-	PageSize int64     `json:"pageSize"`
-	Previous *string   `json:"previous,omitempty"`
+	Data []Payment `json:"data"`
+	// Whether further pages are available
+	HasMore bool `json:"hasMore"`
+	// Cursor for the next page, absent on the last page
+	Next *string `json:"next,omitempty"`
+	// Number of items requested per page
+	PageSize int64 `json:"pageSize"`
+	// Cursor for the previous page, absent on the first page
+	Previous *string `json:"previous,omitempty"`
 }
 
 func (p *PaymentsCursorCursor) GetData() []Payment {
@@ -47,6 +52,7 @@ func (p *PaymentsCursorCursor) GetPrevious() *string {
 
 // PaymentsCursor - OK
 type PaymentsCursor struct {
+	// Paginated cursor wrapping the list of payments
 	Cursor PaymentsCursorCursor `json:"cursor"`
 }
 

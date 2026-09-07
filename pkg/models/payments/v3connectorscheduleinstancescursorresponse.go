@@ -2,6 +2,7 @@
 
 package payments
 
+// V3ConnectorScheduleInstancesCursorResponseCursor - Paginated cursor wrapping the schedule's runs
 type V3ConnectorScheduleInstancesCursorResponseCursor struct {
 	Data     []V3Instance `json:"data"`
 	HasMore  bool         `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V3ConnectorScheduleInstancesCursorResponseCursor) GetPrevious() *string
 // #endregion class-body-v3connectorscheduleinstancescursorresponsecursor
 
 type V3ConnectorScheduleInstancesCursorResponse struct {
+	// Paginated cursor wrapping the schedule's runs
 	Cursor V3ConnectorScheduleInstancesCursorResponseCursor `json:"cursor"`
 }
 

@@ -4,7 +4,9 @@ package payments
 
 // ServerInfo - Server information
 type ServerInfo struct {
-	Debug   *bool   `json:"debug,omitempty"`
+	// Whether the service is running in debug mode
+	Debug *bool `json:"debug,omitempty"`
+	// Version of the payments service
 	Version *string `json:"version,omitempty"`
 }
 
