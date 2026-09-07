@@ -2,6 +2,7 @@
 
 package payments
 
+// V3PaymentServiceUserLinkAttemptsCursorResponseCursor - Paginated cursor wrapping the user's link attempts
 type V3PaymentServiceUserLinkAttemptsCursorResponseCursor struct {
 	Data     []V3PaymentServiceUserLinkAttempt `json:"data"`
 	HasMore  bool                              `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V3PaymentServiceUserLinkAttemptsCursorResponseCursor) GetPrevious() *st
 // #endregion class-body-v3paymentserviceuserlinkattemptscursorresponsecursor
 
 type V3PaymentServiceUserLinkAttemptsCursorResponse struct {
+	// Paginated cursor wrapping the user's link attempts
 	Cursor V3PaymentServiceUserLinkAttemptsCursorResponseCursor `json:"cursor"`
 }
 

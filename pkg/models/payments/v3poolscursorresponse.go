@@ -2,6 +2,7 @@
 
 package payments
 
+// V3PoolsCursorResponseCursor - Paginated cursor wrapping the list of pools
 type V3PoolsCursorResponseCursor struct {
 	Data     []V3Pool `json:"data"`
 	HasMore  bool     `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V3PoolsCursorResponseCursor) GetPrevious() *string {
 // #endregion class-body-v3poolscursorresponsecursor
 
 type V3PoolsCursorResponse struct {
+	// Paginated cursor wrapping the list of pools
 	Cursor V3PoolsCursorResponseCursor `json:"cursor"`
 }
 

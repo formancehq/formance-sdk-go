@@ -9,18 +9,30 @@ import (
 )
 
 type V3CreatePaymentRequest struct {
-	Adjustments          []V3CreatePaymentAdjustmentRequest `json:"adjustments,omitempty"`
-	Amount               *big.Int                           `json:"amount"`
-	Asset                string                             `json:"asset"`
-	ConnectorID          string                             `json:"connectorID"`
-	CreatedAt            time.Time                          `json:"createdAt"`
-	DestinationAccountID *string                            `json:"destinationAccountID,omitempty"`
-	InitialAmount        *big.Int                           `json:"initialAmount"`
-	Metadata             map[string]string                  `json:"metadata,omitempty"`
-	Reference            string                             `json:"reference"`
-	Scheme               string                             `json:"scheme"`
-	SourceAccountID      *string                            `json:"sourceAccountID,omitempty"`
-	Type                 V3PaymentTypeEnum                  `json:"type"`
+	// Status and amount changes to record alongside the payment
+	Adjustments []V3CreatePaymentAdjustmentRequest `json:"adjustments,omitempty"`
+	// Current amount of the payment, in the asset's smallest unit
+	Amount *big.Int `json:"amount"`
+	// Asset the payment is denominated in
+	Asset string `json:"asset"`
+	// Identifier of the connector the payment belongs to
+	ConnectorID string `json:"connectorID"`
+	// When the payment was created at the provider
+	CreatedAt time.Time `json:"createdAt"`
+	// Identifier of the account the funds reach
+	DestinationAccountID *string `json:"destinationAccountID,omitempty"`
+	// Amount the payment was created with, before any adjustment
+	InitialAmount *big.Int `json:"initialAmount"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Identifier the payment carries at the provider
+	Reference string `json:"reference"`
+	// Payment scheme or rail the payment travels over
+	Scheme string `json:"scheme"`
+	// Identifier of the account the funds leave
+	SourceAccountID *string `json:"sourceAccountID,omitempty"`
+	// Direction of a payment
+	Type V3PaymentTypeEnum `json:"type"`
 }
 
 func (v V3CreatePaymentRequest) MarshalJSON() ([]byte, error) {

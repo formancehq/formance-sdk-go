@@ -4,6 +4,7 @@ package payments
 
 // AccountResponse - OK
 type AccountResponse struct {
+	// An account held at a payment provider, surfaced through a connector
 	Data Account `json:"data"`
 }
 

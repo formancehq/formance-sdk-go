@@ -9,12 +9,19 @@ import (
 )
 
 type AccountBalance struct {
-	AccountID string    `json:"accountId"`
-	Asset     string    `json:"asset"`
-	Balance   *big.Int  `json:"balance"`
+	// Identifier of the account this balance belongs to
+	AccountID string `json:"accountId"`
+	// Asset the balance is denominated in
+	Asset string `json:"asset"`
+	// Amount held, in the asset's smallest unit
+	Balance *big.Int `json:"balance"`
+	// Start of the period this balance covers
 	CreatedAt time.Time `json:"createdAt"`
+	// Deprecated alias of asset, kept for backwards compatibility
+	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	Currency      string    `json:"currency"`
+	Currency string `json:"currency"`
+	// When the balance was last refreshed from the provider
 	LastUpdatedAt time.Time `json:"lastUpdatedAt"`
 }
 

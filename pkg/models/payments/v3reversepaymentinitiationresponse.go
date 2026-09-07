@@ -2,6 +2,7 @@
 
 package payments
 
+// V3ReversePaymentInitiationResponseData - The task tracking the reversal, which completes asynchronously
 type V3ReversePaymentInitiationResponseData struct {
 	// Related payment initiation reversal object ID created.
 	//
@@ -29,6 +30,7 @@ func (v *V3ReversePaymentInitiationResponseData) GetTaskID() *string {
 // #endregion class-body-v3reversepaymentinitiationresponsedata
 
 type V3ReversePaymentInitiationResponse struct {
+	// The task tracking the reversal, which completes asynchronously
 	Data V3ReversePaymentInitiationResponseData `json:"data"`
 }
 

@@ -9,11 +9,16 @@ import (
 )
 
 type PaymentAdjustment struct {
-	Amount    *big.Int       `json:"amount"`
-	CreatedAt time.Time      `json:"createdAt"`
-	Raw       map[string]any `json:"raw"`
-	Reference string         `json:"reference"`
-	Status    PaymentStatus  `json:"status"`
+	// Amount carried by this adjustment
+	Amount *big.Int `json:"amount"`
+	// When the adjustment occurred at the provider
+	CreatedAt time.Time `json:"createdAt"`
+	// The provider's original payload for this adjustment
+	Raw map[string]any `json:"raw"`
+	// Identifier the adjustment carries at the provider
+	Reference string `json:"reference"`
+	// Where a payment stands in its lifecycle
+	Status PaymentStatus `json:"status"`
 }
 
 func (p PaymentAdjustment) MarshalJSON() ([]byte, error) {

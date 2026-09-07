@@ -9,13 +9,20 @@ import (
 )
 
 type V3PaymentInitiationAdjustment struct {
-	Amount    *big.Int                      `json:"amount,omitempty"`
-	Asset     *string                       `json:"asset,omitempty"`
-	CreatedAt time.Time                     `json:"createdAt"`
-	Error     *string                       `json:"error,omitempty"`
-	ID        string                        `json:"id"`
-	Metadata  map[string]string             `json:"metadata,omitempty"`
-	Status    V3PaymentInitiationStatusEnum `json:"status"`
+	// Amount carried by this adjustment
+	Amount *big.Int `json:"amount,omitempty"`
+	// Asset the adjustment is denominated in
+	Asset *string `json:"asset,omitempty"`
+	// When the adjustment was recorded
+	CreatedAt time.Time `json:"createdAt"`
+	// Why this step failed, absent when it succeeded
+	Error *string `json:"error,omitempty"`
+	// Unique identifier of the adjustment
+	ID string `json:"id"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Where a payment initiation stands in its lifecycle
+	Status V3PaymentInitiationStatusEnum `json:"status"`
 }
 
 func (v V3PaymentInitiationAdjustment) MarshalJSON() ([]byte, error) {

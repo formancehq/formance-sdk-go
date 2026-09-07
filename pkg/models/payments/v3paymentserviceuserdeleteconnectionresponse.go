@@ -2,6 +2,7 @@
 
 package payments
 
+// V3PaymentServiceUserDeleteConnectionResponseData - The task tracking the deletion, which completes asynchronously
 type V3PaymentServiceUserDeleteConnectionResponseData struct {
 	// Since this call is asynchronous, the response will contain the ID of the task that was created to delete the connection. You can use the task API to check the status of the task.
 	//
@@ -19,6 +20,7 @@ func (v *V3PaymentServiceUserDeleteConnectionResponseData) GetTaskID() string {
 // #endregion class-body-v3paymentserviceuserdeleteconnectionresponsedata
 
 type V3PaymentServiceUserDeleteConnectionResponse struct {
+	// The task tracking the deletion, which completes asynchronously
 	Data V3PaymentServiceUserDeleteConnectionResponseData `json:"data"`
 }
 

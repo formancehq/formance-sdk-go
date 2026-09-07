@@ -4,6 +4,7 @@ package payments
 
 // BankAccountResponse - OK
 type BankAccountResponse struct {
+	// A bank account registered with Formance and forwardable to connectors
 	Data BankAccount `json:"data"`
 }
 

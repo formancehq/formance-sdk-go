@@ -4,6 +4,7 @@ package payments
 
 // TransferInitiationResponse - OK
 type TransferInitiationResponse struct {
+	// A transfer Formance asked a connector to execute
 	Data TransferInitiation `json:"data"`
 }
 

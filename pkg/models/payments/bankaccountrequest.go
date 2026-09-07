@@ -3,13 +3,20 @@
 package payments
 
 type BankAccountRequest struct {
-	AccountNumber *string           `json:"accountNumber,omitempty"`
-	ConnectorID   *string           `json:"connectorID,omitempty"`
-	Country       string            `json:"country"`
-	Iban          *string           `json:"iban,omitempty"`
-	Metadata      map[string]string `json:"metadata,omitempty"`
-	Name          string            `json:"name"`
-	SwiftBicCode  *string           `json:"swiftBicCode,omitempty"`
+	// Domestic account number. Supply this or an IBAN
+	AccountNumber *string `json:"accountNumber,omitempty"`
+	// Connector to forward the bank account to on creation
+	ConnectorID *string `json:"connectorID,omitempty"`
+	// Country the account is held in, as an ISO 3166-1 alpha-2 code
+	Country string `json:"country"`
+	// International bank account number. Supply this or an account number
+	Iban *string `json:"iban,omitempty"`
+	// Arbitrary key/value pairs attached to the bank account
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Human-readable name for the bank account
+	Name string `json:"name"`
+	// SWIFT/BIC code identifying the bank
+	SwiftBicCode *string `json:"swiftBicCode,omitempty"`
 }
 
 func (b *BankAccountRequest) GetAccountNumber() *string {

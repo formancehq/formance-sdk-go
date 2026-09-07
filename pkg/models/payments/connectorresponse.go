@@ -2,6 +2,7 @@
 
 package payments
 
+// Data - The connector that was installed
 type Data struct {
 	ConnectorID string `json:"connectorID"`
 }
@@ -15,6 +16,7 @@ func (d *Data) GetConnectorID() string {
 
 // ConnectorResponse - OK
 type ConnectorResponse struct {
+	// The connector that was installed
 	Data Data `json:"data"`
 }
 

@@ -29,6 +29,7 @@ func (t *TaskCurrencyCloudDescriptor) GetName() *string {
 	return t.Name
 }
 
+// TaskCurrencyCloudState - Internal progress state the task resumes from
 type TaskCurrencyCloudState struct {
 }
 
@@ -44,14 +45,21 @@ func (t *TaskCurrencyCloudState) UnmarshalJSON(data []byte) error {
 }
 
 type TaskCurrencyCloud struct {
-	ConnectorID string                      `json:"connectorID"`
-	CreatedAt   time.Time                   `json:"createdAt"`
-	Descriptor  TaskCurrencyCloudDescriptor `json:"descriptor"`
-	Error       *string                     `json:"error,omitempty"`
-	ID          string                      `json:"id"`
-	State       *TaskCurrencyCloudState     `json:"state,omitempty"`
-	Status      TaskStatus                  `json:"status"`
-	UpdatedAt   time.Time                   `json:"updatedAt"`
+	// Identifier of the connector the task runs against
+	ConnectorID string `json:"connectorID"`
+	// When the task was created
+	CreatedAt  time.Time                   `json:"createdAt"`
+	Descriptor TaskCurrencyCloudDescriptor `json:"descriptor"`
+	// Why the task failed, absent when it succeeded
+	Error *string `json:"error,omitempty"`
+	// Unique identifier of the task
+	ID string `json:"id"`
+	// Internal progress state the task resumes from
+	State *TaskCurrencyCloudState `json:"state,omitempty"`
+	// Where a task stands, from pending or active through to stopped, terminated or failed
+	Status TaskStatus `json:"status"`
+	// When the task was last updated
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 func (t TaskCurrencyCloud) MarshalJSON() ([]byte, error) {

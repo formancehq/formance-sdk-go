@@ -7,12 +7,15 @@ import (
 )
 
 type WiseConfig struct {
+	// API key issued by Wise, used to authenticate the connector's requests
 	APIKey string `json:"apiKey"`
-	Name   string `json:"name"`
+	// Human-readable name identifying this connector instance
+	Name string `json:"name"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Wise API.
 	//
 	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
-	Provider      *string `default:"Wise" json:"provider"`
+	// Identifies the payment provider this configuration targets
+	Provider *string `default:"Wise" json:"provider"`
 }
 
 func (w WiseConfig) MarshalJSON() ([]byte, error) {

@@ -3,11 +3,16 @@
 package payments
 
 type V3CreatePaymentServiceUserRequest struct {
-	Address        *V3AddressRequest        `json:"address,omitempty"`
-	BankAccountIDs []string                 `json:"bankAccountIDs,omitempty"`
+	// A postal address to record on the payment service user
+	Address *V3AddressRequest `json:"address,omitempty"`
+	// Bank accounts to associate with the user
+	BankAccountIDs []string `json:"bankAccountIDs,omitempty"`
+	// How to reach the payment service user
 	ContactDetails *V3ContactDetailsRequest `json:"contactDetails,omitempty"`
-	Metadata       map[string]string        `json:"metadata,omitempty"`
-	Name           string                   `json:"name"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Full name of the payment service user
+	Name string `json:"name"`
 }
 
 func (v *V3CreatePaymentServiceUserRequest) GetAddress() *V3AddressRequest {

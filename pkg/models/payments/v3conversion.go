@@ -31,7 +31,8 @@ type V3Conversion struct {
 	// Currency the fee is denominated in, in `SYMBOL/precision` form.
 	FeeAsset *string `json:"feeAsset,omitempty"`
 	// Formance-assigned unique conversion ID.
-	ID       string            `json:"id"`
+	ID string `json:"id"`
+	// Arbitrary key/value pairs attached to the resource
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Provider name of the connector (e.g. `coinbaseprime`).
 	Provider string `json:"provider"`

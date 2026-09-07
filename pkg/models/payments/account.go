@@ -7,20 +7,34 @@ import (
 	"time"
 )
 
+// Account - An account held at a payment provider, surfaced through a connector
 type Account struct {
-	AccountName  string    `json:"accountName"`
-	ConnectorID  string    `json:"connectorID"`
-	CreatedAt    time.Time `json:"createdAt"`
-	DefaultAsset string    `json:"defaultAsset"`
+	// Human-readable name of the account
+	AccountName string `json:"accountName"`
+	// Identifier of the connector the account belongs to
+	ConnectorID string `json:"connectorID"`
+	// When the account was created at the provider
+	CreatedAt time.Time `json:"createdAt"`
+	// Asset the account is denominated in by default
+	DefaultAsset string `json:"defaultAsset"`
+	// Deprecated alias of defaultAsset, kept for backwards compatibility
+	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	DefaultCurrency string            `json:"defaultCurrency"`
-	ID              string            `json:"id"`
-	Metadata        map[string]string `json:"metadata"`
-	Pools           []string          `json:"pools,omitempty"`
-	Provider        *string           `json:"provider,omitempty"`
-	Raw             map[string]any    `json:"raw"`
-	Reference       string            `json:"reference"`
-	Type            AccountType       `json:"type"`
+	DefaultCurrency string `json:"defaultCurrency"`
+	// Unique identifier of the account within Formance
+	ID string `json:"id"`
+	// Arbitrary key/value pairs attached to the account
+	Metadata map[string]string `json:"metadata"`
+	// Pools this account belongs to
+	Pools []string `json:"pools,omitempty"`
+	// Name of the payment provider behind the connector
+	Provider *string `json:"provider,omitempty"`
+	// The provider's original payload, passed through untouched
+	Raw map[string]any `json:"raw"`
+	// Identifier the account carries at the provider
+	Reference string `json:"reference"`
+	// Whether an account is internal to the provider or belongs to an external party
+	Type AccountType `json:"type"`
 }
 
 func (a Account) MarshalJSON() ([]byte, error) {

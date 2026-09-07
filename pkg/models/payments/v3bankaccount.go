@@ -7,16 +7,26 @@ import (
 	"time"
 )
 
+// V3BankAccount - A bank account registered with Formance and forwardable to connectors
 type V3BankAccount struct {
-	AccountNumber   *string                       `json:"accountNumber,omitempty"`
-	Country         *string                       `json:"country,omitempty"`
-	CreatedAt       time.Time                     `json:"createdAt"`
-	Iban            *string                       `json:"iban,omitempty"`
-	ID              string                        `json:"id"`
-	Metadata        map[string]string             `json:"metadata,omitempty"`
-	Name            string                        `json:"name"`
+	// Domestic account number, when the account is identified that way
+	AccountNumber *string `json:"accountNumber,omitempty"`
+	// Country the account is held in, as an ISO 3166-1 alpha-2 code
+	Country *string `json:"country,omitempty"`
+	// When the bank account was registered
+	CreatedAt time.Time `json:"createdAt"`
+	// International bank account number, when the account is identified that way
+	Iban *string `json:"iban,omitempty"`
+	// Unique identifier of the bank account within Formance
+	ID string `json:"id"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Human-readable name of the bank account
+	Name string `json:"name"`
+	// Provider-side accounts this bank account has been forwarded to
 	RelatedAccounts []V3BankAccountRelatedAccount `json:"relatedAccounts,omitempty"`
-	SwiftBicCode    *string                       `json:"swiftBicCode,omitempty"`
+	// SWIFT/BIC code identifying the bank
+	SwiftBicCode *string `json:"swiftBicCode,omitempty"`
 }
 
 func (v V3BankAccount) MarshalJSON() ([]byte, error) {

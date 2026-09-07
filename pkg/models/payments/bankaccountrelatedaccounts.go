@@ -8,11 +8,16 @@ import (
 )
 
 type BankAccountRelatedAccounts struct {
-	AccountID   string    `json:"accountID"`
-	ConnectorID string    `json:"connectorID"`
-	CreatedAt   time.Time `json:"createdAt"`
-	ID          string    `json:"id"`
-	Provider    string    `json:"provider"`
+	// Identifier of the provider-side account
+	AccountID string `json:"accountID"`
+	// Identifier of the connector holding the provider-side account
+	ConnectorID string `json:"connectorID"`
+	// When the bank account was forwarded to this provider
+	CreatedAt time.Time `json:"createdAt"`
+	// Unique identifier of the link between the bank account and the provider
+	ID string `json:"id"`
+	// Name of the payment provider behind the connector
+	Provider string `json:"provider"`
 }
 
 func (b BankAccountRelatedAccounts) MarshalJSON() ([]byte, error) {

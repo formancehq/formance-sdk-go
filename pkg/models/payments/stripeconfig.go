@@ -7,15 +7,18 @@ import (
 )
 
 type StripeConfig struct {
+	// API key issued by Stripe, used to authenticate the connector's requests
 	APIKey string `json:"apiKey"`
-	Name   string `json:"name"`
+	// Human-readable name identifying this connector instance
+	Name string `json:"name"`
 	// Number of BalanceTransaction to fetch at each polling interval.
 	//
 	PageSize *int64 `default:"100" json:"pageSize"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Stripe API.
 	//
 	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
-	Provider      *string `default:"Stripe" json:"provider"`
+	// Identifies the payment provider this configuration targets
+	Provider *string `default:"Stripe" json:"provider"`
 }
 
 func (s StripeConfig) MarshalJSON() ([]byte, error) {

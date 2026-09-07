@@ -2,6 +2,7 @@
 
 package payments
 
+// V3PaymentInitiationsCursorResponseCursor - Paginated cursor wrapping the list of payment initiations
 type V3PaymentInitiationsCursorResponseCursor struct {
 	Data     []V3PaymentInitiation `json:"data"`
 	HasMore  bool                  `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V3PaymentInitiationsCursorResponseCursor) GetPrevious() *string {
 // #endregion class-body-v3paymentinitiationscursorresponsecursor
 
 type V3PaymentInitiationsCursorResponse struct {
+	// Paginated cursor wrapping the list of payment initiations
 	Cursor V3PaymentInitiationsCursorResponseCursor `json:"cursor"`
 }
 

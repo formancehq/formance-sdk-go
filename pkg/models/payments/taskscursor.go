@@ -203,12 +203,17 @@ func (u TasksCursorData) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type TasksCursorData: all fields are null")
 }
 
+// TasksCursorCursor - Paginated cursor wrapping the list of tasks
 type TasksCursorCursor struct {
-	Data     []TasksCursorData `json:"data"`
-	HasMore  bool              `json:"hasMore"`
-	Next     *string           `json:"next,omitempty"`
-	PageSize int64             `json:"pageSize"`
-	Previous *string           `json:"previous,omitempty"`
+	Data []TasksCursorData `json:"data"`
+	// Whether further pages are available
+	HasMore bool `json:"hasMore"`
+	// Cursor for the next page, absent on the last page
+	Next *string `json:"next,omitempty"`
+	// Number of items requested per page
+	PageSize int64 `json:"pageSize"`
+	// Cursor for the previous page, absent on the first page
+	Previous *string `json:"previous,omitempty"`
 }
 
 func (t *TasksCursorCursor) GetData() []TasksCursorData {
@@ -248,6 +253,7 @@ func (t *TasksCursorCursor) GetPrevious() *string {
 
 // TasksCursor - OK
 type TasksCursor struct {
+	// Paginated cursor wrapping the list of tasks
 	Cursor TasksCursorCursor `json:"cursor"`
 }
 

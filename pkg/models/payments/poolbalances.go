@@ -2,7 +2,9 @@
 
 package payments
 
+// PoolBalances - Aggregated balances across a pool's accounts
 type PoolBalances struct {
+	// Aggregated balance per asset across the pool's accounts
 	Balances []PoolBalance `json:"balances"`
 }
 

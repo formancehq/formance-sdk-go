@@ -1,5 +1,7 @@
 # Type
 
+Whether the funds move between your accounts or out to a third party
+
 ## Example Usage
 
 ```go

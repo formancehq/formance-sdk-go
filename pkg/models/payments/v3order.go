@@ -50,8 +50,9 @@ type V3Order struct {
 	// Formance-assigned unique order ID (composed from the PSP reference and connector ID).
 	ID string `json:"id"`
 	// Maximum price (for BUY) or minimum price (for SELL) at which the order may execute, in `priceAsset` precision. Required for LIMIT-family order types; null otherwise.
-	LimitPrice *big.Int          `json:"limitPrice,omitempty"`
-	Metadata   map[string]string `json:"metadata,omitempty"`
+	LimitPrice *big.Int `json:"limitPrice,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
 	// Currency + precision under which `limitPrice`, `stopPrice`, and
 	// `averageFillPrice` should be interpreted. Separate from
 	// `quoteAsset` because some PSPs return price strings with more

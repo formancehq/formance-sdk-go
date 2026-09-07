@@ -21,6 +21,7 @@ const (
 	TaskResponseDataTypeTaskMoneycorp     TaskResponseDataType = "TaskMoneycorp"
 )
 
+// TaskResponseData - The requested task
 type TaskResponseData struct {
 	TaskStripe        *TaskStripe        `queryParam:"inline" union:"member"`
 	TaskWise          *TaskWise          `queryParam:"inline" union:"member"`
@@ -205,6 +206,7 @@ func (u TaskResponseData) MarshalJSON() ([]byte, error) {
 
 // TaskResponse - OK
 type TaskResponse struct {
+	// The requested task
 	Data TaskResponseData `json:"data"`
 }
 

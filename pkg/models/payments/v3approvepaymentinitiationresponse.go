@@ -2,6 +2,7 @@
 
 package payments
 
+// V3ApprovePaymentInitiationResponseData - The task tracking the approval, which completes asynchronously
 type V3ApprovePaymentInitiationResponseData struct {
 	// Since this call is asynchronous, the response will contain the ID of the task that was created to approve the payment initiation. You can use the task API to check the status of the task and get the resulting payment ID.
 	//
@@ -19,6 +20,7 @@ func (v *V3ApprovePaymentInitiationResponseData) GetTaskID() string {
 // #endregion class-body-v3approvepaymentinitiationresponsedata
 
 type V3ApprovePaymentInitiationResponse struct {
+	// The task tracking the approval, which completes asynchronously
 	Data V3ApprovePaymentInitiationResponseData `json:"data"`
 }
 

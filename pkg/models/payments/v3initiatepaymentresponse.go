@@ -2,6 +2,7 @@
 
 package payments
 
+// V3InitiatePaymentResponseData - The task tracking the initiation, which completes asynchronously
 type V3InitiatePaymentResponseData struct {
 	// Related payment initiation object ID created.
 	//
@@ -29,6 +30,7 @@ func (v *V3InitiatePaymentResponseData) GetTaskID() *string {
 // #endregion class-body-v3initiatepaymentresponsedata
 
 type V3InitiatePaymentResponse struct {
+	// The task tracking the initiation, which completes asynchronously
 	Data V3InitiatePaymentResponseData `json:"data"`
 }
 

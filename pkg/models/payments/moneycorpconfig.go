@@ -7,14 +7,19 @@ import (
 )
 
 type MoneycorpConfig struct {
-	APIKey   string `json:"apiKey"`
+	// API key issued by Moneycorp, used to authenticate the connector's requests
+	APIKey string `json:"apiKey"`
+	// Client ID issued by Moneycorp
 	ClientID string `json:"clientID"`
+	// Base URL of the Moneycorp API the connector calls
 	Endpoint string `json:"endpoint"`
-	Name     string `json:"name"`
+	// Human-readable name identifying this connector instance
+	Name string `json:"name"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from MoneyCorp API.
 	//
 	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
-	Provider      *string `default:"Moneycorp" json:"provider"`
+	// Identifies the payment provider this configuration targets
+	Provider *string `default:"Moneycorp" json:"provider"`
 }
 
 func (m MoneycorpConfig) MarshalJSON() ([]byte, error) {

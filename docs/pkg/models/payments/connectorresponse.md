@@ -7,4 +7,4 @@ OK
 
 | Field                                                 | Type                                                  | Required                                              | Description                                           |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `Data`                                                | [payments.Data](../../../pkg/models/payments/data.md) | :heavy_check_mark:                                    | N/A                                                   |
+| `Data`                                                | [payments.Data](../../../pkg/models/payments/data.md) | :heavy_check_mark:                                    | The connector that was installed                      |

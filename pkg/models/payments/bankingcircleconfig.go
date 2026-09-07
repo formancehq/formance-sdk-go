@@ -7,17 +7,25 @@ import (
 )
 
 type BankingCircleConfig struct {
+	// URL the connector calls to obtain an access token
 	AuthorizationEndpoint string `json:"authorizationEndpoint"`
-	Endpoint              string `json:"endpoint"`
-	Name                  string `json:"name"`
-	Password              string `json:"password"`
+	// Base URL of the Banking Circle API the connector calls
+	Endpoint string `json:"endpoint"`
+	// Human-readable name identifying this connector instance
+	Name string `json:"name"`
+	// Password issued by Banking Circle, used to authenticate the connector
+	Password string `json:"password"`
 	// The frequency at which the connector will try to fetch new BalanceTransaction objects from Banking Circle API.
 	//
-	PollingPeriod      *string `default:"30m" json:"pollingPeriod"`
-	Provider           *string `default:"Bankingcircle" json:"provider"`
-	UserCertificate    string  `json:"userCertificate"`
-	UserCertificateKey string  `json:"userCertificateKey"`
-	Username           string  `json:"username"`
+	PollingPeriod *string `default:"30m" json:"pollingPeriod"`
+	// Identifies the payment provider this configuration targets
+	Provider *string `default:"Bankingcircle" json:"provider"`
+	// Client certificate presented on the mutual-TLS connection to Banking Circle
+	UserCertificate string `json:"userCertificate"`
+	// Private key matching the client certificate
+	UserCertificateKey string `json:"userCertificateKey"`
+	// Username issued by Banking Circle, used to authenticate the connector
+	Username string `json:"username"`
 }
 
 func (b BankingCircleConfig) MarshalJSON() ([]byte, error) {
