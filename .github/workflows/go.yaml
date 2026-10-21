@@ -11,17 +11,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      GOTOOLCHAIN: go1.26.10
+      GOTOOLCHAIN: go1.27.3
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: '1.26.10'
+          go-version: '1.27.3'
       - name: Verify compiler
         run: |
           go version
           go env GOVERSION GOTOOLCHAIN GOROOT
-          test "$(go env GOVERSION)" = go1.26.10
+          test "$(go env GOVERSION)" = go1.27.3
       - name: Build and test SDK
         run: |
           go build ./...
@@ -30,4 +30,4 @@ jobs:
         run: |
           go test -c -o "$RUNNER_TEMP/optionalnullable.test" ./pkg/optionalnullable
           go version -m "$RUNNER_TEMP/optionalnullable.test"
-          go version -m "$RUNNER_TEMP/optionalnullable.test" | head -1 | grep -F 'go1.26.10'
+          go version -m "$RUNNER_TEMP/optionalnullable.test" | head -1 | grep -F 'go1.27.3'
