@@ -1,0 +1,33 @@
+name: Go
+"on":
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GOTOOLCHAIN: go1.27.3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.3'
+      - name: Verify compiler
+        run: |
+          go version
+          go env GOVERSION GOTOOLCHAIN GOROOT
+          test "$(go env GOVERSION)" = go1.27.3
+      - name: Build and test SDK
+        run: |
+          go build ./...
+          go test ./...
+      - name: Verify test binary compiler
+        run: |
+          go test -c -o "$RUNNER_TEMP/optionalnullable.test" ./pkg/optionalnullable
+          go version -m "$RUNNER_TEMP/optionalnullable.test"
+          go version -m "$RUNNER_TEMP/optionalnullable.test" | head -1 | grep -F 'go1.27.3'
