@@ -8,12 +8,14 @@ import (
 )
 
 type V2Pipeline struct {
-	CreatedAt  time.Time `json:"createdAt"`
-	Enabled    *bool     `json:"enabled,omitempty"`
-	ExporterID string    `json:"exporterID"`
-	ID         string    `json:"id"`
-	LastLogID  *int64    `json:"lastLogID,omitempty"`
-	Ledger     string    `json:"ledger"`
+	CreatedAt time.Time `json:"createdAt"`
+	Enabled   *bool     `json:"enabled,omitempty"`
+	// Identifier of the exporter the pipeline feeds
+	ExporterID string `json:"exporterID"`
+	ID         string `json:"id"`
+	LastLogID  *int64 `json:"lastLogID,omitempty"`
+	// Name of the ledger the pipeline reads from
+	Ledger string `json:"ledger"`
 }
 
 func (v V2Pipeline) MarshalJSON() ([]byte, error) {

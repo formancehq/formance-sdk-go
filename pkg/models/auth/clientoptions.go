@@ -3,14 +3,22 @@
 package auth
 
 type ClientOptions struct {
-	Description            *string           `json:"description,omitempty"`
-	Metadata               map[string]string `json:"metadata,omitempty"`
-	Name                   string            `json:"name"`
-	PostLogoutRedirectUris []string          `json:"postLogoutRedirectUris,omitempty"`
-	Public                 *bool             `json:"public,omitempty"`
-	RedirectUris           []string          `json:"redirectUris,omitempty"`
-	Scopes                 []string          `json:"scopes,omitempty"`
-	Trusted                *bool             `json:"trusted,omitempty"`
+	// Human-readable description of the client
+	Description *string `json:"description,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Display name of the client
+	Name string `json:"name"`
+	// URIs the authorization server may redirect to after logout
+	PostLogoutRedirectUris []string `json:"postLogoutRedirectUris,omitempty"`
+	// Whether the client is public, meaning it cannot keep a secret and uses PKCE instead
+	Public *bool `json:"public,omitempty"`
+	// URIs the authorization server may redirect to after a successful authorization
+	RedirectUris []string `json:"redirectUris,omitempty"`
+	// Scopes the client is allowed to request
+	Scopes []string `json:"scopes,omitempty"`
+	// Whether the client is trusted, skipping the user consent screen
+	Trusted *bool `json:"trusted,omitempty"`
 }
 
 func (c *ClientOptions) GetDescription() *string {

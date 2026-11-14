@@ -5,4 +5,4 @@
 
 | Field                                               | Type                                                | Required                                            | Description                                         |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `Data`                                              | [][auth.Client](../../../pkg/models/auth/client.md) | :heavy_minus_sign:                                  | N/A                                                 |
+| `Data`                                              | [][auth.Client](../../../pkg/models/auth/client.md) | :heavy_minus_sign:                                  | The clients registered on this stack                |

@@ -16,6 +16,7 @@ const (
 	SubjectTypeWallet  SubjectType = "WALLET"
 )
 
+// Subject - The counterparty of a wallet movement, either a ledger account or another wallet
 type Subject struct {
 	LedgerAccountSubject *LedgerAccountSubject `queryParam:"inline" union:"member"`
 	WalletSubject        *WalletSubject        `queryParam:"inline" union:"member"`

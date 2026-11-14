@@ -8,6 +8,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2VolumesWithBalanceCursorResponseCursor - Paginated cursor wrapping the list of volumes
 type V2VolumesWithBalanceCursorResponseCursor struct {
 	Data     []V2VolumesWithBalance `json:"data"`
 	HasMore  bool                   `json:"hasMore"`
@@ -65,6 +66,7 @@ func (v *V2VolumesWithBalanceCursorResponseCursor) GetPrevious() *string {
 // #region class-body-v2volumeswithbalancecursorresponsecursor
 // #endregion class-body-v2volumeswithbalancecursorresponsecursor
 
+// V2VolumesWithBalanceCursorResponseResource - The resource type carried by this cursor
 type V2VolumesWithBalanceCursorResponseResource string
 
 const (
@@ -89,7 +91,9 @@ func (e *V2VolumesWithBalanceCursorResponseResource) UnmarshalJSON(data []byte) 
 }
 
 type V2VolumesWithBalanceCursorResponse struct {
-	Cursor   V2VolumesWithBalanceCursorResponseCursor    `json:"cursor"`
+	// Paginated cursor wrapping the list of volumes
+	Cursor V2VolumesWithBalanceCursorResponseCursor `json:"cursor"`
+	// The resource type carried by this cursor
 	Resource *V2VolumesWithBalanceCursorResponseResource `json:"resource,omitempty"`
 }
 

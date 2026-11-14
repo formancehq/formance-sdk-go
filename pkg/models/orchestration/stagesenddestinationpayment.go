@@ -37,6 +37,7 @@ func (e *StageSendDestinationPaymentType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// StageSendDestinationPayment - Send the funds to a payment
 type StageSendDestinationPayment struct {
 	// Payment service provider name (e.g., stripe, wise, mangopay).
 	// Validated by the Payments service based on installed connectors.

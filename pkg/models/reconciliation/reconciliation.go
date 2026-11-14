@@ -8,17 +8,28 @@ import (
 	"time"
 )
 
+// Reconciliation - One run of a policy, comparing both sides and reporting the drift between them
 type Reconciliation struct {
-	CreatedAt            time.Time           `json:"createdAt"`
-	DriftBalances        map[string]*big.Int `json:"driftBalances"`
-	Error                *string             `json:"error,omitempty"`
-	ID                   string              `json:"id"`
-	LedgerBalances       map[string]*big.Int `json:"ledgerBalances"`
-	PaymentsBalances     map[string]*big.Int `json:"paymentsBalances"`
-	PolicyID             string              `json:"policyID"`
-	ReconciledAtLedger   time.Time           `json:"reconciledAtLedger"`
-	ReconciledAtPayments time.Time           `json:"reconciledAtPayments"`
-	Status               string              `json:"status"`
+	// When the reconciliation was run
+	CreatedAt time.Time `json:"createdAt"`
+	// Difference between the two sides, keyed by asset. All-zero means the sides agree
+	DriftBalances map[string]*big.Int `json:"driftBalances"`
+	// Why the run failed, when its status reports an error
+	Error *string `json:"error,omitempty"`
+	// Unique identifier of the reconciliation run
+	ID string `json:"id"`
+	// Balances observed on the ledger side, keyed by asset
+	LedgerBalances map[string]*big.Int `json:"ledgerBalances"`
+	// Balances observed on the payments side, keyed by asset
+	PaymentsBalances map[string]*big.Int `json:"paymentsBalances"`
+	// Identifier of the policy this run applied
+	PolicyID string `json:"policyID"`
+	// Point in time at which the ledger side was evaluated
+	ReconciledAtLedger time.Time `json:"reconciledAtLedger"`
+	// Point in time at which the payments side was evaluated
+	ReconciledAtPayments time.Time `json:"reconciledAtPayments"`
+	// Outcome of the reconciliation run
+	Status string `json:"status"`
 }
 
 func (r Reconciliation) MarshalJSON() ([]byte, error) {

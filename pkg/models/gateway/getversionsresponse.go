@@ -3,8 +3,11 @@
 package gateway
 
 type GetVersionsResponse struct {
-	Env      string    `json:"env"`
-	Region   string    `json:"region"`
+	// Environment the stack is deployed in
+	Env string `json:"env"`
+	// Region the stack is deployed in
+	Region string `json:"region"`
+	// Version and health of each component in the stack
 	Versions []Version `json:"versions"`
 }
 

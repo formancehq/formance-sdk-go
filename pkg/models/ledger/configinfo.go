@@ -2,11 +2,16 @@
 
 package ledger
 
+// ConfigInfo - Configuration and version information for the ledger server
 type ConfigInfo struct {
-	Config               Config   `json:"config"`
+	// Configuration the ledger server is running with
+	Config Config `json:"config"`
+	// Experimental feature flags enabled on this deployment
 	ExperimentalFeatures []string `json:"experimentalFeatures,omitempty"`
-	Server               string   `json:"server"`
-	Version              string   `json:"version"`
+	// Name of the server serving the API
+	Server string `json:"server"`
+	// Version of the ledger service
+	Version string `json:"version"`
 }
 
 func (c *ConfigInfo) GetConfig() Config {

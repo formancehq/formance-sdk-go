@@ -2,35 +2,72 @@
 
 package reconciliation
 
-import (
-	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
-)
-
 type RuleRequest struct {
-	// Reconciliation rhythm. Scopes each failing fingerprint into a period so a
-	// March break and an April break are distinct, independently-closable cases.
-	// `continuous` (default) is a single unbounded period (live monitoring).
+	// Deprecated alias of `periodType`. Same members. Use `periodType`; this is
+	// removed at the next API major.
 	//
-	Cadence       *Cadence          `default:"continuous" json:"cadence"`
-	Enabled       *bool             `json:"enabled,omitempty"`
-	Labels        map[string]string `json:"labels,omitempty"`
-	Name          string            `json:"name"`
-	Notifications []string          `json:"notifications,omitempty"`
-	Schedule      *Schedule         `json:"schedule,omitempty"`
-	Severity      *Severity         `json:"severity,omitempty"`
-	TemplateKind  TemplateKind      `json:"templateKind"`
-	TemplateSpec  map[string]any    `json:"templateSpec"`
-}
-
-func (r RuleRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
-}
-
-func (r *RuleRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
-		return err
-	}
-	return nil
+	// Kept as its own component so regenerated SDKs keep emitting the
+	// `Cadence` type and its constants — dropping it would delete
+	// `CadenceMonthly` and friends from generated clients and break code that
+	// compiles today, even though the wire contract stays compatible.
+	//
+	// On requests either key is accepted. If both carry a value and the values
+	// differ the request is rejected with 400 rather than one being chosen
+	// silently; an empty `cadence` counts as unset rather than as a
+	// conflicting value.
+	//
+	// On responses the server always emits both keys, mirroring, but neither
+	// is listed in the `Rule` required set. That understates the guarantee on
+	// purpose. A required property with no schema default generates a value
+	// type in Go, which would turn the published `Rule.Cadence *Cadence` and
+	// `GetCadence() *Cadence` into non-pointers and break existing consumers;
+	// optional-without-default reproduces the published pointer signatures.
+	// The default cannot come back, because generators materialize it into
+	// request bodies and that collides with this alias. Both become required
+	// again at the next API major, when `cadence` goes.
+	//
+	// Servers before 2.5.0 do not know `periodType` and ignore it, falling
+	// back to `continuous`. Normally that cannot bite you: `periodType`
+	// reaches clients via an SDK regenerated from this spec, which only exists
+	// once 2.5.0 is released. If you need determinism while a fleet is
+	// mid-upgrade, send both keys with equal values — accepted on every
+	// version.
+	//
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Cadence *Cadence `json:"cadence,omitempty"`
+	// Whether the rule should be evaluated. Defaults to enabled
+	Enabled *bool `json:"enabled,omitempty"`
+	// Arbitrary key/value pairs to attach to the rule and copy onto the alerts it raises
+	Labels map[string]string `json:"labels,omitempty"`
+	// Human-readable name for the rule
+	Name string `json:"name"`
+	// Channels to notify when this rule raises an alert
+	Notifications []string `json:"notifications,omitempty"`
+	// How long a reconciliation period lasts. Scopes each failing fingerprint
+	// into a period so a March break and an April break are distinct,
+	// independently-closable cases.
+	//
+	// Omit the key to get `continuous`, a single unbounded period (live
+	// monitoring). There is deliberately no schema-level `default`: SDK
+	// generators materialize defaults into the serialized body, which would
+	// make an omitted key indistinguishable from an explicit one and collide
+	// with the deprecated `cadence` alias. The server owns the default.
+	//
+	// This is not how often the rule runs — that is `schedule`, and the two are
+	// independent: an hourly schedule with a `monthly` period type is normal.
+	// The period type determines the `periodID` an alert is filed under:
+	// `monthly` yields `2026-07`.
+	//
+	PeriodType *PeriodType `json:"periodType,omitempty"`
+	// When a rule runs, either on demand or on a cron expression
+	Schedule *Schedule `json:"schedule,omitempty"`
+	// How serious an alert is, used to route and prioritise notifications
+	Severity *Severity `json:"severity,omitempty"`
+	// Which built-in check a rule applies, determining the shape of its templateSpec
+	TemplateKind TemplateKind `json:"templateKind"`
+	// Parameters for the chosen template, whose shape depends on templateKind
+	TemplateSpec map[string]any `json:"templateSpec"`
 }
 
 func (r *RuleRequest) GetCadence() *Cadence {
@@ -66,6 +103,13 @@ func (r *RuleRequest) GetNotifications() []string {
 		return nil
 	}
 	return r.Notifications
+}
+
+func (r *RuleRequest) GetPeriodType() *PeriodType {
+	if r == nil {
+		return nil
+	}
+	return r.PeriodType
 }
 
 func (r *RuleRequest) GetSchedule() *Schedule {

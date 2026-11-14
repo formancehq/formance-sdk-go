@@ -3,6 +3,7 @@
 package orchestration
 
 type V2GetWorkflowInstanceHistoryStageResponse struct {
+	// Per-activity history of a workflow stage
 	Data []V2WorkflowInstanceHistoryStage `json:"data"`
 }
 

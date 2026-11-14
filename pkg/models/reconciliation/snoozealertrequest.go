@@ -9,8 +9,11 @@ import (
 
 // SnoozeAlertRequest - Mute an alert's notifications until `until` (which must be in the future).
 type SnoozeAlertRequest struct {
-	By    string    `json:"by"`
-	Note  *string   `json:"note,omitempty"`
+	// Who is snoozing the alert
+	By string `json:"by"`
+	// Free-text note to record with the snooze
+	Note *string `json:"note,omitempty"`
+	// When the mute expires and notifications resume. Must be in the future
 	Until time.Time `json:"until"`
 }
 

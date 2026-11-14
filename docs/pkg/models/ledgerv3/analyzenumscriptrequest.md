@@ -1,0 +1,9 @@
+# AnalyzeNumscriptRequest
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Source`                                                                            | `string`                                                                            | :heavy_check_mark:                                                                  | UTF-8 source text, at most 64 KiB. The complete HTTP JSON body is limited to 4 MiB. |                                                                                     |
+| `Version`                                                                           | `string`                                                                            | :heavy_check_mark:                                                                  | Numscript language version; currently v1.                                           | v1                                                                                  |

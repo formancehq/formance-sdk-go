@@ -3,8 +3,10 @@
 package ledger
 
 type V2ExporterConfiguration struct {
+	// Driver-specific configuration for the exporter
 	Config map[string]any `json:"config"`
-	Driver string         `json:"driver"`
+	// Name of the exporter driver to use
+	Driver string `json:"driver"`
 }
 
 func (v *V2ExporterConfiguration) GetConfig() map[string]any {

@@ -2,7 +2,9 @@
 
 package orchestration
 
+// ActivityVoidHold - Arguments for the activity that releases a wallet hold
 type ActivityVoidHold struct {
+	// Identifier of the hold to release
 	ID string `json:"id"`
 }
 

@@ -3,7 +3,9 @@
 package reconciliation
 
 type AckAlertRequest struct {
-	By   string  `json:"by"`
+	// Who is acknowledging the alert
+	By string `json:"by"`
+	// Free-text note to record with the acknowledgement
 	Note *string `json:"note,omitempty"`
 }
 

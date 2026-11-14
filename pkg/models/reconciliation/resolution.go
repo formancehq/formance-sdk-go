@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// Kind - How the alert was resolved, whether automatically, by booking a correcting transaction, or by business acceptance
 type Kind string
 
 const (
@@ -38,13 +39,20 @@ func (e *Kind) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Resolution - Record of how an alert was resolved and by whom
 type Resolution struct {
-	At               time.Time      `json:"at"`
-	By               string         `json:"by"`
+	// When the alert was resolved
+	At time.Time `json:"at"`
+	// Who resolved the alert
+	By string `json:"by"`
+	// The alert's evidence captured at resolution time, kept for audit
 	EvidenceSnapshot map[string]any `json:"evidenceSnapshot,omitempty"`
-	Kind             Kind           `json:"kind"`
-	Note             *string        `json:"note,omitempty"`
-	TransactionRefs  []string       `json:"transactionRefs,omitempty"`
+	// How the alert was resolved, whether automatically, by booking a correcting transaction, or by business acceptance
+	Kind Kind `json:"kind"`
+	// Free-text note left by whoever resolved the alert
+	Note *string `json:"note,omitempty"`
+	// References of the transactions booked to correct the break
+	TransactionRefs []string `json:"transactionRefs,omitempty"`
 }
 
 func (r Resolution) MarshalJSON() ([]byte, error) {

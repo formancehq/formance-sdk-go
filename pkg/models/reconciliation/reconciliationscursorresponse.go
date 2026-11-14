@@ -2,6 +2,7 @@
 
 package reconciliation
 
+// ReconciliationsCursorResponseCursor - Paginated cursor wrapping the list of reconciliations
 type ReconciliationsCursorResponseCursor struct {
 	Data     []Reconciliation `json:"data"`
 	HasMore  bool             `json:"hasMore"`
@@ -47,6 +48,7 @@ func (r *ReconciliationsCursorResponseCursor) GetPrevious() *string {
 
 // ReconciliationsCursorResponse - OK
 type ReconciliationsCursorResponse struct {
+	// Paginated cursor wrapping the list of reconciliations
 	Cursor ReconciliationsCursorResponseCursor `json:"cursor"`
 }
 

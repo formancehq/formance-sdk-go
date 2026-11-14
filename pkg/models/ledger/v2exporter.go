@@ -8,10 +8,12 @@ import (
 )
 
 type V2Exporter struct {
+	// Driver-specific configuration for the exporter
 	Config    map[string]any `json:"config"`
 	CreatedAt time.Time      `json:"createdAt"`
-	Driver    string         `json:"driver"`
-	ID        string         `json:"id"`
+	// Name of the exporter driver to use
+	Driver string `json:"driver"`
+	ID     string `json:"id"`
 }
 
 func (v V2Exporter) MarshalJSON() ([]byte, error) {

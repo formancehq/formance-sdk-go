@@ -1,0 +1,9 @@
+# ListNumscriptVersionsResponseData
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `LatestVersion`                                                                           | `*string`                                                                                 | :heavy_minus_sign:                                                                        | The current latest — the greatest stored semver                                           | 2.0.0                                                                                     |
+| `Versions`                                                                                | [][ledgerv3.NumscriptVersionEntry](../../../pkg/models/ledgerv3/numscriptversionentry.md) | :heavy_minus_sign:                                                                        | Every stored version, highest-first                                                       |                                                                                           |

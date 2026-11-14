@@ -2,6 +2,7 @@
 
 package ledger
 
+// V2PipelinesCursorResponseCursor - Paginated cursor wrapping the list of pipelines
 type V2PipelinesCursorResponseCursor struct {
 	Data     []V2Pipeline `json:"data"`
 	HasMore  bool         `json:"hasMore"`
@@ -50,6 +51,7 @@ func (v *V2PipelinesCursorResponseCursor) GetPrevious() *string {
 
 // V2PipelinesCursorResponse - Pipelines list
 type V2PipelinesCursorResponse struct {
+	// Paginated cursor wrapping the list of pipelines
 	Cursor V2PipelinesCursorResponseCursor `json:"cursor"`
 }
 

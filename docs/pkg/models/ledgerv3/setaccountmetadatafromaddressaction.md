@@ -1,0 +1,12 @@
+# SetAccountMetadataFromAddressAction
+
+For every posting address matching `pattern`, iterate every entry in `replacements` and set accountMetadata[address][key] to the RE2 replacement of the address. Each replacement carries an optional metadata `type` token (same tokens as SetMetadataAction.type).
+
+
+
+## Fields
+
+| Field                                                                                                                           | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `Pattern`                                                                                                                       | `string`                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
+| `Replacements`                                                                                                                  | [][ledgerv3.SetAccountMetadataFromAddressReplacement](../../../pkg/models/ledgerv3/setaccountmetadatafromaddressreplacement.md) | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |

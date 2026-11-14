@@ -10,7 +10,12 @@ import (
 )
 
 type V2GetVolumesWithBalancesRequest struct {
-	RequestBody map[string]any `request:"mediaType=application/json"`
+	// When set to `true`, all bigint values in the response will be serialized
+	// as strings instead of JSON numbers.
+	// Useful for clients that cannot handle large numbers natively (e.g. JavaScript).
+	//
+	FormanceBigintAsString *bool          `default:"false" header:"style=simple,explode=false,name=Formance-Bigint-As-String"`
+	RequestBody            map[string]any `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -43,6 +48,13 @@ func (v *V2GetVolumesWithBalancesRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2GetVolumesWithBalancesRequest) GetFormanceBigintAsString() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.FormanceBigintAsString
 }
 
 func (v *V2GetVolumesWithBalancesRequest) GetRequestBody() map[string]any {

@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// TemplateKind - Which built-in check a rule applies, determining the shape of its templateSpec
 type TemplateKind string
 
 const (

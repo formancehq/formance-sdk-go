@@ -2,12 +2,17 @@
 
 package wallets
 
+// ListWalletsResponseCursor - Paginated cursor wrapping the list of wallets
 type ListWalletsResponseCursor struct {
-	Data     []Wallet `json:"data"`
-	HasMore  *bool    `json:"hasMore,omitempty"`
-	Next     *string  `json:"next,omitempty"`
-	PageSize int64    `json:"pageSize"`
-	Previous *string  `json:"previous,omitempty"`
+	Data []Wallet `json:"data"`
+	// Whether further pages are available
+	HasMore *bool `json:"hasMore,omitempty"`
+	// Cursor for the next page, absent on the last page
+	Next *string `json:"next,omitempty"`
+	// Number of items requested per page
+	PageSize int64 `json:"pageSize"`
+	// Cursor for the previous page, absent on the first page
+	Previous *string `json:"previous,omitempty"`
 }
 
 func (l *ListWalletsResponseCursor) GetData() []Wallet {
@@ -46,6 +51,7 @@ func (l *ListWalletsResponseCursor) GetPrevious() *string {
 }
 
 type ListWalletsResponse struct {
+	// Paginated cursor wrapping the list of wallets
 	Cursor ListWalletsResponseCursor `json:"cursor"`
 }
 

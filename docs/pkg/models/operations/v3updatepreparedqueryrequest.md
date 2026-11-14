@@ -1,0 +1,10 @@
+# V3UpdatePreparedQueryRequest
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `UpdatePreparedQueryRequest`                                                                      | [ledgerv3.UpdatePreparedQueryRequest](../../../pkg/models/ledgerv3/updatepreparedqueryrequest.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `LedgerName`                                                                                      | `string`                                                                                          | :heavy_check_mark:                                                                                | Name of the ledger                                                                                |
+| `QueryName`                                                                                       | `string`                                                                                          | :heavy_check_mark:                                                                                | Prepared query name, URL-encoded as one path segment. Decoded exactly once.                       |

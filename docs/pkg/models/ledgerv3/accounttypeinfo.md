@@ -1,0 +1,11 @@
+# AccountTypeInfo
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Name`                                                                          | `string`                                                                        | :heavy_check_mark:                                                              | Account type name                                                               |
+| `Pattern`                                                                       | `string`                                                                        | :heavy_check_mark:                                                              | Account address pattern                                                         |
+| `Persistence`                                                                   | [ledgerv3.Persistence](../../../pkg/models/ledgerv3/persistence.md)             | :heavy_check_mark:                                                              | How account volumes are stored (NORMAL, EPHEMERAL, or TRANSIENT)                |
+| `SegmentTypes`                                                                  | map[string][*ledgerv3.SegmentType](../../../pkg/models/ledgerv3/segmenttype.md) | :heavy_minus_sign:                                                              | Maps a pattern variable name to a type constraint.                              |

@@ -1,0 +1,16 @@
+# LedgerStats
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `EphemeralEvictedCount`                                             | `int64`                                                             | :heavy_check_mark:                                                  | Number of ephemeral/draining volumes evicted from storage at commit |
+| `LogCount`                                                          | `int64`                                                             | :heavy_check_mark:                                                  | Number of log entries in the ledger                                 |
+| `NumscriptExecutionCount`                                           | `int64`                                                             | :heavy_check_mark:                                                  | Number of Numscript executions in the ledger                        |
+| `PostingCount`                                                      | `int64`                                                             | :heavy_check_mark:                                                  | Total number of postings across all transactions                    |
+| `ReferenceCount`                                                    | `int64`                                                             | :heavy_check_mark:                                                  | Number of transaction references registered in the ledger           |
+| `RevertCount`                                                       | `int64`                                                             | :heavy_check_mark:                                                  | Number of reverted transactions in the ledger                       |
+| `TransactionCount`                                                  | `int64`                                                             | :heavy_check_mark:                                                  | Number of transactions in the ledger                                |
+| `TransientUsedCount`                                                | `int64`                                                             | :heavy_check_mark:                                                  | Number of transient volumes used across proposals                   |
+| `VolumeCount`                                                       | `int64`                                                             | :heavy_check_mark:                                                  | Number of persisted (account, asset, color) volume rows             |

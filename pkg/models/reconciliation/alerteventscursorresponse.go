@@ -2,6 +2,7 @@
 
 package reconciliation
 
+// Cursor - Paginated cursor wrapping the alert's event log
 type Cursor struct {
 	Data     []AlertEvent `json:"data"`
 	HasMore  bool         `json:"hasMore"`
@@ -47,6 +48,7 @@ func (c *Cursor) GetPrevious() *string {
 
 // AlertEventsCursorResponse - OK
 type AlertEventsCursorResponse struct {
+	// Paginated cursor wrapping the alert's event log
 	Cursor Cursor `json:"cursor"`
 }
 

@@ -6,9 +6,12 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2StageSendSourceWallet - Take the funds from a wallet
 type V2StageSendSourceWallet struct {
+	// Name of the balance within the wallet. Defaults to the main balance when omitted
 	Balance *string `json:"balance,omitempty"`
-	ID      string  `json:"id"`
+	// Identifier of the wallet to take funds from
+	ID string `json:"id"`
 }
 
 func (v V2StageSendSourceWallet) MarshalJSON() ([]byte, error) {

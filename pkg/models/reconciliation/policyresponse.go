@@ -4,6 +4,7 @@ package reconciliation
 
 // PolicyResponse - OK
 type PolicyResponse struct {
+	// A reconciliation policy pairing a ledger query with a payments pool
 	Data Policy `json:"data"`
 }
 

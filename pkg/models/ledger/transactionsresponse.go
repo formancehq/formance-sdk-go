@@ -3,6 +3,7 @@
 package ledger
 
 type TransactionsResponse struct {
+	// The transactions that were created
 	Data []Transaction `json:"data"`
 }
 

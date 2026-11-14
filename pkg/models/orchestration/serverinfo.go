@@ -3,6 +3,7 @@
 package orchestration
 
 type ServerInfo struct {
+	// Version of the orchestration service
 	Version string `json:"version"`
 }
 

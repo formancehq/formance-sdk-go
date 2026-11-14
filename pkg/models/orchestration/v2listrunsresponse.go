@@ -2,6 +2,7 @@
 
 package orchestration
 
+// V2ListRunsResponseCursor - Paginated cursor wrapping the list of runs
 type V2ListRunsResponseCursor struct {
 	Data     []V2WorkflowInstance `json:"data"`
 	HasMore  bool                 `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V2ListRunsResponseCursor) GetPrevious() *string {
 // #endregion class-body-v2listrunsresponsecursor
 
 type V2ListRunsResponse struct {
+	// Paginated cursor wrapping the list of runs
 	Cursor V2ListRunsResponseCursor `json:"cursor"`
 }
 

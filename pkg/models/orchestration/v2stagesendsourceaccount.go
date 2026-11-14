@@ -6,15 +6,18 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2StageSendSourceAccount - Take the funds from a ledger account
 type V2StageSendSourceAccount struct {
 	// Enables unbounded overdraft on the throughAccount when set to true.
 	// This is useful when the throughAccount represents a liability or bridge account
 	// that needs to go negative (e.g., "liabilities:payouts-pending").
 	// Only applies when throughAccount is not "world" (which already has unbounded overdraft).
 	//
-	AllowOverdraft *bool   `default:"false" json:"allowOverdraft"`
-	ID             string  `json:"id"`
-	Ledger         *string `json:"ledger,omitempty"`
+	AllowOverdraft *bool `default:"false" json:"allowOverdraft"`
+	// Address of the ledger account to take funds from
+	ID string `json:"id"`
+	// Name of the ledger holding the account
+	Ledger *string `json:"ledger,omitempty"`
 	// Account used when this ledger account interacts with external systems (payments, cross-ledger).
 	// - As SOURCE going to payment: funds are sent to this account (e.g., "liabilities:payouts-pending")
 	// - As DESTINATION from payment: funds come from this account (e.g., "assets:stripe:incoming")

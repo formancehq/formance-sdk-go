@@ -2,12 +2,18 @@
 
 package ledger
 
+// V2SchemasCursor - Paginated cursor over the ledger's schemas
 type V2SchemasCursor struct {
-	Data     []V2Schema `json:"data"`
-	HasMore  bool       `json:"hasMore"`
-	Next     *string    `json:"next,omitempty"`
-	PageSize int64      `json:"pageSize"`
-	Previous *string    `json:"previous,omitempty"`
+	// The schemas on this page
+	Data []V2Schema `json:"data"`
+	// Whether further pages are available
+	HasMore bool `json:"hasMore"`
+	// Cursor for the next page, absent on the last page
+	Next *string `json:"next,omitempty"`
+	// Number of items requested per page
+	PageSize int64 `json:"pageSize"`
+	// Cursor for the previous page, absent on the first page
+	Previous *string `json:"previous,omitempty"`
 }
 
 func (v *V2SchemasCursor) GetData() []V2Schema {

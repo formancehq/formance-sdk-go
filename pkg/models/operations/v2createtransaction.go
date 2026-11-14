@@ -4,10 +4,16 @@ package operations
 
 import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledger"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 	"net/http"
 )
 
 type V2CreateTransactionRequest struct {
+	// When set to `true`, all bigint values in the response will be serialized
+	// as strings instead of JSON numbers.
+	// Useful for clients that cannot handle large numbers natively (e.g. JavaScript).
+	//
+	FormanceBigintAsString *bool `default:"false" header:"style=simple,explode=false,name=Formance-Bigint-As-String"`
 	// Use an idempotency key
 	IdempotencyKey *string `header:"style=simple,explode=false,name=Idempotency-Key"`
 	// The request body must contain at least one of the following objects:
@@ -23,6 +29,24 @@ type V2CreateTransactionRequest struct {
 	Ledger string `pathParam:"style=simple,explode=false,name=ledger"`
 	// Schema version to use for validation
 	SchemaVersion *string `queryParam:"style=form,explode=true,name=schemaVersion"`
+}
+
+func (v V2CreateTransactionRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2CreateTransactionRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2CreateTransactionRequest) GetFormanceBigintAsString() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.FormanceBigintAsString
 }
 
 func (v *V2CreateTransactionRequest) GetIdempotencyKey() *string {

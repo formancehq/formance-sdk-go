@@ -3,9 +3,12 @@
 package webhooks
 
 type ConfigUser struct {
-	Endpoint   string   `json:"endpoint"`
+	// URL events are delivered to
+	Endpoint string `json:"endpoint"`
+	// Types of event that trigger a delivery to this endpoint
 	EventTypes []string `json:"eventTypes"`
-	Secret     *string  `json:"secret,omitempty"`
+	// Secret used to sign delivery payloads. Generated automatically when omitted
+	Secret *string `json:"secret,omitempty"`
 }
 
 func (c *ConfigUser) GetEndpoint() string {

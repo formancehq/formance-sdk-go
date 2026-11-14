@@ -2,8 +2,11 @@
 
 package orchestration
 
+// Hold - Funds locked by a pending wallet debit, later either confirmed or voided
 type Hold struct {
-	Description string   `json:"description"`
+	// Human-readable reason the funds were held
+	Description string `json:"description"`
+	// The counterparty of a wallet movement, either a ledger account or another wallet
 	Destination *Subject `json:"destination,omitempty"`
 	// The unique ID of the hold.
 	ID string `json:"id"`

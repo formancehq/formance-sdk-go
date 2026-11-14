@@ -2,6 +2,7 @@
 
 package ledger
 
+// BalancesCursorResponseCursor - Paginated cursor wrapping the list of balances
 type BalancesCursorResponseCursor struct {
 	Data     []map[string]map[string]int64 `json:"data"`
 	HasMore  bool                          `json:"hasMore"`
@@ -46,6 +47,7 @@ func (b *BalancesCursorResponseCursor) GetPrevious() *string {
 }
 
 type BalancesCursorResponse struct {
+	// Paginated cursor wrapping the list of balances
 	Cursor BalancesCursorResponseCursor `json:"cursor"`
 }
 

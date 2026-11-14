@@ -2,6 +2,7 @@
 
 package orchestration
 
+// V2ListTriggersOccurrencesResponseCursor - Paginated cursor wrapping the trigger's occurrences
 type V2ListTriggersOccurrencesResponseCursor struct {
 	Data     []V2TriggerOccurrence `json:"data"`
 	HasMore  bool                  `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V2ListTriggersOccurrencesResponseCursor) GetPrevious() *string {
 // #endregion class-body-v2listtriggersoccurrencesresponsecursor
 
 type V2ListTriggersOccurrencesResponse struct {
+	// Paginated cursor wrapping the trigger's occurrences
 	Cursor V2ListTriggersOccurrencesResponseCursor `json:"cursor"`
 }
 

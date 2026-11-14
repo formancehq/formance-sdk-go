@@ -3,6 +3,7 @@
 package orchestration
 
 type V2GetWorkflowResponse struct {
+	// A workflow definition and the stages it runs
 	Data V2Workflow `json:"data"`
 }
 

@@ -1,5 +1,7 @@
 # ErrorCode
 
+Machine-readable error code identifying the failure
+
 ## Example Usage
 
 ```go
@@ -18,3 +20,4 @@ value := orchestration.ErrorCodeValidation
 | `ErrorCodeValidation` | VALIDATION            |
 | `ErrorCodeNotFound`   | NOT_FOUND             |
 | `ErrorCodeInternal`   | INTERNAL              |
+| `ErrorCodeConflict`   | CONFLICT              |

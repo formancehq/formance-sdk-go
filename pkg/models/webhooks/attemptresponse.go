@@ -3,6 +3,7 @@
 package webhooks
 
 type AttemptResponse struct {
+	// A single delivery attempt made against a webhook endpoint
 	Data Attempt `json:"data"`
 }
 

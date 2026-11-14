@@ -7,12 +7,18 @@ import (
 	"math/big"
 )
 
+// AccountWithVolumesAndBalances - An account together with its volumes and net balances per asset
 type AccountWithVolumesAndBalances struct {
-	Address  string              `json:"address"`
+	// The account address, a colon-separated segmented path such as users:001
+	Address string `json:"address"`
+	// Net balance per asset, equal to input minus output
 	Balances map[string]*big.Int `json:"balances,omitempty"`
-	Metadata map[string]any      `json:"metadata,omitempty"`
-	Type     *string             `json:"type,omitempty"`
-	Volumes  map[string]Volume   `json:"volumes,omitempty"`
+	// Arbitrary key/value pairs attached to the account
+	Metadata map[string]any `json:"metadata,omitempty"`
+	// Free-form classification of the account
+	Type *string `json:"type,omitempty"`
+	// Volumes per asset for a single account
+	Volumes map[string]Volume `json:"volumes,omitempty"`
 }
 
 func (a AccountWithVolumesAndBalances) MarshalJSON() ([]byte, error) {

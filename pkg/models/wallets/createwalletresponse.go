@@ -3,6 +3,7 @@
 package wallets
 
 type CreateWalletResponse struct {
+	// A wallet backed by a set of ledger accounts
 	Data Wallet `json:"data"`
 }
 

@@ -1,12 +1,47 @@
 # V2QueryTemplate
 
+A query template. `resource` selects which parameters apply.
 
-## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `Body`                                                                                   | map[string]`any`                                                                         | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `Description`                                                                            | `*string`                                                                                | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `Params`                                                                                 | [*ledger.V2QueryParams](../../../pkg/models/ledger/v2queryparams.md)                     | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `Resource`                                                                               | [*ledger.V2QueryResource](../../../pkg/models/ledger/v2queryresource.md)                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `Vars`                                                                                   | map[string][ledger.V2QueryTemplateVar](../../../pkg/models/ledger/v2querytemplatevar.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+## Supported Types
+
+### V2AccountQueryTemplate
+
+```go
+v2QueryTemplate := shared.CreateV2QueryTemplateAccounts(ledger.V2AccountQueryTemplate{/* values here */})
+```
+
+### V2LogQueryTemplate
+
+```go
+v2QueryTemplate := shared.CreateV2QueryTemplateLogs(ledger.V2LogQueryTemplate{/* values here */})
+```
+
+### V2TransactionQueryTemplate
+
+```go
+v2QueryTemplate := shared.CreateV2QueryTemplateTransactions(ledger.V2TransactionQueryTemplate{/* values here */})
+```
+
+### V2VolumeQueryTemplate
+
+```go
+v2QueryTemplate := shared.CreateV2QueryTemplateVolumes(ledger.V2VolumeQueryTemplate{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch v2QueryTemplate.Type {
+	case shared.V2QueryTemplateTypeAccounts:
+		// v2QueryTemplate.V2AccountQueryTemplate is populated
+	case shared.V2QueryTemplateTypeLogs:
+		// v2QueryTemplate.V2LogQueryTemplate is populated
+	case shared.V2QueryTemplateTypeTransactions:
+		// v2QueryTemplate.V2TransactionQueryTemplate is populated
+	case shared.V2QueryTemplateTypeVolumes:
+		// v2QueryTemplate.V2VolumeQueryTemplate is populated
+}
+```

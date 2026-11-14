@@ -3,6 +3,7 @@
 package auth
 
 type CreateClientResponse struct {
+	// An OAuth2 client registered on the stack
 	Data *Client `json:"data,omitempty"`
 }
 

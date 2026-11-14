@@ -2,7 +2,9 @@
 
 package orchestration
 
+// ActivityListWallets - Arguments for the activity that lists wallets
 type ActivityListWallets struct {
+	// Restrict the listing to wallets with this name
 	Name *string `json:"name,omitempty"`
 }
 

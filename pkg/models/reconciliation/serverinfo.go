@@ -4,6 +4,7 @@ package reconciliation
 
 // ServerInfo - Server information
 type ServerInfo struct {
+	// Version of the reconciliation service
 	Version string `json:"version"`
 }
 

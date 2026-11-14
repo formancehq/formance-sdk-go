@@ -1,5 +1,7 @@
 # StageSendDestinationPayment
 
+Send the funds to a payment
+
 
 ## Fields
 

@@ -10,12 +10,13 @@ import (
 )
 
 type GetDeliveriesRequest struct {
-	ConfigID      *string                  `queryParam:"style=form,explode=true,name=configId"`
-	CreatedAtFrom *time.Time               `queryParam:"style=form,explode=true,name=createdAtFrom"`
-	CreatedAtTo   *time.Time               `queryParam:"style=form,explode=true,name=createdAtTo"`
-	Cursor        *string                  `queryParam:"style=form,explode=true,name=cursor"`
-	PageSize      *int64                   `default:"100" queryParam:"style=form,explode=true,name=pageSize"`
-	Status        *webhooks.DeliveryStatus `queryParam:"style=form,explode=true,name=status"`
+	ConfigID      *string    `queryParam:"style=form,explode=true,name=configId"`
+	CreatedAtFrom *time.Time `queryParam:"style=form,explode=true,name=createdAtFrom"`
+	CreatedAtTo   *time.Time `queryParam:"style=form,explode=true,name=createdAtTo"`
+	Cursor        *string    `queryParam:"style=form,explode=true,name=cursor"`
+	PageSize      *int64     `default:"100" queryParam:"style=form,explode=true,name=pageSize"`
+	// Current state of a delivery in its retry lifecycle
+	Status *webhooks.DeliveryStatus `queryParam:"style=form,explode=true,name=status"`
 }
 
 func (g GetDeliveriesRequest) MarshalJSON() ([]byte, error) {

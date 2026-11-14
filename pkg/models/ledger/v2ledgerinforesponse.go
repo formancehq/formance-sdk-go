@@ -3,6 +3,7 @@
 package ledger
 
 type V2LedgerInfoResponse struct {
+	// Runtime information about a ledger, including the state of its storage migrations
 	Data *V2LedgerInfo `json:"data,omitempty"`
 }
 

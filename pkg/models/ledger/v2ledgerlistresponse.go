@@ -2,6 +2,7 @@
 
 package ledger
 
+// V2LedgerListResponseCursor - Paginated cursor wrapping the list of ledgers
 type V2LedgerListResponseCursor struct {
 	Data     []V2Ledger `json:"data"`
 	HasMore  bool       `json:"hasMore"`
@@ -49,6 +50,7 @@ func (v *V2LedgerListResponseCursor) GetPrevious() *string {
 // #endregion class-body-v2ledgerlistresponsecursor
 
 type V2LedgerListResponse struct {
+	// Paginated cursor wrapping the list of ledgers
 	Cursor V2LedgerListResponseCursor `json:"cursor"`
 }
 

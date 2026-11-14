@@ -7,9 +7,13 @@ import (
 	"math/big"
 )
 
+// ExpandedDebitHold - A hold together with the amounts it currently locks and has already released
 type ExpandedDebitHold struct {
-	Asset       string   `json:"asset"`
-	Description string   `json:"description"`
+	// Asset the held funds are denominated in
+	Asset string `json:"asset"`
+	// Human-readable reason the funds were held
+	Description string `json:"description"`
+	// The counterparty of a wallet movement, either a ledger account or another wallet
 	Destination *Subject `json:"destination,omitempty"`
 	// The unique ID of the hold.
 	ID string `json:"id"`
