@@ -3,6 +3,7 @@
 package auth
 
 type ServerInfo struct {
+	// Version of the auth service
 	Version string `json:"version"`
 }
 

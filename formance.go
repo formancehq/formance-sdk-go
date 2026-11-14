@@ -71,15 +71,13 @@ func Pointer[T any](v T) *T { return &v }
 type Formance struct {
 	SDKVersion     string
 	Auth           *Auth
+	Connectivity   *Connectivity
 	Ledger         *Ledger
 	Orchestration  *Orchestration
 	Payments       *Payments
 	Reconciliation *Reconciliation
-	// search.v1
-	// Elasticsearch.v1 query engine
-	Search   *Search
-	Wallets  *Wallets
-	Webhooks *Webhooks
+	Wallets        *Wallets
+	Webhooks       *Webhooks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -211,9 +209,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Formance {
 	sdk := &Formance{
-		SDKVersion: "5.0.1",
+		SDKVersion: "5.1.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 5.0.1 2.893.0 SDK_VERSION github.com/formancehq/formance-sdk-go/v5",
+			UserAgent:  "speakeasy-sdk/go 5.1.0 2.893.0 SDK_VERSION github.com/formancehq/formance-sdk-go/v5",
 			ServerList: ServerList,
 			ServerVariables: []map[string]string{
 				{},
@@ -242,11 +240,11 @@ func New(opts ...SDKOption) *Formance {
 	}
 
 	sdk.Auth = newAuth(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Connectivity = newConnectivity(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Ledger = newLedger(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Orchestration = newOrchestration(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Payments = newPayments(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Reconciliation = newReconciliation(sdk, sdk.sdkConfiguration, sdk.hooks)
-	sdk.Search = newSearch(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Wallets = newWallets(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Webhooks = newWebhooks(sdk, sdk.sdkConfiguration, sdk.hooks)
 

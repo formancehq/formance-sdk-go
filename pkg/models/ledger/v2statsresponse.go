@@ -3,6 +3,7 @@
 package ledger
 
 type V2StatsResponse struct {
+	// Aggregate counts for a ledger
 	Data V2Stats `json:"data"`
 }
 

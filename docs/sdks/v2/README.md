@@ -1030,7 +1030,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
+    if res.Bytes != nil {
         // handle response
     }
 }
@@ -1050,9 +1050,10 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| ledger.V2ErrorResponseError | default                     | application/json            |
+| sdkerrors.SDKError          | 4XX, 5XX                    | \*/\*                       |
 
 ## GetAccount
 
@@ -1805,15 +1806,11 @@ func main() {
                 },
             },
             Queries: map[string]ledger.V2QueryTemplate{
-                "key": ledger.V2QueryTemplate{
-                    Params: v5.Pointer(ledger.CreateV2QueryParamsQueryTemplateAccountParams(
-                        ledger.QueryTemplateAccountParams{
-                            Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-                            PageSize: v5.Pointer[int64](100),
-                            Sort: v5.Pointer("id:desc"),
-                        },
-                    )),
-                },
+                "key": ledger.CreateV2QueryTemplateVolumes(
+                    ledger.V2VolumeQueryTemplate{
+                        Resource: ledger.V2VolumeQueryTemplateResourceVolumes,
+                    },
+                ),
             },
         },
         Ledger: "ledger001",
@@ -2536,13 +2533,10 @@ func main() {
 
     res, err := s.Ledger.V2.RunQuery(ctx, operations.V2RunQueryRequest{
         RequestBody: operations.V2RunQueryRequestBody{
-            Params: v5.Pointer(ledger.CreateV2QueryParamsQueryTemplateAccountParams(
-                ledger.QueryTemplateAccountParams{
-                    Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-                    PageSize: v5.Pointer[int64](100),
-                    Sort: v5.Pointer("id:desc"),
-                },
-            )),
+            Params: &ledger.V2RunQueryParams{
+                PageSize: v5.Pointer[int64](100),
+                Sort: v5.Pointer("id:desc"),
+            },
         },
         Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
         ID: "CUSTOMER_DEPOSIT",

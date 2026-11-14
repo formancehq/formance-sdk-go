@@ -7,10 +7,14 @@ import (
 	"time"
 )
 
+// Ack - Record of who acknowledged an alert and when
 type Ack struct {
-	At   time.Time `json:"at"`
-	By   string    `json:"by"`
-	Note *string   `json:"note,omitempty"`
+	// When the alert was acknowledged
+	At time.Time `json:"at"`
+	// Who acknowledged the alert
+	By string `json:"by"`
+	// Free-text note left by whoever acknowledged the alert
+	Note *string `json:"note,omitempty"`
 }
 
 func (a Ack) MarshalJSON() ([]byte, error) {

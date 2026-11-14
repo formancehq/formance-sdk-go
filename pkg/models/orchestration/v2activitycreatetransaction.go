@@ -2,9 +2,12 @@
 
 package orchestration
 
+// V2ActivityCreateTransaction - Arguments for the activity that writes a transaction to a ledger
 type V2ActivityCreateTransaction struct {
-	Data   *V2PostTransaction `json:"data,omitempty"`
-	Ledger *string            `json:"ledger,omitempty"`
+	// A transaction to write to a ledger
+	Data *V2PostTransaction `json:"data,omitempty"`
+	// Name of the ledger to write the transaction to
+	Ledger *string `json:"ledger,omitempty"`
 }
 
 func (v *V2ActivityCreateTransaction) GetData() *V2PostTransaction {

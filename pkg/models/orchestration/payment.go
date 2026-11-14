@@ -10,9 +10,11 @@ import (
 	"time"
 )
 
+// Raw - The provider's original payload, passed through untouched
 type Raw struct {
 }
 
+// Scheme - Payment scheme or rail the payment travelled over
 type Scheme string
 
 const (
@@ -87,6 +89,7 @@ func (e *Scheme) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// PaymentType - Direction of the payment
 type PaymentType string
 
 const (
@@ -119,22 +122,38 @@ func (e *PaymentType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Payment - A payment observed or initiated through a connector
 type Payment struct {
-	Adjustments          []PaymentAdjustment `json:"adjustments"`
-	Asset                string              `json:"asset"`
-	ConnectorID          string              `json:"connectorID"`
-	CreatedAt            time.Time           `json:"createdAt"`
-	DestinationAccountID string              `json:"destinationAccountID"`
-	ID                   string              `json:"id"`
-	InitialAmount        *big.Int            `json:"initialAmount"`
-	Metadata             *PaymentMetadata    `json:"metadata"`
-	Provider             *Connector          `json:"provider,omitempty"`
-	Raw                  *Raw                `json:"raw"`
-	Reference            string              `json:"reference"`
-	Scheme               Scheme              `json:"scheme"`
-	SourceAccountID      string              `json:"sourceAccountID"`
-	Status               PaymentStatus       `json:"status"`
-	Type                 PaymentType         `json:"type"`
+	// Successive changes to the payment's amount and status
+	Adjustments []PaymentAdjustment `json:"adjustments"`
+	// Asset the payment is denominated in
+	Asset string `json:"asset"`
+	// Identifier of the connector that produced the payment
+	ConnectorID string `json:"connectorID"`
+	// When the payment was created
+	CreatedAt time.Time `json:"createdAt"`
+	// Identifier of the account the funds reached
+	DestinationAccountID string `json:"destinationAccountID"`
+	// Unique identifier of the payment
+	ID string `json:"id"`
+	// Amount the payment was created with, before any adjustment
+	InitialAmount *big.Int `json:"initialAmount"`
+	// Arbitrary key/value pairs attached to a payment
+	Metadata *PaymentMetadata `json:"metadata"`
+	// The payment provider behind a connector
+	Provider *Connector `json:"provider,omitempty"`
+	// The provider's original payload, passed through untouched
+	Raw *Raw `json:"raw"`
+	// Identifier the payment carries at the provider
+	Reference string `json:"reference"`
+	// Payment scheme or rail the payment travelled over
+	Scheme Scheme `json:"scheme"`
+	// Identifier of the account the funds left
+	SourceAccountID string `json:"sourceAccountID"`
+	// Where a payment stands in its lifecycle
+	Status PaymentStatus `json:"status"`
+	// Direction of the payment
+	Type PaymentType `json:"type"`
 }
 
 func (p Payment) MarshalJSON() ([]byte, error) {

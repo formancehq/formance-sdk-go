@@ -4,14 +4,301 @@ package ledger
 
 import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
+	"math/big"
+	"time"
 )
+
+// RevertedTransaction - The original transaction that was reverted
+type RevertedTransaction struct {
+	// Unique sequential identifier for this transaction within the ledger
+	ID *big.Int `json:"id"`
+	// The request time: when the transaction was actually written to the ledger. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	InsertedAt *time.Time `json:"insertedAt,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata"`
+	// Volumes aggregated per account and per asset
+	PostCommitEffectiveVolumes map[string]map[string]V2Volume `json:"postCommitEffectiveVolumes,omitempty"`
+	// Volumes aggregated per account and per asset
+	PostCommitVolumes map[string]map[string]V2Volume `json:"postCommitVolumes,omitempty"`
+	// The fund movements making up the transaction
+	Postings []V2Posting `json:"postings"`
+	// Volumes aggregated per account and per asset
+	PreCommitEffectiveVolumes map[string]map[string]V2Volume `json:"preCommitEffectiveVolumes,omitempty"`
+	// Volumes aggregated per account and per asset
+	PreCommitVolumes map[string]map[string]V2Volume `json:"preCommitVolumes,omitempty"`
+	// Optional caller-supplied identifier, unique within the ledger
+	Reference *string `json:"reference,omitempty"`
+	// Indicates if the transaction has been reverted
+	Reverted bool `json:"reverted"`
+	// When the transaction was reverted, on the request-time axis
+	RevertedAt *time.Time `json:"revertedAt,omitempty"`
+	// Transaction template used
+	Template *string `json:"template,omitempty"`
+	// The transaction time: when the transaction is considered to have occurred. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp time.Time `json:"timestamp"`
+	// When the transaction row was last modified
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+}
+
+func (r RevertedTransaction) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RevertedTransaction) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"id", "metadata", "postings", "reverted", "timestamp"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *RevertedTransaction) GetID() *big.Int {
+	if r == nil {
+		return big.NewInt(0)
+	}
+	return r.ID
+}
+
+func (r *RevertedTransaction) GetInsertedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.InsertedAt
+}
+
+func (r *RevertedTransaction) GetMetadata() map[string]string {
+	if r == nil {
+		return map[string]string{}
+	}
+	return r.Metadata
+}
+
+func (r *RevertedTransaction) GetPostCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if r == nil {
+		return nil
+	}
+	return r.PostCommitEffectiveVolumes
+}
+
+func (r *RevertedTransaction) GetPostCommitVolumes() map[string]map[string]V2Volume {
+	if r == nil {
+		return nil
+	}
+	return r.PostCommitVolumes
+}
+
+func (r *RevertedTransaction) GetPostings() []V2Posting {
+	if r == nil {
+		return []V2Posting{}
+	}
+	return r.Postings
+}
+
+func (r *RevertedTransaction) GetPreCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if r == nil {
+		return nil
+	}
+	return r.PreCommitEffectiveVolumes
+}
+
+func (r *RevertedTransaction) GetPreCommitVolumes() map[string]map[string]V2Volume {
+	if r == nil {
+		return nil
+	}
+	return r.PreCommitVolumes
+}
+
+func (r *RevertedTransaction) GetReference() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Reference
+}
+
+func (r *RevertedTransaction) GetReverted() bool {
+	if r == nil {
+		return false
+	}
+	return r.Reverted
+}
+
+func (r *RevertedTransaction) GetRevertedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.RevertedAt
+}
+
+func (r *RevertedTransaction) GetTemplate() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Template
+}
+
+func (r *RevertedTransaction) GetTimestamp() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.Timestamp
+}
+
+func (r *RevertedTransaction) GetUpdatedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.UpdatedAt
+}
+
+// V2LogDataRevertedTransactionTransaction - The new reverting transaction created to cancel the original
+type V2LogDataRevertedTransactionTransaction struct {
+	// Unique sequential identifier for this transaction within the ledger
+	ID *big.Int `json:"id"`
+	// The request time: when the transaction was actually written to the ledger. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	InsertedAt *time.Time `json:"insertedAt,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata"`
+	// Volumes aggregated per account and per asset
+	PostCommitEffectiveVolumes map[string]map[string]V2Volume `json:"postCommitEffectiveVolumes,omitempty"`
+	// Volumes aggregated per account and per asset
+	PostCommitVolumes map[string]map[string]V2Volume `json:"postCommitVolumes,omitempty"`
+	// The fund movements making up the transaction
+	Postings []V2Posting `json:"postings"`
+	// Volumes aggregated per account and per asset
+	PreCommitEffectiveVolumes map[string]map[string]V2Volume `json:"preCommitEffectiveVolumes,omitempty"`
+	// Volumes aggregated per account and per asset
+	PreCommitVolumes map[string]map[string]V2Volume `json:"preCommitVolumes,omitempty"`
+	// Optional caller-supplied identifier, unique within the ledger
+	Reference *string `json:"reference,omitempty"`
+	// Indicates if the transaction has been reverted
+	Reverted bool `json:"reverted"`
+	// When the transaction was reverted, on the request-time axis
+	RevertedAt *time.Time `json:"revertedAt,omitempty"`
+	// Transaction template used
+	Template *string `json:"template,omitempty"`
+	// The transaction time: when the transaction is considered to have occurred. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp time.Time `json:"timestamp"`
+	// When the transaction row was last modified
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+}
+
+func (v V2LogDataRevertedTransactionTransaction) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, []string{"id", "metadata", "postings", "reverted", "timestamp"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetID() *big.Int {
+	if v == nil {
+		return big.NewInt(0)
+	}
+	return v.ID
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetInsertedAt() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.InsertedAt
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetMetadata() map[string]string {
+	if v == nil {
+		return map[string]string{}
+	}
+	return v.Metadata
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetPostCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PostCommitEffectiveVolumes
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetPostCommitVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PostCommitVolumes
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetPostings() []V2Posting {
+	if v == nil {
+		return []V2Posting{}
+	}
+	return v.Postings
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetPreCommitEffectiveVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PreCommitEffectiveVolumes
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetPreCommitVolumes() map[string]map[string]V2Volume {
+	if v == nil {
+		return nil
+	}
+	return v.PreCommitVolumes
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetReference() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Reference
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetReverted() bool {
+	if v == nil {
+		return false
+	}
+	return v.Reverted
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetRevertedAt() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.RevertedAt
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetTemplate() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Template
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetTimestamp() time.Time {
+	if v == nil {
+		return time.Time{}
+	}
+	return v.Timestamp
+}
+
+func (v *V2LogDataRevertedTransactionTransaction) GetUpdatedAt() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.UpdatedAt
+}
+
+// #region class-body-v2logdatarevertedtransactiontransaction
+// #endregion class-body-v2logdatarevertedtransactiontransaction
 
 // V2LogDataRevertedTransaction - Payload for REVERTED_TRANSACTION log entries. Contains both the original reverted transaction and the new reverting transaction.
 type V2LogDataRevertedTransaction struct {
-	// Transaction structure as it appears in log payloads
-	RevertedTransaction V2LogTransaction `json:"revertedTransaction"`
-	// Transaction structure as it appears in log payloads
-	Transaction V2LogTransaction `json:"transaction"`
+	// The original transaction that was reverted
+	RevertedTransaction RevertedTransaction `json:"revertedTransaction"`
+	// The new reverting transaction created to cancel the original
+	Transaction V2LogDataRevertedTransactionTransaction `json:"transaction"`
 }
 
 func (v V2LogDataRevertedTransaction) MarshalJSON() ([]byte, error) {
@@ -25,16 +312,16 @@ func (v *V2LogDataRevertedTransaction) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2LogDataRevertedTransaction) GetRevertedTransaction() V2LogTransaction {
+func (v *V2LogDataRevertedTransaction) GetRevertedTransaction() RevertedTransaction {
 	if v == nil {
-		return V2LogTransaction{}
+		return RevertedTransaction{}
 	}
 	return v.RevertedTransaction
 }
 
-func (v *V2LogDataRevertedTransaction) GetTransaction() V2LogTransaction {
+func (v *V2LogDataRevertedTransaction) GetTransaction() V2LogDataRevertedTransactionTransaction {
 	if v == nil {
-		return V2LogTransaction{}
+		return V2LogDataRevertedTransactionTransaction{}
 	}
 	return v.Transaction
 }

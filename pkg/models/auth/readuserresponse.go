@@ -3,6 +3,7 @@
 package auth
 
 type ReadUserResponse struct {
+	// A user known to the stack's identity provider
 	Data *User `json:"data,omitempty"`
 }
 

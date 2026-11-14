@@ -1,5 +1,7 @@
 # Cursor
 
+Paginated cursor wrapping the alert's event log
+
 
 ## Fields
 

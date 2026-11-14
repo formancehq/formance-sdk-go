@@ -10,6 +10,11 @@ import (
 )
 
 type V2RevertTransactionRequest struct {
+	// When set to `true`, all bigint values in the response will be serialized
+	// as strings instead of JSON numbers.
+	// Useful for clients that cannot handle large numbers natively (e.g. JavaScript).
+	//
+	FormanceBigintAsString *bool `default:"false" header:"style=simple,explode=false,name=Formance-Bigint-As-String"`
 	// Use an idempotency key
 	IdempotencyKey             *string                            `header:"style=simple,explode=false,name=Idempotency-Key"`
 	V2RevertTransactionRequest *ledger.V2RevertTransactionRequest `request:"mediaType=application/json"`
@@ -36,6 +41,13 @@ func (v *V2RevertTransactionRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2RevertTransactionRequest) GetFormanceBigintAsString() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.FormanceBigintAsString
 }
 
 func (v *V2RevertTransactionRequest) GetIdempotencyKey() *string {

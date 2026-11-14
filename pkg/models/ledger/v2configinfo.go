@@ -3,9 +3,12 @@
 package ledger
 
 type V2ConfigInfo struct {
+	// Experimental feature flags enabled on this deployment
 	ExperimentalFeatures []string `json:"experimentalFeatures,omitempty"`
-	Server               string   `json:"server"`
-	Version              string   `json:"version"`
+	// Name of the server serving the API
+	Server string `json:"server"`
+	// Version of the ledger service
+	Version string `json:"version"`
 }
 
 func (v *V2ConfigInfo) GetExperimentalFeatures() []string {

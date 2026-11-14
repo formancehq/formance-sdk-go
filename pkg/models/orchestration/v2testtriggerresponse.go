@@ -3,6 +3,7 @@
 package orchestration
 
 type V2TestTriggerResponse struct {
+	// Result of evaluating a trigger against a sample event, without running the workflow
 	Data V2TriggerTest `json:"data"`
 }
 

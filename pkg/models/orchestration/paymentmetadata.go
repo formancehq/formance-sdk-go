@@ -2,7 +2,9 @@
 
 package orchestration
 
+// PaymentMetadata - Arbitrary key/value pairs attached to a payment
 type PaymentMetadata struct {
+	// Metadata value carried by the payment
 	Key *string `json:"key,omitempty"`
 }
 

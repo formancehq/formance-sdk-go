@@ -3,6 +3,7 @@
 package orchestration
 
 type ListTriggersOccurrencesResponse struct {
+	// The trigger's occurrences
 	Data []TriggerOccurrence `json:"data"`
 }
 

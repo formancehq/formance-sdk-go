@@ -1,0 +1,10 @@
+# V3CreateIndexRequest
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                                  | `*string`                                                                                         | :heavy_minus_sign:                                                                                | N/A                                                                                               |
+| `RequestBody`                                                                                     | [operations.V3CreateIndexRequestBody](../../../pkg/models/operations/v3createindexrequestbody.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `LedgerName`                                                                                      | `string`                                                                                          | :heavy_check_mark:                                                                                | Name of the ledger                                                                                |

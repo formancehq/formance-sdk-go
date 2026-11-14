@@ -8,8 +8,10 @@ import (
 )
 
 type V2StageDelay struct {
-	Duration *string    `json:"duration,omitempty"`
-	Until    *time.Time `json:"until,omitempty"`
+	// Wait for this long, expressed as a Go duration such as 10s. Mutually exclusive with until
+	Duration *string `json:"duration,omitempty"`
+	// Wait until this absolute point in time. Mutually exclusive with duration
+	Until *time.Time `json:"until,omitempty"`
 }
 
 func (v V2StageDelay) MarshalJSON() ([]byte, error) {

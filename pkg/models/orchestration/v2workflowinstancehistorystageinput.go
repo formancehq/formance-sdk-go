@@ -2,19 +2,32 @@
 
 package orchestration
 
+// V2WorkflowInstanceHistoryStageInput - Arguments an activity was called with, keyed by activity name
 type V2WorkflowInstanceHistoryStageInput struct {
-	AddAccountMetadata       *V2ActivityAddAccountMetadata      `json:"AddAccountMetadata,omitempty"`
-	ConfirmHold              *V2ActivityConfirmHold             `json:"ConfirmHold,omitempty"`
-	CreateTransaction        *V2ActivityCreateTransaction       `json:"CreateTransaction,omitempty"`
-	CreateTransferInitiation *V2CreateTransferInitiationRequest `json:"CreateTransferInitiation,omitempty"`
-	CreditWallet             *V2ActivityCreditWallet            `json:"CreditWallet,omitempty"`
-	DebitWallet              *V2ActivityDebitWallet             `json:"DebitWallet,omitempty"`
-	GetAccount               *V2ActivityGetAccount              `json:"GetAccount,omitempty"`
-	GetPayment               *V2ActivityGetPayment              `json:"GetPayment,omitempty"`
-	GetWallet                *V2ActivityGetWallet               `json:"GetWallet,omitempty"`
-	ListWallets              *V2ActivityListWallets             `json:"ListWallets,omitempty"`
-	StripeTransfer           *V2StripeTransferRequest           `json:"StripeTransfer,omitempty"`
-	VoidHold                 *V2ActivityVoidHold                `json:"VoidHold,omitempty"`
+	// Arguments for the activity that sets metadata on a ledger account
+	AddAccountMetadata *V2ActivityAddAccountMetadata `json:"AddAccountMetadata,omitempty"`
+	// Arguments for the activity that confirms a wallet hold
+	ConfirmHold *V2ActivityConfirmHold `json:"ConfirmHold,omitempty"`
+	// Arguments for the activity that writes a transaction to a ledger
+	CreateTransaction *V2ActivityCreateTransaction `json:"CreateTransaction,omitempty"`
+	// Arguments for the activity that initiates a transfer through a connector
+	CreateTransferInitiation *V2ActivityCreateTransferInitiation `json:"CreateTransferInitiation,omitempty"`
+	// Arguments for the activity that credits a wallet
+	CreditWallet *V2ActivityCreditWallet `json:"CreditWallet,omitempty"`
+	// Arguments for the activity that debits a wallet
+	DebitWallet *V2ActivityDebitWallet `json:"DebitWallet,omitempty"`
+	// Arguments for the activity that reads a ledger account
+	GetAccount *V2ActivityGetAccount `json:"GetAccount,omitempty"`
+	// Arguments for the activity that reads a payment
+	GetPayment *V2ActivityGetPayment `json:"GetPayment,omitempty"`
+	// Arguments for the activity that reads a wallet
+	GetWallet *V2ActivityGetWallet `json:"GetWallet,omitempty"`
+	// Arguments for the activity that lists wallets
+	ListWallets *V2ActivityListWallets `json:"ListWallets,omitempty"`
+	// Arguments for the activity that transfers funds through Stripe
+	StripeTransfer *V2ActivityStripeTransfer `json:"StripeTransfer,omitempty"`
+	// Arguments for the activity that releases a wallet hold
+	VoidHold *V2ActivityVoidHold `json:"VoidHold,omitempty"`
 }
 
 func (v *V2WorkflowInstanceHistoryStageInput) GetAddAccountMetadata() *V2ActivityAddAccountMetadata {
@@ -38,7 +51,7 @@ func (v *V2WorkflowInstanceHistoryStageInput) GetCreateTransaction() *V2Activity
 	return v.CreateTransaction
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetCreateTransferInitiation() *V2CreateTransferInitiationRequest {
+func (v *V2WorkflowInstanceHistoryStageInput) GetCreateTransferInitiation() *V2ActivityCreateTransferInitiation {
 	if v == nil {
 		return nil
 	}
@@ -87,7 +100,7 @@ func (v *V2WorkflowInstanceHistoryStageInput) GetListWallets() *V2ActivityListWa
 	return v.ListWallets
 }
 
-func (v *V2WorkflowInstanceHistoryStageInput) GetStripeTransfer() *V2StripeTransferRequest {
+func (v *V2WorkflowInstanceHistoryStageInput) GetStripeTransfer() *V2ActivityStripeTransfer {
 	if v == nil {
 		return nil
 	}

@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// Status - Where the alert stands in its open, acknowledged, resolved lifecycle
 type Status string
 
 const (
@@ -42,33 +43,47 @@ func (e *Status) UnmarshalJSON(data []byte) error {
 // reconciliation period. There is exactly one Alert per
 // (ruleID, fingerprint, periodID) — within a period, re-opens after resolve
 // flip the status back to OPEN in place; the same fingerprint failing in a
-// new period is a separate Alert. For a `continuous`-cadence rule there is
+// new period is a separate Alert. For a `continuous` period type there is
 // one unbounded period, so it behaves as one Alert per (ruleID, fingerprint).
 // The full history of transitions lives in alert_event
 // (see /alerts/{alertID}/events).
 type Alert struct {
-	Ack              *Ack              `json:"ack,omitempty"`
-	CreatedAt        time.Time         `json:"createdAt"`
-	Evidence         map[string]any    `json:"evidence,omitempty"`
-	Fingerprint      string            `json:"fingerprint"`
-	FirstSeenAt      time.Time         `json:"firstSeenAt"`
-	ID               string            `json:"id"`
-	Labels           map[string]string `json:"labels,omitempty"`
-	LastEvaluationID string            `json:"lastEvaluationID"`
-	LastSeenAt       time.Time         `json:"lastSeenAt"`
-	// Count of FAIL events on this alert across reopen cycles within its period (lifetime, for a continuous-cadence rule).
+	// Record of who acknowledged an alert and when
+	Ack *Ack `json:"ack,omitempty"`
+	// When the alert was created
+	CreatedAt time.Time `json:"createdAt"`
+	// Data captured from the failing evaluation, explaining what broke
+	Evidence map[string]any `json:"evidence,omitempty"`
+	// Identifies what is failing within the rule, so the same break dedupes to one alert
+	Fingerprint string `json:"fingerprint"`
+	// When the fingerprint first failed within this period
+	FirstSeenAt time.Time `json:"firstSeenAt"`
+	// Unique identifier of the alert
+	ID string `json:"id"`
+	// Key/value pairs copied from the rule that raised the alert
+	Labels map[string]string `json:"labels,omitempty"`
+	// Identifier of the evaluation that last touched the alert
+	LastEvaluationID string `json:"lastEvaluationID"`
+	// When the fingerprint most recently failed
+	LastSeenAt time.Time `json:"lastSeenAt"`
+	// Count of FAIL events on this alert across reopen cycles within its period (lifetime, for a `continuous` period type).
 	OccurrenceCount int64 `json:"occurrenceCount"`
 	// Reconciliation period this alert is scoped to ('continuous' for live-monitoring rules).
-	PeriodID   string      `json:"periodID"`
+	PeriodID string `json:"periodID"`
+	// Record of how an alert was resolved and by whom
 	Resolution *Resolution `json:"resolution,omitempty"`
-	RuleID     string      `json:"ruleID"`
-	Severity   Severity    `json:"severity"`
+	// Identifier of the rule that raised the alert
+	RuleID string `json:"ruleID"`
+	// How serious an alert is, used to route and prioritise notifications
+	Severity Severity `json:"severity"`
 	// A time-boxed, operator-initiated mute of an alert's notifications. While
 	// `until` is in the future the alert keeps failing and keeps counting
 	// against period-green — only its notifications are suppressed.
 	//
-	Snooze    *Snooze   `json:"snooze,omitempty"`
-	Status    Status    `json:"status"`
+	Snooze *Snooze `json:"snooze,omitempty"`
+	// Where the alert stands in its open, acknowledged, resolved lifecycle
+	Status Status `json:"status"`
+	// When the alert was last modified
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 

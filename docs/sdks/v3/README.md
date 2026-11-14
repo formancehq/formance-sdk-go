@@ -1,93 +1,89 @@
-# Payments.V3
+# Ledger.V3
 
 ## Overview
 
 ### Available Operations
 
-* [AddAccountToPool](#addaccounttopool) - Add an account to a pool
-* [AddBankAccountToPaymentServiceUser](#addbankaccounttopaymentserviceuser) - Add a bank account to a payment service user
-* [ApprovePaymentInitiation](#approvepaymentinitiation) - Approve a payment initiation
-* [CreateAccount](#createaccount) - Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
+* [AddAccountType](#addaccounttype) - Add an account type
+* [AggregateVolumes](#aggregatevolumes) - Aggregate volumes
+* [AnalyzeAccounts](#analyzeaccounts) - Analyze accounts and suggest a Chart of Accounts
+* [AnalyzeNumscript](#analyzenumscript) - Analyze Numscript source
+* [AnalyzeTransactions](#analyzetransactions) - Analyze transaction flow patterns
+* [BulkOperations](#bulkoperations) - Bulk operations
+* [Clusterz](#clusterz) - Cluster-availability probe
+* [CreateIndex](#createindex) - Create an index on a ledger
+* [CreateLedger](#createledger) - Create a new ledger
+* [CreatePreparedQuery](#createpreparedquery) - Create a prepared query
+* [CreateTransaction](#createtransaction) - Create a new transaction
+* [DeleteAccountMetadata](#deleteaccountmetadata) - Delete account metadata
+* [DeleteLedger](#deleteledger) - Delete a ledger
+* [DeleteLedgerMetadata](#deleteledgermetadata) - Delete ledger metadata
+* [DeletePreparedQuery](#deletepreparedquery) - Delete a prepared query
+* [DeleteTransactionMetadata](#deletetransactionmetadata) - Delete transaction metadata
+* [DropIndex](#dropindex) - Drop an index from a ledger
+* [ExecutePreparedQuery](#executepreparedquery) - Execute a prepared query
+* [GetAccount](#getaccount) - Get an account
+* [GetAccountType](#getaccounttype) - Get an account type
+* [GetAuditEntry](#getauditentry) - Get an audit entry
+* [GetBucketIndex](#getbucketindex) - Get a single bucket-scoped index registry entry
+* [GetBucketIndexEntryStatus](#getbucketindexentrystatus) - Get the per-replica status of a single bucket-scoped index
+* [GetEventsSinks](#geteventssinks) - List configured event sinks
+* [GetIndex](#getindex) - Get a single index registry entry
+* [GetIndexEntryStatus](#getindexentrystatus) - Get the per-replica status of a single index
+* [GetIndexStatus](#getindexstatus) - Get aggregated index registry status
+* [GetLedger](#getledger) - Get a ledger
+* [GetLedgerStats](#getledgerstats) - Get ledger statistics
+* [GetLog](#getlog) - Get a single system log by bucket-wide sequence
+* [GetMetadataSchemaStatus](#getmetadataschemastatus) - Get metadata schema
+* [GetNumscript](#getnumscript) - Get a numscript
+* [GetNumscriptUsage](#getnumscriptusage) - Get template usage
+* [GetTransaction](#gettransaction) - Get a transaction
+* [Health](#health) - Health check
+* [Info](#info) - Get server build information
+* [InspectIndex](#inspectindex) - Inspect a metadata index
+* [ListAccountTypes](#listaccounttypes) - List account types
+* [ListAccounts](#listaccounts) - List accounts
+* [ListAllLedgers](#listallledgers) - List all ledgers
+* [ListAuditEntries](#listauditentries) - List audit entries
+* [ListBucketIndexes](#listbucketindexes) - List bucket-wide indexes
+* [ListLedgerIndexes](#listledgerindexes) - List indexes for a ledger
+* [ListLedgerLogs](#listledgerlogs) - List logs for a ledger
+* [ListLedgerTransactions](#listledgertransactions) - List transactions for a ledger
+* [ListNumscriptVersions](#listnumscriptversions) - List numscript versions
+* [ListNumscripts](#listnumscripts) - List all numscripts
+* [ListPreparedQueries](#listpreparedqueries) - List prepared queries
+* [ListSigningKeys](#listsigningkeys) - List registered Ed25519 signing keys
+* [Livez](#livez) - Liveness probe
+* [PromoteLedger](#promoteledger) - Promote a mirror ledger
+* [Readyz](#readyz) - Readiness probe
+* [RemoveAccountType](#removeaccounttype) - Remove an account type
+* [RemoveEventsSink](#removeeventssink) - Remove an event sink
+* [RemoveMetadataFieldType](#removemetadatafieldtype) - Remove metadata field type
+* [RevertTransaction](#reverttransaction) - Revert a transaction
+* [SaveAccountMetadata](#saveaccountmetadata) - Save account metadata
+* [SaveLedgerMetadata](#saveledgermetadata) - Save ledger metadata
+* [SaveNumscript](#savenumscript) - Save a numscript
+* [SaveTransactionMetadata](#savetransactionmetadata) - Save transaction metadata
+* [SetDefaultEnforcementMode](#setdefaultenforcementmode) - Set default enforcement mode
+* [SetMetadataFieldType](#setmetadatafieldtype) - Set metadata field type
+* [UpdatePreparedQuery](#updatepreparedquery) - Update a prepared query
 
-* [CreateBankAccount](#createbankaccount) - Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
+## AddAccountType
 
-* [CreateLinkForPaymentServiceUser](#createlinkforpaymentserviceuser) - Create an authentication link for a payment service user on a connector, for oauth flow
-* [CreatePayment](#createpayment) - Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
+Adds a new account type to a ledger's chart of accounts. Account types define
+address patterns for account validation. Requires `ledger:WriteMetadata` scope.
 
-* [CreatePaymentServiceUser](#createpaymentserviceuser) - Create a formance payment service user object
-* [CreatePool](#createpool) - Create a formance pool object
-* [DeletePaymentInitiation](#deletepaymentinitiation) - Delete a payment initiation by ID
-* [DeletePaymentServiceUser](#deletepaymentserviceuser) - Delete a payment service user by ID
-* [DeletePaymentServiceUserConnectionFromConnectorID](#deletepaymentserviceuserconnectionfromconnectorid) - Delete a connection for a payment service user on a connector
-* [DeletePaymentServiceUserConnector](#deletepaymentserviceuserconnector) - Remove a payment service user from a connector, the PSU will still exist in Formance
-* [DeletePool](#deletepool) - Delete a pool by ID
-* [ForwardBankAccount](#forwardbankaccount) - Forward a Bank Account to a PSP for creation
-* [ForwardPaymentServiceUserBankAccount](#forwardpaymentserviceuserbankaccount) - Forward a payment service user's bank account to a connector
-* [ForwardPaymentServiceUserToProvider](#forwardpaymentserviceusertoprovider) - Register/forward a payment service user on/to a connector
-* [GetAccount](#getaccount) - Get an account by ID
-* [GetAccountBalances](#getaccountbalances) - Get account balances
-* [GetBankAccount](#getbankaccount) - Get a Bank Account by ID
-* [GetConnectorCapabilities](#getconnectorcapabilities) - Get the plugin capabilities of an installed connector
-* [GetConnectorConfig](#getconnectorconfig) - Get a connector configuration by ID
-* [GetConnectorSchedule](#getconnectorschedule) - Get a connector schedule by ID
-* [GetConversion](#getconversion) - Get a single conversion by its Formance ID
-* [GetOrder](#getorder) - Get a single order by its Formance ID
-* [GetPayment](#getpayment) - Get a payment by ID
-* [GetPaymentInitiation](#getpaymentinitiation) - Get a payment initiation by ID
-* [GetPaymentServiceUser](#getpaymentserviceuser) - Get a payment service user by ID
-* [GetPaymentServiceUserLinkAttemptFromConnectorID](#getpaymentserviceuserlinkattemptfromconnectorid) - Get a link attempt for a payment service user on a connector
-* [GetPool](#getpool) - Get a pool by ID
-* [GetPoolBalances](#getpoolbalances) - Get historical pool balances from a particular point in time
-* [GetPoolBalancesLatest](#getpoolbalanceslatest) - Get latest pool balances
-* [GetTask](#gettask) - Get a task and its result by ID
-* [InitiatePayment](#initiatepayment) - Initiate a payment
-* [InstallConnector](#installconnector) - Install a connector
-* [ListAccounts](#listaccounts) - List all accounts
-* [ListBankAccounts](#listbankaccounts) - List all bank accounts
-* [ListConnectorCapabilities](#listconnectorcapabilities) - List the plugin capabilities advertised by every supported provider
-* [ListConnectorConfigs](#listconnectorconfigs) - List all connector configurations
-* [ListConnectorScheduleInstances](#listconnectorscheduleinstances) - List all connector schedule instances
-* [ListConnectorSchedules](#listconnectorschedules) - List all connector schedules
-* [ListConnectors](#listconnectors) - List all connectors
-* [ListConversions](#listconversions) - List currency and asset conversions ingested from connectors
-* [ListOrders](#listorders) - List orders ingested from exchange-style connectors
-* [ListPaymentInitiationAdjustments](#listpaymentinitiationadjustments) - List all payment initiation adjustments
-* [ListPaymentInitiationRelatedPayments](#listpaymentinitiationrelatedpayments) - List all payments related to a payment initiation
-* [ListPaymentInitiations](#listpaymentinitiations) - List all payment initiations
-* [ListPaymentServiceUserConnections](#listpaymentserviceuserconnections) - List all connections for a payment service user
-* [ListPaymentServiceUserConnectionsFromConnectorID](#listpaymentserviceuserconnectionsfromconnectorid) - List enabled connections for a payment service user on a connector (i.e. the various banks PSUser has enabled on the connector)
-* [ListPaymentServiceUserLinkAttemptsFromConnectorID](#listpaymentserviceuserlinkattemptsfromconnectorid) - List all link attempts for a payment service user on a connector.
-Allows to check if users used the link and completed the oauth flow.
-
-* [ListPaymentServiceUsers](#listpaymentserviceusers) - List all payment service users
-* [ListPayments](#listpayments) - List all payments
-* [ListPools](#listpools) - List all pools
-* [RejectPaymentInitiation](#rejectpaymentinitiation) - Reject a payment initiation
-* [RemoveAccountFromPool](#removeaccountfrompool) - Remove an account from a pool
-* [ResetConnector](#resetconnector) - Reset a connector. Be aware that this will delete all data and stop all existing tasks like payment initiations and bank account creations.
-* [RetryPaymentInitiation](#retrypaymentinitiation) - Retry a payment initiation
-* [ReversePaymentInitiation](#reversepaymentinitiation) - Reverse a payment initiation
-* [UninstallConnector](#uninstallconnector) - Uninstall a connector
-* [UpdateBankAccountMetadata](#updatebankaccountmetadata) - Update a bank account's metadata
-* [UpdateLinkForPaymentServiceUserOnConnector](#updatelinkforpaymentserviceuseronconnector) - Update/Regenerate a link for a payment service user on a connector
-* [UpdatePaymentMetadata](#updatepaymentmetadata) - Update a payment's metadata
-* [UpdatePoolQuery](#updatepoolquery) - Update the query of a pool
-* [V3UpdateConnectorConfig](#v3updateconnectorconfig) - Update the config of a connector
-
-## AddAccountToPool
-
-Add an account to a pool
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3AddAccountToPool" method="post" path="/api/payments/v3/pools/{poolID}/accounts/{accountID}" -->
+<!-- UsageSnippet language="go" operationID="v3AddAccountType" method="post" path="/api/ledger/v3/{ledgerName}/account-types" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
@@ -95,254 +91,25 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.AddAccountToPool(ctx, operations.V3AddAccountToPoolRequest{
-        AccountID: "<id>",
-        PoolID: "<id>",
-    })
+    res, err := s.Ledger.V3.AddAccountType(ctx, operations.V3AddAccountTypeRequest{
+        AddAccountTypeRequest: ledgerv3.AddAccountTypeRequest{
+            Name: "user-checking",
+            Pattern: "users:{id}:checking",
+            Persistence: ledgerv3.AddAccountTypeRequestPersistenceEphemeral.ToPointer(),
+            SegmentTypes: map[string]*ledgerv3.SegmentType{
+                "id": &ledgerv3.SegmentType{
+                    Type: ledgerv3.SegmentTypeTypeUUID,
+                },
+            },
+        },
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.V3AddAccountToPoolRequest](../../pkg/models/operations/v3addaccounttopoolrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
-
-### Response
-
-**[*operations.V3AddAccountToPoolResponse](../../pkg/models/operations/v3addaccounttopoolresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## AddBankAccountToPaymentServiceUser
-
-Add a bank account to a payment service user
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3AddBankAccountToPaymentServiceUser" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/bank-accounts/{bankAccountID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.AddBankAccountToPaymentServiceUser(ctx, operations.V3AddBankAccountToPaymentServiceUserRequest{
-        BankAccountID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                            | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                | :heavy_check_mark:                                                                                                                   | The context to use for the request.                                                                                                  |
-| `request`                                                                                                                            | [operations.V3AddBankAccountToPaymentServiceUserRequest](../../pkg/models/operations/v3addbankaccounttopaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                                                   | The request object to use for the request.                                                                                           |
-| `opts`                                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                                         | :heavy_minus_sign:                                                                                                                   | The options for this request.                                                                                                        |
-
-### Response
-
-**[*operations.V3AddBankAccountToPaymentServiceUserResponse](../../pkg/models/operations/v3addbankaccounttopaymentserviceuserresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ApprovePaymentInitiation
-
-Approve a payment initiation
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ApprovePaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/approve" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ApprovePaymentInitiation(ctx, operations.V3ApprovePaymentInitiationRequest{
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ApprovePaymentInitiationResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
-| `request`                                                                                                        | [operations.V3ApprovePaymentInitiationRequest](../../pkg/models/operations/v3approvepaymentinitiationrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
-| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
-
-### Response
-
-**[*operations.V3ApprovePaymentInitiationResponse](../../pkg/models/operations/v3approvepaymentinitiationresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## CreateAccount
-
-Create a formance account object. This object will not be forwarded to the connector. It is only used for internal purposes.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3CreateAccount" method="post" path="/api/payments/v3/accounts" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.CreateAccount(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3CreateAccountResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [payments.V3CreateAccountRequest](../../pkg/models/payments/v3createaccountrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
-
-### Response
-
-**[*operations.V3CreateAccountResponse](../../pkg/models/operations/v3createaccountresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## CreateBankAccount
-
-Create a formance bank account object. This object will not be forwarded to the connector until you called the forwardBankAccount method.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3CreateBankAccount" method="post" path="/api/payments/v3/bank-accounts" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.CreateBankAccount(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3CreateBankAccountResponse != nil {
+    if res.ErrorResponse != nil {
         // handle response
     }
 }
@@ -353,554 +120,31 @@ func main() {
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [payments.V3CreateBankAccountRequest](../../pkg/models/payments/v3createbankaccountrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `request`                                                                                      | [operations.V3AddAccountTypeRequest](../../pkg/models/operations/v3addaccounttyperequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3AddAccountTypeSecurity](../../pkg/models/operations/v3addaccounttypesecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
-**[*operations.V3CreateBankAccountResponse](../../pkg/models/operations/v3createbankaccountresponse.md), error**
+**[*operations.V3AddAccountTypeResponse](../../pkg/models/operations/v3addaccounttyperesponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## CreateLinkForPaymentServiceUser
+## AggregateVolumes
 
-Create an authentication link for a payment service user on a connector, for oauth flow
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3CreateLinkForPaymentServiceUser" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/create-link" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.CreateLinkForPaymentServiceUser(ctx, operations.V3CreateLinkForPaymentServiceUserRequest{
-        ConnectorID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserCreateLinkResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                          | :heavy_check_mark:                                                                                                             | The context to use for the request.                                                                                            |
-| `request`                                                                                                                      | [operations.V3CreateLinkForPaymentServiceUserRequest](../../pkg/models/operations/v3createlinkforpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
-| `opts`                                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                             | The options for this request.                                                                                                  |
-
-### Response
-
-**[*operations.V3CreateLinkForPaymentServiceUserResponse](../../pkg/models/operations/v3createlinkforpaymentserviceuserresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## CreatePayment
-
-Create a formance payment object. This object will not be forwarded to the connector. It is only used for internal purposes.
+Returns aggregated volumes (input/output/balance per asset) across all accounts in the ledger.
+Supports filtering accounts with the generic `filter` parameter, grouping by account prefixes,
+and max-precision merging.
+Requires `ledger:ReadAccount` scope.
 
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3CreatePayment" method="post" path="/api/payments/v3/payments" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.CreatePayment(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3CreatePaymentResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [payments.V3CreatePaymentRequest](../../pkg/models/payments/v3createpaymentrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
-
-### Response
-
-**[*operations.V3CreatePaymentResponse](../../pkg/models/operations/v3createpaymentresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## CreatePaymentServiceUser
-
-Create a formance payment service user object
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3CreatePaymentServiceUser" method="post" path="/api/payments/v3/payment-service-users" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.CreatePaymentServiceUser(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3CreatePaymentServiceUserResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `request`                                                                                                    | [payments.V3CreatePaymentServiceUserRequest](../../pkg/models/payments/v3createpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
-| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
-
-### Response
-
-**[*operations.V3CreatePaymentServiceUserResponse](../../pkg/models/operations/v3createpaymentserviceuserresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## CreatePool
-
-Create a formance pool object
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3CreatePool" method="post" path="/api/payments/v3/pools" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.CreatePool(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3CreatePoolResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [payments.V3CreatePoolRequest](../../pkg/models/payments/v3createpoolrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
-
-### Response
-
-**[*operations.V3CreatePoolResponse](../../pkg/models/operations/v3createpoolresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## DeletePaymentInitiation
-
-Delete a payment initiation by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3DeletePaymentInitiation" method="delete" path="/api/payments/v3/payment-initiations/{paymentInitiationID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.DeletePaymentInitiation(ctx, operations.V3DeletePaymentInitiationRequest{
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
-| `request`                                                                                                      | [operations.V3DeletePaymentInitiationRequest](../../pkg/models/operations/v3deletepaymentinitiationrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
-| `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
-
-### Response
-
-**[*operations.V3DeletePaymentInitiationResponse](../../pkg/models/operations/v3deletepaymentinitiationresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## DeletePaymentServiceUser
-
-Delete a payment service user by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3DeletePaymentServiceUser" method="delete" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.DeletePaymentServiceUser(ctx, operations.V3DeletePaymentServiceUserRequest{
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserDeleteResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
-| `request`                                                                                                        | [operations.V3DeletePaymentServiceUserRequest](../../pkg/models/operations/v3deletepaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
-| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
-
-### Response
-
-**[*operations.V3DeletePaymentServiceUserResponse](../../pkg/models/operations/v3deletepaymentserviceuserresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## DeletePaymentServiceUserConnectionFromConnectorID
-
-Delete a connection for a payment service user on a connector
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3DeletePaymentServiceUserConnectionFromConnectorID" method="delete" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections/{connectionID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.DeletePaymentServiceUserConnectionFromConnectorID(ctx, operations.V3DeletePaymentServiceUserConnectionFromConnectorIDRequest{
-        ConnectionID: "<id>",
-        ConnectorID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserDeleteConnectionResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                          | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                                                              | :heavy_check_mark:                                                                                                                                                 | The context to use for the request.                                                                                                                                |
-| `request`                                                                                                                                                          | [operations.V3DeletePaymentServiceUserConnectionFromConnectorIDRequest](../../pkg/models/operations/v3deletepaymentserviceuserconnectionfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                                 | The request object to use for the request.                                                                                                                         |
-| `opts`                                                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                 | The options for this request.                                                                                                                                      |
-
-### Response
-
-**[*operations.V3DeletePaymentServiceUserConnectionFromConnectorIDResponse](../../pkg/models/operations/v3deletepaymentserviceuserconnectionfromconnectoridresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## DeletePaymentServiceUserConnector
-
-Remove a payment service user from a connector, the PSU will still exist in Formance
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3DeletePaymentServiceUserConnector" method="delete" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.DeletePaymentServiceUserConnector(ctx, operations.V3DeletePaymentServiceUserConnectorRequest{
-        ConnectorID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserDeleteConnectorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                          | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                              | :heavy_check_mark:                                                                                                                 | The context to use for the request.                                                                                                |
-| `request`                                                                                                                          | [operations.V3DeletePaymentServiceUserConnectorRequest](../../pkg/models/operations/v3deletepaymentserviceuserconnectorrequest.md) | :heavy_check_mark:                                                                                                                 | The request object to use for the request.                                                                                         |
-| `opts`                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                       | :heavy_minus_sign:                                                                                                                 | The options for this request.                                                                                                      |
-
-### Response
-
-**[*operations.V3DeletePaymentServiceUserConnectorResponse](../../pkg/models/operations/v3deletepaymentserviceuserconnectorresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## DeletePool
-
-Delete a pool by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3DeletePool" method="delete" path="/api/payments/v3/pools/{poolID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.DeletePool(ctx, operations.V3DeletePoolRequest{
-        PoolID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.V3DeletePoolRequest](../../pkg/models/operations/v3deletepoolrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
-
-### Response
-
-**[*operations.V3DeletePoolResponse](../../pkg/models/operations/v3deletepoolresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ForwardBankAccount
-
-Forward a Bank Account to a PSP for creation
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ForwardBankAccount" method="post" path="/api/payments/v3/bank-accounts/{bankAccountID}/forward" -->
+<!-- UsageSnippet language="go" operationID="v3AggregateVolumes" method="get" path="/api/ledger/v3/{ledgerName}/volumes" -->
 ```go
 package main
 
@@ -916,13 +160,14 @@ func main() {
 
     s := v5.New()
 
-    res, err := s.Payments.V3.ForwardBankAccount(ctx, operations.V3ForwardBankAccountRequest{
-        BankAccountID: "<id>",
-    })
+    res, err := s.Ledger.V3.AggregateVolumes(ctx, operations.V3AggregateVolumesRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.V3ForwardBankAccountResponse != nil {
+    if res.AggregateVolumesResponse != nil {
         // handle response
     }
 }
@@ -930,270 +175,33 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.V3ForwardBankAccountRequest](../../pkg/models/operations/v3forwardbankaccountrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
-| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.V3AggregateVolumesRequest](../../pkg/models/operations/v3aggregatevolumesrequest.md)   | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `security`                                                                                         | [operations.V3AggregateVolumesSecurity](../../pkg/models/operations/v3aggregatevolumessecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
 ### Response
 
-**[*operations.V3ForwardBankAccountResponse](../../pkg/models/operations/v3forwardbankaccountresponse.md), error**
+**[*operations.V3AggregateVolumesResponse](../../pkg/models/operations/v3aggregatevolumesresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## ForwardPaymentServiceUserBankAccount
+## AnalyzeAccounts
 
-Forward a payment service user's bank account to a connector
+Scans all accounts in a ledger, discovers address patterns, and returns a
+suggested Chart of Accounts. Useful after a mirror import to understand
+account structure. Requires `ledger:read` scope.
 
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ForwardPaymentServiceUserBankAccount" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/bank-accounts/{bankAccountID}/forward" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ForwardPaymentServiceUserBankAccount(ctx, operations.V3ForwardPaymentServiceUserBankAccountRequest{
-        BankAccountID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ForwardPaymentServiceUserBankAccountResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                    | :heavy_check_mark:                                                                                                                       | The context to use for the request.                                                                                                      |
-| `request`                                                                                                                                | [operations.V3ForwardPaymentServiceUserBankAccountRequest](../../pkg/models/operations/v3forwardpaymentserviceuserbankaccountrequest.md) | :heavy_check_mark:                                                                                                                       | The request object to use for the request.                                                                                               |
-| `opts`                                                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                                                             | :heavy_minus_sign:                                                                                                                       | The options for this request.                                                                                                            |
-
-### Response
-
-**[*operations.V3ForwardPaymentServiceUserBankAccountResponse](../../pkg/models/operations/v3forwardpaymentserviceuserbankaccountresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ForwardPaymentServiceUserToProvider
-
-Register/forward a payment service user on/to a connector
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3ForwardPaymentServiceUserToProvider" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/forward" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ForwardPaymentServiceUserToProvider(ctx, operations.V3ForwardPaymentServiceUserToProviderRequest{
-        ConnectorID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                              | Type                                                                                                                                   | Required                                                                                                                               | Description                                                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                  | :heavy_check_mark:                                                                                                                     | The context to use for the request.                                                                                                    |
-| `request`                                                                                                                              | [operations.V3ForwardPaymentServiceUserToProviderRequest](../../pkg/models/operations/v3forwardpaymentserviceusertoproviderrequest.md) | :heavy_check_mark:                                                                                                                     | The request object to use for the request.                                                                                             |
-| `opts`                                                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                                                           | :heavy_minus_sign:                                                                                                                     | The options for this request.                                                                                                          |
-
-### Response
-
-**[*operations.V3ForwardPaymentServiceUserToProviderResponse](../../pkg/models/operations/v3forwardpaymentserviceusertoproviderresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetAccount
-
-Get an account by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetAccount" method="get" path="/api/payments/v3/accounts/{accountID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetAccount(ctx, operations.V3GetAccountRequest{
-        AccountID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetAccountResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.V3GetAccountRequest](../../pkg/models/operations/v3getaccountrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
-
-### Response
-
-**[*operations.V3GetAccountResponse](../../pkg/models/operations/v3getaccountresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetAccountBalances
-
-Get account balances
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetAccountBalances" method="get" path="/api/payments/v3/accounts/{accountID}/balances" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetAccountBalances(ctx, operations.V3GetAccountBalancesRequest{
-        AccountID: "<id>",
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3BalancesCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.V3GetAccountBalancesRequest](../../pkg/models/operations/v3getaccountbalancesrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
-| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
-
-### Response
-
-**[*operations.V3GetAccountBalancesResponse](../../pkg/models/operations/v3getaccountbalancesresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetBankAccount
-
-Get a Bank Account by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetBankAccount" method="get" path="/api/payments/v3/bank-accounts/{bankAccountID}" -->
+<!-- UsageSnippet language="go" operationID="v3AnalyzeAccounts" method="get" path="/api/ledger/v3/{ledgerName}/analyze-accounts" -->
 ```go
 package main
 
@@ -1209,964 +217,13 @@ func main() {
 
     s := v5.New()
 
-    res, err := s.Payments.V3.GetBankAccount(ctx, operations.V3GetBankAccountRequest{
-        BankAccountID: "<id>",
-    })
+    res, err := s.Ledger.V3.AnalyzeAccounts(ctx, operations.V3AnalyzeAccountsRequest{
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.V3GetBankAccountResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.V3GetBankAccountRequest](../../pkg/models/operations/v3getbankaccountrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
-
-### Response
-
-**[*operations.V3GetBankAccountResponse](../../pkg/models/operations/v3getbankaccountresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetConnectorCapabilities
-
-Returns the list of plugin capabilities advertised by the provider backing this installed connector (`FETCH_ACCOUNTS`, `CREATE_TRANSFER`, ...). The same values are also inlined on each row of `v3ListConnectors`; prefer that endpoint when listing multiple connectors.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetConnectorCapabilities" method="get" path="/api/payments/v3/connectors/{connectorID}/capabilities" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetConnectorCapabilities(ctx, operations.V3GetConnectorCapabilitiesRequest{
-        ConnectorID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConnectorCapabilityResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
-| `request`                                                                                                        | [operations.V3GetConnectorCapabilitiesRequest](../../pkg/models/operations/v3getconnectorcapabilitiesrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
-| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
-
-### Response
-
-**[*operations.V3GetConnectorCapabilitiesResponse](../../pkg/models/operations/v3getconnectorcapabilitiesresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetConnectorConfig
-
-Get a connector configuration by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetConnectorConfig" method="get" path="/api/payments/v3/connectors/{connectorID}/config" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetConnectorConfig(ctx, operations.V3GetConnectorConfigRequest{
-        ConnectorID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetConnectorConfigResponse != nil {
-        switch res.V3GetConnectorConfigResponse.Data.Type {
-            case shared.V3ConnectorConfigTypeAdyen:
-                // res.V3GetConnectorConfigResponse.Data.V3AdyenConfig is populated
-            case shared.V3ConnectorConfigTypeAtlar:
-                // res.V3GetConnectorConfigResponse.Data.V3AtlarConfig is populated
-            case shared.V3ConnectorConfigTypeBankingbridge:
-                // res.V3GetConnectorConfigResponse.Data.V3BankingbridgeConfig is populated
-            case shared.V3ConnectorConfigTypeBankingcircle:
-                // res.V3GetConnectorConfigResponse.Data.V3BankingcircleConfig is populated
-            case shared.V3ConnectorConfigTypeBitstamp:
-                // res.V3GetConnectorConfigResponse.Data.V3BitstampConfig is populated
-            case shared.V3ConnectorConfigTypeCoinbaseprime:
-                // res.V3GetConnectorConfigResponse.Data.V3CoinbaseprimeConfig is populated
-            case shared.V3ConnectorConfigTypeColumn:
-                // res.V3GetConnectorConfigResponse.Data.V3ColumnConfig is populated
-            case shared.V3ConnectorConfigTypeCurrencycloud:
-                // res.V3GetConnectorConfigResponse.Data.V3CurrencycloudConfig is populated
-            case shared.V3ConnectorConfigTypeDummypay:
-                // res.V3GetConnectorConfigResponse.Data.V3DummypayConfig is populated
-            case shared.V3ConnectorConfigTypeFireblocks:
-                // res.V3GetConnectorConfigResponse.Data.V3FireblocksConfig is populated
-            case shared.V3ConnectorConfigTypeGeneric:
-                // res.V3GetConnectorConfigResponse.Data.V3GenericConfig is populated
-            case shared.V3ConnectorConfigTypeIncrease:
-                // res.V3GetConnectorConfigResponse.Data.V3IncreaseConfig is populated
-            case shared.V3ConnectorConfigTypeKrakenpro:
-                // res.V3GetConnectorConfigResponse.Data.V3KrakenproConfig is populated
-            case shared.V3ConnectorConfigTypeMangopay:
-                // res.V3GetConnectorConfigResponse.Data.V3MangopayConfig is populated
-            case shared.V3ConnectorConfigTypeModulr:
-                // res.V3GetConnectorConfigResponse.Data.V3ModulrConfig is populated
-            case shared.V3ConnectorConfigTypeMoneycorp:
-                // res.V3GetConnectorConfigResponse.Data.V3MoneycorpConfig is populated
-            case shared.V3ConnectorConfigTypePlaid:
-                // res.V3GetConnectorConfigResponse.Data.V3PlaidConfig is populated
-            case shared.V3ConnectorConfigTypePowens:
-                // res.V3GetConnectorConfigResponse.Data.V3PowensConfig is populated
-            case shared.V3ConnectorConfigTypeQonto:
-                // res.V3GetConnectorConfigResponse.Data.V3QontoConfig is populated
-            case shared.V3ConnectorConfigTypeRoutable:
-                // res.V3GetConnectorConfigResponse.Data.V3RoutableConfig is populated
-            case shared.V3ConnectorConfigTypeStripe:
-                // res.V3GetConnectorConfigResponse.Data.V3StripeConfig is populated
-            case shared.V3ConnectorConfigTypeTink:
-                // res.V3GetConnectorConfigResponse.Data.V3TinkConfig is populated
-            case shared.V3ConnectorConfigTypeWise:
-                // res.V3GetConnectorConfigResponse.Data.V3WiseConfig is populated
-        }
-
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.V3GetConnectorConfigRequest](../../pkg/models/operations/v3getconnectorconfigrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
-| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
-
-### Response
-
-**[*operations.V3GetConnectorConfigResponse](../../pkg/models/operations/v3getconnectorconfigresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetConnectorSchedule
-
-Get a connector schedule by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetConnectorSchedule" method="get" path="/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetConnectorSchedule(ctx, operations.V3GetConnectorScheduleRequest{
-        ConnectorID: "<id>",
-        ScheduleID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConnectorScheduleResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
-| `request`                                                                                                | [operations.V3GetConnectorScheduleRequest](../../pkg/models/operations/v3getconnectorschedulerequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
-| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
-
-### Response
-
-**[*operations.V3GetConnectorScheduleResponse](../../pkg/models/operations/v3getconnectorscheduleresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetConversion
-
-Returns one conversion identified by its Formance-assigned `id`
-(**not** the PSP's native `reference`). See `V3Conversion` for the
-response shape — on `COMPLETED` status the `destinationAmount` and
-`fee` fields reflect the settled values; on `FAILED` the `error`
-field carries the PSP's rejection reason.
-
-Returns an error via `V3ErrorResponse` when no conversion exists
-for the given ID.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetConversion" method="get" path="/api/payments/v3/conversions/{conversionID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetConversion(ctx, operations.V3GetConversionRequest{
-        ConversionID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetConversionResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `request`                                                                                  | [operations.V3GetConversionRequest](../../pkg/models/operations/v3getconversionrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
-| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
-
-### Response
-
-**[*operations.V3GetConversionResponse](../../pkg/models/operations/v3getconversionresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetOrder
-
-Returns one order identified by its Formance-assigned `id` (composed
-from the PSP `reference` and the connector ID — **not** the PSP's
-native reference). The response includes the full `adjustments`
-history ordered from oldest to most recent; the last adjustment
-reflects the order's current top-level `status`.
-
-Returns an error via `V3ErrorResponse` when no order exists for the
-given ID, or when the ID cannot be decoded.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetOrder" method="get" path="/api/payments/v3/orders/{orderID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetOrder(ctx, operations.V3GetOrderRequest{
-        OrderID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetOrderResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.V3GetOrderRequest](../../pkg/models/operations/v3getorderrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
-
-### Response
-
-**[*operations.V3GetOrderResponse](../../pkg/models/operations/v3getorderresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetPayment
-
-Get a payment by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetPayment" method="get" path="/api/payments/v3/payments/{paymentID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetPayment(ctx, operations.V3GetPaymentRequest{
-        PaymentID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetPaymentResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.V3GetPaymentRequest](../../pkg/models/operations/v3getpaymentrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
-
-### Response
-
-**[*operations.V3GetPaymentResponse](../../pkg/models/operations/v3getpaymentresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetPaymentInitiation
-
-Get a payment initiation by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetPaymentInitiation" method="get" path="/api/payments/v3/payment-initiations/{paymentInitiationID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetPaymentInitiation(ctx, operations.V3GetPaymentInitiationRequest{
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetPaymentInitiationResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
-| `request`                                                                                                | [operations.V3GetPaymentInitiationRequest](../../pkg/models/operations/v3getpaymentinitiationrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
-| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
-
-### Response
-
-**[*operations.V3GetPaymentInitiationResponse](../../pkg/models/operations/v3getpaymentinitiationresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetPaymentServiceUser
-
-Get a payment service user by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetPaymentServiceUser" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetPaymentServiceUser(ctx, operations.V3GetPaymentServiceUserRequest{
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetPaymentServiceUserResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
-| `request`                                                                                                  | [operations.V3GetPaymentServiceUserRequest](../../pkg/models/operations/v3getpaymentserviceuserrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
-| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
-
-### Response
-
-**[*operations.V3GetPaymentServiceUserResponse](../../pkg/models/operations/v3getpaymentserviceuserresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetPaymentServiceUserLinkAttemptFromConnectorID
-
-Get a link attempt for a payment service user on a connector
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetPaymentServiceUserLinkAttemptFromConnectorID" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/link-attempts/{attemptID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetPaymentServiceUserLinkAttemptFromConnectorID(ctx, operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDRequest{
-        AttemptID: "<id>",
-        ConnectorID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserLinkAttempt != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                      | Type                                                                                                                                                           | Required                                                                                                                                                       | Description                                                                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                                                          | :heavy_check_mark:                                                                                                                                             | The context to use for the request.                                                                                                                            |
-| `request`                                                                                                                                                      | [operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDRequest](../../pkg/models/operations/v3getpaymentserviceuserlinkattemptfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                             | The request object to use for the request.                                                                                                                     |
-| `opts`                                                                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                   | :heavy_minus_sign:                                                                                                                                             | The options for this request.                                                                                                                                  |
-
-### Response
-
-**[*operations.V3GetPaymentServiceUserLinkAttemptFromConnectorIDResponse](../../pkg/models/operations/v3getpaymentserviceuserlinkattemptfromconnectoridresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetPool
-
-Get a pool by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetPool" method="get" path="/api/payments/v3/pools/{poolID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetPool(ctx, operations.V3GetPoolRequest{
-        PoolID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetPoolResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.V3GetPoolRequest](../../pkg/models/operations/v3getpoolrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
-| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
-
-### Response
-
-**[*operations.V3GetPoolResponse](../../pkg/models/operations/v3getpoolresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetPoolBalances
-
-Get historical pool balances from a particular point in time
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetPoolBalances" method="get" path="/api/payments/v3/pools/{poolID}/balances" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetPoolBalances(ctx, operations.V3GetPoolBalancesRequest{
-        PoolID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PoolBalancesResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.V3GetPoolBalancesRequest](../../pkg/models/operations/v3getpoolbalancesrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
-
-### Response
-
-**[*operations.V3GetPoolBalancesResponse](../../pkg/models/operations/v3getpoolbalancesresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetPoolBalancesLatest
-
-Get latest pool balances
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetPoolBalancesLatest" method="get" path="/api/payments/v3/pools/{poolID}/balances/latest" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetPoolBalancesLatest(ctx, operations.V3GetPoolBalancesLatestRequest{
-        PoolID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PoolBalancesResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
-| `request`                                                                                                  | [operations.V3GetPoolBalancesLatestRequest](../../pkg/models/operations/v3getpoolbalanceslatestrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
-| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
-
-### Response
-
-**[*operations.V3GetPoolBalancesLatestResponse](../../pkg/models/operations/v3getpoolbalanceslatestresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## GetTask
-
-Get a task and its result by ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3GetTask" method="get" path="/api/payments/v3/tasks/{taskID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.GetTask(ctx, operations.V3GetTaskRequest{
-        TaskID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3GetTaskResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.V3GetTaskRequest](../../pkg/models/operations/v3gettaskrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
-| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
-
-### Response
-
-**[*operations.V3GetTaskResponse](../../pkg/models/operations/v3gettaskresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## InitiatePayment
-
-Initiate a payment
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3InitiatePayment" method="post" path="/api/payments/v3/payment-initiations" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.InitiatePayment(ctx, operations.V3InitiatePaymentRequest{})
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3InitiatePaymentResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.V3InitiatePaymentRequest](../../pkg/models/operations/v3initiatepaymentrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
-
-### Response
-
-**[*operations.V3InitiatePaymentResponse](../../pkg/models/operations/v3initiatepaymentresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## InstallConnector
-
-Install a connector
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3InstallConnector" method="post" path="/api/payments/v3/connectors/install/{connector}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.InstallConnector(ctx, operations.V3InstallConnectorRequest{
-        Connector: "<value>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3InstallConnectorResponse != nil {
+    if res.AnalyzeAccountsResponse != nil {
         // handle response
     }
 }
@@ -2177,33 +234,89 @@ func main() {
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.V3InstallConnectorRequest](../../pkg/models/operations/v3installconnectorrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `request`                                                                                        | [operations.V3AnalyzeAccountsRequest](../../pkg/models/operations/v3analyzeaccountsrequest.md)   | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `security`                                                                                       | [operations.V3AnalyzeAccountsSecurity](../../pkg/models/operations/v3analyzeaccountssecurity.md) | :heavy_check_mark:                                                                               | The security requirements to use for the request.                                                |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
 ### Response
 
-**[*operations.V3InstallConnectorResponse](../../pkg/models/operations/v3installconnectorresponse.md), error**
+**[*operations.V3AnalyzeAccountsResponse](../../pkg/models/operations/v3analyzeaccountsresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## ListAccounts
+## AnalyzeNumscript
 
-List all accounts
+Validates Numscript v1 and returns the external input schema without reading or changing ledger state. Recognized source failures are returned as diagnostics with an empty input list. Sources over 64 KiB or with more than 32 block-comment open markers receive a syntax diagnostic; internal failures return a server error.
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3ListAccounts" method="get" path="/api/payments/v3/accounts" -->
+<!-- UsageSnippet language="go" operationID="v3AnalyzeNumscript" method="post" path="/api/ledger/v3/numscripts/analyze" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.AnalyzeNumscript(ctx, ledgerv3.AnalyzeNumscriptRequest{
+        Source: "<value>",
+        Version: "v1",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.AnalyzeNumscriptResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [ledgerv3.AnalyzeNumscriptRequest](../../pkg/models/ledgerV3/analyzenumscriptrequest.md)           | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `security`                                                                                         | [operations.V3AnalyzeNumscriptSecurity](../../pkg/models/operations/v3analyzenumscriptsecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.V3AnalyzeNumscriptResponse](../../pkg/models/operations/v3analyzenumscriptresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## AnalyzeTransactions
+
+Scans all transactions in a ledger, discovers flow patterns by normalizing
+account addresses, and returns statistics per flow type including temporal
+distribution and volume metrics. Requires `ledger:read` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3AnalyzeTransactions" method="get" path="/api/ledger/v3/{ledgerName}/analyze-transactions" -->
+```go
+package main
+
+import(
+	"context"
 	"github.com/formancehq/formance-sdk-go/v5"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
@@ -2212,21 +325,16 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.ListAccounts(ctx, operations.V3ListAccountsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
+    res, err := s.Ledger.V3.AnalyzeTransactions(ctx, operations.V3AnalyzeTransactionsRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.V3AccountsCursorResponse != nil {
+    if res.AnalyzeTransactionsResponse != nil {
         // handle response
     }
 }
@@ -2234,37 +342,108 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.V3ListAccountsRequest](../../pkg/models/operations/v3listaccountsrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
-| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.V3AnalyzeTransactionsRequest](../../pkg/models/operations/v3analyzetransactionsrequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.V3AnalyzeTransactionsSecurity](../../pkg/models/operations/v3analyzetransactionssecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
 ### Response
 
-**[*operations.V3ListAccountsResponse](../../pkg/models/operations/v3listaccountsresponse.md), error**
+**[*operations.V3AnalyzeTransactionsResponse](../../pkg/models/operations/v3analyzetransactionsresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## ListBankAccounts
+## BulkOperations
 
-List all bank accounts
+Execute multiple operations (create transactions, add metadata,
+revert transactions, delete metadata) in a single request. Requires
+`ledger:write` scope.
+
+With `atomic=true`, all elements target the URL's ledger and are
+submitted as one batch. `Idempotency-Key` identifies that whole batch;
+per-element `ik` values are ignored. With `atomic=false`
+(default), each element is submitted separately under its own
+`ik`; the header is ignored.
+
+`continueOnFailure` controls sequential continuation and business-error
+status rollup. It does not allow partial application of an atomic
+batch. Non-atomic failures can follow already committed elements:
+inspect every result and preserve the original identities when retrying.
+A timeout or infrastructure failure does not prove that work was not
+committed. This contract does not enable automatic SDK retries.
+
+The response status is decided in three tiers:
+
+1. **Request-level failures** (before per-element processing):
+   malformed body → `400`, missing/insufficient scope → `401` or
+   `403`, too many elements → `413`. Exceeding the byte limit while
+   decoding the body currently returns `400`.
+   Returned unconditionally, `continueOnFailure` does not apply.
+2. **Infrastructure failures during processing** (transport
+   timeout, cache-horizon exceeded, storage error): the overall
+   status is `503` for retryable failures and `500` otherwise,
+   regardless of `continueOnFailure`. Callers
+   must inspect the element outcomes before deciding what to retry.
+3. **Per-element errors during processing**: each element's error
+   carries the HTTP status it would surface as a single request
+   (via the same mapping `handleError` uses). The top-level
+   status is the "worst" of them, with `continueOnFailure`
+   applying only to per-element business failures (4xx):
+   - Business failures (validation, not-found, conflict,
+     precondition — 4xx, except authentication/permission): rolled up per
+     `continueOnFailure`. `true` → `200`; `false` (default) →
+     the highest 4xx among failing elements (typically `400`).
+   - Authentication and permission failures: `401`/`403`, regardless
+     of `continueOnFailure`, with all processing outcomes retained.
+   - Resource exhaustion (`KindResourceExhausted`, `429`), including
+     rate limits and permanent authoritative-sequence exhaustion:
+     surface unconditionally as `429`.
+   - Retryable infrastructure failures (leader loss,
+     cache-horizon exceeded, `KindUnavailable`): surface as
+     `503` with `Retry-After: 1`, regardless of
+     `continueOnFailure`.
+   - Non-retryable infrastructure failures (transport / storage
+     errors, `KindInternal`, unclassified): surface as `500`.
+   - Aborted elements (`context.Canceled` from the sequential
+     runner after a prior failure): contribute nothing — the
+     originating error drives the rollup.
+Signed requests use `application/json` (including MIME parameters) with
+`request` and standard-base64 `payload`. Either signing header, even if
+empty, selects this wrapper; with neither header present, the ordinary REST body applies.
+Runtime headers choose the representation from the documented anyOf.
+The signed protobuf batch must
+equal the route/body/Idempotency-Key-derived batch in full. Supply exactly
+one nonempty Formance-Signing-Key-Id and Formance-Signature header; the
+latter is a standard-base64 Ed25519 signature of 64 decoded bytes. Missing,
+empty or repeated signing headers, invalid base64 and wrong signature
+length return 400. Signing headers with a non-JSON or missing content type return 415.
+Signature enforcement
+returns 401 `UNAUTHENTICATED` when required but absent and 403
+`PERMISSION_DENIED` for invalid, unknown/revoked-key or mismatched
+signatures. Malformed signed envelopes return 400. The complete
+wrapper counts toward the 4 MiB body limit. JWT scopes still apply.
+Signing requires a nonempty array and `atomic=true` (otherwise 400).
+The header key applies; per-element `ik` is ignored. Authentication
+and permission failures remain 401/403 even with continueOnFailure;
+processing errors preserve every element outcome.
+
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3ListBankAccounts" method="get" path="/api/payments/v3/bank-accounts" -->
+<!-- UsageSnippet language="go" operationID="v3BulkOperations" method="post" path="/api/ledger/v3/{ledgerName}/bulk" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
@@ -2272,391 +451,28 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.ListBankAccounts(ctx, operations.V3ListBankAccountsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
+    res, err := s.Ledger.V3.BulkOperations(ctx, operations.V3BulkOperationsRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        RequestBody: operations.CreateV3BulkOperationsRequestBodyArrayOfBulkElement(
+            []ledgerv3.BulkElement{
+                ledgerv3.BulkElement{
+                    Action: ledgerv3.ActionRevertTransaction,
+                    Data: ledgerv3.CreateBulkElementDataRevertTransactionRequest(
+                        ledgerv3.RevertTransactionRequest{
+                            ID: 725647,
+                        },
+                    ),
+                },
+            },
+        ),
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.V3BankAccountsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.V3ListBankAccountsRequest](../../pkg/models/operations/v3listbankaccountsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
-
-### Response
-
-**[*operations.V3ListBankAccountsResponse](../../pkg/models/operations/v3listbankaccountsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListConnectorCapabilities
-
-Returns the static map of provider name to the list of plugin capabilities (`FETCH_ACCOUNTS`, `CREATE_TRANSFER`, ...) compiled into this binary. The catalog is immutable for the lifetime of the process and is therefore safe to cache: the response carries a strong ETag and a `Cache-Control: public, max-age=3600, must-revalidate` directive. Stateless consumers (e.g. console) should set `If-None-Match` on subsequent requests to receive a `304 Not Modified`.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListConnectorCapabilities" method="get" path="/api/payments/v3/connectors/capabilities" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListConnectorCapabilities(ctx, operations.V3ListConnectorCapabilitiesRequest{})
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConnectorCapabilitiesResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
-| `request`                                                                                                          | [operations.V3ListConnectorCapabilitiesRequest](../../pkg/models/operations/v3listconnectorcapabilitiesrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
-| `opts`                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
-
-### Response
-
-**[*operations.V3ListConnectorCapabilitiesResponse](../../pkg/models/operations/v3listconnectorcapabilitiesresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListConnectorConfigs
-
-List all connector configurations
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListConnectorConfigs" method="get" path="/api/payments/v3/connectors/configs" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListConnectorConfigs(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConnectorConfigsResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
-
-### Response
-
-**[*operations.V3ListConnectorConfigsResponse](../../pkg/models/operations/v3listconnectorconfigsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListConnectorScheduleInstances
-
-List all connector schedule instances
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListConnectorScheduleInstances" method="get" path="/api/payments/v3/connectors/{connectorID}/schedules/{scheduleID}/instances" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListConnectorScheduleInstances(ctx, operations.V3ListConnectorScheduleInstancesRequest{
-        ConnectorID: "<id>",
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-        ScheduleID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConnectorScheduleInstancesCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                    | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                                        | :heavy_check_mark:                                                                                                           | The context to use for the request.                                                                                          |
-| `request`                                                                                                                    | [operations.V3ListConnectorScheduleInstancesRequest](../../pkg/models/operations/v3listconnectorscheduleinstancesrequest.md) | :heavy_check_mark:                                                                                                           | The request object to use for the request.                                                                                   |
-| `opts`                                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                           | The options for this request.                                                                                                |
-
-### Response
-
-**[*operations.V3ListConnectorScheduleInstancesResponse](../../pkg/models/operations/v3listconnectorscheduleinstancesresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListConnectorSchedules
-
-List all connector schedules
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListConnectorSchedules" method="get" path="/api/payments/v3/connectors/{connectorID}/schedules" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListConnectorSchedules(ctx, operations.V3ListConnectorSchedulesRequest{
-        ConnectorID: "<id>",
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConnectorSchedulesCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `request`                                                                                                    | [operations.V3ListConnectorSchedulesRequest](../../pkg/models/operations/v3listconnectorschedulesrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
-| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
-
-### Response
-
-**[*operations.V3ListConnectorSchedulesResponse](../../pkg/models/operations/v3listconnectorschedulesresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListConnectors
-
-List all connectors
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListConnectors" method="get" path="/api/payments/v3/connectors" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListConnectors(ctx, operations.V3ListConnectorsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConnectorsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.V3ListConnectorsRequest](../../pkg/models/operations/v3listconnectorsrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
-
-### Response
-
-**[*operations.V3ListConnectorsResponse](../../pkg/models/operations/v3listconnectorsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListConversions
-
-Returns the full list of conversions ingested by Formance from
-connectors that implement the conversions capability. A conversion
-is a direct swap between two assets on a PSP (e.g. USD → USDC on
-Coinbase Prime). Conversions are **read-only** through the Formance
-API.
-
-Unlike orders, conversions do not carry an adjustment history —
-Formance records only the final observed state (`status`,
-`destinationAmount`, and `fee` when settled).
-
-Results are cursor-paginated. The optional request body accepts a
-query builder for filtering over top-level `V3Conversion` fields
-such as `connectorID`, `reference`, `status`, `sourceAsset`,
-`destinationAsset`, and `createdAt`.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListConversions" method="get" path="/api/payments/v3/conversions" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListConversions(ctx, operations.V3ListConversionsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ConversionsCursorResponse != nil {
+    if res.BulkResponse != nil {
         // handle response
     }
 }
@@ -2667,619 +483,54 @@ func main() {
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.V3ListConversionsRequest](../../pkg/models/operations/v3listconversionsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `request`                                                                                      | [operations.V3BulkOperationsRequest](../../pkg/models/operations/v3bulkoperationsrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3BulkOperationsSecurity](../../pkg/models/operations/v3bulkoperationssecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
-**[*operations.V3ListConversionsResponse](../../pkg/models/operations/v3listconversionsresponse.md), error**
+**[*operations.V3BulkOperationsResponse](../../pkg/models/operations/v3bulkoperationsresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## ListOrders
+## Clusterz
 
-Returns the full list of orders ingested by Formance from connectors
-that implement the orders capability (e.g. `coinbaseprime`). Orders
-represent trade placements on an exchange-style PSP and are
-**read-only** through the Formance API — submission, cancellation,
-and lifecycle transitions are owned by the underlying connector.
-
-Results are cursor-paginated. The optional request body accepts a
-query builder for filtering over top-level `V3Order` fields such as
-`connectorID`, `reference`, `direction`, `status`, `type`,
-`sourceAsset`, `destinationAsset`, and `createdAt`.
-
-See `V3Order` for the full response shape, including the
-`adjustments` array that captures each observed state transition on
-the exchange.
+Returns 200 only when the node is part of a healthy cluster (Raft state
+healthy and a leader elected). Disk and clock skew gate writes (see
+admission), not cluster readiness. Returns 503 otherwise. Use this
+for external monitoring or any client that needs to wait until the node
+can actually serve cluster-dependent traffic. Kubernetes readiness
+probes should target `/readyz` instead — this endpoint MUST NOT gate
+StatefulSet ordering, otherwise the cluster cannot recover from a
+full-kill cold start.
 
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3ListOrders" method="get" path="/api/payments/v3/orders" -->
+<!-- UsageSnippet language="go" operationID="v3Clusterz" method="get" path="/api/ledger/clusterz" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.ListOrders(ctx, operations.V3ListOrdersRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
+    res, err := s.Ledger.V3.Clusterz(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.V3OrdersCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.V3ListOrdersRequest](../../pkg/models/operations/v3listordersrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
-
-### Response
-
-**[*operations.V3ListOrdersResponse](../../pkg/models/operations/v3listordersresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPaymentInitiationAdjustments
-
-List all payment initiation adjustments
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPaymentInitiationAdjustments" method="get" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/adjustments" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPaymentInitiationAdjustments(ctx, operations.V3ListPaymentInitiationAdjustmentsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentInitiationAdjustmentsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                        | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
-| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                            | :heavy_check_mark:                                                                                                               | The context to use for the request.                                                                                              |
-| `request`                                                                                                                        | [operations.V3ListPaymentInitiationAdjustmentsRequest](../../pkg/models/operations/v3listpaymentinitiationadjustmentsrequest.md) | :heavy_check_mark:                                                                                                               | The request object to use for the request.                                                                                       |
-| `opts`                                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                                     | :heavy_minus_sign:                                                                                                               | The options for this request.                                                                                                    |
-
-### Response
-
-**[*operations.V3ListPaymentInitiationAdjustmentsResponse](../../pkg/models/operations/v3listpaymentinitiationadjustmentsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPaymentInitiationRelatedPayments
-
-List all payments related to a payment initiation
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPaymentInitiationRelatedPayments" method="get" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/payments" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPaymentInitiationRelatedPayments(ctx, operations.V3ListPaymentInitiationRelatedPaymentsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentInitiationRelatedPaymentsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                    | :heavy_check_mark:                                                                                                                       | The context to use for the request.                                                                                                      |
-| `request`                                                                                                                                | [operations.V3ListPaymentInitiationRelatedPaymentsRequest](../../pkg/models/operations/v3listpaymentinitiationrelatedpaymentsrequest.md) | :heavy_check_mark:                                                                                                                       | The request object to use for the request.                                                                                               |
-| `opts`                                                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                                                             | :heavy_minus_sign:                                                                                                                       | The options for this request.                                                                                                            |
-
-### Response
-
-**[*operations.V3ListPaymentInitiationRelatedPaymentsResponse](../../pkg/models/operations/v3listpaymentinitiationrelatedpaymentsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPaymentInitiations
-
-List all payment initiations
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPaymentInitiations" method="get" path="/api/payments/v3/payment-initiations" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPaymentInitiations(ctx, operations.V3ListPaymentInitiationsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentInitiationsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `request`                                                                                                    | [operations.V3ListPaymentInitiationsRequest](../../pkg/models/operations/v3listpaymentinitiationsrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
-| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
-
-### Response
-
-**[*operations.V3ListPaymentInitiationsResponse](../../pkg/models/operations/v3listpaymentinitiationsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPaymentServiceUserConnections
-
-List all connections for a payment service user
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUserConnections" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connections" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPaymentServiceUserConnections(ctx, operations.V3ListPaymentServiceUserConnectionsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserConnectionsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                          | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                              | :heavy_check_mark:                                                                                                                 | The context to use for the request.                                                                                                |
-| `request`                                                                                                                          | [operations.V3ListPaymentServiceUserConnectionsRequest](../../pkg/models/operations/v3listpaymentserviceuserconnectionsrequest.md) | :heavy_check_mark:                                                                                                                 | The request object to use for the request.                                                                                         |
-| `opts`                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                       | :heavy_minus_sign:                                                                                                                 | The options for this request.                                                                                                      |
-
-### Response
-
-**[*operations.V3ListPaymentServiceUserConnectionsResponse](../../pkg/models/operations/v3listpaymentserviceuserconnectionsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPaymentServiceUserConnectionsFromConnectorID
-
-List enabled connections for a payment service user on a connector (i.e. the various banks PSUser has enabled on the connector)
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUserConnectionsFromConnectorID" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPaymentServiceUserConnectionsFromConnectorID(ctx, operations.V3ListPaymentServiceUserConnectionsFromConnectorIDRequest{
-        ConnectorID: "<id>",
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserConnectionsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                        | Type                                                                                                                                                             | Required                                                                                                                                                         | Description                                                                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                                                            | :heavy_check_mark:                                                                                                                                               | The context to use for the request.                                                                                                                              |
-| `request`                                                                                                                                                        | [operations.V3ListPaymentServiceUserConnectionsFromConnectorIDRequest](../../pkg/models/operations/v3listpaymentserviceuserconnectionsfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                               | The request object to use for the request.                                                                                                                       |
-| `opts`                                                                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                               | The options for this request.                                                                                                                                    |
-
-### Response
-
-**[*operations.V3ListPaymentServiceUserConnectionsFromConnectorIDResponse](../../pkg/models/operations/v3listpaymentserviceuserconnectionsfromconnectoridresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPaymentServiceUserLinkAttemptsFromConnectorID
-
-List all link attempts for a payment service user on a connector.
-Allows to check if users used the link and completed the oauth flow.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUserLinkAttemptsFromConnectorID" method="get" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/link-attempts" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPaymentServiceUserLinkAttemptsFromConnectorID(ctx, operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest{
-        ConnectorID: "<id>",
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-        PaymentServiceUserID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUserLinkAttemptsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                          | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                                                              | :heavy_check_mark:                                                                                                                                                 | The context to use for the request.                                                                                                                                |
-| `request`                                                                                                                                                          | [operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDRequest](../../pkg/models/operations/v3listpaymentserviceuserlinkattemptsfromconnectoridrequest.md) | :heavy_check_mark:                                                                                                                                                 | The request object to use for the request.                                                                                                                         |
-| `opts`                                                                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                 | The options for this request.                                                                                                                                      |
-
-### Response
-
-**[*operations.V3ListPaymentServiceUserLinkAttemptsFromConnectorIDResponse](../../pkg/models/operations/v3listpaymentserviceuserlinkattemptsfromconnectoridresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPaymentServiceUsers
-
-List all payment service users
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPaymentServiceUsers" method="get" path="/api/payments/v3/payment-service-users" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPaymentServiceUsers(ctx, operations.V3ListPaymentServiceUsersRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentServiceUsersCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
-| `request`                                                                                                      | [operations.V3ListPaymentServiceUsersRequest](../../pkg/models/operations/v3listpaymentserviceusersrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
-| `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
-
-### Response
-
-**[*operations.V3ListPaymentServiceUsersResponse](../../pkg/models/operations/v3listpaymentserviceusersresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPayments
-
-List all payments
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPayments" method="get" path="/api/payments/v3/payments" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPayments(ctx, operations.V3ListPaymentsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PaymentsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.V3ListPaymentsRequest](../../pkg/models/operations/v3listpaymentsrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
-| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
-
-### Response
-
-**[*operations.V3ListPaymentsResponse](../../pkg/models/operations/v3listpaymentsresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ListPools
-
-List all pools
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ListPools" method="get" path="/api/payments/v3/pools" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ListPools(ctx, operations.V3ListPoolsRequest{
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        PageSize: v5.Pointer[int64](100),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3PoolsCursorResponse != nil {
+    if res.HealthResponse != nil {
         // handle response
     }
 }
@@ -3290,382 +541,34 @@ func main() {
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [operations.V3ListPoolsRequest](../../pkg/models/operations/v3listpoolsrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `security`                                                                         | [operations.V3ClusterzSecurity](../../pkg/models/operations/v3clusterzsecurity.md) | :heavy_check_mark:                                                                 | The security requirements to use for the request.                                  |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
 ### Response
 
-**[*operations.V3ListPoolsResponse](../../pkg/models/operations/v3listpoolsresponse.md), error**
+**[*operations.V3ClusterzResponse](../../pkg/models/operations/v3clusterzresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## RejectPaymentInitiation
+## CreateIndex
 
-Reject a payment initiation
+Registers a new index on the ledger. An existing canonical index on
+this ledger is rejected with `INDEX_ALREADY_EXISTS` (HTTP 409), even
+while building or retyping, without changing its definition or progress.
+Replaying an identical batch with its retained `Idempotency-Key` returns
+the original result. The indexbuilder processes the accepted creation.
+The request body carries the target `IndexID` in
+canonical form (see `DELETE /v3/{ledgerName}/indexes/{canonicalId}`
+for the format). Requires `ledger:WriteLedger` scope.
 
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3RejectPaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/reject" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.RejectPaymentInitiation(ctx, operations.V3RejectPaymentInitiationRequest{
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
-| `request`                                                                                                      | [operations.V3RejectPaymentInitiationRequest](../../pkg/models/operations/v3rejectpaymentinitiationrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
-| `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
-
-### Response
-
-**[*operations.V3RejectPaymentInitiationResponse](../../pkg/models/operations/v3rejectpaymentinitiationresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## RemoveAccountFromPool
-
-Remove an account from a pool
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3RemoveAccountFromPool" method="delete" path="/api/payments/v3/pools/{poolID}/accounts/{accountID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.RemoveAccountFromPool(ctx, operations.V3RemoveAccountFromPoolRequest{
-        AccountID: "<id>",
-        PoolID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
-| `request`                                                                                                  | [operations.V3RemoveAccountFromPoolRequest](../../pkg/models/operations/v3removeaccountfrompoolrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
-| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
-
-### Response
-
-**[*operations.V3RemoveAccountFromPoolResponse](../../pkg/models/operations/v3removeaccountfrompoolresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ResetConnector
-
-Reset a connector. Be aware that this will delete all data and stop all existing tasks like payment initiations and bank account creations.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ResetConnector" method="post" path="/api/payments/v3/connectors/{connectorID}/reset" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ResetConnector(ctx, operations.V3ResetConnectorRequest{
-        ConnectorID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ResetConnectorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.V3ResetConnectorRequest](../../pkg/models/operations/v3resetconnectorrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
-
-### Response
-
-**[*operations.V3ResetConnectorResponse](../../pkg/models/operations/v3resetconnectorresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## RetryPaymentInitiation
-
-Retry a payment initiation
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3RetryPaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/retry" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.RetryPaymentInitiation(ctx, operations.V3RetryPaymentInitiationRequest{
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3RetryPaymentInitiationResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `request`                                                                                                    | [operations.V3RetryPaymentInitiationRequest](../../pkg/models/operations/v3retrypaymentinitiationrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
-| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
-
-### Response
-
-**[*operations.V3RetryPaymentInitiationResponse](../../pkg/models/operations/v3retrypaymentinitiationresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## ReversePaymentInitiation
-
-Reverse a payment initiation
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3ReversePaymentInitiation" method="post" path="/api/payments/v3/payment-initiations/{paymentInitiationID}/reverse" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.ReversePaymentInitiation(ctx, operations.V3ReversePaymentInitiationRequest{
-        PaymentInitiationID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3ReversePaymentInitiationResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
-| `request`                                                                                                        | [operations.V3ReversePaymentInitiationRequest](../../pkg/models/operations/v3reversepaymentinitiationrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
-| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
-
-### Response
-
-**[*operations.V3ReversePaymentInitiationResponse](../../pkg/models/operations/v3reversepaymentinitiationresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## UninstallConnector
-
-Uninstall a connector
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3UninstallConnector" method="delete" path="/api/payments/v3/connectors/{connectorID}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Payments.V3.UninstallConnector(ctx, operations.V3UninstallConnectorRequest{
-        ConnectorID: "<id>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.V3UninstallConnectorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.V3UninstallConnectorRequest](../../pkg/models/operations/v3uninstallconnectorrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
-| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
-
-### Response
-
-**[*operations.V3UninstallConnectorResponse](../../pkg/models/operations/v3uninstallconnectorresponse.md), error**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
-
-## UpdateBankAccountMetadata
-
-Update a bank account's metadata
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="v3UpdateBankAccountMetadata" method="patch" path="/api/payments/v3/bank-accounts/{bankAccountID}/metadata" -->
+<!-- UsageSnippet language="go" operationID="v3CreateIndex" method="post" path="/api/ledger/v3/{ledgerName}/indexes" -->
 ```go
 package main
 
@@ -3681,13 +584,16 @@ func main() {
 
     s := v5.New()
 
-    res, err := s.Payments.V3.UpdateBankAccountMetadata(ctx, operations.V3UpdateBankAccountMetadataRequest{
-        BankAccountID: "<id>",
-    })
+    res, err := s.Ledger.V3.CreateIndex(ctx, operations.V3CreateIndexRequest{
+        RequestBody: operations.V3CreateIndexRequestBody{
+            ID: "metadata:TARGET_TYPE_ACCOUNT:color",
+        },
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
+    if res.CreateIndexResponse != nil {
         // handle response
     }
 }
@@ -3695,36 +601,252 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
-| `request`                                                                                                          | [operations.V3UpdateBankAccountMetadataRequest](../../pkg/models/operations/v3updatebankaccountmetadatarequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
-| `opts`                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.V3CreateIndexRequest](../../pkg/models/operations/v3createindexrequest.md)   | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `security`                                                                               | [operations.V3CreateIndexSecurity](../../pkg/models/operations/v3createindexsecurity.md) | :heavy_check_mark:                                                                       | The security requirements to use for the request.                                        |
+| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
 ### Response
 
-**[*operations.V3UpdateBankAccountMetadataResponse](../../pkg/models/operations/v3updatebankaccountmetadataresponse.md), error**
+**[*operations.V3CreateIndexResponse](../../pkg/models/operations/v3createindexresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## UpdateLinkForPaymentServiceUserOnConnector
+## CreateLedger
 
-Update/Regenerate a link for a payment service user on a connector
+Creates a new ledger with the specified name. Storage is configured at the server level.
+Each ledger has its own Raft group for data consistency. Requires `ledger:write` scope.
+
+The ledger name `_` is reserved: all system / non-ledger routes live
+under the `/v3/_/…` segment (e.g. `/v3/_/audit-entries`), so a ledger
+named `_` would be unreachable over REST. Creating it is rejected with a
+validation error. The exact name `_system` is also reserved for system
+events and rejected. Other underscore-prefixed names remain valid.
+
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3UpdateLinkForPaymentServiceUserOnConnector" method="post" path="/api/payments/v3/payment-service-users/{paymentServiceUserID}/connectors/{connectorID}/connections/{connectionID}/update-link" -->
+<!-- UsageSnippet language="go" operationID="v3CreateLedger" method="post" path="/api/ledger/v3/{ledgerName}" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.CreateLedger(ctx, operations.V3CreateLedgerRequest{
+        CreateLedgerRequest: ledgerv3.CreateLedgerRequest{
+            AccountTypes: map[string]ledgerv3.AddAccountTypeRequest{
+                "user-checking": ledgerv3.AddAccountTypeRequest{
+                    Name: "user-checking",
+                    Pattern: "users:{id}:checking",
+                    Persistence: ledgerv3.AddAccountTypeRequestPersistenceEphemeral.ToPointer(),
+                    SegmentTypes: map[string]*ledgerv3.SegmentType{
+                        "id": &ledgerv3.SegmentType{
+                            Type: ledgerv3.SegmentTypeTypeUUID,
+                        },
+                    },
+                },
+            },
+            InitialSchema: []ledgerv3.MetadataFieldTypeCommand{
+                ledgerv3.MetadataFieldTypeCommand{
+                    Key: "color",
+                    TargetType: ledgerv3.MetadataFieldTypeCommandTargetTypeAccount,
+                    Type: ledgerv3.MetadataFieldTypeCommandTypeString,
+                },
+            },
+        },
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CreateLedgerResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.V3CreateLedgerRequest](../../pkg/models/operations/v3createledgerrequest.md)   | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `security`                                                                                 | [operations.V3CreateLedgerSecurity](../../pkg/models/operations/v3createledgersecurity.md) | :heavy_check_mark:                                                                         | The security requirements to use for the request.                                          |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.V3CreateLedgerResponse](../../pkg/models/operations/v3createledgerresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## CreatePreparedQuery
+
+Creates a new prepared query for a ledger. A prepared query defines a reusable
+filter that can be executed later with parameter substitution. Requires `ledger:WriteQuery` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3CreatePreparedQuery" method="post" path="/api/ledger/v3/{ledgerName}/prepared-queries" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.CreatePreparedQuery(ctx, operations.V3CreatePreparedQueryRequest{
+        CreatePreparedQueryRequest: ledgerv3.CreatePreparedQueryRequest{
+            Name: "<value>",
+            Target: ledgerv3.TargetAccounts,
+        },
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.V3CreatePreparedQueryRequest](../../pkg/models/operations/v3createpreparedqueryrequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.V3CreatePreparedQuerySecurity](../../pkg/models/operations/v3createpreparedquerysecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.V3CreatePreparedQueryResponse](../../pkg/models/operations/v3createpreparedqueryresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## CreateTransaction
+
+Creates a new transaction in the specified ledger with the specified postings. Requires `ledger:write` scope.
+Signed requests use `application/json` (including MIME parameters) with
+`request` and standard-base64 `payload`. Either signing header, even if
+empty, selects this wrapper; with neither header present, the ordinary REST body applies.
+Runtime headers choose the representation from the documented anyOf.
+The signed protobuf batch must
+equal the route/body/Idempotency-Key-derived batch in full. Supply exactly
+one nonempty Formance-Signing-Key-Id and Formance-Signature header; the
+latter is a standard-base64 Ed25519 signature of 64 decoded bytes. Missing,
+empty or repeated signing headers, invalid base64 and wrong signature
+length return 400. Signing headers with a non-JSON or missing content type return 415.
+Signature enforcement
+returns 401 `UNAUTHENTICATED` when required but absent and 403
+`PERMISSION_DENIED` for invalid, unknown/revoked-key or mismatched
+signatures. Malformed signed envelopes return 400. The complete
+wrapper counts toward the 4 MiB body limit. JWT scopes still apply.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3CreateTransaction" method="post" path="/api/ledger/v3/{ledgerName}/transactions" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.CreateTransaction(ctx, operations.V3CreateTransactionRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        RequestBody: operations.CreateV3CreateTransactionRequestBodyCreateTransactionRequest(
+            ledgerv3.CreateTransactionRequest{},
+        ),
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CreateTransactionResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.V3CreateTransactionRequest](../../pkg/models/operations/v3createtransactionrequest.md)   | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `security`                                                                                           | [operations.V3CreateTransactionSecurity](../../pkg/models/operations/v3createtransactionsecurity.md) | :heavy_check_mark:                                                                                   | The security requirements to use for the request.                                                    |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.V3CreateTransactionResponse](../../pkg/models/operations/v3createtransactionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## DeleteAccountMetadata
+
+Deletes a metadata key for a specific account in the ledger. Requires `ledger:WriteMetadata` scope (included in the default `ledger:write` mapping).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3DeleteAccountMetadata" method="delete" path="/api/ledger/v3/{ledgerName}/accounts/{address}/metadata/{key}" -->
+```go
+package main
+
+import(
+	"context"
 	"github.com/formancehq/formance-sdk-go/v5"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
@@ -3733,22 +855,17 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.UpdateLinkForPaymentServiceUserOnConnector(ctx, operations.V3UpdateLinkForPaymentServiceUserOnConnectorRequest{
-        ConnectionID: "<id>",
-        ConnectorID: "<id>",
-        PaymentServiceUserID: "<id>",
-    })
+    res, err := s.Ledger.V3.DeleteAccountMetadata(ctx, operations.V3DeleteAccountMetadataRequest{
+        Address: "users:001",
+        Key: "formance.com/reviewed",
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.V3PaymentServiceUserUpdateLinkResponse != nil {
+    if res.ErrorResponse != nil {
         // handle response
     }
 }
@@ -3756,36 +873,35 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                            | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                                | :heavy_check_mark:                                                                                                                                   | The context to use for the request.                                                                                                                  |
-| `request`                                                                                                                                            | [operations.V3UpdateLinkForPaymentServiceUserOnConnectorRequest](../../pkg/models/operations/v3updatelinkforpaymentserviceuseronconnectorrequest.md) | :heavy_check_mark:                                                                                                                                   | The request object to use for the request.                                                                                                           |
-| `opts`                                                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                                                         | :heavy_minus_sign:                                                                                                                                   | The options for this request.                                                                                                                        |
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
+| `request`                                                                                                    | [operations.V3DeleteAccountMetadataRequest](../../pkg/models/operations/v3deleteaccountmetadatarequest.md)   | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `security`                                                                                                   | [operations.V3DeleteAccountMetadataSecurity](../../pkg/models/operations/v3deleteaccountmetadatasecurity.md) | :heavy_check_mark:                                                                                           | The security requirements to use for the request.                                                            |
+| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
 ### Response
 
-**[*operations.V3UpdateLinkForPaymentServiceUserOnConnectorResponse](../../pkg/models/operations/v3updatelinkforpaymentserviceuseronconnectorresponse.md), error**
+**[*operations.V3DeleteAccountMetadataResponse](../../pkg/models/operations/v3deleteaccountmetadataresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## UpdatePaymentMetadata
+## DeleteLedger
 
-Update a payment's metadata
+Deletes a ledger by its name. This operation removes the ledger and its associated Raft group from the cluster. Requires `ledger:write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3UpdatePaymentMetadata" method="patch" path="/api/payments/v3/payments/{paymentID}/metadata" -->
+<!-- UsageSnippet language="go" operationID="v3DeleteLedger" method="delete" path="/api/ledger/v3/{ledgerName}" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
@@ -3794,20 +910,69 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.UpdatePaymentMetadata(ctx, operations.V3UpdatePaymentMetadataRequest{
-        PaymentID: "<id>",
-    })
+    res, err := s.Ledger.V3.DeleteLedger(ctx, operations.V3DeleteLedgerRequest{
+        LedgerName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.V3DeleteLedgerRequest](../../pkg/models/operations/v3deleteledgerrequest.md)   | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `security`                                                                                 | [operations.V3DeleteLedgerSecurity](../../pkg/models/operations/v3deleteledgersecurity.md) | :heavy_check_mark:                                                                         | The security requirements to use for the request.                                          |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.V3DeleteLedgerResponse](../../pkg/models/operations/v3deleteledgerresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## DeleteLedgerMetadata
+
+Deletes a metadata key from the ledger. Requires `ledger:WriteMetadata` scope (included in the default `ledger:write` mapping).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3DeleteLedgerMetadata" method="delete" path="/api/ledger/v3/{ledgerName}/metadata/{key}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.DeleteLedgerMetadata(ctx, operations.V3DeleteLedgerMetadataRequest{
+        Key: "formance.com/reviewed",
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
         // handle response
     }
 }
@@ -3818,33 +983,32 @@ func main() {
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
-| `request`                                                                                                  | [operations.V3UpdatePaymentMetadataRequest](../../pkg/models/operations/v3updatepaymentmetadatarequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `request`                                                                                                  | [operations.V3DeleteLedgerMetadataRequest](../../pkg/models/operations/v3deleteledgermetadatarequest.md)   | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `security`                                                                                                 | [operations.V3DeleteLedgerMetadataSecurity](../../pkg/models/operations/v3deleteledgermetadatasecurity.md) | :heavy_check_mark:                                                                                         | The security requirements to use for the request.                                                          |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
 ### Response
 
-**[*operations.V3UpdatePaymentMetadataResponse](../../pkg/models/operations/v3updatepaymentmetadataresponse.md), error**
+**[*operations.V3DeleteLedgerMetadataResponse](../../pkg/models/operations/v3deleteledgermetadataresponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## UpdatePoolQuery
+## DeletePreparedQuery
 
-Update the query of a pool
+Deletes a prepared query from a ledger. Requires `ledger:WriteQuery` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3UpdatePoolQuery" method="patch" path="/api/payments/v3/pools/{poolID}/query" -->
+<!-- UsageSnippet language="go" operationID="v3DeletePreparedQuery" method="delete" path="/api/ledger/v3/{ledgerName}/prepared-queries/{queryName}" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
@@ -3853,20 +1017,321 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.UpdatePoolQuery(ctx, operations.V3UpdatePoolQueryRequest{
-        PoolID: "<id>",
-    })
+    res, err := s.Ledger.V3.DeletePreparedQuery(ctx, operations.V3DeletePreparedQueryRequest{
+        LedgerName: "<value>",
+        QueryName: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.V3DeletePreparedQueryRequest](../../pkg/models/operations/v3deletepreparedqueryrequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.V3DeletePreparedQuerySecurity](../../pkg/models/operations/v3deletepreparedquerysecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.V3DeletePreparedQueryResponse](../../pkg/models/operations/v3deletepreparedqueryresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## DeleteTransactionMetadata
+
+Deletes a metadata key for a specific transaction in the ledger. Requires `ledger:WriteMetadata` scope (included in the default `ledger:write` mapping).
+Signed requests use `application/json` (including MIME parameters) with
+`request` and standard-base64 `payload`. Either signing header, even if
+empty, selects this wrapper; with neither header present, the ordinary REST body applies.
+Runtime headers choose the representation from the documented anyOf.
+The signed protobuf batch must
+equal the route/body/Idempotency-Key-derived batch in full. Supply exactly
+one nonempty Formance-Signing-Key-Id and Formance-Signature header; the
+latter is a standard-base64 Ed25519 signature of 64 decoded bytes. Missing,
+empty or repeated signing headers, invalid base64 and wrong signature
+length return 400. Signing headers with a non-JSON or missing content type return 415.
+Signature enforcement
+returns 401 `UNAUTHENTICATED` when required but absent and 403
+`PERMISSION_DENIED` for invalid, unknown/revoked-key or mismatched
+signatures. Malformed signed envelopes return 400. The complete
+wrapper counts toward the 4 MiB body limit. JWT scopes still apply.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3DeleteTransactionMetadata" method="delete" path="/api/ledger/v3/{ledgerName}/transactions/{transactionId}/metadata/{key}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.DeleteTransactionMetadata(ctx, operations.V3DeleteTransactionMetadataRequest{
+        Key: "formance.com/reviewed",
+        LedgerName: "<value>",
+        TransactionID: 831017,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [operations.V3DeleteTransactionMetadataRequest](../../pkg/models/operations/v3deletetransactionmetadatarequest.md)   | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `security`                                                                                                           | [operations.V3DeleteTransactionMetadataSecurity](../../pkg/models/operations/v3deletetransactionmetadatasecurity.md) | :heavy_check_mark:                                                                                                   | The security requirements to use for the request.                                                                    |
+| `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.V3DeleteTransactionMetadataResponse](../../pkg/models/operations/v3deletetransactionmetadataresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## DropIndex
+
+Removes an index from a ledger. The path parameter carries the target
+`IndexID` in canonical form (e.g. `metadata:TARGET_TYPE_ACCOUNT:color`,
+`tx_builtin:TX_BUILTIN_INDEX_TIMESTAMP`). Requires `ledger:WriteLedger` scope.
+
+The drop is idempotent. An `IndexID` that has no registry entry on the
+ledger (never created, or already dropped) also answers `204`, and each
+committed drop appends a `DROP_INDEX` entry to the ledger log. A
+mistyped canonical id is therefore not reported; read the index with
+`GET /v3/{ledgerName}/indexes/{canonicalId}` first when the caller must
+know that it exists. `404` means that the ledger does not exist.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3DropIndex" method="delete" path="/api/ledger/v3/{ledgerName}/indexes/{canonicalId}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.DropIndex(ctx, operations.V3DropIndexRequest{
+        CanonicalID: "<id>",
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.V3DropIndexRequest](../../pkg/models/operations/v3dropindexrequest.md)   | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `security`                                                                           | [operations.V3DropIndexSecurity](../../pkg/models/operations/v3dropindexsecurity.md) | :heavy_check_mark:                                                                   | The security requirements to use for the request.                                    |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
+
+### Response
+
+**[*operations.V3DropIndexResponse](../../pkg/models/operations/v3dropindexresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ExecutePreparedQuery
+
+Executes a prepared query with optional parameter substitution. Supports LIST and
+AGGREGATE_VOLUMES modes. LIST uses cursor pagination with an effective page size
+of 100 when omitted or zero, capped at 1000 before collecting and enriching rows.
+AGGREGATE_VOLUMES ignores pageSize and aggregates all matching accounts. Also
+accepts pageSize, cursor and reverse as query parameters. Supplied pageSize and
+reverse values, and nonempty cursor values, override the body. Requires `ledger:ReadQuery` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ExecutePreparedQuery" method="post" path="/api/ledger/v3/{ledgerName}/prepared-queries/{queryName}/execute" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ExecutePreparedQuery(ctx, operations.V3ExecutePreparedQueryRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+        QueryName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ExecutePreparedQueryResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [operations.V3ExecutePreparedQueryRequest](../../pkg/models/operations/v3executepreparedqueryrequest.md)   | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `security`                                                                                                 | [operations.V3ExecutePreparedQuerySecurity](../../pkg/models/operations/v3executepreparedquerysecurity.md) | :heavy_check_mark:                                                                                         | The security requirements to use for the request.                                                          |
+| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.V3ExecutePreparedQueryResponse](../../pkg/models/operations/v3executepreparedqueryresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetAccount
+
+Retrieves account information including metadata for a specific account address. Requires `ledger:read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetAccount_ledgerV3" method="get" path="/api/ledger/v3/{ledgerName}/accounts/{address}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetAccount(ctx, operations.V3GetAccountLedgerV3Request{
+        FormanceBigintAsString: v5.Pointer("true"),
+        Address: "users:001",
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetAccountResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
+| `request`                                                                                              | [operations.V3GetAccountLedgerV3Request](../../pkg/models/operations/v3getaccountledgerv3request.md)   | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| `security`                                                                                             | [operations.V3GetAccountLedgerV3Security](../../pkg/models/operations/v3getaccountledgerv3security.md) | :heavy_check_mark:                                                                                     | The security requirements to use for the request.                                                      |
+| `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
+
+### Response
+
+**[*operations.V3GetAccountLedgerV3Response](../../pkg/models/operations/v3getaccountledgerv3response.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetAccountType
+
+Retrieves a specific account type by name from a ledger. Requires `ledger:ReadAccount` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetAccountType" method="get" path="/api/ledger/v3/{ledgerName}/account-types/{typeName}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetAccountType(ctx, operations.V3GetAccountTypeRequest{
+        LedgerName: "<value>",
+        TypeName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetAccountTypeResponse != nil {
         // handle response
     }
 }
@@ -3877,33 +1342,35 @@ func main() {
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.V3UpdatePoolQueryRequest](../../pkg/models/operations/v3updatepoolqueryrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `request`                                                                                      | [operations.V3GetAccountTypeRequest](../../pkg/models/operations/v3getaccounttyperequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3GetAccountTypeSecurity](../../pkg/models/operations/v3getaccounttypesecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
-**[*operations.V3UpdatePoolQueryResponse](../../pkg/models/operations/v3updatepoolqueryresponse.md), error**
+**[*operations.V3GetAccountTypeResponse](../../pkg/models/operations/v3getaccounttyperesponse.md), error**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| payments.V3ErrorResponse | default                  | application/json         |
-| sdkerrors.SDKError       | 4XX, 5XX                 | \*/\*                    |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
-## V3UpdateConnectorConfig
+## GetAuditEntry
 
-Update connector config
+Returns a single audit entry by its global sequence, with per-order
+`items` populated (the list endpoint omits `items` for compactness).
+Requires `ledger:ReadAudit` scope.
+
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="v3UpdateConnectorConfig" method="patch" path="/api/payments/v3/connectors/{connectorID}/config" -->
+<!-- UsageSnippet language="go" operationID="v3GetAuditEntry" method="get" path="/api/ledger/v3/_/audit-entries/{sequence}" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
@@ -3912,20 +1379,1017 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Payments.V3.V3UpdateConnectorConfig(ctx, operations.V3UpdateConnectorConfigRequest{
-        ConnectorID: "<id>",
-    })
+    res, err := s.Ledger.V3.GetAuditEntry(ctx, operations.V3GetAuditEntryRequest{
+        Sequence: 98403,
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.V3GetAuditEntryRequest](../../pkg/models/operations/v3getauditentryrequest.md)   | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `security`                                                                                   | [operations.V3GetAuditEntrySecurity](../../pkg/models/operations/v3getauditentrysecurity.md) | :heavy_check_mark:                                                                           | The security requirements to use for the request.                                            |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.V3GetAuditEntryResponse](../../pkg/models/operations/v3getauditentryresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetBucketIndex
+
+Returns the `Index` registry entry for a bucket-scoped index
+(`Ledger == ""`, e.g. audit indexes). Ledger-scoped lookups go
+through `GET /v3/{ledgerName}/indexes/{canonicalId}` — the two
+keyspaces are distinct so a bucket-scoped lookup with the same
+canonical will NotFound if only the ledger-scoped entry exists.
+Requires `ledger:ReadOps` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetBucketIndex" method="get" path="/api/ledger/v3/_/indexes/{canonicalId}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetBucketIndex(ctx, operations.V3GetBucketIndexRequest{
+        CanonicalID: "<id>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3GetBucketIndexRequest](../../pkg/models/operations/v3getbucketindexrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3GetBucketIndexSecurity](../../pkg/models/operations/v3getbucketindexsecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3GetBucketIndexResponse](../../pkg/models/operations/v3getbucketindexresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetBucketIndexEntryStatus
+
+Returns the `IndexEntry` (registry entry + backfill cursor +
+per-replica IndexVersionState) for a bucket-scoped index.
+Requires `ledger:ReadOps` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetBucketIndexEntryStatus" method="get" path="/api/ledger/v3/_/indexes/{canonicalId}/status" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetBucketIndexEntryStatus(ctx, operations.V3GetBucketIndexEntryStatusRequest{
+        CanonicalID: "<id>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [operations.V3GetBucketIndexEntryStatusRequest](../../pkg/models/operations/v3getbucketindexentrystatusrequest.md)   | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `security`                                                                                                           | [operations.V3GetBucketIndexEntryStatusSecurity](../../pkg/models/operations/v3getbucketindexentrystatussecurity.md) | :heavy_check_mark:                                                                                                   | The security requirements to use for the request.                                                                    |
+| `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.V3GetBucketIndexEntryStatusResponse](../../pkg/models/operations/v3getbucketindexentrystatusresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetEventsSinks
+
+Returns every event sink configured on the cluster. Requires
+`ledger:ReadOps` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetEventsSinks" method="get" path="/api/ledger/v3/_/events-sinks" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetEventsSinks(ctx, operations.V3GetEventsSinksRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3GetEventsSinksRequest](../../pkg/models/operations/v3geteventssinksrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3GetEventsSinksSecurity](../../pkg/models/operations/v3geteventssinkssecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3GetEventsSinksResponse](../../pkg/models/operations/v3geteventssinksresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetIndex
+
+Returns the `Index` registry entry (id, ledger, createdAt,
+forwardEncodingVersion) for a single index, serialized in
+protobuf-JSON camelCase. Requires `ledger:ReadLedger` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetIndex" method="get" path="/api/ledger/v3/{ledgerName}/indexes/{canonicalId}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetIndex(ctx, operations.V3GetIndexRequest{
+        CanonicalID: "<id>",
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `request`                                                                          | [operations.V3GetIndexRequest](../../pkg/models/operations/v3getindexrequest.md)   | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `security`                                                                         | [operations.V3GetIndexSecurity](../../pkg/models/operations/v3getindexsecurity.md) | :heavy_check_mark:                                                                 | The security requirements to use for the request.                                  |
+| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+
+### Response
+
+**[*operations.V3GetIndexResponse](../../pkg/models/operations/v3getindexresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetIndexEntryStatus
+
+Returns the `IndexEntry` for a single index — the registry entry
+joined with the backfill cursor and the per-replica
+IndexVersionState (current + pending version). Use this to poll
+for backfill completion after a `POST /v3/{ledgerName}/indexes`.
+Requires `ledger:ReadLedger` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetIndexEntryStatus" method="get" path="/api/ledger/v3/{ledgerName}/indexes/{canonicalId}/status" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetIndexEntryStatus(ctx, operations.V3GetIndexEntryStatusRequest{
+        CanonicalID: "<id>",
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.V3GetIndexEntryStatusRequest](../../pkg/models/operations/v3getindexentrystatusrequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.V3GetIndexEntryStatusSecurity](../../pkg/models/operations/v3getindexentrystatussecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.V3GetIndexEntryStatusResponse](../../pkg/models/operations/v3getindexentrystatusresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetIndexStatus
+
+Returns the aggregated index registry status: per-index backfill cursor,
+per-replica IndexVersionState (current/pending), and cluster-wide
+counters (LastIndexedSequence, LastLogSequence, Lag, IndexFileSize).
+The optional `ledger` query parameter narrows the per-index entries to
+a single ledger; the aggregated counters always cover the bucket.
+Requires `ledger:ReadOps` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetIndexStatus" method="get" path="/api/ledger/v3/_/indexes/status" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetIndexStatus(ctx, operations.V3GetIndexStatusRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3GetIndexStatusRequest](../../pkg/models/operations/v3getindexstatusrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3GetIndexStatusSecurity](../../pkg/models/operations/v3getindexstatussecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3GetIndexStatusResponse](../../pkg/models/operations/v3getindexstatusresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetLedger
+
+Retrieves a ledger by its name. Requires `ledger:read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetLedger" method="get" path="/api/ledger/v3/{ledgerName}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetLedger(ctx, operations.V3GetLedgerRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetLedgerResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.V3GetLedgerRequest](../../pkg/models/operations/v3getledgerrequest.md)   | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `security`                                                                           | [operations.V3GetLedgerSecurity](../../pkg/models/operations/v3getledgersecurity.md) | :heavy_check_mark:                                                                   | The security requirements to use for the request.                                    |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
+
+### Response
+
+**[*operations.V3GetLedgerResponse](../../pkg/models/operations/v3getledgerresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetLedgerStats
+
+Returns aggregate usage statistics (transaction, volume, reference, posting, log, revert and Numscript-execution counts, plus ephemeral-evicted and transient-used volume tallies) for a ledger. Requires `ledger:read` scope. On live reads, `transactionCount` and `logCount` are FSM-backed. The seven usage-derived counters (`postingCount`, `revertCount`, `numscriptExecutionCount`, `referenceCount`, `ephemeralEvictedCount`, `transientUsedCount`, `volumeCount`) are materialised asynchronously in the serving replica's usagestore and may lag committed state even after the request's ReadIndex barrier. Note: for checkpoint-scoped (historical) reads, only `transactionCount` and `logCount` are checkpoint-consistent; the usage-derived counters (`postingCount`, `revertCount`, `numscriptExecutionCount`, `referenceCount`, `ephemeralEvictedCount`, `transientUsedCount`, `volumeCount`) are sourced from the live usagestore projection, which is not checkpoint-aware, and are returned as `0` at a checkpoint rather than a live value — treat `0` on a checkpoint read as "not available at this checkpoint".
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetLedgerStats" method="get" path="/api/ledger/v3/{ledgerName}/stats" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetLedgerStats(ctx, operations.V3GetLedgerStatsRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetLedgerStatsResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3GetLedgerStatsRequest](../../pkg/models/operations/v3getledgerstatsrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3GetLedgerStatsSecurity](../../pkg/models/operations/v3getledgerstatssecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3GetLedgerStatsResponse](../../pkg/models/operations/v3getledgerstatsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetLog
+
+Returns the system log entry with the given bucket-wide sequence number.
+Requires `ledger:ReadOps` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetLog" method="get" path="/api/ledger/v3/_/logs/{sequence}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetLog(ctx, operations.V3GetLogRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        Sequence: 593519,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [operations.V3GetLogRequest](../../pkg/models/operations/v3getlogrequest.md)   | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `security`                                                                     | [operations.V3GetLogSecurity](../../pkg/models/operations/v3getlogsecurity.md) | :heavy_check_mark:                                                             | The security requirements to use for the request.                              |
+| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
+
+### Response
+
+**[*operations.V3GetLogResponse](../../pkg/models/operations/v3getlogresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetMetadataSchemaStatus
+
+Returns the declared type of every metadata field on a ledger. Requires `ledger:read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetMetadataSchemaStatus" method="get" path="/api/ledger/v3/{ledgerName}/metadata-schema" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetMetadataSchemaStatus(ctx, operations.V3GetMetadataSchemaStatusRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.MetadataSchemaStatusResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
+| `request`                                                                                                        | [operations.V3GetMetadataSchemaStatusRequest](../../pkg/models/operations/v3getmetadataschemastatusrequest.md)   | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `security`                                                                                                       | [operations.V3GetMetadataSchemaStatusSecurity](../../pkg/models/operations/v3getmetadataschemastatussecurity.md) | :heavy_check_mark:                                                                                               | The security requirements to use for the request.                                                                |
+| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
+
+### Response
+
+**[*operations.V3GetMetadataSchemaStatusResponse](../../pkg/models/operations/v3getmetadataschemastatusresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetNumscript
+
+Retrieves a numscript by name from a ledger. Use the `version` query parameter to get a specific
+semver version. If omitted or empty, the latest version is returned.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetNumscript" method="get" path="/api/ledger/v3/{ledgerName}/numscripts/{name}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetNumscript(ctx, operations.V3GetNumscriptRequest{
+        LedgerName: "<value>",
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetNumscriptResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.V3GetNumscriptRequest](../../pkg/models/operations/v3getnumscriptrequest.md)   | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `security`                                                                                 | [operations.V3GetNumscriptSecurity](../../pkg/models/operations/v3getnumscriptsecurity.md) | :heavy_check_mark:                                                                         | The security requirements to use for the request.                                          |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.V3GetNumscriptResponse](../../pkg/models/operations/v3getnumscriptresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetNumscriptUsage
+
+Returns the invocation counter and last-used timestamp for a Numscript template. Values are
+materialised asynchronously by the `usagebuilder` subsystem from the FSM audit chain and may
+lag the live FSM while the worker drains pending batches. A never-invoked template returns a
+zero-valued response (not 404), so clients handle "never used" uniformly.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetNumscriptUsage" method="get" path="/api/ledger/v3/{ledgerName}/numscripts/{name}/usage" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetNumscriptUsage(ctx, operations.V3GetNumscriptUsageRequest{
+        LedgerName: "<value>",
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetTemplateUsageResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.V3GetNumscriptUsageRequest](../../pkg/models/operations/v3getnumscriptusagerequest.md)   | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `security`                                                                                           | [operations.V3GetNumscriptUsageSecurity](../../pkg/models/operations/v3getnumscriptusagesecurity.md) | :heavy_check_mark:                                                                                   | The security requirements to use for the request.                                                    |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.V3GetNumscriptUsageResponse](../../pkg/models/operations/v3getnumscriptusageresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetTransaction
+
+Retrieves a transaction by its ID from the specified ledger. Requires `ledger:read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3GetTransaction" method="get" path="/api/ledger/v3/{ledgerName}/transactions/{transactionId}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.GetTransaction(ctx, operations.V3GetTransactionRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+        TransactionID: 431503,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetTransactionResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3GetTransactionRequest](../../pkg/models/operations/v3gettransactionrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3GetTransactionSecurity](../../pkg/models/operations/v3gettransactionsecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3GetTransactionResponse](../../pkg/models/operations/v3gettransactionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## Health
+
+Returns the health status of the node. Returns 503 if the node is not connected to the cluster.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3Health" method="get" path="/api/ledger/health" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.Health(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.HealthResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `security`                                                                     | [operations.V3HealthSecurity](../../pkg/models/operations/v3healthsecurity.md) | :heavy_check_mark:                                                             | The security requirements to use for the request.                              |
+| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
+
+### Response
+
+**[*operations.V3HealthResponse](../../pkg/models/operations/v3healthresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## Info
+
+Returns the server build metadata (version, commit, build date, Go runtime version). Unauthenticated.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3Info" method="get" path="/api/ledger/_info#ledgerV3" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.Info(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ServerInfo != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
+| `security`                                                                 | [operations.V3InfoSecurity](../../pkg/models/operations/v3infosecurity.md) | :heavy_check_mark:                                                         | The security requirements to use for the request.                          |
+| `opts`                                                                     | [][operations.Option](../../pkg/models/operations/option.md)               | :heavy_minus_sign:                                                         | The options for this request.                                              |
+
+### Response
+
+**[*operations.V3InfoResponse](../../pkg/models/operations/v3inforesponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## InspectIndex
+
+Scans a metadata index and returns distinct values, facets (value + count),
+or a summary (cardinality, min/max, existence counts). The index must be
+in READY state. Only metadata indexes are inspectable (builtin indexes
+return 400). Requires `ledger:read` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3InspectIndex" method="get" path="/api/ledger/v3/{ledgerName}/indexes/{canonicalId}/inspect" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.InspectIndex(ctx, operations.V3InspectIndexRequest{
+        CanonicalID: "<id>",
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        switch res.Object.Data.Type {
+            case operations.V3InspectIndexDataTypeInspectSummaryResponse:
+                // res.Object.Data.InspectSummaryResponse is populated
+            case operations.V3InspectIndexDataTypeInspectDistinctValuesResponse:
+                // res.Object.Data.InspectDistinctValuesResponse is populated
+            case operations.V3InspectIndexDataTypeInspectFacetsResponse:
+                // res.Object.Data.InspectFacetsResponse is populated
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.V3InspectIndexRequest](../../pkg/models/operations/v3inspectindexrequest.md)   | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `security`                                                                                 | [operations.V3InspectIndexSecurity](../../pkg/models/operations/v3inspectindexsecurity.md) | :heavy_check_mark:                                                                         | The security requirements to use for the request.                                          |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.V3InspectIndexResponse](../../pkg/models/operations/v3inspectindexresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListAccountTypes
+
+Returns all account types defined on a ledger, sorted by name.
+Requires `ledger:ReadAccount` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListAccountTypes" method="get" path="/api/ledger/v3/{ledgerName}/account-types" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListAccountTypes(ctx, operations.V3ListAccountTypesRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListAccountTypesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.V3ListAccountTypesRequest](../../pkg/models/operations/v3listaccounttypesrequest.md)   | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `security`                                                                                         | [operations.V3ListAccountTypesSecurity](../../pkg/models/operations/v3listaccounttypessecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.V3ListAccountTypesResponse](../../pkg/models/operations/v3listaccounttypesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListAccounts
+
+Lists accounts in a ledger in alphabetical order with cursor
+pagination and an optional generic `filter` (e.g. address-prefix
+selection via `filter=address ^= "users:"`). Requires `ledger:read`
+scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListAccounts_ledgerV3" method="get" path="/api/ledger/v3/{ledgerName}/accounts" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListAccounts(ctx, operations.V3ListAccountsLedgerV3Request{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
         // handle response
     }
 }
@@ -3936,16 +2400,1466 @@ func main() {
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
-| `request`                                                                                                  | [operations.V3UpdateConnectorConfigRequest](../../pkg/models/operations/v3updateconnectorconfigrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `request`                                                                                                  | [operations.V3ListAccountsLedgerV3Request](../../pkg/models/operations/v3listaccountsledgerv3request.md)   | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `security`                                                                                                 | [operations.V3ListAccountsLedgerV3Security](../../pkg/models/operations/v3listaccountsledgerv3security.md) | :heavy_check_mark:                                                                                         | The security requirements to use for the request.                                                          |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
 ### Response
 
-**[*operations.V3UpdateConnectorConfigResponse](../../pkg/models/operations/v3updateconnectorconfigresponse.md), error**
+**[*operations.V3ListAccountsLedgerV3Response](../../pkg/models/operations/v3listaccountsledgerv3response.md), error**
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| payments.PaymentsErrorResponse | default                        | application/json               |
-| sdkerrors.SDKError             | 4XX, 5XX                       | \*/\*                          |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListAllLedgers
+
+Lists the ledgers in the cluster, paged by name (ascending unless
+`reverse=true`). Requires `ledger:read` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListAllLedgers" method="get" path="/api/ledger/v3/" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListAllLedgers(ctx, operations.V3ListAllLedgersRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListAllLedgersResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3ListAllLedgersRequest](../../pkg/models/operations/v3listallledgersrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3ListAllLedgersSecurity](../../pkg/models/operations/v3listallledgerssecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3ListAllLedgersResponse](../../pkg/models/operations/v3listallledgersresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListAuditEntries
+
+Lists audit trail entries (one per proposal, success or failure) across
+the whole bucket, paged by audit sequence (ascending unless
+`reverse=true`). Audit reads are
+not ledger-scoped in the path — a single proposal can touch several
+ledgers — so ledger scope, outcome and other dimensions are expressed
+through the `filter` query parameter.
+
+This endpoint always performs a live read and does not expose pinned
+checkpoint reads. Filters containing indexed audit conditions wait for
+the audit projection to certify the request's fixed main-store horizon;
+matching entries are loaded from that same main snapshot. Unfiltered
+reads and sequence-only bounds scan the audit zone directly without
+waiting for the audit projection.
+
+Requires `ledger:ReadAudit` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListAuditEntries" method="get" path="/api/ledger/v3/_/audit-entries" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListAuditEntries(ctx, operations.V3ListAuditEntriesRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.V3ListAuditEntriesRequest](../../pkg/models/operations/v3listauditentriesrequest.md)   | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `security`                                                                                         | [operations.V3ListAuditEntriesSecurity](../../pkg/models/operations/v3listauditentriessecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.V3ListAuditEntriesResponse](../../pkg/models/operations/v3listauditentriesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListBucketIndexes
+
+Streams the bucket-scoped index registry. The `scope` query parameter
+selects the flavor: `all` (default, matches the ListIndexesRequest
+proto default) streams every entry across ledgers, skipping orphan
+entries whose owning ledger no longer exists; `bucket` surfaces only
+bucket-scoped entries (empty ledger, e.g. audit indexes). Use
+`GET /v3/{ledgerName}/indexes` for the per-ledger view. Requires
+`ledger:ReadOps` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListBucketIndexes" method="get" path="/api/ledger/v3/_/indexes" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListBucketIndexes(ctx, operations.V3ListBucketIndexesRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.V3ListBucketIndexesRequest](../../pkg/models/operations/v3listbucketindexesrequest.md)   | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `security`                                                                                           | [operations.V3ListBucketIndexesSecurity](../../pkg/models/operations/v3listbucketindexessecurity.md) | :heavy_check_mark:                                                                                   | The security requirements to use for the request.                                                    |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.V3ListBucketIndexesResponse](../../pkg/models/operations/v3listbucketindexesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListLedgerIndexes
+
+Streams the indexes registered on a specific ledger. Requires
+`ledger:ReadLedger` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListLedgerIndexes" method="get" path="/api/ledger/v3/{ledgerName}/indexes" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListLedgerIndexes(ctx, operations.V3ListLedgerIndexesRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.V3ListLedgerIndexesRequest](../../pkg/models/operations/v3listledgerindexesrequest.md)   | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `security`                                                                                           | [operations.V3ListLedgerIndexesSecurity](../../pkg/models/operations/v3listledgerindexessecurity.md) | :heavy_check_mark:                                                                                   | The security requirements to use for the request.                                                    |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.V3ListLedgerIndexesResponse](../../pkg/models/operations/v3listledgerindexesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListLedgerLogs
+
+Lists log entries for a specific ledger, paged by ledger-local log ID
+(ascending unless `reverse=true`).
+Requires the builtin `LOG` index to be enabled on the ledger via `CreateIndex`.
+Requires `ledger:read` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListLedgerLogs" method="get" path="/api/ledger/v3/{ledgerName}/logs" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListLedgerLogs(ctx, operations.V3ListLedgerLogsRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3ListLedgerLogsRequest](../../pkg/models/operations/v3listledgerlogsrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3ListLedgerLogsSecurity](../../pkg/models/operations/v3listledgerlogssecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3ListLedgerLogsResponse](../../pkg/models/operations/v3listledgerlogsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListLedgerTransactions
+
+Lists transactions for a specific ledger. The default order is
+newest-first (descending transaction id); pass `reverse=true` to
+get oldest-first (ascending). Supports cursor pagination (`pageSize`,
+`cursor`), an optional date range (`startDate`/`endDate`),
+and the generic `filter` parameter (e.g. reference selection via
+`filter={"$match":{"reference":"..."}}`, URL-encoded). Requires
+`ledger:ReadTransaction` scope.
+
+This is a live read, linearizable by default. `X-Consistency: stale`
+reads the receiving node's local state, which may lag the leader. Every
+projection used by the filter is automatically aligned. Unlike the
+gRPC API, it does not accept the `checkpointId` option to pin the read
+to a specific historical snapshot — use gRPC for checkpoint-pinned
+reads. (Tracked follow-up, same carve-out as the audit reads.)
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListLedgerTransactions" method="get" path="/api/ledger/v3/{ledgerName}/transactions" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListLedgerTransactions(ctx, operations.V3ListLedgerTransactionsRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
+| `request`                                                                                                      | [operations.V3ListLedgerTransactionsRequest](../../pkg/models/operations/v3listledgertransactionsrequest.md)   | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
+| `security`                                                                                                     | [operations.V3ListLedgerTransactionsSecurity](../../pkg/models/operations/v3listledgertransactionssecurity.md) | :heavy_check_mark:                                                                                             | The security requirements to use for the request.                                                              |
+| `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
+
+### Response
+
+**[*operations.V3ListLedgerTransactionsResponse](../../pkg/models/operations/v3listledgertransactionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListNumscriptVersions
+
+Returns the numscript's history: its current latest (greatest stored
+semver) and every stored version, highest-first.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListNumscriptVersions" method="get" path="/api/ledger/v3/{ledgerName}/numscripts/{name}/versions" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListNumscriptVersions(ctx, operations.V3ListNumscriptVersionsRequest{
+        LedgerName: "<value>",
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListNumscriptVersionsResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
+| `request`                                                                                                    | [operations.V3ListNumscriptVersionsRequest](../../pkg/models/operations/v3listnumscriptversionsrequest.md)   | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `security`                                                                                                   | [operations.V3ListNumscriptVersionsSecurity](../../pkg/models/operations/v3listnumscriptversionssecurity.md) | :heavy_check_mark:                                                                                           | The security requirements to use for the request.                                                            |
+| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
+
+### Response
+
+**[*operations.V3ListNumscriptVersionsResponse](../../pkg/models/operations/v3listnumscriptversionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListNumscripts
+
+Lists every numscript of a ledger at its greatest stored version, paged
+by name (ascending unless `reverse=true`).
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListNumscripts" method="get" path="/api/ledger/v3/{ledgerName}/numscripts" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListNumscripts(ctx, operations.V3ListNumscriptsRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListNumscriptsResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.V3ListNumscriptsRequest](../../pkg/models/operations/v3listnumscriptsrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.V3ListNumscriptsSecurity](../../pkg/models/operations/v3listnumscriptssecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.V3ListNumscriptsResponse](../../pkg/models/operations/v3listnumscriptsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListPreparedQueries
+
+Returns a list of all prepared queries for a ledger. Requires `ledger:ReadQuery` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListPreparedQueries" method="get" path="/api/ledger/v3/{ledgerName}/prepared-queries" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListPreparedQueries(ctx, operations.V3ListPreparedQueriesRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListPreparedQueriesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.V3ListPreparedQueriesRequest](../../pkg/models/operations/v3listpreparedqueriesrequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.V3ListPreparedQueriesSecurity](../../pkg/models/operations/v3listpreparedqueriessecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.V3ListPreparedQueriesResponse](../../pkg/models/operations/v3listpreparedqueriesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListSigningKeys
+
+Lists the Ed25519 signing keys registered on the cluster, paged by key
+id (ascending unless `reverse=true`). Requires `ledger:ReadOps` scope.
+
+This route performs a live read, linearizable by default.
+`X-Consistency: stale` reads the receiving node's local state, which
+may lag the leader. Signing-key reads are live-only on both transports.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3ListSigningKeys" method="get" path="/api/ledger/v3/_/signing-keys" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.ListSigningKeys(ctx, operations.V3ListSigningKeysRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.V3ListSigningKeysRequest](../../pkg/models/operations/v3listsigningkeysrequest.md)   | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `security`                                                                                       | [operations.V3ListSigningKeysSecurity](../../pkg/models/operations/v3listsigningkeyssecurity.md) | :heavy_check_mark:                                                                               | The security requirements to use for the request.                                                |
+| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
+
+### Response
+
+**[*operations.V3ListSigningKeysResponse](../../pkg/models/operations/v3listsigningkeysresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## Livez
+
+Returns 200 as long as the process is alive. Suitable for Kubernetes liveness probes.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3Livez" method="get" path="/api/ledger/livez" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.Livez(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.HealthResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
+| `security`                                                                   | [operations.V3LivezSecurity](../../pkg/models/operations/v3livezsecurity.md) | :heavy_check_mark:                                                           | The security requirements to use for the request.                            |
+| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
+
+### Response
+
+**[*operations.V3LivezResponse](../../pkg/models/operations/v3livezresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## PromoteLedger
+
+Promotes a mirror-mode ledger to normal mode. After promotion, the mirror sync
+worker is stopped and the ledger accepts direct write operations. Requires `ledger:write` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3PromoteLedger" method="post" path="/api/ledger/v3/{ledgerName}/promote" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.PromoteLedger(ctx, operations.V3PromoteLedgerRequest{
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.PromoteLedgerResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.V3PromoteLedgerRequest](../../pkg/models/operations/v3promoteledgerrequest.md)   | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `security`                                                                                   | [operations.V3PromoteLedgerSecurity](../../pkg/models/operations/v3promoteledgersecurity.md) | :heavy_check_mark:                                                                           | The security requirements to use for the request.                                            |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.V3PromoteLedgerResponse](../../pkg/models/operations/v3promoteledgerresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## Readyz
+
+Returns 200 once the local Raft loop has started, regardless of whether
+a leader has been elected. Suitable for Kubernetes readiness probes and
+StatefulSet `OrderedReady` ordering: it is intentionally permissive so
+peer pods can be brought up during a cold start where quorum cannot
+form until they exist. Use `/clusterz` for the stricter
+cluster-availability signal.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3Readyz" method="get" path="/api/ledger/readyz" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.Readyz(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.HealthResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `security`                                                                     | [operations.V3ReadyzSecurity](../../pkg/models/operations/v3readyzsecurity.md) | :heavy_check_mark:                                                             | The security requirements to use for the request.                              |
+| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
+
+### Response
+
+**[*operations.V3ReadyzResponse](../../pkg/models/operations/v3readyzresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## RemoveAccountType
+
+Removes an account type from a ledger's chart of accounts. Requires `ledger:WriteMetadata` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3RemoveAccountType" method="delete" path="/api/ledger/v3/{ledgerName}/account-types/{typeName}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.RemoveAccountType(ctx, operations.V3RemoveAccountTypeRequest{
+        LedgerName: "<value>",
+        TypeName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.V3RemoveAccountTypeRequest](../../pkg/models/operations/v3removeaccounttyperequest.md)   | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `security`                                                                                           | [operations.V3RemoveAccountTypeSecurity](../../pkg/models/operations/v3removeaccounttypesecurity.md) | :heavy_check_mark:                                                                                   | The security requirements to use for the request.                                                    |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.V3RemoveAccountTypeResponse](../../pkg/models/operations/v3removeaccounttyperesponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## RemoveEventsSink
+
+Removes a named event sink from the cluster. Requires `ledger:WriteOps`
+scope. A non-empty controllerId must match the sink's controllerId;
+a mismatch returns `SINK_CONTROLLER_MISMATCH` (409). An omitted or empty
+controllerId removes the sink without an ownership precondition.
+A missing sink returns `SINK_NOT_FOUND` (404). Malformed query encoding
+or repeated controllerId parameters return `INVALID_REQUEST` (400)
+before Apply, instead of becoming unconditional removal.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3RemoveEventsSink" method="delete" path="/api/ledger/v3/_/events-sinks/{sinkName}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.RemoveEventsSink(ctx, operations.V3RemoveEventsSinkRequest{
+        SinkName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.V3RemoveEventsSinkRequest](../../pkg/models/operations/v3removeeventssinkrequest.md)   | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `security`                                                                                         | [operations.V3RemoveEventsSinkSecurity](../../pkg/models/operations/v3removeeventssinksecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.V3RemoveEventsSinkResponse](../../pkg/models/operations/v3removeeventssinkresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## RemoveMetadataFieldType
+
+Removes the type declaration for a metadata key on a ledger.
+Existing metadata values remain unchanged and any attached index is dropped. Requires `ledger:WriteMetadata` scope (included in the default `ledger:write` mapping).
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3RemoveMetadataFieldType" method="delete" path="/api/ledger/v3/{ledgerName}/metadata-schema/{targetType}/{key}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.RemoveMetadataFieldType(ctx, operations.V3RemoveMetadataFieldTypeRequest{
+        Key: "formance.com/reviewed",
+        LedgerName: "<value>",
+        TargetType: ledgerv3.TargetTypeLedger,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
+| `request`                                                                                                        | [operations.V3RemoveMetadataFieldTypeRequest](../../pkg/models/operations/v3removemetadatafieldtyperequest.md)   | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `security`                                                                                                       | [operations.V3RemoveMetadataFieldTypeSecurity](../../pkg/models/operations/v3removemetadatafieldtypesecurity.md) | :heavy_check_mark:                                                                                               | The security requirements to use for the request.                                                                |
+| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
+
+### Response
+
+**[*operations.V3RemoveMetadataFieldTypeResponse](../../pkg/models/operations/v3removemetadatafieldtyperesponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## RevertTransaction
+
+Reverts a transaction by creating a reverse transaction that undoes its effects. Requires `ledger:write` scope.
+The body is optional; an absent or empty body uses default options. Supplied
+options and metadata are decoded for both known-length and HTTP/1.1 chunked
+requests. Malformed or truncated JSON, extra values, trailing non-whitespace
+and options of the wrong JSON type (for example `"atEffectiveDate": "true"`
+or a non-object `metadata`) return 400 before applying the revert. A JSON
+`null` option uses its default. The complete body, including trailing
+whitespace, counts towards the 4 MiB limit; exceeding it returns 413.
+Signed requests use `application/json` (including MIME parameters) with
+`request` and standard-base64 `payload`. Either signing header, even if
+empty, selects this wrapper; with neither header present, the ordinary REST body applies.
+Runtime headers choose the representation from the documented anyOf.
+The signed protobuf batch must
+equal the route/body/Idempotency-Key-derived batch in full. Supply exactly
+one nonempty Formance-Signing-Key-Id and Formance-Signature header; the
+latter is a standard-base64 Ed25519 signature of 64 decoded bytes. Missing,
+empty or repeated signing headers, invalid base64 and wrong signature
+length return 400. Signing headers with a non-JSON or missing content type return 415.
+Signature enforcement
+returns 401 `UNAUTHENTICATED` when required but absent and 403
+`PERMISSION_DENIED` for invalid, unknown/revoked-key or mismatched
+signatures. Malformed signed envelopes return 400. The complete
+wrapper counts toward the 4 MiB body limit. JWT scopes still apply.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3RevertTransaction" method="post" path="/api/ledger/v3/{ledgerName}/transactions/{transactionId}/revert" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.RevertTransaction(ctx, operations.V3RevertTransactionRequest{
+        FormanceBigintAsString: v5.Pointer("true"),
+        LedgerName: "<value>",
+        TransactionID: 541831,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.RevertedTransactionResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.V3RevertTransactionRequest](../../pkg/models/operations/v3reverttransactionrequest.md)   | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `security`                                                                                           | [operations.V3RevertTransactionSecurity](../../pkg/models/operations/v3reverttransactionsecurity.md) | :heavy_check_mark:                                                                                   | The security requirements to use for the request.                                                    |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.V3RevertTransactionResponse](../../pkg/models/operations/v3reverttransactionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SaveAccountMetadata
+
+Saves metadata for a specific account in the ledger. Requires `ledger:WriteMetadata` scope (included in the default `ledger:write` mapping).
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3SaveAccountMetadata" method="post" path="/api/ledger/v3/{ledgerName}/accounts/{address}/metadata" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.SaveAccountMetadata(ctx, operations.V3SaveAccountMetadataRequest{
+        RequestBody: map[string]*ledgerv3.MetadataValue{
+            "account_type": v5.Pointer(ledgerv3.CreateMetadataValueStr(
+                "asset",
+            )),
+            "label": v5.Pointer(ledgerv3.CreateMetadataValueStr(
+                "Bank Account",
+            )),
+            "active": v5.Pointer(ledgerv3.CreateMetadataValueBoolean(
+                true,
+            )),
+            "balance_threshold": v5.Pointer(ledgerv3.CreateMetadataValueInteger(
+                1000,
+            )),
+        },
+        Address: "users:001",
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.V3SaveAccountMetadataRequest](../../pkg/models/operations/v3saveaccountmetadatarequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.V3SaveAccountMetadataSecurity](../../pkg/models/operations/v3saveaccountmetadatasecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.V3SaveAccountMetadataResponse](../../pkg/models/operations/v3saveaccountmetadataresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SaveLedgerMetadata
+
+Saves metadata key-value pairs on the ledger itself. Requires `ledger:WriteMetadata`; `ledger:write` grants it under the default scope mapping. Custom scope mappings can differ.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3SaveLedgerMetadata" method="post" path="/api/ledger/v3/{ledgerName}/metadata" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.SaveLedgerMetadata(ctx, operations.V3SaveLedgerMetadataRequest{
+        RequestBody: map[string]*ledgerv3.MetadataValue{
+            "environment": v5.Pointer(ledgerv3.CreateMetadataValueStr(
+                "production",
+            )),
+            "team": v5.Pointer(ledgerv3.CreateMetadataValueStr(
+                "payments",
+            )),
+            "region": v5.Pointer(ledgerv3.CreateMetadataValueStr(
+                "eu-west-1",
+            )),
+        },
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
+| `request`                                                                                              | [operations.V3SaveLedgerMetadataRequest](../../pkg/models/operations/v3saveledgermetadatarequest.md)   | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| `security`                                                                                             | [operations.V3SaveLedgerMetadataSecurity](../../pkg/models/operations/v3saveledgermetadatasecurity.md) | :heavy_check_mark:                                                                                     | The security requirements to use for the request.                                                      |
+| `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
+
+### Response
+
+**[*operations.V3SaveLedgerMetadataResponse](../../pkg/models/operations/v3saveledgermetadataresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SaveNumscript
+
+Appends an immutable version to a ledger's numscript library. The `version`
+field must be an explicit full semver (e.g. "1.0.0"); it creates a new
+version and fails if that version already exists. The per-name latest is
+always the greatest stored semver.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3SaveNumscript" method="put" path="/api/ledger/v3/{ledgerName}/numscripts/{name}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.SaveNumscript(ctx, operations.V3SaveNumscriptRequest{
+        SaveNumscriptRequest: ledgerv3.SaveNumscriptRequest{
+            Content: "<value>",
+            Version: "1.0.0",
+        },
+        LedgerName: "<value>",
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetNumscriptResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.V3SaveNumscriptRequest](../../pkg/models/operations/v3savenumscriptrequest.md)   | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `security`                                                                                   | [operations.V3SaveNumscriptSecurity](../../pkg/models/operations/v3savenumscriptsecurity.md) | :heavy_check_mark:                                                                           | The security requirements to use for the request.                                            |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.V3SaveNumscriptResponse](../../pkg/models/operations/v3savenumscriptresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SaveTransactionMetadata
+
+Saves metadata for a specific transaction in the ledger. Requires `ledger:WriteMetadata` scope (included in the default `ledger:write` mapping).
+Signed requests use `application/json` (including MIME parameters) with
+`request` and standard-base64 `payload`. Either signing header, even if
+empty, selects this wrapper; with neither header present, the ordinary REST body applies.
+Runtime headers choose the representation from the documented anyOf.
+The signed protobuf batch must
+equal the route/body/Idempotency-Key-derived batch in full. Supply exactly
+one nonempty Formance-Signing-Key-Id and Formance-Signature header; the
+latter is a standard-base64 Ed25519 signature of 64 decoded bytes. Missing,
+empty or repeated signing headers, invalid base64 and wrong signature
+length return 400. Signing headers with a non-JSON or missing content type return 415.
+Signature enforcement
+returns 401 `UNAUTHENTICATED` when required but absent and 403
+`PERMISSION_DENIED` for invalid, unknown/revoked-key or mismatched
+signatures. Malformed signed envelopes return 400. The complete
+wrapper counts toward the 4 MiB body limit. JWT scopes still apply.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3SaveTransactionMetadata" method="post" path="/api/ledger/v3/{ledgerName}/transactions/{transactionId}/metadata" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.SaveTransactionMetadata(ctx, operations.V3SaveTransactionMetadataRequest{
+        RequestBody: operations.CreateV3SaveTransactionMetadataRequestBodyMapOfMetadataValue(
+            map[string]*ledgerv3.MetadataValue{
+                "reason": v5.Pointer(ledgerv3.CreateMetadataValueStr(
+                    "correction",
+                )),
+                "source": v5.Pointer(ledgerv3.CreateMetadataValueStr(
+                    "support",
+                )),
+                "priority": v5.Pointer(ledgerv3.CreateMetadataValueInteger(
+                    1,
+                )),
+            },
+        ),
+        LedgerName: "<value>",
+        TransactionID: 736514,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
+| `request`                                                                                                        | [operations.V3SaveTransactionMetadataRequest](../../pkg/models/operations/v3savetransactionmetadatarequest.md)   | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `security`                                                                                                       | [operations.V3SaveTransactionMetadataSecurity](../../pkg/models/operations/v3savetransactionmetadatasecurity.md) | :heavy_check_mark:                                                                                               | The security requirements to use for the request.                                                                |
+| `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
+
+### Response
+
+**[*operations.V3SaveTransactionMetadataResponse](../../pkg/models/operations/v3savetransactionmetadataresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SetDefaultEnforcementMode
+
+Sets the default enforcement mode for accounts that do not match any defined
+account type. Must be STRICT or AUDIT. STRICT rejects an order that uses an
+unmatched account with `400 ACCOUNT_NOT_MATCHING_TYPE`. AUDIT accepts the
+order and does not report the unmatched account: the response carries no
+warning. Requires `ledger:WriteMetadata` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3SetDefaultEnforcementMode" method="put" path="/api/ledger/v3/{ledgerName}/account-types/default-enforcement-mode" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.SetDefaultEnforcementMode(ctx, operations.V3SetDefaultEnforcementModeRequest{
+        SetDefaultEnforcementModeRequest: ledgerv3.SetDefaultEnforcementModeRequest{
+            EnforcementMode: ledgerv3.EnforcementModeAudit,
+        },
+        LedgerName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [operations.V3SetDefaultEnforcementModeRequest](../../pkg/models/operations/v3setdefaultenforcementmoderequest.md)   | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `security`                                                                                                           | [operations.V3SetDefaultEnforcementModeSecurity](../../pkg/models/operations/v3setdefaultenforcementmodesecurity.md) | :heavy_check_mark:                                                                                                   | The security requirements to use for the request.                                                                    |
+| `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+
+### Response
+
+**[*operations.V3SetDefaultEnforcementModeResponse](../../pkg/models/operations/v3setdefaultenforcementmoderesponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SetMetadataFieldType
+
+Declares or changes the type used to encode a metadata key in an attached query index.
+Metadata values are neither validated nor converted by this declaration, and existing primary values remain unchanged.
+Any attached index is rewritten asynchronously. Requires `ledger:WriteMetadata` scope (included in the default `ledger:write` mapping).
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3SetMetadataFieldType" method="put" path="/api/ledger/v3/{ledgerName}/metadata-schema/{targetType}/{key}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.SetMetadataFieldType(ctx, operations.V3SetMetadataFieldTypeRequest{
+        SetMetadataTypeRequest: ledgerv3.SetMetadataTypeRequest{
+            Type: ledgerv3.SetMetadataTypeRequestTypeBool,
+        },
+        Key: "formance.com/reviewed",
+        LedgerName: "<value>",
+        TargetType: ledgerv3.TargetTypeLedger,
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [operations.V3SetMetadataFieldTypeRequest](../../pkg/models/operations/v3setmetadatafieldtyperequest.md)   | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `security`                                                                                                 | [operations.V3SetMetadataFieldTypeSecurity](../../pkg/models/operations/v3setmetadatafieldtypesecurity.md) | :heavy_check_mark:                                                                                         | The security requirements to use for the request.                                                          |
+| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.V3SetMetadataFieldTypeResponse](../../pkg/models/operations/v3setmetadatafieldtyperesponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## UpdatePreparedQuery
+
+Updates the filter of an existing prepared query. Requires `ledger:WriteQuery` scope.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="v3UpdatePreparedQuery" method="put" path="/api/ledger/v3/{ledgerName}/prepared-queries/{queryName}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledgerv3"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Ledger.V3.UpdatePreparedQuery(ctx, operations.V3UpdatePreparedQueryRequest{
+        UpdatePreparedQueryRequest: ledgerv3.UpdatePreparedQueryRequest{},
+        LedgerName: "<value>",
+        QueryName: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ErrorResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.V3UpdatePreparedQueryRequest](../../pkg/models/operations/v3updatepreparedqueryrequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.V3UpdatePreparedQuerySecurity](../../pkg/models/operations/v3updatepreparedquerysecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.V3UpdatePreparedQueryResponse](../../pkg/models/operations/v3updatepreparedqueryresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

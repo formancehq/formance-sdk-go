@@ -2,8 +2,11 @@
 
 package orchestration
 
+// ActivityRevertTransaction - Arguments for the activity that reverts a ledger transaction
 type ActivityRevertTransaction struct {
-	ID     string `json:"id"`
+	// Identifier of the transaction to revert
+	ID string `json:"id"`
+	// Name of the ledger holding the transaction
 	Ledger string `json:"ledger"`
 }
 

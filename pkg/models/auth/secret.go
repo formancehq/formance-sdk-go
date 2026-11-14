@@ -2,12 +2,15 @@
 
 package auth
 
+// Secret - A client secret. The full value is returned only at creation and cannot be retrieved again
 type Secret struct {
-	Clear      string            `json:"clear"`
-	ID         string            `json:"id"`
-	LastDigits string            `json:"lastDigits"`
-	Metadata   map[string]string `json:"metadata,omitempty"`
-	Name       string            `json:"name"`
+	Clear      string `json:"clear"`
+	ID         string `json:"id"`
+	LastDigits string `json:"lastDigits"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Human-readable name identifying the secret
+	Name string `json:"name"`
 }
 
 func (s *Secret) GetClear() string {

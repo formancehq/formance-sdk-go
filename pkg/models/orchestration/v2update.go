@@ -7,6 +7,7 @@ import (
 )
 
 type V2Update struct {
+	// Metadata to set on a ledger account
 	Account *V2UpdateAccount `json:"account,omitempty"`
 }
 

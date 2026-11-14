@@ -4,14 +4,22 @@ package reconciliation
 
 // RulePatchRequest - Partial update — only fields supplied are applied.
 type RulePatchRequest struct {
-	Enabled       *bool             `json:"enabled,omitempty"`
-	Labels        map[string]string `json:"labels,omitempty"`
-	Name          *string           `json:"name,omitempty"`
-	Notifications []string          `json:"notifications,omitempty"`
-	Schedule      *Schedule         `json:"schedule,omitempty"`
-	Severity      *Severity         `json:"severity,omitempty"`
-	TemplateKind  *TemplateKind     `json:"templateKind,omitempty"`
-	TemplateSpec  map[string]any    `json:"templateSpec,omitempty"`
+	// Whether the rule should be evaluated
+	Enabled *bool `json:"enabled,omitempty"`
+	// New set of key/value pairs attached to the rule
+	Labels map[string]string `json:"labels,omitempty"`
+	// New human-readable name for the rule
+	Name *string `json:"name,omitempty"`
+	// New set of channels to notify when this rule raises an alert
+	Notifications []string `json:"notifications,omitempty"`
+	// When a rule runs, either on demand or on a cron expression
+	Schedule *Schedule `json:"schedule,omitempty"`
+	// How serious an alert is, used to route and prioritise notifications
+	Severity *Severity `json:"severity,omitempty"`
+	// Which built-in check a rule applies, determining the shape of its templateSpec
+	TemplateKind *TemplateKind `json:"templateKind,omitempty"`
+	// New parameters for the template, whose shape depends on templateKind
+	TemplateSpec map[string]any `json:"templateSpec,omitempty"`
 }
 
 func (r *RulePatchRequest) GetEnabled() *bool {

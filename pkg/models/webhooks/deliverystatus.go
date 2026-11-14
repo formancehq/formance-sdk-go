@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// DeliveryStatus - Current state of a delivery in its retry lifecycle
 type DeliveryStatus string
 
 const (

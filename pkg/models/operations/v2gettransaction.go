@@ -11,7 +11,12 @@ import (
 )
 
 type V2GetTransactionRequest struct {
-	Expand *string `queryParam:"style=form,explode=true,name=expand"`
+	// When set to `true`, all bigint values in the response will be serialized
+	// as strings instead of JSON numbers.
+	// Useful for clients that cannot handle large numbers natively (e.g. JavaScript).
+	//
+	FormanceBigintAsString *bool   `default:"false" header:"style=simple,explode=false,name=Formance-Bigint-As-String"`
+	Expand                 *string `queryParam:"style=form,explode=true,name=expand"`
 	// Transaction ID.
 	ID *big.Int `pathParam:"style=simple,explode=false,name=id"`
 	// Name of the ledger.
@@ -28,6 +33,13 @@ func (v *V2GetTransactionRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2GetTransactionRequest) GetFormanceBigintAsString() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.FormanceBigintAsString
 }
 
 func (v *V2GetTransactionRequest) GetExpand() *string {

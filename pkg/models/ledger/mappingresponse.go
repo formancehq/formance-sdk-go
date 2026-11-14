@@ -3,6 +3,7 @@
 package ledger
 
 type MappingResponse struct {
+	// Contracts constraining the balances a ledger's accounts may hold
 	Data *Mapping `json:"data,omitempty"`
 }
 

@@ -3,6 +3,7 @@
 package auth
 
 type ListClientsResponse struct {
+	// The clients registered on this stack
 	Data []Client `json:"data,omitempty"`
 }
 

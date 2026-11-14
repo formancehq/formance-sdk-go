@@ -7,14 +7,22 @@ import (
 	"time"
 )
 
+// WebhooksConfig - A webhook endpoint together with the event types it subscribes to
 type WebhooksConfig struct {
-	Active     bool      `json:"active"`
-	CreatedAt  time.Time `json:"createdAt"`
-	Endpoint   string    `json:"endpoint"`
-	EventTypes []string  `json:"eventTypes"`
-	ID         string    `json:"id"`
-	Secret     string    `json:"secret"`
-	UpdatedAt  time.Time `json:"updatedAt"`
+	// Whether the configuration is active. Deactivated configurations receive no deliveries
+	Active bool `json:"active"`
+	// When the configuration was created
+	CreatedAt time.Time `json:"createdAt"`
+	// URL events are delivered to
+	Endpoint string `json:"endpoint"`
+	// Types of event that trigger a delivery to this endpoint
+	EventTypes []string `json:"eventTypes"`
+	// Unique identifier of the configuration
+	ID string `json:"id"`
+	// Secret used to sign delivery payloads, letting the receiver verify their authenticity
+	Secret string `json:"secret"`
+	// When the configuration was last modified
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 func (w WebhooksConfig) MarshalJSON() ([]byte, error) {

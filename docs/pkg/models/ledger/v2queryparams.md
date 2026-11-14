@@ -1,45 +1,14 @@
 # V2QueryParams
 
+Parameters applied when running a query template
 
-## Supported Types
 
-### QueryTemplateAccountParams
+## Fields
 
-```go
-v2QueryParams := shared.CreateV2QueryParamsQueryTemplateAccountParams(ledger.QueryTemplateAccountParams{/* values here */})
-```
-
-### QueryTemplateTransactionParams
-
-```go
-v2QueryParams := shared.CreateV2QueryParamsQueryTemplateTransactionParams(ledger.QueryTemplateTransactionParams{/* values here */})
-```
-
-### QueryTemplateLogParams
-
-```go
-v2QueryParams := shared.CreateV2QueryParamsQueryTemplateLogParams(ledger.QueryTemplateLogParams{/* values here */})
-```
-
-### QueryTemplateVolumeParams
-
-```go
-v2QueryParams := shared.CreateV2QueryParamsQueryTemplateVolumeParams(ledger.QueryTemplateVolumeParams{/* values here */})
-```
-
-## Union Discrimination
-
-Use the `Type` field to determine which variant is active, then access the corresponding field:
-
-```go
-switch v2QueryParams.Type {
-	case shared.V2QueryParamsTypeQueryTemplateAccountParams:
-		// v2QueryParams.QueryTemplateAccountParams is populated
-	case shared.V2QueryParamsTypeQueryTemplateTransactionParams:
-		// v2QueryParams.QueryTemplateTransactionParams is populated
-	case shared.V2QueryParamsTypeQueryTemplateLogParams:
-		// v2QueryParams.QueryTemplateLogParams is populated
-	case shared.V2QueryParamsTypeQueryTemplateVolumeParams:
-		// v2QueryParams.QueryTemplateVolumeParams is populated
-}
-```
+| Field                                                                                                                                                                       | Type                                                                                                                                                                        | Required                                                                                                                                                                    | Description                                                                                                                                                                 | Example                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EndTime`                                                                                                                                                                   | [*time.Time](https://pkg.go.dev/time#Time)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                          | Upper bound of the time window the query covers                                                                                                                             |                                                                                                                                                                             |
+| `Expand`                                                                                                                                                                    | []`string`                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                          | Additional data to include in the response, such as volumes                                                                                                                 |                                                                                                                                                                             |
+| `PageSize`                                                                                                                                                                  | `*int64`                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                          | The maximum number of results to return per page.<br/>                                                                                                                      | 100                                                                                                                                                                         |
+| `Sort`                                                                                                                                                                      | `*string`                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                          | Sort results using a field name and order (ascending or descending).<br/>Format: `<field>:<order>`, where `<field>` is the field name and `<order>` is either `asc` or `desc`.<br/> | id:desc                                                                                                                                                                     |
+| `StartTime`                                                                                                                                                                 | [*time.Time](https://pkg.go.dev/time#Time)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                          | Lower bound of the time window the query covers                                                                                                                             |                                                                                                                                                                             |

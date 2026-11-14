@@ -2,6 +2,7 @@
 
 package webhooks
 
+// DeliveryAttemptsResponseCursor - Paginated cursor wrapping the list of delivery attempts
 type DeliveryAttemptsResponseCursor struct {
 	Data     []DeliveryAttempt `json:"data"`
 	HasMore  bool              `json:"hasMore"`
@@ -38,6 +39,7 @@ func (d *DeliveryAttemptsResponseCursor) GetPageSize() *int64 {
 }
 
 type DeliveryAttemptsResponse struct {
+	// Paginated cursor wrapping the list of delivery attempts
 	Cursor DeliveryAttemptsResponseCursor `json:"cursor"`
 }
 

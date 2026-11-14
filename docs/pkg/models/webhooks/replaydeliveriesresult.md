@@ -1,13 +1,15 @@
 # ReplayDeliveriesResult
 
+Outcome of a bulk replay, counting the deliveries it moved
+
 
 ## Fields
 
-| Field                                     | Type                                      | Required                                  | Description                               |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `CreatedAtTo`                             | [time.Time](https://pkg.go.dev/time#Time) | :heavy_check_mark:                        | N/A                                       |
-| `Expedited`                               | `int64`                                   | :heavy_check_mark:                        | N/A                                       |
-| `HasMore`                                 | `bool`                                    | :heavy_check_mark:                        | N/A                                       |
-| `NextCursor`                              | `*string`                                 | :heavy_minus_sign:                        | N/A                                       |
-| `Replayed`                                | `int64`                                   | :heavy_check_mark:                        | N/A                                       |
-| `Skipped`                                 | `int64`                                   | :heavy_check_mark:                        | N/A                                       |
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `CreatedAtTo`                                                                               | [time.Time](https://pkg.go.dev/time#Time)                                                   | :heavy_check_mark:                                                                          | Upper time bound actually applied, echoed so a paginated replay stays on a fixed window     |
+| `Expedited`                                                                                 | `int64`                                                                                     | :heavy_check_mark:                                                                          | Number of already-pending deliveries whose next attempt was brought forward to now          |
+| `HasMore`                                                                                   | `bool`                                                                                      | :heavy_check_mark:                                                                          | Whether further deliveries match and can be processed with the returned cursor              |
+| `NextCursor`                                                                                | `*string`                                                                                   | :heavy_minus_sign:                                                                          | Cursor to pass to the next replay call to continue where this one stopped                   |
+| `Replayed`                                                                                  | `int64`                                                                                     | :heavy_check_mark:                                                                          | Number of failed deliveries moved back to pending and scheduled for a new retry cycle       |
+| `Skipped`                                                                                   | `int64`                                                                                     | :heavy_check_mark:                                                                          | Number of candidates left untouched, because their status changed before the replay applied |

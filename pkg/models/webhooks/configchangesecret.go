@@ -3,6 +3,7 @@
 package webhooks
 
 type ConfigChangeSecret struct {
+	// The new signing secret, 24 random bytes encoded as base64
 	Secret string `json:"secret"`
 }
 

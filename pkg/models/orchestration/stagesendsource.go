@@ -6,10 +6,14 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// StageSendSource - Where a send stage takes the funds from
 type StageSendSource struct {
+	// Take the funds from a ledger account
 	Account *StageSendSourceAccount `json:"account,omitempty"`
+	// Take the funds from a payment
 	Payment *StageSendSourcePayment `json:"payment,omitempty"`
-	Wallet  *StageSendSourceWallet  `json:"wallet,omitempty"`
+	// Take the funds from a wallet
+	Wallet *StageSendSourceWallet `json:"wallet,omitempty"`
 }
 
 func (s StageSendSource) MarshalJSON() ([]byte, error) {

@@ -3,6 +3,7 @@
 package orchestration
 
 type ListWorkflowsResponse struct {
+	// The workflows defined on this stack
 	Data []Workflow `json:"data"`
 }
 

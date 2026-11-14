@@ -13,9 +13,10 @@ import (
 )
 
 type V2RunQueryRequestBody struct {
-	Cursor *string               `json:"cursor,omitempty"`
-	Params *ledger.V2QueryParams `json:"params,omitempty"`
-	Vars   map[string]string     `json:"vars,omitempty"`
+	Cursor *string `json:"cursor,omitempty"`
+	// Parameter overrides applied when running a query template. `insertionDate` and `groupBy` only apply to volume queries.
+	Params *ledger.V2RunQueryParams `json:"params,omitempty"`
+	Vars   map[string]string        `json:"vars,omitempty"`
 }
 
 func (v *V2RunQueryRequestBody) GetCursor() *string {
@@ -25,7 +26,7 @@ func (v *V2RunQueryRequestBody) GetCursor() *string {
 	return v.Cursor
 }
 
-func (v *V2RunQueryRequestBody) GetParams() *ledger.V2QueryParams {
+func (v *V2RunQueryRequestBody) GetParams() *ledger.V2RunQueryParams {
 	if v == nil {
 		return nil
 	}
@@ -67,7 +68,12 @@ func (e *V2RunQueryQueryParamOrder) UnmarshalJSON(data []byte) error {
 }
 
 type V2RunQueryRequest struct {
-	RequestBody V2RunQueryRequestBody `request:"mediaType=application/json"`
+	// When set to `true`, all bigint values in the response will be serialized
+	// as strings instead of JSON numbers.
+	// Useful for clients that cannot handle large numbers natively (e.g. JavaScript).
+	//
+	FormanceBigintAsString *bool                 `default:"false" header:"style=simple,explode=false,name=Formance-Bigint-As-String"`
+	RequestBody            V2RunQueryRequestBody `request:"mediaType=application/json"`
 	// Parameter used in pagination requests. Maximum page size is set to 15.
 	// Set to the value of next for the next page of results.
 	// Set to the value of previous for the previous page of results.
@@ -105,6 +111,13 @@ func (v *V2RunQueryRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (v *V2RunQueryRequest) GetFormanceBigintAsString() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.FormanceBigintAsString
 }
 
 func (v *V2RunQueryRequest) GetRequestBody() V2RunQueryRequestBody {

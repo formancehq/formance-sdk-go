@@ -2,45 +2,53 @@
 
 package orchestration
 
+// WorkflowInstanceHistoryStageOutput - Result an activity returned, keyed by activity name
 type WorkflowInstanceHistoryStageOutput struct {
-	CreateTransaction *CreateTransactionResponse `json:"CreateTransaction,omitempty"`
-	DebitWallet       *DebitWalletResponse       `json:"DebitWallet,omitempty"`
-	GetAccount        *AccountResponse           `json:"GetAccount,omitempty"`
-	GetPayment        *PaymentResponse           `json:"GetPayment,omitempty"`
-	GetWallet         *GetWalletResponse         `json:"GetWallet,omitempty"`
-	ListWallets       *ListWalletsResponse       `json:"ListWallets,omitempty"`
-	RevertTransaction *CreateTransactionResponse `json:"RevertTransaction,omitempty"`
+	// Result of the activity that writes a transaction to a ledger
+	CreateTransaction *ActivityCreateTransactionOutput `json:"CreateTransaction,omitempty"`
+	// Result of the activity that debits a wallet
+	DebitWallet *ActivityDebitWalletOutput `json:"DebitWallet,omitempty"`
+	// Result of the activity that reads a ledger account
+	GetAccount *ActivityGetAccountOutput `json:"GetAccount,omitempty"`
+	// Result of the activity that reads a payment
+	GetPayment *ActivityGetPaymentOutput `json:"GetPayment,omitempty"`
+	// Result of the activity that reads a wallet
+	GetWallet *ActivityGetWalletOutput `json:"GetWallet,omitempty"`
+	// A page of wallets
+	ListWallets *ListWalletsResponse `json:"ListWallets,omitempty"`
+	// Result of the activity that reverts a ledger transaction
+	RevertTransaction *ActivityRevertTransactionOutput `json:"RevertTransaction,omitempty"`
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *CreateTransactionResponse {
+func (w *WorkflowInstanceHistoryStageOutput) GetCreateTransaction() *ActivityCreateTransactionOutput {
 	if w == nil {
 		return nil
 	}
 	return w.CreateTransaction
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetDebitWallet() *DebitWalletResponse {
+func (w *WorkflowInstanceHistoryStageOutput) GetDebitWallet() *ActivityDebitWalletOutput {
 	if w == nil {
 		return nil
 	}
 	return w.DebitWallet
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetGetAccount() *AccountResponse {
+func (w *WorkflowInstanceHistoryStageOutput) GetGetAccount() *ActivityGetAccountOutput {
 	if w == nil {
 		return nil
 	}
 	return w.GetAccount
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetGetPayment() *PaymentResponse {
+func (w *WorkflowInstanceHistoryStageOutput) GetGetPayment() *ActivityGetPaymentOutput {
 	if w == nil {
 		return nil
 	}
 	return w.GetPayment
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetGetWallet() *GetWalletResponse {
+func (w *WorkflowInstanceHistoryStageOutput) GetGetWallet() *ActivityGetWalletOutput {
 	if w == nil {
 		return nil
 	}
@@ -54,7 +62,7 @@ func (w *WorkflowInstanceHistoryStageOutput) GetListWallets() *ListWalletsRespon
 	return w.ListWallets
 }
 
-func (w *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *CreateTransactionResponse {
+func (w *WorkflowInstanceHistoryStageOutput) GetRevertTransaction() *ActivityRevertTransactionOutput {
 	if w == nil {
 		return nil
 	}

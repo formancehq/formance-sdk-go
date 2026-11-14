@@ -6,10 +6,14 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2StageSendDestination - Where a send stage puts the funds
 type V2StageSendDestination struct {
-	Account *V2StageSendSourceAccount      `json:"account,omitempty"`
+	// Send the funds to a ledger account
+	Account *V2StageSendDestinationAccount `json:"account,omitempty"`
+	// Send the funds to a payment
 	Payment *V2StageSendDestinationPayment `json:"payment,omitempty"`
-	Wallet  *V2StageSendSourceWallet       `json:"wallet,omitempty"`
+	// Send the funds to a wallet
+	Wallet *V2StageSendDestinationWallet `json:"wallet,omitempty"`
 }
 
 func (v V2StageSendDestination) MarshalJSON() ([]byte, error) {
@@ -23,7 +27,7 @@ func (v *V2StageSendDestination) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *V2StageSendDestination) GetAccount() *V2StageSendSourceAccount {
+func (v *V2StageSendDestination) GetAccount() *V2StageSendDestinationAccount {
 	if v == nil {
 		return nil
 	}
@@ -37,7 +41,7 @@ func (v *V2StageSendDestination) GetPayment() *V2StageSendDestinationPayment {
 	return v.Payment
 }
 
-func (v *V2StageSendDestination) GetWallet() *V2StageSendSourceWallet {
+func (v *V2StageSendDestination) GetWallet() *V2StageSendDestinationWallet {
 	if v == nil {
 		return nil
 	}

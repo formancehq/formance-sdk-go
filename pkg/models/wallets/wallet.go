@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Balances - The wallet's main balance, keyed by asset
 type Balances struct {
 	Main AssetHolder `json:"main"`
 }
@@ -18,15 +19,20 @@ func (b *Balances) GetMain() AssetHolder {
 	return b.Main
 }
 
+// Wallet - A wallet backed by a set of ledger accounts
 type Wallet struct {
-	Balances  *Balances `json:"balances,omitempty"`
+	// The wallet's main balance, keyed by asset
+	Balances *Balances `json:"balances,omitempty"`
+	// When the wallet was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The unique ID of the wallet.
-	ID     string `json:"id"`
+	ID string `json:"id"`
+	// Name of the ledger backing this wallet
 	Ledger string `json:"ledger"`
 	// Metadata associated with the wallet.
 	Metadata map[string]string `json:"metadata"`
-	Name     string            `json:"name"`
+	// Human-readable name of the wallet
+	Name string `json:"name"`
 }
 
 func (w Wallet) MarshalJSON() ([]byte, error) {

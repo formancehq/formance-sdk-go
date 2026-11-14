@@ -17,6 +17,7 @@ const (
 	TargetIDTypeBigint TargetIDType = "bigint"
 )
 
+// TargetID - Identifier of the entity the metadata was deleted from, either an account address or a transaction ID
 type TargetID struct {
 	Str    *string  `queryParam:"inline" union:"member"`
 	Bigint *big.Int `queryParam:"inline" union:"member"`
@@ -103,7 +104,8 @@ func (e *TargetType) UnmarshalJSON(data []byte) error {
 // V2LogDataDeleteMetadata - Payload for DELETE_METADATA log entries. Contains the target entity and the metadata key that was deleted.
 type V2LogDataDeleteMetadata struct {
 	// The metadata key that was deleted
-	Key      string   `json:"key"`
+	Key string `json:"key"`
+	// Identifier of the entity the metadata was deleted from, either an account address or a transaction ID
 	TargetID TargetID `json:"targetId"`
 	// Type of the target entity
 	TargetType TargetType `json:"targetType"`

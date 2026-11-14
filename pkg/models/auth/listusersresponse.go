@@ -3,6 +3,7 @@
 package auth
 
 type ListUsersResponse struct {
+	// The users known to this stack
 	Data []User `json:"data,omitempty"`
 }
 

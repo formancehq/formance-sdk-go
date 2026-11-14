@@ -3,6 +3,7 @@
 package ledger
 
 type V2SchemasCursorResponse struct {
+	// Paginated cursor over the ledger's schemas
 	Cursor V2SchemasCursor `json:"cursor"`
 }
 

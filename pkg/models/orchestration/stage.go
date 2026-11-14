@@ -17,6 +17,7 @@ const (
 	StageTypeUpdate         StageType = "Update"
 )
 
+// Stage - One step of a workflow, whose shape depends on the stage type
 type Stage struct {
 	StageSend      *StageSend      `queryParam:"inline" union:"member"`
 	StageDelay     *StageDelay     `queryParam:"inline" union:"member"`

@@ -7,9 +7,12 @@ import (
 )
 
 type WalletSubject struct {
-	Balance    *string `json:"balance,omitempty"`
-	Identifier string  `json:"identifier"`
-	Type       string  `json:"type"`
+	// Name of the balance within the wallet to use. Defaults to the main balance when omitted
+	Balance *string `json:"balance,omitempty"`
+	// Identifier of the wallet
+	Identifier string `json:"identifier"`
+	// Discriminator identifying this subject as a wallet
+	Type string `json:"type"`
 }
 
 func (w WalletSubject) MarshalJSON() ([]byte, error) {
