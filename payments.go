@@ -9,7 +9,7 @@ import (
 
 type Payments struct {
 	V1 *FormancePaymentsV1
-	V3 *V3
+	V3 *FormanceV3
 
 	rootSDK          *Formance
 	sdkConfiguration config.SDKConfiguration
@@ -22,6 +22,6 @@ func newPayments(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *ho
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
 		V1:               newFormancePaymentsV1(rootSDK, sdkConfig, hooks),
-		V3:               newV3(rootSDK, sdkConfig, hooks),
+		V3:               newFormanceV3(rootSDK, sdkConfig, hooks),
 	}
 }

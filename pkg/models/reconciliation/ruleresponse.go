@@ -4,6 +4,7 @@ package reconciliation
 
 // RuleResponse - OK
 type RuleResponse struct {
+	// A monitoring rule evaluated on a schedule, raising alerts when it fails
 	Data Rule `json:"data"`
 }
 

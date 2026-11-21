@@ -1,9 +1,12 @@
 # WorkflowConfig
 
+The stages a workflow runs, in order
+
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `Name`             | `*string`          | :heavy_minus_sign: | N/A                |
-| `Stages`           | []map[string]`any` | :heavy_check_mark: | N/A                |
+| Field                                                                                                                       | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `ActivityMaxAttempts`                                                                                                       | `*int`                                                                                                                      | :heavy_minus_sign:                                                                                                          | Total attempts per stage activity, including the initial attempt. Stored at workflow creation; defaults to 15 when omitted. |
+| `Name`                                                                                                                      | `*string`                                                                                                                   | :heavy_minus_sign:                                                                                                          | Human-readable name for the workflow                                                                                        |
+| `Stages`                                                                                                                    | []map[string]`any`                                                                                                          | :heavy_check_mark:                                                                                                          | The stages executed in order when the workflow runs                                                                         |

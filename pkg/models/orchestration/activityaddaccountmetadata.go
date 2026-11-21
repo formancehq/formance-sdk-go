@@ -2,9 +2,13 @@
 
 package orchestration
 
+// ActivityAddAccountMetadata - Arguments for the activity that sets metadata on a ledger account
 type ActivityAddAccountMetadata struct {
-	ID       string            `json:"id"`
-	Ledger   string            `json:"ledger"`
+	// Address of the ledger account to update
+	ID string `json:"id"`
+	// Name of the ledger holding the account
+	Ledger string `json:"ledger"`
+	// Metadata to set on the account
 	Metadata map[string]string `json:"metadata"`
 }
 

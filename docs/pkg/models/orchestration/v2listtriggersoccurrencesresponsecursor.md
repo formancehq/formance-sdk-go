@@ -1,5 +1,7 @@
 # V2ListTriggersOccurrencesResponseCursor
 
+Paginated cursor wrapping the trigger's occurrences
+
 
 ## Fields
 

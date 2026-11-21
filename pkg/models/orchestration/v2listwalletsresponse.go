@@ -2,12 +2,17 @@
 
 package orchestration
 
+// V2ListWalletsResponseCursor - Paginated cursor wrapping the list of wallets
 type V2ListWalletsResponseCursor struct {
-	Data     []V2Wallet `json:"data"`
-	HasMore  *bool      `json:"hasMore,omitempty"`
-	Next     *string    `json:"next,omitempty"`
-	PageSize int64      `json:"pageSize"`
-	Previous *string    `json:"previous,omitempty"`
+	Data []V2Wallet `json:"data"`
+	// Whether further pages are available
+	HasMore *bool `json:"hasMore,omitempty"`
+	// Cursor for the next page, absent on the last page
+	Next *string `json:"next,omitempty"`
+	// Number of items requested per page
+	PageSize int64 `json:"pageSize"`
+	// Cursor for the previous page, absent on the first page
+	Previous *string `json:"previous,omitempty"`
 }
 
 func (v *V2ListWalletsResponseCursor) GetData() []V2Wallet {
@@ -48,7 +53,9 @@ func (v *V2ListWalletsResponseCursor) GetPrevious() *string {
 // #region class-body-v2listwalletsresponsecursor
 // #endregion class-body-v2listwalletsresponsecursor
 
+// V2ListWalletsResponse - A page of wallets
 type V2ListWalletsResponse struct {
+	// Paginated cursor wrapping the list of wallets
 	Cursor V2ListWalletsResponseCursor `json:"cursor"`
 }
 

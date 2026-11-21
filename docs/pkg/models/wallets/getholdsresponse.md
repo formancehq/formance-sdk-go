@@ -5,4 +5,4 @@
 
 | Field                                                   | Type                                                    | Required                                                | Description                                             |
 | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `Cursor`                                                | [wallets.Cursor](../../../pkg/models/wallets/cursor.md) | :heavy_check_mark:                                      | N/A                                                     |
+| `Cursor`                                                | [wallets.Cursor](../../../pkg/models/wallets/cursor.md) | :heavy_check_mark:                                      | Paginated cursor wrapping the list of holds             |

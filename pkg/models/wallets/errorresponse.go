@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// ErrorCode - Machine-readable error code identifying the failure
 type ErrorCode string
 
 const (
@@ -40,8 +41,10 @@ func (e *ErrorCode) UnmarshalJSON(data []byte) error {
 }
 
 type ErrorResponse struct {
-	ErrorCode    ErrorCode `json:"errorCode"`
-	ErrorMessage string    `json:"errorMessage"`
+	// Machine-readable error code identifying the failure
+	ErrorCode ErrorCode `json:"errorCode"`
+	// Human-readable description of the error
+	ErrorMessage string `json:"errorMessage"`
 }
 
 var _ error = &ErrorResponse{}

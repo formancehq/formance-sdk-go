@@ -3,13 +3,13 @@
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `Description`            | `*string`                | :heavy_minus_sign:       | N/A                      |
-| `Metadata`               | map[string]`string`      | :heavy_minus_sign:       | N/A                      |
-| `Name`                   | `string`                 | :heavy_check_mark:       | N/A                      |
-| `PostLogoutRedirectUris` | []`string`               | :heavy_minus_sign:       | N/A                      |
-| `Public`                 | `*bool`                  | :heavy_minus_sign:       | N/A                      |
-| `RedirectUris`           | []`string`               | :heavy_minus_sign:       | N/A                      |
-| `Scopes`                 | []`string`               | :heavy_minus_sign:       | N/A                      |
-| `Trusted`                | `*bool`                  | :heavy_minus_sign:       | N/A                      |
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Description`                                                                       | `*string`                                                                           | :heavy_minus_sign:                                                                  | Human-readable description of the client                                            |
+| `Metadata`                                                                          | map[string]`string`                                                                 | :heavy_minus_sign:                                                                  | Arbitrary key/value pairs attached to the resource                                  |
+| `Name`                                                                              | `string`                                                                            | :heavy_check_mark:                                                                  | Display name of the client                                                          |
+| `PostLogoutRedirectUris`                                                            | []`string`                                                                          | :heavy_minus_sign:                                                                  | URIs the authorization server may redirect to after logout                          |
+| `Public`                                                                            | `*bool`                                                                             | :heavy_minus_sign:                                                                  | Whether the client is public, meaning it cannot keep a secret and uses PKCE instead |
+| `RedirectUris`                                                                      | []`string`                                                                          | :heavy_minus_sign:                                                                  | URIs the authorization server may redirect to after a successful authorization      |
+| `Scopes`                                                                            | []`string`                                                                          | :heavy_minus_sign:                                                                  | Scopes the client is allowed to request                                             |
+| `Trusted`                                                                           | `*bool`                                                                             | :heavy_minus_sign:                                                                  | Whether the client is trusted, skipping the user consent screen                     |

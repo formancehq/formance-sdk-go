@@ -7,11 +7,16 @@ import (
 	"time"
 )
 
+// V2Workflow - A workflow definition and the stages it runs
 type V2Workflow struct {
-	Config    V2WorkflowConfig `json:"config"`
-	CreatedAt time.Time        `json:"createdAt"`
-	ID        string           `json:"id"`
-	UpdatedAt time.Time        `json:"updatedAt"`
+	// The stages a workflow runs, in order
+	Config V2WorkflowConfig `json:"config"`
+	// When the workflow was created
+	CreatedAt time.Time `json:"createdAt"`
+	// Unique identifier of the workflow
+	ID string `json:"id"`
+	// When the workflow was last modified
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 func (v V2Workflow) MarshalJSON() ([]byte, error) {

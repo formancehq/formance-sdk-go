@@ -3,11 +3,14 @@
 package ledger
 
 type Script struct {
+	// Arbitrary key/value pairs attached to the resource
 	Metadata map[string]any `json:"metadata,omitempty"`
-	Plain    string         `json:"plain"`
+	// The Numscript program to execute
+	Plain string `json:"plain"`
 	// Reference to attach to the generated transaction
-	Reference *string        `json:"reference,omitempty"`
-	Vars      map[string]any `json:"vars,omitempty"`
+	Reference *string `json:"reference,omitempty"`
+	// Values bound to the script's declared variables, keyed by variable name
+	Vars map[string]any `json:"vars,omitempty"`
 }
 
 func (s *Script) GetMetadata() map[string]any {

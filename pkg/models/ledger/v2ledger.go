@@ -7,14 +7,22 @@ import (
 	"time"
 )
 
+// V2Ledger - A ledger and its configuration
 type V2Ledger struct {
-	AddedAt   time.Time         `json:"addedAt"`
-	Bucket    string            `json:"bucket"`
-	DeletedAt *time.Time        `json:"deletedAt,omitempty"`
-	Features  map[string]string `json:"features,omitempty"`
-	ID        *int64            `json:"id,omitempty"`
-	Metadata  map[string]string `json:"metadata,omitempty"`
-	Name      string            `json:"name"`
+	// When the ledger was created
+	AddedAt time.Time `json:"addedAt"`
+	// Name of the storage bucket backing the ledger
+	Bucket string `json:"bucket"`
+	// When the ledger was deleted, absent for active ledgers
+	DeletedAt *time.Time `json:"deletedAt,omitempty"`
+	// Feature flags enabled on the ledger, keyed by feature name
+	Features map[string]string `json:"features,omitempty"`
+	// Unique sequential identifier for the ledger
+	ID *int64 `json:"id,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Name of the ledger
+	Name string `json:"name"`
 }
 
 func (v V2Ledger) MarshalJSON() ([]byte, error) {

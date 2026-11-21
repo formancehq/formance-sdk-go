@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// Severity - How serious an alert is, used to route and prioritise notifications
 type Severity string
 
 const (

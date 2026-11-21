@@ -1,0 +1,10 @@
+# V3SaveNumscriptRequest
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `SaveNumscriptRequest`                                                                | [ledgerv3.SaveNumscriptRequest](../../../pkg/models/ledgerv3/savenumscriptrequest.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `LedgerName`                                                                          | `string`                                                                              | :heavy_check_mark:                                                                    | Name of the ledger                                                                    |
+| `Name`                                                                                | `string`                                                                              | :heavy_check_mark:                                                                    | Name of the numscript, URL-encoded as one path segment. Decoded exactly once.         |

@@ -8,11 +8,16 @@ import (
 )
 
 type StageSend struct {
-	Amount      *Monetary             `json:"amount,omitempty"`
+	// An amount together with the asset it is denominated in
+	Amount *Monetary `json:"amount,omitempty"`
+	// Where a send stage puts the funds
 	Destination *StageSendDestination `json:"destination,omitempty"`
-	Metadata    map[string]string     `json:"metadata,omitempty"`
-	Source      *StageSendSource      `json:"source,omitempty"`
-	Timestamp   *time.Time            `json:"timestamp,omitempty"`
+	// Metadata to attach to the resulting transaction
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Where a send stage takes the funds from
+	Source *StageSendSource `json:"source,omitempty"`
+	// The transaction time to record on the resulting transaction. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
 
 func (s StageSend) MarshalJSON() ([]byte, error) {

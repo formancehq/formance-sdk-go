@@ -1,5 +1,7 @@
 # AlertsCursorResponseCursor
 
+Paginated cursor wrapping the list of alerts
+
 
 ## Fields
 

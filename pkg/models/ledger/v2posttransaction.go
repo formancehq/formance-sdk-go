@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// V2PostTransactionScript - A Numscript program executed to produce the postings. Mutually exclusive with postings
 type V2PostTransactionScript struct {
 	Plain    *string           `json:"plain,omitempty"`
 	Template *string           `json:"template,omitempty"`
@@ -49,15 +50,22 @@ func (v *V2PostTransactionScript) GetVars() map[string]string {
 // #endregion class-body-v2posttransactionscript
 
 type V2PostTransaction struct {
+	// Metadata to set on the accounts involved in the transaction, keyed by account address
 	AccountMetadata map[string]map[string]string `json:"accountMetadata,omitempty"`
-	Force           *bool                        `json:"force,omitempty"`
-	Metadata        map[string]string            `json:"metadata"`
-	Postings        []V2Posting                  `json:"postings,omitempty"`
-	Reference       *string                      `json:"reference,omitempty"`
+	// When true, lets source accounts overdraft without bound, bypassing the balance check. Applies to the postings form only
+	Force *bool `json:"force,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata"`
+	// Fund movements to apply. Mutually exclusive with script and template
+	Postings []V2Posting `json:"postings,omitempty"`
+	// Optional caller-supplied identifier, unique within the ledger, used to deduplicate transactions
+	Reference *string `json:"reference,omitempty"`
 	// The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
-	Runtime   *Runtime                 `json:"runtime,omitempty"`
-	Script    *V2PostTransactionScript `json:"script,omitempty"`
-	Timestamp *time.Time               `json:"timestamp,omitempty"`
+	Runtime *Runtime `json:"runtime,omitempty"`
+	// A Numscript program executed to produce the postings. Mutually exclusive with postings
+	Script *V2PostTransactionScript `json:"script,omitempty"`
+	// The transaction time to record, letting you backdate or postdate the transaction. Defaults to current machine time if omitted. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
 
 func (v V2PostTransaction) MarshalJSON() ([]byte, error) {

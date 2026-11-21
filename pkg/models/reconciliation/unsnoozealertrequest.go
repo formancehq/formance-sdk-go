@@ -3,6 +3,7 @@
 package reconciliation
 
 type UnsnoozeAlertRequest struct {
+	// Who is lifting the snooze
 	By string `json:"by"`
 }
 

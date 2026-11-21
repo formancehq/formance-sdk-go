@@ -2,6 +2,7 @@
 
 package reconciliation
 
+// RulesCursorResponseCursor - Paginated cursor wrapping the list of rules
 type RulesCursorResponseCursor struct {
 	Data     []Rule  `json:"data"`
 	HasMore  bool    `json:"hasMore"`
@@ -47,6 +48,7 @@ func (r *RulesCursorResponseCursor) GetPrevious() *string {
 
 // RulesCursorResponse - OK
 type RulesCursorResponse struct {
+	// Paginated cursor wrapping the list of rules
 	Cursor RulesCursorResponseCursor `json:"cursor"`
 }
 

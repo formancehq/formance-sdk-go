@@ -4,7 +4,9 @@ package reconciliation
 
 // AcceptAlertRequest - Business acceptance. `note` is required and the evidence is snapshotted onto the resolution.
 type AcceptAlertRequest struct {
-	By   string `json:"by"`
+	// Who is accepting the break
+	By string `json:"by"`
+	// Why the break is being accepted rather than corrected
 	Note string `json:"note"`
 }
 

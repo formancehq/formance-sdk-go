@@ -203,7 +203,7 @@ func (s *FormanceV2) CancelEvent(ctx context.Context, request operations.V2Cance
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -420,7 +420,7 @@ func (s *FormanceV2) CreateTrigger(ctx context.Context, request *orchestration.V
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -637,7 +637,7 @@ func (s *FormanceV2) CreateWorkflow(ctx context.Context, request *orchestration.
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -828,7 +828,7 @@ func (s *FormanceV2) DeleteTrigger(ctx context.Context, request operations.V2Del
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1019,7 +1019,7 @@ func (s *FormanceV2) DeleteWorkflow(ctx context.Context, request operations.V2De
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1229,7 +1229,7 @@ func (s *FormanceV2) GetInstance(ctx context.Context, request operations.V2GetIn
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1439,7 +1439,7 @@ func (s *FormanceV2) GetInstanceHistory(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1649,7 +1649,7 @@ func (s *FormanceV2) GetInstanceStageHistory(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1858,7 +1858,7 @@ func (s *FormanceV2) GetServerInfo(ctx context.Context, opts ...operations.Optio
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2068,7 +2068,7 @@ func (s *FormanceV2) GetWorkflow(ctx context.Context, request operations.V2GetWo
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2282,7 +2282,7 @@ func (s *FormanceV2) ListInstances(ctx context.Context, request operations.V2Lis
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2496,7 +2496,7 @@ func (s *FormanceV2) ListTriggers(ctx context.Context, request operations.V2List
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2710,7 +2710,7 @@ func (s *FormanceV2) ListTriggersOccurrences(ctx context.Context, request operat
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -2924,7 +2924,7 @@ func (s *FormanceV2) ListWorkflows(ctx context.Context, request operations.V2Lis
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3134,7 +3134,7 @@ func (s *FormanceV2) ReadTrigger(ctx context.Context, request operations.V2ReadT
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3147,6 +3147,238 @@ func (s *FormanceV2) ReadTrigger(ctx context.Context, request operations.V2ReadT
 			}
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	}
+
+	return res, nil
+
+}
+
+// ResumeActivity - Resume a paused activity
+// Resume a paused activity identified by temporalRunID and pausedAt.
+// Use both values from the paused activity projection. A stale run id or
+// pause timestamp returns a conflict, preventing a delayed resend from
+// resuming an activity in a newer run or a subsequent pause generation.
+//
+// If set, this operation will use [Security.ClientID] from the global security.
+func (s *FormanceV2) ResumeActivity(ctx context.Context, request operations.V2ResumeActivityRequest, opts ...operations.Option) (*operations.V2ResumeActivityResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/orchestration/v2/instances/{instanceID}/stages/{number}/activities/{activityID}/resume", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "v2ResumeActivity",
+		OAuth2Scopes:     []string{"orchestration:write"},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "ClientID"); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"429",
+				"500",
+				"502",
+				"503",
+				"504",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if !utils.MatchStatusCodes([]string{"204", "400", "404", "409", "500"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.V2ResumeActivityResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: httpRes.Header.Get("Content-Type"),
+		RawResponse: httpRes,
+	}
+
+	switch {
+	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
+	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 404:
+		fallthrough
+	case httpRes.StatusCode == 409:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out orchestration.V2Error
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.V2Error = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 500:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out orchestration.V2Error
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.V2Error = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	default:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -3355,7 +3587,7 @@ func (s *FormanceV2) RunWorkflow(ctx context.Context, request operations.V2RunWo
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3553,7 +3785,7 @@ func (s *FormanceV2) SendEvent(ctx context.Context, request operations.V2SendEve
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3770,7 +4002,7 @@ func (s *FormanceV2) TestTrigger(ctx context.Context, request operations.TestTri
 				return nil, err
 			}
 
-			var out orchestration.V2Error
+			var out orchestration.V2Error1
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

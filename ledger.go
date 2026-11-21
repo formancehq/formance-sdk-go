@@ -9,7 +9,8 @@ import (
 
 type Ledger struct {
 	V2 *V2
-	V1 *FormanceV1
+	V1 *FormanceLedgerV1
+	V3 *V3
 
 	rootSDK          *Formance
 	sdkConfiguration config.SDKConfiguration
@@ -22,6 +23,7 @@ func newLedger(rootSDK *Formance, sdkConfig config.SDKConfiguration, hooks *hook
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
 		V2:               newV2(rootSDK, sdkConfig, hooks),
-		V1:               newFormanceV1(rootSDK, sdkConfig, hooks),
+		V1:               newFormanceLedgerV1(rootSDK, sdkConfig, hooks),
+		V3:               newV3(rootSDK, sdkConfig, hooks),
 	}
 }

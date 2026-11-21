@@ -10,21 +10,33 @@ import (
 
 // V2LogTransaction - Transaction structure as it appears in log payloads
 type V2LogTransaction struct {
-	ID                         *big.Int                       `json:"id"`
-	InsertedAt                 *time.Time                     `json:"insertedAt,omitempty"`
-	Metadata                   map[string]string              `json:"metadata"`
+	// Unique sequential identifier for this transaction within the ledger
+	ID *big.Int `json:"id"`
+	// The request time: when the transaction was actually written to the ledger. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	InsertedAt *time.Time `json:"insertedAt,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata"`
+	// Volumes aggregated per account and per asset
 	PostCommitEffectiveVolumes map[string]map[string]V2Volume `json:"postCommitEffectiveVolumes,omitempty"`
-	PostCommitVolumes          map[string]map[string]V2Volume `json:"postCommitVolumes,omitempty"`
-	Postings                   []V2Posting                    `json:"postings"`
-	PreCommitEffectiveVolumes  map[string]map[string]V2Volume `json:"preCommitEffectiveVolumes,omitempty"`
-	PreCommitVolumes           map[string]map[string]V2Volume `json:"preCommitVolumes,omitempty"`
-	Reference                  *string                        `json:"reference,omitempty"`
+	// Volumes aggregated per account and per asset
+	PostCommitVolumes map[string]map[string]V2Volume `json:"postCommitVolumes,omitempty"`
+	// The fund movements making up the transaction
+	Postings []V2Posting `json:"postings"`
+	// Volumes aggregated per account and per asset
+	PreCommitEffectiveVolumes map[string]map[string]V2Volume `json:"preCommitEffectiveVolumes,omitempty"`
+	// Volumes aggregated per account and per asset
+	PreCommitVolumes map[string]map[string]V2Volume `json:"preCommitVolumes,omitempty"`
+	// Optional caller-supplied identifier, unique within the ledger
+	Reference *string `json:"reference,omitempty"`
 	// Indicates if the transaction has been reverted
-	Reverted   bool       `json:"reverted"`
+	Reverted bool `json:"reverted"`
+	// When the transaction was reverted, on the request-time axis
 	RevertedAt *time.Time `json:"revertedAt,omitempty"`
 	// Transaction template used
-	Template  *string    `json:"template,omitempty"`
-	Timestamp time.Time  `json:"timestamp"`
+	Template *string `json:"template,omitempty"`
+	// The transaction time: when the transaction is considered to have occurred. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp time.Time `json:"timestamp"`
+	// When the transaction row was last modified
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 
