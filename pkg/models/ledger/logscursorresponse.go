@@ -2,6 +2,7 @@
 
 package ledger
 
+// LogsCursorResponseCursor - Paginated cursor wrapping the list of logs
 type LogsCursorResponseCursor struct {
 	Data     []Log   `json:"data"`
 	HasMore  bool    `json:"hasMore"`
@@ -46,6 +47,7 @@ func (l *LogsCursorResponseCursor) GetPrevious() *string {
 }
 
 type LogsCursorResponse struct {
+	// Paginated cursor wrapping the list of logs
 	Cursor LogsCursorResponseCursor `json:"cursor"`
 }
 

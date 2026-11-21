@@ -2,6 +2,7 @@
 
 package reconciliation
 
+// EvaluationsCursorResponseCursor - Paginated cursor wrapping the list of evaluations
 type EvaluationsCursorResponseCursor struct {
 	Data     []Evaluation `json:"data"`
 	HasMore  bool         `json:"hasMore"`
@@ -47,6 +48,7 @@ func (e *EvaluationsCursorResponseCursor) GetPrevious() *string {
 
 // EvaluationsCursorResponse - OK
 type EvaluationsCursorResponse struct {
+	// Paginated cursor wrapping the list of evaluations
 	Cursor EvaluationsCursorResponseCursor `json:"cursor"`
 }
 

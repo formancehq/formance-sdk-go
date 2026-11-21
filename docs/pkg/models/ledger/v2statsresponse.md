@@ -5,4 +5,4 @@
 
 | Field                                                   | Type                                                    | Required                                                | Description                                             |
 | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `Data`                                                  | [ledger.V2Stats](../../../pkg/models/ledger/v2stats.md) | :heavy_check_mark:                                      | N/A                                                     |
+| `Data`                                                  | [ledger.V2Stats](../../../pkg/models/ledger/v2stats.md) | :heavy_check_mark:                                      | Aggregate counts for a ledger                           |

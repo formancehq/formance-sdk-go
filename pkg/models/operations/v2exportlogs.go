@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"io"
 	"net/http"
 )
 
@@ -28,6 +29,9 @@ type V2ExportLogsResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// Export OK
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	Bytes io.ReadCloser
 }
 
 func (v *V2ExportLogsResponse) GetContentType() string {
@@ -49,6 +53,13 @@ func (v *V2ExportLogsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return v.RawResponse
+}
+
+func (v *V2ExportLogsResponse) GetBytes() io.ReadCloser {
+	if v == nil {
+		return nil
+	}
+	return v.Bytes
 }
 
 // #region class-body-v2exportlogsresponse

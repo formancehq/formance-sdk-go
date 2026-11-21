@@ -8,7 +8,9 @@ import (
 )
 
 type ReconciliationRequest struct {
-	ReconciledAtLedger   time.Time `json:"reconciledAtLedger"`
+	// Point in time at which the ledger side is evaluated
+	ReconciledAtLedger time.Time `json:"reconciledAtLedger"`
+	// Point in time at which the payments side is evaluated
 	ReconciledAtPayments time.Time `json:"reconciledAtPayments"`
 }
 

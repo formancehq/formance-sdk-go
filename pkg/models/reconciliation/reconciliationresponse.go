@@ -4,6 +4,7 @@ package reconciliation
 
 // ReconciliationResponse - OK
 type ReconciliationResponse struct {
+	// One run of a policy, comparing both sides and reporting the drift between them
 	Data Reconciliation `json:"data"`
 }
 

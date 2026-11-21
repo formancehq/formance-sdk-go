@@ -8,10 +8,19 @@ import (
 )
 
 type StageStatus struct {
-	Error        *string    `json:"error,omitempty"`
-	InstanceID   string     `json:"instanceID"`
-	Stage        float64    `json:"stage"`
-	StartedAt    time.Time  `json:"startedAt"`
+	// Why the stage failed, absent when it succeeded
+	Error *string `json:"error,omitempty"`
+	// Identifier of the workflow instance this stage belongs to
+	InstanceID string `json:"instanceID"`
+	// True when Temporal pause state could not be read; display UNKNOWN rather than inferring active from absent pendingActivities. Omitted on successful reads and missing legacy executions.
+	PauseStateUnavailable *bool `json:"pauseStateUnavailable,omitempty"`
+	// Paused activities hydrated on instance detail reads only; absent when none are paused or legacy Temporal execution is unavailable
+	PendingActivities []ActivityPause `json:"pendingActivities,omitempty"`
+	// Zero-based position of the stage within the workflow
+	Stage float64 `json:"stage"`
+	// When the stage started
+	StartedAt time.Time `json:"startedAt"`
+	// When the stage finished, absent while it is still running
 	TerminatedAt *time.Time `json:"terminatedAt,omitempty"`
 }
 
@@ -38,6 +47,20 @@ func (s *StageStatus) GetInstanceID() string {
 		return ""
 	}
 	return s.InstanceID
+}
+
+func (s *StageStatus) GetPauseStateUnavailable() *bool {
+	if s == nil {
+		return nil
+	}
+	return s.PauseStateUnavailable
+}
+
+func (s *StageStatus) GetPendingActivities() []ActivityPause {
+	if s == nil {
+		return nil
+	}
+	return s.PendingActivities
 }
 
 func (s *StageStatus) GetStage() float64 {

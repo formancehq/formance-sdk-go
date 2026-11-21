@@ -1,0 +1,10 @@
+# MetadataSchemaStatusResponseData
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `AccountFields`                                                                                | map[string][ledgerv3.MetadataFieldStatus](../../../pkg/models/ledgerv3/metadatafieldstatus.md) | :heavy_check_mark:                                                                             | Account metadata field declarations                                                            |
+| `LedgerFields`                                                                                 | map[string][ledgerv3.MetadataFieldStatus](../../../pkg/models/ledgerv3/metadatafieldstatus.md) | :heavy_check_mark:                                                                             | Ledger metadata field declarations                                                             |
+| `TransactionFields`                                                                            | map[string][ledgerv3.MetadataFieldStatus](../../../pkg/models/ledgerv3/metadatafieldstatus.md) | :heavy_check_mark:                                                                             | Transaction metadata field declarations                                                        |

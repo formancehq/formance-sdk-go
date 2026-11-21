@@ -6,6 +6,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// DotSelf - Rules and metadata applied to the segment's own account, as opposed to its children
 type DotSelf struct {
 }
 
@@ -22,11 +23,15 @@ func (d *DotSelf) UnmarshalJSON(data []byte) error {
 
 // V2ChartSegment - Segment within a chart of accounts
 type V2ChartSegment struct {
-	DotMetadata          map[string]V2ChartAccountMetadata `json:".metadata,omitempty"`
-	DotPattern           *string                           `json:".pattern,omitempty"`
-	DotRules             *V2ChartAccountRules              `json:".rules,omitempty"`
-	DotSelf              *DotSelf                          `json:".self,omitempty"`
-	AdditionalProperties map[string]V2ChartSegment         `additionalProperties:"true" json:"-"`
+	// Metadata applied to accounts matching this segment, keyed by metadata key
+	DotMetadata map[string]V2ChartAccountMetadata `json:".metadata,omitempty"`
+	// Regular expression every child segment name must match
+	DotPattern *string `json:".pattern,omitempty"`
+	// Rules applied to accounts matching a chart-of-accounts segment
+	DotRules *V2ChartAccountRules `json:".rules,omitempty"`
+	// Rules and metadata applied to the segment's own account, as opposed to its children
+	DotSelf              *DotSelf                  `json:".self,omitempty"`
+	AdditionalProperties map[string]V2ChartSegment `additionalProperties:"true" json:"-"`
 }
 
 func (v V2ChartSegment) MarshalJSON() ([]byte, error) {

@@ -1,0 +1,12 @@
+# AccountPattern
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `AccountCount`                                                              | `*int64`                                                                    | :heavy_minus_sign:                                                          | N/A                                                                         |
+| `Assets`                                                                    | []`string`                                                                  | :heavy_minus_sign:                                                          | N/A                                                                         |
+| `MetadataKeys`                                                              | []`string`                                                                  | :heavy_minus_sign:                                                          | N/A                                                                         |
+| `Pattern`                                                                   | `*string`                                                                   | :heavy_minus_sign:                                                          | N/A                                                                         |
+| `Segments`                                                                  | [][ledgerv3.PatternSegment](../../../pkg/models/ledgerv3/patternsegment.md) | :heavy_minus_sign:                                                          | N/A                                                                         |

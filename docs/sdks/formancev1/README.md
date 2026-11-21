@@ -1,685 +1,39 @@
-# Ledger.V1
+# Connectivity.V1
 
 ## Overview
 
 ### Available Operations
 
-* [CreateTransactions](#createtransactions) - Create a new batch of transactions to a ledger
-* [AddMetadataOnTransaction](#addmetadataontransaction) - Set the metadata of a transaction by its ID
-* [AddMetadataToAccount](#addmetadatatoaccount) - Add metadata to an account
-* [CountAccounts](#countaccounts) - Count the accounts from a ledger
-* [CountTransactions](#counttransactions) - Count the transactions from a ledger
-* [CreateTransaction](#createtransaction) - Create a new transaction to a ledger
-* [GetAccountLedger](#getaccountledger) - Get account by its address
-* [GetBalances](#getbalances) - Get the balances from a ledger's account
-* [GetBalancesAggregated](#getbalancesaggregated) - Get the aggregated balances from selected accounts
-* [GetInfo](#getinfo) - Show server information
-* [GetLedgerInfo](#getledgerinfo) - Get information about a ledger
-* [GetMapping](#getmapping) - Get the mapping of a ledger
-* [GetTransaction](#gettransaction) - Get transaction from a ledger by its ID
-* [ListAccountsLedger](#listaccountsledger) - List accounts from a ledger
-* [ListLogs](#listlogs) - List the logs from a ledger
-* [ListTransactions](#listtransactions) - List transactions from a ledger
-* [ReadStats](#readstats) - Get statistics from a ledger
-* [RevertTransaction](#reverttransaction) - Revert a ledger transaction by its ID
-* [~~RunScript~~](#runscript) - Execute a Numscript :warning: **Deprecated**
-* [UpdateMapping](#updatemapping) - Update the mapping of a ledger
+* [ConnectivityInfo](#connectivityinfo) - Build information
+* [CreateConnection](#createconnection) - Create a Connection
+* [DeleteConnection](#deleteconnection) - Delete a Connection
+* [GetConnection](#getconnection) - Get a Connection
+* [GetConnector](#getconnector) - Get a Connector (lean connector metadata)
+* [GetConnectorFacets](#getconnectorfacets) - Facet-value distribution over the published catalogue
+* [GetConnectorVersion](#getconnectorversion) - Get one Connector version (including its configSchema and additionalMetadata)
+* [GetQueryCapabilities](#getquerycapabilities) - The filterable keys, operators and value enums per resource
+* [Healthcheck](#healthcheck) - Health probe
+* [ListConnections](#listconnections) - List connector instances for this tenant
+* [ListConnectorVersions](#listconnectorversions) - List the installable versions of a Connector
+* [ListConnectors](#listconnectors) - List published Connectors with their catalogue identity
+* [PatchConnection](#patchconnection) - Merge-patch a connector instance configuration
+* [ReplaceConnection](#replaceconnection) - Replace a connector instance configuration
 
-## CreateTransactions
+## ConnectivityInfo
 
-Create a new batch of transactions to a ledger
+Version probe used by the stack gateway to report this module in the
+`/versions` aggregation. Response shape follows the platform-wide
+ServiceInfo contract.
+
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="CreateTransactions" method="post" path="/api/ledger/{ledger}/transactions/batch" -->
+<!-- UsageSnippet language="go" operationID="connectivityInfo" method="get" path="/api/connectivity/_info" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"math/big"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledger"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.CreateTransactions(ctx, operations.CreateTransactionsRequest{
-        Transactions: ledger.Transactions{
-            Transactions: []ledger.TransactionData{
-                ledger.TransactionData{
-                    Postings: []ledger.Posting{
-                        ledger.Posting{
-                            Amount: big.NewInt(100),
-                            Asset: "COIN",
-                            Destination: "users:002",
-                            Source: "users:001",
-                        },
-                    },
-                    Reference: v5.Pointer("ref:001"),
-                },
-            },
-        },
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.TransactionsResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.CreateTransactionsRequest](../../pkg/models/operations/createtransactionsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
-
-### Response
-
-**[*operations.CreateTransactionsResponse](../../pkg/models/operations/createtransactionsresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## AddMetadataOnTransaction
-
-Set the metadata of a transaction by its ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="addMetadataOnTransaction" method="post" path="/api/ledger/{ledger}/transactions/{txid}/metadata" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"math/big"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.AddMetadataOnTransaction(ctx, operations.AddMetadataOnTransactionRequest{
-        RequestBody: map[string]any{
-
-        },
-        Ledger: "ledger001",
-        Txid: big.NewInt(1234),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `request`                                                                                                    | [operations.AddMetadataOnTransactionRequest](../../pkg/models/operations/addmetadataontransactionrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
-| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
-
-### Response
-
-**[*operations.AddMetadataOnTransactionResponse](../../pkg/models/operations/addmetadataontransactionresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## AddMetadataToAccount
-
-Add metadata to an account
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="addMetadataToAccount" method="post" path="/api/ledger/{ledger}/accounts/{address}/metadata" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.AddMetadataToAccount(ctx, operations.AddMetadataToAccountRequest{
-        RequestBody: map[string]any{
-            "key": "<value>",
-            "key1": "<value>",
-            "key2": "<value>",
-        },
-        Address: "users:001",
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.AddMetadataToAccountRequest](../../pkg/models/operations/addmetadatatoaccountrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
-| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
-
-### Response
-
-**[*operations.AddMetadataToAccountResponse](../../pkg/models/operations/addmetadatatoaccountresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## CountAccounts
-
-Count the accounts from a ledger
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="countAccounts" method="head" path="/api/ledger/{ledger}/accounts" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.CountAccounts(ctx, operations.CountAccountsRequest{
-        Address: v5.Pointer("users:.+"),
-        Ledger: "ledger001",
-        Metadata: map[string]any{
-            "0": "m",
-            "1": "e",
-            "2": "t",
-            "3": "a",
-            "4": "d",
-            "5": "a",
-            "6": "t",
-            "7": "a",
-            "8": "[",
-            "9": "k",
-            "10": "e",
-            "11": "y",
-            "12": "]",
-            "13": "=",
-            "14": "v",
-            "15": "a",
-            "16": "l",
-            "17": "u",
-            "18": "e",
-            "19": "1",
-            "20": "&",
-            "21": "m",
-            "22": "e",
-            "23": "t",
-            "24": "a",
-            "25": "d",
-            "26": "a",
-            "27": "t",
-            "28": "a",
-            "29": "[",
-            "30": "a",
-            "31": ".",
-            "32": "n",
-            "33": "e",
-            "34": "s",
-            "35": "t",
-            "36": "e",
-            "37": "d",
-            "38": ".",
-            "39": "k",
-            "40": "e",
-            "41": "y",
-            "42": "]",
-            "43": "=",
-            "44": "v",
-            "45": "a",
-            "46": "l",
-            "47": "u",
-            "48": "e",
-            "49": "2",
-        },
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.CountAccountsRequest](../../pkg/models/operations/countaccountsrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
-
-### Response
-
-**[*operations.CountAccountsResponse](../../pkg/models/operations/countaccountsresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## CountTransactions
-
-Count the transactions from a ledger
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="countTransactions" method="head" path="/api/ledger/{ledger}/transactions" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.CountTransactions(ctx, operations.CountTransactionsRequest{
-        Account: v5.Pointer("users:001"),
-        Destination: v5.Pointer("users:001"),
-        Ledger: "ledger001",
-        Metadata: &operations.Metadata{},
-        Reference: v5.Pointer("ref:001"),
-        Source: v5.Pointer("users:001"),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.CountTransactionsRequest](../../pkg/models/operations/counttransactionsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
-
-### Response
-
-**[*operations.CountTransactionsResponse](../../pkg/models/operations/counttransactionsresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## CreateTransaction
-
-Create a new transaction to a ledger
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="createTransaction" method="post" path="/api/ledger/{ledger}/transactions" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"math/big"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledger"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.CreateTransaction(ctx, operations.CreateTransactionRequest{
-        PostTransaction: ledger.PostTransaction{
-            Postings: []ledger.Posting{
-                ledger.Posting{
-                    Amount: big.NewInt(100),
-                    Asset: "COIN",
-                    Destination: "users:002",
-                    Source: "users:001",
-                },
-            },
-            Reference: v5.Pointer("ref:001"),
-            Script: &ledger.PostTransactionScript{
-                Plain: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\tdestination = $user\n)\n",
-                Vars: map[string]any{
-                    "user": "users:042",
-                },
-            },
-        },
-        Ledger: "ledger001",
-        Preview: v5.Pointer(true),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.TransactionsResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.CreateTransactionRequest](../../pkg/models/operations/createtransactionrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
-
-### Response
-
-**[*operations.CreateTransactionResponse](../../pkg/models/operations/createtransactionresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## GetAccountLedger
-
-Get account by its address
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="getAccount_ledger" method="get" path="/api/ledger/{ledger}/accounts/{address}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.GetAccountLedger(ctx, operations.GetAccountLedgerRequest{
-        Address: "users:001",
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.AccountResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.GetAccountLedgerRequest](../../pkg/models/operations/getaccountledgerrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
-
-### Response
-
-**[*operations.GetAccountLedgerResponse](../../pkg/models/operations/getaccountledgerresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## GetBalances
-
-Get the balances from a ledger's account
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="getBalances" method="get" path="/api/ledger/{ledger}/balances" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.GetBalances(ctx, operations.GetBalancesRequest{
-        Address: v5.Pointer("users:001"),
-        After: v5.Pointer("users:003"),
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.BalancesCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [operations.GetBalancesRequest](../../pkg/models/operations/getbalancesrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
-
-### Response
-
-**[*operations.GetBalancesResponse](../../pkg/models/operations/getbalancesresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## GetBalancesAggregated
-
-Get the aggregated balances from selected accounts
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="getBalancesAggregated" method="get" path="/api/ledger/{ledger}/aggregate/balances" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.GetBalancesAggregated(ctx, operations.GetBalancesAggregatedRequest{
-        Address: v5.Pointer("users:001"),
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.AggregateBalancesResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
-| `request`                                                                                              | [operations.GetBalancesAggregatedRequest](../../pkg/models/operations/getbalancesaggregatedrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
-| `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
-
-### Response
-
-**[*operations.GetBalancesAggregatedResponse](../../pkg/models/operations/getbalancesaggregatedresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## GetInfo
-
-Show server information
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="getInfo" method="get" path="/api/ledger/_info" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
 	"log"
 )
@@ -687,18 +41,13 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Ledger.V1.GetInfo(ctx)
+    res, err := s.Connectivity.V1.ConnectivityInfo(ctx)
     if err != nil {
         log.Fatal(err)
     }
-    if res.ConfigInfoResponse != nil {
+    if res.Info != nil {
         // handle response
     }
 }
@@ -713,535 +62,104 @@ func main() {
 
 ### Response
 
-**[*operations.GetInfoResponse](../../pkg/models/operations/getinforesponse.md), error**
+**[*operations.ConnectivityInfoResponse](../../pkg/models/operations/connectivityinforesponse.md), error**
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
 
-## GetLedgerInfo
+## CreateConnection
 
-Get information about a ledger
+Creates a new `Connection` in the caller's environment.
+`configuration.connector`, `configuration.ledger` and exactly one of `configuration.version` or
+`configuration.channel` are required. `env` and `files` are string key/value maps;
+properties marked `format: password` by the selected connector schema
+are stored confidentially and omitted from read responses.
+Storage metadata and configuration references are rejected on input.
+A field outside the tenant contract,
+including unsupported instance fields such as `image`, `additionalEnv`,
+`additionalFiles` or `replicas`, is rejected with
+`400 unsupported_field`.
 
-### Example Usage
 
-<!-- UsageSnippet language="go" operationID="getLedgerInfo" method="get" path="/api/ledger/{ledger}/_info" -->
+### Example Usage: channel
+
+<!-- UsageSnippet language="go" operationID="createConnection" method="post" path="/api/connectivity/connections" example="channel" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/connectivity"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Ledger.V1.GetLedgerInfo(ctx, operations.GetLedgerInfoRequest{
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.LedgerInfoResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.GetLedgerInfoRequest](../../pkg/models/operations/getledgerinforequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
-
-### Response
-
-**[*operations.GetLedgerInfoResponse](../../pkg/models/operations/getledgerinforesponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## GetMapping
-
-Get the mapping of a ledger
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="getMapping" method="get" path="/api/ledger/{ledger}/mapping" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.GetMapping(ctx, operations.GetMappingRequest{
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.MappingResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.GetMappingRequest](../../pkg/models/operations/getmappingrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
-
-### Response
-
-**[*operations.GetMappingResponse](../../pkg/models/operations/getmappingresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## GetTransaction
-
-Get transaction from a ledger by its ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="getTransaction" method="get" path="/api/ledger/{ledger}/transactions/{txid}" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"math/big"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.GetTransaction(ctx, operations.GetTransactionRequest{
-        Ledger: "ledger001",
-        Txid: big.NewInt(1234),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.TransactionResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.GetTransactionRequest](../../pkg/models/operations/gettransactionrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
-| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
-
-### Response
-
-**[*operations.GetTransactionResponse](../../pkg/models/operations/gettransactionresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## ListAccountsLedger
-
-List accounts from a ledger, sorted by address in descending order.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="listAccounts_ledger" method="get" path="/api/ledger/{ledger}/accounts" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.ListAccountsLedger(ctx, operations.ListAccountsLedgerRequest{
-        Address: v5.Pointer("users:.+"),
-        After: v5.Pointer("users:003"),
-        Balance: v5.Pointer[int64](2400),
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Ledger: "ledger001",
-        Metadata: map[string]any{
-            "0": "m",
-            "1": "e",
-            "2": "t",
-            "3": "a",
-            "4": "d",
-            "5": "a",
-            "6": "t",
-            "7": "a",
-            "8": "[",
-            "9": "k",
-            "10": "e",
-            "11": "y",
-            "12": "]",
-            "13": "=",
-            "14": "v",
-            "15": "a",
-            "16": "l",
-            "17": "u",
-            "18": "e",
-            "19": "1",
-            "20": "&",
-            "21": "m",
-            "22": "e",
-            "23": "t",
-            "24": "a",
-            "25": "d",
-            "26": "a",
-            "27": "t",
-            "28": "a",
-            "29": "[",
-            "30": "a",
-            "31": ".",
-            "32": "n",
-            "33": "e",
-            "34": "s",
-            "35": "t",
-            "36": "e",
-            "37": "d",
-            "38": ".",
-            "39": "k",
-            "40": "e",
-            "41": "y",
-            "42": "]",
-            "43": "=",
-            "44": "v",
-            "45": "a",
-            "46": "l",
-            "47": "u",
-            "48": "e",
-            "49": "2",
+    res, err := s.Connectivity.V1.CreateConnection(ctx, connectivity.ConnectionCreate{
+        Configuration: connectivity.Configuration{
+            Channel: connectivity.ConnectionCreateChannelStable.ToPointer(),
+            Connector: "stripe",
+            Env: map[string]string{
+                "STRIPE_API_KEY": "<your-api-key>",
+            },
+            Ledger: "main",
+            PollInterval: v5.Pointer("30s"),
         },
-        PageSize: v5.Pointer[int64](100),
-    })
+        Name: "stripe-main",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.AccountsCursorResponse != nil {
+    if res.Connection != nil {
         // handle response
     }
 }
 ```
+### Example Usage: version
 
-### Parameters
-
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.ListAccountsLedgerRequest](../../pkg/models/operations/listaccountsledgerrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
-
-### Response
-
-**[*operations.ListAccountsLedgerResponse](../../pkg/models/operations/listaccountsledgerresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## ListLogs
-
-List the logs from a ledger, sorted by ID in descending order.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="listLogs" method="get" path="/api/ledger/{ledger}/logs" -->
+<!-- UsageSnippet language="go" operationID="createConnection" method="post" path="/api/connectivity/connections" example="version" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/connectivity"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Ledger.V1.ListLogs(ctx, operations.ListLogsRequest{
-        After: v5.Pointer("1234"),
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Ledger: "ledger001",
-        PageSize: v5.Pointer[int64](100),
-    })
+    res, err := s.Connectivity.V1.CreateConnection(ctx, connectivity.ConnectionCreate{
+        Configuration: connectivity.Configuration{
+            Connector: "bitcoin",
+            Env: map[string]string{
+                "RPC_URL": "http://bitcoind:8332",
+            },
+            Files: map[string]string{
+                "/etc/bitcoin/ca.pem": "<PEM certificate content>",
+            },
+            InitialCursor: v5.Pointer("AAAAAAAAA+g="),
+            Ledger: "btc",
+            Version: v5.Pointer("v1.4.2"),
+        },
+        Name: "bitcoin-main",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.LogsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.ListLogsRequest](../../pkg/models/operations/listlogsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
-
-### Response
-
-**[*operations.ListLogsResponse](../../pkg/models/operations/listlogsresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## ListTransactions
-
-List transactions from a ledger, sorted by txid in descending order.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="listTransactions" method="get" path="/api/ledger/{ledger}/transactions" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.ListTransactions(ctx, operations.ListTransactionsRequest{
-        Account: v5.Pointer("users:001"),
-        After: v5.Pointer("1234"),
-        Cursor: v5.Pointer("aHR0cHM6Ly9nLnBhZ2UvTmVrby1SYW1lbj9zaGFyZQ=="),
-        Destination: v5.Pointer("users:001"),
-        Ledger: "ledger001",
-        PageSize: v5.Pointer[int64](100),
-        Reference: v5.Pointer("ref:001"),
-        Source: v5.Pointer("users:001"),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.TransactionsCursorResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.ListTransactionsRequest](../../pkg/models/operations/listtransactionsrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
-
-### Response
-
-**[*operations.ListTransactionsResponse](../../pkg/models/operations/listtransactionsresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## ReadStats
-
-Get statistics from a ledger. (aggregate metrics on accounts and transactions)
-
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="readStats" method="get" path="/api/ledger/{ledger}/stats" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.ReadStats(ctx, operations.ReadStatsRequest{
-        Ledger: "ledger001",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.StatsResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.ReadStatsRequest](../../pkg/models/operations/readstatsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
-| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
-
-### Response
-
-**[*operations.ReadStatsResponse](../../pkg/models/operations/readstatsresponse.md), error**
-
-### Errors
-
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
-
-## RevertTransaction
-
-Revert a ledger transaction by its ID
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="revertTransaction" method="post" path="/api/ledger/{ledger}/transactions/{txid}/revert" -->
-```go
-package main
-
-import(
-	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
-	"github.com/formancehq/formance-sdk-go/v5"
-	"math/big"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
-
-    res, err := s.Ledger.V1.RevertTransaction(ctx, operations.RevertTransactionRequest{
-        Ledger: "ledger001",
-        Txid: big.NewInt(1234),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.TransactionResponse != nil {
+    if res.Connection != nil {
         // handle response
     }
 }
@@ -1252,38 +170,34 @@ func main() {
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.RevertTransactionRequest](../../pkg/models/operations/reverttransactionrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `request`                                                                                      | [connectivity.ConnectionCreate](../../pkg/models/connectivity/connectioncreate.md)             | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.CreateConnectionSecurity](../../pkg/models/operations/createconnectionsecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
-**[*operations.RevertTransactionResponse](../../pkg/models/operations/reverttransactionresponse.md), error**
+**[*operations.CreateConnectionResponse](../../pkg/models/operations/createconnectionresponse.md), error**
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
 
-## ~~RunScript~~
+## DeleteConnection
 
-This route is deprecated, and has been merged into `POST /{ledger}/transactions`.
-
-
-> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+Delete a Connection
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="runScript" method="post" path="/api/ledger/{ledger}/script" -->
+<!-- UsageSnippet language="go" operationID="deleteConnection" method="delete" path="/api/connectivity/connections/{name}" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/ledger"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
 )
@@ -1291,28 +205,15 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Ledger.V1.RunScript(ctx, operations.RunScriptRequest{
-        Script: ledger.Script{
-            Plain: "vars {\naccount $user\n}\nsend [COIN 10] (\n\tsource = @world\n\tdestination = $user\n)\n",
-            Reference: v5.Pointer("order_1234"),
-            Vars: map[string]any{
-                "user": "users:042",
-            },
-        },
-        Ledger: "ledger001",
-        Preview: v5.Pointer(true),
-    })
+    res, err := s.Connectivity.V1.DeleteConnection(ctx, operations.DeleteConnectionRequest{
+        Name: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.ScriptResponse != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -1320,35 +221,36 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.RunScriptRequest](../../pkg/models/operations/runscriptrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
-| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.DeleteConnectionRequest](../../pkg/models/operations/deleteconnectionrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `security`                                                                                     | [operations.DeleteConnectionSecurity](../../pkg/models/operations/deleteconnectionsecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
-**[*operations.RunScriptResponse](../../pkg/models/operations/runscriptresponse.md), error**
+**[*operations.DeleteConnectionResponse](../../pkg/models/operations/deleteconnectionresponse.md), error**
 
 ### Errors
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
 
-## UpdateMapping
+## GetConnection
 
-Update the mapping of a ledger
+Get a Connection
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="updateMapping" method="put" path="/api/ledger/{ledger}/mapping" -->
+<!-- UsageSnippet language="go" operationID="getConnection" method="get" path="/api/connectivity/connections/{name}" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
 	"github.com/formancehq/formance-sdk-go/v5"
 	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
 	"log"
@@ -1357,21 +259,69 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := v5.New(
-        v5.WithSecurity(shared.Security{
-            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
-            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
-        }),
-    )
+    s := v5.New()
 
-    res, err := s.Ledger.V1.UpdateMapping(ctx, operations.UpdateMappingRequest{
-        Mapping: nil,
-        Ledger: "ledger001",
-    })
+    res, err := s.Connectivity.V1.GetConnection(ctx, operations.GetConnectionRequest{
+        Name: "<value>",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.MappingResponse != nil {
+    if res.Connection != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.GetConnectionRequest](../../pkg/models/operations/getconnectionrequest.md)   | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `security`                                                                               | [operations.GetConnectionSecurity](../../pkg/models/operations/getconnectionsecurity.md) | :heavy_check_mark:                                                                       | The security requirements to use for the request.                                        |
+| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.GetConnectionResponse](../../pkg/models/operations/getconnectionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## GetConnector
+
+Get a Connector (lean connector metadata)
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getConnector" method="get" path="/api/connectivity/connectors/{name}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.GetConnector(ctx, operations.GetConnectorRequest{
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Connector != nil {
         // handle response
     }
 }
@@ -1382,16 +332,605 @@ func main() {
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.UpdateMappingRequest](../../pkg/models/operations/updatemappingrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `request`                                                                              | [operations.GetConnectorRequest](../../pkg/models/operations/getconnectorrequest.md)   | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `security`                                                                             | [operations.GetConnectorSecurity](../../pkg/models/operations/getconnectorsecurity.md) | :heavy_check_mark:                                                                     | The security requirements to use for the request.                                      |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
 ### Response
 
-**[*operations.UpdateMappingResponse](../../pkg/models/operations/updatemappingresponse.md), error**
+**[*operations.GetConnectorResponse](../../pkg/models/operations/getconnectorresponse.md), error**
 
 ### Errors
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| ledger.ErrorResponseError | default                   | application/json          |
-| sdkerrors.SDKError        | 4XX, 5XX                  | \*/\*                     |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## GetConnectorFacets
+
+Counts distinct published `Connector`s per `facet:value` tag (split on
+the first `:`; flat tags carry no facet and are excluded), narrowed by
+the same `query` filter as the list. `_facets` can never collide with
+a connector: names are DNS labels, which cannot contain `_`.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getConnectorFacets" method="get" path="/api/connectivity/connectors/_facets" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.GetConnectorFacets(ctx, operations.GetConnectorFacetsRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.FacetDistribution != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.GetConnectorFacetsRequest](../../pkg/models/operations/getconnectorfacetsrequest.md)   | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `security`                                                                                         | [operations.GetConnectorFacetsSecurity](../../pkg/models/operations/getconnectorfacetssecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.GetConnectorFacetsResponse](../../pkg/models/operations/getconnectorfacetsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## GetConnectorVersion
+
+Get one Connector version (including its configSchema and additionalMetadata)
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getConnectorVersion" method="get" path="/api/connectivity/connectors/{name}/versions/{version}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.GetConnectorVersion(ctx, operations.GetConnectorVersionRequest{
+        Name: "<value>",
+        Version: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConnectorVersion != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.GetConnectorVersionRequest](../../pkg/models/operations/getconnectorversionrequest.md)   | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `security`                                                                                           | [operations.GetConnectorVersionSecurity](../../pkg/models/operations/getconnectorversionsecurity.md) | :heavy_check_mark:                                                                                   | The security requirements to use for the request.                                                    |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.GetConnectorVersionResponse](../../pkg/models/operations/getconnectorversionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## GetQueryCapabilities
+
+Serialized from the same allowlist the server enforces on `?query=`,
+so a UI can build its filter bar dynamically and never drift from
+what the API accepts.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="getQueryCapabilities" method="get" path="/api/connectivity/_query/capabilities" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.GetQueryCapabilities(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.QueryCapabilities != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
+| `security`                                                                                             | [operations.GetQueryCapabilitiesSecurity](../../pkg/models/operations/getquerycapabilitiessecurity.md) | :heavy_check_mark:                                                                                     | The security requirements to use for the request.                                                      |
+| `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
+
+### Response
+
+**[*operations.GetQueryCapabilitiesResponse](../../pkg/models/operations/getquerycapabilitiesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## Healthcheck
+
+Single health endpoint, probed by the stack gateway for the `/versions`
+aggregation and by service readiness/liveness probes. Ready
+means the service can reach its storage dependency.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="healthcheck" method="get" path="/api/connectivity/_healthcheck" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.Healthcheck(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Health != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
+
+### Response
+
+**[*operations.HealthcheckResponse](../../pkg/models/operations/healthcheckresponse.md), error**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| connectivity.HealthError | 500                      | application/json         |
+| connectivity.Error       | 4XX                      | application/json         |
+| connectivity.Error       | 5XX                      | application/json         |
+
+## ListConnections
+
+List connector instances for this tenant
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listConnections" method="get" path="/api/connectivity/connections" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.ListConnections(ctx, operations.ListConnectionsRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConnectionCursor != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.ListConnectionsRequest](../../pkg/models/operations/listconnectionsrequest.md)   | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `security`                                                                                   | [operations.ListConnectionsSecurity](../../pkg/models/operations/listconnectionssecurity.md) | :heavy_check_mark:                                                                           | The security requirements to use for the request.                                            |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.ListConnectionsResponse](../../pkg/models/operations/listconnectionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## ListConnectorVersions
+
+Returns the `ConnectorVersion`s published for this Connector, sorted
+ascending by semantic version. Use `configuration.version` to pin a Connection,
+or `configuration.channel` to track a maturity channel.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listConnectorVersions" method="get" path="/api/connectivity/connectors/{name}/versions" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.ListConnectorVersions(ctx, operations.ListConnectorVersionsRequest{
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConnectorVersionCursor != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.ListConnectorVersionsRequest](../../pkg/models/operations/listconnectorversionsrequest.md)   | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `security`                                                                                               | [operations.ListConnectorVersionsSecurity](../../pkg/models/operations/listconnectorversionssecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.ListConnectorVersionsResponse](../../pkg/models/operations/listconnectorversionsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## ListConnectors
+
+Returns the published `Connector`s, each carrying the identity of its
+newest Validated version (branding, tagline, tags, `latestVersion`) so
+a catalogue UI renders and filters from this single request.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="listConnectors" method="get" path="/api/connectivity/connectors" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.ListConnectors(ctx, operations.ListConnectorsRequest{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConnectorCursor != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.ListConnectorsRequest](../../pkg/models/operations/listconnectorsrequest.md)   | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `security`                                                                                 | [operations.ListConnectorsSecurity](../../pkg/models/operations/listconnectorssecurity.md) | :heavy_check_mark:                                                                         | The security requirements to use for the request.                                          |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+
+### Response
+
+**[*operations.ListConnectorsResponse](../../pkg/models/operations/listconnectorsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## PatchConnection
+
+JSON merge patch (RFC 7396) over tenant `configuration` fields only. Other fields
+are rejected with `400 unsupported_field`. `env` and `files` are string
+maps: omitted entries are preserved, including secret-backed values;
+`null` deletes a field or map entry. A supplied literal replaces the
+stored source. `connector` and `ledger` are not PATCH fields: any presence, including
+unchanged values and null, returns `400 unsupported_field`. The merged
+result must retain exactly one of `version` and `channel`, so
+switching selectors sends `null` for the other one.
+
+
+### Example Usage: rotatePassword
+
+<!-- UsageSnippet language="go" operationID="patchConnection" method="patch" path="/api/connectivity/connections/{name}" example="rotatePassword" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/connectivity"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.PatchConnection(ctx, operations.PatchConnectionRequest{
+        ConnectionPatch: connectivity.ConnectionPatch{
+            Configuration: &connectivity.ConnectionPatchConfiguration{
+                Env: map[string]*string{
+                    "STRIPE_API_KEY": v5.Pointer("<new-api-key>"),
+                },
+            },
+        },
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Connection != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: suspend
+
+<!-- UsageSnippet language="go" operationID="patchConnection" method="patch" path="/api/connectivity/connections/{name}" example="suspend" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/connectivity"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.PatchConnection(ctx, operations.PatchConnectionRequest{
+        ConnectionPatch: connectivity.ConnectionPatch{
+            Configuration: &connectivity.ConnectionPatchConfiguration{
+                Suspend: v5.Pointer(true),
+            },
+        },
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Connection != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: switchToChannel
+
+<!-- UsageSnippet language="go" operationID="patchConnection" method="patch" path="/api/connectivity/connections/{name}" example="switchToChannel" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/connectivity"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.PatchConnection(ctx, operations.PatchConnectionRequest{
+        ConnectionPatch: connectivity.ConnectionPatch{
+            Configuration: &connectivity.ConnectionPatchConfiguration{
+                Channel: connectivity.ConnectionPatchChannelStable.ToPointer(),
+                Version: nil,
+            },
+        },
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Connection != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.PatchConnectionRequest](../../pkg/models/operations/patchconnectionrequest.md)   | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `security`                                                                                   | [operations.PatchConnectionSecurity](../../pkg/models/operations/patchconnectionsecurity.md) | :heavy_check_mark:                                                                           | The security requirements to use for the request.                                            |
+| `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.PatchConnectionResponse](../../pkg/models/operations/patchconnectionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |
+
+## ReplaceConnection
+
+Full-replace semantics on mutable tenant `configuration`: omitted mutable
+fields are cleared. The API does not write fields outside its tenant scope.
+`status` is preserved. `connector` and `ledger` are immutable once set:
+omission preserves them, first assignment and unchanged values are accepted,
+and changes or null return `422 connector_immutable` or `422 ledger_immutable`. Read responses omit reference-backed entries,
+so PUT must supply the complete configuration, including required secrets.
+Use PATCH to preserve omitted configuration. Fields outside the tenant contract are rejected with
+`400 unsupported_field`.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="replaceConnection" method="put" path="/api/connectivity/connections/{name}" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/connectivity"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New()
+
+    res, err := s.Connectivity.V1.ReplaceConnection(ctx, operations.ReplaceConnectionRequest{
+        ConnectionUpdate: connectivity.ConnectionUpdate{
+            Configuration: connectivity.ConnectionConfiguration{},
+        },
+        Name: "<value>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Connection != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.ReplaceConnectionRequest](../../pkg/models/operations/replaceconnectionrequest.md)   | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `security`                                                                                       | [operations.ReplaceConnectionSecurity](../../pkg/models/operations/replaceconnectionsecurity.md) | :heavy_check_mark:                                                                               | The security requirements to use for the request.                                                |
+| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
+
+### Response
+
+**[*operations.ReplaceConnectionResponse](../../pkg/models/operations/replaceconnectionresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| connectivity.Error | 4XX                | application/json   |
+| connectivity.Error | 5XX                | application/json   |

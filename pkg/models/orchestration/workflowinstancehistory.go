@@ -8,11 +8,17 @@ import (
 )
 
 type WorkflowInstanceHistory struct {
-	Error        *string    `json:"error,omitempty"`
-	Input        Stage      `json:"input"`
-	Name         string     `json:"name"`
-	StartedAt    time.Time  `json:"startedAt"`
-	Terminated   bool       `json:"terminated"`
+	// Why the stage failed, absent when it succeeded
+	Error *string `json:"error,omitempty"`
+	// One step of a workflow, whose shape depends on the stage type
+	Input Stage `json:"input"`
+	// Name of the stage this history entry records
+	Name string `json:"name"`
+	// When the stage started
+	StartedAt time.Time `json:"startedAt"`
+	// Whether the stage has finished
+	Terminated bool `json:"terminated"`
+	// When the stage finished, absent while it is still running
 	TerminatedAt *time.Time `json:"terminatedAt,omitempty"`
 }
 

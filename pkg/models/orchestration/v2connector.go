@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// V2Connector - The payment provider behind a connector
 type V2Connector string
 
 const (

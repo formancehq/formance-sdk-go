@@ -5,4 +5,4 @@
 
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `Data`                                                            | [][ledger.Transaction](../../../pkg/models/ledger/transaction.md) | :heavy_check_mark:                                                | N/A                                                               |
+| `Data`                                                            | [][ledger.Transaction](../../../pkg/models/ledger/transaction.md) | :heavy_check_mark:                                                | The transactions that were created                                |

@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// Outcome - How the attempt ended. A retryable failure is retried, a permanent failure is not
 type Outcome string
 
 const (
@@ -39,17 +40,28 @@ func (e *Outcome) UnmarshalJSON(data []byte) error {
 }
 
 type DeliveryAttempt struct {
-	AttemptNumber    int64     `json:"attemptNumber"`
-	CreatedAt        time.Time `json:"createdAt"`
-	DeliveryID       string    `json:"deliveryID"`
-	DurationMillis   *int64    `json:"durationMillis,omitempty"`
-	Endpoint         string    `json:"endpoint"`
-	Error            *string   `json:"error,omitempty"`
-	ID               string    `json:"id"`
-	Outcome          Outcome   `json:"outcome"`
-	ReplayGeneration int64     `json:"replayGeneration"`
-	ResponseExcerpt  *string   `json:"responseExcerpt,omitempty"`
-	StatusCode       int64     `json:"statusCode"`
+	// Position of this attempt within its retry cycle
+	AttemptNumber int64 `json:"attemptNumber"`
+	// When the attempt was made
+	CreatedAt time.Time `json:"createdAt"`
+	// Identifier of the delivery this attempt belongs to
+	DeliveryID string `json:"deliveryID"`
+	// How long the attempt took, in milliseconds
+	DurationMillis *int64 `json:"durationMillis,omitempty"`
+	// URL the attempt was sent to
+	Endpoint string `json:"endpoint"`
+	// Error reported by the attempt, when it did not succeed
+	Error *string `json:"error,omitempty"`
+	// Unique identifier of the attempt
+	ID string `json:"id"`
+	// How the attempt ended. A retryable failure is retried, a permanent failure is not
+	Outcome Outcome `json:"outcome"`
+	// Retry cycle this attempt belongs to
+	ReplayGeneration int64 `json:"replayGeneration"`
+	// Truncated body returned by the endpoint, kept for troubleshooting
+	ResponseExcerpt *string `json:"responseExcerpt,omitempty"`
+	// HTTP status code returned by the endpoint
+	StatusCode int64 `json:"statusCode"`
 }
 
 func (d DeliveryAttempt) MarshalJSON() ([]byte, error) {

@@ -3,6 +3,7 @@
 package orchestration
 
 type ListTriggersResponse struct {
+	// The triggers defined on this stack
 	Data []Trigger `json:"data"`
 }
 

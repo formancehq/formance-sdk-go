@@ -3,6 +3,7 @@
 package webhooks
 
 type ConfigResponse struct {
+	// A webhook endpoint together with the event types it subscribes to
 	Data WebhooksConfig `json:"data"`
 }
 

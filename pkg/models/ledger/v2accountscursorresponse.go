@@ -8,6 +8,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2AccountsCursorResponseCursor - Paginated cursor wrapping the list of accounts
 type V2AccountsCursorResponseCursor struct {
 	Data     []V2Account `json:"data"`
 	HasMore  bool        `json:"hasMore"`
@@ -65,6 +66,7 @@ func (v *V2AccountsCursorResponseCursor) GetPrevious() *string {
 // #region class-body-v2accountscursorresponsecursor
 // #endregion class-body-v2accountscursorresponsecursor
 
+// Resource - The resource type carried by this cursor
 type Resource string
 
 const (
@@ -89,8 +91,10 @@ func (e *Resource) UnmarshalJSON(data []byte) error {
 }
 
 type V2AccountsCursorResponse struct {
-	Cursor   V2AccountsCursorResponseCursor `json:"cursor"`
-	Resource *Resource                      `json:"resource,omitempty"`
+	// Paginated cursor wrapping the list of accounts
+	Cursor V2AccountsCursorResponseCursor `json:"cursor"`
+	// The resource type carried by this cursor
+	Resource *Resource `json:"resource,omitempty"`
 }
 
 func (v V2AccountsCursorResponse) MarshalJSON() ([]byte, error) {

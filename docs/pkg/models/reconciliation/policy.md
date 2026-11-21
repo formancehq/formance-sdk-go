@@ -1,13 +1,15 @@
 # Policy
 
+A reconciliation policy pairing a ledger query with a payments pool
+
 
 ## Fields
 
-| Field                                     | Type                                      | Required                                  | Description                               | Example                                   |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `CreatedAt`                               | [time.Time](https://pkg.go.dev/time#Time) | :heavy_check_mark:                        | N/A                                       | 2021-01-01T00:00:00.000Z                  |
-| `ID`                                      | `string`                                  | :heavy_check_mark:                        | N/A                                       | XXX                                       |
-| `LedgerName`                              | `string`                                  | :heavy_check_mark:                        | N/A                                       | default                                   |
-| `LedgerQuery`                             | map[string]`any`                          | :heavy_check_mark:                        | N/A                                       |                                           |
-| `Name`                                    | `string`                                  | :heavy_check_mark:                        | N/A                                       | XXX                                       |
-| `PaymentsPoolID`                          | `string`                                  | :heavy_check_mark:                        | N/A                                       | XXX                                       |
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `CreatedAt`                                                         | [time.Time](https://pkg.go.dev/time#Time)                           | :heavy_check_mark:                                                  | When the policy was created                                         | 2021-01-01T00:00:00.000Z                                            |
+| `ID`                                                                | `string`                                                            | :heavy_check_mark:                                                  | Unique identifier of the policy                                     | XXX                                                                 |
+| `LedgerName`                                                        | `string`                                                            | :heavy_check_mark:                                                  | Name of the ledger the policy reconciles against                    | default                                                             |
+| `LedgerQuery`                                                       | map[string]`any`                                                    | :heavy_check_mark:                                                  | Filter selecting the ledger accounts whose balances are reconciled  |                                                                     |
+| `Name`                                                              | `string`                                                            | :heavy_check_mark:                                                  | Human-readable name of the policy                                   | XXX                                                                 |
+| `PaymentsPoolID`                                                    | `string`                                                            | :heavy_check_mark:                                                  | Identifier of the payments pool the ledger side is compared against | XXX                                                                 |

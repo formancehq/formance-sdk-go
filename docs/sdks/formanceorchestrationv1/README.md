@@ -19,6 +19,7 @@
 * [ListTriggersOccurrences](#listtriggersoccurrences) - List triggers occurrences
 * [ListWorkflows](#listworkflows) - List registered workflows
 * [ReadTrigger](#readtrigger) - Read trigger
+* [ResumeActivity](#resumeactivity) - Resume a paused activity
 * [RunWorkflow](#runworkflow) - Run workflow
 * [SendEvent](#sendevent) - Send an event to a running workflow
 
@@ -76,10 +77,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## CreateTrigger
 
@@ -132,10 +133,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## CreateWorkflow
 
@@ -188,10 +189,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## DeleteTrigger
 
@@ -247,10 +248,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## DeleteWorkflow
 
@@ -306,10 +307,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## GetInstance
 
@@ -365,10 +366,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## GetInstanceHistory
 
@@ -424,10 +425,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## GetInstanceStageHistory
 
@@ -484,10 +485,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## GetServerInfoOrchestration
 
@@ -539,10 +540,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## GetWorkflow
 
@@ -598,10 +599,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## ListInstances
 
@@ -658,10 +659,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## ListTriggers
 
@@ -715,10 +716,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## ListTriggersOccurrences
 
@@ -774,10 +775,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## ListWorkflows
 
@@ -829,10 +830,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## ReadTrigger
 
@@ -888,10 +889,79 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
+
+## ResumeActivity
+
+Resume a paused activity identified by temporalRunID and pausedAt.
+Use both values from the paused activity projection. A stale run id or
+pause timestamp returns a conflict, preventing a delayed resend from
+resuming an activity in a newer run or a subsequent pause generation.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="resumeActivity" method="post" path="/api/orchestration/instances/{instanceID}/stages/{number}/activities/{activityID}/resume" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/shared"
+	"github.com/formancehq/formance-sdk-go/v5"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/types"
+	"github.com/formancehq/formance-sdk-go/v5/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v5.New(
+        v5.WithSecurity(shared.Security{
+            ClientID: v5.Pointer("<YOUR_CLIENT_ID_HERE>"),
+            ClientSecret: v5.Pointer("<YOUR_CLIENT_SECRET_HERE>"),
+        }),
+    )
+
+    res, err := s.Orchestration.V1.ResumeActivity(ctx, operations.ResumeActivityRequest{
+        RequestBody: operations.ResumeActivityRequestBody{
+            PausedAt: types.MustTimeFromString("2025-06-22T15:55:52.985Z"),
+            TemporalRunID: "<id>",
+        },
+        ActivityID: "<id>",
+        InstanceID: "<id>",
+        Number: 113977,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Error != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.ResumeActivityRequest](../../pkg/models/operations/resumeactivityrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+
+### Response
+
+**[*operations.ResumeActivityResponse](../../pkg/models/operations/resumeactivityresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## RunWorkflow
 
@@ -947,10 +1017,10 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |
 
 ## SendEvent
 
@@ -1006,7 +1076,7 @@ func main() {
 
 ### Errors
 
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| orchestration.Error | default             | application/json    |
-| sdkerrors.SDKError  | 4XX, 5XX            | \*/\*               |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| orchestration.Error1 | default              | application/json     |
+| sdkerrors.SDKError   | 4XX, 5XX             | \*/\*                |

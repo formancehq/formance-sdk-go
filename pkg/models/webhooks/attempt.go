@@ -7,17 +7,28 @@ import (
 	"time"
 )
 
+// Attempt - A single delivery attempt made against a webhook endpoint
 type Attempt struct {
-	Config         WebhooksConfig `json:"config"`
-	CreatedAt      time.Time      `json:"createdAt"`
-	ID             string         `json:"id"`
-	NextRetryAfter *time.Time     `json:"nextRetryAfter,omitempty"`
-	Payload        string         `json:"payload"`
-	RetryAttempt   int64          `json:"retryAttempt"`
-	Status         string         `json:"status"`
-	StatusCode     int64          `json:"statusCode"`
-	UpdatedAt      time.Time      `json:"updatedAt"`
-	WebhookID      string         `json:"webhookID"`
+	// A webhook endpoint together with the event types it subscribes to
+	Config WebhooksConfig `json:"config"`
+	// When the attempt was created
+	CreatedAt time.Time `json:"createdAt"`
+	// Unique identifier of the attempt
+	ID string `json:"id"`
+	// When the next retry is scheduled, absent once the attempt is settled
+	NextRetryAfter *time.Time `json:"nextRetryAfter,omitempty"`
+	// The event body sent to the endpoint
+	Payload string `json:"payload"`
+	// Position of this attempt in the retry sequence
+	RetryAttempt int64 `json:"retryAttempt"`
+	// Current status of the attempt
+	Status string `json:"status"`
+	// HTTP status code returned by the endpoint
+	StatusCode int64 `json:"statusCode"`
+	// When the attempt was last modified
+	UpdatedAt time.Time `json:"updatedAt"`
+	// Identifier of the webhook this attempt belongs to
+	WebhookID string `json:"webhookID"`
 }
 
 func (a Attempt) MarshalJSON() ([]byte, error) {

@@ -8,13 +8,20 @@ import (
 	"time"
 )
 
+// Transaction - A transaction recorded in the ledger, carrying its postings and metadata
 type Transaction struct {
-	ID        *big.Int          `json:"id"`
-	Metadata  map[string]string `json:"metadata"`
-	Postings  []Posting         `json:"postings"`
-	Reference *string           `json:"reference,omitempty"`
-	Reverted  bool              `json:"reverted"`
-	Timestamp time.Time         `json:"timestamp"`
+	// Unique sequential identifier for this transaction within the ledger
+	ID *big.Int `json:"id"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata"`
+	// The fund movements making up the transaction
+	Postings []Posting `json:"postings"`
+	// Optional caller-supplied identifier, unique within the ledger, used to deduplicate transactions
+	Reference *string `json:"reference,omitempty"`
+	// Indicates if the transaction has been reverted
+	Reverted bool `json:"reverted"`
+	// The transaction time: when the transaction is considered to have occurred. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp time.Time `json:"timestamp"`
 }
 
 func (t Transaction) MarshalJSON() ([]byte, error) {

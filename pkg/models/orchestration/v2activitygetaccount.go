@@ -2,8 +2,11 @@
 
 package orchestration
 
+// V2ActivityGetAccount - Arguments for the activity that reads a ledger account
 type V2ActivityGetAccount struct {
-	ID     string `json:"id"`
+	// Address of the ledger account to read
+	ID string `json:"id"`
+	// Name of the ledger holding the account
 	Ledger string `json:"ledger"`
 }
 
