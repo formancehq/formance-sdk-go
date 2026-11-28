@@ -3,9 +3,12 @@
 package ledger
 
 type ErrorResponse struct {
-	Details      *string    `json:"details,omitempty"`
-	ErrorCode    ErrorsEnum `json:"errorCode"`
-	ErrorMessage string     `json:"errorMessage"`
+	// Optional link carrying additional context about the error, such as a Numscript playground URL reproducing it
+	Details *string `json:"details,omitempty"`
+	// Machine-readable error code identifying the failure
+	ErrorCode ErrorsEnum `json:"errorCode"`
+	// Human-readable description of the error
+	ErrorMessage string `json:"errorMessage"`
 }
 
 func (e *ErrorResponse) GetDetails() *string {

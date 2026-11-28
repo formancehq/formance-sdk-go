@@ -7,9 +7,11 @@ import (
 )
 
 type V2BulkElementCreateTransaction struct {
+	// The bulk action this element performs
 	Action string             `json:"action"`
 	Data   *V2PostTransaction `json:"data,omitempty"`
-	Ik     *string            `json:"ik,omitempty"`
+	// Idempotency key scoped to this element, making it safe to retry the bulk request
+	Ik *string `json:"ik,omitempty"`
 }
 
 func (v V2BulkElementCreateTransaction) MarshalJSON() ([]byte, error) {

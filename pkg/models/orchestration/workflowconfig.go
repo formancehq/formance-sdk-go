@@ -2,9 +2,36 @@
 
 package orchestration
 
+import (
+	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
+)
+
+// WorkflowConfig - The stages a workflow runs, in order
 type WorkflowConfig struct {
-	Name   *string          `json:"name,omitempty"`
+	// Total attempts per stage activity, including the initial attempt. Stored at workflow creation; defaults to 15 when omitted.
+	ActivityMaxAttempts *int `default:"15" json:"activityMaxAttempts"`
+	// Human-readable name for the workflow
+	Name *string `json:"name,omitempty"`
+	// The stages executed in order when the workflow runs
 	Stages []map[string]any `json:"stages"`
+}
+
+func (w WorkflowConfig) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *WorkflowConfig) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (w *WorkflowConfig) GetActivityMaxAttempts() *int {
+	if w == nil {
+		return nil
+	}
+	return w.ActivityMaxAttempts
 }
 
 func (w *WorkflowConfig) GetName() *string {

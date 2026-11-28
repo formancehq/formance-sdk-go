@@ -3,6 +3,7 @@
 package ledger
 
 type V2GetLedgerResponse struct {
+	// A ledger and its configuration
 	Data V2Ledger `json:"data"`
 }
 

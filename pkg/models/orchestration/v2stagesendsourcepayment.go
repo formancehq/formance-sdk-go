@@ -6,6 +6,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2StageSendSourcePayment - Take the funds from a payment
 type V2StageSendSourcePayment struct {
 	// Enables unbounded overdraft on the throughAccount when set to true.
 	// Only applies when throughAccount is not "world" (which already has unbounded overdraft).
@@ -15,7 +16,8 @@ type V2StageSendSourcePayment struct {
 	// Defaults to "payment:{paymentID}" format.
 	//
 	HoldingAccount *string `json:"holdingAccount,omitempty"`
-	ID             string  `json:"id"`
+	// Identifier of the payment to take funds from
+	ID string `json:"id"`
 	// Ledger to use for payment ingestion.
 	// Defaults to the internal orchestration ledger.
 	//

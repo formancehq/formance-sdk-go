@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// ScheduleKind - Whether the rule runs only when triggered or on a recurring cron schedule
 type ScheduleKind string
 
 const (
@@ -33,12 +34,16 @@ func (e *ScheduleKind) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Schedule - When a rule runs, either on demand or on a cron expression
 type Schedule struct {
-	Expr *string      `json:"expr,omitempty"`
+	// Cron expression driving the schedule, required when kind is cron
+	Expr *string `json:"expr,omitempty"`
+	// Whether the rule runs only when triggered or on a recurring cron schedule
 	Kind ScheduleKind `json:"kind"`
 	// Go duration string
 	SafetyMargin *string `json:"safetyMargin,omitempty"`
-	Tz           *string `json:"tz,omitempty"`
+	// Timezone the cron expression is interpreted in
+	Tz *string `json:"tz,omitempty"`
 }
 
 func (s *Schedule) GetExpr() *string {

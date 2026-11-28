@@ -3,8 +3,11 @@
 package gateway
 
 type Version struct {
-	Health  bool   `json:"health"`
-	Name    string `json:"name"`
+	// Whether the component is reporting itself healthy
+	Health bool `json:"health"`
+	// Name of the component
+	Name string `json:"name"`
+	// Version of the component currently deployed
 	Version string `json:"version"`
 }
 

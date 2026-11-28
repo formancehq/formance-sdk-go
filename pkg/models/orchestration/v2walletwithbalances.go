@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Balances - Aggregated funds held by the wallet, keyed by asset
 type Balances struct {
 	Main V2AssetHolder `json:"main"`
 }
@@ -18,15 +19,20 @@ func (b *Balances) GetMain() V2AssetHolder {
 	return b.Main
 }
 
+// V2WalletWithBalances - A wallet together with the funds it currently holds
 type V2WalletWithBalances struct {
-	Balances  Balances  `json:"balances"`
+	// Aggregated funds held by the wallet, keyed by asset
+	Balances Balances `json:"balances"`
+	// When the wallet was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The unique ID of the wallet.
-	ID     string `json:"id"`
+	ID string `json:"id"`
+	// Name of the ledger backing this wallet
 	Ledger string `json:"ledger"`
 	// Metadata associated with the wallet.
 	Metadata map[string]string `json:"metadata"`
-	Name     string            `json:"name"`
+	// Human-readable name of the wallet
+	Name string `json:"name"`
 }
 
 func (v V2WalletWithBalances) MarshalJSON() ([]byte, error) {

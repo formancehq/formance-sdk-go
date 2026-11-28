@@ -130,6 +130,7 @@ func (u Evidence) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Evidence: all fields are null")
 }
 
+// Result - Whether the rule passed, failed, or could not be evaluated
 type Result string
 
 const (
@@ -159,19 +160,28 @@ func (e *Result) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Evaluation - One run of a rule, carrying its outcome and cost
 type Evaluation struct {
-	CostUnits *int64    `json:"costUnits,omitempty"`
+	// Cumulative CEL runtime cost of the evaluation, used to track expensive rules
+	CostUnits *int64 `json:"costUnits,omitempty"`
+	// When the evaluation record was created
 	CreatedAt time.Time `json:"createdAt"`
-	EndedAt   time.Time `json:"endedAt"`
-	Error     *string   `json:"error,omitempty"`
+	// When the evaluation finished
+	EndedAt time.Time `json:"endedAt"`
+	// Why the evaluation could not complete, when its result reports an error
+	Error *string `json:"error,omitempty"`
 	// For PASS/FAIL: the per-fingerprint roster. Each PASS entry carries a compact `proof`: the observed balances that make the check hold, with self-describing keys — both sides where two are compared, e.g. {"ledger":"523500","pool":"-523500"} (drift), {"left":…,"right":…} (source_parity), {"positive":…,"negative":…} (ledger_invariant), or {"balance":…} (account_threshold). These reuse the FAIL balance keys, so under tolerance the residual (left−right) is visible without recomputation. Each FAIL entry carries the full `evidence` breakdown (balances, drift, tolerance, compiled CEL). Bounded by asset count (per-asset granularity; per-account is parked). An empty array means no outcomes were produced (no assets matched). For ERROR: an object describing the engine failure.
 	Evidence *Evidence `json:"evidence,omitempty"`
-	ID       string    `json:"id"`
+	// Unique identifier of the evaluation
+	ID string `json:"id"`
 	// Effective historical PITs used by sources. For a Payments `latest` read, the value is the successful observation time because the upstream response has no snapshot timestamp; the evaluation evidence is frozen, but exact historical replay of that latest snapshot is not guaranteed.
 	PitPerSource map[string]time.Time `json:"pitPerSource,omitempty"`
-	Result       Result               `json:"result"`
-	RuleID       string               `json:"ruleID"`
-	StartedAt    time.Time            `json:"startedAt"`
+	// Whether the rule passed, failed, or could not be evaluated
+	Result Result `json:"result"`
+	// Identifier of the rule that was evaluated
+	RuleID string `json:"ruleID"`
+	// When the evaluation started
+	StartedAt time.Time `json:"startedAt"`
 }
 
 func (e Evaluation) MarshalJSON() ([]byte, error) {

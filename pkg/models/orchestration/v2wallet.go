@@ -8,13 +8,16 @@ import (
 )
 
 type V2Wallet struct {
+	// When the wallet was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The unique ID of the wallet.
-	ID     string `json:"id"`
+	ID string `json:"id"`
+	// Name of the ledger backing this wallet
 	Ledger string `json:"ledger"`
 	// Metadata associated with the wallet.
 	Metadata map[string]string `json:"metadata"`
-	Name     string            `json:"name"`
+	// Human-readable name of the wallet
+	Name string `json:"name"`
 }
 
 func (v V2Wallet) MarshalJSON() ([]byte, error) {

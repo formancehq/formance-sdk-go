@@ -3,8 +3,11 @@
 package ledger
 
 type V2CreateLedgerRequest struct {
-	Bucket   *string           `json:"bucket,omitempty"`
+	// Name of the storage bucket backing the ledger. Ledgers sharing a bucket share a database schema
+	Bucket *string `json:"bucket,omitempty"`
+	// Feature flags to enable on the ledger, keyed by feature name
 	Features map[string]string `json:"features,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
 	Metadata map[string]string `json:"metadata,omitempty"`
 }
 

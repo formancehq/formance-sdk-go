@@ -7,9 +7,12 @@ import (
 )
 
 type ErrorResponse struct {
-	Details      *string    `json:"details,omitempty"`
-	ErrorCode    ErrorsEnum `json:"errorCode"`
-	ErrorMessage string     `json:"errorMessage"`
+	// Optional link carrying additional context about the error
+	Details *string `json:"details,omitempty"`
+	// Machine-readable error code identifying the failure
+	ErrorCode ErrorsEnum `json:"errorCode"`
+	// Human-readable description of the error
+	ErrorMessage string `json:"errorMessage"`
 }
 
 var _ error = &ErrorResponse{}

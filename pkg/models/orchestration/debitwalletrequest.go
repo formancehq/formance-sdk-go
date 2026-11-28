@@ -7,10 +7,15 @@ import (
 	"time"
 )
 
+// DebitWalletRequest - A debit to apply to a wallet
 type DebitWalletRequest struct {
-	Amount      Monetary `json:"amount"`
-	Balances    []string `json:"balances,omitempty"`
-	Description *string  `json:"description,omitempty"`
+	// An amount together with the asset it is denominated in
+	Amount Monetary `json:"amount"`
+	// Names of the balances to debit from, in order. Defaults to the main balance when omitted
+	Balances []string `json:"balances,omitempty"`
+	// Human-readable reason for the debit
+	Description *string `json:"description,omitempty"`
+	// The counterparty of a wallet movement, either a ledger account or another wallet
 	Destination *Subject `json:"destination,omitempty"`
 	// Metadata associated with the wallet.
 	Metadata map[string]string `json:"metadata"`

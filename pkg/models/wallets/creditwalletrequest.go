@@ -8,14 +8,18 @@ import (
 )
 
 type CreditWalletRequest struct {
+	// An amount together with the asset it is denominated in
 	Amount Monetary `json:"amount"`
 	// The balance to credit
 	Balance *string `json:"balance,omitempty"`
 	// Metadata associated with the wallet.
-	Metadata  map[string]string `json:"metadata,omitempty"`
-	Reference *string           `json:"reference,omitempty"`
-	Sources   []Subject         `json:"sources,omitempty"`
-	Timestamp *time.Time        `json:"timestamp,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Optional caller-supplied identifier used to deduplicate the credit
+	Reference *string `json:"reference,omitempty"`
+	// Where the funds come from. Defaults to the world account when omitted
+	Sources []Subject `json:"sources,omitempty"`
+	// The transaction time to record, letting you backdate or postdate the credit. See [bi- temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
 
 func (c CreditWalletRequest) MarshalJSON() ([]byte, error) {

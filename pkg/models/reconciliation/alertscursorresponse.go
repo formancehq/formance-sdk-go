@@ -2,6 +2,7 @@
 
 package reconciliation
 
+// AlertsCursorResponseCursor - Paginated cursor wrapping the list of alerts
 type AlertsCursorResponseCursor struct {
 	Data     []Alert `json:"data"`
 	HasMore  bool    `json:"hasMore"`
@@ -47,6 +48,7 @@ func (a *AlertsCursorResponseCursor) GetPrevious() *string {
 
 // AlertsCursorResponse - OK
 type AlertsCursorResponse struct {
+	// Paginated cursor wrapping the list of alerts
 	Cursor AlertsCursorResponseCursor `json:"cursor"`
 }
 

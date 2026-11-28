@@ -11,9 +11,13 @@ import (
 // `until` is in the future the alert keeps failing and keeps counting
 // against period-green — only its notifications are suppressed.
 type Snooze struct {
-	At    time.Time `json:"at"`
-	By    string    `json:"by"`
-	Note  *string   `json:"note,omitempty"`
+	// When the alert was snoozed
+	At time.Time `json:"at"`
+	// Who snoozed the alert
+	By string `json:"by"`
+	// Free-text note left by whoever snoozed the alert
+	Note *string `json:"note,omitempty"`
+	// When the mute expires and notifications resume. Must be in the future
 	Until time.Time `json:"until"`
 }
 

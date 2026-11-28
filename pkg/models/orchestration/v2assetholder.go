@@ -8,6 +8,7 @@ import (
 )
 
 type V2AssetHolder struct {
+	// Amounts held, keyed by asset
 	Assets map[string]*big.Int `json:"assets"`
 }
 

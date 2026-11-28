@@ -4,6 +4,7 @@ package reconciliation
 
 // EvaluationResponse - OK
 type EvaluationResponse struct {
+	// One run of a rule, carrying its outcome and cost
 	Data Evaluation `json:"data"`
 }
 

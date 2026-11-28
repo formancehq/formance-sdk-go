@@ -1,5 +1,7 @@
 # SchemasErrorCode
 
+Machine-readable error code identifying the failure
+
 ## Example Usage
 
 ```go
@@ -18,3 +20,4 @@ value := orchestration.SchemasErrorCodeValidation
 | `SchemasErrorCodeValidation` | VALIDATION                   |
 | `SchemasErrorCodeNotFound`   | NOT_FOUND                    |
 | `SchemasErrorCodeInternal`   | INTERNAL                     |
+| `SchemasErrorCodeConflict`   | CONFLICT                     |

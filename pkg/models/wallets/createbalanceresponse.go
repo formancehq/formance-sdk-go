@@ -3,6 +3,7 @@
 package wallets
 
 type CreateBalanceResponse struct {
+	// A named balance within a wallet, optionally carrying an expiry date
 	Data Balance `json:"data"`
 }
 

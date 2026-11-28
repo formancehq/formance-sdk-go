@@ -3,6 +3,7 @@
 package wallets
 
 type DebitWalletResponse struct {
+	// Funds locked by a pending debit, later either confirmed or voided
 	Data Hold `json:"data"`
 }
 

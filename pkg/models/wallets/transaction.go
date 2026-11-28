@@ -8,15 +8,22 @@ import (
 )
 
 type Transaction struct {
-	ID     int64   `json:"id"`
+	// Unique sequential identifier for this transaction within the ledger
+	ID int64 `json:"id"`
+	// Name of the ledger the transaction was recorded in
 	Ledger *string `json:"ledger,omitempty"`
 	// Metadata associated with the wallet.
-	Metadata          map[string]string            `json:"metadata"`
+	Metadata map[string]string `json:"metadata"`
+	// Volumes aggregated per account and per asset
 	PostCommitVolumes map[string]map[string]Volume `json:"postCommitVolumes,omitempty"`
-	Postings          []Posting                    `json:"postings"`
-	PreCommitVolumes  map[string]map[string]Volume `json:"preCommitVolumes,omitempty"`
-	Reference         *string                      `json:"reference,omitempty"`
-	Timestamp         time.Time                    `json:"timestamp"`
+	// The fund movements making up the transaction
+	Postings []Posting `json:"postings"`
+	// Volumes aggregated per account and per asset
+	PreCommitVolumes map[string]map[string]Volume `json:"preCommitVolumes,omitempty"`
+	// Optional caller-supplied identifier, unique within the ledger, used to deduplicate transactions
+	Reference *string `json:"reference,omitempty"`
+	// The transaction time: when the transaction is considered to have occurred. See [bi- temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp time.Time `json:"timestamp"`
 }
 
 func (t Transaction) MarshalJSON() ([]byte, error) {

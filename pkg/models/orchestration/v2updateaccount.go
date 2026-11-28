@@ -6,9 +6,13 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2UpdateAccount - Metadata to set on a ledger account
 type V2UpdateAccount struct {
-	ID       string            `json:"id"`
-	Ledger   string            `json:"ledger"`
+	// Address of the ledger account to update
+	ID string `json:"id"`
+	// Name of the ledger holding the account
+	Ledger string `json:"ledger"`
+	// Metadata to set on the account
 	Metadata map[string]string `json:"metadata"`
 }
 

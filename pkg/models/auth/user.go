@@ -2,9 +2,13 @@
 
 package auth
 
+// User - A user known to the stack's identity provider
 type User struct {
-	Email   *string `json:"email,omitempty"`
-	ID      *string `json:"id,omitempty"`
+	// Email address of the user
+	Email *string `json:"email,omitempty"`
+	// Unique identifier of the user
+	ID *string `json:"id,omitempty"`
+	// Subject claim identifying the user with the identity provider
 	Subject *string `json:"subject,omitempty"`
 }
 

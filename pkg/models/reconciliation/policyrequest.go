@@ -3,10 +3,14 @@
 package reconciliation
 
 type PolicyRequest struct {
-	LedgerName     string         `json:"ledgerName"`
-	LedgerQuery    map[string]any `json:"ledgerQuery"`
-	Name           string         `json:"name"`
-	PaymentsPoolID string         `json:"paymentsPoolID"`
+	// Name of the ledger the policy reconciles against
+	LedgerName string `json:"ledgerName"`
+	// Filter selecting the ledger accounts whose balances are reconciled
+	LedgerQuery map[string]any `json:"ledgerQuery"`
+	// Human-readable name for the policy
+	Name string `json:"name"`
+	// Identifier of the payments pool the ledger side is compared against
+	PaymentsPoolID string `json:"paymentsPoolID"`
 }
 
 func (p *PolicyRequest) GetLedgerName() string {

@@ -3,6 +3,7 @@
 package ledger
 
 type V2CreatePipelineRequest struct {
+	// Identifier of the exporter this pipeline feeds
 	ExporterID string `json:"exporterID"`
 }
 

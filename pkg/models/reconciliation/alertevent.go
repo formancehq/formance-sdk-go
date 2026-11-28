@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// NewStatus - Status after this event
 type NewStatus string
 
 const (
@@ -38,6 +39,7 @@ func (e *NewStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// PrevStatus - Status before this event. Null only for the alert's inaugural event
 type PrevStatus string
 
 const (
@@ -67,6 +69,7 @@ func (e *PrevStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Type - What happened, whether an evaluation outcome or a manual transition
 type Type string
 
 const (
@@ -117,18 +120,26 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 // a transition kept for audit but deliberately not published (a repeated
 // identical fail, or a fail muted by an active snooze).
 type AlertEvent struct {
-	AlertID      string    `json:"alertID"`
-	At           time.Time `json:"at"`
-	EvaluationID *string   `json:"evaluationID,omitempty"`
-	ID           string    `json:"id"`
-	IsReopen     bool      `json:"isReopen"`
-	NewStatus    NewStatus `json:"newStatus"`
+	// Identifier of the alert this event belongs to
+	AlertID string `json:"alertID"`
+	// When the event occurred
+	At time.Time `json:"at"`
+	// Identifier of the evaluation that produced this event, absent for manual transitions
+	EvaluationID *string `json:"evaluationID,omitempty"`
+	// Unique identifier of the event
+	ID string `json:"id"`
+	// True when a failure landed on an already-resolved alert, reopening it
+	IsReopen bool `json:"isReopen"`
+	// Status after this event
+	NewStatus NewStatus `json:"newStatus"`
 	// Whether this transition was published to the message bus. false = recorded for audit but suppressed.
 	Notify bool `json:"notify"`
 	// Event-type-specific payload (evidence for fail, resolution for resolve/accept, ack object for ack, snooze object for snooze).
-	Payload    map[string]any `json:"payload,omitempty"`
-	PrevStatus *PrevStatus    `json:"prevStatus,omitempty"`
-	Type       Type           `json:"type"`
+	Payload map[string]any `json:"payload,omitempty"`
+	// Status before this event. Null only for the alert's inaugural event
+	PrevStatus *PrevStatus `json:"prevStatus,omitempty"`
+	// What happened, whether an evaluation outcome or a manual transition
+	Type Type `json:"type"`
 }
 
 func (a AlertEvent) MarshalJSON() ([]byte, error) {
