@@ -9,11 +9,16 @@ import (
 )
 
 type V2Transaction struct {
-	Metadata  map[string]string `json:"metadata"`
-	Postings  []V2Posting       `json:"postings"`
-	Reference *string           `json:"reference,omitempty"`
-	Timestamp time.Time         `json:"timestamp"`
-	Txid      *big.Int          `json:"txid"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata"`
+	// The fund movements making up the transaction
+	Postings []V2Posting `json:"postings"`
+	// Optional caller-supplied identifier, unique within the ledger, used to deduplicate transactions
+	Reference *string `json:"reference,omitempty"`
+	// The transaction time: when the transaction is considered to have occurred. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp time.Time `json:"timestamp"`
+	// Unique sequential identifier for this transaction within the ledger
+	Txid *big.Int `json:"txid"`
 }
 
 func (v V2Transaction) MarshalJSON() ([]byte, error) {

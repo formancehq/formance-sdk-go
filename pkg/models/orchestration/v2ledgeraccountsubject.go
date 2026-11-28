@@ -7,8 +7,10 @@ import (
 )
 
 type V2LedgerAccountSubject struct {
+	// Address of the ledger account
 	Identifier string `json:"identifier"`
-	Type       string `json:"type"`
+	// Discriminator identifying this subject as a ledger account
+	Type string `json:"type"`
 }
 
 func (v V2LedgerAccountSubject) MarshalJSON() ([]byte, error) {

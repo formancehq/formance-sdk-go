@@ -3,6 +3,7 @@
 package auth
 
 type CreateSecretResponse struct {
+	// A client secret. The full value is returned only at creation and cannot be retrieved again
 	Data *Secret `json:"data,omitempty"`
 }
 

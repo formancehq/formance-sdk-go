@@ -7,6 +7,7 @@ import (
 	"math/big"
 )
 
+// V2Monetary - An amount together with the asset it is denominated in
 type V2Monetary struct {
 	// The amount of the monetary value.
 	Amount *big.Int `json:"amount"`

@@ -45,9 +45,11 @@ func (d *Data) GetTargetType() V2TargetType {
 }
 
 type V2BulkElementAddMetadata struct {
-	Action string  `json:"action"`
-	Data   *Data   `json:"data,omitempty"`
-	Ik     *string `json:"ik,omitempty"`
+	// The bulk action this element performs
+	Action string `json:"action"`
+	Data   *Data  `json:"data,omitempty"`
+	// Idempotency key scoped to this element, making it safe to retry the bulk request
+	Ik *string `json:"ik,omitempty"`
 }
 
 func (v V2BulkElementAddMetadata) MarshalJSON() ([]byte, error) {

@@ -7,13 +7,20 @@ import (
 	"time"
 )
 
+// Policy - A reconciliation policy pairing a ledger query with a payments pool
 type Policy struct {
-	CreatedAt      time.Time      `json:"createdAt"`
-	ID             string         `json:"id"`
-	LedgerName     string         `json:"ledgerName"`
-	LedgerQuery    map[string]any `json:"ledgerQuery"`
-	Name           string         `json:"name"`
-	PaymentsPoolID string         `json:"paymentsPoolID"`
+	// When the policy was created
+	CreatedAt time.Time `json:"createdAt"`
+	// Unique identifier of the policy
+	ID string `json:"id"`
+	// Name of the ledger the policy reconciles against
+	LedgerName string `json:"ledgerName"`
+	// Filter selecting the ledger accounts whose balances are reconciled
+	LedgerQuery map[string]any `json:"ledgerQuery"`
+	// Human-readable name of the policy
+	Name string `json:"name"`
+	// Identifier of the payments pool the ledger side is compared against
+	PaymentsPoolID string `json:"paymentsPoolID"`
 }
 
 func (p Policy) MarshalJSON() ([]byte, error) {

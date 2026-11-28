@@ -6,6 +6,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2ChartAccountRules - Rules applied to accounts matching a chart-of-accounts segment
 type V2ChartAccountRules struct {
 }
 

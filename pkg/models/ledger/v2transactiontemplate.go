@@ -7,10 +7,12 @@ import (
 )
 
 type V2TransactionTemplate struct {
+	// Human-readable description of what the template does
 	Description *string `json:"description,omitempty"`
 	// The numscript runtime used to execute the script. Uses "machine" by default, unless the "--experimental-numscript-interpreter" feature flag is passed.
 	Runtime *Runtime `json:"runtime,omitempty"`
-	Script  string   `json:"script"`
+	// The Numscript program the template executes
+	Script string `json:"script"`
 }
 
 func (v V2TransactionTemplate) MarshalJSON() ([]byte, error) {

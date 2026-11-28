@@ -8,10 +8,11 @@ import (
 )
 
 type V2BulkElementRevertTransactionData struct {
-	AtEffectiveDate *bool             `json:"atEffectiveDate,omitempty"`
-	Force           *bool             `json:"force,omitempty"`
-	ID              *big.Int          `json:"id"`
-	Metadata        map[string]string `json:"metadata,omitempty"`
+	AtEffectiveDate *bool    `json:"atEffectiveDate,omitempty"`
+	Force           *bool    `json:"force,omitempty"`
+	ID              *big.Int `json:"id"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
 func (v V2BulkElementRevertTransactionData) MarshalJSON() ([]byte, error) {
@@ -57,9 +58,11 @@ func (v *V2BulkElementRevertTransactionData) GetMetadata() map[string]string {
 // #endregion class-body-v2bulkelementreverttransactiondata
 
 type V2BulkElementRevertTransaction struct {
+	// The bulk action this element performs
 	Action string                              `json:"action"`
 	Data   *V2BulkElementRevertTransactionData `json:"data,omitempty"`
-	Ik     *string                             `json:"ik,omitempty"`
+	// Idempotency key scoped to this element, making it safe to retry the bulk request
+	Ik *string `json:"ik,omitempty"`
 }
 
 func (v V2BulkElementRevertTransaction) MarshalJSON() ([]byte, error) {

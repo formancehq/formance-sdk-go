@@ -17,6 +17,7 @@ const (
 	V2StageTypeV2Update         V2StageType = "V2Update"
 )
 
+// V2Stage - One step of a workflow, whose shape depends on the stage type
 type V2Stage struct {
 	V2StageSend      *V2StageSend      `queryParam:"inline" union:"member"`
 	V2StageDelay     *V2StageDelay     `queryParam:"inline" union:"member"`

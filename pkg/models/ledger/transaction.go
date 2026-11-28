@@ -8,14 +8,22 @@ import (
 	"time"
 )
 
+// Transaction - A transaction recorded in the ledger, carrying its postings and metadata
 type Transaction struct {
-	Metadata          map[string]any               `json:"metadata,omitempty"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]any `json:"metadata,omitempty"`
+	// Volumes aggregated per account and per asset
 	PostCommitVolumes map[string]map[string]Volume `json:"postCommitVolumes,omitempty"`
-	Postings          []Posting                    `json:"postings"`
-	PreCommitVolumes  map[string]map[string]Volume `json:"preCommitVolumes,omitempty"`
-	Reference         *string                      `json:"reference,omitempty"`
-	Timestamp         time.Time                    `json:"timestamp"`
-	Txid              *big.Int                     `json:"txid"`
+	// The fund movements making up the transaction
+	Postings []Posting `json:"postings"`
+	// Volumes aggregated per account and per asset
+	PreCommitVolumes map[string]map[string]Volume `json:"preCommitVolumes,omitempty"`
+	// Optional caller-supplied identifier, unique within the ledger, used to deduplicate transactions
+	Reference *string `json:"reference,omitempty"`
+	// The transaction time: when the transaction is considered to have occurred. See [bi-temporality](https://docs.formance.com/modules/ledger/working-with/bi-temporality)
+	Timestamp time.Time `json:"timestamp"`
+	// Unique sequential identifier for this transaction within the ledger
+	Txid *big.Int `json:"txid"`
 }
 
 func (t Transaction) MarshalJSON() ([]byte, error) {

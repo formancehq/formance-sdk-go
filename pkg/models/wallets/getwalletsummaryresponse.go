@@ -3,6 +3,7 @@
 package wallets
 
 type GetWalletSummaryResponse struct {
+	// Aggregated funds held by a wallet, broken down by availability
 	Data WalletSummary `json:"data"`
 }
 

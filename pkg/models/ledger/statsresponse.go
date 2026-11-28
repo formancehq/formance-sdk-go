@@ -3,6 +3,7 @@
 package ledger
 
 type StatsResponse struct {
+	// Aggregate counts for a ledger
 	Data Stats `json:"data"`
 }
 

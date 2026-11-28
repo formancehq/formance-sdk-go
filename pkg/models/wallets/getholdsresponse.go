@@ -2,11 +2,16 @@
 
 package wallets
 
+// Cursor - Paginated cursor wrapping the list of holds
 type Cursor struct {
-	Data     []Hold  `json:"data"`
-	HasMore  *bool   `json:"hasMore,omitempty"`
-	Next     *string `json:"next,omitempty"`
-	PageSize int64   `json:"pageSize"`
+	Data []Hold `json:"data"`
+	// Whether further pages are available
+	HasMore *bool `json:"hasMore,omitempty"`
+	// Cursor for the next page, absent on the last page
+	Next *string `json:"next,omitempty"`
+	// Number of items requested per page
+	PageSize int64 `json:"pageSize"`
+	// Cursor for the previous page, absent on the first page
 	Previous *string `json:"previous,omitempty"`
 }
 
@@ -46,6 +51,7 @@ func (c *Cursor) GetPrevious() *string {
 }
 
 type GetHoldsResponse struct {
+	// Paginated cursor wrapping the list of holds
 	Cursor Cursor `json:"cursor"`
 }
 

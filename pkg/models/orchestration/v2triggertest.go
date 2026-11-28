@@ -2,6 +2,7 @@
 
 package orchestration
 
+// Filter - How the trigger's filter evaluated against the sample event
 type Filter struct {
 	Error *string `json:"error,omitempty"`
 	Match *bool   `json:"match,omitempty"`
@@ -40,8 +41,11 @@ func (v *Variables) GetValue() *string {
 	return v.Value
 }
 
+// V2TriggerTest - Result of evaluating a trigger against a sample event, without running the workflow
 type V2TriggerTest struct {
-	Filter    *Filter              `json:"filter,omitempty"`
+	// How the trigger's filter evaluated against the sample event
+	Filter *Filter `json:"filter,omitempty"`
+	// The variables the trigger would build from the sample event
 	Variables map[string]Variables `json:"variables,omitempty"`
 }
 

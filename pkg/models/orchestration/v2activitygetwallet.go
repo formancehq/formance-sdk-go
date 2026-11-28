@@ -2,7 +2,9 @@
 
 package orchestration
 
+// V2ActivityGetWallet - Arguments for the activity that reads a wallet
 type V2ActivityGetWallet struct {
+	// Identifier of the wallet to read
 	ID string `json:"id"`
 }
 

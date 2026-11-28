@@ -2,7 +2,9 @@
 
 package orchestration
 
+// V2ActivityGetPayment - Arguments for the activity that reads a payment
 type V2ActivityGetPayment struct {
+	// Identifier of the payment to read
 	ID string `json:"id"`
 }
 

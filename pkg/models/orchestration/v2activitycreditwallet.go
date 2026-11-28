@@ -2,9 +2,12 @@
 
 package orchestration
 
+// V2ActivityCreditWallet - Arguments for the activity that credits a wallet
 type V2ActivityCreditWallet struct {
+	// A credit to apply to a wallet
 	Data *V2CreditWalletRequest `json:"data,omitempty"`
-	ID   *string                `json:"id,omitempty"`
+	// Identifier of the wallet to credit
+	ID *string `json:"id,omitempty"`
 }
 
 func (v *V2ActivityCreditWallet) GetData() *V2CreditWalletRequest {

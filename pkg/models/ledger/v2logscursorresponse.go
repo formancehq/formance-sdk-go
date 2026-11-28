@@ -8,6 +8,7 @@ import (
 	"github.com/formancehq/formance-sdk-go/v5/pkg/utils"
 )
 
+// V2LogsCursorResponseCursor - Paginated cursor wrapping the list of logs
 type V2LogsCursorResponseCursor struct {
 	Data     []V2Log `json:"data"`
 	HasMore  bool    `json:"hasMore"`
@@ -65,6 +66,7 @@ func (v *V2LogsCursorResponseCursor) GetPrevious() *string {
 // #region class-body-v2logscursorresponsecursor
 // #endregion class-body-v2logscursorresponsecursor
 
+// V2LogsCursorResponseResource - The resource type carried by this cursor
 type V2LogsCursorResponseResource string
 
 const (
@@ -89,7 +91,9 @@ func (e *V2LogsCursorResponseResource) UnmarshalJSON(data []byte) error {
 }
 
 type V2LogsCursorResponse struct {
-	Cursor   V2LogsCursorResponseCursor    `json:"cursor"`
+	// Paginated cursor wrapping the list of logs
+	Cursor V2LogsCursorResponseCursor `json:"cursor"`
+	// The resource type carried by this cursor
 	Resource *V2LogsCursorResponseResource `json:"resource,omitempty"`
 }
 

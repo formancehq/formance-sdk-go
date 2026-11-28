@@ -5,8 +5,11 @@ package reconciliation
 // ResolveAlertRequest - Mark an alert resolved. When `transactionRefs` is non-empty the
 // resolution kind is recorded as `fixed_by_booking`.
 type ResolveAlertRequest struct {
-	By              string   `json:"by"`
-	Note            *string  `json:"note,omitempty"`
+	// Who is resolving the alert
+	By string `json:"by"`
+	// Free-text note to record with the resolution
+	Note *string `json:"note,omitempty"`
+	// References of the transactions booked to correct the break. Supplying any records the resolution as fixed_by_booking
 	TransactionRefs []string `json:"transactionRefs,omitempty"`
 }
 

@@ -3,10 +3,14 @@
 package auth
 
 type ClientSecret struct {
-	ID         string            `json:"id"`
-	LastDigits string            `json:"lastDigits"`
-	Metadata   map[string]string `json:"metadata,omitempty"`
-	Name       string            `json:"name"`
+	// Unique identifier of the secret
+	ID string `json:"id"`
+	// Last digits of the secret. The full plaintext is hidden, and only the last digits are exposed.
+	LastDigits string `json:"lastDigits"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata,omitempty"`
+	// Human-readable name identifying the secret
+	Name string `json:"name"`
 }
 
 func (c *ClientSecret) GetID() string {

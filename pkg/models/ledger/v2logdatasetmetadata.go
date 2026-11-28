@@ -17,6 +17,7 @@ const (
 	V2LogDataSetMetadataTargetIDTypeBigint V2LogDataSetMetadataTargetIDType = "bigint"
 )
 
+// V2LogDataSetMetadataTargetID - Identifier of the entity the metadata was set on, either an account address or a transaction ID
 type V2LogDataSetMetadataTargetID struct {
 	Str    *string  `queryParam:"inline" union:"member"`
 	Bigint *big.Int `queryParam:"inline" union:"member"`
@@ -102,7 +103,9 @@ func (e *V2LogDataSetMetadataTargetType) UnmarshalJSON(data []byte) error {
 
 // V2LogDataSetMetadata - Payload for SET_METADATA log entries. Contains the target entity and the metadata that was set.
 type V2LogDataSetMetadata struct {
-	Metadata map[string]string            `json:"metadata"`
+	// Arbitrary key/value pairs attached to the resource
+	Metadata map[string]string `json:"metadata"`
+	// Identifier of the entity the metadata was set on, either an account address or a transaction ID
 	TargetID V2LogDataSetMetadataTargetID `json:"targetId"`
 	// Type of the target entity
 	TargetType V2LogDataSetMetadataTargetType `json:"targetType"`

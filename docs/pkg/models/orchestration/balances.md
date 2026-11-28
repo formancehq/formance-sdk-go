@@ -1,5 +1,7 @@
 # Balances
 
+Aggregated funds held by the wallet, keyed by asset
+
 
 ## Fields
 
